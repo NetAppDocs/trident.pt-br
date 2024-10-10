@@ -1,0 +1,338 @@
+---
+sidebar: sidebar 
+permalink: trident-use/trident-fsx-storage-backend.html 
+keywords: Amazon FSx for NetApp ONTAP, FSx for ONTAP, deploy Trident, integrate Trident, Trident 
+summary: 'Usando o Astra Trident com o Amazon FSX for NetApp ONTAP, você garante que os clusters do Kubernetes executados no Amazon Elastic Kubernetes Service (EKS) possam provisionar volumes persistentes de bloco e arquivo com o respaldo do do ONTAP.' 
+---
+= Configure o back-end de armazenamento
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+
+
+== Integração de driver SAN e nas ONTAP
+
+Você pode criar um arquivo de back-end usando as credenciais SVM (nome de usuário e senha) armazenadas no AWS Secret Manager, conforme mostrado neste exemplo:
+
+[role="tabbed-block"]
+====
+.YAML
+--
+[listing]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentBackendConfig
+metadata:
+  name: backend-tbc-ontap-nas
+spec:
+  version: 1
+  storageDriverName: ontap-nas
+  backendName: tbc-ontap-nas
+  svm: svm-name
+  aws:
+    fsxFilesystemID: fs-xxxxxxxxxx
+  credentials:
+    name: "arn:aws:secretsmanager:us-west-2:xxxxxxxx:secret:secret-name"
+    type: awsarn
+----
+--
+.JSON
+--
+[listing]
+----
+{
+  "apiVersion": "trident.netapp.io/v1",
+  "kind": "TridentBackendConfig",
+  "metadata": {
+    "name": "backend-tbc-ontap-nas"
+  },
+  "spec": {
+    "version": 1,
+    "storageDriverName": "ontap-nas",
+    "backendName": "tbc-ontap-nas",
+    "svm": "svm-name",
+    "aws": {
+      "fsxFilesystemID": "fs-xxxxxxxxxx"
+    },
+    "managementLIF": null,
+    "credentials": {
+      "name": "arn:aws:secretsmanager:us-west-2:xxxxxxxx:secret:secret-name",
+      "type": "awsarn"
+    }
+  }
+}
+
+----
+--
+====
+Para obter informações sobre como criar backends, consulte estas páginas:
+
+* link:ontap-nas.html["Configurar um back-end com drivers nas ONTAP"]
+* link:ontap-san.html["Configure um back-end com drivers SAN ONTAP"]
+
+
+
+
+== Detalhes do driver FSX for ONTAP
+
+Você pode integrar o Astra Trident ao Amazon FSX for NetApp ONTAP usando os seguintes drivers:
+
+* `ontap-san`: Cada PV provisionado é um LUN dentro de seu próprio volume do Amazon FSX for NetApp ONTAP. Recomendado para armazenamento de blocos.
+* `ontap-nas`: Cada PV provisionado é um volume completo do Amazon FSX for NetApp ONTAP. Recomendado para NFS e SMB.
+* `ontap-san-economy`: Cada PV provisionado é um LUN com um número configurável de LUNs por volume do Amazon FSX for NetApp ONTAP.
+* `ontap-nas-economy`: Cada PV provisionado é uma qtree, com um número configurável de qtrees por volume do Amazon FSX for NetApp ONTAP.
+* `ontap-nas-flexgroup`: Cada PV provisionado é um volume completo do Amazon FSX for NetApp ONTAP FlexGroup.
+
+
+Para obter informações sobre o condutor, link:../trident-use/ontap-nas.html["Controladores NAS"]consulte e link:../trident-use/ontap-san.html["Controladores SAN"].
+
+
+
+== Exemplos de configurações
+
+.Configuração do AWS FSX for ONTAP com gerenciador de segredos
+[%collapsible]
+====
+[listing]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentBackendConfig
+metadata:
+  name: backend-tbc-ontap-nas
+spec:
+  version: 1
+  storageDriverName: ontap-nas
+  backendName: tbc-ontap-nas
+  svm: svm-name
+  aws:
+    fsxFilesystemID: fs-xxxxxxxxxx
+  managementLIF:
+  credentials:
+    name: "arn:aws:secretsmanager:us-west-2:xxxxxxxx:secret:secret-name"
+    type: awsarn
+----
+====
+.Configuração da classe de armazenamento para volumes SMB
+[%collapsible]
+====
+Usando `nasType`, `node-stage-secret-name` e `node-stage-secret-namespace`, você pode especificar um volume SMB e fornecer as credenciais necessárias do ative Directory. Os volumes SMB são suportados usando `ontap-nas` apenas o driver.
+
+[listing]
+----
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: nas-smb-sc
+provisioner: csi.trident.netapp.io
+parameters:
+  backendType: "ontap-nas"
+  trident.netapp.io/nasType: "smb"
+  csi.storage.k8s.io/node-stage-secret-name: "smbcreds"
+  csi.storage.k8s.io/node-stage-secret-namespace: "default"
+----
+====
+
+
+== Configuração avançada de backend e exemplos
+
+Consulte a tabela a seguir para obter as opções de configuração de back-end:
+
+[cols="3"]
+|===
+| Parâmetro | Descrição | Exemplo 
+
+
+| `version` |  | Sempre 1 
+
+
+| `storageDriverName` | Nome do controlador de armazenamento | `ontap-nas` `ontap-nas-economy`, , `ontap-nas-flexgroup` `ontap-san` , , , `ontap-san-economy` 
+
+
+| `backendName` | Nome personalizado ou back-end de storage | Nome do driver 
+
+
+| `managementLIF` | Endereço IP de um cluster ou LIF de gerenciamento de SVM Um nome de domínio totalmente qualificado (FQDN) pode ser especificado. Pode ser definido para usar endereços IPv6 se o Astra Trident tiver sido instalado usando o sinalizador IPv6. Os endereços IPv6 devem ser definidos entre colchetes, como [28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]. Se você fornecer o `fsxFilesystemID` sob o `aws` campo, não precisará fornecer o `managementLIF` porque o Astra Trident recupera as informações do SVM `managementLIF` da AWS. Portanto, você deve fornecer credenciais para um usuário sob o SVM (por exemplo: Vsadmin) e o usuário deve ter a `vsadmin` função. | "10,0.0,1", "[2001:1234:abcd::fefe]" 
+
+
+| `dataLIF` | Endereço IP do protocolo LIF. * ONTAP nas drivers*: Recomendamos especificar dataLIF. Se não for fornecido, o Astra Trident obtém LIFs de dados do SVM. Você pode especificar um nome de domínio totalmente qualificado (FQDN) a ser usado para as operações de montagem NFS, permitindo que você crie um DNS de round-robin para balanceamento de carga em vários LIFs de dados. Pode ser alterado após a definição inicial. Consulte a . *Drivers SAN ONTAP*: Não especifique para iSCSI. O Astra Trident usa o mapa de LUN seletivo da ONTAP para descobrir as LIFs iSCI necessárias para estabelecer uma sessão de vários caminhos. Um aviso é gerado se o dataLIF for definido explicitamente. Pode ser definido para usar endereços IPv6 se o Astra Trident tiver sido instalado usando o sinalizador IPv6. Os endereços IPv6 devem ser definidos entre colchetes, como [28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]. |  
+
+
+| `autoExportPolicy` | Ativar a criação e atualização automática da política de exportação [Boolean]. Com `autoExportPolicy` as opções e `autoExportCIDRs`, o Astra Trident pode gerenciar políticas de exportação automaticamente. | `false` 
+
+
+| `autoExportCIDRs` | Lista de CIDR para filtrar IPs de nós do Kubernetes quando `autoExportPolicy` está ativado. Com `autoExportPolicy` as opções e `autoExportCIDRs`, o Astra Trident pode gerenciar políticas de exportação automaticamente. | "["0,0.0,0/0", ":::/0"]" 
+
+
+| `labels` | Conjunto de rótulos arbitrários formatados em JSON para aplicar em volumes | "" 
+
+
+| `clientCertificate` | Valor codificado em base64 do certificado do cliente. Usado para autenticação baseada em certificado | "" 
+
+
+| `clientPrivateKey` | Valor codificado em base64 da chave privada do cliente. Usado para autenticação baseada em certificado | "" 
+
+
+| `trustedCACertificate` | Valor codificado em base64 do certificado CA confiável. Opcional. Usado para autenticação baseada em certificado. | "" 
+
+
+| `username` | Nome de usuário para se conetar ao cluster ou SVM. Usado para autenticação baseada em credenciais. Por exemplo, vsadmin. |  
+
+
+| `password` | Senha para se conectar ao cluster ou SVM. Usado para autenticação baseada em credenciais. |  
+
+
+| `svm` | Máquina virtual de armazenamento para usar | Derivado se um SVM managementLIF for especificado. 
+
+
+| `storagePrefix` | Prefixo usado ao provisionar novos volumes na SVM. Não pode ser modificado após a criação. Para atualizar esse parâmetro, você precisará criar um novo backend. | `trident` 
+
+
+| `limitAggregateUsage` | *Não especifique para o Amazon FSX for NetApp ONTAP.* O fornecido `fsxadmin` e `vsadmin` não contém as permissões necessárias para recuperar o uso agregado e limitá-lo usando o Astra Trident. | Não utilizar. 
+
+
+| `limitVolumeSize` | Falha no provisionamento se o tamanho do volume solicitado estiver acima desse valor. Também restringe o tamanho máximo dos volumes que gerencia para qtrees e LUNs, e a `qtreesPerFlexvol` opção permite personalizar o número máximo de qtrees por FlexVol. | "" (não aplicado por padrão) 
+
+
+| `lunsPerFlexvol` | O máximo de LUNs por FlexVol tem de estar no intervalo [50, 200]. Apenas SAN. | "100" 
+
+
+| `debugTraceFlags` | Debug flags para usar ao solucionar problemas. Por exemplo, não use `debugTraceFlags` a menos que você esteja solucionando problemas e exija um despejo de log detalhado. | nulo 
+
+
+| `nfsMountOptions` | Lista separada por vírgulas de opções de montagem NFS. As opções de montagem para volumes persistentes do Kubernetes normalmente são especificadas em classes de storage, mas se nenhuma opção de montagem for especificada em uma classe de storage, o Astra Trident voltará a usar as opções de montagem especificadas no arquivo de configuração do back-end de storage. Se nenhuma opção de montagem for especificada na classe de storage ou no arquivo de configuração, o Astra Trident não definirá nenhuma opção de montagem em um volume persistente associado. | "" 
+
+
+| `nasType` | Configurar a criação de volumes NFS ou SMB. As opções são `nfs`, `smb`, ou null. *Deve definir como `smb` para volumes SMB.* A configuração como null padrão para volumes NFS. | `nfs` 
+
+
+| `qtreesPerFlexvol` | Qtrees máximos por FlexVol, têm de estar no intervalo [50, 300] | `"200"` 
+
+
+| `smbShare` | Você pode especificar uma das seguintes opções: O nome de um compartilhamento SMB criado usando o Console de Gerenciamento da Microsoft ou a CLI do ONTAP ou um nome para permitir que o Astra Trident crie o compartilhamento SMB. Esse parâmetro é necessário para backends do Amazon FSX for ONTAP. | `smb-share` 
+
+
+| `useREST` | Parâmetro booleano para usar APIs REST do ONTAP. *A visualização técnica* 
+`useREST` é fornecida como uma **prévia técnica** que é recomendada para ambientes de teste e não para cargas de trabalho de produção. Quando definido como `true`, o Astra Trident usará as APIS REST do ONTAP para se comunicar com o back-end. Esse recurso requer o ONTAP 9.11,1 e posterior. Além disso, a função de login do ONTAP usada deve ter acesso ao `ontap` aplicativo. Isso é satisfeito com as funções e `cluster-admin` predefinidas `vsadmin`. | `false` 
+
+
+| `aws` | Você pode especificar o seguinte no arquivo de configuração do AWS FSX for ONTAP: - `fsxFilesystemID`: Especifique o ID do sistema de arquivos AWS FSX.  `apiRegion`- : Nome da região da API AWS.  `apikey`- : Chave da API da AWS.  `secretKey`- : Chave secreta da AWS. | ``
+`` 
+`""`
+`""`
+`""` 
+
+
+| `credentials` | Especifique as credenciais do FSX SVM para armazenar no AWS Secret Manager.  `name`- : Nome do recurso Amazon (ARN) do segredo, que contém as credenciais do SVM.  `type`- : Defina para `awsarn`. link:https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_secret.html["Crie um segredo do AWS Secrets Manager"^]Consulte para obter mais informações. |  
+|===
+
+
+== Opções de configuração de back-end para volumes de provisionamento
+
+Você pode controlar o provisionamento padrão usando essas opções na `defaults` seção da configuração. Para obter um exemplo, consulte os exemplos de configuração abaixo.
+
+[cols="3"]
+|===
+| Parâmetro | Descrição | Padrão 
+
+
+| `spaceAllocation` | Alocação de espaço para LUNs | `true` 
+
+
+| `spaceReserve` | Modo de reserva de espaço; "nenhum" (fino) ou "volume" (grosso) | `none` 
+
+
+| `snapshotPolicy` | Política de instantâneos a utilizar | `none` 
+
+
+| `qosPolicy` | Grupo de políticas de QoS a atribuir aos volumes criados. Escolha uma das qosPolicy ou adaptiveQosPolicy por pool de armazenamento ou backend. O uso de grupos de política de QoS com o Astra Trident requer o ONTAP 9.8 ou posterior. Recomendamos o uso de um grupo de políticas de QoS não compartilhado e garantir que o grupo de políticas seja aplicado individualmente a cada componente. Um grupo de política de QoS compartilhado aplicará o limite máximo da taxa de transferência total de todos os workloads. | "" 
+
+
+| `adaptiveQosPolicy` | Grupo de políticas de QoS adaptável a atribuir para volumes criados. Escolha uma das qosPolicy ou adaptiveQosPolicy por pool de armazenamento ou backend. Não suportado pela ONTAP-nas-Economy. | "" 
+
+
+| `snapshotReserve` | Porcentagem de volume reservado para snapshots "0" | Se `snapshotPolicy` for `none`, `else` "" 
+
+
+| `splitOnClone` | Divida um clone de seu pai na criação | `false` 
+
+
+| `encryption` | Ative a criptografia de volume do NetApp (NVE) no novo volume; o padrão é `false`. O NVE deve ser licenciado e habilitado no cluster para usar essa opção. Se o NAE estiver ativado no back-end, qualquer volume provisionado no Astra Trident será o NAE ativado. Para obter mais informações, consulte: link:../trident-reco/security-reco.html["Como o Astra Trident funciona com NVE e NAE"]. | `false` 
+
+
+| `luksEncryption` | Ativar encriptação LUKS. link:../trident-reco/security-reco.html#Use-Linux-Unified-Key-Setup-(LUKS)["Usar a configuração de chave unificada do Linux (LUKS)"]Consulte a . Apenas SAN. | "" 
+
+
+| `tieringPolicy` | Política de disposição em camadas para usar	`none` | `snapshot-only` Para configuração pré-ONTAP 9.5 SVM-DR 
+
+
+| `unixPermissions` | Modo para novos volumes. *Deixe vazio para volumes SMB.* | "" 
+
+
+| `securityStyle` | Estilo de segurança para novos volumes. Estilos de segurança e `unix` suporte de NFS `mixed`. Suporta SMB `mixed` e `ntfs` estilos de segurança. | O padrão NFS é `unix`. O padrão SMB é `ntfs`. 
+|===
+
+
+== Prepare-se para provisionar volumes SMB
+
+Você pode provisionar volumes SMB usando `ontap-nas` o driver. Antes de concluir <<Integração de driver SAN e nas ONTAP>>as etapas a seguir.
+
+.Antes de começar
+Antes de provisionar volumes SMB usando `ontap-nas` o driver, você deve ter o seguinte:
+
+* Um cluster do Kubernetes com um nó de controlador Linux e pelo menos um nó de trabalho do Windows que executa o Windows Server 2019. O Astra Trident é compatível com volumes SMB montados em pods executados apenas em nós do Windows.
+* Pelo menos um segredo do Astra Trident que contém suas credenciais do ative Directory. Para gerar segredo `smbcreds`:
++
+[listing]
+----
+kubectl create secret generic smbcreds --from-literal username=user --from-literal password='password'
+----
+* Um proxy CSI configurado como um serviço Windows. Para configurar um `csi-proxy`, link:https://github.com/kubernetes-csi/csi-proxy["GitHub: CSI Proxy"^]consulte ou link:https://github.com/Azure/aks-engine/blob/master/docs/topics/csi-proxy-windows.md["GitHub: CSI Proxy para Windows"^] para nós do Kubernetes executados no Windows.
+
+
+.Passos
+. Criar compartilhamentos SMB. Você pode criar os compartilhamentos de administração SMB de duas maneiras usando o link:https://learn.microsoft.com/en-us/troubleshoot/windows-server/system-management-components/what-is-microsoft-management-console["Microsoft Management Console"^]snap-in pastas compartilhadas ou usando a CLI do ONTAP. Para criar compartilhamentos SMB usando a CLI do ONTAP:
++
+.. Se necessário, crie a estrutura do caminho do diretório para o compartilhamento.
++
+O `vserver cifs share create` comando verifica o caminho especificado na opção -path durante a criação de compartilhamento. Se o caminho especificado não existir, o comando falhará.
+
+.. Crie um compartilhamento SMB associado ao SVM especificado:
++
+[listing]
+----
+vserver cifs share create -vserver vserver_name -share-name share_name -path path [-share-properties share_properties,...] [other_attributes] [-comment text]
+----
+.. Verifique se o compartilhamento foi criado:
++
+[listing]
+----
+vserver cifs share show -share-name share_name
+----
++
+
+NOTE: link:https://docs.netapp.com/us-en/ontap/smb-config/create-share-task.html["Crie um compartilhamento SMB"^]Consulte para obter detalhes completos.
+
+
+
+. Ao criar o back-end, você deve configurar o seguinte para especificar volumes SMB. Para obter todas as opções de configuração de back-end do FSX for ONTAP, link:trident-fsx-examples.html["Opções e exemplos de configuração do FSX for ONTAP"]consulte .
++
+[cols="3"]
+|===
+| Parâmetro | Descrição | Exemplo 
+
+
+| `smbShare` | Você pode especificar uma das seguintes opções: O nome de um compartilhamento SMB criado usando o Console de Gerenciamento da Microsoft ou a CLI do ONTAP ou um nome para permitir que o Astra Trident crie o compartilhamento SMB. Esse parâmetro é necessário para backends do Amazon FSX for ONTAP. | `smb-share` 
+
+
+| `nasType` | *Tem de estar definido para `smb`.* Se nulo, o padrão é `nfs`. | `smb` 
+
+
+| `securityStyle` | Estilo de segurança para novos volumes. *Deve ser definido como `ntfs` ou `mixed` para volumes SMB.* | `ntfs` Ou `mixed` para volumes SMB 
+
+
+| `unixPermissions` | Modo para novos volumes. *Deve ser deixado vazio para volumes SMB.* | "" 
+|===
+

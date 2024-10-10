@@ -1,0 +1,85 @@
+---
+sidebar: sidebar 
+permalink: trident-docker/multiple-instances-docker.html 
+keywords: deploy, astra trident, docker, trident for docker, managed plugin, trident instances, alias 
+summary: Várias instâncias do Astra Trident são necessárias quando você deseja ter várias configurações de storage disponíveis simultaneamente. A chave para várias instâncias é dar nomes diferentes usando a opção --alias com o plug-in em contentor, ou --volume-driver ao instanciar o Trident no host. 
+---
+= Gerenciar várias instâncias do Astra Trident
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Várias instâncias do Trident são necessárias quando você deseja ter várias configurações de storage disponíveis simultaneamente. A chave para várias instâncias é dar nomes diferentes usando a `--alias` opção com o plug-in em contentor, ou `--volume-driver` opção ao instanciar o Trident no host.
+
+
+
+== Etapas para o plugin gerenciado do Docker (versão 1,13/17,03 ou posterior)
+
+. Inicie a primeira instância especificando um alias e um arquivo de configuração.
++
+[listing]
+----
+docker plugin install --grant-all-permissions --alias silver netapp/trident-plugin:21.07 config=silver.json
+----
+. Inicie a segunda instância, especificando um alias diferente e arquivo de configuração.
++
+[listing]
+----
+docker plugin install --grant-all-permissions --alias gold netapp/trident-plugin:21.07 config=gold.json
+----
+. Crie volumes especificando o alias como o nome do driver.
++
+Por exemplo, para o volume de ouro:
+
++
+[listing]
+----
+docker volume create -d gold --name ntapGold
+----
++
+Por exemplo, para o volume prateado:
+
++
+[listing]
+----
+docker volume create -d silver --name ntapSilver
+----
+
+
+
+
+== Passos para o tradicional (versão 1,12 ou anterior)
+
+. Inicie o plugin com uma configuração NFS usando um ID de driver personalizado:
++
+[listing]
+----
+sudo trident --volume-driver=netapp-nas --config=/path/to/config-nfs.json
+----
+. Inicie o plug-in com uma configuração iSCSI usando um ID de driver personalizado:
++
+[listing]
+----
+sudo trident --volume-driver=netapp-san --config=/path/to/config-iscsi.json
+----
+. Provisione volumes Docker para cada instância de driver:
++
+Por exemplo, para NFS:
+
++
+[listing]
+----
+docker volume create -d netapp-nas --name my_nfs_vol
+----
++
+Por exemplo, para iSCSI:
+
++
+[listing]
+----
+docker volume create -d netapp-san --name my_iscsi_vol
+----
+

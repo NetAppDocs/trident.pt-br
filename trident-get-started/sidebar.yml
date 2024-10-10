@@ -1,0 +1,24 @@
+---
+section: trident-get-started
+title: Comece agora
+entries:
+- title: Saiba mais sobre o Astra Trident
+  entries:
+  - title: Visão geral do Astra Trident
+    url: "/trident-get-started/intro.html"
+  - title: A arquitetura do Astra Trident
+    url: "/trident-get-started/architecture.html"
+  - title: Conceitos
+    entries:
+    - title: Provisionamento
+      url: "/trident-concepts/provisioning.html"
+    - title: Instantâneos de volume
+      url: "/trident-concepts/snapshots.html"
+    - title: Pools virtuais
+      url: "/trident-concepts/virtual-storage-pool.html"
+    - title: Grupos de acesso de volume
+      url: "/trident-concepts/vol-access-groups.html"
+- title: Início rápido
+  url: "/trident-get-started/quickstart.html"
+- title: Requisitos
+  url: "/trident-get-started/requirements.html"

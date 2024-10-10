@@ -1,0 +1,59 @@
+---
+sidebar: sidebar 
+permalink: trident-concepts/virtual-storage-pool.html 
+keywords: virtual pools, astra trident, backends 
+summary: Os pools virtuais fornecem uma camada de abstração entre os back-ends de storage do Astra Trident e os StorageClasses do Kubernetes. Eles permitem que um administrador defina aspectos, como localização, desempenho e proteção para cada back-end de uma maneira comum e independente de back-end, sem fazer com que o StorageClass especifique qual back-end físico, pool de back-end ou tipo de back-end usar para atender aos critérios desejados. 
+---
+= Pools virtuais
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Os pools virtuais fornecem uma camada de abstração entre os back-ends de storage do Astra Trident e o Kubernetes `StorageClasses`. Eles permitem que um administrador defina aspetos, como localização, desempenho e proteção para cada back-end de uma maneira comum e independente de back-end, sem `StorageClass` especificar qual backend físico, pool de back-end ou tipo de back-end usar para atender aos critérios desejados.
+
+
+
+== Saiba mais sobre pools virtuais
+
+O administrador de storage pode definir pools virtuais em qualquer um dos backends do Astra Trident em um arquivo de definição JSON ou YAML.
+
+image::virtual_storage_pools.png[Mostra o diagrama conceitual de pools virtuais.]
+
+Qualquer aspeto especificado fora da lista de pools virtuais é global para o back-end e se aplicará a todos os pools virtuais, enquanto cada pool virtual pode especificar um ou mais aspetos individualmente (substituindo quaisquer aspetos globais de back-end).
+
+[NOTE]
+====
+* Ao definir pools virtuais, não tente reorganizar a ordem dos pools virtuais existentes em uma definição de back-end.
+* Aconselhamos a não modificar atributos para um pool virtual existente. Você deve definir um novo pool virtual para fazer alterações.
+
+
+====
+A maioria dos aspetos são especificados em termos específicos de back-end. Fundamentalmente, os valores de aspeto não são expostos fora do driver do back-end e não estão disponíveis para correspondência em `StorageClasses`. em vez disso, o administrador define um ou mais rótulos para cada pool virtual. Cada rótulo é um par chave:valor, e os rótulos podem ser comuns em backends exclusivos. Assim como aspetos, os rótulos podem ser especificados por pool ou globais para o back-end. Ao contrário de aspetos, que têm nomes e valores predefinidos, o administrador tem total discrição para definir chaves de rótulo e valores conforme necessário. Por conveniência, os administradores de storage podem definir rótulos por pool virtual e volumes de grupo por rótulo.
+
+A `StorageClass` identifica qual pool virtual usar fazendo referência aos rótulos dentro de um parâmetro seletor. Os seletores de pool virtual suportam os seguintes operadores:
+
+[cols="14%,34%,52%"]
+|===
+| Operador | Exemplo | O valor do rótulo de um pool deve: 
+
+
+| `=` | desempenho superior | Correspondência 
+
+
+| `!=` | performance! extrema | Não corresponde 
+
+
+| `in` | localização em (leste, oeste) | Esteja no conjunto de valores 
+
+
+| `notin` | notificação de desempenho (prata, bronze) | Não estar no conjunto de valores 
+
+
+| `<key>` | proteção | Existe com qualquer valor 
+
+
+| `!<key>` | !proteção | Não existe 
+|===

@@ -1,0 +1,18 @@
+---
+section: trident-reco
+title: Práticas recomendadas e recomendações
+entries:
+- title: Implantação
+  url: "/trident-reco/deploy-reco.html"
+- title: Configuração de armazenamento
+  url: "/trident-reco/storage-config-best-practices.html"
+- title: Integração com o Astra Trident
+  url: "/trident-reco/integrate-trident.html"
+- title: Proteção de dados e recuperação de desastres
+  url: "/trident-reco/backup.html"
+- title: Segurança
+  entries:
+  - title: Recomendações de segurança
+    url: "/trident-reco/security-reco.html"
+  - title: Configuração de chave unificada do Linux (LUKS)
+    url: "/trident-reco/security-luks.html"

@@ -1,0 +1,206 @@
+---
+sidebar: sidebar 
+permalink: trident-get-started/requirements.html 
+keywords: trident requirements, supported front ends, supported backends, kubernetes cluster, cluster requirements, version requirements, supported versions, host configuration, host os, system configuration, host operating system, fsx, ports, csi, images, orchestrators, storage systems, feature, kubernetes 
+summary: Antes de instalar o Astra Trident, você deve analisar esses requisitos gerais de sistema. Backends específicos podem ter requisitos adicionais. 
+---
+= Requisitos
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Antes de instalar o Astra Trident, você deve analisar esses requisitos gerais de sistema. Backends específicos podem ter requisitos adicionais.
+
+
+
+== Informações essenciais sobre o Astra Trident
+
+*Você deve ler as seguintes informações críticas sobre o Astra Trident.*
+
+.<strong> informações essenciais sobre o Astra Trident </strong>
+[%collapsible%open]
+====
+* O Kubernetes 1,31 agora é compatível com o Astra Trident. Atualize o Astra Trident antes de atualizar o Kubernetes.
+* O Astra Trident reforça estritamente o uso de configuração multipathing em ambientes SAN, com um valor recomendado de `find_multipaths: no` no arquivo multipath.conf.
++
+O uso de configuração não multipathing ou o uso `find_multipaths: yes` de ou `find_multipaths: smart` valor no arquivo multipath.conf resultará em falhas de montagem. O Astra Trident recomenda o uso `find_multipaths: no` desde o lançamento de 21,07.
+
+
+
+====
+
+
+== Frontens suportados (orquestradores)
+
+O Astra Trident é compatível com vários mecanismos de contêiner e orquestradores, incluindo os seguintes:
+
+* Anthos On-Prem (VMware) e Anthos em bare metal 1,16
+* Kubernetes 1,24 - 1,31
+* OpenShift 4,10 - 4,16
+
+
+O operador Trident é suportado com estas versões:
+
+* Anthos On-Prem (VMware) e Anthos em bare metal 1,16
+* Kubernetes 1,24 - 1,31
+* OpenShift 4,10 - 4,16
+
+
+O Astra Trident também trabalha com uma série de outras ofertas do Kubernetes totalmente gerenciadas e autogeridas, incluindo o Google Kubernetes Engine (GKE), o Amazon Elastic Kubernetes Services (EKS), o
+
+O Astra Trident e o ONTAP podem ser usados como fornecedores de storage do link:https://kubevirt.io/["KubeVirt"].
+
+
+WARNING: Antes de atualizar um cluster do Kubernetes do 1,24 para o 1,25 ou posterior que tenha o Astra Trident instalado, link:../trident-managing-k8s/upgrade-operator.html#upgrade-a-helm-installation["Atualize uma instalação do Helm"]consulte a .
+
+
+
+== Backends suportados (armazenamento)
+
+Para usar o Astra Trident, você precisa de um ou mais dos seguintes back-ends compatíveis:
+
+* Amazon FSX para NetApp ONTAP
+* Azure NetApp Files
+* Cloud Volumes ONTAP
+* Cloud Volumes Service para GCP
+* FAS/AFF/Selecione 9,5 ou posterior
+* NetApp All SAN Array (ASA)
+* Software NetApp HCI/Element 11 ou superior
+
+
+
+
+== Requisitos de recursos
+
+A tabela abaixo resume os recursos disponíveis com esta versão do Astra Trident e as versões do Kubernetes compatíveis.
+
+[cols="3"]
+|===
+| Recurso | Versão do Kubernetes | É necessário ter portões? 
+
+
+| Astra Trident  a| 
+1,24 - 1,31
+ a| 
+Não
+
+
+
+| Instantâneos de volume  a| 
+1,24 - 1,31
+ a| 
+Não
+
+
+
+| PVC a partir de instantâneos de volume  a| 
+1,24 - 1,31
+ a| 
+Não
+
+
+
+| Redimensionamento iSCSI PV  a| 
+1,24 - 1,31
+ a| 
+Não
+
+
+
+| ONTAP bidirectional CHAP  a| 
+1,24 - 1,31
+ a| 
+Não
+
+
+
+| Políticas de exportação dinâmica  a| 
+1,24 - 1,31
+ a| 
+Não
+
+
+
+| Operador Trident  a| 
+1,24 - 1,31
+ a| 
+Não
+
+
+
+| Topologia de CSI  a| 
+1,24 - 1,31
+ a| 
+Não
+
+|===
+
+
+== Sistemas operacionais de host testados
+
+Embora o Astra Trident não seja oficialmente compatível com sistemas operacionais específicos, sabe-se que os seguintes itens funcionam:
+
+* Versões do RedHat CoreOS (RHCOS) suportadas pela OpenShift Container Platform (AMD64 e ARM64)
+* RHEL 8 OU SUPERIOR (AMD64 E ARM64)
++
+
+NOTE: O NVMe/TCP requer o RHEL 9 ou posterior.
+
+* Ubuntu 22,04 ou posterior (AMD64 e ARM64)
+* Windows Server 2022
+
+
+Por padrão, o Astra Trident é executado em um contentor e, portanto, será executado em qualquer trabalhador Linux. No entanto, esses funcionários precisam ser capazes de montar os volumes que o Astra Trident fornece usando o cliente NFS padrão ou iniciador iSCSI, dependendo dos backends que você está usando.
+
+O `tridentctl` utilitário também é executado em qualquer uma dessas distribuições do Linux.
+
+
+
+== Configuração de host
+
+Todos os nós de trabalho no cluster do Kubernetes precisam ser capazes de montar os volumes provisionados para os pods. Para preparar os nós de trabalho, é necessário instalar ferramentas NFS, iSCSI ou NVMe com base na seleção de driver.
+
+link:../trident-use/worker-node-prep.html["Prepare o nó de trabalho"]
+
+
+
+== Configuração do sistema de storage
+
+O Astra Trident pode exigir alterações em um sistema de storage antes que uma configuração de back-end o use.
+
+link:../trident-use/backends.html["Configurar backends"]
+
+
+
+== Portas Astra Trident
+
+O Astra Trident requer acesso a portas específicas para comunicação.
+
+link:../trident-reference/ports.html["Portas Astra Trident"]
+
+
+
+== Imagens de contêineres e versões correspondentes do Kubernetes
+
+Para instalações com conexão de ar, a lista a seguir é uma referência das imagens de contêiner necessárias para instalar o Astra Trident. Use o `tridentctl images` comando para verificar a lista de imagens de contentor necessárias.
+
+[cols="2"]
+|===
+| Versões do Kubernetes | Imagem do recipiente 
+
+
+| v1.24.0, v1.25.0, v1.26.0, v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0  a| 
+* docker.io/NetApp/Trident:24.06.0
+* docker.io/NetApp/Trident-AutoSupport:24,06
+* provisionador do registry.k8s.io/sig-storage/csi:v4,0.1
+* registry.k8s.io/sig-storage/csi-attacher:v4,6.0
+* registry.k8s.io/sig-storage/csi-resizer:v1.11.0
+* registry.k8s.io/sig-storage/csi-snapshotter:v7,0.2
+* registry.k8s.io/sig-storage/csi-node-driver-registrador:v2.10.0
+* docker.io/NetApp/Trident-operador:24.06.0 (opcional)
+
+
+|===

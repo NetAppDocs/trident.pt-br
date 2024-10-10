@@ -1,0 +1,88 @@
+---
+sidebar: sidebar 
+permalink: trident-use/ontap-nas.html 
+keywords: trident backend, ontap nas, ontap-nas, ontap-nas-economy, ontap-nas-flexgroups, fsx, drivers, access modes, rwo, rwx, rwp, rwop, file system 
+summary: Saiba mais sobre como configurar um back-end ONTAP com drivers nas ONTAP. 
+---
+= Descrição geral do controlador ONTAP nas
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Saiba mais sobre como configurar um back-end ONTAP com drivers nas ONTAP e Cloud Volumes ONTAP.
+
+
+
+== Detalhes do driver nas do ONTAP
+
+O Astra Trident fornece os seguintes drivers de storage nas para se comunicar com o cluster ONTAP. Os modos de acesso suportados são: _ReadWriteOnce_ (RWO), _ReadOnlyMuy_ (ROX), _ReadWriteMany_ (RWX), _ReadWriteOncePod_ (RWOP).
+
+
+IMPORTANT: Se você estiver usando o Astra Control para proteção, recuperação e mobilidade, leia <<Compatibilidade com driver Astra Control>>.
+
+[cols="2, 1, 1, 2, 2"]
+|===
+| Condutor | Protocolo | VolumeMode | Modos de acesso suportados | Sistemas de arquivos suportados 
+
+
+| `ontap-nas`  a| 
+NFS, SMB
+ a| 
+Sistema de ficheiros
+ a| 
+RWO, ROX, RWX, RWOP
+ a| 
+"" `nfs`, , `smb`
+
+
+
+| `ontap-nas-economy`  a| 
+NFS, SMB
+ a| 
+Sistema de ficheiros
+ a| 
+RWO, ROX, RWX, RWOP
+ a| 
+"" `nfs`, , `smb`
+
+
+
+| `ontap-nas-flexgroup`  a| 
+NFS, SMB
+ a| 
+Sistema de ficheiros
+ a| 
+RWO, ROX, RWX, RWOP
+ a| 
+"" `nfs`, , `smb`
+
+|===
+
+
+=== Compatibilidade com driver Astra Control
+
+O Astra Control oferece proteção aprimorada, recuperação de desastres e mobilidade (migrando volumes entre clusters Kubernetes) para volumes criados com os `ontap-nas` drivers , `ontap-nas-flexgroup` e . `ontap-san` link:https://docs.netapp.com/us-en/astra-control-center/use/replicate_snapmirror.html#replication-prerequisites["Pré-requisitos de replicação do Astra Control"^]Consulte para obter detalhes.
+
+[WARNING]
+====
+* Use `ontap-san-economy` somente se a contagem de uso de volume persistente for esperada ser maior que link:https://docs.netapp.com/us-en/ontap/volumes/storage-limits-reference.html["Limites de volume ONTAP suportados"^].
+* Use `ontap-nas-economy` somente se a contagem de uso de volume persistente for esperada para ser maior do que link:https://docs.netapp.com/us-en/ontap/volumes/storage-limits-reference.html["Limites de volume ONTAP suportados"^] e o `ontap-san-economy` driver não puder ser usado.
+* Não use o uso `ontap-nas-economy` se você antecipar a necessidade de proteção de dados, recuperação de desastres ou mobilidade.
+
+
+====
+
+
+== Permissões do usuário
+
+O Astra Trident espera ser executado como administrador da ONTAP ou SVM, normalmente usando o `admin` usuário do cluster ou um `vsadmin` usuário SVM, ou um usuário com um nome diferente que tenha a mesma função.
+
+Para implantações do Amazon FSX for NetApp ONTAP, o Astra Trident espera ser executado como administrador do ONTAP ou SVM, usando o usuário do cluster `fsxadmin` ou um `vsadmin` usuário SVM, ou um usuário com um nome diferente que tenha a mesma função. O `fsxadmin` usuário é um substituto limitado para o usuário administrador do cluster.
+
+
+NOTE: Se você usar o `limitAggregateUsage` parâmetro, as permissões de administrador do cluster serão necessárias. Ao usar o Amazon FSX for NetApp ONTAP com Astra Trident, o `limitAggregateUsage` parâmetro não funcionará com as `vsadmin` contas de usuário e `fsxadmin`. A operação de configuração falhará se você especificar este parâmetro.
+
+Embora seja possível criar uma função mais restritiva no ONTAP que um driver Trident pode usar, não recomendamos. A maioria das novas versões do Trident chamarão APIs adicionais que teriam que ser contabilizadas, tornando as atualizações difíceis e suscetíveis a erros.

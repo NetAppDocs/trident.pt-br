@@ -1,0 +1,85 @@
+---
+sidebar: sidebar 
+permalink: trident-managing-k8s/upgrade-trident.html 
+keywords: upgrade, trident, methods, operator, tridentctl, helm 
+summary: O Astra Trident segue uma cadência de lançamento de quatro meses, oferecendo três grandes lançamentos todos os anos. Cada nova versão é construída sobre as versões anteriores, fornecendo novos recursos e melhorias de desempenho, bem como correções de bugs e melhorias. Recomendamos que você atualize pelo menos uma vez por ano para aproveitar os novos recursos do Astra Trident. 
+---
+= Atualizar o Astra Trident
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Começando com o lançamento de 24,02, o Astra Trident segue uma cadência de lançamento de quatro meses, entregando três grandes lançamentos todos os anos. Cada nova versão baseia-se nas versões anteriores e fornece novos recursos, melhorias de desempenho, correções de bugs e melhorias. Recomendamos que você atualize pelo menos uma vez por ano para aproveitar os novos recursos do Astra Trident.
+
+
+
+== Considerações antes da atualização
+
+Ao atualizar para a versão mais recente do Astra Trident, considere o seguinte:
+
+* Deve haver apenas uma instância do Astra Trident instalada em todos os namespaces em um determinado cluster do Kubernetes.
+* O Astra Trident 23,07 e posterior requer snapshots de volume v1 e não é mais compatível com snapshots alfa ou beta.
+* Se você criou o Cloud Volumes Service para Google Cloud no link:../trident-use/gcp.html#learn-about-astra-trident-support-for-cloud-volumes-service-for-google-cloud["Tipo de serviço CVS"], atualize a configuração de back-end para usar o `standardsw` nível de serviço ou `zoneredundantstandardsw` ao atualizar a partir do Astra Trident 23,01. A falha ao atualizar o `serviceLevel` no back-end pode causar falha de volumes. link:../trident-use/gcp.html#cvs-service-type-examples["Amostras do tipo de serviço CVS"]Consulte para obter detalhes.
+* Ao atualizar, é importante que você forneça `parameter.fsType` o `StorageClasses` Astra Trident usado. Você pode excluir e recriar `StorageClasses` sem interromper volumes pré-existentes.
++
+** Este é um ** requisito** para aplicação de https://kubernetes.io/docs/tasks/configure-pod-container/security-context/["contextos de segurança"^] volumes SAN.
+** O diretório https://github.com/NetApp https://github.com/NetApp/Trident Trident/tree/master/Trident Trident-installer/sample-input[sample input] contém exemplos, como https://github.com/NetApp/Trident/blob/master/Trident-installer/sample-input/storage-class-samples/storage-class-[`storage-class-bronze-default.yaml`basic[`storage-class-basic.yaml.templ`
+** Para obter mais informações, link:../trident-rn.html["Problemas conhecidos"]consulte .
+
+
+
+
+
+
+== Passo 1: Selecione uma versão
+
+As versões do Astra Trident seguem uma convenção de nomenclatura baseada em data `YY.MM`, onde "YY" é os últimos dois dígitos do ano e "MM" é o mês. Os lançamentos de ponto seguem uma `YY.MM.X` convenção, onde "X" é o nível de patch. Você selecionará a versão para a qual atualizar com base na versão da qual você está atualizando.
+
+* Você pode fazer uma atualização direta para qualquer versão de destino que esteja dentro de uma janela de quatro versões da versão instalada. Por exemplo, você pode atualizar diretamente de 23,04 (ou qualquer lançamento de 23,04 pontos) para 24,06.
+* Se você estiver atualizando de uma versão fora da janela de quatro versões, execute uma atualização em várias etapas. Use as instruções de atualização do link:../earlier-versions.html["versão anterior"]para atualizar para a versão mais recente que se encaixa na janela de quatro versões. Por exemplo, se você estiver executando o 22,01 e quiser atualizar para o 24,06:
++
+.. Primeiro upgrade de 22,07 para 23,04.
+.. Em seguida, atualize de 23,04 para 24,06.
+
+
+
+
+
+NOTE: Ao atualizar usando o operador Trident na Plataforma de contêiner OpenShift, você deve atualizar para o Trident 21.01.1 ou posterior. O operador Trident lançado com 21.01.0 contém um problema conhecido que foi corrigido no 21.01.1. Para obter mais detalhes, consulte https://github.com/NetApp/trident/issues/517["Detalhes do problema no GitHub"^]a .
+
+
+
+== Passo 2: Determine o método de instalação original
+
+Para determinar qual versão você usou para instalar originalmente o Astra Trident:
+
+. Use `kubectl get pods -n trident` para examinar os pods.
++
+** Se não houver nenhum pod do operador, o Astra Trident foi instalado usando `tridentctl`o .
+** Se houver um pod do operador, o Astra Trident foi instalado usando o operador Trident manualmente ou usando o Helm.
+
+
+. Se houver um pod do operador, use `kubectl describe torc` para determinar se o Astra Trident foi instalado usando o Helm.
++
+** Se houver uma etiqueta Helm, o Astra Trident foi instalado usando Helm.
+** Se não houver nenhuma etiqueta Helm, o Astra Trident foi instalado manualmente usando o operador Trident.
+
+
+
+
+
+
+== Passo 3: Selecione um método de atualização
+
+Geralmente, você deve atualizar usando o mesmo método usado para a instalação inicial, no entanto, você pode link:../trident-get-started/kubernetes-deploy.html#moving-between-installation-methods["mova entre os métodos de instalação"]. Há duas opções para atualizar o Astra Trident.
+
+* link:upgrade-operator.html["Atualize usando o operador Trident"]
++
+
+TIP: Sugerimos que você revise link:upgrade-operator-overview.html["Compreender o fluxo de trabalho de atualização do operador"] antes de atualizar com o operador.
+
+* 
+

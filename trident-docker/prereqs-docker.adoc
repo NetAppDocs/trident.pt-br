@@ -1,0 +1,192 @@
+---
+sidebar: sidebar 
+permalink: trident-docker/prereqs-docker.html 
+keywords: deploy, astra trident, docker, trident for docker, nfs, iscsi, protcol, nfs protocol, iscsi protocol, configure host, host config, nvme/tcp, nvme 
+summary: Você precisa instalar e configurar os pré-requisitos de protocolo necessários no seu host antes de implantar o Astra Trident. 
+---
+= Pré-requisitos para implantação
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você precisa instalar e configurar os pré-requisitos de protocolo necessários no seu host antes de implantar o Astra Trident.
+
+
+
+== Verifique os requisitos
+
+* Verifique se sua implantação atende a todos link:../trident-get-started/requirements.html["requisitos"]os .
+* Verifique se você tem uma versão suportada do Docker instalada. Se a versão do Docker estiver desatualizada, https://docs.docker.com/engine/install/["instale ou atualize-o."^].
++
+[listing]
+----
+docker --version
+----
+* Verifique se os pré-requisitos do protocolo estão instalados e configurados no seu host.
+
+
+
+
+=== Ferramentas NFS
+
+Instale as ferramentas NFS usando os comandos do seu sistema operacional.
+
+[role="tabbed-block"]
+====
+.RHEL 8 MAIS
+--
+[listing]
+----
+sudo yum install -y nfs-utils
+----
+--
+.Ubuntu
+--
+[listing]
+----
+sudo apt-get install -y nfs-common
+----
+--
+====
+
+WARNING: Reinicie seus nós de trabalho após instalar as ferramentas NFS para evitar falhas ao anexar volumes a contêineres.
+
+
+
+=== Ferramentas iSCSI
+
+Instale as ferramentas iSCSI utilizando os comandos do seu sistema operativo.
+
+[role="tabbed-block"]
+====
+.RHEL 8 MAIS
+--
+. Instale os seguintes pacotes de sistema:
++
+[listing]
+----
+sudo yum install -y lsscsi iscsi-initiator-utils sg3_utils device-mapper-multipath
+----
+. Verifique se a versão iscsi-iniciador-utils é 6,2.0,874-2.el7 ou posterior:
++
+[listing]
+----
+rpm -q iscsi-initiator-utils
+----
+. Definir a digitalização para manual:
++
+[listing]
+----
+sudo sed -i 's/^\(node.session.scan\).*/\1 = manual/' /etc/iscsi/iscsid.conf
+----
+. Ativar multipathing:
++
+[listing]
+----
+sudo mpathconf --enable --with_multipathd y --find_multipaths n
+----
++
+
+NOTE: Certifique-se de `etc/multipath.conf` que contém `find_multipaths no` `defaults` em .
+
+. Certifique-se de que `iscsid` e `multipathd` estão a funcionar:
++
+[listing]
+----
+sudo systemctl enable --now iscsid multipathd
+----
+. Ativar e iniciar `iscsi`:
++
+[listing]
+----
+sudo systemctl enable --now iscsi
+----
+
+
+--
+.Ubuntu
+--
+. Instale os seguintes pacotes de sistema:
++
+[listing]
+----
+sudo apt-get install -y open-iscsi lsscsi sg3-utils multipath-tools scsitools
+----
+. Verifique se a versão Open-iscsi é 2,0.874-5ubuntu2.10 ou posterior (para bionic) ou 2,0.874-7.1ubuntu6.1 ou posterior (para focal):
++
+[listing]
+----
+dpkg -l open-iscsi
+----
+. Definir a digitalização para manual:
++
+[listing]
+----
+sudo sed -i 's/^\(node.session.scan\).*/\1 = manual/' /etc/iscsi/iscsid.conf
+----
+. Ativar multipathing:
++
+[listing]
+----
+sudo tee /etc/multipath.conf <<-'EOF'
+defaults {
+    user_friendly_names yes
+    find_multipaths no
+}
+EOF
+sudo systemctl enable --now multipath-tools.service
+sudo service multipath-tools restart
+----
++
+
+NOTE: Certifique-se de `etc/multipath.conf` que contém `find_multipaths no` `defaults` em .
+
+. Certifique-se de que `open-iscsi` e `multipath-tools` estão ativados e em execução:
++
+[listing]
+----
+sudo systemctl status multipath-tools
+sudo systemctl enable --now open-iscsi.service
+sudo systemctl status open-iscsi
+----
+
+
+--
+====
+
+
+== Ferramentas NVMe
+
+Instale as ferramentas NVMe usando os comandos do seu sistema operacional.
+
+[NOTE]
+====
+* O NVMe requer o RHEL 9 ou posterior.
+* Se a versão do kernel do seu nó Kubernetes for muito antiga ou se o pacote NVMe não estiver disponível para a versão do kernel, talvez seja necessário atualizar a versão do kernel do nó para uma com o pacote NVMe.
+
+
+====
+[role="tabbed-block"]
+====
+.RHEL 9
+--
+[listing]
+----
+sudo yum install nvme-cli
+sudo yum install linux-modules-extra-$(uname -r)
+sudo modprobe nvme-tcp
+----
+--
+.Ubuntu
+--
+[listing]
+----
+sudo apt install nvme-cli
+sudo apt -y install linux-modules-extra-$(uname -r)
+sudo modprobe nvme-tcp
+----
+--
+====

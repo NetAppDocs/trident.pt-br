@@ -1,0 +1,63 @@
+---
+settings:
+  name: Astra Trident
+  internal:
+    pdf_enabled: true
+  prod:
+    pdf_enabled: true
+    harmony_enabled: false
+  rss_page: trident-rn.html
+  versions:
+  - version-number: '24.06'
+    url: "/trident"
+  - version-number: '24.02'
+    url: "/trident-2402"
+  - version-number: '23.10'
+    url: "/trident-2310"
+  - version-number: '23.07'
+    url: "/trident-2307"
+  - version-number: '23.04'
+    url: "/trident-2304"
+  - version-number: '23.01'
+    url: "/trident-2301"
+  - version-number: '22.10'
+    url: "/trident-2210"
+  - version-number: '22.07'
+    url: "/trident-2207"
+  - version-number: '22.04'
+    url: "/trident-2204"
+  - version-number: '22.01'
+    url: "/trident-2201"
+  - version-number: '21.10'
+    url: "/trident-2110"
+  langs: pt-br,us-en,ja-jp,ko-kr,zh-cn,zh-tw,de-de,es-es,fr-fr,it-it
+sidebar:
+  entries:
+  - title: Documentos do Astra Trident
+    url: "/index.html"
+  - title: Notas de lançamento
+    entries:
+    - title: O que há de novo
+      url: "/trident-rn.html"
+    - title: Versões anteriores
+      url: "/earlier-versions.html"
+  - section: trident-get-started
+  - section: trident-install
+  - section: trident-use
+  - section: trident-managing-k8s
+  - section: trident-docker
+  - section: trident-reco
+  - title: Conhecimento e apoio
+    entries:
+    - title: FAQs
+      url: "/faq.html"
+    - title: Solução de problemas
+      url: "/troubleshooting.html"
+    - title: Obtenha ajuda
+      url: "/get-help.html"
+  - section: trident-reference
+  - title: Avisos legais
+    url: "/legal-notices.html"
+product-family:
+  name: Astra
+  repo: astra-family

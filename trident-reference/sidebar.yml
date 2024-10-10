@@ -1,0 +1,14 @@
+---
+section: trident-reference
+title: Referência
+entries:
+- title: Portas Astra Trident
+  url: "/trident-reference/ports.html"
+- title: API REST do Astra Trident
+  url: "/trident-reference/rest-api.html"
+- title: Opções de linha de comando
+  url: "/trident-reference/trident-cl.html"
+- title: Objetos Kubernetes e Astra Trident
+  url: "/trident-reference/objects.html"
+- title: Padrões de segurança do pod (PSS) e restrições de contexto de segurança (SCC)
+  url: "/trident-reference/pod-security.html"

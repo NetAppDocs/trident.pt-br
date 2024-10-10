@@ -1,0 +1,27 @@
+---
+sidebar: sidebar 
+permalink: trident-concepts/provisioning.html 
+keywords: provisioning, astra trident 
+summary: O provisionamento no Astra Trident tem duas fases primárias. A primeira fase associa uma classe de armazenamento ao conjunto de conjuntos de armazenamento de back-end adequados e ocorre como uma preparação necessária antes do provisionamento. A segunda fase inclui a própria criação de volume e requer a escolha de um pool de armazenamento daqueles associados à classe de armazenamento do volume pendente. 
+---
+= Provisionamento
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O provisionamento no Astra Trident tem duas fases primárias. A primeira fase associa uma classe de armazenamento ao conjunto de conjuntos de armazenamento de back-end adequados e ocorre como uma preparação necessária antes do provisionamento. A segunda fase inclui a própria criação de volume e requer a escolha de um pool de armazenamento daqueles associados à classe de armazenamento do volume pendente.
+
+
+
+== Associação de classe de armazenamento
+
+A associação de pools de storage de back-end a uma classe de armazenamento depende dos atributos solicitados da classe de armazenamento e `storagePools` das listas , `additionalStoragePools` e `excludeStoragePools` . Quando você cria uma classe de storage, o Trident compara os atributos e pools oferecidos por cada um de seus back-ends aos solicitados pela classe de storage. Se os atributos e o nome de um pool de storage corresponderem a todos os atributos e nomes de pool solicitados, o Astra Trident adicionará esse pool de storage ao conjunto de pools de storage adequados para essa classe de storage. Além disso, o Astra Trident adiciona todos os pools de storage listados na `additionalStoragePools` lista a esse conjunto, mesmo que seus atributos não atendam a todos ou a qualquer um dos atributos solicitados da classe de storage. Você deve usar a `excludeStoragePools` lista para substituir e remover pools de armazenamento de uso para uma classe de armazenamento. O Astra Trident executa um processo semelhante sempre que você adiciona um novo back-end, verificando se os pools de storage atendem às classes de storage existentes e removendo quaisquer que tenham sido marcados como excluídos.
+
+
+
+== Criação de volume
+
+Em seguida, o Astra Trident usa as associações entre classes de storage e pools de storage para determinar onde provisionar volumes. Quando você cria um volume, o Astra Trident primeiro obtém o conjunto de pools de storage para a classe de storage desse volume e, se você especificar um protocolo para o volume, o Astra Trident removerá esses pools de storage que não podem fornecer o protocolo solicitado (por exemplo, um back-end NetApp HCI/SolidFire não poderá fornecer um volume baseado em arquivo enquanto um back-end do ONTAP nas não puder fornecer um volume baseado em bloco). O Astra Trident aleatoriza a ordem desse conjunto resultante, para facilitar uma distribuição uniforme de volumes e, em seguida, iterá-lo, tentando provisionar o volume em cada pool de storage por sua vez. Se for bem-sucedido em um, ele retorna com sucesso, registrando quaisquer falhas encontradas no processo. O Astra Trident retorna uma falha *somente se* falhar ao provisionamento em *todos* dos pools de storage disponíveis para a classe de storage e o protocolo solicitados.

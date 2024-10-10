@@ -1,0 +1,60 @@
+---
+indexpage:
+  lead: O Astra Trident é um provisionador e orquestrador de storage de código aberto
+    mantido pela NetApp. Com ele, você cria volumes de storage para aplicações em
+    contêiner gerenciadas pelo Docker e Kubernetes.
+  tiles:
+  - title: Notas de lançamento
+    links:
+    - title: O que há de novo
+      url: trident-rn.html
+    - title: Versões anteriores
+      url: "/earlier-versions.html"
+  - title: Comece agora
+    links:
+    - title: Saiba mais sobre o Astra Trident
+      url: "/trident-get-started/intro.html"
+    - title: Requisitos
+      url: "/trident-get-started/requirements.html"
+    - title: Início rápido
+      url: "/trident-get-started/quickstart.html"
+  - title: Implante o Astra Trident
+    links:
+    - title: Implante com o operador Trident
+      url: "/trident-get-started/kubernetes-deploy-operator.html"
+    - title: Implante com o tridentctl
+      url: "/trident-get-started/kubernetes-deploy-tridentctl.html"
+    - title: Implante o Astra Trident para Docker
+      url: "/trident-docker/deploy-docker.html"
+  - title: Atualizar o Astra Trident
+    links:
+    - title: Atualize com o operador Trident
+      url: "/trident-managing-k8s/upgrade-operator.html"
+    - title: Atualize com o tridentctl
+      url: "/trident-managing-k8s/upgrade-tridentctl.html"
+  - title: Use o Astra Trident
+    links:
+    - title: Prepare o nó de trabalho
+      url: "/trident-use/worker-node-prep.html"
+    - title: Configurar backends
+      url: "/trident-use/backends.html"
+    - title: Gerenciar classes de armazenamento
+      url: "/trident-use/manage-stor-class.html"
+    - title: Executar operações de volume
+      url: "/trident-use/vol-operations.html"
+  - title: Demos e tutoriais
+    links:
+    - title: Vídeos do Astra Trident
+      url: https://tv.netapp.com/detail/video/5995831475001/using-trident-with-kubernetes
+  - title: Blogs & comunidade
+    links:
+    - title: Blogs do Astra
+      url: https://cloud.netapp.com/blog/topic/astra
+    - title: Blogs do Astra Trident
+      url: https://netapp.io/persistent-storage-provisioner-for-kubernetes/
+    - title: Kubernetes Hub
+      url: https://cloud.netapp.com/kubernetes-hub
+    - title: NetApp.io
+      url: https://netapp.io/
+    - title: Discórdia
+      url: https://discord.gg/NetApp

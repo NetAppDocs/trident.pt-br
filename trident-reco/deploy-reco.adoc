@@ -1,0 +1,31 @@
+---
+sidebar: sidebar 
+permalink: trident-reco/deploy-reco.html 
+keywords: deployment, deploy, trident, namespace 
+summary: Use as recomendações listadas aqui quando implantar o Astra Trident. 
+---
+= Implantação
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Use as recomendações listadas aqui quando implantar o Astra Trident.
+
+
+
+== Implante em um namespace dedicado
+
+https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/["Namespaces"^] fornecer separação administrativa entre diferentes aplicações e são uma barreira para o compartilhamento de recursos. Por exemplo, um PVC de um namespace não pode ser consumido de outro. O Astra Trident fornece recursos PV para todos os namespaces no cluster do Kubernetes e, consequentemente, utiliza uma conta de serviço que elevou o Privileges.
+
+Além disso, o acesso ao pod Trident pode permitir que um usuário acesse credenciais do sistema de storage e outras informações confidenciais. É importante garantir que os usuários de aplicativos e aplicativos de gerenciamento não tenham a capacidade de acessar as definições de objetos do Trident ou os próprios pods.
+
+
+
+== Use cotas e limites de intervalo para controlar o consumo de armazenamento
+
+O Kubernetes tem dois recursos que, quando combinados, fornecem um mecanismo avançado para limitar o consumo de recursos pelas aplicações. O https://kubernetes.io/docs/concepts/policy/resource-quotas/#storage-resource-quota["mecanismo de cota de storage"^] permite que o administrador implemente limites de consumo globais e específicos de classe de storage, de contagem de objetos e capacidade em uma base por namespace. Além disso, o uso de a https://kubernetes.io/docs/tasks/administer-cluster/limit-storage-consumption/#limitrange-to-limit-requests-for-storage["limite de alcance"^] garante que as solicitações de PVC estejam dentro de um valor mínimo e máximo antes que a solicitação seja encaminhada para o provisionador.
+
+Esses valores são definidos em uma base por namespace, o que significa que cada namespace deve ter valores definidos que se encaixam em seus requisitos de recursos. Consulte aqui para obter informações https://netapp.io/2017/06/09/self-provisioning-storage-kubernetes-without-worry["como alavancar cotas"^] sobre .

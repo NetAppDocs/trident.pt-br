@@ -1,0 +1,25 @@
+---
+sidebar: sidebar 
+permalink: trident-use/backends.html 
+keywords: backends, storage system, anf, cvs for gcp, element, hci, solidfire, ontap, aff, fas, ontap select, configure backends, fsx 
+summary: Um back-end define a relação entre o Astra Trident e um sistema de storage. Ele diz ao Astra Trident como se comunicar com esse sistema de storage e como o Astra Trident deve provisionar volumes a partir dele. 
+---
+= Configurar backends
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Um back-end define a relação entre o Astra Trident e um sistema de storage. Ele diz ao Astra Trident como se comunicar com esse sistema de storage e como o Astra Trident deve provisionar volumes a partir dele.
+
+O Astra Trident oferece automaticamente pools de storage de back-ends que atendem aos requisitos definidos por uma classe de storage. Saiba como configurar o back-end para o seu sistema de armazenamento.
+
+* link:anf.html["Configurar um back-end do Azure NetApp Files"^]
+* link:gcp.html["Configure um back-end do Cloud Volumes Service para o Google Cloud Platform"^]
+* link:element.html["Configurar um back-end NetApp HCI ou SolidFire"^]
+* link:ontap-nas.html["Configurar um back-end com drivers nas ONTAP ou Cloud Volumes ONTAP"^]
+* link:ontap-san.html["Configure um back-end com drivers SAN ONTAP ou Cloud Volumes ONTAP"^]
+* link:trident-fsx.html["Use o Astra Trident com o Amazon FSX para NetApp ONTAP"^]
+

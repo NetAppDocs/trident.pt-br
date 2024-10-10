@@ -1,0 +1,326 @@
+---
+sidebar: sidebar 
+permalink: trident-use/worker-node-prep.html 
+keywords: storage class, manage storage class, storage classes, kubernetes storage classes, worker node, nfs, iscsi, kubernetes clusters, self-healing, healing, nvme, tcp 
+summary: Todos os nós de trabalho no cluster do Kubernetes precisam ser capazes de montar os volumes provisionados para os pods. Se você estiver usando o driver ONTAP-nas, ONTAP-nas-Economy, ONTAP-nas-FlexGroup para um de seus back-ends, seus nós de trabalho precisarão das ferramentas NFS. Caso contrário, eles exigem as ferramentas iSCSI. 
+---
+= Prepare o nó de trabalho
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Todos os nós de trabalho no cluster do Kubernetes precisam ser capazes de montar os volumes provisionados para os pods. Para preparar os nós de trabalho, é necessário instalar ferramentas NFS, iSCSI ou NVMe/TCP com base na seleção de driver.
+
+
+
+== Selecionar as ferramentas certas
+
+Se você estiver usando uma combinação de drivers, você deve instalar todas as ferramentas necessárias para seus drivers. Versões recentes do RedHat CoreOS têm as ferramentas instaladas por padrão.
+
+.Ferramentas NFS
+link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#nfs-volumes["Instalar as ferramentas NFS"] se estiver a utilizar: `ontap-nas`, `ontap-nas-economy`, `ontap-nas-flexgroup`, , , `azure-netapp-files` `gcp-cvs` .
+
+.Ferramentas iSCSI
+link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#install-the-iscsi-tools["Instale as ferramentas iSCSI"] se estiver a utilizar: `ontap-san`, `ontap-san-economy`, `solidfire-san`.
+
+.Ferramentas NVMe
+link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#nvmetcp-volumes["Instalar as ferramentas do NVMe"] Se você estiver usando `ontap-san` o protocolo NVMe (não-volátil Memory Express) em TCP (NVMe/TCP).
+
+
+NOTE: Recomendamos o ONTAP 9.12 ou posterior para NVMe/TCP.
+
+
+
+== Detecção de serviço de nós
+
+O Astra Trident tenta detetar automaticamente se o nó pode executar serviços iSCSI ou NFS.
+
+
+NOTE: A descoberta de serviço de nó identifica os serviços descobertos, mas não garante que os serviços estejam configurados corretamente. Por outro lado, a ausência de um serviço descoberto não garante que a montagem de volume falhe.
+
+.Rever eventos
+O Astra Trident cria eventos para o nó a fim de identificar os serviços descobertos. Para rever estes eventos, execute:
+
+[listing]
+----
+kubectl get event -A --field-selector involvedObject.name=<Kubernetes node name>
+----
+.Reveja os serviços descobertos
+O Astra Trident identifica serviços habilitados para cada nó no nó CR da Trident. Para visualizar os serviços descobertos, execute:
+
+[listing]
+----
+tridentctl get node -o wide -n <Trident namespace>
+----
+
+
+== Volumes NFS
+
+Instale as ferramentas NFS usando os comandos do seu sistema operacional. Certifique-se de que o serviço NFS seja iniciado durante o tempo de inicialização.
+
+[role="tabbed-block"]
+====
+.RHEL 8 MAIS
+--
+[listing]
+----
+sudo yum install -y nfs-utils
+----
+--
+.Ubuntu
+--
+[listing]
+----
+sudo apt-get install -y nfs-common
+----
+--
+====
+
+WARNING: Reinicie seus nós de trabalho após instalar as ferramentas NFS para evitar falhas ao anexar volumes a contêineres.
+
+
+
+== Volumes iSCSI
+
+O Astra Trident pode estabelecer automaticamente uma sessão iSCSI, digitalizar LUNs e descobrir dispositivos multipath, formatá-los e montá-los em um pod.
+
+
+
+=== Recursos de autorrecuperação iSCSI
+
+Para sistemas ONTAP, o Astra Trident executa autorrecuperação iSCSI a cada cinco minutos para:
+
+. *Identifique* o estado de sessão iSCSI desejado e o estado atual da sessão iSCSI.
+. *Compare* o estado desejado com o estado atual para identificar as reparações necessárias. O Astra Trident determina as prioridades de reparação e quando efetuar as reparações.
+. *Efetuar reparações* necessárias para repor o estado atual da sessão iSCSI para o estado de sessão iSCSI pretendido.
+
+
+
+NOTE: Logs de atividade de auto-cura estão localizados no `trident-main` recipiente no respetivo pod Daemonset. Para visualizar logs, você deve ter definido `debug` como "true" durante a instalação do Astra Trident.
+
+As funcionalidades de autorrecuperação iSCSI do Astra Trident ajudam a impedir:
+
+* Sessões iSCSI obsoletas ou não saudáveis que podem ocorrer após um problema de conetividade de rede. No caso de uma sessão obsoleta, o Astra Trident aguarda sete minutos antes de sair para restabelecer a conexão com um portal.
++
+
+NOTE: Por exemplo, se os segredos CHAP foram girados no controlador de armazenamento e a rede perder a conetividade, os segredos CHAP antigos (_stale_) podem persistir. A auto-cura pode reconhecer isso e restabelecer automaticamente a sessão para aplicar os segredos CHAP atualizados.
+
+* Sessões iSCSI em falta
+* LUNs em falta
+
+
+*Pontos a considerar antes de atualizar o Trident*
+
+* Se apenas os grupos por nó (introduzidos em mais de 23,04) estiverem em uso, a recuperação automática iSCSI iniciará os rescans SCSI para todos os dispositivos no barramento SCSI.
+* Se apenas grupos com escopo de back-end (obsoletos a partir de 23,04) estiverem em uso, a recuperação automática iSCSI iniciará as reconfigurações SCSI para IDs de LUN exatas no barramento SCSI.
+* Se uma combinação de grupos por nó e grupos com escopo de back-end estiver em uso, a recuperação automática iSCSI iniciará as substituições SCSI para IDs LUN exatas no barramento SCSI.
+
+
+
+
+=== Instale as ferramentas iSCSI
+
+Instale as ferramentas iSCSI utilizando os comandos do seu sistema operativo.
+
+.Antes de começar
+* Cada nó no cluster do Kubernetes precisa ter uma IQN exclusiva. *Este é um pré-requisito necessário*.
+* Se estiver usando RHCOS versão 4,5 ou posterior, ou outra distribuição Linux compatível com RHEL, com o `solidfire-san` driver e o Element OS 12,5 ou anterior, verifique se o algoritmo de autenticação CHAP está definido como MD5 em `/etc/iscsi/iscsid.conf`. algoritmos CHAP compatíveis com FIPS seguros SHA1, SHA-256 e SHA3-256 estão disponíveis com o elemento 12,7.
++
+[listing]
+----
+sudo sed -i 's/^\(node.session.auth.chap_algs\).*/\1 = MD5/' /etc/iscsi/iscsid.conf
+----
+* Ao usar nós de trabalho que executam RHEL/RedHat CoreOS com iSCSI PVs, especifique a `discard` mountOption no StorageClass para executar a recuperação de espaço em linha. Consulte a https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_file_systems/discarding-unused-blocks_managing-file-systems["Documentação da RedHat"^].
+
+
+[role="tabbed-block"]
+====
+.RHEL 8 MAIS
+--
+. Instale os seguintes pacotes de sistema:
++
+[listing]
+----
+sudo yum install -y lsscsi iscsi-initiator-utils sg3_utils device-mapper-multipath
+----
+. Verifique se a versão iscsi-iniciador-utils é 6,2.0,874-2.el7 ou posterior:
++
+[listing]
+----
+rpm -q iscsi-initiator-utils
+----
+. Definir a digitalização para manual:
++
+[listing]
+----
+sudo sed -i 's/^\(node.session.scan\).*/\1 = manual/' /etc/iscsi/iscsid.conf
+----
+. Ativar multipathing:
++
+[listing]
+----
+sudo mpathconf --enable --with_multipathd y --find_multipaths n
+----
++
+
+NOTE: Certifique-se de `etc/multipath.conf` que contém `find_multipaths no` `defaults` em .
+
+. Certifique-se de que `iscsid` e `multipathd` estão a funcionar:
++
+[listing]
+----
+sudo systemctl enable --now iscsid multipathd
+----
+. Ativar e iniciar `iscsi`:
++
+[listing]
+----
+sudo systemctl enable --now iscsi
+----
+
+
+--
+.Ubuntu
+--
+. Instale os seguintes pacotes de sistema:
++
+[listing]
+----
+sudo apt-get install -y open-iscsi lsscsi sg3-utils multipath-tools scsitools
+----
+. Verifique se a versão Open-iscsi é 2,0.874-5ubuntu2.10 ou posterior (para bionic) ou 2,0.874-7.1ubuntu6.1 ou posterior (para focal):
++
+[listing]
+----
+dpkg -l open-iscsi
+----
+. Definir a digitalização para manual:
++
+[listing]
+----
+sudo sed -i 's/^\(node.session.scan\).*/\1 = manual/' /etc/iscsi/iscsid.conf
+----
+. Ativar multipathing:
++
+[listing]
+----
+sudo tee /etc/multipath.conf <<-'EOF
+defaults {
+    user_friendly_names yes
+    find_multipaths no
+}
+EOF
+sudo systemctl enable --now multipath-tools.service
+sudo service multipath-tools restart
+----
++
+
+NOTE: Certifique-se de `etc/multipath.conf` que contém `find_multipaths no` `defaults` em .
+
+. Certifique-se de que `open-iscsi` e `multipath-tools` estão ativados e em execução:
++
+[listing]
+----
+sudo systemctl status multipath-tools
+sudo systemctl enable --now open-iscsi.service
+sudo systemctl status open-iscsi
+----
++
+
+NOTE: Para o Ubuntu 18,04, você deve descobrir portas de destino com `iscsiadm` antes de iniciar `open-iscsi` o daemon iSCSI para iniciar. Em alternativa, pode modificar o `iscsi` serviço para iniciar `iscsid` automaticamente.
+
+
+
+--
+====
+
+
+=== Configurar ou desativar a auto-recuperação iSCSI
+
+Você pode configurar as seguintes configurações de autorrecuperação iSCSI Astra Trident para corrigir sessões obsoletas:
+
+* *Intervalo de auto-recuperação iSCSI*: Determina a frequência na qual a auto-recuperação iSCSI é invocada (predefinição: 5 minutos). Você pode configurá-lo para executar com mais frequência definindo um número menor ou com menos frequência definindo um número maior.
+
+
+[NOTE]
+====
+Definir o intervalo de auto-recuperação iSCSI para 0 interrompe completamente a auto-recuperação iSCSI. Não recomendamos a desativação do iSCSI Self-healing; ele só deve ser desativado em certos cenários quando o iSCSI Self-healing não estiver funcionando como pretendido ou para fins de depuração.
+
+====
+* *Tempo de espera de auto-cura iSCSI*: Determina a duração de espera de auto-recuperação iSCSI antes de sair de uma sessão não saudável e tentar iniciar sessão novamente (predefinição: 7 minutos). Você pode configurá-lo para um número maior para que as sessões identificadas como não saudáveis tenham que esperar mais antes de serem desconetadas e, em seguida, uma tentativa é feita para fazer login novamente, ou um número menor para fazer logout e fazer login mais cedo.
+
+
+[role="tabbed-block"]
+====
+.Leme
+--
+Para configurar ou alterar as definições de recuperação automática iSCSI, passe os `iscsiSelfHealingInterval` parâmetros e `iscsiSelfHealingWaitTime` durante a instalação do leme ou atualização do leme.
+
+O exemplo a seguir define o intervalo de auto-recuperação iSCSI para 3 minutos e o tempo de espera de auto-recuperação para 6 minutos:
+
+[listing]
+----
+helm install trident trident-operator-100.2406.0.tgz --set iscsiSelfHealingInterval=3m0s --set iscsiSelfHealingWaitTime=6m0s -n trident
+----
+--
+.tridentctl
+--
+Para configurar ou alterar as configurações de auto-recuperação iSCSI, passe os `iscsi-self-healing-interval` parâmetros e `iscsi-self-healing-wait-time` durante a instalação ou atualização do tridentctl.
+
+O exemplo a seguir define o intervalo de auto-recuperação iSCSI para 3 minutos e o tempo de espera de auto-recuperação para 6 minutos:
+
+[listing]
+----
+tridentctl install --iscsi-self-healing-interval=3m0s --iscsi-self-healing-wait-time=6m0s -n trident
+----
+--
+====
+
+
+== Volumes NVMe/TCP
+
+Instale as ferramentas NVMe usando os comandos do seu sistema operacional.
+
+[NOTE]
+====
+* O NVMe requer o RHEL 9 ou posterior.
+* Se a versão do kernel do seu nó Kubernetes for muito antiga ou se o pacote NVMe não estiver disponível para a versão do kernel, talvez seja necessário atualizar a versão do kernel do nó para uma com o pacote NVMe.
+
+
+====
+[role="tabbed-block"]
+====
+.RHEL 9
+--
+[listing]
+----
+sudo yum install nvme-cli
+sudo yum install linux-modules-extra-$(uname -r)
+sudo modprobe nvme-tcp
+----
+--
+.Ubuntu
+--
+[listing]
+----
+sudo apt install nvme-cli
+sudo apt -y install linux-modules-extra-$(uname -r)
+sudo modprobe nvme-tcp
+----
+--
+====
+
+
+=== Verifique a instalação
+
+Após a instalação, verifique se cada nó no cluster do Kubernetes tem um NQN exclusivo usando o comando:
+
+[listing]
+----
+cat /etc/nvme/hostnqn
+----
+
+WARNING: O Astra Trident modifica o `ctrl_device_tmo` valor para garantir que o NVMe não desista do caminho se ele cair. Não altere esta definição.

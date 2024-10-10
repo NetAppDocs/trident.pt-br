@@ -1,0 +1,62 @@
+---
+sidebar: sidebar 
+permalink: trident-get-started/quickstart.html 
+keywords: kubernetes cluster, simple installation, Kubernetes installation 
+summary: Se você acabou de começar a usar o Kubernetes, siga as instruções para instalar o Kubernetes para experimentá-lo. Essas instruções fornecem um cluster de nó único e bare-metal com o qual o Trident pode se integrar para fins de demonstração. 
+---
+= Início rápido para Astra Trident
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode instalar o Astra Trident e começar a gerenciar recursos de storage em apenas algumas etapas. Antes de começar, reveja link:requirements.html["Requisitos do Astra Trident"]o .
+
+
+NOTE: Para Docker, link:../trident-docker/deploy-docker.html["Astra Trident para Docker"]consulte .
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png["Um"] Instale o Astra Trident
+[role="quick-margin-para"]
+O Astra Trident oferece vários métodos e modos de instalação otimizados para uma variedade de ambientes e organizações.
+
+[role="quick-margin-para"]
+link:../trident-get-started/kubernetes-deploy.html["Instale o Astra Trident"]
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png["Dois"] Prepare o nó de trabalho
+[role="quick-margin-para"]
+Todos os nós de trabalho no cluster do Kubernetes precisam ser capazes de montar os volumes provisionados para os pods.
+
+[role="quick-margin-para"]
+link:../trident-use/worker-node-prep.html["Prepare o nó de trabalho"]
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png["Três"] Crie um backend
+[role="quick-margin-para"]
+Um back-end define a relação entre o Astra Trident e um sistema de storage. Ele diz ao Astra Trident como se comunicar com esse sistema de storage e como o Astra Trident deve provisionar volumes a partir dele.
+
+[role="quick-margin-para"]
+link:../trident-use/backends.html["Configurar um back-end"] para o seu sistema de storage
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-4.png["Quatro"] Crie um Kubernetes StorageClass
+[role="quick-margin-para"]
+O objeto Kubernetes StorageClass especifica o Astra Trident como o provisionador e permite que você crie uma classe de storage para provisionar volumes com atributos personalizáveis. O Astra Trident cria uma classe de storage correspondente para objetos Kubernetes que especificam o provisionador do Astra Trident.
+
+[role="quick-margin-para"]
+link:../trident-use/create-stor-class.html["Crie uma classe de armazenamento"]
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-5.png["Cinco"] Provisionar um volume
+[role="quick-margin-para"]
+Um _Persistentvolume_ (PV) é um recurso de armazenamento físico provisionado pelo administrador de cluster em um cluster do Kubernetes. O _PersistentVolumeClaim_ (PVC) é um pedido de acesso ao Persistentvolume no cluster.
+
+[role="quick-margin-para"]
+Crie um Persistentvolume (PV) e um PersistentVolumeClaim (PVC) que use o Kubernetes StorageClass configurado para solicitar acesso ao PV. Em seguida, pode montar o PV num pod.
+
+[role="quick-margin-para"]
+link:../trident-use/vol-provision.html["Provisionar um volume"]
+
+
+
+== O que se segue?
+
+Agora você pode adicionar backends adicionais, gerenciar classes de armazenamento, gerenciar backends e executar operações de volume.

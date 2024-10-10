@@ -1,0 +1,229 @@
+---
+sidebar: sidebar 
+permalink: trident-get-started/kubernetes-deploy-helm.html 
+keywords: deploy, astra trident, operator, helm, helm chart, configuration, values, standard, registry 
+summary: Você pode implantar o operador Trident e instalar o Astra Trident usando o Helm. Este processo aplica-se a instalações onde as imagens de contentor exigidas pelo Astra Trident não são armazenadas em um Registro privado. 
+---
+= Implantar operador Trident usando Helm (modo padrão)
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode implantar o operador Trident e instalar o Astra Trident usando o Helm. Este processo aplica-se a instalações onde as imagens de contentor exigidas pelo Astra Trident não são armazenadas em um Registro privado. Se tiver um registo de imagens privado, utilize o link:kubernetes-deploy-helm-mirror.html["processo para implantação off-line"].
+
+
+
+== Informações críticas sobre o Astra Trident 24,06
+
+*Você deve ler as seguintes informações críticas sobre o Astra Trident.*
+
+.<strong> informações essenciais sobre o Astra Trident </strong>
+[%collapsible%open]
+====
+* O Kubernetes 1,31 agora é compatível com o Astra Trident. Atualize o Trident antes de atualizar o Kubernetes.
+* O Astra Trident reforça estritamente o uso de configuração multipathing em ambientes SAN, com um valor recomendado de `find_multipaths: no` no arquivo multipath.conf.
++
+O uso de configuração não multipathing ou o uso `find_multipaths: yes` de ou `find_multipaths: smart` valor no arquivo multipath.conf resultará em falhas de montagem. A Trident recomenda o uso de `find_multipaths: no` desde a versão 21,07.
+
+
+
+====
+
+
+== Implante o operador Trident e instale o Astra Trident usando o Helm
+
+Usando o Tridentlink:https://artifacthub.io/packages/helm/netapp-trident/trident-operator["Carta do leme"^], você pode implantar o operador Trident e instalar o Trident em uma etapa.
+
+Revise link:../trident-get-started/kubernetes-deploy.html["a visão geral da instalação"] para garantir que você atendeu aos pré-requisitos de instalação e selecionou a opção de instalação correta para o seu ambiente.
+
+.Antes de começar
+Além do link:../trident-get-started/kubernetes-deploy.html#before-you-deploy["pré-requisitos de implantação"] que você precisalink:https://v3.helm.sh/["Helm versão 3"^].
+
+.Passos
+. Adicione o repositório Astra Trident Helm:
++
+[listing]
+----
+helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
+----
+. Use `helm install` e especifique um nome para sua implantação, como no exemplo a seguir, onde `100.2404.0` está a versão do Astra Trident que você está instalando.
++
+[listing]
+----
+helm install <name> netapp-trident/trident-operator --version 100.2406.0 --create-namespace --namespace <trident-namespace>
+----
++
+
+NOTE: Se você já criou um namespace para Trident, o `--create-namespace` parâmetro não criará um namespace adicional.
+
+
+
+Você pode usar `helm list` para revisar detalhes de instalação, como nome, namespace, gráfico, status, versão do aplicativo e número de revisão.
+
+
+
+== Passe os dados de configuração durante a instalação
+
+Há duas maneiras de passar dados de configuração durante a instalação:
+
+[cols="2"]
+|===
+| Opção | Descrição 
+
+
+| `--values` (ou `-f`)  a| 
+Especifique um arquivo YAML com substituições. Isso pode ser especificado várias vezes e o arquivo mais à direita terá precedência.
+
+
+
+| `--set`  a| 
+Especifique substituições na linha de comando.
+
+|===
+Por exemplo, para alterar o valor padrão `debug` do , execute o seguinte `--set` comando onde `100.2406.0` está a versão do Astra Trident que você está instalando:
+
+[listing]
+----
+helm install <name> netapp-trident/trident-operator --version 100.2406.0  --create-namespace --namespace trident --set tridentDebug=true
+----
+
+
+== Opções de configuração
+
+Esta tabela e o `values.yaml` arquivo, que faz parte do gráfico Helm, fornecem a lista de chaves e seus valores padrão.
+
+[cols="1,2,1"]
+|===
+| Opção | Descrição | Padrão 
+
+
+| `nodeSelector` | Etiquetas de nó para atribuição de pod |  
+
+
+| `podAnnotations` | Anotações do pod |  
+
+
+| `deploymentAnnotations` | Anotações de implantação |  
+
+
+| `tolerations` | Tolerâncias para atribuição de pod |  
+
+
+| `affinity` | Afinidade para atribuição de pod |  
+
+
+| `tridentControllerPluginNodeSelector` | Seletores de nós adicionais para pods. <<Compreensão dos pods dos nós e dos pods do controlador>>Consulte para obter detalhes. |  
+
+
+| `tridentControllerPluginTolerations` | Substitui as tolerâncias do Kubernetes para pods. <<Compreensão dos pods dos nós e dos pods do controlador>>Consulte para obter detalhes. |  
+
+
+| `tridentNodePluginNodeSelector` | Seletores de nós adicionais para pods. <<Compreensão dos pods dos nós e dos pods do controlador>>Consulte para obter detalhes. |  
+
+
+| `tridentNodePluginTolerations` | Substitui as tolerâncias do Kubernetes para pods. <<Compreensão dos pods dos nós e dos pods do controlador>>Consulte para obter detalhes. |  
+
+
+| `imageRegistry` | Identifica o registo para as `trident-operator`, `trident`e outras imagens. Deixe vazio para aceitar o padrão. | `""` 
+
+
+| `imagePullPolicy` | Define a política de recebimento de imagens para o `trident-operator`. | `IfNotPresent` 
+
+
+| `imagePullSecrets` | Define os segredos de extração da imagem para as `trident-operator`, `trident` e outras imagens. |  
+
+
+| `kubeletDir` | Permite substituir a localização do host do estado interno do kubelet. | `"/var/lib/kubelet"` 
+
+
+| `operatorLogLevel` | Permite que o nível de log do operador Trident seja definido como: `trace`, , `debug`, `info` `warn` , , `error` Ou `fatal`. | `"info"` 
+
+
+| `operatorDebug` | Permite que o nível de log do operador Trident seja definido como debug. | `true` 
+
+
+| `operatorImage` | Permite a substituição completa da imagem para `trident-operator`. | `""` 
+
+
+| `operatorImageTag` | Permite substituir a etiqueta da `trident-operator` imagem. | `""` 
+
+
+| `tridentIPv6` | Permite que o Astra Trident funcione em IPv6 clusters. | `false` 
+
+
+| `tridentK8sTimeout` | Substitui o tempo limite padrão de 30 segundos para a maioria das operações da API do Kubernetes (se não for zero, em segundos). | `0` 
+
+
+| `tridentHttpRequestTimeout` | Substitui o tempo limite padrão de 90 segundos para as solicitações HTTP, `0s` sendo uma duração infinita para o tempo limite. Valores negativos não são permitidos. | `"90s"` 
+
+
+| `tridentSilenceAutosupport` | Permite desativar os relatórios periódicos do Astra Trident AutoSupport. | `false` 
+
+
+| `tridentAutosupportImageTag` | Permite substituir a tag da imagem para o contentor Astra Trident AutoSupport. | `<version>` 
+
+
+| `tridentAutosupportProxy` | Permite que o Astra Trident AutoSupport Container ligue para casa por meio de um proxy HTTP. | `""` 
+
+
+| `tridentLogFormat` | Define o formato de registo Astra Trident (`text`ou `json`). | `"text"` 
+
+
+| `tridentDisableAuditLog` | Desativa o registrador de auditoria Astra Trident. | `true` 
+
+
+| `tridentLogLevel` | Permite que o nível de log do Astra Trident seja definido como: `trace`, `debug`, , `info` `warn` , , `error` `fatal` Ou . | `"info"` 
+
+
+| `tridentDebug` | Permite que o nível de log do Astra Trident seja definido como `debug`. | `false` 
+
+
+| `tridentLogWorkflows` | Permite que fluxos de trabalho específicos do Astra Trident sejam ativados para registo de rastreio ou supressão de registos. | `""` 
+
+
+| `tridentLogLayers` | Permite que camadas específicas do Astra Trident sejam ativadas para registo de rastreio ou supressão de registos. | `""` 
+
+
+| `tridentImage` | Permite a substituição completa da imagem para Astra Trident. | `""` 
+
+
+| `tridentImageTag` | Permite substituir a tag da imagem para Astra Trident. | `""` 
+
+
+| `tridentProbePort` | Permite substituir a porta padrão usada para sondas de disponibilidade/prontidão do Kubernetes. | `""` 
+
+
+| `windows` | Permite que o Astra Trident seja instalado no nó de trabalho do Windows. | `false` 
+
+
+| `enableForceDetach` | Permite ativar a função forçar desanexar. | `false` 
+
+
+| `excludePodSecurityPolicy` | Exclui a criação da diretiva de segurança do pod do operador. | `false` 
+
+
+| `cloudProvider` | Defina como `"Azure"` quando utilizar identidades geridas ou uma identidade de nuvem num cluster AKS. Defina como "AWS" ao usar uma identidade de nuvem em um cluster EKS. | `""` 
+
+
+| `cloudIdentity` | Defina como identidade da carga de trabalho ("azure.Workload.identity/client-id: xxxxxxxx-xxxx-xxxx-xxxxxxxxx") ao usar identidade da nuvem em um cluster AKS. Defina como função do AWS IAM ("'eks.amazonaws.com/role-arn: arn:aws:iam::123456:role/astratrident-role'") ao usar a identidade da nuvem em um cluster do EKS. | `""` 
+
+
+| `iscsiSelfHealingInterval` | O intervalo no qual a auto-recuperação iSCSI é invocada. | `5m0s` 
+
+
+| `iscsiSelfHealingWaitTime` | A duração após a qual a auto-recuperação iSCSI inicia uma tentativa de resolver uma sessão obsoleta executando um logout e login subsequente. | `7m0s` 
+|===
+
+
+=== Compreensão dos pods dos nós e dos pods do controlador
+
+O Astra Trident é executado como um único pod de controlador, além de um pod de nó em cada nó de trabalho no cluster. O pod de nó deve estar em execução em qualquer host onde você queira potencialmente montar um volume Astra Trident.
+
+Kubernetes link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/["seletores de nós"^] e link:https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/["tolerações e taints"^]são usados para restringir um pod a ser executado em um nó específico ou preferencial. Usando o ControllerPlugin e `NodePlugin`o , você pode especificar restrições e substituições.
+
+* O plugin controlador lida com o provisionamento e gerenciamento de volume, como snapshots e redimensionamento.
+* O plug-in do nó manipula a conexão do armazenamento ao nó.
+

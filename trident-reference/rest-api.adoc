@@ -1,0 +1,66 @@
+---
+sidebar: sidebar 
+permalink: trident-reference/rest-api.html 
+keywords: rest api, get, post, json, object, backends 
+summary: Você pode usar o endpoint REST diretamente se preferir interagir com a API REST do Astra Trident. 
+---
+= API REST do Astra Trident
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+link:tridentctl.html["comandos e opções tridentctl"]Embora seja a maneira mais fácil de interagir com a API REST do Astra Trident, você pode usar o endpoint REST diretamente, se preferir.
+
+
+
+== Quando usar a API REST
+
+A API REST é útil para instalações avançadas que usam o Astra Trident como um binário autônomo em implantações não Kubernetes.
+
+Para uma melhor segurança, o Astra Trident `REST API` é restrito a localhost por padrão ao ser executado dentro de um pod. Para alterar esse comportamento, você precisa definir o argumento do Astra Trident `-address` na configuração do pod.
+
+
+
+== Usando a API REST
+
+Para exemplos de como essas APIs são chamadas, passe o (`-d`sinalizador debug ). Para obter mais informações, link:../trident-managing-k8s/tridentctl.html["Gerenciar o Astra Trident usando o tridentctl"]consulte .
+
+A API funciona da seguinte forma:
+
+
+
+=== OBTER
+
+`GET <trident-address>/trident/v1/<object-type>`:: Lista todos os objetos desse tipo.
+`GET <trident-address>/trident/v1/<object-type>/<object-name>`:: Obtém os detalhes do objeto nomeado.
+
+
+
+
+=== POST
+
+`POST <trident-address>/trident/v1/<object-type>`:: Cria um objeto do tipo especificado.
++
+--
+* Requer uma configuração JSON para o objeto a ser criado. Para obter a especificação de cada tipo de objeto, link:../trident-managing-k8s/tridentctl.html["Gerenciar o Astra Trident usando o tridentctl"]consulte a .
+* Se o objeto já existir, o comportamento varia: Os backends atualizam o objeto existente, enquanto todos os outros tipos de objeto falharão a operação.
+
+
+--
+
+
+
+
+=== ELIMINAR
+
+`DELETE <trident-address>/trident/v1/<object-type>/<object-name>`:: Exclui o recurso nomeado.
++
+--
+
+NOTE: Os volumes associados a backends ou classes de armazenamento continuarão a existir; estes devem ser excluídos separadamente. Para obter mais informações, link:../trident-managing-k8s/tridentctl.html["Gerenciar o Astra Trident usando o tridentctl"]consulte .
+
+--
+

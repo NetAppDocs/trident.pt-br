@@ -1,0 +1,133 @@
+---
+sidebar: sidebar 
+permalink: trident-docker/volumes-docker.html 
+keywords: create volumes, astra trident, trident for docker, docker, docker volume 
+summary: 'Para criar volumes, use os comandos padrão `docker volume` com o nome do driver Astra Trident especificado quando necessário.' 
+---
+= Trabalhe com volumes
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode criar, clonar e remover volumes facilmente usando os comandos padrão `docker volume` com o nome do driver Astra Trident especificado quando necessário.
+
+
+
+== Crie um volume
+
+* Crie um volume com um driver usando o nome padrão:
++
+[listing]
+----
+docker volume create -d netapp --name firstVolume
+----
+* Criar um volume com uma instância específica do Astra Trident:
++
+[listing]
+----
+docker volume create -d ntap_bronze --name bronzeVolume
+----
++
+
+NOTE: Se você não especificar nenhum link:volume-driver-options.html["opções"^], os padrões para o driver serão usados.
+
+* Substituir o tamanho de volume predefinido. Veja o exemplo a seguir para criar um volume 20GiB com um driver:
++
+[listing]
+----
+docker volume create -d netapp --name my_vol --opt size=20G
+----
++
+
+TIP: Os tamanhos de volume são expressos como strings contendo um valor inteiro com unidades opcionais (exemplo: 10g, 20GB, 3TiB). Se nenhuma unidade for especificada, o padrão é G. as unidades de tamanho podem ser expressas como potências de 2 (B, KiB, MIB, GiB, TIB) ou potências de 10 (B, KB, MB, GB, TB). As unidades shorthand usam poderes de 2 (G GiB, T TIB,...).
+
+
+
+
+
+== Remova um volume
+
+* Remova o volume como qualquer outro volume do Docker:
++
+[listing]
+----
+docker volume rm firstVolume
+----
++
+
+IMPORTANT: Ao utilizar o `solidfire-san` controlador, o exemplo acima elimina e elimina o volume.
+
+
+
+Execute as etapas abaixo para atualizar o Astra Trident para Docker.
+
+
+
+== Clonar um volume
+
+Ao usar o `ontap-nas`, `ontap-san`, , `solidfire-san` e `gcp-cvs storage drivers`, o Astra Trident pode clonar volumes. Ao usar os `ontap-nas-flexgroup` drivers ou `ontap-nas-economy`, a clonagem não é suportada. Criar um novo volume a partir de um volume existente resultará na criação de um novo instantâneo.
+
+* Inspecione o volume para enumerar instantâneos:
++
+[listing]
+----
+docker volume inspect <volume_name>
+----
+* Crie um novo volume a partir de um volume existente. Isso resultará na criação de um novo snapshot:
++
+[listing]
+----
+docker volume create -d <driver_name> --name <new_name> -o from=<source_docker_volume>
+----
+* Criar um novo volume a partir de um instantâneo existente em um volume. Isso não criará um novo snapshot:
++
+[listing]
+----
+docker volume create -d <driver_name> --name <new_name> -o from=<source_docker_volume> -o fromSnapshot=<source_snap_name>
+----
+
+
+
+
+=== Exemplo
+
+[listing]
+----
+docker volume inspect firstVolume
+
+[
+    {
+        "Driver": "ontap-nas",
+        "Labels": null,
+        "Mountpoint": "/var/lib/docker-volumes/ontap-nas/netappdvp_firstVolume",
+        "Name": "firstVolume",
+        "Options": {},
+        "Scope": "global",
+        "Status": {
+            "Snapshots": [
+                {
+                    "Created": "2017-02-10T19:05:00Z",
+                    "Name": "hourly.2017-02-10_1505"
+                }
+            ]
+        }
+    }
+]
+
+docker volume create -d ontap-nas --name clonedVolume -o from=firstVolume
+clonedVolume
+
+docker volume rm clonedVolume
+docker volume create -d ontap-nas --name volFromSnap -o from=firstVolume -o fromSnapshot=hourly.2017-02-10_1505
+volFromSnap
+
+docker volume rm volFromSnap
+----
+
+
+== Acesse volumes criados externamente
+
+Você pode acessar dispositivos de bloco criados externamente (ou seus clones) por contentores usando Trident *only* se eles não tiverem partições e se seu sistema de arquivos for suportado pelo Astra Trident (por exemplo: Um `ext4`-formatado `/dev/sdc1` não será acessível via Astra Trident).
