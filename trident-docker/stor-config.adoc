@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-docker/stor-config.html 
 keywords: deploy, trident, docker, trident for docker, nfs, iscsi, protocol, nfs protocol, iscsi protocol, configure host, host config, storage config, options, variables, ontap, element, storage pool, cvs, cvs-performance, service type, service level, cloud volumes service, cloud volumes 
-summary: Consulte as opções de configuração disponíveis para suas configurações do Astra Trident. 
+summary: Consulte as opções de configuração disponíveis para as configurações do Trident. 
 ---
 = Opções de configuração de armazenamento
 :hardbreaks:
@@ -12,13 +12,13 @@ summary: Consulte as opções de configuração disponíveis para suas configura
 
 
 [role="lead"]
-Consulte as opções de configuração disponíveis para suas configurações do Astra Trident.
+Consulte as opções de configuração disponíveis para as configurações do Trident.
 
 
 
 == Opções de configuração global
 
-Essas opções de configuração se aplicam a todas as configurações do Astra Trident, independentemente da plataforma de storage usada.
+Essas opções de configuração se aplicam a todas as configurações do Trident, independentemente da plataforma de storage usada.
 
 [cols="3*"]
 |===
@@ -90,9 +90,9 @@ Endereço IP do ONTAP Management LIF. Você pode especificar um nome de domínio
 | `dataLIF`  a| 
 Endereço IP do protocolo LIF.
 
-* ONTAP nas drivers*: Recomendamos especificar `dataLIF`. Se não for fornecido, o Astra Trident obtém LIFs de dados do SVM. Você pode especificar um nome de domínio totalmente qualificado (FQDN) a ser usado para as operações de montagem NFS, permitindo que você crie um DNS de round-robin para balanceamento de carga em vários LIFs de dados.
+* ONTAP nas drivers*: Recomendamos especificar `dataLIF`. Se não for fornecido, o Trident obtém LIFs de dados do SVM. Você pode especificar um nome de domínio totalmente qualificado (FQDN) a ser usado para as operações de montagem NFS, permitindo que você crie um DNS de round-robin para balanceamento de carga em vários LIFs de dados.
 
-*Drivers SAN ONTAP*: Não especifique para iSCSI. O Astra Trident usa link:https://docs.netapp.com/us-en/ontap/san-admin/selective-lun-map-concept.html["Mapa de LUN seletivo da ONTAP"^] para descobrir os LIFs iSCI necessários para estabelecer uma sessão de vários caminhos. Um aviso é gerado se `dataLIF` for definido explicitamente.
+*Drivers SAN ONTAP*: Não especifique para iSCSI. O Trident usa link:https://docs.netapp.com/us-en/ontap/san-admin/selective-lun-map-concept.html["Mapa de LUN seletivo da ONTAP"^] para descobrir os LIFs iSCI necessários para estabelecer uma sessão de vários caminhos. Um aviso é gerado se `dataLIF` for definido explicitamente.
  a| 
 `10.0.0.2`
 
@@ -141,7 +141,7 @@ Controle refinado das opções de montagem NFS; o padrão é "-o nfsvers 3". *Di
 
 
 | `igroupName`  a| 
-O Astra Trident cria e gerencia por nó `igroups` `netappdvp` como .
+O Trident cria e gerencia por nó `igroups` `netappdvp` como .
 
 Este valor não pode ser alterado ou omitido.
 
@@ -167,7 +167,9 @@ Qtrees máximos por FlexVol, tem de estar no intervalo [50, 300], o padrão é 2
 
 
 
-| `sanType` | *Suportado apenas para `ontap-san` driver.* Utilize para selecionar `iscsi` para iSCSI ou `nvme` para NVMe/TCP. | `iscsi` se estiver em branco 
+ a| 
+`sanType`
+| *Suportado apenas para `ontap-san` driver.* Use para selecionar `iscsi` iSCSI, `nvme` NVMe/TCP ou `fcp` SCSI por Fibre Channel (FC). *'fcp' (SCSI sobre FC) é um recurso de pré-visualização técnica na versão do Trident 24,10.* | `iscsi` se estiver em branco 
 
 
 | `limitVolumePoolSize` | *Suportado apenas para `ontap-san-economy` drivers e `ontap-san-economy`.* Limites tamanhos de FlexVol em motoristas econômicos ONTAP ONTAP-nas-Economy e ONTAP-SAN-Economy.  a| 
@@ -212,9 +214,9 @@ Divida um clone de seu pai na criação, o padrão é `false`
 | `encryption`  a| 
 Ativa a criptografia de volume NetApp (NVE) no novo volume; o padrão é `false`. O NVE deve ser licenciado e habilitado no cluster para usar essa opção.
 
-Se o NAE estiver ativado no back-end, qualquer volume provisionado no Astra Trident será o NAE ativado.
+Se NAE estiver ativado no back-end, qualquer volume provisionado no Trident será NAE habilitado.
 
-Para obter mais informações, consulte: link:../trident-reco/security-reco.html["Como o Astra Trident funciona com NVE e NAE"].
+Para obter mais informações, consulte: link:../trident-reco/security-reco.html["Como o Trident funciona com NVE e NAE"].
  a| 
 verdadeiro
 
@@ -228,9 +230,9 @@ Opção nas para volumes NFS provisionados, o padrão é `777`
 
 
 | `snapshotDir`  a| 
-Opção nas para acesso ao `.snapshot` diretório, o padrão é `false`
+Opção nas para acesso ao `.snapshot` diretório.
  a| 
-`true`
+"Verdadeiro" para NFSv4 "falso" para NFSv3
 
 
 
@@ -287,9 +289,68 @@ Escolha o `ontap-nas-flexgroup` driver para aumentar o paralelismo para um únic
 * A clonagem não é compatível com volumes FlexGroup.
 
 
-Para obter informações sobre FlexGroups e cargas de trabalho apropriadas para FlexGroups, consulte https://www.netapp.com/pdf.html?item=/media/12385-tr4571pdf.pdf["Guia de práticas recomendadas e implementação de volumes do NetApp FlexGroup"^].
+Para obter informações sobre FlexGroups e cargas de trabalho apropriadas para FlexGroups, consulte https://www.netapp.com/pdf.html?item=/media/12385-tr4571pdf.pdf["Guia de práticas recomendadas e implementação do volume NetApp FlexGroup"^].
 
 Para obter recursos avançados e grande escala no mesmo ambiente, você pode executar várias instâncias do Docker volume Plugin, com uma usando `ontap-nas` e outra usando `ontap-nas-economy`o .
+
+
+
+=== Função ONTAP personalizada para Trident
+
+Você pode criar uma função de cluster do ONTAP com Privileges mínimo para que você não precise usar a função de administrador do ONTAP para executar operações no Trident. Quando você inclui o nome de usuário em uma configuração de back-end do Trident, o Trident usa a função de cluster do ONTAP criada para executar as operações.
+
+link:https://github.com/NetApp/trident/tree/master/contrib/ontap/trident_role["Gerador de função personalizada Trident"]Consulte para obter mais informações sobre como criar funções personalizadas do Trident.
+
+[role="tabbed-block"]
+====
+.Usando a CLI do ONTAP
+--
+. Crie uma nova função usando o seguinte comando:
++
+`security login role create <role_name\> -cmddirname "command" -access all –vserver <svm_name\>`
+
+. Crie um nome de usuário para o usuário do Trident:
++
+`security login create -username <user_name\> -application ontapi -authmethod <password\> -role <name_of_role_in_step_1\> –vserver <svm_name\> -comment "user_description"`
+
+. Mapeie a função para o usuário:
++
+`security login modify username <user_name\> –vserver <svm_name\> -role <role_name\> -application ontapi -application console -authmethod <password\>`
+
+
+
+--
+.Usando o System Manager
+--
+Execute as seguintes etapas no Gerenciador do sistema do ONTAP:
+
+. *Crie uma função personalizada*:
++
+.. Para criar uma função personalizada no nível do cluster, selecione *Cluster > Settings*.
++
+(Ou) para criar uma função personalizada no nível SVM, selecione *Storage > Storage VMs > `required SVM` Settings > Users and Roles*.
+
+.. Selecione o ícone de seta (*->*) ao lado de *usuários e funções*.
+.. Selecione * Adicionar * em *funções*.
+.. Defina as regras para a função e clique em *Salvar*.
+
+
+. *Mapeie a função para o usuário do Trident*: Execute as seguintes etapas na página *usuários e funções*:
++
+.. Selecione Adicionar ícone ** em *usuários*.
+.. Selecione o nome de usuário desejado e selecione uma função no menu suspenso para *função*.
+.. Clique em *Salvar*.
+
+
+
+
+--
+====
+Consulte as páginas a seguir para obter mais informações:
+
+* link:https://kb.netapp.com/on-prem/ontap/Ontap_OS/OS-KBs/FAQ__Custom_roles_for_administration_of_ONTAP["Funções personalizadas para administração do ONTAP"^] ou link:https://docs.netapp.com/us-en/ontap/authentication/define-custom-roles-task.html["Definir funções personalizadas"^]
+* link:https://docs.netapp.com/us-en/ontap-automation/rest/rbac_roles_users.html#rest-api["Trabalhe com funções e usuários"^]
+
 
 
 

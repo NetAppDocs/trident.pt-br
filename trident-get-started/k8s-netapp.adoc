@@ -16,9 +16,9 @@ O portfólio de produtos de storage do NetApp se integra a muitos aspectos difer
 
 
 
-== Astra
+== Trident
 
-https://docs.netapp.com/us-en/astra/["Astra"^] Facilita o gerenciamento, a proteção e a migração de workloads em contêineres com muitos dados executados no Kubernetes dentro e entre nuvens públicas e no local. O Astra provisiona e fornece storage de contêiner persistente usando o Trident do portfólio de storage comprovado e expansivo da NetApp, na nuvem pública e no local. Ele também oferece um conjunto avançado de recursos avançados de gerenciamento de dados com reconhecimento de aplicações, como snapshot, backup e restauração, logs de atividade e clonagem ativa para proteção de dados, recuperação de desastres/dados, auditoria de dados e casos de uso de migração para workloads Kubernetes.
+https://docs.netapp.com/us-en/trident/["Trident"^] Facilita o gerenciamento, a proteção e a migração de workloads em contêineres com muitos dados executados no Kubernetes dentro e entre nuvens públicas e no local. O Trident provisiona e fornece storage de contêiner persistente usando o Trident do portfólio de storage da NetApp comprovado e expansivo, na nuvem pública e no local. Ele também oferece um conjunto avançado de recursos avançados de gerenciamento de dados com reconhecimento de aplicações, como snapshot, backup e restauração, logs de atividade e clonagem ativa para proteção de dados, recuperação de desastres/dados, auditoria de dados e casos de uso de migração para workloads Kubernetes.
 
 
 

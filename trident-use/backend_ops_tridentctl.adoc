@@ -36,7 +36,7 @@ Depois de identificar e corrigir o problema com o arquivo de configuração, voc
 
 == Excluir um back-end
 
-Para excluir um back-end do Astra Trident, faça o seguinte:
+Para excluir um back-end do Trident, faça o seguinte:
 
 . Recuperar o nome do backend:
 +
@@ -53,7 +53,7 @@ tridentctl delete backend <backend-name> -n trident
 
 
 
-NOTE: Se o Astra Trident provisionou volumes e snapshots desse back-end que ainda existem, a exclusão do back-end impede que novos volumes sejam provisionados por ele. O back-end continuará a existir em um estado de exclusão e o Trident continuará a gerenciar esses volumes e snapshots até que sejam excluídos.
+NOTE: Se o Trident provisionou volumes e snapshots desse back-end que ainda existem, excluir o back-end impede que novos volumes sejam provisionados por ele. O back-end continuará a existir em um estado de exclusão e o Trident continuará a gerenciar esses volumes e snapshots até que sejam excluídos.
 
 
 

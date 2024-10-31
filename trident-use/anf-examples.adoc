@@ -18,10 +18,10 @@ Saiba mais sobre as opções de configuração de back-end NFS e SMB para Azure 
 
 == Opções de configuração de back-end
 
-O Astra Trident usa sua configuração de back-end (sub-rede, rede virtual, nível de serviço e local) para criar volumes Azure NetApp Files em pools de capacidade disponíveis no local solicitado e que correspondam ao nível de serviço e à sub-rede solicitados.
+O Trident usa sua configuração de back-end (sub-rede, rede virtual, nível de serviço e local) para criar volumes Azure NetApp Files em pools de capacidade disponíveis no local solicitado e corresponder ao nível de serviço e à sub-rede solicitados.
 
 
-NOTE: O Astra Trident não é compatível com pools de capacidade de QoS manual.
+NOTE: O Trident não oferece suporte a pools de capacidade de QoS manual.
 
 Os backends Azure NetApp Files fornecem essas opções de configuração.
 
@@ -96,7 +96,7 @@ NOTE: Para obter mais informações sobre recursos de rede, link:https://docs.mi
 
 === Permissões e recursos necessários
 
-Se você receber um erro "sem pools de capacidade encontrados" ao criar um PVC, é provável que o Registro do aplicativo não tenha as permissões e recursos necessários (sub-rede, rede virtual, pool de capacidade) associados. Se a depuração estiver ativada, o Astra Trident registrará os recursos do Azure descobertos quando o back-end for criado. Verifique se uma função apropriada está sendo usada.
+Se você receber um erro "sem pools de capacidade encontrados" ao criar um PVC, é provável que o Registro do aplicativo não tenha as permissões e recursos necessários (sub-rede, rede virtual, pool de capacidade) associados. Se a depuração estiver ativada, o Trident registrará os recursos do Azure descobertos quando o back-end for criado. Verifique se uma função apropriada está sendo usada.
 
 Os valores para `resourceGroups`, `netappAccounts`, `capacityPools`, , `virtualNetwork` e `subnet` podem ser especificados usando nomes curtos ou totalmente qualificados. Nomes totalmente qualificados são recomendados na maioria das situações, pois nomes curtos podem corresponder vários recursos com o mesmo nome.
 
@@ -136,7 +136,7 @@ Você pode controlar o provisionamento de volume padrão especificando as seguin
 `exportRule` Deve ser uma lista separada por vírgulas de qualquer combinação de endereços IPv4 ou sub-redes IPv4 na notação CIDR. Ignorado para volumes SMB. | "0,0.0,0/0" 
 
 
-| `snapshotDir` | Controla a visibilidade do diretório .snapshot | "falso" 
+| `snapshotDir` | Controla a visibilidade do diretório .snapshot | "Verdadeiro" para NFSv4 "falso" para NFSv3 
 
 
 | `size` | O tamanho padrão dos novos volumes | "100G" 
@@ -153,7 +153,7 @@ Os exemplos a seguir mostram configurações básicas que deixam a maioria dos p
 .Configuração mínima
 [%collapsible]
 ====
-Esta é a configuração mínima absoluta de back-end. Com essa configuração, o Astra Trident descobre todas as suas contas NetApp, pools de capacidade e sub-redes delegadas ao Azure NetApp Files no local configurado e coloca novos volumes aleatoriamente em um desses pools e sub-redes. Como `nasType` é omitido, o `nfs` padrão se aplica e o back-end provisionará para volumes NFS.
+Esta é a configuração mínima absoluta de back-end. Com essa configuração, o Trident descobre todas as suas contas NetApp, pools de capacidade e sub-redes delegadas ao Azure NetApp Files no local configurado e coloca novos volumes em um desses pools e sub-redes aleatoriamente. Como `nasType` é omitido, o `nfs` padrão se aplica e o back-end provisionará para volumes NFS.
 
 Essa configuração é ideal quando você está apenas começando a usar o Azure NetApp Files e experimentando as coisas, mas na prática você vai querer fornecer um escopo adicional para os volumes provisionados.
 
@@ -224,7 +224,7 @@ spec:
 .Configuração específica de nível de serviço com filtros de pool de capacidade
 [%collapsible]
 ====
-Essa configuração de back-end coloca volumes no local do Azure `eastus` em um `Ultra` pool de capacidade. O Astra Trident descobre automaticamente todas as sub-redes delegadas ao Azure NetApp Files nesse local e coloca um novo volume em uma delas aleatoriamente.
+Essa configuração de back-end coloca volumes no local do Azure `eastus` em um `Ultra` pool de capacidade. O Trident descobre automaticamente todas as sub-redes delegadas ao Azure NetApp Files nesse local e coloca um novo volume em uma delas aleatoriamente.
 
 [listing]
 ----
@@ -320,7 +320,7 @@ storage:
 .Configuração de topologias compatíveis
 [%collapsible]
 ====
-O Astra Trident facilita o provisionamento de volumes para workloads com base em regiões e zonas de disponibilidade. O `supportedTopologies` bloco nesta configuração de back-end é usado para fornecer uma lista de regiões e zonas por back-end. Os valores de região e zona especificados aqui devem corresponder aos valores de região e zona dos rótulos em cada nó de cluster do Kubernetes. Essas regiões e zonas representam a lista de valores permitidos que podem ser fornecidos em uma classe de armazenamento. Para classes de armazenamento que contêm um subconjunto das regiões e zonas fornecidas em um back-end, o Astra Trident criará volumes na região e na zona mencionadas. Para obter mais informações, link:../trident-use/csi-topology.html["Use a topologia CSI"]consulte .
+O Trident facilita o provisionamento de volumes para workloads com base em regiões e zonas de disponibilidade. O `supportedTopologies` bloco nesta configuração de back-end é usado para fornecer uma lista de regiões e zonas por back-end. Os valores de região e zona especificados aqui devem corresponder aos valores de região e zona dos rótulos em cada nó de cluster do Kubernetes. Essas regiões e zonas representam a lista de valores permitidos que podem ser fornecidos em uma classe de armazenamento. Para classes de armazenamento que contêm um subconjunto das regiões e zonas fornecidas em um back-end, o Trident cria volumes na região e na zona mencionadas. Para obter mais informações, link:../trident-use/csi-topology.html["Use a topologia CSI"]consulte .
 
 [listing]
 ----

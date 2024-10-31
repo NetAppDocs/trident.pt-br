@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/create-stor-class.html 
 keywords: storage class, manage storage class, storage classes, kubernetes storage classes 
-summary: Você pode projetar um arquivo Kubernetes StorageClass e criar o StorageClass para instruir o Astra Trident a provisionar volumes. 
+summary: Você pode projetar um arquivo Kubernetes StorageClass e criar o StorageClass para instruir o Trident a provisionar volumes. 
 ---
 = Crie uma classe de armazenamento
 :hardbreaks:
@@ -12,13 +12,13 @@ summary: Você pode projetar um arquivo Kubernetes StorageClass e criar o Storag
 
 
 [role="lead"]
-Configure um objeto Kubernetes StorageClass e crie a classe de storage para instruir o Astra Trident a provisionar volumes.
+Configure um objeto Kubernetes StorageClass e crie a classe de storage para instruir o Trident a provisionar volumes.
 
 
 
 == Configurar um objeto Kubernetes StorageClass
 
-O https://kubernetes.io/docs/concepts/storage/storage-classes/["Objeto Kubernetes StorageClass"^] identifica o Astra Trident como o provisionador que é usado para essa classe e instrui o Astra Trident a provisionar um volume. Por exemplo:
+O https://kubernetes.io/docs/concepts/storage/storage-classes/["Objeto Kubernetes StorageClass"^] identifica o Trident como o provisionador usado para essa classe e instrui o Trident a provisionar um volume. Por exemplo:
 
 [listing]
 ----
@@ -33,7 +33,7 @@ parameters:
 allowVolumeExpansion: true
 volumeBindingMode: Immediate
 ----
-link:../trident-reference/objects.html["Objetos Kubernetes e Trident"]Consulte para obter detalhes sobre como as classes de storage interagem com os `PersistentVolumeClaim` parâmetros e para controlar como o Astra Trident provisiona volumes.
+link:../trident-reference/objects.html["Objetos Kubernetes e Trident"]Consulte para obter detalhes sobre como as classes de armazenamento interagem com os `PersistentVolumeClaim` parâmetros e para controlar como o Trident provisiona volumes.
 
 
 
@@ -48,7 +48,7 @@ Depois de criar o objeto StorageClass, você pode criar a classe de armazenament
 ----
 kubectl create -f sample-input/storage-class-basic-csi.yaml
 ----
-. Agora você deve ver uma classe de storage *Basic-csi* no Kubernetes e Astra Trident, e o Astra Trident deve ter descoberto os pools no back-end.
+. Agora você deve ver uma classe de armazenamento *Basic-csi* no Kubernetes e no Trident, e o Trident deve ter descoberto os pools no back-end.
 +
 [listing]
 ----
@@ -87,7 +87,7 @@ basic-csi    csi.trident.netapp.io   15h
 
 === Amostras da classe de armazenamento
 
-O Astra Trident https://github.com/NetApp/trident/tree/master/trident-installer/sample-input/storage-class-samples["definições de classe de armazenamento simples para backends específicos"^] fornece .
+O Trident fornece https://github.com/NetApp/trident/tree/master/trident-installer/sample-input/storage-class-samples["definições de classe de armazenamento simples para backends específicos"^].
 
 Alternativamente, você pode editar `sample-input/storage-class-csi.yaml.templ` o arquivo que vem com o instalador e substituir `__BACKEND_TYPE__` pelo nome do driver de armazenamento.
 

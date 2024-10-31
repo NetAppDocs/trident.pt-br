@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: trident-use/trident-fsx.html 
 keywords: Amazon FSx for NetApp ONTAP, FSx for ONTAP, deploy Trident, integrate Trident, Trident 
-summary: 'Usando o Astra Trident com o Amazon FSX for NetApp ONTAP, você garante que os clusters do Kubernetes executados no Amazon Elastic Kubernetes Service (EKS) possam provisionar volumes persistentes de bloco e arquivo com o respaldo do do ONTAP.' 
+summary: 'Usando o Trident com o Amazon FSX for NetApp ONTAP, você pode garantir que os clusters do Kubernetes executados no Amazon Elastic Kubernetes Service (EKS) provisionem volumes persistentes de bloco e arquivo com o respaldo do do ONTAP.' 
 ---
-= Use o Astra Trident com o Amazon FSX para NetApp ONTAP
+= Use o Trident com o Amazon FSX para NetApp ONTAP
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
@@ -14,17 +14,17 @@ summary: 'Usando o Astra Trident com o Amazon FSX for NetApp ONTAP, você garant
 [role="lead"]
 https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/what-is-fsx-ontap.html["Amazon FSX para NetApp ONTAP"^] É um serviço AWS totalmente gerenciado que permite que os clientes iniciem e executem sistemas de arquivos equipados com o sistema operacional de storage NetApp ONTAP. O FSX para ONTAP permite que você aproveite os recursos, o desempenho e os recursos administrativos do NetApp com os quais você já conhece, ao mesmo tempo em que aproveita a simplicidade, a agilidade, a segurança e a escalabilidade do armazenamento de dados na AWS. O FSX para ONTAP oferece suporte aos recursos do sistema de arquivos ONTAP e APIs de administração.
 
-Você pode integrar seu sistema de arquivos do Amazon FSX for NetApp ONTAP ao Astra Trident para garantir que os clusters do Kubernetes executados no Amazon Elastic Kubernetes Service (EKS) possam provisionar volumes persistentes de bloco e arquivo com o respaldo do ONTAP.
+Você pode integrar o sistema de arquivos do Amazon FSX for NetApp ONTAP ao Trident para garantir que os clusters do Kubernetes executados no Amazon Elastic Kubernetes Service (EKS) possam provisionar volumes persistentes de bloco e arquivo com o respaldo do ONTAP.
 
 Um sistema de arquivos é o principal recurso do Amazon FSX, análogo a um cluster do ONTAP no local. Em cada SVM, você pode criar um ou vários volumes, que são contentores de dados que armazenam os arquivos e pastas em seu sistema de arquivos. Com o Amazon FSX for NetApp ONTAP, o Data ONTAP será fornecido como um sistema de arquivos gerenciado na nuvem. O novo tipo de sistema de arquivos é chamado de *NetApp ONTAP*.
 
-Usando o Astra Trident com o Amazon FSX for NetApp ONTAP, você pode garantir que os clusters do Kubernetes executados no Amazon Elastic Kubernetes Service (EKS) provisionem volumes persistentes de bloco e arquivo com o respaldo do do ONTAP.
+Usando o Trident com o Amazon FSX for NetApp ONTAP, você pode garantir que os clusters do Kubernetes executados no Amazon Elastic Kubernetes Service (EKS) provisionem volumes persistentes de bloco e arquivo com o respaldo do do ONTAP.
 
 
 
 == Requisitos
 
-Além link:../trident-get-started/requirements.html["Requisitos do Astra Trident"]do , para integrar o FSX para ONTAP com Astra Trident, você precisa de:
+Além link:../trident-get-started/requirements.html["Requisitos da Trident"]do , para integrar o FSX for ONTAP com o Trident, você precisa:
 
 * Um cluster do Amazon EKS existente ou um cluster do Kubernetes autogerenciado com `kubectl` o instalado.
 * Um sistema de arquivos e máquina virtual de armazenamento (SVM) do Amazon FSX for NetApp ONTAP que pode ser acessado a partir dos nós de trabalho do seu cluster.
@@ -42,14 +42,14 @@ NOTE: Certifique-se de seguir as etapas de preparação de nós necessárias par
 * Volumes SMB:
 +
 ** Os volumes SMB são suportados usando `ontap-nas` apenas o driver.
-** Os volumes SMB não são compatíveis com o complemento Astra Trident EKS.
-** O Astra Trident é compatível com volumes SMB montados em pods executados apenas em nós do Windows. link:../trident-use/trident-fsx-storage-backend.html#prepare-to-provision-smb-volumes["Prepare-se para provisionar volumes SMB"]Consulte para obter detalhes.
+** Os volumes SMB não são compatíveis com o complemento Trident EKS.
+** O Trident dá suporte a volumes SMB montados em pods executados apenas em nós do Windows. link:../trident-use/trident-fsx-storage-backend.html#prepare-to-provision-smb-volumes["Prepare-se para provisionar volumes SMB"]Consulte para obter detalhes.
 
 
-* Antes do Astra Trident 24,02, os volumes criados nos sistemas de arquivos do Amazon FSX que têm backups automáticos ativados, não puderam ser excluídos pelo Trident. Para evitar esse problema no Astra Trident 24,02 ou posterior, especifique o `fsxFilesystemID`, `apiRegion` AWS , AWS `apikey` e AWS `secretKey` no arquivo de configuração de back-end do AWS FSX for ONTAP.
+* Antes do Trident 24,02, os volumes criados nos sistemas de arquivos do Amazon FSX que têm backups automáticos ativados, não puderam ser excluídos pelo Trident. Para evitar esse problema no Trident 24,02 ou posterior, especifique o `fsxFilesystemID`, `apiRegion` AWS , AWS `apikey` e AWS `secretKey` no arquivo de configuração de back-end do AWS FSX for ONTAP.
 +
 
-NOTE: Se você estiver especificando uma função do IAM para o Astra Trident, poderá omitir especificar explicitamente os `apiRegion` campos , `apiKey` e `secretKey` para o Astra Trident. Para obter mais informações, link:../trident-use/trident-fsx-examples.html["Opções e exemplos de configuração do FSX for ONTAP"]consulte .
+NOTE: Se você estiver especificando uma função do IAM para o Trident, poderá omitir especificar explicitamente os `apiRegion` campos , `apiKey` e `secretKey` para o Trident. Para obter mais informações, link:../trident-use/trident-fsx-examples.html["Opções e exemplos de configuração do FSX for ONTAP"]consulte .
 
 
 
@@ -57,14 +57,14 @@ NOTE: Se você estiver especificando uma função do IAM para o Astra Trident, p
 
 == Autenticação
 
-O Astra Trident oferece dois modos de autenticação.
+O Trident oferece dois modos de autenticação.
 
 * Baseado em credenciais (recomendado): Armazena credenciais com segurança no AWS Secrets Manager. Você pode usar o `fsxadmin` usuário do sistema de arquivos ou o `vsadmin` usuário configurado para o SVM.
 +
 
-WARNING: O Astra Trident espera ser executado como um `vsadmin` usuário SVM ou como um usuário com um nome diferente que tenha a mesma função. O Amazon FSX for NetApp ONTAP tem um `fsxadmin` usuário que é uma substituição limitada do usuário do cluster do ONTAP `admin`. É altamente recomendável usar `vsadmin` com o Astra Trident.
+WARNING: O Trident espera ser executado como um `vsadmin` usuário SVM ou como um usuário com um nome diferente que tenha a mesma função. O Amazon FSX for NetApp ONTAP tem um `fsxadmin` usuário que é uma substituição limitada do usuário do cluster do ONTAP `admin`. Recomendamos vivamente a utilização `vsadmin` com o Trident.
 
-* Baseado em certificado: O Astra Trident se comunicará com o SVM em seu sistema de arquivos FSX usando um certificado instalado no seu SVM.
+* Baseado em certificado: O Trident se comunicará com o SVM em seu sistema de arquivos FSX usando um certificado instalado em seu SVM.
 
 
 Para obter detalhes sobre como ativar a autenticação, consulte a autenticação do tipo de driver:

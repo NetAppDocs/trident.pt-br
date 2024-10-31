@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/element.html 
 keywords: trident backend, solidfire, netapp hci, drivers, access modes, rwo, rwx, rwp, rwop, file system 
-summary: Saiba mais sobre como criar e usar um back-end Element com sua instalação do Astra Trident. 
+summary: Saiba mais sobre como criar e usar um backend Element com a instalação do Trident. 
 ---
 = Configurar um back-end NetApp HCI ou SolidFire
 :hardbreaks:
@@ -12,15 +12,15 @@ summary: Saiba mais sobre como criar e usar um back-end Element com sua instala�
 
 
 [role="lead"]
-Saiba como criar e usar um back-end Element com sua instalação do Astra Trident.
+Saiba como criar e usar um backend Element com a instalação do Trident.
 
 
 
 == Detalhes do driver do elemento
 
-O Astra Trident fornece o `solidfire-san` driver de storage para se comunicar com o cluster. Os modos de acesso suportados são: _ReadWriteOnce_ (RWO), _ReadOnlyMuy_ (ROX), _ReadWriteMany_ (RWX), _ReadWriteOncePod_ (RWOP).
+O Trident fornece ao `solidfire-san` controlador de armazenamento a comunicação com o cluster. Os modos de acesso suportados são: _ReadWriteOnce_ (RWO), _ReadOnlyMuy_ (ROX), _ReadWriteMany_ (RWX), _ReadWriteOncePod_ (RWOP).
 
-O `solidfire-san` driver de armazenamento suporta os modos de volume _file_ e _block_. Para o `Filesystem` volumeMode, o Astra Trident cria um volume e cria um sistema de arquivos. O tipo de sistema de arquivos é especificado pelo StorageClass.
+O `solidfire-san` driver de armazenamento suporta os modos de volume _file_ e _block_. Para o `Filesystem` volumeMode, o Trident cria um volume e cria um sistema de arquivos. O tipo de sistema de arquivos é especificado pelo StorageClass.
 
 [cols="5"]
 |===
@@ -94,7 +94,7 @@ Consulte a tabela a seguir para obter as opções de configuração de back-end:
 | `InitiatorIFace` | Restringir o tráfego iSCSI a uma interface de host específica | "padrão" 
 
 
-| `UseCHAP` | Use CHAP para autenticar iSCSI. O Astra Trident usa CHAP. | verdadeiro 
+| `UseCHAP` | Use CHAP para autenticar iSCSI. Trident usa CHAP. | verdadeiro 
 
 
 | `AccessGroups` | Lista de IDs de Grupo de Acesso a utilizar | Encontra a ID de um grupo de acesso chamado "Trident" 
@@ -153,7 +153,7 @@ Types:
 
 Este exemplo mostra o arquivo de definição de back-end configurado com pools virtuais junto com o StorageClasses que se referem a eles.
 
-O Astra Trident copia rótulos presentes em um pool de storage para a LUN de storage de back-end no provisionamento. Por conveniência, os administradores de storage podem definir rótulos por pool virtual e volumes de grupo por rótulo.
+O Trident copia rótulos presentes em um pool de storage para a LUN de storage de back-end no provisionamento. Por conveniência, os administradores de storage podem definir rótulos por pool virtual e volumes de grupo por rótulo.
 
 No arquivo de definição de back-end de exemplo mostrado abaixo, padrões específicos são definidos para todos os pools de armazenamento, que definem o `type` em Prata. Os pools virtuais são definidos na `storage` seção. Neste exemplo, alguns dos pools de armazenamento definem seu próprio tipo, e alguns pools substituem os valores padrão definidos acima.
 
@@ -211,7 +211,7 @@ storage:
 ----
 As seguintes definições do StorageClass referem-se aos pools virtuais acima. Usando o `parameters.selector` campo, cada StorageClass chama qual(s) pool(s) virtual(s) pode(m) ser(ão) usado(s) para hospedar um volume. O volume terá os aspetos definidos no pool virtual escolhido.
 
-O primeiro StorageClass ) (`solidfire-gold-four`será mapeado para o primeiro pool virtual. Este é o único pool que oferece desempenho de ouro com um `Volume Type QoS` de ouro. O último StorageClass ) (`solidfire-silver`chama qualquer pool de armazenamento que ofereça um desempenho prateado. O Astra Trident decidirá qual pool virtual está selecionado e garantirá que o requisito de storage seja atendido.
+O primeiro StorageClass ) (`solidfire-gold-four`será mapeado para o primeiro pool virtual. Este é o único pool que oferece desempenho de ouro com um `Volume Type QoS` de ouro. O último StorageClass ) (`solidfire-silver`chama qualquer pool de armazenamento que ofereça um desempenho prateado. O Trident decidirá qual pool virtual é selecionado e garante que o requisito de armazenamento seja atendido.
 
 [listing]
 ----

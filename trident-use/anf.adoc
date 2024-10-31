@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/anf.html 
 keywords: trident backend, azure netapp files, smb volumes, smb, windows, drivers, access modes, rwo, rwx, rwp, rwop, file system, aks, managed identities, azure 
-summary: 'Você pode configurar o Azure NetApp Files como back-end para o Astra Trident. É possível anexar volumes NFS e SMB usando um back-end do Azure NetApp Files. O Astra Trident também oferece suporte ao gerenciamento de credenciais usando identidades gerenciadas para clusters do Azure Kubernetes Services (AKS).' 
+summary: 'Você pode configurar o Azure NetApp Files como o back-end para o Trident. É possível anexar volumes NFS e SMB usando um back-end do Azure NetApp Files. O Trident também oferece suporte ao gerenciamento de credenciais usando identidades gerenciadas para clusters do Azure Kubernetes Services (AKS).' 
 ---
 = Configurar um back-end do Azure NetApp Files
 :hardbreaks:
@@ -12,13 +12,13 @@ summary: 'Você pode configurar o Azure NetApp Files como back-end para o Astra 
 
 
 [role="lead"]
-Você pode configurar o Azure NetApp Files como back-end para o Astra Trident. É possível anexar volumes NFS e SMB usando um back-end do Azure NetApp Files. O Astra Trident também oferece suporte ao gerenciamento de credenciais usando identidades gerenciadas para clusters do Azure Kubernetes Services (AKS).
+Você pode configurar o Azure NetApp Files como o back-end para o Trident. É possível anexar volumes NFS e SMB usando um back-end do Azure NetApp Files. O Trident também oferece suporte ao gerenciamento de credenciais usando identidades gerenciadas para clusters do Azure Kubernetes Services (AKS).
 
 
 
 == Detalhes do driver Azure NetApp Files
 
-O Astra Trident fornece os seguintes drivers de storage Azure NetApp Files para se comunicar com o cluster. Os modos de acesso suportados são: _ReadWriteOnce_ (RWO), _ReadOnlyMuy_ (ROX), _ReadWriteMany_ (RWX), _ReadWriteOncePod_ (RWOP).
+O Trident fornece os seguintes drivers de armazenamento Azure NetApp Files para se comunicar com o cluster. Os modos de acesso suportados são: _ReadWriteOnce_ (RWO), _ReadOnlyMuy_ (ROX), _ReadWriteMany_ (RWX), _ReadWriteOncePod_ (RWOP).
 
 [cols="2, 1, 1, 2, 2"]
 |===
@@ -39,25 +39,25 @@ RWO, ROX, RWX, RWOP
 
 === Considerações
 
-* O serviço Azure NetApp Files não oferece suporte a volumes menores que 100 GB. O Astra Trident cria automaticamente volumes de 100 GiB se um volume menor for solicitado.
-* O Astra Trident é compatível com volumes SMB montados em pods executados apenas em nós do Windows.
+* O serviço Azure NetApp Files não oferece suporte a volumes menores que 50 GiB. O Trident cria automaticamente volumes de 50 GiB se um volume menor for solicitado.
+* O Trident dá suporte a volumes SMB montados em pods executados apenas em nós do Windows.
 
 
 
 
 == Identidades gerenciadas para AKS
 
-O Astra Trident é compatível link:https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview["identidades gerenciadas"^]com clusters do Azure Kubernetes Services. Para aproveitar o gerenciamento simplificado de credenciais oferecido por identidades gerenciadas, você deve ter:
+O Trident é compatível link:https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview["identidades gerenciadas"^]com clusters do Azure Kubernetes Services. Para aproveitar o gerenciamento simplificado de credenciais oferecido por identidades gerenciadas, você deve ter:
 
 * Um cluster do Kubernetes implantado usando AKS
 * Identidades gerenciadas configuradas no cluster AKS kuquilla
-* Astra Trident instalado que inclui o `cloudProvider` para especificar `"Azure"`.
+* Trident instalado que inclui o `cloudProvider` para especificar `"Azure"`.
 +
 [role="tabbed-block"]
 ====
 .Operador Trident
 --
-Para instalar o Astra Trident usando o operador Trident, edite `tridentorchestrator_cr.yaml` para definir `cloudProvider` como `"Azure"`. Por exemplo:
+Para instalar o Trident usando o operador Trident, edite `tridentorchestrator_cr.yaml` para definir `cloudProvider` como `"Azure"`. Por exemplo:
 
 [listing]
 ----
@@ -74,16 +74,16 @@ spec:
 --
 .Leme
 --
-O exemplo a seguir instala conjuntos Astra Trident `cloudProvider` no Azure usando a variável de ambiente `$CP` :
+O exemplo a seguir instala conjuntos Trident `cloudProvider` no Azure usando a variável de ambiente `$CP` :
 
 [listing]
 ----
-helm install trident trident-operator-100.2406.0.tgz --create-namespace --namespace <trident-namespace> --set cloudProvider=$CP
+helm install trident trident-operator-100.2410.0.tgz --create-namespace --namespace <trident-namespace> --set cloudProvider=$CP
 ----
 --
 .<code>dtridentctl</code>
 --
-O exemplo a seguir instala o Astra Trident e define o `cloudProvider` sinalizador como `Azure`:
+O exemplo a seguir instala o Trident e define o `cloudProvider` sinalizador como `Azure`:
 
 [listing]
 ----
@@ -103,13 +103,13 @@ Para aproveitar a identidade da nuvem no Azure, você deve ter:
 
 * Um cluster do Kubernetes implantado usando AKS
 * Identidade da carga de trabalho e oidc-emitente configurados no cluster AKS Kubernetes
-* Astra Trident instalado que inclui o `cloudProvider` para especificar `"Azure"` e `cloudIdentity` especificar a identidade da carga de trabalho
+* Trident instalado que inclui o `cloudProvider` para especificar `"Azure"` e `cloudIdentity` especificar a identidade da carga de trabalho
 +
 [role="tabbed-block"]
 ====
 .Operador Trident
 --
-Para instalar o Astra Trident usando o operador Trident, edite `tridentorchestrator_cr.yaml` para definir `cloudProvider` como `"Azure"` e defina `cloudIdentity` como `azure.workload.identity/client-id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx`.
+Para instalar o Trident usando o operador Trident, edite `tridentorchestrator_cr.yaml` para definir `cloudProvider` como `"Azure"` e defina `cloudIdentity` como `azure.workload.identity/client-id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx`.
 
 Por exemplo:
 
@@ -134,11 +134,11 @@ Defina os valores para sinalizadores *provedor de nuvem (CP)* e *identidade de n
 `export CP="Azure"`
 `export CI="azure.workload.identity/client-id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"`
 
-O exemplo a seguir instala o Astra Trident e define `cloudProvider` para o Azure usando a variável de ambiente `$CP` e define a `cloudIdentity` variável usando o ambiente `$CI` :
+O exemplo a seguir instala o Trident e define `cloudProvider` o Azure usando a variável de ambiente `$CP` e define a `cloudIdentity` variável usando o ambiente `$CI` :
 
 [listing]
 ----
-helm install trident trident-operator-100.2406.0.tgz --set cloudProvider=$CP --set cloudIdentity=$CI
+helm install trident trident-operator-100.2410.0.tgz --set cloudProvider=$CP --set cloudIdentity=$CI
 ----
 --
 .<code>dtridentctl</code>
@@ -148,7 +148,7 @@ Defina os valores para os sinalizadores *provedor de nuvem* e *identidade de nuv
 `export CP="Azure"`
 `export CI="azure.workload.identity/client-id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"`
 
-O exemplo a seguir instala o Astra Trident e define o `cloud-provider` sinalizador como `$CP`, e `cloud-identity` como `$CI`:
+O exemplo a seguir instala o Trident e define o `cloud-provider` sinalizador como `$CP`, e `cloud-identity` como `$CI`:
 
 [listing]
 ----

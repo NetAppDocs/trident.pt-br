@@ -35,7 +35,7 @@ Para configurar e usar um https://azure.microsoft.com/en-us/services/netapp/["Az
 * `tenantID`, `clientID` E `clientSecret` de um link:https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal["Registo da aplicação"^] no Azure ative Directory com permissões suficientes para o serviço Azure NetApp Files. O Registro de aplicativos deve usar:
 +
 ** A função proprietário ou Colaborador link:https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles["Pré-definido pelo Azure"^].
-** A link:https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles-portal["Função de Colaborador personalizada"]no nível da subscrição (`assignableScopes`) com as seguintes permissões limitadas apenas ao que o Astra Trident requer. Depois de criar a função personalizadalink:https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal["Atribua a função usando o portal do Azure"^], .
+** A link:https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles-portal["Função de Colaborador personalizada"]no nível da subscrição (`assignableScopes`) com as seguintes permissões que estão limitadas apenas ao que o Trident requer. Depois de criar a função personalizadalink:https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal["Atribua a função usando o portal do Azure"^], .
 +
 .Função de colaborador personalizada
 [%collapsible]
@@ -96,8 +96,8 @@ Para configurar e usar um https://azure.microsoft.com/en-us/services/netapp/["Az
 Para criar um volume SMB, você deve ter:
 
 * Ative Directory configurado e conetado ao Azure NetApp Files. link:https://learn.microsoft.com/en-us/azure/azure-netapp-files/create-active-directory-connections["Microsoft: Crie e gerencie conexões do ative Directory para Azure NetApp Files"^]Consulte a .
-* Um cluster do Kubernetes com um nó de controlador Linux e pelo menos um nó de trabalho do Windows que executa o Windows Server 2022. O Astra Trident é compatível com volumes SMB montados em pods executados apenas em nós do Windows.
-* Pelo menos um segredo do Astra Trident que contém suas credenciais do ative Directory para que o Azure NetApp Files possa se autenticar no ative Directory. Para gerar segredo `smbcreds`:
+* Um cluster do Kubernetes com um nó de controlador Linux e pelo menos um nó de trabalho do Windows que executa o Windows Server 2022. O Trident dá suporte a volumes SMB montados em pods executados apenas em nós do Windows.
+* Pelo menos um segredo do Trident contendo suas credenciais do ative Directory para que o Azure NetApp Files possa se autenticar no ative Directory. Para gerar segredo `smbcreds`:
 +
 [listing]
 ----

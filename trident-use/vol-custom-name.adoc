@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/vol-custom-name.html 
 keywords: volumes, volume name, custom volume name, on-demand volume snapshots, expand volumes, iscsci volumes, nfs volumes, expand, expansion, 
-summary: 'O Astra Trident dá suporte à atribuição de nomes e rótulos significativos aos volumes criados para que seja mais fácil identificar, monitorar e mapear os volumes para os respectivos recursos do Kubernetes (PVCs).' 
+summary: 'O Trident dá suporte à atribuição de nomes e rótulos significativos aos volumes criados para que seja mais fácil identificar, monitorar o gerenciamento e mapear os volumes para os respectivos recursos do Kubernetes (PVCs).' 
 ---
 = Personalizar nomes e rótulos de volume
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: 'O Astra Trident dá suporte à atribuição de nomes e rótulos signif
 
 
 [role="lead"]
-Com o Astra Trident, você pode atribuir nomes e rótulos significativos aos volumes criados. Isso ajuda a identificar e mapear facilmente volumes para seus respectivos recursos do Kubernetes (PVCs). Você também pode definir modelos no nível de back-end para criar nomes de volume personalizados e rótulos personalizados; todos os volumes que você criar, importar ou clonar aderirão aos modelos.
+Com o Trident, você pode atribuir nomes e rótulos significativos aos volumes criados. Isso ajuda a identificar e mapear facilmente volumes para seus respectivos recursos do Kubernetes (PVCs). Você também pode definir modelos no nível de back-end para criar nomes de volume personalizados e rótulos personalizados; todos os volumes que você criar, importar ou clonar aderirão aos modelos.
 
 
 
@@ -117,7 +117,7 @@ Modelos de nome personalizados podem ser definidos no nível raiz e/ou pool.
 
 . No caso das importações de volume, as etiquetas são atualizadas apenas se o volume existente tiver etiquetas num formato específico. Por exemplo `{"provisioning":{"Cluster":"ClusterA", "PVC": "pvcname"}}`: .
 . No caso de importações de volume gerenciado, o nome do volume segue o modelo de nome definido no nível raiz na definição de back-end.
-. O Astra Trident não oferece suporte ao uso de um operador de fatia com o prefixo de storage.
-. Se os modelos não resultarem em nomes de volume exclusivos, o Astra Trident anexará alguns carateres aleatórios para criar nomes de volume exclusivos.
-. Se o nome personalizado para um volume de economia nas exceder 64 carateres de comprimento, o Astra Trident nomeará os volumes de acordo com a convenção de nomenclatura existente. Para todos os outros drivers ONTAP, se o nome do volume exceder o limite de nome, o processo de criação de volume falhará.
+. O Trident não suporta a utilização de um operador de corte com o prefixo de armazenamento.
+. Se os modelos não resultarem em nomes de volume exclusivos, o Trident adicionará alguns carateres aleatórios para criar nomes de volume exclusivos.
+. Se o nome personalizado para um volume de economia nas exceder 64 carateres de comprimento, o Trident nomeará os volumes de acordo com a convenção de nomenclatura existente. Para todos os outros drivers ONTAP, se o nome do volume exceder o limite de nome, o processo de criação de volume falhará.
 

@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/gcp.html 
 keywords: trident backend, cloud volumes service for google cloud platform, google cloud platform, gcp, storage pool labels, storage pool, cvs, cvs-performance, service type, service level, cloud volumes service, cloud volumes, drivers, access modes, rwo, rwx, rwp, rwop, file system 
-summary: Saiba como configurar o Cloud Volumes Service para Google Cloud como back-end para sua instalação do Astra Trident usando as configurações de exemplo fornecidas. 
+summary: Saiba como configurar o Cloud Volumes Service para o Google Cloud como o back-end para sua instalação do Trident usando as configurações de exemplo fornecidas. 
 ---
 = Configure um back-end do Cloud Volumes Service para o Google Cloud
 :hardbreaks:
@@ -12,13 +12,13 @@ summary: Saiba como configurar o Cloud Volumes Service para Google Cloud como ba
 
 
 [role="lead"]
-Saiba como configurar o NetApp Cloud Volumes Service para Google Cloud como back-end para sua instalação do Astra Trident usando as configurações de exemplo fornecidas.
+Saiba como configurar o NetApp Cloud Volumes Service para o Google Cloud como o back-end para sua instalação do Trident usando as configurações de exemplo fornecidas.
 
 
 
 == Detalhes do driver do Google Cloud
 
-O Astra Trident fornece ao `gcp-cvs` condutor a comunicação com o cluster. Os modos de acesso suportados são: _ReadWriteOnce_ (RWO), _ReadOnlyMuy_ (ROX), _ReadWriteMany_ (RWX), _ReadWriteOncePod_ (RWOP).
+O Trident fornece ao `gcp-cvs` controlador para comunicar com o cluster. Os modos de acesso suportados são: _ReadWriteOnce_ (RWO), _ReadOnlyMuy_ (ROX), _ReadWriteMany_ (RWX), _ReadWriteOncePod_ (RWOP).
 
 [cols="1, 1, 1, 2, 2"]
 |===
@@ -37,11 +37,11 @@ RWO, ROX, RWX, RWOP
 |===
 
 
-== Saiba mais sobre o suporte ao Astra Trident para Cloud Volumes Service para Google Cloud
+== Saiba mais sobre o suporte do Trident para o Cloud Volumes Service
 
-O Astra Trident pode criar volumes Cloud Volumes Service em um de dois link:https://cloud.google.com/architecture/partners/netapp-cloud-volumes/service-types["tipos de serviço"^]:
+O Trident pode criar volumes Cloud Volumes Service em um de dois link:https://cloud.google.com/architecture/partners/netapp-cloud-volumes/service-types["tipos de serviço"^]:
 
-* *CVS-Performance*: O tipo de serviço padrão Astra Trident. Esse tipo de serviço otimizado para performance é mais adequado para workloads de produção que valorizam a performance. O tipo de serviço CVS-Performance é uma opção de hardware que suporta volumes com um tamanho mínimo de 100 GiB. Você pode escolher um dos link:https://cloud.google.com/architecture/partners/netapp-cloud-volumes/service-levels#service_levels_for_the_cvs-performance_service_type["três níveis de serviço"^]:
+* *CVS-Performance*: O tipo de serviço Trident padrão. Esse tipo de serviço otimizado para performance é mais adequado para workloads de produção que valorizam a performance. O tipo de serviço CVS-Performance é uma opção de hardware que suporta volumes com um tamanho mínimo de 100 GiB. Você pode escolher um dos link:https://cloud.google.com/architecture/partners/netapp-cloud-volumes/service-levels#service_levels_for_the_cvs-performance_service_type["três níveis de serviço"^]:
 +
 ** `standard`
 ** `premium`
@@ -85,7 +85,7 @@ Cada back-end provisiona volumes em uma única região do Google Cloud. Para cri
 | `backendName` | Nome personalizado ou back-end de storage | Nome do driver e parte da chave da API 
 
 
-| `storageClass` | Parâmetro opcional usado para especificar o tipo de serviço CVS.  `software`Use para selecionar o tipo de serviço CVS. Caso contrário, o Astra Trident assume o tipo de serviço CVS-Performance (`hardware`). |  
+| `storageClass` | Parâmetro opcional usado para especificar o tipo de serviço CVS.  `software`Use para selecionar o tipo de serviço CVS. Caso contrário, o Trident assume o tipo de serviço CVS-Performance (`hardware`). |  
 
 
 | `storagePools` | Apenas tipo de serviço CVS. Parâmetro opcional usado para especificar pools de armazenamento para criação de volume. |  
@@ -97,7 +97,7 @@ Cada back-end provisiona volumes em uma única região do Google Cloud. Para cri
 | `hostProjectNumber` | Necessário se estiver usando uma rede VPC compartilhada. Neste cenário, `projectNumber` é o projeto de serviço, e `hostProjectNumber` é o projeto host. |  
 
 
-| `apiRegion` | A região do Google Cloud onde o Astra Trident cria o Cloud Volumes Service volumes. Ao criar clusters de Kubernetes entre regiões, os volumes criados em um `apiRegion` podem ser usados em workloads programados em nós em várias regiões do Google Cloud. O tráfego entre regiões incorre em um custo adicional. |  
+| `apiRegion` | A região do Google Cloud onde o Trident cria o Cloud Volumes Service volumes. Ao criar clusters de Kubernetes entre regiões, os volumes criados em um `apiRegion` podem ser usados em workloads programados em nós em várias regiões do Google Cloud. O tráfego entre regiões incorre em um custo adicional. |  
 
 
 | `apiKey` | Chave de API para a conta de serviço do Google Cloud com a `netappcloudvolumes.admin` função. Ele inclui o conteúdo formatado em JSON do arquivo de chave privada de uma conta de serviço do Google Cloud (copiado literalmente no arquivo de configuração de back-end). |  
@@ -354,7 +354,7 @@ allowVolumeExpansion: true
 ----
 ====
 * O primeiro StorageClass ) (`cvs-extreme-extra-protection`mapeia para o primeiro pool virtual. Esse é o único pool que oferece desempenho extremo com uma reserva de snapshot de 10%.
-* O último StorageClass ) (`cvs-extra-protection`chama qualquer pool de armazenamento que forneça uma reserva de snapshot de 10%. O Astra Trident decide qual pool virtual está selecionado e garante que o requisito de reserva de snapshot seja atendido.
+* O último StorageClass ) (`cvs-extra-protection`chama qualquer pool de armazenamento que forneça uma reserva de snapshot de 10%. O Trident decide qual pool virtual é selecionado e garante que o requisito de reserva de snapshot seja atendido.
 
 
 

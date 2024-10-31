@@ -1,6 +1,6 @@
 ---
 section: trident-use
-title: Use o Astra Trident
+title: Use o Trident
 entries:
 - title: Prepare o nó de trabalho
   url: "/trident-use/worker-node-prep.html"
@@ -50,7 +50,7 @@ entries:
       url: "/trident-use/trident-fsx.html"
     - title: Crie uma função do IAM e um segredo da AWS
       url: "/trident-use/trident-fsx-iam-role.html"
-    - title: Instale o Astra Trident
+    - title: Instale o Trident
       url: "/trident-use/trident-fsx-install-trident.html"
     - title: Configurar o back-end de storage
       url: "/trident-use/trident-fsx-storage-backend.html"
@@ -58,7 +58,7 @@ entries:
       url: "/trident-use/trident-fsx-storageclass-pvc.html"
     - title: Implantar um aplicativo de amostra
       url: "/trident-use/trident-fsx-deploy-sample.html"
-    - title: Configurar o complemento do Astra Trident EKS no cluster do EKS
+    - title: Configure o complemento do Trident EKS no cluster do EKS
       url: "/trident-use/trident-aws-addon.html"
   - title: Crie backends com kubectl
     url: "/trident-use/backend-kubectl.html"

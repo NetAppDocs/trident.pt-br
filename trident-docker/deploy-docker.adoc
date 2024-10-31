@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: trident-docker/deploy-docker.html 
-keywords: deploy, astra trident, trident for docker, docker 
-summary: O Astra Trident para Docker fornece integração direta com o ecossistema Docker para plataformas de storage NetApp. Ele dá suporte ao provisionamento e gerenciamento de recursos de storage da plataforma de storage para hosts Docker, com uma estrutura para adicionar plataformas adicionais no futuro. 
+keywords: deploy, Trident, trident for docker, docker 
+summary: O Trident para Docker oferece integração direta com o ecossistema Docker para plataformas de storage NetApp. Ele dá suporte ao provisionamento e gerenciamento de recursos de storage da plataforma de storage para hosts Docker, com uma estrutura para adicionar plataformas adicionais no futuro. 
 ---
-= Implante o Astra Trident
+= Implante o Trident
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
@@ -12,12 +12,12 @@ summary: O Astra Trident para Docker fornece integração direta com o ecossiste
 
 
 [role="lead"]
-O Astra Trident para Docker fornece integração direta com o ecossistema Docker para plataformas de storage NetApp. Ele dá suporte ao provisionamento e gerenciamento de recursos de storage da plataforma de storage para hosts Docker, com uma estrutura para adicionar plataformas adicionais no futuro.
+O Trident para Docker oferece integração direta com o ecossistema Docker para plataformas de storage NetApp. Ele dá suporte ao provisionamento e gerenciamento de recursos de storage da plataforma de storage para hosts Docker, com uma estrutura para adicionar plataformas adicionais no futuro.
 
-Várias instâncias do Astra Trident podem ser executadas simultaneamente no mesmo host. Isso permite conexões simultâneas a vários sistemas de armazenamento e tipos de armazenamento, com a capacidade de personalizar o armazenamento usado para os volumes Docker.
+Várias instâncias do Trident podem ser executadas simultaneamente no mesmo host. Isso permite conexões simultâneas a vários sistemas de armazenamento e tipos de armazenamento, com a capacidade de personalizar o armazenamento usado para os volumes Docker.
 
 .O que você vai precisar
-Consulte link:prereqs-docker.html["pré-requisitos para implantação"]. Depois de garantir que os pré-requisitos sejam atendidos, você estará pronto para implantar o Astra Trident.
+Consulte link:prereqs-docker.html["pré-requisitos para implantação"]. Depois de garantir que os pré-requisitos sejam atendidos, você estará pronto para implantar o Trident.
 
 
 
@@ -25,7 +25,7 @@ Consulte link:prereqs-docker.html["pré-requisitos para implantação"]. Depois 
 
 .Antes de começar
 
-NOTE: Se você usou o Astra Trident pré Docker 1,13/17,03 no método daemon tradicional, certifique-se de parar o processo Astra Trident e reiniciar seu daemon Docker antes de usar o método do plugin gerenciado.
+NOTE: Se você usou o Trident pré Docker 1,13/17,03 no método daemon tradicional, certifique-se de parar o processo Trident e reiniciar o seu daemon Docker antes de usar o método do plugin gerenciado.
 
 . Parar todas as instâncias em execução:
 +
@@ -85,13 +85,13 @@ EOF
 
 
 
-. Inicie o Astra Trident usando o sistema de plugins gerenciado. Substitua `<version>` pela versão do plugin (xxx.xx.x) que você está usando.
+. Inicie o Trident usando o sistema de plug-in gerenciado. Substitua `<version>` pela versão do plugin (xxx.xx.x) que você está usando.
 +
 [listing]
 ----
 docker plugin install --grant-all-permissions --alias netapp netapp/trident-plugin:<version> config=myConfigFile.json
 ----
-. Comece a usar o Astra Trident para consumir storage do sistema configurado.
+. Comece a usar o Trident para consumir storage do sistema configurado.
 +
 .. Crie um volume chamado "firstvolume":
 +
@@ -147,8 +147,8 @@ Ou, https://docs.docker.com/engine/install/["siga as instruções para sua distr
 +
 [listing]
 ----
-wget https://github.com/NetApp/trident/releases/download/v24.10.0/trident-installer-24.06.0.tar.gz
-tar zxf trident-installer-24.06.0.tar.gz
+wget https://github.com/NetApp/trident/releases/download/v24.10.0/trident-installer-24.10.0.tar.gz
+tar zxf trident-installer-24.10.0.tar.gz
 ----
 .. Mover para um local no caminho do compartimento:
 +
@@ -219,7 +219,7 @@ docker volume rm trident_2
 
 
 
-== Inicie o Astra Trident na inicialização do sistema
+== Inicie o Trident na inicialização do sistema
 
 Um arquivo de unidade de exemplo para sistemas baseados em systemd pode ser encontrado `contrib/trident.service.example` no repositório Git. Para usar o arquivo com RHEL, faça o seguinte:
 

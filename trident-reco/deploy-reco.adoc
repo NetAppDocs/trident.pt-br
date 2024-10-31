@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-reco/deploy-reco.html 
 keywords: deployment, deploy, trident, namespace 
-summary: Use as recomendações listadas aqui quando implantar o Astra Trident. 
+summary: Use as recomendações listadas aqui quando implantar o Trident. 
 ---
 = Implantação
 :hardbreaks:
@@ -12,13 +12,13 @@ summary: Use as recomendações listadas aqui quando implantar o Astra Trident.
 
 
 [role="lead"]
-Use as recomendações listadas aqui quando implantar o Astra Trident.
+Use as recomendações listadas aqui quando implantar o Trident.
 
 
 
 == Implante em um namespace dedicado
 
-https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/["Namespaces"^] fornecer separação administrativa entre diferentes aplicações e são uma barreira para o compartilhamento de recursos. Por exemplo, um PVC de um namespace não pode ser consumido de outro. O Astra Trident fornece recursos PV para todos os namespaces no cluster do Kubernetes e, consequentemente, utiliza uma conta de serviço que elevou o Privileges.
+https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/["Namespaces"^] fornecer separação administrativa entre diferentes aplicações e são uma barreira para o compartilhamento de recursos. Por exemplo, um PVC de um namespace não pode ser consumido de outro. O Trident fornece recursos PV para todos os namespaces no cluster do Kubernetes e, consequentemente, aproveita uma conta de serviço que elevou o Privileges.
 
 Além disso, o acesso ao pod Trident pode permitir que um usuário acesse credenciais do sistema de storage e outras informações confidenciais. É importante garantir que os usuários de aplicativos e aplicativos de gerenciamento não tenham a capacidade de acessar as definições de objetos do Trident ou os próprios pods.
 

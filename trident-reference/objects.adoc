@@ -279,7 +279,7 @@ O `VolumeSnapshotContent` objeto contém detalhes que identificam exclusivamente
 Quando uma solicitação de snapshot entra, o Trident cria o snapshot no back-end. Depois que o snapshot é criado, o Trident configura um `VolumeSnapshotContent` objeto e, portanto, expõe o snapshot à API do Kubernetes.
 
 
-NOTE: Normalmente, você não precisa gerenciar o `VolumeSnapshotContent` objeto. Uma exceção a isso é quando você deseja link:../trident-use/vol-snapshots.html#import-a-volume-snapshot["importar um instantâneo de volume"]criar fora do Astra Trident.
+NOTE: Normalmente, você não precisa gerenciar o `VolumeSnapshotContent` objeto. Uma exceção a isso é quando você deseja link:../trident-use/vol-snapshots.html#import-a-volume-snapshot["importar um instantâneo de volume"]criar fora do Trident.
 
 
 
@@ -289,7 +289,7 @@ Os recursos personalizados do Kubernetes são endpoints na API do Kubernetes que
 
 As definições personalizadas de recursos (CRDs) e os metadados de objetos associados são armazenados pelo Kubernetes em seu armazenamento de metadados. Isso elimina a necessidade de uma loja separada para o Trident.
 
-O Astra Trident usa `CustomResourceDefinition` objetos para preservar a identidade de objetos Trident, como back-ends Trident, classes de storage Trident e volumes Trident. Esses objetos são gerenciados pelo Trident. Além disso, a estrutura de snapshot do volume CSI introduz algumas CRDs que são necessárias para definir snapshots de volume.
+O Trident usa `CustomResourceDefinition` objetos para preservar a identidade de objetos do Trident, como backends Trident, classes de storage Trident e volumes Trident. Esses objetos são gerenciados pelo Trident. Além disso, a estrutura de snapshot do volume CSI introduz algumas CRDs que são necessárias para definir snapshots de volume.
 
 CRDs são uma construção do Kubernetes. Os objetos dos recursos definidos acima são criados pelo Trident. Como um exemplo simples, quando um back-end é criado usando `tridentctl`o , um objeto CRD correspondente `tridentbackends` é criado para consumo pelo Kubernetes.
 
@@ -301,7 +301,7 @@ Aqui estão alguns pontos a ter em mente sobre os CRDs do Trident:
 
 
 
-== Objetos Astra Trident `StorageClass`
+== ObjetosTrident `StorageClass`
 
 O Trident cria classes de storage correspondentes para objetos Kubernetes `StorageClass` que especificam `csi.trident.netapp.io` no campo do provisionador. O nome da classe de storage corresponde ao do objeto Kubernetes `StorageClass` que ele representa.
 
@@ -314,7 +314,7 @@ Você pode criar configurações de classe de armazenamento para definir diretam
 
 
 
-== Objetos de back-end do Astra Trident
+== Objetos de back-end do Trident
 
 Os backends representam os fornecedores de storage em cima dos quais o Trident provisiona volumes. Uma única instância do Trident pode gerenciar qualquer número de backends.
 
@@ -325,7 +325,7 @@ Para obter mais informações sobre como construir esses objetos, link:../triden
 
 
 
-== Objetos Astra Trident `StoragePool`
+== ObjetosTrident `StoragePool`
 
 Os pools de storage representam locais distintos disponíveis para provisionamento em cada back-end. Para ONTAP, eles correspondem a agregados em SVMs. Para NetApp HCI/SolidFire, estes correspondem a bandas de QoS especificadas pelo administrador. Para o Cloud Volumes Service, eles correspondem a regiões de provedores de nuvem. Cada pool de storage tem um conjunto de atributos de storage distintos, que definem suas características de performance e proteção de dados.
 
@@ -333,7 +333,7 @@ Ao contrário dos outros objetos aqui, os candidatos ao pool de armazenamento s�
 
 
 
-== Objetos Astra Trident `Volume`
+== ObjetosTrident `Volume`
 
 Os volumes são a unidade básica de provisionamento, incluindo pontos de extremidade de back-end, como compartilhamentos NFS e iSCSI LUNs. No Kubernetes, eles correspondem diretamente `PersistentVolumes` ao . Ao criar um volume, certifique-se de que ele tenha uma classe de armazenamento, que determina onde esse volume pode ser provisionado, juntamente com um tamanho.
 
@@ -401,7 +401,7 @@ Você pode usar configurações de volume para provisionar volumes diretamente u
 
 
 
-== Objetos Astra Trident `Snapshot`
+== ObjetosTrident `Snapshot`
 
 Os snapshots são uma cópia pontual de volumes, que pode ser usada para provisionar novos volumes ou restaurar o estado. No Kubernetes, eles correspondem diretamente a `VolumeSnapshotContent` objetos. Cada snapshot é associado a um volume, que é a origem dos dados do snapshot.
 
@@ -443,11 +443,11 @@ Quando uma solicitação de objeto Kubernetes `VolumeSnapshot` é criada, o Trid
 
 
 
-== Objeto Astra Trident `ResourceQuota`
+== Objeto Trident `ResourceQuota`
 
-O deamonset do Trident consome uma `system-node-critical` classe de prioridade - a classe de prioridade mais alta disponível no Kubernetes - para garantir que o Astra Trident possa identificar e limpar volumes durante o desligamento gracioso do nó e permitir que os pods do Trident daemonset pré-empt cargas de trabalho com prioridade mais baixa em clusters onde há alta pressão de recursos.
+O deamonset do Trident consome uma `system-node-critical` classe de prioridade - a classe de prioridade mais alta disponível no Kubernetes - para garantir que o Trident possa identificar e limpar volumes durante o desligamento gracioso do nó e permitir que os pods do Trident daemonset pré-empt cargas de trabalho com prioridade mais baixa em clusters onde há alta pressão de recursos.
 
-Para conseguir isso, o Astra Trident emprega um `ResourceQuota` objeto para garantir que uma classe de prioridade "crítica do nó do sistema" no daemonset do Trident esteja satisfeita. Antes da implantação e criação do daemonset, o Astra Trident procura o `ResourceQuota` objeto e, se não for descoberto, o aplica.
+Para conseguir isso, o Trident emprega um `ResourceQuota` objeto para garantir que uma classe de prioridade "system-node-critical" no daemonset do Trident esteja satisfeita. Antes da implantação e criação do daemonset, o Trident procura o `ResourceQuota` objeto e, se não for descoberto, o aplica.
 
 Se você precisar de mais controle sobre a cota de recurso padrão e Classe de prioridade, você pode gerar um `custom.yaml` ou configurar o `ResourceQuota` objeto usando o gráfico de Helm.
 
@@ -482,7 +482,7 @@ Se isso não funcionar, remova manualmente o `ResourceQuota` objeto.
 
 === Retire `ResourceQuota`
 
-Se você preferir controlar sua própria alocação de recursos, poderá remover o objeto Astra Trident `ResourceQuota` usando o comando:
+Se você preferir controlar sua própria alocação de recursos, você pode remover o objeto Trident `ResourceQuota` usando o comando:
 
 [listing]
 ----

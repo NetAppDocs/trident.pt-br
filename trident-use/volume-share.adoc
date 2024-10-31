@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/volume-share.html 
 keywords: volref, volume reference, share, pvc, pv, nfs, namespace, cvna, cross-namespace, sharing 
-summary: Com o Astra Trident, você pode criar um volume em um namespace principal e compartilhá-lo em um ou mais namespaces secundários. 
+summary: Usando o Trident, você pode criar um volume em um namespace principal e compartilhá-lo em um ou mais namespaces secundários. 
 ---
 = Compartilhar um volume NFS entre namespaces
 :hardbreaks:
@@ -12,13 +12,13 @@ summary: Com o Astra Trident, você pode criar um volume em um namespace princip
 
 
 [role="lead"]
-Com o Astra Trident, você pode criar um volume em um namespace principal e compartilhá-lo em um ou mais namespaces secundários.
+Usando o Trident, você pode criar um volume em um namespace principal e compartilhá-lo em um ou mais namespaces secundários.
 
 
 
 == Caraterísticas
 
-O Astra TrigentVolumeReference CR permite que você compartilhe com segurança volumes NFS ReadWriteMany (RWX) em um ou mais namespaces do Kubernetes. Essa solução nativa do Kubernetes tem os seguintes benefícios:
+O TridentVolumeReference CR permite que você compartilhe com segurança volumes NFS ReadWriteMany (RWX) em um ou mais namespaces do Kubernetes. Essa solução nativa do Kubernetes tem os seguintes benefícios:
 
 * Vários níveis de controle de acesso para garantir a segurança
 * Funciona com todos os drivers de volume Trident NFS
@@ -78,7 +78,7 @@ spec:
       storage: 100Gi
 ----
 +
-O Astra Trident cria o PV e o volume de storage NFS no back-end.
+A Trident cria o PV e seu volume de storage NFS no back-end.
 
 +
 [NOTE]
@@ -129,13 +129,13 @@ NOTE: O tamanho do PVC de destino deve ser inferior ou igual ao PVC de origem.
 
 
 .Resultados
-O Astra Trident lê a `shareFromPVC` anotação no PVC de destino e cria o PV de destino como um volume subordinado sem recurso de armazenamento próprio que aponta para o PV de origem e compartilha o recurso de armazenamento PV de origem. O PVC e o PV de destino aparecem encadernados normalmente.
+O Trident lê a `shareFromPVC` anotação no PVC de destino e cria o PV de destino como um volume subordinado sem recurso de armazenamento próprio que aponta para o PV de origem e compartilha o recurso de armazenamento PV de origem. O PVC e o PV de destino aparecem encadernados normalmente.
 
 
 
 == Eliminar um volume partilhado
 
-Você pode excluir um volume compartilhado entre vários namespaces. O Astra Trident removerá o acesso ao volume no namespace de origem e manterá acesso para outros namespaces que compartilham o volume. Quando todos os namespaces que fazem referência ao volume são removidos, o Astra Trident exclui o volume.
+Você pode excluir um volume compartilhado entre vários namespaces. O Trident removerá o acesso ao volume no namespace de origem e manterá o acesso para outros namespaces que compartilham o volume. Quando todos os namespaces que fazem referência ao volume são removidos, o Trident exclui o volume.
 
 
 
@@ -159,7 +159,7 @@ Bandeiras -
 
 == Limitações
 
-* O Astra Trident não pode impedir que namespaces de destino gravem no volume compartilhado. Você deve usar o bloqueio de arquivos ou outros processos para evitar a substituição de dados de volume compartilhado.
+* O Trident não pode impedir que namespaces de destino gravem no volume compartilhado. Você deve usar o bloqueio de arquivos ou outros processos para evitar a substituição de dados de volume compartilhado.
 * Não é possível revogar o acesso ao PVC de origem removendo as `shareToNamespace` anotações ou ou `shareFromNamespace` excluindo o `TridentVolumeReference` CR. Para revogar o acesso, você deve excluir o PVC subordinado.
 * Snapshots, clones e espelhamento não são possíveis em volumes subordinados.
 

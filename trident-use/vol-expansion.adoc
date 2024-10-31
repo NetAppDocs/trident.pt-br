@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/vol-expansion.html 
 keywords: volumes, on-demand volume snapshots, expand volumes, iscsci volumes, nfs volumes, expand, expansion 
-summary: O Astra Trident oferece aos usuários do Kubernetes a capacidade de expandir seus volumes depois que eles são criados. Encontre informações sobre as configurações necessárias para expandir volumes iSCSI e NFS. 
+summary: O Trident oferece aos usuários do Kubernetes a capacidade de expandir seus volumes depois que eles são criados. Encontre informações sobre as configurações necessárias para expandir volumes iSCSI e NFS. 
 ---
 = Expanda volumes
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: O Astra Trident oferece aos usuários do Kubernetes a capacidade de exp
 
 
 [role="lead"]
-O Astra Trident oferece aos usuários do Kubernetes a capacidade de expandir seus volumes depois que eles são criados. Encontre informações sobre as configurações necessárias para expandir volumes iSCSI e NFS.
+O Trident oferece aos usuários do Kubernetes a capacidade de expandir seus volumes depois que eles são criados. Encontre informações sobre as configurações necessárias para expandir volumes iSCSI e NFS.
 
 
 
@@ -65,7 +65,7 @@ spec:
       storage: 1Gi
   storageClassName: ontap-san
 ----
-O Astra Trident cria um volume persistente (PV) e o associa a essa reivindicação de volume persistente (PVC).
+O Trident cria um volume persistente (PV) e associa-o a esta reivindicação de volume persistente (PVC).
 
 [listing]
 ----
@@ -83,8 +83,8 @@ pvc-8a814d62-bd58-4253-b0d1-82f2885db671   1Gi        RWO            Delete     
 
 Fixe o PV a um pod para que ele seja redimensionado. Existem dois cenários ao redimensionar um iSCSI PV:
 
-* Se o PV estiver conetado a um pod, o Astra Trident expande o volume no back-end de armazenamento, refaz o dispositivo e redimensiona o sistema de arquivos.
-* Ao tentar redimensionar um PV não anexado, o Astra Trident expande o volume no back-end de armazenamento. Depois que o PVC é ligado a um pod, o Trident refaz o dispositivo e redimensiona o sistema de arquivos. Em seguida, o Kubernetes atualiza o tamanho do PVC após a operação de expansão ter sido concluída com sucesso.
+* Se o PV estiver conetado a um pod, o Trident expande o volume no back-end de armazenamento, refaz o dispositivo e redimensiona o sistema de arquivos.
+* Ao tentar redimensionar um PV não anexado, o Trident expande o volume no back-end de armazenamento. Depois que o PVC é ligado a um pod, o Trident refaz o dispositivo e redimensiona o sistema de arquivos. Em seguida, o Kubernetes atualiza o tamanho do PVC após a operação de expansão ter sido concluída com sucesso.
 
 
 Neste exemplo, é criado um pod que usa o `san-pvc`.
@@ -151,7 +151,7 @@ spec:
 
 === Etapa 5: Validar a expansão
 
-É possível validar a expansão trabalhada corretamente verificando o tamanho do PVC, PV e volume Astra Trident:
+Você pode validar a expansão trabalhada corretamente verificando o tamanho do PVC, PV e o volume Trident:
 
 [listing]
 ----
@@ -172,7 +172,7 @@ tridentctl get volumes -n trident
 
 == Expandir um volume NFS
 
-O Astra Trident dá suporte à expansão de volume para PVS NFS provisionados em `ontap-nas` `ontap-nas-economy` , , , `ontap-nas-flexgroup` `gcp-cvs` e `azure-netapp-files` backends.
+O Trident oferece suporte à expansão de volume para PVS NFS provisionados em `ontap-nas` `ontap-nas-economy` , , , `ontap-nas-flexgroup` `gcp-cvs` e `azure-netapp-files` backends.
 
 
 
@@ -213,7 +213,7 @@ spec:
       storage: 20Mi
   storageClassName: ontapnas
 ----
-O Astra Trident deve criar um PV NFS de 20MiB para este PVC:
+Trident deve criar um PV NFS 20MiB para este PVC:
 
 [listing]
 ----
@@ -265,7 +265,7 @@ spec:
 
 === Etapa 4: Validar a expansão
 
-Você pode validar o redimensionamento trabalhado corretamente verificando o tamanho do PVC, PV e o volume Astra Trident:
+Você pode validar o redimensionamento trabalhado corretamente verificando o tamanho do PVC, PV e o volume Trident:
 
 [listing]
 ----

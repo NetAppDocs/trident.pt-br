@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-reco/security-luks.html 
 keywords: security, luks, linux unified key setup, encryption, key rotation, resizing, advanced encryption, rotation, key, import 
-summary: 'Você pode ativar o LUKS (configuração de chave unificada do Linux) para criptografar volumes DE ECONOMIA SAN ONTAP e SAN ONTAP no Astra Trident. O Astra Trident suporta redimensionamento de volume e rotação de chave (frase-passe) para volumes criptografados com LUKS.' 
+summary: 'Você pode ativar a configuração de chave unificada do Linux (LUKS) para criptografar volumes DE ECONOMIA DE SAN ONTAP e SAN ONTAP no Trident. O Trident suporta redimensionamento de volume e rotação de chave (frase-passe) para volumes criptografados por LUKS.' 
 ---
 = Configuração de chave unificada do Linux (LUKS)
 :hardbreaks:
@@ -12,9 +12,9 @@ summary: 'Você pode ativar o LUKS (configuração de chave unificada do Linux) 
 
 
 [role="lead"]
-Você pode ativar o LUKS (configuração de chave unificada do Linux) para criptografar volumes DE ECONOMIA SAN ONTAP e SAN ONTAP no Astra Trident. O Astra Trident é compatível com rotação de frase-passe e expansão de volume para volumes criptografados por LUKS.
+Você pode ativar a configuração de chave unificada do Linux (LUKS) para criptografar volumes DE ECONOMIA DE SAN ONTAP e SAN ONTAP no Trident. O Trident suporta rotação de senhas e expansão de volume para volumes criptografados com LUKS.
 
-No Astra Trident, os volumes criptografados por LUKS usam a cifra e o modo aes-xts-plain64, conforme recomendado link:https://csrc.nist.gov/publications/detail/sp/800-38e/final["NIST"^]pelo .
+No Trident, os volumes criptografados por LUKS usam a cifra e o modo aes-xts-plain64, conforme recomendado link:https://csrc.nist.gov/publications/detail/sp/800-38e/final["NIST"^]pelo .
 
 .Antes de começar
 * Os nós de trabalho devem ter o cryptsetup 2,1 ou superior (mas inferior a 3,0) instalado. Para obter mais informações, visite link:https://gitlab.com/cryptsetup/cryptsetup["Gitlab: Cryptsetup"^].
@@ -96,7 +96,7 @@ Os volumes criptografados com LUKS não podem aproveitar a deduplicação e a co
 
 == Configuração de back-end para importação de volumes LUKS
 
-Para importar um volume LUKS, você deve definir `luksEncryption` como(`true` no back-end. A `luksEncryption` opção informa ao Astra Trident se o volume é compatível com LUKS (`true`) ou não com LUKS (`false`), conforme mostrado no exemplo a seguir.
+Para importar um volume LUKS, você deve definir `luksEncryption` como(`true` no back-end. A `luksEncryption` opção informa ao Trident se o volume é compatível com LUKS (`true`) ou não com LUKS (`false`), conforme mostrado no exemplo a seguir.
 
 [listing]
 ----
@@ -146,7 +146,7 @@ Pode rodar a frase-passe LUKS e confirmar a rotação.
 WARNING: Não se esqueça de uma frase-passe até ter verificado que ela não é mais referenciada por qualquer volume, instantâneo ou segredo. Se uma frase-passe referenciada for perdida, talvez você não consiga montar o volume e os dados permanecerão criptografados e inacessíveis.
 
 .Sobre esta tarefa
-A rotação da frase-passe LUKS ocorre quando um pod que monta o volume é criado após uma nova frase-passe LUKS ser especificada. Quando um novo pod é criado, o Astra Trident compara a frase-passe LUKS no volume com a frase-passe ativa em segredo.
+A rotação da frase-passe LUKS ocorre quando um pod que monta o volume é criado após uma nova frase-passe LUKS ser especificada. Quando um novo pod é criado, o Trident compara a frase-passe LUKS no volume com a frase-passe ativa no segredo.
 
 * Se a frase-passe no volume não corresponder à frase-passe ativa no segredo, ocorre rotação.
 * Se a frase-passe no volume corresponder à frase-passe ativa no segredo, o `previous-luks-passphrase` parâmetro é ignorado.

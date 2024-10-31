@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: trident-docker/volume-driver-options.html 
-keywords: create volumes, astra trident, trident for docker, docker, docker volume, driver options, ontap, element volumes, cvs, cloud volumes service on gcp, azure netapp files 
+keywords: create volumes, Trident, trident for docker, docker, docker volume, driver options, ontap, element volumes, cvs, cloud volumes service on gcp, azure netapp files 
 summary: Cada driver de armazenamento tem um conjunto diferente de opções, que você pode especificar no momento da criação do volume para personalizar o resultado. Veja abaixo as opções que se aplicam ao sistema de armazenamento configurado. 
 ---
 = Opções de volume específicas do condutor
@@ -55,9 +55,9 @@ Ao clonar um volume, isso fará com que o ONTAP divida imediatamente o clone de 
 | `encryption`  a| 
 Ative a criptografia de volume do NetApp (NVE) no novo volume; o padrão é `false`. O NVE deve ser licenciado e habilitado no cluster para usar essa opção.
 
-Se o NAE estiver ativado no back-end, qualquer volume provisionado no Astra Trident será o NAE ativado.
+Se NAE estiver ativado no back-end, qualquer volume provisionado no Trident será NAE habilitado.
 
-Para obter mais informações, consulte: link:../trident-reco/security-reco.html["Como o Astra Trident funciona com NVE e NAE"].
+Para obter mais informações, consulte: link:../trident-reco/security-reco.html["Como o Trident funciona com NVE e NAE"].
 
 
 

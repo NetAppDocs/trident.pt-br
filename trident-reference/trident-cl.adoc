@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-reference/trident-cl.html 
 keywords: command-line, options, logging, kubernetes, docker, ports 
-summary: O Astra Trident expõe várias opções de linha de comando para o orquestrador Trident e se comunica por certas portas. 
+summary: O Trident expõe várias opções de linha de comando para o orquestrador Trident e comunica através de determinadas portas. 
 ---
 = Opções de linha de comando
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: O Astra Trident expõe várias opções de linha de comando para o orqu
 
 
 [role="lead"]
-O Astra Trident expõe várias opções de linha de comando para o orquestrador Trident. Você pode usar essas opções para modificar sua implantação.
+O Trident expõe várias opções de linha de comando para o orquestrador Trident. Você pode usar essas opções para modificar sua implantação.
 
 
 

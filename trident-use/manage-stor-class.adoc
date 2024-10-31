@@ -32,14 +32,14 @@ kubectl get storageclass
 ----
 kubectl get storageclass <storage-class> -o json
 ----
-* Para exibir as classes de storage sincronizadas do Astra Trident, execute o seguinte comando:
+* Para exibir as classes de armazenamento sincronizadas do Trident, execute o seguinte comando:
 
 
 [listing]
 ----
 tridentctl get storageclass
 ----
-* Para visualizar os detalhes da classe de storage sincronizado do Astra Trident, execute o seguinte comando:
+* Para exibir os detalhes da classe de armazenamento sincronizado do Trident, execute o seguinte comando:
 
 
 [listing]
@@ -76,7 +76,7 @@ NOTE: Deve haver apenas uma classe de armazenamento padrão no cluster de cada v
 
 == Identificar o back-end de uma classe de storage
 
-Este é um exemplo do tipo de perguntas que você pode responder com o JSON que `tridentctl` produz para objetos backend Astra Trident. Isso usa o `jq` utilitário, que você pode precisar instalar primeiro.
+Este é um exemplo do tipo de perguntas que você pode responder com o JSON que `tridentctl` produz para objetos backend do Trident. Isso usa o `jq` utilitário, que você pode precisar instalar primeiro.
 
 [listing]
 ----
@@ -94,7 +94,7 @@ kubectl delete storageclass <storage-class>
 ----
 `<storage-class>` deve ser substituído pela sua classe de armazenamento.
 
-Todos os volumes persistentes criados com essa classe de storage permanecerão intocados, e o Astra Trident continuará gerenciá-los.
+Todos os volumes persistentes criados com essa classe de storage permanecerão intocados, e o Trident continuará gerenciando-os.
 
 
-NOTE: O Astra Trident impõe um espaço em branco `fsType` para os volumes que cria. Para backends iSCSI, recomenda-se aplicar `parameters.fsType` no StorageClass. Você deve excluir StorageClasses existentes e recriá-los com `parameters.fsType` especificado.
+NOTE: O Trident impõe um espaço em branco `fsType` para os volumes que cria. Para backends iSCSI, recomenda-se aplicar `parameters.fsType` no StorageClass. Você deve excluir StorageClasses existentes e recriá-los com `parameters.fsType` especificado.

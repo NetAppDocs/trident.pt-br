@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: trident-use/trident-aws-addon.html 
-keywords: Trident add-on, Astra Trident EKS add-on, Trident AWS EKS add-on, integrate Trident, Trident 
-summary: Adicione o complemento Astra Trident EKS ao cluster do Kubernetes. 
+keywords: Trident add-on, Trident EKS add-on, Trident AWS EKS add-on, integrate Trident, Trident 
+summary: Adicione o complemento do Trident EKS ao cluster do Kubernetes. 
 ---
-= Configure o complemento Astra Trident EKS em um cluster EKS
+= Configure o complemento do Trident EKS em um cluster EKS
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
@@ -12,13 +12,13 @@ summary: Adicione o complemento Astra Trident EKS ao cluster do Kubernetes.
 
 
 [role="lead"]
-O Astra Trident simplifica o gerenciamento de armazenamento do Amazon FSX for NetApp ONTAP no Kubernetes para permitir que seus desenvolvedores e administradores se concentrem na implantação de aplicações. O complemento Astra Trident EKS inclui os patches de segurança mais recentes, correções de bugs e é validado pela AWS para funcionar com o Amazon EKS. O complemento EKS permite que você garanta consistentemente que seus clusters do Amazon EKS estejam seguros e estáveis e reduza a quantidade de trabalho que você precisa fazer para instalar, configurar e atualizar complementos.
+O Trident simplifica o gerenciamento de armazenamento do Amazon FSX for NetApp ONTAP no Kubernetes para permitir que seus desenvolvedores e administradores se concentrem na implantação de aplicativos. O complemento do Trident EKS inclui os patches de segurança mais recentes, correções de bugs e é validado pela AWS para funcionar com o Amazon EKS. O complemento EKS permite que você garanta consistentemente que seus clusters do Amazon EKS estejam seguros e estáveis e reduza a quantidade de trabalho que você precisa fazer para instalar, configurar e atualizar complementos.
 
 
 
 == Pré-requisitos
 
-Antes de configurar o complemento Astra Trident para AWS EKS, verifique se você tem o seguinte:
+Verifique se você tem o seguinte antes de configurar o complemento do Trident para o AWS EKS:
 
 * Uma conta de cluster do Amazon EKS com assinatura complementar
 * Permissões da AWS para o marketplace da AWS:
@@ -42,7 +42,7 @@ image::../media/aws-eks-01.png[aws eks 01]
 +
 image::../media/aws-eks-02.png[aws eks 02]
 
-. Localize *AstraTrident by NetApp* e marque a caixa de seleção para o complemento Astra Trident.
+. Localize *AstraTrident by NetApp* e marque a caixa de seleção do complemento Trident.
 . Escolha a versão desejada do complemento.
 +
 image::../media/aws-eks-03.png[aws eks 03]
@@ -61,13 +61,13 @@ image::../media/aws-eks-05.png[aws eks 05]
 
 
 
-== Instale/desinstale o complemento Astra Trident EKS usando a CLI
+== Instale/desinstale o complemento Trident EKS usando a CLI
 
-.Instale o complemento Astra Trident EKS usando a CLI:
-Os seguintes comandos de exemplo instalam o complemento Astra Trident EKS:
+.Instale o complemento Trident EKS usando CLI:
+Os seguintes comandos de exemplo instalam o complemento Trident EKS:
 `eksctl create addon --cluster K8s-arm --name netapp_trident-operator --version v24.2.0-eksbuild.`
 `eksctl create addon --cluster K8s-arm --name netapp_trident-operator --version v24.2.0-eksbuild.1` (Com uma versão dedicada)
 
-.Desinstale o complemento Astra Trident EKS usando a CLI:
-O comando a seguir desinstala o complemento Astra Trident EKS:
+.Desinstale o complemento Trident EKS usando a CLI:
+O seguinte comando desinstala o complemento do Trident EKS:
 `eksctl delete addon --cluster K8s-arm --name netapp_trident-operator`

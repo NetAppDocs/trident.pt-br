@@ -12,17 +12,17 @@ summary: O NetApp fornece suporte para Trident de várias maneiras. Amplas opç�
 
 
 [role="lead"]
-O NetApp é compatível com o Astra Trident de várias maneiras. Amplas opções gratuitas de suporte autônomo estão disponíveis 24 horas por dia, 7 dias por semana, como artigos da base de conhecimento (KB) e um canal discord.
+O NetApp fornece suporte para Trident de várias maneiras. Amplas opções gratuitas de suporte autônomo estão disponíveis 24 horas por dia, 7 dias por semana, como artigos da base de conhecimento (KB) e um canal discord.
 
 
 
-== Ciclo de vida do suporte ao Astra Trident
+== Ciclo de vida do suporte da Trident
 
-O Astra Trident oferece três níveis de suporte com base na sua versão. link:https://mysupport.netapp.com/site/info/version-support["Suporte à versão do software NetApp para definições"^]Consulte a .
+O Trident oferece três níveis de suporte com base na sua versão. link:https://mysupport.netapp.com/site/info/version-support["Suporte à versão do software NetApp para definições"^]Consulte a .
 
-Suporte completo:: O Astra Trident fornece suporte total por doze meses a partir da data de lançamento.
-Suporte limitado:: O Astra Trident fornece suporte limitado por meses, 13 a 24, a partir da data de lançamento.
-Auto-suporte:: A documentação do Astra Trident está disponível durante os meses 25 a 36 a partir da data de lançamento.
+Suporte completo:: O Trident fornece suporte completo por doze meses a partir da data de lançamento.
+Suporte limitado:: O Trident fornece suporte limitado durante os meses de 13 a 24 a partir da data de lançamento.
+Auto-suporte:: A documentação do Trident está disponível para os meses 25 - 36 a partir da data de lançamento.
 
 
 [cols="1, 1, 1, 1"]
@@ -31,12 +31,17 @@ Auto-suporte:: A documentação do Astra Trident está disponível durante os me
 
 
  a| 
-link:https://docs.netapp.com/us-en/trident/index.html["24,06"^]
+link:https://docs.netapp.com/us-en/trident/index.html["24,10"^]
+| Outubro de 2025 | Outubro de 2026 | Outubro de 2027 
+
+
+ a| 
+link:https://docs.netapp.com/us-en/trident-2406/index.html["24,06"^]
 | Junho de 2025 | Junho de 2026 | Junho de 2027 
 
 
  a| 
-link:https://docs.netapp.com/us-en/trident/index.html["24,02"^]
+link:https://docs.netapp.com/us-en/trident-2402/index.html["24,02"^]
 | Fevereiro de 2025 | Fevereiro de 2026 | Fevereiro de 2027 
 
 
@@ -78,36 +83,30 @@ link:https://docs.netapp.com/us-en/trident-2204/index.html["22,04"^]
  a| 
 link:https://docs.netapp.com/us-en/trident-2201/index.html["22,01"^]
 | -- | -- | Janeiro de 2025 
-
-
- a| 
-link:https://docs.netapp.com/us-en/trident-2110/index.html["21,10"^]
-| -- | -- | Outubro de 2024 
 |===
 
 
 == Auto-suporte
 
-Para obter uma lista abrangente de artigos de solução de problemas, https://kb.netapp.com/Advice_and_Troubleshooting/Cloud_Services/Trident_Kubernetes["Base de Conhecimento NetApp (login necessário)"^] consulte . Você também encontrará informações sobre a solução de problemas relacionados ao Astra https://kb.netapp.com/Advice_and_Troubleshooting/Cloud_Services/Astra["aqui"^].
+Para obter uma lista abrangente de artigos de solução de problemas, https://kb.netapp.com/Advice_and_Troubleshooting/Cloud_Services/Trident_Kubernetes["Base de Conhecimento NetApp (login necessário)"^] consulte .
 
 
 
 == Apoio comunitário
 
-Há uma vibrante comunidade pública de usuários de contêineres (incluindo desenvolvedores do Astra Tridentlink:https://discord.gg/NetApp["Canal discord"^]) no nosso Astra . Este é um ótimo lugar para fazer perguntas gerais sobre o projeto e discutir tópicos relacionados com colegas de mentalidade semelhante.
+Há uma vibrante comunidade pública de usuários de contentores (incluindo desenvolvedores do Trident) no link:https://discord.gg/NetApp["Canal discord"^]nosso . Este é um ótimo lugar para fazer perguntas gerais sobre o projeto e discutir tópicos relacionados com colegas de mentalidade semelhante.
 
 
 
 == Suporte técnico da NetApp
 
-Para obter ajuda com o Astra Trident, crie um pacote de suporte usando `tridentctl logs -a -n trident` e envie para `NetApp Support <Getting Help>`o .
+Para obter ajuda com o Trident, crie um pacote de suporte usando `tridentctl logs -a -n trident` e envie-o para `NetApp Support <Getting Help>`o .
 
 
 
 == Para mais informações
 
-* link:https://cloud.netapp.com/blog/topic/astra["Blogs do Astra"^]
-* link:https://netapp.io/persistent-storage-provisioner-for-kubernetes/["Blogs do Astra Trident"^]
+* link:https://netapp.io/persistent-storage-provisioner-for-kubernetes/["Trident blogs"^]
 * link:https://cloud.netapp.com/kubernetes-hub["Kubernetes Hub"^]
 * link:https://netapp.io/["NetApp.io"^]
 

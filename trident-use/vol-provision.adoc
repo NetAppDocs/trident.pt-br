@@ -203,4 +203,4 @@ kubectl delete pod task-pv-pod
 ----
 
 
-link:../trident-reference/objects.html["Objetos Kubernetes e Trident"]Consulte para obter detalhes sobre como as classes de storage interagem com os `PersistentVolumeClaim` parâmetros e para controlar como o Astra Trident provisiona volumes.
+link:../trident-reference/objects.html["Objetos Kubernetes e Trident"]Consulte para obter detalhes sobre como as classes de armazenamento interagem com os `PersistentVolumeClaim` parâmetros e para controlar como o Trident provisiona volumes.

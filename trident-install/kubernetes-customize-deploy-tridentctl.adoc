@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
 permalink: trident-get-started/kubernetes-customize-deploy-tridentctl.html 
-keywords: deploy, astra trident, methods, operator, tridentctl, helm, attributes, customize 
-summary: Você pode usar o instalador do Astra Trident para personalizar a implantação. 
+keywords: deploy, Trident, methods, operator, tridentctl, helm, attributes, customize 
+summary: Você pode usar o instalador do Trident para personalizar a implantação. 
 ---
 = Personalize a instalação do tridentctl
 :hardbreaks:
@@ -12,13 +12,16 @@ summary: Você pode usar o instalador do Astra Trident para personalizar a impla
 
 
 [role="lead"]
-Você pode usar o instalador do Astra Trident para personalizar a instalação.
+Você pode usar o instalador do Trident para personalizar a instalação.
 
 
 
 == Saiba mais sobre o instalador
 
-O instalador do Astra Trident permite personalizar atributos. Por exemplo, se você tiver copiado a imagem Trident para um repositório privado, poderá especificar o nome da imagem `--trident-image` usando o . Se você copiou a imagem do Trident, bem como as imagens do sidecar do CSI necessárias para um repositório privado, pode ser preferível especificar a localização desse repositório usando o `--image-registry` switch, que assume o formulário `<registry FQDN>[:port]`.
+O instalador do Trident permite personalizar atributos. Por exemplo, se você tiver copiado a imagem Trident para um repositório privado, poderá especificar o nome da imagem `--trident-image` usando o . Se você copiou a imagem do Trident, bem como as imagens do sidecar do CSI necessárias para um repositório privado, pode ser preferível especificar a localização desse repositório usando o `--image-registry` switch, que assume o formulário `<registry FQDN>[:port]`.
+
+
+IMPORTANT: Ao instalar o Trident em um repositório privado, se você estiver usando o `--image-registry` switch para especificar o local do repositório, não use `/netapp/` no caminho do repositório. Por exemplo: `./tridentctl install --image-registry <image-registry> -n <namespace>`
 
 Se você estiver usando uma distribuição do Kubernetes, onde `kubelet` mantém seus dados em um caminho diferente do habitual `/var/lib/kubelet`, você poderá especificar o caminho alternativo usando `--kubelet-dir`o .
 

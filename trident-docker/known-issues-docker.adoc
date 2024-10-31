@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-docker/known-issues-docker.html 
 keywords: known issues, trident, trident for docker, docker 
-summary: Encontre informações sobre problemas conhecidos ao usar o Astra Trident com Docker. 
+summary: Encontre informações sobre problemas conhecidos ao usar o Trident com o Docker. 
 ---
 = Problemas e limitações conhecidos
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: Encontre informações sobre problemas conhecidos ao usar o Astra Tride
 
 
 [role="lead"]
-Encontre informações sobre problemas e limitações conhecidos ao usar o Astra Trident com Docker.
+Encontre informações sobre problemas e limitações conhecidos ao usar o Trident com Docker.
 
 
 
@@ -48,11 +48,11 @@ NOTE: Esta é uma limitação de cliente Docker. O cliente interpretará um úni
 
 
 
-== O Docker Swarm tem certos comportamentos que impedem o Astra Trident de dar suporte a ele em cada combinação de storage e driver.
+== O Docker Swarm tem certos comportamentos que impedem o Trident de suportá-lo com cada combinação de armazenamento e driver.
 
 * Docker Swarm atualmente faz uso do nome do volume em vez de ID do volume como seu identificador de volume exclusivo.
 * As solicitações de volume são enviadas simultaneamente para cada nó em um cluster Swarm.
-* Os plug-ins de volume (incluindo o Astra Trident) devem ser executados de forma independente em cada nó em um cluster do Swarm. Devido à forma como o ONTAP funciona e como os `ontap-nas` drivers e `ontap-san` funcionam, eles são os únicos que podem operar dentro dessas limitações.
+* Plugins de volume (incluindo Trident) devem ser executados independentemente em cada nó em um cluster Swarm. Devido à forma como o ONTAP funciona e como os `ontap-nas` drivers e `ontap-san` funcionam, eles são os únicos que podem operar dentro dessas limitações.
 
 
 O resto dos pilotos estão sujeitos a problemas como condições de corrida que podem resultar na criação de um grande número de volumes para uma única solicitação sem um claro "vencedor"; por exemplo, o elemento tem um recurso que permite que os volumes tenham o mesmo nome, mas IDs diferentes.

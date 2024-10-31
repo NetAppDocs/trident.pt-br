@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/trident-fsx-storageclass-pvc.html 
 keywords: Amazon FSx for NetApp ONTAP, FSx for ONTAP, deploy Trident, integrate Trident, Trident 
-summary: 'Usando o Astra Trident com o Amazon FSX for NetApp ONTAP, você garante que os clusters do Kubernetes executados no Amazon Elastic Kubernetes Service (EKS) possam provisionar volumes persistentes de bloco e arquivo com o respaldo do do ONTAP.' 
+summary: 'Usando o Trident com o Amazon FSX for NetApp ONTAP, você pode garantir que os clusters do Kubernetes executados no Amazon Elastic Kubernetes Service (EKS) provisionem volumes persistentes de bloco e arquivo com o respaldo do do ONTAP.' 
 ---
 = Configurar uma classe de armazenamento e PVC
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: 'Usando o Astra Trident com o Amazon FSX for NetApp ONTAP, você garant
 
 
 [role="lead"]
-Configure um objeto Kubernetes StorageClass e crie a classe de storage para instruir o Astra Trident a provisionar volumes. Crie um Persistentvolume (PV) e um PersistentVolumeClaim (PVC) que use o Kubernetes StorageClass configurado para solicitar acesso ao PV. Em seguida, pode montar o PV num pod.
+Configure um objeto Kubernetes StorageClass e crie a classe de storage para instruir o Trident a provisionar volumes. Crie um Persistentvolume (PV) e um PersistentVolumeClaim (PVC) que use o Kubernetes StorageClass configurado para solicitar acesso ao PV. Em seguida, pode montar o PV num pod.
 
 
 
@@ -22,7 +22,7 @@ Configure um objeto Kubernetes StorageClass e crie a classe de storage para inst
 
 === Configurar um objeto Kubernetes StorageClass
 
-O https://kubernetes.io/docs/concepts/storage/storage-classes/["Objeto Kubernetes StorageClass"^] identifica o Astra Trident como o provisionador que é usado para essa classe instrui o Astra Trident a provisionar um volume. Por exemplo:
+O https://kubernetes.io/docs/concepts/storage/storage-classes/["Objeto Kubernetes StorageClass"^] identifica o Trident como o provisionador usado para essa classe instrui o Trident a provisionar um volume. Por exemplo:
 
 [listing]
 ----
@@ -37,7 +37,7 @@ parameters:
   provisioningType: "thin"
   snapshots: "true"
 ----
-link:../trident-reference/objects.html["Objetos Kubernetes e Trident"]Consulte para obter detalhes sobre como as classes de storage interagem com os `PersistentVolumeClaim` parâmetros e para controlar como o Astra Trident provisiona volumes.
+link:../trident-reference/objects.html["Objetos Kubernetes e Trident"]Consulte para obter detalhes sobre como as classes de armazenamento interagem com os `PersistentVolumeClaim` parâmetros e para controlar como o Trident provisiona volumes.
 
 
 
@@ -50,7 +50,7 @@ link:../trident-reference/objects.html["Objetos Kubernetes e Trident"]Consulte p
 ----
 kubectl create -f storage-class-ontapnas.yaml
 ----
-. Agora você deve ver uma classe de storage *Basic-csi* no Kubernetes e Astra Trident, e o Astra Trident deve ter descoberto os pools no back-end.
+. Agora você deve ver uma classe de armazenamento *Basic-csi* no Kubernetes e no Trident, e o Trident deve ter descoberto os pools no back-end.
 +
 [listing]
 ----
@@ -174,13 +174,13 @@ pvc-storage Bound  pv-name 2Gi      RWO                       5m
 ----
 
 
-link:../trident-reference/objects.html["Objetos Kubernetes e Trident"]Consulte para obter detalhes sobre como as classes de storage interagem com os `PersistentVolumeClaim` parâmetros e para controlar como o Astra Trident provisiona volumes.
+link:../trident-reference/objects.html["Objetos Kubernetes e Trident"]Consulte para obter detalhes sobre como as classes de armazenamento interagem com os `PersistentVolumeClaim` parâmetros e para controlar como o Trident provisiona volumes.
 
 
 
-== Atributos do Astra Trident
+== Atributos do Trident
 
-Esses parâmetros determinam quais pools de storage gerenciado pelo Astra Trident devem ser utilizados para provisionar volumes de um determinado tipo.
+Esses parâmetros determinam quais pools de storage gerenciado pelo Trident devem ser utilizados para provisionar volumes de um determinado tipo.
 
 [cols=",,,,,"]
 |===
