@@ -49,13 +49,13 @@ Para aproveitar a identidade da nuvem no Google Cloud, você deve ter:
 
 * Um cluster do Kubernetes implantado usando o GKE.
 * Identidade da carga de trabalho e oidc-emitente configurados no cluster GKE.
-* Astra Trident instalado que inclui o `cloudProvider` para especificar `"GCP"` e `cloudIdentity` especificar a identidade da carga de trabalho.
+* Trident instalado que inclui o `cloudProvider` para especificar `"GCP"` e `cloudIdentity` especificar a identidade da carga de trabalho.
 +
 [role="tabbed-block"]
 ====
 .Operador Trident
 --
-Para instalar o Astra Trident usando o operador Trident, edite `tridentorchestrator_cr.yaml` para definir `cloudProvider` como `"GCP"` e defina `cloudIdentity` como `iam.gke.io/gcp-service-account: \cloudvolumes-admin-sa@mygcpproject.iam.gserviceaccount.com`.
+Para instalar o Trident usando o operador Trident, edite `tridentorchestrator_cr.yaml` para definir `cloudProvider` como `"GCP"` e defina `cloudIdentity` como `iam.gke.io/gcp-service-account: \cloudvolumes-admin-sa@mygcpproject.iam.gserviceaccount.com`.
 
 Por exemplo:
 
@@ -80,7 +80,7 @@ Defina os valores para sinalizadores *provedor de nuvem (CP)* e *identidade de n
 `export CP="GCP"`
 `export ANNOTATION="iam.gke.io/gcp-service-account: \cloudvolumes-admin-sa@mygcpproject.iam.gserviceaccount.com"`
 
-O exemplo a seguir instala o Astra Trident e configura `cloudProvider` o GCP usando a variável de ambiente `$CP` e define a `cloudIdentity` variável uso do `$ANNOTATION` ambiente :
+O exemplo a seguir instala o Trident e define `cloudProvider` o GCP usando a variável de ambiente `$CP` e define a `cloudIdentity` variável usando o ambiente `$ANNOTATION` :
 
 [listing]
 ----
@@ -94,7 +94,7 @@ Defina os valores para os sinalizadores *provedor de nuvem* e *identidade de nuv
 `export CP="GCP"`
 `export ANNOTATION="iam.gke.io/gcp-service-account: \cloudvolumes-admin-sa@mygcpproject.iam.gserviceaccount.com"`
 
-O exemplo a seguir instala o Astra Trident e define o `cloud-provider` sinalizador como `$CP`, e `cloud-identity` como `$ANNOTATION`:
+O exemplo a seguir instala o Trident e define o `cloud-provider` sinalizador como `$CP`, e `cloud-identity` como `$ANNOTATION`:
 
 [listing]
 ----
