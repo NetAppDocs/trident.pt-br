@@ -168,6 +168,9 @@ Você pode controlar o provisionamento padrão usando essas opções na `default
 
 
 | `nameTemplate` | Modelo para criar nomes de volume personalizados. | "" 
+
+
+| `denyNewVolumePools` | Restringe `ontap-nas-economy` backends de criar novos volumes do FlexVol para conter suas Qtrees. Somente Flexvols pré-existentes são usados para provisionar novos PVS. |  
 |===
 
 NOTE: O uso de grupos de política de QoS com Trident requer o ONTAP 9.8 ou posterior. Você deve usar um grupo de políticas de QoS não compartilhado e garantir que o grupo de políticas seja aplicado individualmente a cada componente. Um grupo de políticas de QoS compartilhado impõe o limite máximo da taxa de transferência total de todos os workloads.
