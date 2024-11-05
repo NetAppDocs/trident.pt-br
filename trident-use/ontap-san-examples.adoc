@@ -95,7 +95,7 @@ NOTE: Quando o agregado é atualizado no SVM, ele é atualizado automaticamente 
 | `limitAggregateUsage` | Falha no provisionamento se o uso estiver acima dessa porcentagem. Se você estiver usando um back-end do Amazon FSX for NetApp ONTAP, não  `limitAggregateUsage`especifique . O fornecido `fsxadmin` e `vsadmin` não contém as permissões necessárias para recuperar o uso agregado e limitá-lo usando o Trident. | "" (não aplicado por padrão) 
 
 
-| `limitVolumeSize` | Falha no provisionamento se o tamanho do volume solicitado estiver acima desse valor. Também restringe o tamanho máximo dos volumes que gerencia para qtrees e LUNs. | "" (não aplicado por padrão) 
+| `limitVolumeSize` | Falha no provisionamento se o tamanho do volume solicitado estiver acima desse valor. Também restringe o tamanho máximo dos volumes que gerencia para LUNs. | "" (não aplicado por padrão) 
 
 
 | `lunsPerFlexvol` | Máximo de LUNs por FlexVol, tem de estar no intervalo [50, 200] | `100` 
@@ -121,6 +121,12 @@ NOTE: Quando o agregado é atualizado no SVM, ele é atualizado automaticamente 
 *Suportado apenas para `ontap-san` drivers e `ontap-san-economy`.*
  a| 
 
+
+
+| `limitVolumePoolSize` | Tamanho máximo de FlexVol requestable ao usar LUNs no back-end ONTAP-san-econômico. | "" (não aplicado por padrão) 
+
+
+| `denyNewVolumePools` | Restringe a `ontap-san-economy` criação de novos volumes do FlexVol para conter LUNs. Somente Flexvols pré-existentes são usados para provisionar novos PVS. |  
 |===
 
 
@@ -178,12 +184,6 @@ Você pode controlar o provisionamento padrão usando essas opções na `default
 
 
 | `nameTemplate` | Modelo para criar nomes de volume personalizados. | "" 
-
-
-| `limitVolumePoolSize` | Tamanho máximo de FlexVol requestable ao usar LUNs no back-end ONTAP-san-econômico. | "" (não aplicado por padrão) 
-
-
-| `denyNewVolumePools` | Restringe a `ontap-san-economy` criação de novos volumes do FlexVol para conter LUNs. Somente Flexvols pré-existentes são usados para provisionar novos PVS. |  
 |===
 
 
