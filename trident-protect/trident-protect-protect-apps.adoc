@@ -1,0 +1,319 @@
+---
+sidebar: sidebar 
+permalink: trident-protect/trident-protect-protect-apps.html 
+keywords: protect, snapshots, demand, configuration, cluster, appvault 
+summary: Proteja todos os aplicativos tirando snapshots e backups usando uma política de proteção automatizada ou ad hoc. 
+---
+= Proteger aplicações
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Proteja todos os aplicativos tirando snapshots e backups usando uma política de proteção automatizada ou ad hoc.
+
+
+
+== Crie um snapshot sob demanda
+
+Você pode criar um snapshot sob demanda a qualquer momento.
+
+[role="tabbed-block"]
+====
+.Crie um instantâneo usando um CR
+--
+. Crie o arquivo de recurso personalizado (CR) e nomeie-o `trident-protect-snapshot-cr.yaml`.
+. No arquivo criado, configure os seguintes atributos:
++
+** *metadata.name*: (_required_) o nome deste recurso personalizado; escolha um nome único e sensível para o seu ambiente.
+** *Spec.applicationRef*: O nome do Kubernetes da aplicação para snapshot.
+** *Spec.appVaultRef*: (_required_) o nome do AppVault onde o conteúdo instantâneo (metadados) deve ser armazenado.
+** *Spec.reclaimPolicy*: (_Optional_) define o que acontece com o AppArchive de um snapshot quando o snapshot CR é excluído. Isso significa que, mesmo quando definido como `Retain`, o instantâneo será excluído. Opções válidas:
++
+*** `Retain` (predefinição)
+*** `Delete`
++
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: Snapshot
+metadata:
+  namespace: my-app-namespace
+  name: my-cr-name
+spec:
+  applicationRef: my-application
+  appVaultRef: appvault-name
+  reclaimPolicy: Delete
+----
+
+
+
+
+. Depois de preencher o `trident-protect-snapshot-cr.yaml` ficheiro com os valores corretos, aplique o CR:
++
+[source, console]
+----
+kubectl apply -f trident-protect-snapshot-cr.yaml
+----
+
+
+--
+.Crie um instantâneo usando a CLI
+--
+. Crie o snapshot, substituindo valores entre parênteses por informações do seu ambiente. Por exemplo:
++
+[source, console]
+----
+tridentctl protect create snapshot <my_snapshot_name> --appvault <my_appvault_name> --app <name_of_app_to_snapshot>
+----
+
+
+--
+====
+
+
+== Crie um backup sob demanda
+
+Você pode fazer backup de um aplicativo a qualquer momento.
+
+[role="tabbed-block"]
+====
+.Crie uma cópia de segurança utilizando um CR
+--
+. Crie o arquivo de recurso personalizado (CR) e nomeie-o `trident-protect-backup-cr.yaml`.
+. No arquivo criado, configure os seguintes atributos:
++
+** *metadata.name*: (_required_) o nome deste recurso personalizado; escolha um nome único e sensível para o seu ambiente.
+** *Spec.applicationRef*: (_required_) o nome do Kubernetes do aplicativo para fazer backup.
+** *Spec.appVaultRef*: (_required_) o nome do AppVault onde o conteúdo de backup deve ser armazenado.
+** *Spec.dataMover*: (_Optional_) Uma cadeia de carateres indicando qual ferramenta de backup usar para a operação de backup. Valores possíveis (sensíveis a maiúsculas e minúsculas):
++
+*** `Restic`
+*** `Kopia` (predefinição)
+
+
+** *Spec.reclaimPolicy*: (_Optional_) define o que acontece com um backup quando liberado de sua reivindicação. Valores possíveis:
++
+*** `Delete`
+*** `Retain` (predefinição)
+
+
+** *Spec.snapshotRef*: (_Optional_): Nome do instantâneo a ser usado como fonte do backup. Se não for fornecido, um instantâneo temporário será criado e feito backup.
++
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: Backup
+metadata:
+  namespace: my-app-namespace
+  name: my-cr-name
+spec:
+  applicationRef: my-application
+  appVaultRef: appvault-name
+  dataMover: Kopia
+----
+
+
+. Depois de preencher o `trident-protect-backup-cr.yaml` ficheiro com os valores corretos, aplique o CR:
++
+[source, console]
+----
+kubectl apply -f trident-protect-backup-cr.yaml
+----
+
+
+--
+.Crie um backup usando a CLI
+--
+. Crie o backup, substituindo valores entre parênteses por informações do seu ambiente. Por exemplo:
++
+[source, console]
+----
+tridentctl protect create backup <my_backup_name> --appvault <my-vault-name> --app <name_of_app_to_back_up>
+----
+
+
+--
+====
+
+
+== Criar um cronograma de proteção de dados
+
+Uma política de proteção protege um aplicativo criando snapshots, backups ou ambos em um cronograma definido. Você pode optar por criar snapshots e backups por hora, diariamente, semanalmente e mensalmente, e especificar o número de cópias a reter.
+
+[role="tabbed-block"]
+====
+.Crie uma agenda usando um CR
+--
+. Crie o arquivo de recurso personalizado (CR) e nomeie-o `trident-protect-schedule-cr.yaml`.
+. No arquivo criado, configure os seguintes atributos:
++
+** *metadata.name*: (_required_) o nome deste recurso personalizado; escolha um nome único e sensível para o seu ambiente.
+** *Spec.dataMover*: (_Optional_) Uma cadeia de carateres indicando qual ferramenta de backup usar para a operação de backup. Valores possíveis (sensíveis a maiúsculas e minúsculas):
++
+*** `Restic`
+*** `Kopia` (predefinição)
+
+
+** *Spec.applicationRef*: O nome do Kubernetes do aplicativo para fazer backup.
+** *Spec.appVaultRef*: (_required_) o nome do AppVault onde o conteúdo de backup deve ser armazenado.
+** *Spec.backupRetention*: O número de backups a reter. Zero indica que nenhum backup deve ser criado.
+** *Spec.snapshotRetention*: O número de instantâneos a reter. Zero indica que nenhum instantâneo deve ser criado.
+** *spec.granularity*: a frequência em que o horário deve ser executado. Valores possíveis, juntamente com campos associados obrigatórios:
++
+*** `hourly` (requer que você `spec.minute` especifique )
+*** `daily` (requer que você especifique `spec.minute` e `spec.hour`)
+*** `weekly` (requer especificar `spec.minute, spec.hour`, e `spec.dayOfWeek`)
+*** `monthly` (requer especificar `spec.minute, spec.hour`, e `spec.dayOfMonth`)
+
+
+** *Spec.dayOfMonth*: (_Optional_) o dia do mês (1 - 31) em que a programação deve ser executada. Este campo é necessário se a granularidade estiver definida como `monthly`.
+** *Spec.DayOfWeek*: (_Optional_) o dia da semana (0 - 7) em que o horário deve ser executado. Os valores de 0 ou 7 indicam domingo. Este campo é necessário se a granularidade estiver definida como `weekly`.
+** *Spec.hour*: (_Optional_) a hora do dia (0 - 23) em que o horário deve ser executado. Este campo é necessário se a granularidade estiver definida como `daily`, `weekly` `monthly` ou .
+** *Spec.minute*: (_Optional_) o minuto da hora (0 - 59) que o horário deve ser executado. Este campo é necessário se a granularidade estiver definida como `hourly`, , `daily` `weekly` , ou `monthly`.
++
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: Schedule
+metadata:
+  namespace: my-app-namespace
+  name: my-cr-name
+spec:
+  dataMover: Kopia
+  applicationRef: my-application
+  appVaultRef: appvault-name
+  backupRetention: "15"
+  snapshotRetention: "15"
+  granularity: <monthly>
+  dayOfMonth: "1"
+  dayOfWeek: "0"
+  hour: "0"
+  minute: "0"
+----
+
+
+. Depois de preencher o `trident-protect-schedule-cr.yaml` ficheiro com os valores corretos, aplique o CR:
++
+[source, console]
+----
+kubectl apply -f trident-protect-schedule-cr.yaml
+----
+
+
+--
+.Crie uma agenda usando a CLI
+--
+. Crie o cronograma de proteção, substituindo valores entre parênteses por informações do seu ambiente. Por exemplo:
++
+
+NOTE: Você pode usar `tridentctl protect create schedule --help` para exibir informações detalhadas de ajuda para este comando.
+
++
+[source, console]
+----
+tridentctl protect create schedule <my_schedule_name> --appvault <my_appvault_name> --app <name_of_app_to_snapshot> --backup-retention <how_many_backups_to_retain> --data-mover <kopia_or_restic> --day-of-month <day_of_month_to_run_schedule> --day-of-week <day_of_month_to_run_schedule> --granularity <frequency_to_run> --hour <hour_of_day_to_run> --minute <minute_of_hour_to_run> --recurrence-rule <recurrence> --snapshot-retention <how_many_snapshots_to_retain>
+----
+
+
+--
+====
+
+
+== Eliminar um instantâneo
+
+Exclua os snapshots programados ou sob demanda que você não precisa mais.
+
+.Passos
+. Remover o instantâneo CR associado ao instantâneo:
++
+[source, console]
+----
+kubectl delete snapshot <snapshot_name> -n my-app-namespace
+----
+
+
+
+
+== Eliminar uma cópia de segurança
+
+Exclua os backups programados ou sob demanda que você não precisa mais.
+
+.Passos
+. Remova o CR de backup associado ao backup:
++
+[source, console]
+----
+kubectl delete backup <backup_name> -n my-app-namespace
+----
+
+
+
+
+== Verifique o status de uma operação de backup
+
+Você pode usar a linha de comando para verificar o status de uma operação de backup em andamento, concluída ou falhou.
+
+.Passos
+. Use o seguinte comando para recuperar o status da operação de backup, substituindo valores em brackes por informações do seu ambiente:
++
+[source, console]
+----
+kubectl get backup -n <namespace_name> <my_backup_cr_name> -o jsonpath='{.status}'
+----
+
+
+
+
+== Habilite o backup e a restauração de operações do Azure-NetApp-Files (ANF)
+
+Se você tiver instalado o Trident Protect, poderá habilitar a funcionalidade de backup e restauração com uso eficiente de espaço para back-ends de armazenamento que usam a classe de armazenamento azure-NetApp-Files e foram criados antes do Trident 24,06. Esta funcionalidade funciona com NFSv4 volumes e não consome espaço adicional do pool de capacidade.
+
+.Antes de começar
+Certifique-se de que:
+
+* Você instalou o Trident Protect.
+* Você definiu um aplicativo no Trident Protect. Esta aplicação terá uma funcionalidade de proteçãoão limitada até concluir este procedimento.
+* Você `azure-netapp-files` selecionou como a classe de armazenamento padrão para o back-end de armazenamento.
+
+
+.Expanda para obter as etapas de configuração
+[%collapsible]
+====
+. No Trident, se o volume do ANF tiver sido criado antes da atualização para o Trident 24,10:
++
+.. Ative o diretório instantâneo para cada PV que é baseado em azure-NetApp-Files e associado ao aplicativo:
++
+[source, console]
+----
+tridentctl update volume <pv name> --snapshot-dir=true -n trident
+----
+.. Confirme se o diretório instantâneo foi ativado para cada PV associado:
++
+[source, console]
+----
+tridentctl get volume <pv name> -n trident -o yaml | grep snapshotDir
+----
++
+Resposta:
+
++
+[listing]
+----
+snapshotDirectory: "true"
+----
++
+Quando o diretório instantâneo não está ativado, o Trident Protect escolhe a funcionalidade de backup regular, que consome temporariamente espaço no pool de capacidade durante o processo de backup. Nesse caso, certifique-se de que há espaço suficiente disponível no pool de capacidade para criar um volume temporário do tamanho do volume que está sendo feito backup.
+
+
+
+
+
+.Resultado
+O aplicativo está pronto para backup e restauração usando o Trident Protect. Cada PVC também está disponível para ser usado por outras aplicações para backups e restaurações.
+
+====

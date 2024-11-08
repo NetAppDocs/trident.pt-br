@@ -1,0 +1,76 @@
+---
+sidebar: sidebar 
+permalink: trident-protect/trident-protect-manage-applications.html 
+keywords: appvault, data protection, custom resource, namespace, application, cluster 
+summary: Você pode tornar o Trident Protect ciente de um aplicativo que deseja gerenciar criando um CR de aplicativo e um CR de AppVault associado. 
+---
+= Definir uma aplicação para gestão
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode definir um aplicativo que deseja gerenciar com o Trident Protect criando um CR de aplicativo e um CR de AppVault associado.
+
+
+
+== Crie um AppVault CR
+
+Você precisa criar um AppVault CR que será usado ao executar operações de proteção de dados no aplicativo, e o AppVault CR precisa residir no cluster onde o Trident Protect está instalado. O AppVault CR é específico para o seu ambiente; para exemplos do AppVault CRS, consulte link:trident-protect-appvault-custom-resources.html["Recursos personalizados do AppVault."]
+
+
+
+== Criar uma aplicação CR
+
+Você precisa criar um CR de aplicativo para cada aplicativo que você deseja gerenciar com o Trident Protect. Você pode adicionar um aplicativo para gerenciamento criando manualmente um CR de aplicativo ou usando a CLI Trident Protect para criar o CR.
+
+[role="tabbed-block"]
+====
+.Adicione uma aplicação utilizando um CR
+--
+. Criar o ficheiro CR da aplicação de destino:
++
+.. Crie o arquivo de recurso personalizado (CR) e nomeie-o (por exemplo, `maria-app.yaml` ).
+.. Configure os seguintes atributos:
++
+*** *metadata.name*: (_required_) o nome do recurso personalizado do aplicativo. Observe o nome escolhido porque outros arquivos CR necessários para operações de proteção referem-se a esse valor.
+*** *spec.includedNamespaces*: (_required_) Use rótulos de namespace ou um nome de namespace para especificar namespaces nos quais os recursos da aplicação existem. O namespace da aplicação deve ser parte dessa lista.
++
+Exemplo YAML:
+
++
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: Application
+metadata:
+  name: maria
+  namespace: my-app-namespace
+spec:
+  includedNamespaces:
+    labelSelector: {}
+    namespace: my-app-namespace
+----
+
+
+
+
+
+
+--
+.Adicione um aplicativo usando a CLI
+--
+. Crie e aplique a definição da aplicação, substituindo valores entre parênteses por informações do seu ambiente. Você pode incluir namespaces e recursos na definição do aplicativo usando listas separadas por vírgulas com os argumentos mostrados no exemplo a seguir:
++
+[source, console]
+----
+tridentctl protect create application <my_new_app_cr_name> --namespaces <namespaces_to_include> --csr <cluster_scoped_resources_to_include>
+----
+
+
+--
+====

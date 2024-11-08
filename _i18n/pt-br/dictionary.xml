@@ -2958,8 +2958,6 @@
   <block id="5f06738a5749e735a4681f5c09e2bafc" category="paragraph">O exemplo a seguir atualiza o complemento EKS:</block>
   <block id="14aac489d4434a82a3f9f97e8fe91694" category="paragraph"><block ref="187beb49762f7fb831051ad42bd762fe" prefix="" category="inline-code"></block></block>
   <block id="d8c918c170a0768203b4c2a6218e22bf" category="paragraph">Você tem duas opções para remover um complemento do Amazon EKS:</block>
-  <block id="d43d72969793ea80734b71e9c2406b2a" category="list-text">*Preserve o software complementar no cluster* – essa opção remove o gerenciamento do Amazon EKS de qualquer configuração. Ele também remove a capacidade do Amazon EKS de notificá-lo de atualizações e atualizar automaticamente o complemento do Amazon EKS depois de iniciar uma atualização. No entanto, ele preserva o software complementar no cluster. Essa opção torna o complemento uma instalação autogerenciada, em vez de um complemento do Amazon EKS. Com essa opção, não há tempo de inatividade para o complemento. Guarde a<block ref="4b4ac0f998920a46fd2015e11d01d3e7" prefix=" " category="inline-code"></block> opção no comando para preservar o complemento.</block>
-  <block id="4c467d48a00d885ea22b1e685b747492" category="list-text">*Remover software complementar inteiramente do cluster* – recomendamos que você remova o suplemento do Amazon EKS do cluster somente se não houver recursos no cluster que dependam dele. Remova<block ref="4b4ac0f998920a46fd2015e11d01d3e7" prefix=" " category="inline-code"></block> a opção do<block ref="099af53f601532dbd31e0ea99ffdeb64" prefix=" " category="inline-code"></block> comando para remover o complemento.</block>
   <block id="577a7d77fb14f745abf0c5ee04b72879" category="admonition">Se o complemento tiver uma conta do IAM associada a ele, a conta do IAM não será removida.</block>
   <block id="ae7c26e7d90f669e27bf9a36527336ec" category="list-text">No painel de navegação esquerdo, clique em *clusters*.</block>
   <block id="99e7173540f126412137b25a0caaf2d1" category="list-text">Clique no nome do cluster para o qual você deseja remover o complemento NetApp Trident CSI.</block>
@@ -3951,7 +3949,6 @@
   <block id="86c0118c20bbec39a37e58e07b4ca78e" category="list-text">Mínimo atualizado com suporte de Kubernetes para 1,25.</block>
   <block id="8b1b4442b4204fbf84931236c6402e37" category="list-text">Suporte removido para a Diretiva de Segurança DO POD.</block>
   <block id="4f52a386be5239d16bac5e9e054c7686" category="section-title">Rebranding do produto</block>
-  <block id="e0c7c5b86117f728a9a34a3fdaeabc46" category="paragraph">A partir do lançamento de 24,10, o Astra Trident é renomeado para Trident (NetApp Trident). Esse rebranding não afeta recursos, plataformas suportadas e interoperabilidade para o Trident.</block>
   <block id="b56fb7b6833a5dc3a047885cd9fb56b3" category="section-title">Mudanças em 24,06</block>
   <block id="59757b96b5b7c76f5131b54a97bfb34b" category="list-text">Adicionada capacidade para que as configurações de log configuradas pelo usuário para o controlador Trident sejam propagadas para pods de nó do Trident.</block>
   <block id="65aba759730c3a57f815e388e62498df" category="list-text">Adicionado suporte no Trident para usar REST por padrão em vez de ZAPI para ONTAP versões 9.15.1 e posteriores.</block>
@@ -4328,4 +4325,572 @@
   <block id="98b1298645505c6ec838667dff651c81" category="cell">Tamanho máximo de FlexVol requestable ao usar Qtrees no back-end ONTAP-nas-Economy.</block>
   <block id="7be7ec1f4262cda30e19c85af89449af" category="cell">Alocação de espaço para Qtrees</block>
   <block id="bc78339d85241498c635b61d8f201ef9" category="cell">Falha no provisionamento se o tamanho do volume solicitado estiver acima desse valor. Também restringe o tamanho máximo dos volumes que gerencia para LUNs.</block>
+  <block id="579198c91fea423d4b79c97828ac3da4" category="summary">O Trident Protect permite que você proteja seus aplicativos e dados de aplicações usando o Trident.</block>
+  <block id="a53f4cc048a3d0227206b8b6182e67dc" category="doc">Saiba mais sobre o Trident Protect</block>
+  <block id="6d8d3279a9b2226029d9af309058363b" category="paragraph">O NetApp Trident Protect oferece recursos avançados de gerenciamento de dados de aplicações que aprimoram o recurso e a disponibilidade de aplicações Kubernetes com monitoramento de estado e respaldo dos sistemas de storage da NetApp ONTAP e do provisionador de storage NetApp Trident CSI. O Trident Protect simplifica o gerenciamento, a proteção e a movimentação de workloads em contêineres entre nuvens públicas e ambientes locais. Ele também oferece recursos de automação por meio de sua API e CLI.</block>
+  <block id="6a945469c2d9fdc27b0cb844d066c984" category="paragraph">Você pode proteger aplicativos com o Trident Protect criando recursos personalizados (CRS) ou usando a CLI do Trident Protect.</block>
+  <block id="7e6f9558ca98ca29afd74d0bbb0b2bce" category="paragraph">Você pode saber mais sobre os requisitos do Trident Protect antes de instalá-lo:</block>
+  <block id="a0a1eb9fbd2b7284352e6b610999f841" category="inline-link-macro">Requisitos do Trident Protect</block>
+  <block id="8d806bd87636d4fd0eecab0333057f10" category="list-text"><block ref="8d806bd87636d4fd0eecab0333057f10" category="inline-link-macro-rx"></block></block>
+  <block id="af68364761ed4114c192b6bb2962467b" category="summary">O Trident Protect usa o modelo Kubernetes de controle de acesso baseado em funções (RBAC). Você pode usar os recursos do Trident Protect RBAC para controlar com mais precisão o acesso aos recursos.</block>
+  <block id="3f94255d3ae6517615821f8939ba6230" category="doc">Gerenciar autorização e controle de acesso</block>
+  <block id="9991f5d4b3aa4ae5a36fb2ad6a637d73" category="paragraph">O Trident Protect usa o modelo Kubernetes de controle de acesso baseado em funções (RBAC). Por padrão, o Trident Protect fornece um único namespace de sistema e sua conta de serviço padrão associada. Se você tiver uma organização com muitos usuários ou necessidades de segurança específicas, use os recursos RBAC do Trident Protect para obter controle mais granular sobre o acesso a recursos e espaços de nomes.</block>
+  <block id="a22c0a4dfca95968d88392eb0bbb2dcf" category="paragraph">O administrador do cluster sempre tem acesso a recursos no namespace padrão<block ref="9a82c7a4099124e5bfaa83e7c5997bd4" prefix=" " category="inline-code"></block> e também pode acessar recursos em todos os outros namespaces. Para controlar o acesso a recursos e aplicações, é necessário criar espaços de nomes adicionais e adicionar recursos e aplicações a esses espaços de nomes.</block>
+  <block id="661e3b2b32de1ab85fb426b5abec28f3" category="paragraph">Observe que nenhum usuário pode criar CRS de gerenciamento de dados do aplicativo no namespace padrão<block ref="9a82c7a4099124e5bfaa83e7c5997bd4" prefix=" " category="inline-code"></block>. Você precisa criar CRS de gerenciamento de dados de aplicativo em um namespace de aplicativo (como prática recomendada, criar CRS de gerenciamento de dados de aplicativo no mesmo namespace que seu aplicativo associado).</block>
+  <block id="b1f69b20762545a6c94e024888638df8" category="paragraph">Somente os administradores devem ter acesso a objetos de recursos personalizados privilegiados do Trident Protect, que incluem:</block>
+  <block id="4516bb1529fba64216073cc95812839c" category="list-text">*AppVault*: Requer dados de credenciais de bucket</block>
+  <block id="984eb0d94901a4b5f9105f96d4d2b4a9" category="list-text">*AutoSupportBundle*: Coleta métricas, logs e outros dados confidenciais do Trident Protect</block>
+  <block id="10e6811ca4c78900349b612176a3233b" category="list-text">*AutoSupportBundleSchedule*: Gerencia os horários de coleta de Registros</block>
+  <block id="7cfd5c25f0cd486a1157966cad4acba7" category="paragraph">Como prática recomendada, use o RBAC para restringir o acesso a objetos privilegiados aos administradores.</block>
+  <block id="407b2fe2d3bbcc55c8ae895a2fd8263c" category="inline-link">Documentação do Kubernetes RBAC</block>
+  <block id="280879df8b54b2167169ec47c5cabf6d" category="paragraph">Para obter mais informações sobre como o RBAC regula o acesso a recursos e namespaces, consulte o<block ref="4825a411217f39ad9486c7b5e7edfd2b" category="inline-link-rx"></block>.</block>
+  <block id="1f8885e14663f7eb65b23f1fb65cf1ad" category="inline-link">Documentação da conta de serviço do Kubernetes</block>
+  <block id="6d2eefddf1d006b070ac00f2cf8d9f2e" category="paragraph">Para obter informações sobre contas de serviço, consulte o<block ref="37bf82f0fc7d7e935aabd2fb73032b3c" category="inline-link-rx"></block>.</block>
+  <block id="c8daba6f7a2139f5744d1f673acae2b4" category="section-title">Exemplo: Gerencie o acesso para dois grupos de usuários</block>
+  <block id="9a9f2142e8d53ddda9013b6fc97827cd" category="paragraph">Por exemplo, uma organização tem um administrador de cluster, um grupo de usuários de engenharia e um grupo de usuários de marketing. O administrador do cluster concluiria as seguintes tarefas para criar um ambiente onde o grupo de engenharia e o grupo de marketing tenham acesso apenas aos recursos atribuídos aos respetivos namespaces.</block>
+  <block id="62e8eb1beb4089e76f084fa767746c24" category="section-title">Etapa 1: Crie um namespace para conter recursos para cada grupo</block>
+  <block id="bff98f2ace11d8e7b9fe541ae444c93a" category="paragraph">Criar um namespace permite separar recursos logicamente e controlar melhor quem tem acesso a esses recursos.</block>
+  <block id="34bc7fd01806723536ffab05992d77d0" category="list-text">Crie um namespace para o grupo de engenharia:</block>
+  <block id="ba644a4cbff232b5b4157a0f8bfc30f8" category="list-text">Crie um namespace para o grupo de marketing:</block>
+  <block id="aac00f41716d928be61ef3ff1cd6fc2d" category="section-title">Etapa 2: Crie novas contas de serviço para interagir com recursos em cada namespace</block>
+  <block id="3e8da71376257c3915a88fb2bfe69a27" category="paragraph">Cada novo namespace que você criar vem com uma conta de serviço padrão, mas você deve criar uma conta de serviço para cada grupo de usuários para que você possa dividir ainda mais Privileges entre grupos no futuro, se necessário.</block>
+  <block id="7bd34dd5c1a41f3a7aeea2aaad2469b5" category="list-text">Crie uma conta de serviço para o grupo de engenharia:</block>
+  <block id="37281883196948d16907e71598070c79" category="list-text">Crie uma conta de serviço para o grupo de marketing:</block>
+  <block id="2cdbda2406e807bdae6ccf33ad2445f3" category="section-title">Passo 3: Crie um segredo para cada nova conta de serviço</block>
+  <block id="a15042adaad3bebc86d46ef450a4f98c" category="paragraph">Um segredo de conta de serviço é usado para autenticar com a conta de serviço e pode ser facilmente excluído e recriado se comprometido.</block>
+  <block id="78a7dfb4e5b60d84d3c54ec150be8a80" category="list-text">Crie um segredo para a conta de serviço de engenharia:</block>
+  <block id="b098f513abca683a5e1c36cbc8b244db" category="list-text">Crie um segredo para a conta do serviço de marketing:</block>
+  <block id="d1732b3423240a19064951afa9a3266a" category="section-title">Passo 4: Crie um objeto RoleBinding para vincular o objeto ClusterRole a cada nova conta de serviço</block>
+  <block id="720de81bb5619bda23df5ae99eb9ebcb" category="paragraph">Um objeto ClusterRole padrão é criado quando você instala o Trident Protect. Você pode vincular esse ClusterRole à conta de serviço criando e aplicando um objeto RoleBinding.</block>
+  <block id="067d8d99affb5418a3d899eba8658cc4" category="list-text">Vincule o ClusterRole à conta de serviço de engenharia:</block>
+  <block id="b25ecd55b23c424058fdad947fe23b13" category="list-text">Vincule o ClusterRole à conta do serviço de marketing:</block>
+  <block id="574c7934280b498080dfc2272c570f69" category="section-title">Passo 5: Testar permissões</block>
+  <block id="8d65423ec256f18737823ea6cedeae87" category="paragraph">Teste se as permissões estão corretas.</block>
+  <block id="7b0c0cd292b286167249cc067be6d47d" category="list-text">Confirme se os usuários de engenharia podem acessar os recursos de engenharia:</block>
+  <block id="37aa0c3d444b765e5080a77f572f9040" category="list-text">Confirme que os usuários de engenharia não podem acessar recursos de marketing:</block>
+  <block id="1317a4b523ecc5ea298adec08e7ba407" category="summary">O bucket custom resource (CR) do Trident Protect é conhecido como AppVault. AppVaults são a representação declarativa do fluxo de trabalho do Kubernetes de um bucket de storage.</block>
+  <block id="618ce5e44021c1c57c9655e5e3846eda" category="doc">Use objetos AppVault para gerenciar buckets</block>
+  <block id="f39726752bf5b117fe78f8c383e31cdd" category="paragraph">O bucket custom resource (CR) do Trident Protect é conhecido como AppVault. Os objetos AppVault são a representação declarativa do fluxo de trabalho do Kubernetes de um bucket de storage. Um AppVault CR contém as configurações necessárias para que um bucket seja usado em operações de proteção, como backups, snapshots, operações de restauração e replicação do SnapMirror. Apenas os administradores podem criar AppVaults.</block>
+  <block id="b0f47f6adf0e419b1f2eec1a0a995e8c" category="section-title">Geração de chaves e exemplos de definição do AppVault</block>
+  <block id="e1acb82bf1e9f5db4a12c5a7eb653d47" category="paragraph">Ao definir um AppVault CR, você precisa incluir credenciais para acessar os recursos hospedados pelo provedor. A forma como você gera as chaves para as credenciais será diferente dependendo do provedor. A seguir estão exemplos de geração de chaves de linha de comando para vários provedores, seguidos de exemplos de definições do AppVault para cada provedor.</block>
+  <block id="56ef2682280ac110060b881925a87b80" category="section-title">Google Cloud</block>
+  <block id="740ca32fc91467fd47fb71d2414cfef5" category="paragraph">Exemplo de geração de chaves:</block>
+  <block id="194398b8524e2cd4b7f246805e250ed0" category="paragraph">Os exemplos de definição do AppVault a seguir são fornecidos como um CR que você pode usar e modificar, ou um exemplo de comando Trident Protect CLI que gera o AppVault CR para você:</block>
+  <block id="717b55966fdf152c0b975d5025c190c0" category="open-title">Exemplo de AppVault CR</block>
+  <block id="970235f2b49975fd398ad1272198687b" category="open-title">Exemplo de criação do AppVault CR usando a CLI do Trident Protect</block>
+  <block id="270fcb785810d0206945029bb05f4e97" category="section-title">Amazon S3</block>
+  <block id="cde0d86b75c5d9604be18e3bd522bf17" category="open-title">Exemplo de criação do AppVault com CLI</block>
+  <block id="1668ca1bd914c1d847f23b491319ac91" category="section-title">Microsoft Azure</block>
+  <block id="017615c1142fadb040de32a937ba28a5" category="section-title">Valores suportados para providerType e providerConfig</block>
+  <block id="f6583553f122a79fc1cb33273af12b71" category="paragraph"><block ref="e70aba098da8c605b31dbf0e75f81dcb" prefix=" " category="inline-code"></block>As chaves e<block ref="93fc18ae6fe8f42e5ec9235d62051855" prefix=" " category="inline-code"></block> em um AppVault CR exigem valores específicos. A tabela a seguir lista os valores suportados para a<block ref="e70aba098da8c605b31dbf0e75f81dcb" prefix=" " category="inline-code"></block> chave e a chave associada<block ref="93fc18ae6fe8f42e5ec9235d62051855" prefix=" " category="inline-code"></block> que você precisa usar com cada<block ref="e70aba098da8c605b31dbf0e75f81dcb" prefix=" " category="inline-code"></block> valor.</block>
+  <block id="465bce4ca7a51a41028b39e2638813e7" category="cell">Valor suportado<block ref="e70aba098da8c605b31dbf0e75f81dcb" prefix=" " category="inline-code"></block></block>
+  <block id="62047e0c7c39225e57ee4ea7021c2c03" category="cell">Chave associada<block ref="93fc18ae6fe8f42e5ec9235d62051855" prefix=" " category="inline-code"></block></block>
+  <block id="4847e034bb0a55fcbc8a3380d6a3ab80" category="cell">AWS</block>
+  <block id="c0828e0381730befd1f7a025057c74fb" category="cell">s3</block>
+  <block id="3a580f142203677f1f0bc30898f63f53" category="cell">Azure</block>
+  <block id="cf04a02e37b774fc311a48f605c3c597" category="cell">azure</block>
+  <block id="c731f72e1d22a7c5e01a7cb789a8885e" category="cell">GCP</block>
+  <block id="50f66ecbc45488ee5826941bfbc50411" category="cell">gcp</block>
+  <block id="7f93d53700ceda931b2ea8335eef2b68" category="cell">GenericS3</block>
+  <block id="e65506feb09d12651a37ac31d3023758" category="cell">OntapS3</block>
+  <block id="339a160f314b213eaa0ef1a17608793b" category="cell">StorageGridS3</block>
+  <block id="4ac6e7a03fe8abedfa131f8cf6680984" category="section-title">Use o navegador AppVault para exibir informações do AppVault</block>
+  <block id="ce8f41081c98b9eea8be01b08936dbb0" category="paragraph">Você pode usar o plugin Trident Protect CLI para exibir informações sobre objetos AppVault que foram criados no cluster.</block>
+  <block id="485573baf8bfa9487485deb07780d89f" category="list-text">Exibir o conteúdo de um objeto AppVault:</block>
+  <block id="10dce9030ad8783afd2b4e831da49b7f" category="paragraph">*Exemplo de saída*:</block>
+  <block id="72444a17ff17655124f96b02602fe90f" category="list-text">Opcionalmente, para ver o AppVaultPath para cada recurso, use o<block ref="a9b1c03a99224cbb5c6773ccbe51d4fb" prefix=" " category="inline-code"></block> sinalizador .</block>
+  <block id="caef5be37857b92378c0054db6bc8696" category="paragraph">O nome do cluster na primeira coluna da tabela só estará disponível se um nome de cluster tiver sido especificado na instalação do leme Trident Protect. Por exemplo<block ref="b84d46473a6782105f40ea4fa2bc2964" prefix=" " category="inline-code"></block>: .</block>
+  <block id="eb5dcb495342ee5285be31fb17267ccc" category="section-title">Remova um AppVault</block>
+  <block id="086d4622dbc50dc37c51fc80568681a2" category="paragraph">Você pode remover um objeto AppVault a qualquer momento.</block>
+  <block id="79f2a1cdb1287644a5d3176157cc43c4" category="admonition">Não remova a<block ref="276c63528ef3085f91fb1bc80a3febc0" prefix=" " category="inline-code"></block> chave no AppVault CR antes de excluir o objeto AppVault. Se você fizer isso, isso pode resultar em dados residuais no bucket do AppVault e recursos órfãos no cluster.</block>
+  <block id="49e2b1aa2d6325460e3268f3fac8fd30" category="paragraph">Certifique-se de que você excluiu todos os snapshots e backups armazenados no bucket associado.</block>
+  <block id="33850d305da8c5eb949c81e70e40a54d" category="open-title">Remova um AppVault usando a CLI do Kubernetes</block>
+  <block id="1921311333af338cd3327c59e3b9a4ab" category="list-text">Remova o objeto AppVault, substituindo<block ref="c57e6773097b6f688f96a88c56c16d47" prefix=" " category="inline-code"></block> pelo nome do objeto AppVault para remover:</block>
+  <block id="cec4e9b4984eb35ca6068b0c9dcd5aa7" category="open-title">Remova um AppVault usando a CLI do Trident</block>
+  <block id="6c4ae71603666b23d3e05193118a3147" category="summary">Você pode usar o comando protectctl para criar e interagir com os recursos personalizados do Trident Protect.</block>
+  <block id="40e0842217cf3fc8b760cbd68cc14a76" category="doc">Instale o plugin Trident Protect CLI</block>
+  <block id="bd0df34f0c12fe6faae3a05dde47f3a9" category="paragraph">Você pode usar o plugin de linha de comando Trident Protect, que é uma extensão do utilitário Trident<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block>, para criar e interagir com o Trident Protect custom Resources (CRS).</block>
+  <block id="2b1100a071932a4cb5f33e22121f48fa" category="paragraph">Antes de usar o utilitário de linha de comando, você precisa instalá-lo na máquina usada para acessar o cluster. Siga estes passos, dependendo se a sua máquina utiliza uma CPU x64 ou ARM.</block>
+  <block id="852f04e90409df288c69ca8f37453383" category="open-title">Faça o download do plugin para CPUs Linux AMD64</block>
+  <block id="567471047b313eb49e48a17b4213a1d1" category="list-text">Faça o download do plugin Trident Protect CLI:</block>
+  <block id="b64b2077b896969e7810dbb0a2de2f1a" category="open-title">Faça o download do plugin para CPUs Linux ARM64</block>
+  <block id="d58e744bd40cf0f8373ee5b2c7d11387" category="open-title">Baixe o plugin para CPUs Mac AMD64</block>
+  <block id="fd3e558ef6c1af851bddabf0eb1945d7" category="open-title">Baixe o plugin para CPUs Mac ARM64</block>
+  <block id="412a5def83fe5329b38679035cfea675" category="list-text">Ativar permissões de execução para o binário:</block>
+  <block id="9bd9e61654b5ae02837f94c50605b5e3" category="list-text">Copie o binário do plugin para o caminho de sua escolha:</block>
+  <block id="42be0effe300120c50a16b27b8feac25" category="list-text">Opcionalmente, para instalar o binário globalmente, copie o binário do plugin para um caminho global. Por exemplo:<block ref="7512824c50c61ea8d89d0f193a4f72d1" prefix=" " category="inline-code"></block> Ou<block ref="ad2e864ce1a99daa836c3449f3ba705d" prefix=" " category="inline-code"></block> (você pode precisar de Privileges elevado):</block>
+  <block id="b23c395acc963a69b0a5f06a20bb4887" category="section-title">Veja a ajuda do plugin Trident CLI</block>
+  <block id="305f79cb740685921820521a57e525e5" category="paragraph">Você pode usar os recursos integrados de ajuda do plugin para obter ajuda detalhada sobre os recursos do plugin:</block>
+  <block id="09b4818c610e8f967a9f5257455a3a2a" category="list-text">Utilize a função de ajuda para visualizar as orientações de utilização:</block>
+  <block id="da9d072bec5b191d5b5120761a2094e5" category="section-title">Ativar a auto-conclusão do comando</block>
+  <block id="2994879f05c105b10427c87890d6ce6a" category="paragraph">Depois de instalar o plugin Trident Protect CLI, você pode ativar a auto-conclusão para determinados comandos.</block>
+  <block id="df7d0aa2cf46fe870b9bba130ea4d964" category="open-title">Ative a auto-conclusão para o shell Bash</block>
+  <block id="dc8d08efd37c5c2cd13f1da4b74b2004" category="list-text">Faça o download do script de conclusão:</block>
+  <block id="bbd32e1d32af84e3002666b13f548cce" category="list-text">Crie um novo diretório em seu diretório inicial para conter o script:</block>
+  <block id="63f01fb9933705d6d795c4c690a6504c" category="list-text">Mova o script baixado para<block ref="37476bab24bad3126a5edbc11fab761e" prefix=" " category="inline-code"></block> o diretório:</block>
+  <block id="4a76f80f250e570c9fd0b4b8b9e41486" category="list-text">Adicione a seguinte linha ao<block ref="b8cb707d54dfbd8ab64f0b1dc81b72e1" prefix=" " category="inline-code"></block> arquivo em seu diretório inicial:</block>
+  <block id="51c2c8a3b8dd4aaaa1d5640e39860408" category="open-title">Ative a auto-conclusão para o shell Z.</block>
+  <block id="45dba4471beecdb4813778042a6ccfc2" category="list-text">Mova o script baixado para<block ref="d6ca46a9bae5529cb8e845fb419ba1e0" prefix=" " category="inline-code"></block> o diretório:</block>
+  <block id="e2f12f24108169a5ab9aa9923f95a468" category="list-text">Adicione a seguinte linha ao<block ref="f0f9c4057b7322a99704208706a05ba7" prefix=" " category="inline-code"></block> arquivo em seu diretório inicial:</block>
+  <block id="8eea62084ca7e541d918e823422bd82e" category="paragraph-title">Resultado</block>
+  <block id="a2290b3f31cfd85a3e9ff7885be716a7" category="paragraph">Após o seu próximo login shell, você pode usar o comando auto-completação com o plugin tridentctl Protect.</block>
+  <block id="7b6672be7a52979b1357ccc3d2a45f8a" category="summary">O Trident Protect permite que os administradores gerem pacotes que incluem informações úteis ao suporte da NetApp, incluindo logs, métricas e informações de topologia sobre os clusters e aplicativos em gerenciamento. Se você estiver conetado à Internet, poderá fazer upload de pacotes de suporte para o site de suporte da NetApp (NSS) usando um arquivo de recurso personalizado (CR).</block>
+  <block id="c06b3814928e21adcd4d633f11293a23" category="doc">Gerar um pacote de suporte</block>
+  <block id="e984343e441956b7136d09919877b5ab" category="open-title">Crie um pacote de suporte usando um CR</block>
+  <block id="dd942fa25b8e28c96c8d05e37b0f157e" category="list-text">Crie o arquivo de recurso personalizado (CR) e nomeie-o (por exemplo,<block ref="699c503b46d4ca3ec78905dff3704cac" prefix=" " category="inline-code"></block> ).</block>
+  <block id="18924d9e76d2dc9a88bddb772904461d" category="list-text">Configure os seguintes atributos:</block>
+  <block id="3dbbdf39618ebec771728a10e75c52f9" category="list-text">*metadata.name*: (_required_) o nome deste recurso personalizado; escolha um nome único e sensível para o seu ambiente.</block>
+  <block id="1d18312b2c5bd000f0693d25f38bddc9" category="list-text">*Spec.triggerType*: (_required_) determina se o pacote de suporte é gerado imediatamente ou programado. A geração de pacotes programados acontece às 12AM UTC. Valores possíveis:</block>
+  <block id="2b7dabba0077abe3732e0418b048a56b" category="list-text">Programado</block>
+  <block id="e1ba155a9f2e8c3be94020eef32a0301" category="list-text">Manual</block>
+  <block id="b541a1c308699e3b9e58d7a1aa6d3ad6" category="list-text">*Spec.uploadEnabled*: (_Optional_) controla se o pacote de suporte deve ser carregado para o site de suporte da NetApp depois que ele é gerado. Se não for especificado, o padrão é<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>. Valores possíveis:</block>
+  <block id="e836d7c4f6371da7534f60641286999b" category="list-text">falso (padrão)</block>
+  <block id="fa3e867f8599e4541ced8b0ced5b2cf1" category="list-text">*Spec.dataWindowStart*: (_Optional_) Uma cadeia de carateres de data no formato RFC 3339 que especifica a data e a hora em que a janela de dados incluídos no pacote de suporte deve começar. Se não for especificado, o padrão é 24 horas atrás. A data da janela mais antiga que você pode especificar é de 7 dias atrás.</block>
+  <block id="139f344cca23a89c521bc7cc6c7100b8" category="paragraph">Exemplo YAML:</block>
+  <block id="1f5c923d658756149d27388a30350ece" category="list-text">Depois de preencher o<block ref="f242db754742ad72c7a0a3fa93d314df" prefix=" " category="inline-code"></block> ficheiro com os valores corretos, aplique o CR:</block>
+  <block id="b69675775a82aaa1e3307ebbe6a45fc0" category="open-title">Crie um pacote de suporte usando a CLI</block>
+  <block id="2294988013d14e5c254422b8164d83ad" category="list-text">Crie o pacote de suporte, substituindo valores entre parênteses por informações do seu ambiente. O<block ref="769627afa23a2b90f925b1091e474dc5" prefix=" " category="inline-code"></block> determina se o pacote é criado imediatamente ou se o tempo de criação é ditado pelo agendamento e pode ser<block ref="e1ba155a9f2e8c3be94020eef32a0301" prefix=" " category="inline-code"></block> ou<block ref="2b7dabba0077abe3732e0418b048a56b" prefix=" " category="inline-code"></block>. A predefinição é<block ref="e1ba155a9f2e8c3be94020eef32a0301" prefix=" " category="inline-code"></block>.</block>
+  <block id="4351048276414d4fad273a0c7ad9f491" category="summary">Se o seu ambiente atender aos requisitos, siga estas etapas para instalar o Trident Protect.</block>
+  <block id="9ee0b57319616120eef37546fa8e4c42" category="doc">Instalar e configurar o Trident Protect</block>
+  <block id="dc48a335c2095fb6a79ee14ee62b4806" category="paragraph">Se o seu ambiente atender aos requisitos do Trident Protect, siga estas etapas para instalar o Trident Protect no cluster. Você pode obter o Trident Protect do NetApp, ou instalá-lo a partir de seu próprio Registro privado. A instalação a partir de um registo privado é útil se o cluster não conseguir aceder à Internet.</block>
+  <block id="1d5f2a4008fa2c223d0ebc6aea423256" category="open-title">Instale o Trident Protect do NetApp</block>
+  <block id="6802e29016a0674682497c848bf90236" category="list-text">Use o Helm para instalar o Trident Protect. Substitua<block ref="b90b2ffedb63ca3bd8795caf4397715e" prefix=" " category="inline-code"></block> por um nome de cluster, que será atribuído ao cluster e usado para identificar backups e snapshots deste cluster:</block>
+  <block id="b533d7fe842e47fbd62d24400867d3f2" category="list-text">Opcionalmente, congele suas VMs. Se você estiver usando o suporte do KubeVirt para SnapMirror, congelar VMs ajuda você a gerenciá-las de forma eficaz:</block>
+  <block id="e49b02afb984c32aa521917480fc4012" category="inline-link-macro">Instalando o OpenShift Virtualization</block>
+  <block id="c096df753a5c7335177118895259c96a" category="admonition">Você precisa configurar a virtualização para que a funcionalidade de congelamento funcione. As VMs implantadas após essa configuração incluem os binários necessários para congelar e descongelar. Para saber mais sobre como configurar a virtualização, <block ref="2e657c6eb92d8a54673acb8e93eb84d5" category="inline-link-macro-rx"></block>consulte .</block>
+  <block id="f1db582519ebcfcc20d90e41c0c5e9cc" category="open-title">Instale o Trident Protect a partir de um registo privado</block>
+  <block id="73dac5f92be0a06ecbcb1b8139b40593" category="paragraph">Você pode instalar o Trident Protect a partir de um Registro de imagem privado se o cluster do Kubernetes não conseguir acessar a Internet. Nestes exemplos, substitua valores entre parênteses por informações do seu ambiente:</block>
+  <block id="dfb8cfd789dde682f000a96e0aabb1f1" category="list-text">Puxe as seguintes imagens para a sua máquina local, atualize as etiquetas e, em seguida, envie-as para o seu registo privado:</block>
+  <block id="2dcd4437dbff8aff3bc16ac15a71b74d" category="list-text">Crie o namespace do sistema Trident Protect:</block>
+  <block id="e0f6b701766eb28d805d7ba1e820f582" category="list-text">Inicie sessão no registo:</block>
+  <block id="814565bb5d7e7359fff967986fd4195a" category="list-text">Crie um segredo para usar para autenticação de Registro privado:</block>
+  <block id="9fd6c1e403ca347a1528f0f6688f6a06" category="list-text">Crie um arquivo chamado<block ref="5744e710490761bdd5b4603b9b0487a7" prefix=" " category="inline-code"></block> que contenha as seguintes configurações de proteção do Trident:</block>
+  <block id="5d276dc92276b59621488d2545356081" category="list-text">Use o Helm para instalar o Trident Protect:</block>
+  <block id="86e8b34710172d33dcae839e1f4dd07e" category="summary">Você pode tornar o Trident Protect ciente de um aplicativo que deseja gerenciar criando um CR de aplicativo e um CR de AppVault associado.</block>
+  <block id="80b940e5c68d020c06f9dc2f188d2169" category="doc">Definir uma aplicação para gestão</block>
+  <block id="1e10d655f5307ce7f79aeee68a9e72f3" category="paragraph">Você pode definir um aplicativo que deseja gerenciar com o Trident Protect criando um CR de aplicativo e um CR de AppVault associado.</block>
+  <block id="58bd941b0268654136e17a3f6361fa75" category="section-title">Crie um AppVault CR</block>
+  <block id="f5ddee36f3439fbf6875de509925b804" category="inline-link-macro">Recursos personalizados do AppVault.</block>
+  <block id="2c2c79b6a4bc3f3b90fed9b96ab44d05" category="paragraph">Você precisa criar um AppVault CR que será usado ao executar operações de proteção de dados no aplicativo, e o AppVault CR precisa residir no cluster onde o Trident Protect está instalado. O AppVault CR é específico para o seu ambiente; para exemplos do AppVault CRS, consulte <block ref="7e7838343a821a01b97d2b866c568a54" category="inline-link-macro-rx"></block></block>
+  <block id="bb54028c613908a73e7575bf50ce2f8b" category="section-title">Criar uma aplicação CR</block>
+  <block id="650b7f6eb7d8e2a1b558878be64e787f" category="paragraph">Você precisa criar um CR de aplicativo para cada aplicativo que você deseja gerenciar com o Trident Protect. Você pode adicionar um aplicativo para gerenciamento criando manualmente um CR de aplicativo ou usando a CLI Trident Protect para criar o CR.</block>
+  <block id="7eb786201a1068df31c2a8d7805c50bf" category="open-title">Adicione uma aplicação utilizando um CR</block>
+  <block id="b4b10aa7102ef4de9ba1d5672445c895" category="list-text">Criar o ficheiro CR da aplicação de destino:</block>
+  <block id="0f14679ea6b53d676a4e19300d32937e" category="list-text">Crie o arquivo de recurso personalizado (CR) e nomeie-o (por exemplo,<block ref="6e1c6964e1bb7e391ff353b09e122d80" prefix=" " category="inline-code"></block> ).</block>
+  <block id="3b96edf2a12486fc5d9dfaf7e692cdfc" category="list-text">*metadata.name*: (_required_) o nome do recurso personalizado do aplicativo. Observe o nome escolhido porque outros arquivos CR necessários para operações de proteção referem-se a esse valor.</block>
+  <block id="fcf820f08f5d5769772e80b226253850" category="list-text">*spec.includedNamespaces*: (_required_) Use rótulos de namespace ou um nome de namespace para especificar namespaces nos quais os recursos da aplicação existem. O namespace da aplicação deve ser parte dessa lista.</block>
+  <block id="edb32c41feaaffb2d7ff10dac9d80312" category="open-title">Adicione um aplicativo usando a CLI</block>
+  <block id="c7b530e751fba67f8910728e6bfca47d" category="list-text">Crie e aplique a definição da aplicação, substituindo valores entre parênteses por informações do seu ambiente. Você pode incluir namespaces e recursos na definição do aplicativo usando listas separadas por vírgulas com os argumentos mostrados no exemplo a seguir:</block>
+  <block id="0ef657dffb550796349fff7260ee7b1f" category="summary">Você pode restaurar os dados de backup ou snapshot para um cluster ou classe de armazenamento diferente</block>
+  <block id="5d23a9c0c55a80ece74daa65c04f1d66" category="doc">Migrar aplicações</block>
+  <block id="f0947115fd72dc8926d993b03e13a329" category="paragraph">Você pode migrar seus aplicativos entre clusters ou classes de armazenamento restaurando seus dados de backup ou snapshot para um cluster ou classe de armazenamento diferente.</block>
+  <block id="85ff05ce333a3cc83e4b1bece0b1a885" category="admonition">Quando você migra um aplicativo, todos os ganchos de execução configurados para o aplicativo são migrados com o aplicativo. Se um gancho de execução pós-restauração estiver presente, ele será executado automaticamente como parte da operação de restauração.</block>
+  <block id="dea2f94d534ebdd522c0137cd11f63bf" category="section-title">Operações de backup e restauração</block>
+  <block id="b21f1727ed04fb70c8e47cb11cdfb2bb" category="paragraph">Para executar operações de backup e restauração nos cenários a seguir, você pode automatizar tarefas específicas de backup e restauração.</block>
+  <block id="a9764be0f1589c38e0a7df19889c7d63" category="section-title">Clonar para o mesmo cluster</block>
+  <block id="5a9889aaf704b3737fe054ecabd850fc" category="paragraph">Para clonar uma aplicação para o mesmo cluster, crie um snapshot ou backup e restaure os dados para o mesmo cluster.</block>
+  <block id="365d382b2d9ecca9b0d40171c69b38ff" category="list-text">Execute um dos seguintes procedimentos:</block>
+  <block id="af9c364e0933200b7b8c1e7e13947ccf" category="inline-link-macro">Criar um instantâneo</block>
+  <block id="a73aa64574ccfae0cf05d9da96bd1301" category="list-text"><block ref="e078308a27dcac975eec5d2adaa1104c" category="inline-link-macro-rx"></block>.</block>
+  <block id="f99b69945a176ffbedac86a22cf6c413" category="inline-link-macro">Crie uma cópia de segurança</block>
+  <block id="d0b37af201761eb2698b45f7c3f6d0d8" category="list-text"><block ref="7d9cd4227c8376552577f7b664ce81bb" category="inline-link-macro-rx"></block>.</block>
+  <block id="cf36005406fb9e7864efedea0a35a8a0" category="list-text">No mesmo cluster, siga um destes procedimentos, dependendo se você criou um snapshot ou um backup:</block>
+  <block id="2d173330624878d1a02dc399b82aa10b" category="inline-link-macro">Restaure seus dados a partir do snapshot</block>
+  <block id="00b559822f9df33b751ce11389fb7c7a" category="list-text"><block ref="137b81ae6c60df62029e75ad69c6bacd" category="inline-link-macro-rx"></block>.</block>
+  <block id="1c7b9a68982aa2ad5f1d69eeb5bdf99e" category="inline-link-macro">Restaure seus dados a partir do backup</block>
+  <block id="e27031b9d0bffffcf2abd2136eed21f5" category="list-text"><block ref="71bc4096317f8eb78a9951851bc1165b" category="inline-link-macro-rx"></block>.</block>
+  <block id="403ecb1db6fa0f1bb20e787bb5f5dacd" category="section-title">Clone para cluster diferente</block>
+  <block id="1fe732d5921038b3ec81023b7a5d8068" category="paragraph">Para clonar uma aplicação para um cluster diferente (executar um clone entre clusters), crie um snapshot ou backup e restaure os dados para um cluster diferente. Certifique-se de que o Trident Protect está instalado no cluster de destino.</block>
+  <block id="884bacf23a56346ab0468809c6cb7145" category="list-text">Verifique se o AppVault CR para o bucket de armazenamento de objetos que contém o backup ou o snapshot foi configurado no cluster de destino.</block>
+  <block id="f5c64bf182766988d3561488bae5bf83" category="list-text">No cluster de destino, siga um destes procedimentos, dependendo se você criou um instantâneo ou um backup:</block>
+  <block id="181aa092ab965b34bcee90e25056f876" category="section-title">Migrar aplicações de uma classe de storage para outra classe de storage</block>
+  <block id="97a1f17d0c2154050e8ba2ecfd07ecf4" category="paragraph">É possível migrar aplicativos de uma classe de armazenamento para outra classe de armazenamento restaurando um snapshot para a classe de armazenamento de destino diferente.</block>
+  <block id="f1ad7bca566917ee78958caa78fab3f5" category="paragraph">Por exemplo (excluindo os segredos do CR de restauração):</block>
+  <block id="daf2d2aebeca09dea5ece5c9c1513383" category="open-title">Restaure o instantâneo usando um CR</block>
+  <block id="a35b06511e032bee46bbed064afa12dc" category="list-text">Crie o arquivo de recurso personalizado (CR) e nomeie-o<block ref="fac6dff7f801a4983f4a536dbcbd40d7" prefix=" " category="inline-code"></block>.</block>
+  <block id="3585700696abe40ccc0973202ddace0a" category="list-text">No arquivo criado, configure os seguintes atributos:</block>
+  <block id="ac6cdb13ccdd5d0ac3195b3301db572c" category="list-text">*Spec.appArchivePath*: O caminho dentro do AppVault onde o conteúdo do snapshot é armazenado. Você pode usar o seguinte comando para encontrar este caminho:</block>
+  <block id="d2e7f59eea5f95f37b023a243745727d" category="list-text">*Spec.appVaultRef*: (_required_) o nome do AppVault onde o conteúdo do instantâneo é armazenado.</block>
+  <block id="33dc1feba43183f93ade318576611f4a" category="list-text">*spec.namespaceMapping*: o mapeamento do namespace de origem da operação de restauração para o namespace de destino. Substitua<block ref="a6f7f0a873c27a67ee3194949076866b" prefix=" " category="inline-code"></block> e<block ref="2cfb071d6be7d4cf9e297100f62858fe" prefix=" " category="inline-code"></block> por informações do seu ambiente.</block>
+  <block id="12ed8140e585382bd7caee15c2ebb002" category="list-text">Opcionalmente, se você precisar selecionar apenas certos recursos do aplicativo para restaurar, adicione filtragem que inclua ou exclua recursos marcados com rótulos específicos:</block>
+  <block id="15212a55e2108abef019ef0de4a2d413" category="list-text">*ResourceFilter.resourceSelectionCriteria*: (Necessário para filtragem) Use<block ref="0daf9ee05d33b85e4cfc7be473c64e9b" prefix=" " category="inline-code"></block> para incluir ou excluir um recurso definido em resourceMatchers. Adicione os seguintes parâmetros resourceMatchers para definir os recursos a serem incluídos ou excluídos:</block>
+  <block id="1ca8ced6065c9f465611bb5ff24699bc" category="list-text">*resourceMatchers.group*: (_Opcional_) Grupo do recurso a ser filtrado.</block>
+  <block id="1abc2ced311814dde4619aba0c0ae69d" category="list-text">*ResourceMatchers.kind*: (_Opcional_) tipo do recurso a ser filtrado.</block>
+  <block id="f2afaee5bf5a6e08b3f94e1fe23f9ddf" category="list-text">*ResourceMatchers.version*: (_Optional_) versão do recurso a ser filtrado.</block>
+  <block id="cd7c33fdac590384c71373183085354e" category="list-text">*resourceMatchers.names*: (_Optional_) nomes no campo Kubernetes metadata.name do recurso a ser filtrado.</block>
+  <block id="bcf62d122b3627832ee25e9e69aa4701" category="list-text">*resourceMatchers.namespaces*: (_Optional_) namespaces no campo Kubernetes metadata.name do recurso a ser filtrado.</block>
+  <block id="d9348d075dc7b3c91cff99d56dfc327b" category="inline-link">Documentação do Kubernetes</block>
+  <block id="c436fdf7e5393ae3a8821f5bd3058215" category="list-text">*ResourceMatchers.labelSelectors*: (_Optional_) string de seleção de etiquetas no campo Kubernetes metadata.name do recurso, conforme definido no<block ref="d4ce3da8407a7d8e148bb1287288e778" category="inline-link-rx"></block>. Por exemplo<block ref="6ea45baf659f1f35e51c8dc9005eac03" prefix=" " category="inline-code"></block>: .</block>
+  <block id="bca1b1b2b1a229dc37dffa4f7012c02d" category="list-text">Depois de preencher o<block ref="fac6dff7f801a4983f4a536dbcbd40d7" prefix=" " category="inline-code"></block> ficheiro com os valores corretos, aplique o CR:</block>
+  <block id="ffe607ccb2c74bd77fcfcd7f0ff7691e" category="open-title">Restaure o instantâneo usando a CLI</block>
+  <block id="a77b4ff586cfbf08c54732a1ced52e4f" category="list-text">Restaure o snapshot para um namespace diferente, substituindo valores entre parênteses por informações do seu ambiente.</block>
+  <block id="4f7a601ab79eb07bd8f0460d0e4ebccf" category="list-text">O<block ref="c322d3de29d2b0c5e2e011dad5e77df2" prefix=" " category="inline-code"></block> argumento usa um namespace e um nome instantâneo no formato<block ref="7310980de32cd5ca687291f4b01b2e19" prefix=" " category="inline-code"></block>.</block>
+  <block id="9a3152a9bfe0e487c80e9e42ee22e9f0" category="list-text">O<block ref="65e11896cb6b19f7dcb2432e67c74725" prefix=" " category="inline-code"></block> argumento usa namespaces separados por dois pontos para mapear namespaces de origem para os namespaces de destino corretos no formato<block ref="07c70c21dcae158a4b2f0d389a52981b" prefix=" " category="inline-code"></block>.</block>
+  <block id="3909674c7e76459d193fe9c27f127cbf" category="summary">Proteja todos os aplicativos tirando snapshots e backups usando uma política de proteção automatizada ou ad hoc.</block>
+  <block id="ca73b42f56baa81e1c83e31ee5c53d42" category="doc">Proteger aplicações</block>
+  <block id="2530ad97c013f5d8d9c69004a4e7ee67" category="section-title">Crie um snapshot sob demanda</block>
+  <block id="9bbdcd6083ca1f29424ab7d4e6e6d3f5" category="paragraph">Você pode criar um snapshot sob demanda a qualquer momento.</block>
+  <block id="ca5d8da21766c0b74083bb89d9b98f19" category="open-title">Crie um instantâneo usando um CR</block>
+  <block id="d3455b82ff23d66412cff307dea26e95" category="list-text">Crie o arquivo de recurso personalizado (CR) e nomeie-o<block ref="30f7bac2bbe029d2d24e82f27526854c" prefix=" " category="inline-code"></block>.</block>
+  <block id="14c5017706ef7ba38dbfced0b670f7e4" category="list-text">*Spec.applicationRef*: O nome do Kubernetes da aplicação para snapshot.</block>
+  <block id="92c5bebe15e018e9b60ed9fa2a5d7736" category="list-text">*Spec.appVaultRef*: (_required_) o nome do AppVault onde o conteúdo instantâneo (metadados) deve ser armazenado.</block>
+  <block id="a9860c462819471295facd0a13fc4275" category="list-text">*Spec.reclaimPolicy*: (_Optional_) define o que acontece com o AppArchive de um snapshot quando o snapshot CR é excluído. Isso significa que, mesmo quando definido como<block ref="afece4245269582cb2f1009d4fb52047" prefix=" " category="inline-code"></block>, o instantâneo será excluído. Opções válidas:</block>
+  <block id="ff5ca6a0665c8d286d507fe36b867e1c" category="list-text"><block ref="afece4245269582cb2f1009d4fb52047" prefix="" category="inline-code"></block> (predefinição)</block>
+  <block id="c009f85498c5a7a2db78e1874e6dd4b1" category="list-text"><block ref="f2a6c498fb90ee345d997f888fce3b18" prefix="" category="inline-code"></block></block>
+  <block id="e405f936b8c322965ea5098c0dbead5e" category="list-text">Depois de preencher o<block ref="30f7bac2bbe029d2d24e82f27526854c" prefix=" " category="inline-code"></block> ficheiro com os valores corretos, aplique o CR:</block>
+  <block id="70e7d17c41da1ec8002b8b8735b5d0b2" category="open-title">Crie um instantâneo usando a CLI</block>
+  <block id="210011bd2b9ec4d5301f86e4a42cd17a" category="list-text">Crie o snapshot, substituindo valores entre parênteses por informações do seu ambiente. Por exemplo:</block>
+  <block id="6c4e6d5940a93fcf9cfb1c5d53280da3" category="section-title">Crie um backup sob demanda</block>
+  <block id="f874973a64b67b3f5a5bb3aa28c5ed12" category="paragraph">Você pode fazer backup de um aplicativo a qualquer momento.</block>
+  <block id="e0babda055ca7a962e4010e772393eb7" category="open-title">Crie uma cópia de segurança utilizando um CR</block>
+  <block id="adfd482111138eb2dfed01cdbaf4bead" category="list-text">Crie o arquivo de recurso personalizado (CR) e nomeie-o<block ref="a130741c8dff3b771a616715e2390607" prefix=" " category="inline-code"></block>.</block>
+  <block id="888ea90f9844794ae90f13cbee8b341f" category="list-text">*Spec.applicationRef*: (_required_) o nome do Kubernetes do aplicativo para fazer backup.</block>
+  <block id="df4c9919e99b5b20e10644af2e6480e1" category="list-text">*Spec.appVaultRef*: (_required_) o nome do AppVault onde o conteúdo de backup deve ser armazenado.</block>
+  <block id="2c5daece4baabe00a1e913f6f4248b54" category="list-text">*Spec.dataMover*: (_Optional_) Uma cadeia de carateres indicando qual ferramenta de backup usar para a operação de backup. Valores possíveis (sensíveis a maiúsculas e minúsculas):</block>
+  <block id="2baffe938961bfb9edd7d7ddfd52e2e1" category="list-text"><block ref="5f1c05bdfa0fa9da52e78fce65f0891a" prefix="" category="inline-code"></block></block>
+  <block id="02c4383beef4fc06361dc4ef7bd9762a" category="list-text"><block ref="d112b025f416527f157666baac7d0ff7" prefix="" category="inline-code"></block> (predefinição)</block>
+  <block id="5a848fb25ba88be36b674bded99badbd" category="list-text">*Spec.reclaimPolicy*: (_Optional_) define o que acontece com um backup quando liberado de sua reivindicação. Valores possíveis:</block>
+  <block id="731a2e076f0d59b6593efc1178b86131" category="list-text">*Spec.snapshotRef*: (_Optional_): Nome do instantâneo a ser usado como fonte do backup. Se não for fornecido, um instantâneo temporário será criado e feito backup.</block>
+  <block id="e3cdcd12b4f53ac42049007406401d18" category="list-text">Depois de preencher o<block ref="a130741c8dff3b771a616715e2390607" prefix=" " category="inline-code"></block> ficheiro com os valores corretos, aplique o CR:</block>
+  <block id="4dd48cffc8290e0b33e5c4ee6ddc6dbb" category="open-title">Crie um backup usando a CLI</block>
+  <block id="25ccf268b4f889fe28d3f3de94aace02" category="list-text">Crie o backup, substituindo valores entre parênteses por informações do seu ambiente. Por exemplo:</block>
+  <block id="451d39e79b7f4418d96b486e79bbce7d" category="section-title">Criar um cronograma de proteção de dados</block>
+  <block id="45ad0235a77627fe6b23b64997cecf69" category="paragraph">Uma política de proteção protege um aplicativo criando snapshots, backups ou ambos em um cronograma definido. Você pode optar por criar snapshots e backups por hora, diariamente, semanalmente e mensalmente, e especificar o número de cópias a reter.</block>
+  <block id="1f3ba9ee33f6eeade259b37d0a9d4295" category="open-title">Crie uma agenda usando um CR</block>
+  <block id="0e94d109e3c6dd8f63d25b03253b5d5b" category="list-text">Crie o arquivo de recurso personalizado (CR) e nomeie-o<block ref="8b0c6e1f32e0c117335dedae62b11dba" prefix=" " category="inline-code"></block>.</block>
+  <block id="fd3508664419c1ac5449e5dc6073188b" category="list-text">*Spec.applicationRef*: O nome do Kubernetes do aplicativo para fazer backup.</block>
+  <block id="42423d5a056001113d7894f5f70d7b91" category="list-text">*Spec.backupRetention*: O número de backups a reter. Zero indica que nenhum backup deve ser criado.</block>
+  <block id="53ea99d8bfae17bb8fc2186524166892" category="list-text">*Spec.snapshotRetention*: O número de instantâneos a reter. Zero indica que nenhum instantâneo deve ser criado.</block>
+  <block id="da9137c7fbfdc9b7f02e3ca8def0431d" category="list-text">*spec.granularity*: a frequência em que o horário deve ser executado. Valores possíveis, juntamente com campos associados obrigatórios:</block>
+  <block id="682d677bcf1ee88366ae753c477ace2d" category="list-text"><block ref="745fd0ea7f576f350a0eed4b8c48a8e2" prefix="" category="inline-code"></block> (requer que você<block ref="aadd5cec42dbc02d51f62a1095401f59" prefix=" " category="inline-code"></block> especifique )</block>
+  <block id="a1fbdfda9f5f05dbe5b05383881f400f" category="list-text"><block ref="bea79186fd7af2da67e59b4b15df5a26" prefix="" category="inline-code"></block> (requer que você especifique<block ref="aadd5cec42dbc02d51f62a1095401f59" prefix=" " category="inline-code"></block> e<block ref="9199af27775b1a2a876e6d7b25540711" prefix=" " category="inline-code"></block>)</block>
+  <block id="41f071e1fad48cd8dcd577b1ac9c6917" category="list-text"><block ref="4a11fc05ed694c195f0703605b64da90" prefix="" category="inline-code"></block> (requer especificar<block ref="d5870327522a71f5b75f9d3793d0dc97" prefix=" " category="inline-code"></block>, e<block ref="4a04848e0e6e9423892ebc93ae61842d" prefix=" " category="inline-code"></block>)</block>
+  <block id="80ec5614051d9052a9306e31ccee727b" category="list-text"><block ref="708638881f3bac9d9c8c742c79502811" prefix="" category="inline-code"></block> (requer especificar<block ref="d5870327522a71f5b75f9d3793d0dc97" prefix=" " category="inline-code"></block>, e<block ref="9a7606959f42328ceeef95d70c353158" prefix=" " category="inline-code"></block>)</block>
+  <block id="fcf190043fb09fd4804fe6782a78a9a2" category="list-text">*Spec.dayOfMonth*: (_Optional_) o dia do mês (1 - 31) em que a programação deve ser executada. Este campo é necessário se a granularidade estiver definida como<block ref="708638881f3bac9d9c8c742c79502811" prefix=" " category="inline-code"></block>.</block>
+  <block id="2af4c701bc864e6f851f67ac3c19d5ea" category="list-text">*Spec.DayOfWeek*: (_Optional_) o dia da semana (0 - 7) em que o horário deve ser executado. Os valores de 0 ou 7 indicam domingo. Este campo é necessário se a granularidade estiver definida como<block ref="4a11fc05ed694c195f0703605b64da90" prefix=" " category="inline-code"></block>.</block>
+  <block id="b3af349c3c5d7f7aaa212c92d5ea9e51" category="list-text">*Spec.hour*: (_Optional_) a hora do dia (0 - 23) em que o horário deve ser executado. Este campo é necessário se a granularidade estiver definida como<block ref="bea79186fd7af2da67e59b4b15df5a26" prefix=" " category="inline-code"></block>,<block ref="4a11fc05ed694c195f0703605b64da90" prefix=" " category="inline-code"></block><block ref="708638881f3bac9d9c8c742c79502811" prefix=" " category="inline-code"></block> ou .</block>
+  <block id="27c9cf2998853e8a9b756268b2844110" category="list-text">*Spec.minute*: (_Optional_) o minuto da hora (0 - 59) que o horário deve ser executado. Este campo é necessário se a granularidade estiver definida como<block ref="745fd0ea7f576f350a0eed4b8c48a8e2" prefix=" " category="inline-code"></block>, ,<block ref="bea79186fd7af2da67e59b4b15df5a26" prefix=" " category="inline-code"></block><block ref="4a11fc05ed694c195f0703605b64da90" prefix=" " category="inline-code"></block> , ou<block ref="708638881f3bac9d9c8c742c79502811" prefix=" " category="inline-code"></block>.</block>
+  <block id="1326c499c45cd471c6075891c6573130" category="list-text">Depois de preencher o<block ref="8b0c6e1f32e0c117335dedae62b11dba" prefix=" " category="inline-code"></block> ficheiro com os valores corretos, aplique o CR:</block>
+  <block id="6bb2ab2bbc2b0f3f5faec961628f6f4b" category="open-title">Crie uma agenda usando a CLI</block>
+  <block id="95e2bfc6f531a05575927e45b0a34558" category="list-text">Crie o cronograma de proteção, substituindo valores entre parênteses por informações do seu ambiente. Por exemplo:</block>
+  <block id="7f0d505baa6b3480c3d32ad1383aa91c" category="admonition">Você pode usar<block ref="d37e701d9d74e65c6aded6370cecbd15" prefix=" " category="inline-code"></block> para exibir informações detalhadas de ajuda para este comando.</block>
+  <block id="efb44cfe1d5b8d9954ea045385675c66" category="section-title">Eliminar um instantâneo</block>
+  <block id="a37bf6328466dc531288498c6041de5f" category="paragraph">Exclua os snapshots programados ou sob demanda que você não precisa mais.</block>
+  <block id="3eb928cdf7a13317d47b6aff6e1777bc" category="list-text">Remover o instantâneo CR associado ao instantâneo:</block>
+  <block id="cb2cecbd9776fc0c17c7929541fe9404" category="section-title">Eliminar uma cópia de segurança</block>
+  <block id="2072fc95a1bd08ae58a002d5b61a84d0" category="paragraph">Exclua os backups programados ou sob demanda que você não precisa mais.</block>
+  <block id="7b30bbf41be45c1c70a68e6dd971d83a" category="list-text">Remova o CR de backup associado ao backup:</block>
+  <block id="b4907a30deb60cd2f8ea2856235ce4d7" category="section-title">Verifique o status de uma operação de backup</block>
+  <block id="b030755f5014f11eb86aee527d4ef872" category="paragraph">Você pode usar a linha de comando para verificar o status de uma operação de backup em andamento, concluída ou falhou.</block>
+  <block id="83fe182363ccdea33046e538aec4ac23" category="list-text">Use o seguinte comando para recuperar o status da operação de backup, substituindo valores em brackes por informações do seu ambiente:</block>
+  <block id="bdd3c7731ba2eae7059bfebd0d56c7e3" category="section-title">Habilite o backup e a restauração de operações do Azure-NetApp-Files (ANF)</block>
+  <block id="e9730662640f8238dbf4ed30d6292ecb" category="paragraph">Se você tiver instalado o Trident Protect, poderá habilitar a funcionalidade de backup e restauração com uso eficiente de espaço para back-ends de armazenamento que usam a classe de armazenamento azure-NetApp-Files e foram criados antes do Trident 24,06. Esta funcionalidade funciona com NFSv4 volumes e não consome espaço adicional do pool de capacidade.</block>
+  <block id="a3ba5a3fd33b03f148e52fd833cda7c3" category="paragraph">Certifique-se de que:</block>
+  <block id="a6cdb2021351db573212b98138416717" category="list-text">Você instalou o Trident Protect.</block>
+  <block id="1b56af5799cb507ae72605b020a620df" category="list-text">Você definiu um aplicativo no Trident Protect. Esta aplicação terá uma funcionalidade de proteçãoão limitada até concluir este procedimento.</block>
+  <block id="a9910fb38baec2aa849c3ea6191b1cf9" category="list-text">Você<block ref="bc5779a2d33eeb1304bae57f15920cfc" prefix=" " category="inline-code"></block> selecionou como a classe de armazenamento padrão para o back-end de armazenamento.</block>
+  <block id="579cc8ac85c74501fbfa1bac4d013c1f" category="example-title">Expanda para obter as etapas de configuração</block>
+  <block id="b1927eae954479de09c736cae4ed08dd" category="list-text">No Trident, se o volume do ANF tiver sido criado antes da atualização para o Trident 24,10:</block>
+  <block id="119a6ab21356c173b517e4baf8ab21d3" category="list-text">Ative o diretório instantâneo para cada PV que é baseado em azure-NetApp-Files e associado ao aplicativo:</block>
+  <block id="9cb0a94d3b3051cae7cda63d4c5aa1d6" category="list-text">Confirme se o diretório instantâneo foi ativado para cada PV associado:</block>
+  <block id="54472d1da4b0c6eadf8684e846b25dcc" category="paragraph">Resposta:</block>
+  <block id="77c9498d5c74a08af1c5918bd5fd8ee1" category="paragraph">Quando o diretório instantâneo não está ativado, o Trident Protect escolhe a funcionalidade de backup regular, que consome temporariamente espaço no pool de capacidade durante o processo de backup. Nesse caso, certifique-se de que há espaço suficiente disponível no pool de capacidade para criar um volume temporário do tamanho do volume que está sendo feito backup.</block>
+  <block id="2efd4c8775ce47d6aa29183091d2a4e2" category="paragraph">O aplicativo está pronto para backup e restauração usando o Trident Protect. Cada PVC também está disponível para ser usado por outras aplicações para backups e restaurações.</block>
+  <block id="697f51e8965440d487236d46d469510d" category="summary">Comece verificando a prontidão do seu ambiente operacional, clusters de aplicativos, aplicativos e licenças. Certifique-se de que seu ambiente atenda a esses requisitos para implantar e operar o Trident Protect.</block>
+  <block id="f52842953ff751bb11c3849b84337de2" category="section-title">O Trident protege a compatibilidade do Kubernetes</block>
+  <block id="c8f91050b5ec3e677d9c7e16e424f9bc" category="paragraph">O Trident Protect é compatível com uma ampla variedade de ofertas do Kubernetes totalmente gerenciadas e autogeridas, incluindo:</block>
+  <block id="480c9b5f979d1ce95ea2a58b09826d1b" category="list-text">Amazon Elastic Kubernetes Service (EKS)</block>
+  <block id="974030a30a48754684d05541fd5e96c9" category="list-text">Google Kubernetes Engine (GKE)</block>
+  <block id="f3bd1985b243e9691bbbd63c6702344b" category="list-text">Microsoft Azure Kubernetes Service (AKS)</block>
+  <block id="b175d08ac03101cd40f077848d436e1f" category="list-text">Red Hat OpenShift</block>
+  <block id="6577b94f9943e513915919cfd0dc5909" category="list-text">SUSE Rancher</block>
+  <block id="c395793804bd9dfa82ff727781faf3c5" category="list-text">Portfólio do VMware Tanzu</block>
+  <block id="1de3a8db0dcc39abe68ae2b506a8f0ac" category="list-text">Kubernetes upstream</block>
+  <block id="f6fbfc99b1ed4fcb2dee65355a088f0b" category="section-title">O Trident protege a compatibilidade de back-end de storage</block>
+  <block id="dc754c1df3be627f8c83600f4c69aade" category="paragraph">O Trident Protect suporta os seguintes backends de armazenamento:</block>
+  <block id="ca3930511e1c5997e851e891e33190ab" category="list-text">Storage arrays ONTAP</block>
+  <block id="e254891423d193d0e614eaf948880de5" category="paragraph">Certifique-se de que o back-end de storage atenda aos seguintes requisitos:</block>
+  <block id="79a749f4efd0990a7c186a6c8b0b8f85" category="list-text">Certifique-se de que o storage NetApp conectado ao cluster esteja usando o Astra Trident 24,02 ou mais recente (recomenda-se o Trident 24,10).</block>
+  <block id="f230e68f84bd24699c72ae6e8b9b926c" category="list-text">Se o Astra Trident for mais antigo que a versão 24.06.1 e você planeja usar a funcionalidade de recuperação de desastres do NetApp SnapMirror, é necessário habilitar manualmente o Supervisor de Controle Astra.</block>
+  <block id="46a6a1c4196079f75ce0891927733cf0" category="list-text">Certifique-se de que você tem o mais recente software de previsão Astra Control (instalado e habilitado por padrão a partir do Astra Trident 24.06.1).</block>
+  <block id="1efa9b79a24750278cc3058eaf2ead00" category="list-text">Verifique se você tem um back-end de storage do NetApp ONTAP.</block>
+  <block id="c9a524733ac9eb25fbf1980538b5437d" category="list-text">Certifique-se de ter configurado um bucket de armazenamento de objetos para armazenar backups.</block>
+  <block id="953216b11f9b494b0b28bcec605cbea1" category="list-text">Crie namespaces de aplicações que você planeja usar para aplicações ou operações de gerenciamento de dados de aplicações. O Trident Protect não cria esses namespaces para você; se você especificar um namespace inexistente em um recurso personalizado, a operação falhará.</block>
+  <block id="f4ce5a5f08fdc6de51b81cc305a21fd0" category="section-title">Requisitos para volumes nas-economia</block>
+  <block id="85641afe25671a9190f50185f6e499d5" category="paragraph">O Trident Protect é compatível com operações de backup e restauração em volumes com economia nas. Snapshots, clones e replicação SnapMirror para volumes nas-Economy atualmente não são compatíveis. Você precisa ativar um diretório de snapshot para cada volume de economia nas que você planeja usar com o Trident Protect.</block>
+  <block id="43da051477acee60af3ad54451d3d090" category="paragraph">Alguns aplicativos não são compatíveis com volumes que usam um diretório instantâneo. Para esses aplicativos, você precisa ocultar o diretório instantâneo executando o seguinte comando no sistema de armazenamento ONTAP:</block>
+  <block id="beb2d6f4cedfc5b87a39d1766369fade" category="paragraph">Você pode ativar o diretório de snapshot executando o seguinte comando para cada volume de economia nas, substituindo<block ref="a86374477aa0b3d451812bb6ced0458d" prefix=" " category="inline-code"></block> pelo UUID do volume que deseja alterar:</block>
+  <block id="70117c3862b4c793cc80799862e6fde9" category="admonition">Você pode habilitar diretórios de snapshot por padrão para novos volumes definindo a opção de configuração de back-end do Trident<block ref="7ad68fdac2eac069eb8ed0fc45b0fb74" prefix=" " category="inline-code"></block> como<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>. Os volumes existentes não são afetados.</block>
+  <block id="3ab436334531996382ccf17d7d3a4d69" category="section-title">Requisitos para replicação do SnapMirror</block>
+  <block id="3253fc268f721dc313863b81e2a0762f" category="paragraph">O NetApp SnapMirror está disponível para uso com o Trident Protect para as seguintes soluções da ONTAP:</block>
+  <block id="2b304856171196502641312a496c6d54" category="list-text">NetApp ASA</block>
+  <block id="8bf5bd6530ea430a8edac8a795165179" category="list-text">NetApp AFF</block>
+  <block id="4ba8114dd624dc2130553b7742f70d88" category="list-text">NetApp FAS</block>
+  <block id="00ae925249b1dcd734cdb679b48bf8f7" category="list-text">NetApp ONTAP Select</block>
+  <block id="0f0b99ea2f70cd363c2c6a279f74e760" category="list-text">NetApp Cloud Volumes ONTAP</block>
+  <block id="9f91d52d37c43ec162560596ac851ec9" category="section-title">Requisitos de cluster do ONTAP para replicação do SnapMirror</block>
+  <block id="6ed8f95cb1dcd3baff756120151793a9" category="paragraph">Se você planeja usar a replicação do SnapMirror, verifique se o cluster do ONTAP atende aos seguintes requisitos:</block>
+  <block id="48d3e1a20815766a05a0edaac0e45679" category="list-text">*Parceiro de Controle Astra ou Trident*: O Trident ou o Provisioner do Astra Control devem existir nos clusters do Kubernetes de origem e destino que utilizam o ONTAP como um back-end. O Trident Protect oferece suporte à replicação com a tecnologia NetApp SnapMirror usando classes de armazenamento com os seguintes drivers:</block>
+  <block id="ba84728ffba482ceb12371a53be2f636" category="inline-link">Visão geral do licenciamento do SnapMirror no ONTAP</block>
+  <block id="b677eb65f7f869d18b845725a133a8d5" category="list-text">*Licenças*: As licenças assíncronas do ONTAP SnapMirror usando o pacote proteção de dados devem estar ativadas nos clusters ONTAP de origem e destino. <block ref="a7b9425cefc4a3715b38951f4b2b6b35" category="inline-link-rx"></block>Consulte para obter mais informações.</block>
+  <block id="ed097f5d093bf5311313c62bfb2f2d5a" category="section-title">Considerações de peering para replicação do SnapMirror</block>
+  <block id="a56ca0c4752a7197e296cb9141e9be9f" category="paragraph">Certifique-se de que seu ambiente atenda aos seguintes requisitos se você planeja usar peering de back-end de storage:</block>
+  <block id="9fecd08b776fdfca7b33426363edf913" category="inline-link">Visão geral do peering de cluster e SVM</block>
+  <block id="ddae31913091b421eaff815ed1e19b4f" category="list-text">*Cluster e SVM*: Os backends de storage do ONTAP devem ser colocados em Contato. <block ref="36ecaf21e9ca81a83e736deb4ff5c657" category="inline-link-rx"></block>Consulte para obter mais informações.</block>
+  <block id="94ac6b3955eab183cb88ab17c91000eb" category="admonition">Certifique-se de que os nomes do SVM usados na relação de replicação entre dois clusters ONTAP sejam exclusivos.</block>
+  <block id="ab44b8630d7609691da158960d9b30b6" category="list-text">*Supervisor de Controle Astra ou Trident e SVM*: Os SVMs remotos em Contato devem estar disponíveis para o Astra Control Provisioner ou Trident no cluster de destino.</block>
+  <block id="e05c29680eacd6a4c163eefe138ff9fd" category="list-text">*Backends gerenciados*: Você precisa adicionar e gerenciar backends de armazenamento ONTAP no Trident Protect para criar uma relação de replicação.</block>
+  <block id="1000954a94920c8ffd3752b548978ccf" category="list-text">*NVMe em TCP*: O Trident Protect não oferece suporte à replicação NetApp SnapMirror para back-ends de armazenamento que estejam usando o protocolo NVMe em TCP.</block>
+  <block id="57fe82c052fea1c269ca2b14e92e80d3" category="section-title">Configuração Trident / ONTAP para replicação SnapMirror</block>
+  <block id="59292a70a610fc937685ef1c3a3b5cb1" category="paragraph">O Trident Protect exige que você configure pelo menos um back-end de storage compatível com a replicação para os clusters de origem e destino. Se os clusters de origem e destino forem iguais, o aplicativo de destino deverá usar um back-end de storage diferente do aplicativo de origem para obter a melhor resiliência.</block>
+  <block id="3b3186bfde639bfb8d074bc442b4dd99" category="section-title">Considerações ao usar KubeVirt</block>
+  <block id="848b401dccd2553e826a5baf5064321a" category="paragraph">Se você planeja usar<block ref="dfbafe671f5f5e6c95dde413429a5999" category="inline-link-rx"></block> máquinas virtuais com replicação do SnapMirror, precisa configurar a virtualização para que você possa congelar e descongelar seus SVMs. Depois de configurar a virtualização, os SVMs que você implantar incluirão as ferramentas necessárias para congelar e descongelar. Para saber mais sobre como configurar a virtualização,<block ref="e91eeccdebb36ea585bcf119dba9a3b4" category="inline-link-rx"></block> consulte .</block>
+  <block id="4b92c534580865d96f1efb9f86289249" category="summary">Você pode usar o Trident Protect para restaurar seu aplicativo a partir de um snapshot ou backup. A restauração a partir de um instantâneo existente será mais rápida ao restaurar o aplicativo para o mesmo cluster.</block>
+  <block id="ff29014f3961a30f52557df7142d1a65" category="doc">Restaurar aplicativos</block>
+  <block id="f346d32ba5d9c332bf8577bf1bacda07" category="admonition">Quando você restaura um aplicativo, todos os ganchos de execução configurados para o aplicativo são restaurados com o aplicativo. Se um gancho de execução pós-restauração estiver presente, ele será executado automaticamente como parte da operação de restauração.</block>
+  <block id="a082effb2d23d4eb077129001a77582f" category="section-title">Restaure de um backup para um namespace diferente</block>
+  <block id="80a8842041758f0012a710677ab91939" category="paragraph">Quando você restaura um backup para um namespace diferente usando um BackupRestore CR, o Trident Protect restaura o aplicativo em um novo namespace, mas o aplicativo restaurado não é protegido automaticamente pelo Trident Protect. Para proteger o aplicativo restaurado, você precisa criar um CR de aplicativo para o aplicativo restaurado para que ele seja protegido pelo Trident Protect.</block>
+  <block id="5a3a68cc2fb27d13057472b4869353f1" category="open-title">Use um CR</block>
+  <block id="0334c5d881452d9144d4edf93d44ff85" category="list-text">Crie o arquivo de recurso personalizado (CR) e nomeie-o<block ref="aa3356b96c40153ef83fe9854ede7a70" prefix=" " category="inline-code"></block>.</block>
+  <block id="8ebefb3e84a05b2e3bf54824870d776d" category="list-text">*Spec.appArchivePath*: O caminho dentro do AppVault onde o conteúdo do backup é armazenado. Você pode usar o seguinte comando para encontrar este caminho:</block>
+  <block id="3f1db1c30ba33e5d04499f000ed77f97" category="list-text">*Spec.appVaultRef*: (_required_) o nome do AppVault onde o conteúdo de backup é armazenado.</block>
+  <block id="3e209c1619d0c38cf60c13838ca4cf72" category="list-text">*Spec.storageClassMapping*: O mapeamento da classe de armazenamento de origem da operação de restauração para a classe de armazenamento de destino. Substitua<block ref="6d4164a2db4b8f123f2f4666f47d1304" prefix=" " category="inline-code"></block> e<block ref="cb3a1d54728d178b537383d31afb4b53" prefix=" " category="inline-code"></block> por informações do seu ambiente.</block>
+  <block id="a5085953f7b15a312b4e12827abc66e5" category="list-text">(_Opcional_) se você precisar selecionar apenas determinados recursos do aplicativo para restaurar, adicione filtragem que inclua ou exclua recursos marcados com rótulos específicos:</block>
+  <block id="792236c6092ad20b208a284b7be14046" category="list-text">*ResourceFilter.resourceMatchers*: Array de resourceMatcher objetos.</block>
+  <block id="be16b6e14200639734fb9694e3c0f655" category="list-text">*ResourceMatchers[].group*: (_Optional_) Grupo do recurso a ser filtrado.</block>
+  <block id="2162d9f0c97d87c37f838ea27ecb393a" category="list-text">*ResourceMatchers[].kind*: (_Opcional_) tipo do recurso a ser filtrado.</block>
+  <block id="862dca1a77422225d13abda4b7bf539b" category="list-text">*ResourceMatchers[].version*: (_Optional_) versão do recurso a ser filtrado.</block>
+  <block id="f5d1dcaf86934b4541162f010db1d3e1" category="list-text">*ResourceMatchers[].names*: (_Optional_) nomes no campo Kubernetes metadata.name do recurso a ser filtrado.</block>
+  <block id="19c69b04e9f9adb29979cc0ff90625b2" category="list-text">*ResourceMatchers[].namespaces*: (_Optional_) namespaces no campo Kubernetes metadata.name do recurso a ser filtrado.</block>
+  <block id="cb4354b08a6a88b3c12671390a85c520" category="list-text">*ResourceMatchers[].labelSelectors*: (_Optional_) string de seleção de etiquetas no campo Kubernetes metadata.name do recurso, conforme definido no<block ref="d4ce3da8407a7d8e148bb1287288e778" category="inline-link-rx"></block>. Por exemplo<block ref="6ea45baf659f1f35e51c8dc9005eac03" prefix=" " category="inline-code"></block>: .</block>
+  <block id="18ad656f28db1ef6b2d76d21959ca243" category="list-text">Depois de preencher o<block ref="aa3356b96c40153ef83fe9854ede7a70" prefix=" " category="inline-code"></block> ficheiro com os valores corretos, aplique o CR:</block>
+  <block id="8a9e0f8224695e94f0988f444488877b" category="open-title">Use a CLI</block>
+  <block id="6a07207e8441bfa8c4c36dc925112780" category="list-text">Restaure o backup para um namespace diferente, substituindo valores entre parênteses por informações do seu ambiente. O<block ref="65e11896cb6b19f7dcb2432e67c74725" prefix=" " category="inline-code"></block> argumento usa namespaces separados por dois pontos para mapear namespaces de origem para os namespaces de destino corretos no formato<block ref="07c70c21dcae158a4b2f0d389a52981b" prefix=" " category="inline-code"></block>. Por exemplo:</block>
+  <block id="0bfcabe961e72fea535a073143d53fad" category="section-title">Restaure de um backup para o namespace original</block>
+  <block id="7260bc412b6c22c2589f01098c1f4430" category="paragraph">Você pode restaurar um backup para o namespace original a qualquer momento.</block>
+  <block id="ccad4e21e7ba2bf4cc861355c3bd79ad" category="admonition">Restaurar um backup para um namespace com recursos existentes não alterará nenhum recurso que compartilhe nomes com aqueles no backup. Para restaurar todos os recursos em um backup, exclua e recrie o namespace de destino ou restaure o backup para um novo namespace.</block>
+  <block id="34653be4af07bad31b9a3775f18b1b5f" category="list-text">Crie o arquivo de recurso personalizado (CR) e nomeie-o<block ref="59a09233aaa2a2c9e25fc46650bd6dee" prefix=" " category="inline-code"></block>.</block>
+  <block id="349d4c53fe9d2e740d60f7ce8094c294" category="list-text">Depois de preencher o<block ref="59a09233aaa2a2c9e25fc46650bd6dee" prefix=" " category="inline-code"></block> ficheiro com os valores corretos, aplique o CR:</block>
+  <block id="11d13ce9542ccbfd1e47138c96b125a1" category="list-text">Restaure o backup para o namespace original, substituindo valores entre parênteses por informações do seu ambiente. O<block ref="402051f4be0cc3aad33bcf3ac3d6532b" prefix=" " category="inline-code"></block> argumento usa um namespace e um nome de backup no formato<block ref="7310980de32cd5ca687291f4b01b2e19" prefix=" " category="inline-code"></block>. Por exemplo:</block>
+  <block id="db4c6bfd26488f4d6ab2ec6129b067d8" category="section-title">Restauração de um snapshot para um namespace diferente</block>
+  <block id="9abe0b166b3dc77e35a8be1d062ece32" category="paragraph">É possível restaurar dados de um snapshot usando um arquivo de recurso personalizado (CR) para um namespace diferente ou namespace de origem original. Quando você restaura um snapshot para um namespace diferente usando um SnapshotRestore CR, o Trident Protect restaura o aplicativo em um novo namespace, mas o aplicativo restaurado não é protegido automaticamente pelo Trident Protect. Para proteger o aplicativo restaurado, você precisa criar um CR de aplicativo para o aplicativo restaurado para que ele seja protegido pelo Trident Protect.</block>
+  <block id="941a76112ae80457a7a22ae552218be9" category="section-title">Restauração de um snapshot para o namespace original</block>
+  <block id="a392e5395f0751460dc460cd6ec5e89d" category="paragraph">Você pode restaurar um snapshot para o namespace original a qualquer momento.</block>
+  <block id="4d18dba9a79fbe92e2bb99f0a9300df3" category="list-text">Crie o arquivo de recurso personalizado (CR) e nomeie-o<block ref="620b0dae36dbe6aeaae5d993f961c634" prefix=" " category="inline-code"></block>.</block>
+  <block id="54625166c25afd8a6a484aaf2f346fbb" category="list-text">Depois de preencher o<block ref="620b0dae36dbe6aeaae5d993f961c634" prefix=" " category="inline-code"></block> ficheiro com os valores corretos, aplique o CR:</block>
+  <block id="6bd960f94c189d42fef14b770c0ac909" category="list-text">Restaure o snapshot para o namespace original, substituindo valores entre parênteses por informações do seu ambiente. Por exemplo:</block>
+  <block id="ba2718de6be08337811d049982d9f03f" category="section-title">Verifique o status de uma operação de restauração</block>
+  <block id="97dedb929a195e839af5f7d7f8ef0ec5" category="paragraph">Você pode usar a linha de comando para verificar o status de uma operação de restauração que está em andamento, concluiu ou falhou.</block>
+  <block id="c076e91339c1f092aaad1d36a9c18a7a" category="list-text">Use o seguinte comando para recuperar o status da operação de restauração, substituindo valores em brackes por informações do seu ambiente:</block>
+  <block id="3b236bd888d7d3460e381b13adb8f6b8" category="summary">Talvez seja necessário remover componentes do Trident Protect se você estiver atualizando de uma versão de avaliação para uma versão completa do produto.</block>
+  <block id="1bc8acdabd6fc240195da5f19b986dd6" category="doc">Desinstalar o Trident Protect</block>
+  <block id="fb509ce83a58c3beeca23f5d55c8d75c" category="paragraph">Para remover o Trident Protect, execute as etapas a seguir.</block>
+  <block id="f6116aed83b3970c50d28447d27f4f97" category="list-text">Remova os arquivos Trident Protect CR:</block>
+  <block id="aec02c2a1b714f40a949aa18d1f2d588" category="list-text">Remover Trident Protect:</block>
+  <block id="20c06650be80c297c0e4dc5ae977d44f" category="list-text">Remova o namespace Trident Protect:</block>
+  <block id="a8c1fc9f09b8338dd9f8badd5c3d30c0" category="summary">Você pode criar um gancho de execução personalizado para um aplicativo usando o Trident Protect. Você precisa ter permissões de proprietário, administrador ou membro para criar ganchos de execução.</block>
+  <block id="cbb269e08085ebb437449cc744357ee6" category="doc">Gerenciar ganchos de execução</block>
+  <block id="ccd62d676165e34c2e9c6d088c06e70f" category="paragraph">Um gancho de execução é uma ação personalizada que você pode configurar para ser executada em conjunto com uma operação de proteção de dados de um aplicativo gerenciado. Por exemplo, se você tiver um aplicativo de banco de dados, poderá usar um gancho de execução para pausar todas as transações de banco de dados antes de um snapshot e retomar as transações após a conclusão do snapshot. Isso garante snapshots consistentes com aplicativos.</block>
+  <block id="83fbf1604bedff410ea11872b40ab9f0" category="section-title">Tipos de ganchos de execução</block>
+  <block id="d702711249a4d54c15ce81c80152b8e7" category="paragraph">O Trident Protect suporta os seguintes tipos de ganchos de execução, com base em quando eles podem ser executados:</block>
+  <block id="9c6a9cc04a4d5840a5d237b232190a35" category="list-text">Pré-instantâneo</block>
+  <block id="65db6b15c7f05c97a1647c11699053e3" category="list-text">Pós-snapshot</block>
+  <block id="0a2055495a94f091655a2e4d421cffe2" category="list-text">Pré-backup</block>
+  <block id="cf6e97e89c4b36c29252fcb7b0728d2f" category="list-text">Pós-backup</block>
+  <block id="349b93d2884e6ca3d41d0d9dab41dcd8" category="list-text">Pós-restauração</block>
+  <block id="0952ad82f36d650828c9197bb777ee05" category="list-text">Pós-failover</block>
+  <block id="a9f57378169166a88acf61a71442e5fb" category="section-title">Ordem de execução</block>
+  <block id="e8132483e0cae3565c87c193b3fd8f57" category="paragraph">Quando uma operação de proteção de dados é executada, os eventos de gancho de execução ocorrem na seguinte ordem:</block>
+  <block id="4a6ccf1757fd10978b3fb28d81187dcc" category="list-text">Todos os ganchos de execução personalizados de pré-operação aplicáveis são executados nos contentores apropriados. Você pode criar e executar quantos ganchos de pré-operação personalizados você precisar, mas a ordem de execução desses ganchos antes da operação não é garantida nem configurável.</block>
+  <block id="cfbed2286711be0cf6dbc12aba602709" category="list-text">A operação de proteção de dados é realizada.</block>
+  <block id="9465fae733e0b5fdcd6e532ef8a78b08" category="list-text">Todos os ganchos de execução pós-operação personalizados aplicáveis são executados nos contentores apropriados. Você pode criar e executar quantos ganchos de pós-operação personalizados você precisar, mas a ordem de execução desses ganchos após a operação não é garantida nem configurável.</block>
+  <block id="a4ce4f522b635b3063f4af5d138933cc" category="paragraph">Se você criar vários ganchos de execução do mesmo tipo (por exemplo, pré-snapshot), a ordem de execução desses ganchos não será garantida. No entanto, a ordem de execução de ganchos de diferentes tipos é garantida. Por exemplo, a seguinte é a ordem de execução de uma configuração que tem todos os diferentes tipos de ganchos:</block>
+  <block id="25fcbdcc7c9fb7d2e1db9e64ef06804c" category="list-text">Ganchos pré-instantâneos executados</block>
+  <block id="f098e888afa8ccb3f1ad3337c3b6eea1" category="list-text">Ganchos pós-snapshot executados</block>
+  <block id="59b50be8e9e2ed1b0e1bccae54c76036" category="list-text">Ganchos pré-backup executados</block>
+  <block id="1f374d287bf615eef6eb9afd92b862f2" category="list-text">Ganchos pós-backup executados</block>
+  <block id="e807d528474129e76f18c5ce17a2c3d6" category="admonition">O exemplo de pedido anterior só se aplica quando você executa um backup que não usa um snapshot existente.</block>
+  <block id="b74efcc6eafe1d8dec6ade34cfa13365" category="admonition">Você deve sempre testar seus scripts de gancho de execução antes de habilitá-los em um ambiente de produção. Você pode usar o comando 'kubectl exec' para testar convenientemente os scripts. Depois de habilitar os ganchos de execução em um ambiente de produção, teste os snapshots e backups resultantes para garantir que eles sejam consistentes. Você pode fazer isso clonando o aplicativo para um namespace temporário, restaurando o snapshot ou o backup e testando o aplicativo.</block>
+  <block id="f99748fb4b1cf592516b60937743c52d" category="section-title">Notas importantes sobre ganchos de execução personalizados</block>
+  <block id="6b8e88c5f4231fbc6994f3a29dd893af" category="paragraph">Considere o seguinte ao Planejar ganchos de execução para seus aplicativos.</block>
+  <block id="c9333604c0c05d7727ea70ec5f1b806b" category="list-text">Um gancho de execução deve usar um script para executar ações. Muitos ganchos de execução podem referenciar o mesmo script.</block>
+  <block id="cc0a52984aa9087cc5fca898c4dc1caa" category="list-text">O Trident Protect requer que os scripts que os ganchos de execução usam sejam escritos no formato de scripts shell executáveis.</block>
+  <block id="6a7d60379bb9015c0bfe02adcc54d0b5" category="list-text">O tamanho do script está limitado a 96kbMB.</block>
+  <block id="d6eb1b65eb578d8eb99d367edc11bb03" category="list-text">O Trident Protect usa configurações de gancho de execução e quaisquer critérios correspondentes para determinar quais ganchos são aplicáveis a uma operação de snapshot, backup ou restauração.</block>
+  <block id="6b988caf78b1aa60f0402c611a1c8e2a" category="admonition">Como os ganchos de execução geralmente reduzem ou desativam completamente a funcionalidade do aplicativo em que estão sendo executados, você deve sempre tentar minimizar o tempo que seus ganchos de execução personalizados demoram para serem executados. Se você iniciar uma operação de backup ou snapshot com ganchos de execução associados, mas depois cancelá-la, os ganchos ainda poderão ser executados se a operação de backup ou snapshot já tiver começado. Isso significa que a lógica usada em um gancho de execução pós-backup não pode assumir que o backup foi concluído.</block>
+  <block id="99dc882fc0f61d1db87631ed9f156913" category="section-title">Filtros de gancho de execução</block>
+  <block id="44db75fbdb91be494665aebf40107fcf" category="paragraph">Quando você adiciona ou edita um gancho de execução para um aplicativo, você pode adicionar filtros ao gancho de execução para gerenciar quais contentores o gancho corresponderá. Os filtros são úteis para aplicativos que usam a mesma imagem de contentor em todos os contentores, mas podem usar cada imagem para um propósito diferente (como o Elasticsearch). Os filtros permitem criar cenários onde os ganchos de execução são executados em alguns, mas não necessariamente em todos os contentores idênticos. Se você criar vários filtros para um único gancho de execução, eles serão combinados com um operador LÓGICO E. Você pode ter até 10 filtros ativos por gancho de execução.</block>
+  <block id="7caae75448dbc59fcadd621099e170b3" category="inline-link">Suporte à sintaxe da expressão regular 2 (RE2)</block>
+  <block id="c8390f7fcf8913e63d64e8069f87aa58" category="paragraph">Cada filtro que você adicionar a um gancho de execução usa uma expressão regular para corresponder a containers em seu cluster. Quando um gancho corresponde a um recipiente, o gancho executará o script associado nesse recipiente. As expressões regulares para filtros usam a sintaxe da expressão regular 2 (RE2), que não suporta a criação de um filtro que exclui contentores da lista de correspondências. Para obter informações sobre a sintaxe que o Trident Protect suporta para expressões regulares em filtros de gancho de execução,<block ref="d4d0dd655d04b2dc5b031206e1febd50" category="inline-link-rx"></block> consulte .</block>
+  <block id="4c004df391027b81952b788a3802e37c" category="admonition">Se você adicionar um filtro de namespace a um gancho de execução que é executado após uma operação de restauração ou clone e a origem e destino de restauração ou clone estiverem em namespaces diferentes, o filtro de namespace será aplicado somente ao namespace de destino.</block>
+  <block id="f1ec6389b6d19d3be02f29f4a7d29051" category="section-title">Exemplos de gancho de execução</block>
+  <block id="0370124d48bfc5af2def19c48f433283" category="inline-link">Projeto NetApp Verda GitHub</block>
+  <block id="a59e4fa5cc01a3a4bdebbff4cec60b47" category="paragraph">Visite o<block ref="84d9961ef5a89731849bc2055780d0b6" category="inline-link-rx"></block> para baixar ganchos de execução reais para aplicativos populares, como Apache Cassandra e Elasticsearch. Você também pode ver exemplos e obter ideias para estruturar seus próprios ganchos de execução personalizados.</block>
+  <block id="b103709bb8bab06f6db02c661d88466a" category="section-title">Crie um gancho de execução</block>
+  <block id="e39c63d5ded2742e4215d5e339fa729e" category="list-text">Crie o arquivo de recurso personalizado (CR) e nomeie-o<block ref="ce6abb389eaae6953714e27f1dfde579" prefix=" " category="inline-code"></block>.</block>
+  <block id="a1b64283bac1ca460b6b777a46121e7f" category="list-text">Configure os seguintes atributos para corresponder ao ambiente do Trident Protect e à configuração do cluster:</block>
+  <block id="500ef917ae8cc36e9c85a2c0bc7d9337" category="list-text">*Spec.applicationRef*: (_required_) o nome do Kubernetes do aplicativo para o qual executar o gancho de execução.</block>
+  <block id="5422fe7ebd8e2354557341f5b0c60905" category="list-text">*Spec.stage*: (_required_) Uma cadeia de carateres indicando qual estágio durante a ação o gancho de execução deve ser executado. Valores possíveis:</block>
+  <block id="fb55a965b77791b31ffd2bb548f71080" category="list-text">Pre</block>
+  <block id="03d947a2158373c3b9d74325850cb8b9" category="list-text">Post</block>
+  <block id="e60e3d87a1e5f522bbc8419b61b46a94" category="list-text">*Spec.action*: (_required_) Uma cadeia de carateres indicando qual ação o gancho de execução tomará, supondo que quaisquer filtros de gancho de execução especificados sejam correspondentes. Valores possíveis:</block>
+  <block id="3500ba09d0538297440ca620c9dd46bf" category="list-text">Backup</block>
+  <block id="2bd339d85ee3b33e513359ce781b60cc" category="list-text">Restaurar</block>
+  <block id="7388404ef116c3ff812bfd290b094d9e" category="list-text">Failover</block>
+  <block id="216715348d2815376ef6d68d1ae8d3a1" category="list-text">*Spec.enabled*: (_Optional_) indica se esse gancho de execução está ativado ou desativado. Se não for especificado, o valor padrão é verdadeiro.</block>
+  <block id="aa6776e9151e1848128d771057fdb5d1" category="list-text">*Spec.hookSource*: (_required_) Uma string contendo o script de gancho codificado em base64.</block>
+  <block id="c2f4f9c36d367244147c02191649b33e" category="list-text">*Spec.timeout*: (_Optional_) Um número que define quanto tempo em minutos o gancho de execução pode ser executado. O valor mínimo é de 1 minuto e o valor padrão é de 25 minutos, se não for especificado.</block>
+  <block id="327ca4bc755c7de7ac0d335364730679" category="list-text">*Spec.arguments*: (_Optional_) Uma lista YAML de argumentos que você pode especificar para o gancho de execução.</block>
+  <block id="bf30a4b48b4b2636f15eacfc7159af33" category="list-text">*Spec.matchingCriteria*: (_Optional_) uma lista opcional de pares de valores de chave de critérios, cada par compondo um filtro de gancho de execução. Você pode adicionar até 10 filtros por gancho de execução.</block>
+  <block id="9092d99fcac84905883e4e76cd55bfab" category="list-text">*Spec.matchingCriteria.type*: (_Optional_) Uma string que identifica o tipo de filtro do gancho de execução. Valores possíveis:</block>
+  <block id="820b7ec56ed75f6138f5ddc10aec4747" category="list-text">ContainerImage</block>
+  <block id="3d52068b047d2a094a1af32cb2e338d6" category="list-text">Nome do ConteinerName</block>
+  <block id="8fd1f588fe68392265ea3a8149ce05a3" category="list-text">PodName</block>
+  <block id="d76694b319ab8227266d15f77f5f7aec" category="list-text">PodLabel</block>
+  <block id="d84562295e02e89c17de04ba750d4c35" category="list-text">NamespaceName</block>
+  <block id="011b50d44a6bb217bbe310071e727641" category="list-text">*Spec.matchingCriteria.value*: (_Optional_) Uma string ou expressão regular identificando o valor do filtro do gancho de execução.</block>
+  <block id="5b34802949c91e91f2c85f8ee1c129bd" category="list-text">Depois de preencher o ficheiro CR com os valores corretos, aplique o CR:</block>
+  <block id="de72143da28c8cafc0b906859f6e6d05" category="list-text">Crie o gancho de execução, substituindo valores entre parênteses por informações do seu ambiente. Por exemplo:</block>
+  <block id="d37692493f4055c8b34b9de2897bb1a6" category="summary">Com o Trident Protect, você pode usar os recursos de replicação assíncrona da tecnologia NetApp SnapMirror para replicar alterações de dados e aplicações de um back-end de storage para outro, no mesmo cluster ou entre clusters diferentes.</block>
+  <block id="73ff2f0e4c750901167edccad459407d" category="doc">Replique aplicações com o NetApp SnapMirror</block>
+  <block id="40322a2a338856f04751d8d3bdb62496" category="section-title">Configure uma relação de replicação</block>
+  <block id="f7c69ddccabddb0b74276d3c2a3086e0" category="paragraph">A configuração de uma relação de replicação envolve o seguinte:</block>
+  <block id="a7b38e98cd0b780e4d7f39ca030851fe" category="list-text">Escolhendo com que frequência você deseja que o Trident Protect tire um snapshot do aplicativo (que inclui os recursos do Kubernetes do aplicativo, bem como os snapshots de volume de cada um dos volumes do aplicativo)</block>
+  <block id="cc37bc9830a1edb8e50e296af8ade03b" category="list-text">Escolha do cronograma de replicação (inclui recursos do Kubernetes e dados de volume persistente)</block>
+  <block id="55960a396448d8f19fb182dfd2b04d90" category="list-text">Definir o tempo para a captura instantânea</block>
+  <block id="7fe804bb721f10861ae38239b332f774" category="inline-link-macro">Recursos personalizados do AppVault</block>
+  <block id="38886c5d59d709a7506113ab8fa737eb" category="list-text">Crie um AppVault para o aplicativo de origem no cluster de origem. Dependendo do seu fornecedor de storage, modifique um exemplo no <block ref="789b31b0a5cabea5de04107e65439f53" category="inline-link-macro-rx"></block> para se adequar ao seu ambiente:</block>
+  <block id="bb557baccf285d1ab6b4cdc32daf5848" category="open-title">Crie um AppVault usando um CR</block>
+  <block id="32429298e62d70d6afc71defdbdd3c42" category="list-text">Crie o arquivo de recurso personalizado (CR) e nomeie-o (por exemplo,<block ref="0992b18d0f3771479838d4ddbaa2b097" prefix=" " category="inline-code"></block> ).</block>
+  <block id="4b60a832776a25dfdf74d5dac3d3111f" category="list-text">*metadata.name*: (_required_) o nome do recurso personalizado do AppVault. Anote o nome que você escolher, porque outros arquivos CR necessários para uma relação de replicação referem-se a esse valor.</block>
+  <block id="2e65eb784535a1ecc4b75ea18e2863a6" category="list-text">*spec.providerConfig*: (_required_) armazena a configuração necessária para acessar o AppVault usando o provedor especificado. Escolha um bucketName e quaisquer outros detalhes necessários para o seu provedor. Anote os valores que você escolher, porque outros arquivos CR necessários para uma relação de replicação se referem a esses valores. <block ref="789b31b0a5cabea5de04107e65439f53" category="inline-link-macro-rx"></block>Consulte para obter exemplos de AppVault CRS com outros provedores.</block>
+  <block id="655a22501c6f6d02821989a81036e65e" category="list-text">*spec.providerCredentials*: (_required_) armazena referências a qualquer credencial necessária para acessar o AppVault usando o provedor especificado.</block>
+  <block id="cb95e87ea13fe367aee43a64591dc23f" category="list-text">*spec.providerCredentials.valueFromSecret*: (_required_) indica que o valor da credencial deve vir de um segredo.</block>
+  <block id="553f77a87c1f7385701bd0df77669571" category="list-text">*Key*: (_required_) a chave válida do segredo para selecionar.</block>
+  <block id="cf3ae025f91646ac07aa5641d4e510cb" category="list-text">*Name*: (_required_) Nome do segredo que contém o valor deste campo. Deve estar no mesmo namespace.</block>
+  <block id="0e022225fc6e6c1b2028f3a32bcc9dbc" category="list-text">*spec.providerCredentials.secretAccessKey*: (_required_) a chave de acesso usada para acessar o provedor. O *nome* deve corresponder a *spec.providerCredentials.valueFromSecret.name*.</block>
+  <block id="3830f9aa0973251f5c2658ea2e742ee5" category="list-text">*spec.providerType*: (_required_) determina o que fornece o backup; por exemplo, NetApp ONTAP S3, S3 genérico, Google Cloud ou Microsoft Azure. Valores possíveis:</block>
+  <block id="ac68bbf921d953d1cfab916cb6120864" category="list-text">aws</block>
+  <block id="03034eb1f294ef4f7a106ae02a31ae45" category="list-text">generic-s3</block>
+  <block id="a4d3001255c12ffd187d9548a2c800aa" category="list-text">ONTAP-s3</block>
+  <block id="da8c660bc44b572ae5fc3157a93282cb" category="list-text">StorageGRID-s3</block>
+  <block id="8af3a24bfad8f2e7a06abec1e5bc710e" category="list-text">Depois de preencher o<block ref="0992b18d0f3771479838d4ddbaa2b097" prefix=" " category="inline-code"></block> ficheiro com os valores corretos, aplique o CR:</block>
+  <block id="65b1402ebaf9b35766ab033225a55f41" category="open-title">Crie um AppVault usando a CLI</block>
+  <block id="d686d91628b89b1ba45ca8bf5274eece" category="list-text">Crie o AppVault, substituindo valores entre parênteses por informações do seu ambiente:</block>
+  <block id="c244d23f9be6389c5ac873426253b152" category="list-text">Criar a aplicação de origem CR:</block>
+  <block id="93b7f025ad50fefb3f6b0c5ee86d6162" category="open-title">Crie o aplicativo de origem usando um CR</block>
+  <block id="793bc477cba966a8d3771d018030c3c4" category="list-text">Crie o arquivo de recurso personalizado (CR) e nomeie-o (por exemplo,<block ref="3e2c6ff026eba99761434b4f79aaa782" prefix=" " category="inline-code"></block> ).</block>
+  <block id="3bf6684ac69fda7ed549f87ecb72678d" category="list-text">*metadata.name*: (_required_) o nome do recurso personalizado do aplicativo. Anote o nome que você escolher, porque outros arquivos CR necessários para uma relação de replicação referem-se a esse valor.</block>
+  <block id="969353c1601d960362b65e2372b29251" category="list-text">*spec.includedNamespaces*: (_required_) um array de namespaces e rótulos associados. Use nomes de namespace e, opcionalmente, restrinja o escopo dos namespaces com rótulos para especificar recursos que existem nos namespaces listados aqui. O namespace da aplicação deve fazer parte desse array.</block>
+  <block id="7a4e65ca72b4d8d16a9df08725a64df9" category="paragraph">*Exemplo YAML*:</block>
+  <block id="948be8a05d305f0b3dece0e8dcaf4546" category="list-text">Depois de preencher o<block ref="3e2c6ff026eba99761434b4f79aaa782" prefix=" " category="inline-code"></block> ficheiro com os valores corretos, aplique o CR:</block>
+  <block id="677aa747b5e08444532c7cc040384124" category="open-title">Crie o aplicativo de origem usando a CLI</block>
+  <block id="feaddb5b204f8f8f1226cc6f02275f5c" category="list-text">Crie o aplicativo de origem. Por exemplo:</block>
+  <block id="2111432c46f82ea9d065a1168a7bca3d" category="list-text">Opcionalmente, tire um snapshot do aplicativo de origem. Este instantâneo é utilizado como base para a aplicação no cluster de destino. Se você pular esta etapa, precisará esperar que o próximo snapshot agendado seja executado para que você tenha um snapshot recente.</block>
+  <block id="84caf200e79d5962bc7f3516e9ad328c" category="open-title">Tire um instantâneo usando um CR</block>
+  <block id="929d5ad53cad5d51ead7578004e2d5e5" category="list-text">Crie um agendamento de replicação para o aplicativo de origem:</block>
+  <block id="57cc31c4785dfe52bb22cc8d375a3b67" category="list-text">Crie o arquivo de recurso personalizado (CR) e nomeie-o (por exemplo,<block ref="8898becea7c9a79dd32acb9c34818b46" prefix=" " category="inline-code"></block> ).</block>
+  <block id="87918fdbe5607aeceec3ec53bc40a2f8" category="list-text">*metadata.name*: (_required_) o nome do recurso personalizado de agendamento.</block>
+  <block id="3e23380d121194d4ed43d5587e33eeba" category="list-text">*Spec.AppVaultRef*: (_required_) este valor deve corresponder ao campo metadata.name do AppVault para o aplicativo de origem.</block>
+  <block id="a7ac547d97c63ad78926b420081cf36d" category="list-text">*Spec.ApplicationRef*: (_required_) este valor deve corresponder ao campo metadata.name da aplicação de origem CR.</block>
+  <block id="565c53b27f6972afc514c3431a7fb733" category="list-text">*Spec.backupRetention*: (_required_) este campo é obrigatório e o valor deve ser definido como 0.</block>
+  <block id="e00228f2eaa851d908b74fd6e1cbb1ab" category="list-text">*Spec.enabled*: Deve ser definido como true.</block>
+  <block id="b8e08f9f53492c0cf7c4c918c8c27185" category="list-text">*spec.granularity*: tem de estar definido para<block ref="90589c47f06eb971d548591f23c285af" prefix=" " category="inline-code"></block>.</block>
+  <block id="8c33ed4b89c2cd001ffad0203fe3c3b6" category="list-text">*Spec.recurrenceRule*: Defina uma data de início no horário UTC e um intervalo de recorrência.</block>
+  <block id="35ef995e5b9fe2ba99491ff849d63302" category="list-text">*Spec.snapshotRetention*: Deve ser definido como 2.</block>
+  <block id="7c6d1c687b69c90909ec8375ac84883e" category="list-text">Depois de preencher o<block ref="8898becea7c9a79dd32acb9c34818b46" prefix=" " category="inline-code"></block> ficheiro com os valores corretos, aplique o CR:</block>
+  <block id="3feb4a62c8b59cd52ae22845d363c901" category="open-title">Tire um instantâneo usando a CLI</block>
+  <block id="a1e2bc47f1a3bfef13f10398ea862ec3" category="list-text">Crie um aplicativo de origem AppVault CR no cluster de destino idêntico ao AppVault CR aplicado no cluster de origem e nomeie-o (por exemplo,<block ref="3ad9e8b652d0a9a977e2534bf143ea29" prefix=" " category="inline-code"></block> ).</block>
+  <block id="04a53b4d2f7e20d9df207bfb6beb6ee7" category="list-text">Aplicar o CR:</block>
+  <block id="b90466d65b799b761b892272fec2c528" category="list-text">Crie um AppVault para o aplicativo de destino no cluster de destino. Dependendo do seu fornecedor de storage, modifique um exemplo no <block ref="789b31b0a5cabea5de04107e65439f53" category="inline-link-macro-rx"></block> para se adequar ao seu ambiente:</block>
+  <block id="d5ab09bc69c7800783bce2e14f2e456f" category="list-text">Crie o arquivo de recurso personalizado (CR) e nomeie-o (por exemplo,<block ref="b851e4210e3875aa9242df636b0b3068" prefix=" " category="inline-code"></block> ).</block>
+  <block id="7fab67e3c762a0a044dd84f11a740dd7" category="list-text">*spec.providerConfig*: (_required_) armazena a configuração necessária para acessar o AppVault usando o provedor especificado. Escolha um<block ref="070a97dcde31faecac1fc843e205039c" prefix=" " category="inline-code"></block> e quaisquer outros detalhes necessários para o seu provedor. Anote os valores que você escolher, porque outros arquivos CR necessários para uma relação de replicação se referem a esses valores. <block ref="789b31b0a5cabea5de04107e65439f53" category="inline-link-macro-rx"></block>Consulte para obter exemplos de AppVault CRS com outros provedores.</block>
+  <block id="4758f7c104e1f75364dadc9f8310e51d" category="list-text">Depois de preencher o<block ref="b851e4210e3875aa9242df636b0b3068" prefix=" " category="inline-code"></block> ficheiro com os valores corretos, aplique o CR:</block>
+  <block id="852c44e158b3265857137f38ef65ac49" category="list-text">Crie um arquivo CR AppMirrorRelationship:</block>
+  <block id="15e5c4ea8565e669f02393ab1d7b1021" category="open-title">Crie um AppMirrorRelationship usando um CR</block>
+  <block id="3ca407ea70946200511f8d2e1008f20f" category="list-text">Crie o arquivo de recurso personalizado (CR) e nomeie-o (por exemplo,<block ref="e4fba3915616865173fe7feee130a30f" prefix=" " category="inline-code"></block> ).</block>
+  <block id="52e868ab750f66344086c9bc5d6dadeb" category="list-text">*metadata.name:* (obrigatório) o nome do recurso personalizado AppMirrorRelationship.</block>
+  <block id="d9ee8f59f7e4a770213d4728b012fa38" category="list-text">*spec.destinationAppVaultRef*: (_required_) esse valor deve corresponder ao nome do AppVault para o aplicativo de destino no cluster de destino.</block>
+  <block id="ad47c31cec730ddef75893f6207a8350" category="list-text">*spec.namespaceMapping*: (_required_) os namespaces de destino e origem devem corresponder ao namespace de aplicativo definido no respetivo CR de aplicação.</block>
+  <block id="0d2f17f43053f85c97752c575bb2af3e" category="list-text">*Spec.sourceAppVaultRef*: (_required_) este valor deve corresponder ao nome do AppVault para o aplicativo de origem.</block>
+  <block id="5c0044cad9c27e4f4742c4a031edd6eb" category="list-text">*Spec.sourceApplicationName*: (_required_) esse valor deve corresponder ao nome do aplicativo de origem definido no CR do aplicativo de origem.</block>
+  <block id="be4ed18b3b9c2261b9f3966d0d80e6c4" category="list-text">*Spec.storageClassName*: (_required_) escolha o nome de uma classe de armazenamento válida no cluster. A classe de armazenamento deve ser colocada em Contato com a classe de armazenamento que está em uso no cluster de origem onde o aplicativo de origem é implantado.</block>
+  <block id="e1e70c108ffb369c9c05ac65820562c3" category="list-text">Depois de preencher o<block ref="e4fba3915616865173fe7feee130a30f" prefix=" " category="inline-code"></block> ficheiro com os valores corretos, aplique o CR:</block>
+  <block id="d4c94febe4f13411fa761de57ad6cce6" category="open-title">Crie um AppMirrorRelationship usando a CLI</block>
+  <block id="1d29e9d9da5d097b90cc18a976fa591c" category="list-text">Crie e aplique o objeto AppMirrorRelationship, substituindo valores entre parênteses por informações do seu ambiente. Por exemplo:</block>
+  <block id="86d47ead9019d8e9c93c863f7ab4e41b" category="list-text">(_Optional_) Verifique o estado e o estado da relação de replicação:</block>
+  <block id="70cc2bec279e168711b67e789468c45c" category="section-title">Failover para o cluster de destino</block>
+  <block id="196c4df78e5add7c9590d6a1c18367ec" category="paragraph">Com o Trident Protect, você pode fazer failover de aplicações replicadas para um cluster de destino. Este procedimento interrompe a relação de replicação e coloca a aplicação online no cluster de destino. O Trident Protect não interrompe o aplicativo no cluster de origem se ele estiver operacional.</block>
+  <block id="ffb2e8a8e2a97e36799531c053229941" category="list-text">Abra o arquivo CR do AppMirrorRelationship (por exemplo,<block ref="e4fba3915616865173fe7feee130a30f" prefix=" " category="inline-code"></block> ) e altere o valor de *spec.desiredState* para<block ref="2c42d7d277f63fcbe64b041b997ceaed" prefix=" " category="inline-code"></block>.</block>
+  <block id="2d258c624d61d2388efacfc246d2439e" category="list-text">Salve o arquivo CR.</block>
+  <block id="66ccf267a388b1a30a7530a93ea5ce18" category="list-text">(_Optional_) Crie todos os programas de proteção que você precisa no aplicativo com falha.</block>
+  <block id="ea7117a895b98283737d3855ef6a2adc" category="section-title">Ressincronizar uma relação de replicação com falha</block>
+  <block id="c91dda18aff454993264381ffa25993f" category="paragraph">A operação ressincronizada restabelece a relação de replicação. Depois de executar uma operação ressincronizada, o aplicativo de origem original se torna o aplicativo em execução e quaisquer alterações feitas no aplicativo em execução no cluster de destino serão descartadas.</block>
+  <block id="86e073f24d64b270ed8fd6bac00280eb" category="paragraph">O processo pára o aplicativo no cluster de destino antes de restabelecer a replicação.</block>
+  <block id="63a5fb6889ac843fec3c274399995a88" category="admonition">Todos os dados gravados na aplicação de destino durante o failover serão perdidos.</block>
+  <block id="40b77bd147004d34167c59a33489e3ca" category="list-text">Crie um instantâneo do aplicativo de origem.</block>
+  <block id="b0952495915865cc8c4cee9f26959545" category="list-text">Abra o arquivo CR do AppMirrorRelationship (por exemplo,<block ref="e4fba3915616865173fe7feee130a30f" prefix=" " category="inline-code"></block> ) e altere o valor de spec.desiredState para<block ref="072f9734fceb02f516b50d4174ac0f18" prefix=" " category="inline-code"></block>.</block>
+  <block id="c7e41946fafafcb541aaa5a67635b607" category="list-text">Se você criou quaisquer programações de proteção no cluster de destino para proteger o aplicativo com falha, remova-os. Quaisquer programações restantes causam falhas de snapshot de volume.</block>
+  <block id="6e81bcb9e218ada350c173457300a0ed" category="section-title">Ressincronização reversa de uma relação de replicação com falha</block>
+  <block id="b29e882c5e41f060c9261101cb1cab06" category="paragraph">Quando você faz a ressincronização reversa de uma relação de replicação com falha, o aplicativo de destino se torna o aplicativo de origem e a origem se torna o destino. As alterações feitas na aplicação de destino durante o failover são mantidas.</block>
+  <block id="6916d76a20f4ca4fffa219680ae6e418" category="list-text">Exclua o AppMirrorRelationship CR no cluster de destino original. Isso faz com que o destino se torne a fonte. Se houver planos de proteção restantes no novo cluster de destino, remova-os.</block>
+  <block id="3c890586eb43d0d71cdcb47011358420" category="list-text">Configure uma relação de replicação aplicando os arquivos CR usados originalmente para configurar a relação com os clusters opostos.</block>
+  <block id="e4d13c88dbb2196550655288d4cf351a" category="list-text">Certifique-se de que o AppVault CRS esteja pronto em cada cluster.</block>
+  <block id="8a427fa57d96e74516c008754320b521" category="list-text">Configure uma relação de replicação no cluster oposto, configurando valores para a direção inversa.</block>
+  <block id="792322eb4a0bf1a122100fc009041d9b" category="section-title">Sentido de replicação da aplicação inversa</block>
+  <block id="eb89cf8a1850f41e41a65f7b65ec9c87" category="paragraph">Quando você inverte a direção da replicação, o Trident Protect move o aplicativo para o back-end de storage de destino e continua replicando de volta para o back-end de storage de origem original. O Trident Protect interrompe a aplicação de origem e replica os dados para o destino antes de fazer o failover para a aplicação de destino.</block>
+  <block id="4625c1e6ccf2351ad9a08dcee33270c8" category="paragraph">Nesta situação, você está trocando a origem e o destino.</block>
+  <block id="06275f61faab68bc1c01a07a41aadfed" category="list-text">Criar um instantâneo de encerramento:</block>
+  <block id="4f902591d45de06985f0af6d869c8a04" category="open-title">Crie um instantâneo de encerramento utilizando um CR</block>
+  <block id="1f6c30c2bcecec90eda54cd7038f326b" category="list-text">Desative as programações de políticas de proteção para o aplicativo de origem.</block>
+  <block id="4a4cfa535eb9cd705b5999ffaa6a738b" category="list-text">Criar um ficheiro ShutdownSnapshot CR:</block>
+  <block id="92391ecdad41a6b33b04771b3e5e20bf" category="list-text">Crie o arquivo de recurso personalizado (CR) e nomeie-o (por exemplo,<block ref="9bab8384d1fd26e8737f71771039462f" prefix=" " category="inline-code"></block> ).</block>
+  <block id="1b38935a45d4eaf71098501cbdc191df" category="list-text">*metadata.name*: (_required_) o nome do recurso personalizado.</block>
+  <block id="54c1687e91064a6e4cdc35b9a2d411a8" category="list-text">*Spec.ApplicationRef*: (_required_) este valor deve corresponder ao campo metadata.name do arquivo CR da aplicação de origem.</block>
+  <block id="4390dd9bb73a0c56ac3c54b54b1fe51a" category="list-text">Depois de preencher o<block ref="9bab8384d1fd26e8737f71771039462f" prefix=" " category="inline-code"></block> ficheiro com os valores corretos, aplique o CR:</block>
+  <block id="f450395b52edc310f6e53fe1a9e24477" category="open-title">Crie um instantâneo de encerramento usando a CLI</block>
+  <block id="01eb7f0adf446989c265a6179909de7b" category="list-text">Crie o instantâneo de encerramento, substituindo valores entre parênteses por informações do seu ambiente. Por exemplo:</block>
+  <block id="5c29a32288e71f1820e4af984e4616d6" category="list-text">Após a conclusão do snapshot, obtenha o status do snapshot:</block>
+  <block id="eae3a231fcdd07328a039c0bd1b3ebdf" category="list-text">Encontre o valor de *shutdownsnapshot.status.appArchivePath* usando o seguinte comando, e Registre a última parte do caminho do arquivo (também chamado de basename; isso será tudo após a última barra):</block>
+  <block id="9facdd349a186c792ec6a26f5b938472" category="list-text">Execute um failover do cluster de destino para o cluster de origem, com a seguinte alteração:</block>
+  <block id="bdd0666b03fe73dd725c0376fdb435e0" category="admonition">Na etapa 2 do procedimento de failover, inclua o<block ref="60464bee8fcac84cb209df68a2b05fba" prefix=" " category="inline-code"></block> campo no arquivo AppMirrorRelationship CR e defina seu valor para o nome de base registrado na etapa 3 acima.</block>
+  <block id="6813800aea854bfb29f3b2931dae3410" category="list-text">Execute as etapas de ressincronização reversa no <block ref="34fbd8efeee5eb11716e5f3f4c6db090" category="inline-xref-macro-rx"></block>.</block>
+  <block id="ab486212bb19e45c8e71532739574a22" category="list-text">Ative programações de proteção no novo cluster de origem.</block>
+  <block id="aea4fd534bd3152673956c6bbd7c115c" category="paragraph">As seguintes ações ocorrem devido à replicação reversa:</block>
+  <block id="a23cf6af7e31f808d57bb74c992226c6" category="list-text">Um snapshot é obtido dos recursos do Kubernetes do aplicativo de origem original.</block>
+  <block id="08c383efd49395a644fa60036a0853a2" category="list-text">Os pods do aplicativo de origem original são interrompidos graciosamente ao excluir os recursos do Kubernetes do aplicativo (deixando PVCs e PVS no lugar).</block>
+  <block id="0053c8b169583fc7b29e0dfbe82d59fd" category="list-text">Depois que os pods são desativados, snapshots dos volumes do aplicativo são feitos e replicados.</block>
+  <block id="b1907879d61e1f061c433469dfb8ddcf" category="list-text">As relações do SnapMirror são quebradas, tornando os volumes de destino prontos para leitura/gravação.</block>
+  <block id="b6c3873d17157e3e4a0b1ef02b3cef69" category="list-text">Os recursos do Kubernetes do aplicativo são restaurados a partir do snapshot de pré-encerramento, usando os dados de volume replicados após o desligamento do aplicativo de origem original.</block>
+  <block id="3cecdf93ba8c40eb3b09b7a7f9985e1d" category="list-text">A replicação é restabelecida na direção inversa.</block>
+  <block id="827d6f4840be3ba668aa3eaee7c11d8d" category="section-title">Falha de aplicativos para o cluster de origem original</block>
+  <block id="fbe6471033a142db5e3165e4034c1157" category="paragraph">Usando o Trident Protect, você pode obter "failback" após uma operação de failover usando a seguinte sequência de operações. Nesse fluxo de trabalho para restaurar a direção de replicação original, o Trident Protect replica (ressincrones) qualquer aplicativo é alterado de volta para o aplicativo de origem original antes de reverter a direção de replicação.</block>
+  <block id="3a045f0ae84563b460627f43bb272936" category="paragraph">Esse processo começa a partir de um relacionamento que concluiu um failover para um destino e envolve as seguintes etapas:</block>
+  <block id="9cbd7771b861e31b5edb23d83de4758c" category="list-text">Comece com um estado com falha em excesso.</block>
+  <block id="9f8be3d8552ca406f8bc6e98f620deeb" category="list-text">Inverta a ressincronização do relacionamento.</block>
+  <block id="ad04ac539c02d43abb5b3468d853b96d" category="list-text">Inverta a replicação.</block>
+  <block id="a98cf8721f50314020f780a1b99cc880" category="list-text">Execute os <block ref="3767bb9c312610e22029cc3e24b4717f" category="inline-xref-macro-rx"></block> passos</block>
+  <block id="b776a375decd9bf6b9cc3c7744034e92" category="list-text">Execute os <block ref="34fbd8efeee5eb11716e5f3f4c6db090" category="inline-xref-macro-rx"></block> passos</block>
+  <block id="39d2beed854377dcad2ea22fe9e58477" category="section-title">Excluir uma relação de replicação</block>
+  <block id="a6c87e2b66308cd117a39af0fdac9885" category="paragraph">Você pode excluir um relacionamento de replicação a qualquer momento. Quando você exclui a relação de replicação do aplicativo, isso resulta em dois aplicativos separados sem relação entre eles.</block>
+  <block id="146012b834b7d1f68305ff2495a1beb7" category="list-text">Excluir o AppMirrorRelationship CR:</block>
+  <block id="c4407b1cc5192fe600872654a5ffe223" category="list-text">Adição de novos recursos do Trident para workflows nativos do Kubernetes:</block>
+  <block id="7e7397a7b79323762c61941fc0e6b5f9" category="list-text">Proteção de dados</block>
+  <block id="5866b98c049a53ea6dc7f50f9349f434" category="list-text">Migração de dados</block>
+  <block id="645a84975202e30700b572b49a5ee29d" category="list-text">Recuperação de desastres</block>
+  <block id="11d5920d0c0b3a97e764f84dc92ef110" category="list-text">Mobilidade de aplicativos</block>
+  <block id="f593e32b2a3ead4ac029c13126d3531d" category="inline-link-macro">Saiba mais sobre o Trident Protect</block>
+  <block id="4f341cba22662b4f62e28f58e573db1f" category="paragraph"><block ref="d74b9942b9f31e879889873ba2e086e3" category="inline-link-macro-rx"></block>.</block>
+  <block id="487dc96e91d89134e7a216bab529a019" category="paragraph">A partir do lançamento de 24,10, o Astra Trident é renomeado para Trident (NetApp Trident). Esse rebranding não afeta recursos, plataformas suportadas ou interoperabilidade para o Trident.</block>
+  <block id="cf3f16653945ea2a3c2a47b5dce1e6b2" category="list-text">*Preserve o software complementar no cluster* - essa opção remove o gerenciamento do Amazon EKS de qualquer configuração. Ele também remove a capacidade do Amazon EKS de notificá-lo de atualizações e atualizar automaticamente o complemento do Amazon EKS depois de iniciar uma atualização. No entanto, ele preserva o software complementar no cluster. Essa opção torna o complemento uma instalação autogerenciada, em vez de um complemento do Amazon EKS. Com essa opção, não há tempo de inatividade para o complemento. Guarde a<block ref="4b4ac0f998920a46fd2015e11d01d3e7" prefix=" " category="inline-code"></block> opção no comando para preservar o complemento.</block>
+  <block id="b84ba52748723df31fdf54485208c120" category="list-text">*Remover software complementar inteiramente do cluster* - recomendamos que você remova o suplemento do Amazon EKS do cluster somente se não houver recursos no cluster que dependam dele. Remova<block ref="4b4ac0f998920a46fd2015e11d01d3e7" prefix=" " category="inline-code"></block> a opção do<block ref="099af53f601532dbd31e0ea99ffdeb64" prefix=" " category="inline-code"></block> comando para remover o complemento.</block>
+  <block id="a2d3ef10e2d8aae09270e11f8faea2d2" category="sidebar">Proteção e gerenciamento avançados de dados</block>
+  <block id="6274fe9ce01bdde4e27e80b7958fb714" category="sidebar">Proteção de dados avançada com o Trident Protect</block>
+  <block id="1251ea693b8f0b6da19ce6991115faa0" category="sidebar">Implante o Trident Protect</block>
+  <block id="6c3cb2816fa53d1d99c44a111d9f7206" category="sidebar">Proteja aplicações com o Trident Protect</block>
+  <block id="884400bd4c8f5f2b0070bef92b055594" category="sidebar">Instale o Trident Protect</block>
+  <block id="f284d92e4bd22a3c7a76bfe530ddd899" category="sidebar">Gerenciar o Trident Protect</block>
+  <block id="b9ef0ee6944eb101de3de64b82db00dd" category="sidebar">Gerar um pacote de suporte Trident Protect</block>
+  <block id="1ae067a03c56065918252f36c73024d1" category="sidebar">Gerenciar e proteger aplicativos</block>
+  <block id="793ba052e921b84a44dd053d68f45012" category="sidebar">Gerencie ganchos de execução com o Trident Protect</block>
 </blocks>
