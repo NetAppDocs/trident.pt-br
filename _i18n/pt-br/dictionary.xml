@@ -4880,7 +4880,6 @@
   <block id="645a84975202e30700b572b49a5ee29d" category="list-text">Recuperação de desastres</block>
   <block id="11d5920d0c0b3a97e764f84dc92ef110" category="list-text">Mobilidade de aplicativos</block>
   <block id="f593e32b2a3ead4ac029c13126d3531d" category="inline-link-macro">Saiba mais sobre o Trident Protect</block>
-  <block id="4f341cba22662b4f62e28f58e573db1f" category="paragraph"><block ref="d74b9942b9f31e879889873ba2e086e3" category="inline-link-macro-rx"></block>.</block>
   <block id="487dc96e91d89134e7a216bab529a019" category="paragraph">A partir do lançamento de 24,10, o Astra Trident é renomeado para Trident (NetApp Trident). Esse rebranding não afeta recursos, plataformas suportadas ou interoperabilidade para o Trident.</block>
   <block id="cf3f16653945ea2a3c2a47b5dce1e6b2" category="list-text">*Preserve o software complementar no cluster* - essa opção remove o gerenciamento do Amazon EKS de qualquer configuração. Ele também remove a capacidade do Amazon EKS de notificá-lo de atualizações e atualizar automaticamente o complemento do Amazon EKS depois de iniciar uma atualização. No entanto, ele preserva o software complementar no cluster. Essa opção torna o complemento uma instalação autogerenciada, em vez de um complemento do Amazon EKS. Com essa opção, não há tempo de inatividade para o complemento. Guarde a<block ref="4b4ac0f998920a46fd2015e11d01d3e7" prefix=" " category="inline-code"></block> opção no comando para preservar o complemento.</block>
   <block id="b84ba52748723df31fdf54485208c120" category="list-text">*Remover software complementar inteiramente do cluster* - recomendamos que você remova o suplemento do Amazon EKS do cluster somente se não houver recursos no cluster que dependam dele. Remova<block ref="4b4ac0f998920a46fd2015e11d01d3e7" prefix=" " category="inline-code"></block> a opção do<block ref="099af53f601532dbd31e0ea99ffdeb64" prefix=" " category="inline-code"></block> comando para remover o complemento.</block>
@@ -4893,4 +4892,5 @@
   <block id="b9ef0ee6944eb101de3de64b82db00dd" category="sidebar">Gerar um pacote de suporte Trident Protect</block>
   <block id="1ae067a03c56065918252f36c73024d1" category="sidebar">Gerenciar e proteger aplicativos</block>
   <block id="793ba052e921b84a44dd053d68f45012" category="sidebar">Gerencie ganchos de execução com o Trident Protect</block>
+  <block id="a4ac350fb585f51020f747525f3175d8" category="paragraph"><block ref="2c7a14b5507108d57a83e6eb9858f03a" category="inline-link-macro-rx"></block>.</block>
 </blocks>
