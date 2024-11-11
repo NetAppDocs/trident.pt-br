@@ -124,7 +124,7 @@ curl -L -O https://github.com/NetApp/tridentctl-protect/releases/download/24.10.
 +
 [source, console]
 ----
-md ~/.bash/completions
+mkdir -p ~/.bash/completions
 ----
 . Mova o script baixado para `~/.bash/completions` o diretório:
 +
@@ -153,7 +153,7 @@ curl -L -O https://github.com/NetApp/tridentctl-protect/releases/download/24.10.
 +
 [source, console]
 ----
-md ~/.zsh/completions
+mkdir -p ~/.zsh/completions
 ----
 . Mova o script baixado para `~/.zsh/completions` o diretório:
 +
