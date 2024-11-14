@@ -63,6 +63,6 @@ https://azure.microsoft.com/en-us/services/netapp/["Azure NetApp Files"^] É um 
 
 
 
-== Cloud Volumes Service para Google Cloud
+== Google Cloud NetApp volumes
 
-https://cloud.netapp.com/cloud-volumes-service-for-gcp?utm_source=GitHub&utm_campaign=Trident["NetApp Cloud Volumes Service para Google Cloud"^] É um serviço de arquivos nativo da nuvem que fornece volumes nas em NFS e SMB com performance all-flash. Esse serviço permite que qualquer workload, incluindo aplicações legadas, seja executado na nuvem do GCP. Ele fornece um serviço totalmente gerenciado que oferece alta performance consistente, clonagem instantânea, proteção de dados e acesso seguro às instâncias do Google Compute Engine (GCE).
+https://cloud.netapp.com/cloud-volumes-service-for-gcp?utm_source=GitHub&utm_campaign=Trident["Google Cloud NetApp volumes"^] É um serviço de arquivos nativo da nuvem que fornece volumes nas em NFS com performance all-flash. Esse serviço permite que qualquer workload, incluindo aplicações legadas, seja executado na nuvem do GCP. Ele fornece um serviço totalmente gerenciado que oferece alta performance consistente, clonagem instantânea, proteção de dados e acesso seguro às instâncias do Google Compute Engine (GCE).

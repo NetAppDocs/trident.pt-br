@@ -14,10 +14,6 @@ summary:
 [role="lead"]
 Agora você pode configurar o Google Cloud NetApp volumes como back-end para o Trident. É possível anexar volumes NFS usando um back-end do Google Cloud NetApp volumes.
 
-[listing]
-----
- Google Cloud NetApp Volumes is a tech preview feature in Trident 24.06.
-----
 
 
 == Detalhes do driver do Google Cloud NetApp volumes

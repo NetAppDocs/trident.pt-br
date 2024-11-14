@@ -62,31 +62,31 @@ https://www.netapp.com/azure/azure-netapp-files/["Azure NetApp Files"^] É um se
 link:https://www.netapp.com/cloud-services/cloud-volumes-ontap/["Cloud Volumes ONTAP"^] É um dispositivo de storage somente de software que executa o software de gerenciamento de dados ONTAP na nuvem.
 
 ====
-.Cloud Volumes Service para Google Cloud
+.Google Cloud NetApp volumes
 [%collapsible]
 ====
-link:https://bluexp.netapp.com/google-cloud-netapp-volumes?utm_source=GitHub&utm_campaign=Trident["NetApp Cloud Volumes Service para Google Cloud"^] É um serviço de arquivos nativo da nuvem que fornece volumes nas em NFS e SMB com performance all-flash.
+link:https://bluexp.netapp.com/google-cloud-netapp-volumes?utm_source=GitHub&utm_campaign=Trident["Google Cloud NetApp volumes"^] O Google Cloud é um serviço de storage de arquivos totalmente gerenciado que oferece storage de arquivos de nível empresarial e de alta performance.
 
-====
-.Software Element
-[%collapsible]
 ====
 https://www.netapp.com/data-management/element-software/["Elemento"^] permite que o administrador de storage consolide workloads garantindo a performance e possibilitando um espaço físico do storage simplificado e otimizado.
 
+[]
 ====
-.NetApp HCI
-[%collapsible]
+
 ====
 link:https://docs.netapp.com/us-en/hci/docs/concept_hci_product_overview.html["NetApp HCI"^] simplifica o gerenciamento e a escala do data center automatizando tarefas de rotina e permitindo que os administradores de infraestrutura se concentrem em funções mais importantes.
 
 O Trident pode provisionar e gerenciar dispositivos de storage para aplicações em contêiner diretamente na plataforma de storage subjacente da NetApp HCI.
 
+[]
 ====
-.NetApp ONTAP
-[%collapsible]
+
 ====
 link:https://docs.netapp.com/us-en/ontap/index.html["NetApp ONTAP"^] É o sistema operacional de storage unificado multiprotocolo da NetApp que oferece recursos avançados de gerenciamento de dados para qualquer aplicação.
 
 Os sistemas ONTAP têm configurações all-flash, híbridas ou totalmente HDD e oferecem muitos modelos de implantação diferentes, incluindo hardware projetado (FAS e AFF), white-box (ONTAP Select) e somente para nuvem (Cloud Volumes ONTAP). O Trident oferece suporte a esses modelos de implantação do ONTAP.
+
+[]
+====
 
 ====
