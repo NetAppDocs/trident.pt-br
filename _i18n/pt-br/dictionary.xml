@@ -4423,7 +4423,6 @@
   <block id="9ee0b57319616120eef37546fa8e4c42" category="doc">Instalar e configurar o Trident Protect</block>
   <block id="dc48a335c2095fb6a79ee14ee62b4806" category="paragraph">Se o seu ambiente atender aos requisitos do Trident Protect, siga estas etapas para instalar o Trident Protect no cluster. Você pode obter o Trident Protect do NetApp, ou instalá-lo a partir de seu próprio Registro privado. A instalação a partir de um registo privado é útil se o cluster não conseguir aceder à Internet.</block>
   <block id="1d5f2a4008fa2c223d0ebc6aea423256" category="open-title">Instale o Trident Protect do NetApp</block>
-  <block id="6802e29016a0674682497c848bf90236" category="list-text">Use o Helm para instalar o Trident Protect. Substitua<block ref="b90b2ffedb63ca3bd8795caf4397715e" prefix=" " category="inline-code"></block> por um nome de cluster, que será atribuído ao cluster e usado para identificar backups e snapshots deste cluster:</block>
   <block id="b533d7fe842e47fbd62d24400867d3f2" category="list-text">Opcionalmente, congele suas VMs. Se você estiver usando o suporte do KubeVirt para SnapMirror, congelar VMs ajuda você a gerenciá-las de forma eficaz:</block>
   <block id="e49b02afb984c32aa521917480fc4012" category="inline-link-macro">Instalando o OpenShift Virtualization</block>
   <block id="c096df753a5c7335177118895259c96a" category="admonition">Você precisa configurar a virtualização para que a funcionalidade de congelamento funcione. As VMs implantadas após essa configuração incluem os binários necessários para congelar e descongelar. Para saber mais sobre como configurar a virtualização, <block ref="2e657c6eb92d8a54673acb8e93eb84d5" category="inline-link-macro-rx"></block>consulte .</block>
@@ -4434,7 +4433,6 @@
   <block id="e0f6b701766eb28d805d7ba1e820f582" category="list-text">Inicie sessão no registo:</block>
   <block id="814565bb5d7e7359fff967986fd4195a" category="list-text">Crie um segredo para usar para autenticação de Registro privado:</block>
   <block id="9fd6c1e403ca347a1528f0f6688f6a06" category="list-text">Crie um arquivo chamado<block ref="5744e710490761bdd5b4603b9b0487a7" prefix=" " category="inline-code"></block> que contenha as seguintes configurações de proteção do Trident:</block>
-  <block id="5d276dc92276b59621488d2545356081" category="list-text">Use o Helm para instalar o Trident Protect:</block>
   <block id="86e8b34710172d33dcae839e1f4dd07e" category="summary">Você pode tornar o Trident Protect ciente de um aplicativo que deseja gerenciar criando um CR de aplicativo e um CR de AppVault associado.</block>
   <block id="80b940e5c68d020c06f9dc2f188d2169" category="doc">Definir uma aplicação para gestão</block>
   <block id="1e10d655f5307ce7f79aeee68a9e72f3" category="paragraph">Você pode definir um aplicativo que deseja gerenciar com o Trident Protect criando um CR de aplicativo e um CR de AppVault associado.</block>
@@ -4823,7 +4821,6 @@
   <block id="eae3a231fcdd07328a039c0bd1b3ebdf" category="list-text">Encontre o valor de *shutdownsnapshot.status.appArchivePath* usando o seguinte comando, e Registre a última parte do caminho do arquivo (também chamado de basename; isso será tudo após a última barra):</block>
   <block id="9facdd349a186c792ec6a26f5b938472" category="list-text">Execute um failover do cluster de destino para o cluster de origem, com a seguinte alteração:</block>
   <block id="bdd0666b03fe73dd725c0376fdb435e0" category="admonition">Na etapa 2 do procedimento de failover, inclua o<block ref="60464bee8fcac84cb209df68a2b05fba" prefix=" " category="inline-code"></block> campo no arquivo AppMirrorRelationship CR e defina seu valor para o nome de base registrado na etapa 3 acima.</block>
-  <block id="6813800aea854bfb29f3b2931dae3410" category="list-text">Execute as etapas de ressincronização reversa no <block ref="34fbd8efeee5eb11716e5f3f4c6db090" category="inline-xref-macro-rx"></block>.</block>
   <block id="ab486212bb19e45c8e71532739574a22" category="list-text">Ative programações de proteção no novo cluster de origem.</block>
   <block id="aea4fd534bd3152673956c6bbd7c115c" category="paragraph">As seguintes ações ocorrem devido à replicação reversa:</block>
   <block id="a23cf6af7e31f808d57bb74c992226c6" category="list-text">Um snapshot é obtido dos recursos do Kubernetes do aplicativo de origem original.</block>
@@ -4836,10 +4833,6 @@
   <block id="fbe6471033a142db5e3165e4034c1157" category="paragraph">Usando o Trident Protect, você pode obter "failback" após uma operação de failover usando a seguinte sequência de operações. Nesse fluxo de trabalho para restaurar a direção de replicação original, o Trident Protect replica (ressincrones) qualquer aplicativo é alterado de volta para o aplicativo de origem original antes de reverter a direção de replicação.</block>
   <block id="3a045f0ae84563b460627f43bb272936" category="paragraph">Esse processo começa a partir de um relacionamento que concluiu um failover para um destino e envolve as seguintes etapas:</block>
   <block id="9cbd7771b861e31b5edb23d83de4758c" category="list-text">Comece com um estado com falha em excesso.</block>
-  <block id="9f8be3d8552ca406f8bc6e98f620deeb" category="list-text">Inverta a ressincronização do relacionamento.</block>
-  <block id="ad04ac539c02d43abb5b3468d853b96d" category="list-text">Inverta a replicação.</block>
-  <block id="a98cf8721f50314020f780a1b99cc880" category="list-text">Execute os <block ref="3767bb9c312610e22029cc3e24b4717f" category="inline-xref-macro-rx"></block> passos</block>
-  <block id="b776a375decd9bf6b9cc3c7744034e92" category="list-text">Execute os <block ref="34fbd8efeee5eb11716e5f3f4c6db090" category="inline-xref-macro-rx"></block> passos</block>
   <block id="39d2beed854377dcad2ea22fe9e58477" category="section-title">Excluir uma relação de replicação</block>
   <block id="a6c87e2b66308cd117a39af0fdac9885" category="paragraph">Você pode excluir um relacionamento de replicação a qualquer momento. Quando você exclui a relação de replicação do aplicativo, isso resulta em dois aplicativos separados sem relação entre eles.</block>
   <block id="146012b834b7d1f68305ff2495a1beb7" category="list-text">Excluir o AppMirrorRelationship CR:</block>
@@ -4902,4 +4895,26 @@
   <block id="8019e0dcd97c1bda9a4283c660df9424" category="list-text">Clique na guia *Complementos* e, em seguida, clique em *Astra Trident by NetApp*.*</block>
   <block id="03f2a9d8b5b9f1a03bc58b91a939d84f" category="paragraph"><block ref="ad43edaec055586043c762c9475bde5c" category="inline-link-macro-rx"></block> O Google Cloud é um serviço de storage de arquivos totalmente gerenciado que oferece storage de arquivos de nível empresarial e de alta performance.</block>
   <block id="0ce84605b24873b2ee81987302d60089" category="paragraph"><block ref="bc468e9b0072cb6f1552f9bc0a3b6063" category="inline-link-rx"></block> É um serviço de arquivos nativo da nuvem que fornece volumes nas em NFS com performance all-flash. Esse serviço permite que qualquer workload, incluindo aplicações legadas, seja executado na nuvem do GCP. Ele fornece um serviço totalmente gerenciado que oferece alta performance consistente, clonagem instantânea, proteção de dados e acesso seguro às instâncias do Google Compute Engine (GCE).</block>
+  <block id="afb432a9cb893dca3218bf5ed8f124b6" category="section-title">Etapa 6: Conceder acesso a objetos AppVault</block>
+  <block id="518792e00e0ca0d711657c9051ae8b45" category="paragraph">Para executar tarefas de gerenciamento de dados, como backups e snapshots, o administrador do cluster precisa conceder acesso a objetos AppVault a usuários individuais.</block>
+  <block id="3ce2b0dd65dc314e4d0ccf4ed02db5a7" category="list-text">Crie e aplique um arquivo YAML de combinação secreta e AppVault que concede a um usuário acesso a um AppVault. Por exemplo, o CR a seguir concede acesso a um AppVault ao usuário<block ref="6ca05da537cc3daa1ec22134c0b69946" prefix=" " category="inline-code"></block>:</block>
+  <block id="f1c648202447b3667edef5439e1a8c5e" category="list-text">Crie e aplique um CR de função para permitir que os administradores de cluster concedam acesso a recursos específicos em um namespace. Por exemplo:</block>
+  <block id="2ebacf7e8f38b367350c5c91618a6e79" category="list-text">Criar e aplicar um RoleBinding CR para vincular as permissões ao usuário eng-user. Por exemplo:</block>
+  <block id="dc3d0a515ce0266cb00eb5cc06c4fe94" category="list-text">Verifique se as permissões estão corretas.</block>
+  <block id="b5c9b7c142e23b0f885d64628ec267ff" category="list-text">Tente recuperar informações de objeto AppVault para todos os namespaces:</block>
+  <block id="d0848afd8553c34945705222a97a4553" category="paragraph">Você deve ver saída semelhante ao seguinte:</block>
+  <block id="07337191562a62a775a853d9901903a6" category="list-text">Teste para ver se o usuário pode obter as informações do AppVault que ele agora tem permissão para acessar:</block>
+  <block id="e7165fc51f62031fcae1d793899febaa" category="paragraph">Os usuários aos quais você concedeu permissões AppVault devem poder usar objetos AppVault autorizados para operações de gerenciamento de dados de aplicativos e não devem poder acessar recursos fora dos namespaces atribuídos ou criar novos recursos aos quais eles não têm acesso.</block>
+  <block id="a268a576db3133de464aad1cd81ab3e1" category="inline-link-macro">gerar um pacote de suporte</block>
+  <block id="a10e94152d7706a1754c5224358811ad" category="admonition">Por padrão, o Trident Protect coleta informações de suporte que ajudam em todos os casos de suporte da NetApp que você possa abrir, incluindo logs, métricas e informações de topologia sobre clusters e aplicativos gerenciados. O Trident Protect envia esses pacotes de suporte ao NetApp diariamente. Opcionalmente, você pode desativar essa coleção de pacotes de suporte ao instalar o Trident Protect. Você pode manualmente <block ref="dedfc5877c343d6cbe77701c7edd9bde" category="inline-link-macro-rx"></block> a qualquer momento.</block>
+  <block id="76d9687f27080e6c2da9c8a0d64fbd42" category="list-text">Instale as CRDs Trident Protect:</block>
+  <block id="a29c2442da7eaa2adc245c73a4fa8969" category="list-text">Use o Helm para instalar o Trident Protect usando um dos seguintes comandos. Substitua<block ref="b90b2ffedb63ca3bd8795caf4397715e" prefix=" " category="inline-code"></block> por um nome de cluster, que será atribuído ao cluster e usado para identificar os backups e snapshots do cluster:</block>
+  <block id="7eccc1ff44845b9328911013fd4f479d" category="list-text">Instale o Trident Protect normalmente:</block>
+  <block id="567ddef6d1b44dd7de5bb03fcf15e432" category="list-text">Instale o Trident Protect e desative os carregamentos diários programados do pacote de suporte do Trident Protect AutoSupport:</block>
+  <block id="753f99fdafabdea1282917a0d7df52d4" category="list-text">Execute as etapas de ressincronização reversa no <block ref="07428cadd63a52910df8ba314efe2f56" category="inline-xref-macro-rx"></block>.</block>
+  <block id="fe411ea35c29677771dcaad52985fc08" category="list-text">Reverta a ressincronização da relação de replicação.</block>
+  <block id="eb10e971ec83f13f35beb8166ae8958b" category="admonition">Não execute uma operação de ressincronização normal, pois isso descartará os dados gravados no cluster de destino durante o procedimento de failover.</block>
+  <block id="de5da2c7cfd6c7eda31703be01d3513e" category="list-text">Inverta a direção da replicação.</block>
+  <block id="be41e0ea028981dcba35343dcbd34991" category="list-text">Execute os <block ref="07428cadd63a52910df8ba314efe2f56" category="inline-xref-macro-rx"></block> passos.</block>
+  <block id="e3f67484570d0b1b5736841718c5ab22" category="list-text">Execute os <block ref="80fca82e419d46692dbbc4fbbcd0c990" category="inline-xref-macro-rx"></block> passos.</block>
 </blocks>

@@ -458,7 +458,7 @@ k get shutdownsnapshot -n my-app-namespace <shutdown_snapshot_name> -o jsonpath=
 
 NOTE: Na etapa 2 do procedimento de failover, inclua o `spec.promotedSnapshot` campo no arquivo AppMirrorRelationship CR e defina seu valor para o nome de base registrado na etapa 3 acima.
 
-. Execute as etapas de ressincronização reversa no <<Reverse resync a failed over replication>>.
+. Execute as etapas de ressincronização reversa no <<Ressincronização reversa de uma relação de replicação com falha>>.
 . Ative programações de proteção no novo cluster de origem.
 
 
@@ -485,13 +485,17 @@ Usando o Trident Protect, você pode obter "failback" após uma operação de fa
 Esse processo começa a partir de um relacionamento que concluiu um failover para um destino e envolve as seguintes etapas:
 
 * Comece com um estado com falha em excesso.
-* Inverta a ressincronização do relacionamento.
-* Inverta a replicação.
+* Reverta a ressincronização da relação de replicação.
++
+
+CAUTION: Não execute uma operação de ressincronização normal, pois isso descartará os dados gravados no cluster de destino durante o procedimento de failover.
+
+* Inverta a direção da replicação.
 
 
 .Passos
-. Execute os <<Resync a failed over replication>> passos
-. Execute os <<Reverse resync a failed over replication>> passos
+. Execute os <<Ressincronização reversa de uma relação de replicação com falha>> passos.
+. Execute os <<Sentido de replicação da aplicação inversa>> passos.
 
 
 

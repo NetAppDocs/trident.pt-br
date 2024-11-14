@@ -16,6 +16,9 @@ summary: Se o seu ambiente atender aos requisitos, siga estas etapas para instal
 [role="lead"]
 Se o seu ambiente atender aos requisitos do Trident Protect, siga estas etapas para instalar o Trident Protect no cluster. Você pode obter o Trident Protect do NetApp, ou instalá-lo a partir de seu próprio Registro privado. A instalação a partir de um registo privado é útil se o cluster não conseguir aceder à Internet.
 
+
+NOTE: Por padrão, o Trident Protect coleta informações de suporte que ajudam em todos os casos de suporte da NetApp que você possa abrir, incluindo logs, métricas e informações de topologia sobre clusters e aplicativos gerenciados. O Trident Protect envia esses pacotes de suporte ao NetApp diariamente. Opcionalmente, você pode desativar essa coleção de pacotes de suporte ao instalar o Trident Protect. Você pode manualmente link:trident-protect-generate-support-bundle.html["gerar um pacote de suporte"] a qualquer momento.
+
 [role="tabbed-block"]
 ====
 .Instale o Trident Protect do NetApp
@@ -26,17 +29,28 @@ Se o seu ambiente atender aos requisitos do Trident Protect, siga estas etapas p
 ----
 helm repo add netapp-trident-protect https://netapp.github.io/trident-protect-helm-chart
 ----
-. Use o Helm para instalar o Trident Protect. Substitua `<name_of_cluster>` por um nome de cluster, que será atribuído ao cluster e usado para identificar backups e snapshots deste cluster:
+. Instale as CRDs Trident Protect:
 +
 [source, console]
 ----
 helm install trident-protect-crds netapp-trident-protect/trident-protect-crds --version 100.2410.0
 ----
+. Use o Helm para instalar o Trident Protect usando um dos seguintes comandos. Substitua `<name_of_cluster>` por um nome de cluster, que será atribuído ao cluster e usado para identificar os backups e snapshots do cluster:
++
+** Instale o Trident Protect normalmente:
 +
 [source, console]
 ----
 helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name_of_cluster> --version 100.2410.0 --create-namespace --namespace trident-protect
 ----
+** Instale o Trident Protect e desative os carregamentos diários programados do pacote de suporte do Trident Protect AutoSupport:
++
+[source, console]
+----
+helm install trident-protect netapp-trident-protect/trident-protect --set autoSupport.enabled=false --set clusterName=<name_of_cluster> --version 100.2410.0 --create-namespace --namespace trident-protect
+----
+
+
 . Opcionalmente, congele suas VMs. Se você estiver usando o suporte do KubeVirt para SnapMirror, congelar VMs ajuda você a gerenciá-las de forma eficaz:
 +
 [source, console]
@@ -132,17 +146,28 @@ webhooksCleanup:
   imagePullSecrets:
   - name: regcred
 ----
-. Use o Helm para instalar o Trident Protect:
+. Instale as CRDs Trident Protect:
 +
 [source, console]
 ----
 helm install trident-protect-crds netapp-trident-protect/trident-protect-crds --version 100.2410.0
 ----
+. Use o Helm para instalar o Trident Protect usando um dos seguintes comandos. Substitua `<name_of_cluster>` por um nome de cluster, que será atribuído ao cluster e usado para identificar os backups e snapshots do cluster:
++
+** Instale o Trident Protect normalmente:
 +
 [source, console]
 ----
 helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name_of_cluster> --version 100.2410.0 --create-namespace --namespace trident-protect -f protectValues.yaml
 ----
+** Instale o Trident Protect e desative os carregamentos diários programados do pacote de suporte do Trident Protect AutoSupport:
++
+[source, console]
+----
+helm install trident-protect netapp-trident-protect/trident-protect --set autoSupport.enabled=false --set clusterName=<name_of_cluster> --version 100.2410.0 --create-namespace --namespace trident-protect -f protectValues.yaml
+----
+
+
 . Opcionalmente, congele suas VMs. Se você estiver usando o suporte do KubeVirt para SnapMirror, congelar VMs ajuda você a gerenciá-las de forma eficaz:
 +
 [source, console]
