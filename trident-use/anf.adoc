@@ -138,7 +138,7 @@ O exemplo a seguir instala o Trident e define `cloudProvider` o Azure usando a v
 
 [listing]
 ----
-helm install trident trident-operator-100.2410.0.tgz --set cloudProvider=$CP --set cloudIdentity=$CI
+helm install trident trident-operator-100.2410.0.tgz --set cloudProvider=$CP --set cloudIdentity="$CI"
 ----
 --
 .<code>dtridentctl</code>

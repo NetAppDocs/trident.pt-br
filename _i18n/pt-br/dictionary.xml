@@ -3205,7 +3205,6 @@
   <block id="96e1384807331548bf745acde0fe1b73" category="inline-link-macro">NetAppTV</block>
   <block id="5ff83dbc70e496ea22b38ea61bb69f05" category="list-text">Assista à demonstração no <block ref="c27441bbbe62adf51ae6ecec41fde8bd" category="inline-link-macro-rx"></block>.</block>
   <block id="821b0ad941ad2559ef18eb8de56a470e" category="summary">Todos os nós de trabalho no cluster do Kubernetes precisam ser capazes de montar os volumes provisionados para os pods. Se você estiver usando o driver ONTAP-nas, ONTAP-nas-Economy, ONTAP-nas-FlexGroup para um de seus back-ends, seus nós de trabalho precisarão das ferramentas NFS. Caso contrário, eles exigem as ferramentas iSCSI.</block>
-  <block id="cedfb4d575651cbf026e87084c68731c" category="paragraph">Todos os nós de trabalho no cluster do Kubernetes precisam ser capazes de montar os volumes provisionados para os pods. Para preparar os nós de trabalho, é necessário instalar ferramentas NFS, iSCSI ou NVMe/TCP com base na seleção de driver.</block>
   <block id="262309361fe5b6dcda3a2eae08a48c2d" category="section-title">Selecionar as ferramentas certas</block>
   <block id="2994aa6a94d7af57a2fb9663129866a9" category="paragraph">Se você estiver usando uma combinação de drivers, você deve instalar todas as ferramentas necessárias para seus drivers. Versões recentes do RedHat CoreOS têm as ferramentas instaladas por padrão.</block>
   <block id="33176aeb27c41088051f460946356423" category="inline-link-macro">Instalar as ferramentas NFS</block>
@@ -3925,7 +3924,6 @@
   <block id="326a8f228f219b0e904c9d182f05edc0" category="list-text">Os novos volumes de NFS com economia de ONTAP nas usarão políticas de exportação por qtree ao usar<block ref="323e871cfe2e70ead9c713e8f3164f8f" prefix=" " category="inline-code"></block> a opção de back-end. As Qtrees só serão mapeadas para políticas de exportação restritivas de nós no momento da publicação para melhorar o controle de acesso e a segurança. Os qtrees existentes serão alternados para o novo modelo de política de exportação quando o Trident não publicar o volume de todos os nós para fazê-lo sem afetar cargas de trabalho ativas.</block>
   <block id="62900e6f021ab726737e77fc086ef8d8" category="list-text">Adicionado suporte para Kubernetes 1,31.</block>
   <block id="99feca4f342726633c553b7037f4effd" category="section-title">Melhorias experimentais</block>
-  <block id="b4da90c52a04dd004929d86ec62cc931" category="list-text">Adicionado pré-visualização técnica para suporte de Fibre Channel no driver ONTAP-SAN.</block>
   <block id="f47cb8e173cabaf3981c7356253eaf5f" category="list-text">*Kubernetes*:</block>
   <block id="d17c6ce149a6479587ff459c15a1f857" category="inline-link-macro">Problema nº 839</block>
   <block id="0d72ada08f4f4a9200f5e98c300ac3f5" category="list-text">Webhook de admissão de Rancher fixo que impede instalações de Helm do Trident (<block ref="db779c46d1b4e6ce40c3816626258ba8" category="inline-link-macro-rx"></block> ).</block>
@@ -4917,4 +4915,35 @@
   <block id="de5da2c7cfd6c7eda31703be01d3513e" category="list-text">Inverta a direção da replicação.</block>
   <block id="be41e0ea028981dcba35343dcbd34991" category="list-text">Execute os <block ref="07428cadd63a52910df8ba314efe2f56" category="inline-xref-macro-rx"></block> passos.</block>
   <block id="e3f67484570d0b1b5736841718c5ab22" category="list-text">Execute os <block ref="80fca82e419d46692dbbc4fbbcd0c990" category="inline-xref-macro-rx"></block> passos.</block>
+  <block id="d5b345f45f80f7f56440408591048e1a" category="inline-link-macro">Suporte ao Fibre Channel</block>
+  <block id="f1c09cfcd8aa6e6314b92b3a724aca83" category="list-text">Adicionado pré-visualização técnica para suporte de Fibre Channel no driver ONTAP-SAN. <block ref="9954ad164e99690ed1af0635a7949c36" category="inline-link-macro-rx"></block>Consulte a .</block>
+  <block id="3ffb7f02782ced1dbec181c6524bea0b" category="doc">Suporte ao Fibre Channel (FC)</block>
+  <block id="51d8fa0a5eb3f269bad2a2a47a660a2d" category="paragraph">Agora você pode usar o protocolo Fibre Channel (FC) com o Trident para provisionar e gerenciar recursos de storage no sistema ONTAP.</block>
+  <block id="5084aac4393e5aff5539dc0265ab2e37" category="paragraph">O Fibre Channel é um protocolo amplamente adotado em ambientes de storage empresarial devido ao alto desempenho, confiabilidade e escalabilidade. Ele fornece um canal de comunicação robusto e eficiente para dispositivos de armazenamento, permitindo transferências de dados rápidas e seguras. Ao usar SCSI em Fibre Channel, você pode aproveitar a infraestrutura de storage baseada em SCSI existente e se beneficiar dos recursos de alto desempenho e longa distância do Fibre Channel. Ele permite a consolidação de recursos de armazenamento e a criação de redes de área de armazenamento (SANs) escaláveis e eficientes que podem lidar com grandes quantidades de dados com baixa latência.</block>
+  <block id="87ef5e348a9702ee84419ab313442e62" category="paragraph">Usando o recurso FC com Trident, você pode fazer o seguinte: * Provisionar dinamicamente PVCs usando uma especificação de implantação. * Tirar instantâneos de volume e criar um novo volume a partir do instantâneo. * Clone um FC-PVC existente. * Redimensionar um volume já implantado.</block>
+  <block id="822b1839c387749c78601eebc94c8d7d" category="paragraph">Configure as configurações de rede e nó necessárias para FC.</block>
+  <block id="f508b22c8fc4486b19fee39d5ded3841" category="section-title">Definições de rede</block>
+  <block id="16fdd92def5a71313d6535c74ef67b81" category="inline-link-macro">mostra da interface de rede</block>
+  <block id="fc2e7b75efdee011ff06c37c7b71f6a6" category="list-text">Obtenha o WWPN das interfaces de destino. <block ref="cc71fd7fb2f6e7e70f421fe2150fdc04" category="inline-link-macro-rx"></block>Consulte para obter mais informações.</block>
+  <block id="cc7e69899d736126df9787634ad41870" category="list-text">Obtenha o WWPN para as interfaces no iniciador (Host).</block>
+  <block id="1089b965cabd19cfee7f3ef855fbd63d" category="paragraph">Consulte os utilitários do sistema operacional host correspondentes.</block>
+  <block id="6f58745fc3a341adae0772d30d9e508c" category="list-text">Configure o zoneamento no switch FC usando WWPNs do host e do destino.</block>
+  <block id="54336aa51b161faac4d0ebb1b76b1536" category="paragraph">Consulte a documentação do fornecedor do switch responsável para obter informações.</block>
+  <block id="299f2e1a529559eb06c9dfbe12ccdea9" category="paragraph">Consulte a seguinte documentação do ONTAP para obter detalhes:</block>
+  <block id="d7281ba358054b30594dcd34819057a1" category="inline-link">Visão geral do zoneamento Fibre Channel e FCoE</block>
+  <block id="bce9f24194c15bbf6b5ad6cd1d8d1899" category="list-text"><block ref="bce9f24194c15bbf6b5ad6cd1d8d1899" category="inline-link-rx"></block></block>
+  <block id="9b9db0b6f6df6361aa97412feea7ae07" category="list-text"><block ref="1a83c479258a4b0e250085c944bae4de" category="inline-link-rx"></block></block>
+  <block id="a92a311c4eeb6cfdcc775cfca067ea8d" category="paragraph">Todos os nós de trabalho no cluster do Kubernetes precisam ser capazes de montar os volumes provisionados para os pods. Para preparar os nós de trabalho para FC, é necessário instalar as ferramentas necessárias.</block>
+  <block id="36b37761159ed00a729b4f6fab9a0f02" category="paragraph-title">Instalar as ferramentas FC</block>
+  <block id="f0ad3dc6a6ba17b1e77a2a4af657f22a" category="paragraph">Instale as ferramentas FC usando os comandos do seu sistema operacional.</block>
+  <block id="ef7c7fb7512d2686223cbef4d18a4687" category="section-title">Crie uma configuração de back-end</block>
+  <block id="9ca5edfbebc9d61a4e6f574ff097a540" category="paragraph">Crie um backend Trident para<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> o driver e<block ref="0f64d0456878c73cbec1ccea842a6f14" prefix=" " category="inline-code"></block> como sanType.</block>
+  <block id="6563093287f74a616e9d7ac49b4d6a44" category="paragraph">Consulte:</block>
+  <block id="c8a4ebb8f375440952f478262c6dc775" category="list-text"><block ref="c8a4ebb8f375440952f478262c6dc775" category="inline-link-macro-rx"></block></block>
+  <block id="4dff3394c7a642139ff55771ed74588c" category="list-text"><block ref="4dff3394c7a642139ff55771ed74588c" category="inline-link-macro-rx"></block></block>
+  <block id="db9cdbb22315c0c520742eed35564a6e" category="listing-title">Exemplo de configuração de back-end com FC</block>
+  <block id="2f8299f876158db323c08455b12b585a" category="paragraph">Para obter mais informações, consulte:</block>
+  <block id="61379a8f62ab2974cb68f4754e439dfd" category="list-text"><block ref="61379a8f62ab2974cb68f4754e439dfd" category="inline-link-macro-rx"></block></block>
+  <block id="553ac32ac6bcab84d5384eda7468d415" category="paragraph">Todos os nós de trabalho no cluster do Kubernetes precisam ser capazes de montar os volumes provisionados para os pods. Para preparar os nós de trabalho, é necessário instalar ferramentas NFS, iSCSI, NVMe/TCP ou FC com base na seleção de driver.</block>
+  <block id="07e8df1ea1cba20edddeb5a9da554efd" category="sidebar">SCSI em Fibre Channel (FC)</block>
 </blocks>

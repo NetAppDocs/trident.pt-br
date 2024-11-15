@@ -12,7 +12,7 @@ summary: Todos os nós de trabalho no cluster do Kubernetes precisam ser capazes
 
 
 [role="lead"]
-Todos os nós de trabalho no cluster do Kubernetes precisam ser capazes de montar os volumes provisionados para os pods. Para preparar os nós de trabalho, é necessário instalar ferramentas NFS, iSCSI ou NVMe/TCP com base na seleção de driver.
+Todos os nós de trabalho no cluster do Kubernetes precisam ser capazes de montar os volumes provisionados para os pods. Para preparar os nós de trabalho, é necessário instalar ferramentas NFS, iSCSI, NVMe/TCP ou FC com base na seleção de driver.
 
 
 
