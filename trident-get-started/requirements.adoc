@@ -42,7 +42,7 @@ O Trident é compatível com vários mecanismos de contêiner e orquestradores, 
 
 * Anthos On-Prem (VMware) e Anthos em bare metal 1,16
 * Kubernetes 1,25 - 1,31
-* OpenShift 4,10 - 4,16
+* OpenShift 4,10 - 4,17
 * Rancher Kubernetes Engine 2 (RKE2) v1.28.5-rke2r1
 
 
@@ -50,7 +50,7 @@ O operador Trident é suportado com estas versões:
 
 * Anthos On-Prem (VMware) e Anthos em bare metal 1,16
 * Kubernetes 1,25 - 1,31
-* OpenShift 4,10 - 4,16
+* OpenShift 4,10 - 4,17
 * Rancher Kubernetes Engine 2 (RKE2) v1.28.5-rke2r1
 
 

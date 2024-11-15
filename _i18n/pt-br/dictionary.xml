@@ -576,7 +576,6 @@
   <block id="5a2ebfb8baa378cfcfcba58bbb1380c2" category="doc">Requisitos</block>
   <block id="c777be7f669397b0a376fe32ca5cd9c3" category="section-title">Frontens suportados (orquestradores)</block>
   <block id="7cc1edf2116d94e97b8f4a69079de132" category="list-text">Anthos On-Prem (VMware) e Anthos em bare metal 1,16</block>
-  <block id="c9db4c3d8dc7c24ea723ab5fe1e45fdb" category="list-text">OpenShift 4,10 - 4,16</block>
   <block id="201eb37826a33e35adff9119f25946bd" category="paragraph">O operador Trident é suportado com estas versões:</block>
   <block id="eca0dda5d40cf62b4a73c50deab2520c" category="inline-link-macro">KubeVirt</block>
   <block id="a5fd2691a6a5df653970895b1c5045ed" category="inline-link-macro">Atualize uma instalação do Helm</block>
@@ -4946,4 +4945,6 @@
   <block id="61379a8f62ab2974cb68f4754e439dfd" category="list-text"><block ref="61379a8f62ab2974cb68f4754e439dfd" category="inline-link-macro-rx"></block></block>
   <block id="553ac32ac6bcab84d5384eda7468d415" category="paragraph">Todos os nós de trabalho no cluster do Kubernetes precisam ser capazes de montar os volumes provisionados para os pods. Para preparar os nós de trabalho, é necessário instalar ferramentas NFS, iSCSI, NVMe/TCP ou FC com base na seleção de driver.</block>
   <block id="07e8df1ea1cba20edddeb5a9da554efd" category="sidebar">SCSI em Fibre Channel (FC)</block>
+  <block id="766a0f35ad6c38b247125809df6efead" category="list-text">OpenShift 4,10 - 4,17</block>
+  <block id="64467ac9530ff26c4e6495117175346d" category="admonition">Ao usar o ONTAP-nas-economy e um storagePreFIX que tenha 24 ou mais carateres, o qtrees não terá o prefixo de armazenamento incorporado, embora esteja no nome do volume.</block>
 </blocks>
