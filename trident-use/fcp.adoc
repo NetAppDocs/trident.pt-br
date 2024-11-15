@@ -18,7 +18,13 @@ Agora você pode usar o protocolo Fibre Channel (FC) com o Trident para provisio
 
 O Fibre Channel é um protocolo amplamente adotado em ambientes de storage empresarial devido ao alto desempenho, confiabilidade e escalabilidade. Ele fornece um canal de comunicação robusto e eficiente para dispositivos de armazenamento, permitindo transferências de dados rápidas e seguras. Ao usar SCSI em Fibre Channel, você pode aproveitar a infraestrutura de storage baseada em SCSI existente e se beneficiar dos recursos de alto desempenho e longa distância do Fibre Channel. Ele permite a consolidação de recursos de armazenamento e a criação de redes de área de armazenamento (SANs) escaláveis e eficientes que podem lidar com grandes quantidades de dados com baixa latência.
 
-Usando o recurso FC com Trident, você pode fazer o seguinte: * Provisionar dinamicamente PVCs usando uma especificação de implantação. * Tirar instantâneos de volume e criar um novo volume a partir do instantâneo. * Clone um FC-PVC existente. * Redimensionar um volume já implantado.
+Usando o recurso FC com Trident, você pode fazer o seguinte:
+
+* Provisione PVCs dinamicamente usando uma especificação de implantação.
+* Tire snapshots de volume e crie um novo volume a partir do snapshot.
+* Clone um FC-PVC existente.
+* Redimensione um volume já implantado.
+
 
 
 

@@ -4918,7 +4918,6 @@
   <block id="3ffb7f02782ced1dbec181c6524bea0b" category="doc">Suporte ao Fibre Channel (FC)</block>
   <block id="51d8fa0a5eb3f269bad2a2a47a660a2d" category="paragraph">Agora você pode usar o protocolo Fibre Channel (FC) com o Trident para provisionar e gerenciar recursos de storage no sistema ONTAP.</block>
   <block id="5084aac4393e5aff5539dc0265ab2e37" category="paragraph">O Fibre Channel é um protocolo amplamente adotado em ambientes de storage empresarial devido ao alto desempenho, confiabilidade e escalabilidade. Ele fornece um canal de comunicação robusto e eficiente para dispositivos de armazenamento, permitindo transferências de dados rápidas e seguras. Ao usar SCSI em Fibre Channel, você pode aproveitar a infraestrutura de storage baseada em SCSI existente e se beneficiar dos recursos de alto desempenho e longa distância do Fibre Channel. Ele permite a consolidação de recursos de armazenamento e a criação de redes de área de armazenamento (SANs) escaláveis e eficientes que podem lidar com grandes quantidades de dados com baixa latência.</block>
-  <block id="87ef5e348a9702ee84419ab313442e62" category="paragraph">Usando o recurso FC com Trident, você pode fazer o seguinte: * Provisionar dinamicamente PVCs usando uma especificação de implantação. * Tirar instantâneos de volume e criar um novo volume a partir do instantâneo. * Clone um FC-PVC existente. * Redimensionar um volume já implantado.</block>
   <block id="822b1839c387749c78601eebc94c8d7d" category="paragraph">Configure as configurações de rede e nó necessárias para FC.</block>
   <block id="f508b22c8fc4486b19fee39d5ded3841" category="section-title">Definições de rede</block>
   <block id="16fdd92def5a71313d6535c74ef67b81" category="inline-link-macro">mostra da interface de rede</block>
@@ -4948,4 +4947,9 @@
   <block id="64467ac9530ff26c4e6495117175346d" category="admonition">Ao usar o ONTAP-nas-economy e um storagePreFIX que tenha 24 ou mais carateres, o qtrees não terá o prefixo de armazenamento incorporado, embora esteja no nome do volume.</block>
   <block id="0d28255dc96cb23d422741096c09ce8e" category="paragraph"><block ref="256d12880dee7515c7ed6253fd0a228a" prefix="" category="inline-code"></block><block ref="bd5ed83ae12ddcfe924a6af54a0be554" prefix=" " category="inline-code"></block></block>
   <block id="8643539c7696bee604cfc39337280ef3" category="list-text">Adicionado pré-visualização técnica para suporte de Fibre Channel no driver ONTAP-SAN. <block ref="5aa030ef89b8f38b2fa353dc2fa17e8d" category="inline-link-macro-rx"></block>Consulte a .</block>
+  <block id="1803781f7c004f51be9b62cbcd506ed2" category="paragraph">Usando o recurso FC com Trident, você pode fazer o seguinte:</block>
+  <block id="7294f3b61be368d5929dcdabac5431cf" category="list-text">Provisione PVCs dinamicamente usando uma especificação de implantação.</block>
+  <block id="aedb73fd0ccffbcf4bb3a5bc721b9603" category="list-text">Tire snapshots de volume e crie um novo volume a partir do snapshot.</block>
+  <block id="aa2fd96b8dfdeb6aaaf2bb11da1413aa" category="list-text">Clone um FC-PVC existente.</block>
+  <block id="de35bb06ba09c90d091b31450c61efd7" category="list-text">Redimensione um volume já implantado.</block>
 </blocks>
