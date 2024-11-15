@@ -132,7 +132,7 @@ spec:
 Defina os valores para sinalizadores *provedor de nuvem (CP)* e *identidade de nuvem (IC)* usando as seguintes variáveis de ambiente:
 
 `export CP="Azure"`
-`export CI="azure.workload.identity/client-id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"`
+`export CI="'azure.workload.identity/client-id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx'"`
 
 O exemplo a seguir instala o Trident e define `cloudProvider` o Azure usando a variável de ambiente `$CP` e define a `cloudIdentity` variável usando o ambiente `$CI` :
 

@@ -4946,5 +4946,6 @@
   <block id="07e8df1ea1cba20edddeb5a9da554efd" category="sidebar">SCSI em Fibre Channel (FC)</block>
   <block id="766a0f35ad6c38b247125809df6efead" category="list-text">OpenShift 4,10 - 4,17</block>
   <block id="64467ac9530ff26c4e6495117175346d" category="admonition">Ao usar o ONTAP-nas-economy e um storagePreFIX que tenha 24 ou mais carateres, o qtrees não terá o prefixo de armazenamento incorporado, embora esteja no nome do volume.</block>
-  <block id="716e675a4fa1eb80b65e215c4053483e" category="list-text">Adicionado pré-visualização técnica para suporte de Fibre Channel no driver ONTAP-SAN. <block ref="261f4d716d9b6dc09663ffbaf6630011" category="inline-link-macro-rx"></block>Consulte a .</block>
+  <block id="f1c09cfcd8aa6e6314b92b3a724aca83" category="list-text">Adicionado pré-visualização técnica para suporte de Fibre Channel no driver ONTAP-SAN. <block ref="9954ad164e99690ed1af0635a7949c36" category="inline-link-macro-rx"></block>Consulte a .</block>
+  <block id="0d28255dc96cb23d422741096c09ce8e" category="paragraph"><block ref="256d12880dee7515c7ed6253fd0a228a" prefix="" category="inline-code"></block><block ref="bd5ed83ae12ddcfe924a6af54a0be554" prefix=" " category="inline-code"></block></block>
 </blocks>
