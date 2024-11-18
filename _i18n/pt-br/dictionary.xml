@@ -4383,8 +4383,6 @@
   <block id="d58e744bd40cf0f8373ee5b2c7d11387" category="open-title">Baixe o plugin para CPUs Mac AMD64</block>
   <block id="fd3e558ef6c1af851bddabf0eb1945d7" category="open-title">Baixe o plugin para CPUs Mac ARM64</block>
   <block id="412a5def83fe5329b38679035cfea675" category="list-text">Ativar permissões de execução para o binário:</block>
-  <block id="9bd9e61654b5ae02837f94c50605b5e3" category="list-text">Copie o binário do plugin para o caminho de sua escolha:</block>
-  <block id="42be0effe300120c50a16b27b8feac25" category="list-text">Opcionalmente, para instalar o binário globalmente, copie o binário do plugin para um caminho global. Por exemplo:<block ref="7512824c50c61ea8d89d0f193a4f72d1" prefix=" " category="inline-code"></block> Ou<block ref="ad2e864ce1a99daa836c3449f3ba705d" prefix=" " category="inline-code"></block> (você pode precisar de Privileges elevado):</block>
   <block id="b23c395acc963a69b0a5f06a20bb4887" category="section-title">Veja a ajuda do plugin Trident CLI</block>
   <block id="305f79cb740685921820521a57e525e5" category="paragraph">Você pode usar os recursos integrados de ajuda do plugin para obter ajuda detalhada sobre os recursos do plugin:</block>
   <block id="09b4818c610e8f967a9f5257455a3a2a" category="list-text">Utilize a função de ajuda para visualizar as orientações de utilização:</block>
@@ -4952,4 +4950,6 @@
   <block id="aedb73fd0ccffbcf4bb3a5bc721b9603" category="list-text">Tire snapshots de volume e crie um novo volume a partir do snapshot.</block>
   <block id="aa2fd96b8dfdeb6aaaf2bb11da1413aa" category="list-text">Clone um FC-PVC existente.</block>
   <block id="de35bb06ba09c90d091b31450c61efd7" category="list-text">Redimensione um volume já implantado.</block>
+  <block id="15286900a0d0667ffc4d515aeec6a1d2" category="list-text">Copie o binário do plugin para um local definido na variável PATH. Por exemplo,<block ref="7512824c50c61ea8d89d0f193a4f72d1" prefix=" " category="inline-code"></block> ou<block ref="ad2e864ce1a99daa836c3449f3ba705d" prefix=" " category="inline-code"></block> (você pode precisar de Privileges elevado):</block>
+  <block id="b3062a04e26d499596575c6767c02c16" category="list-text">Opcionalmente, você pode copiar o binário para um local em seu diretório home. Nesse caso, talvez seja necessário adicionar o local à variável PATH:</block>
 </blocks>
