@@ -25,6 +25,9 @@ NOTE: Quando você restaura um aplicativo, todos os ganchos de execução config
 
 Quando você restaura um backup para um namespace diferente usando um BackupRestore CR, o Trident Protect restaura o aplicativo em um novo namespace, mas o aplicativo restaurado não é protegido automaticamente pelo Trident Protect. Para proteger o aplicativo restaurado, você precisa criar um CR de aplicativo para o aplicativo restaurado para que ele seja protegido pelo Trident Protect.
 
+
+NOTE: Restaurar um backup para um namespace diferente com recursos existentes não alterará nenhum recurso que compartilhe nomes com aqueles no backup. Para restaurar todos os recursos no backup, exclua e recrie o namespace de destino ou restaure o backup para um novo namespace.
+
 [role="tabbed-block"]
 ====
 .Use um CR
@@ -121,9 +124,6 @@ tridentctl protect create backuprestore <my_restore_name> --backup <backup_names
 == Restaure de um backup para o namespace original
 
 Você pode restaurar um backup para o namespace original a qualquer momento.
-
-
-NOTE: Restaurar um backup para um namespace com recursos existentes não alterará nenhum recurso que compartilhe nomes com aqueles no backup. Para restaurar todos os recursos em um backup, exclua e recrie o namespace de destino ou restaure o backup para um novo namespace.
 
 [role="tabbed-block"]
 ====
