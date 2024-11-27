@@ -26,6 +26,7 @@ Antes de usar o utilitário de linha de comando, você precisa instalá-lo na m�
 ====
 .Faça o download do plugin para CPUs Linux AMD64
 --
+.Passos
 . Faça o download do plugin Trident Protect CLI:
 +
 [source, console]
@@ -37,6 +38,7 @@ curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/relea
 --
 .Faça o download do plugin para CPUs Linux ARM64
 --
+.Passos
 . Faça o download do plugin Trident Protect CLI:
 +
 [source, console]
@@ -48,6 +50,7 @@ curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/relea
 --
 .Baixe o plugin para CPUs Mac AMD64
 --
+.Passos
 . Faça o download do plugin Trident Protect CLI:
 +
 [source, console]
@@ -59,6 +62,7 @@ curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/relea
 --
 .Baixe o plugin para CPUs Mac ARM64
 --
+.Passos
 . Faça o download do plugin Trident Protect CLI:
 +
 [source, console]
@@ -114,6 +118,7 @@ Depois de instalar o plugin Trident Protect CLI, você pode ativar a auto-conclu
 ====
 .Ative a auto-conclusão para o shell Bash
 --
+.Passos
 . Faça o download do script de conclusão:
 +
 [source, console]
@@ -143,6 +148,7 @@ source ~/.bash/completions/tridentctl-completion.bash
 --
 .Ative a auto-conclusão para o shell Z.
 --
+.Passos
 . Faça o download do script de conclusão:
 +
 [source, console]

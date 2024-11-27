@@ -32,6 +32,7 @@ Você precisa criar um CR de aplicativo para cada aplicativo que você deseja ge
 ====
 .Adicione uma aplicação utilizando um CR
 --
+.Passos
 . Criar o ficheiro CR da aplicação de destino:
 +
 .. Crie o arquivo de recurso personalizado (CR) e nomeie-o (por exemplo, `maria-app.yaml` ).
@@ -64,6 +65,7 @@ spec:
 --
 .Adicione um aplicativo usando a CLI
 --
+.Passos
 . Crie e aplique a definição da aplicação, substituindo valores entre parênteses por informações do seu ambiente. Você pode incluir namespaces e recursos na definição do aplicativo usando listas separadas por vírgulas com os argumentos mostrados no exemplo a seguir:
 +
 [source, console]
