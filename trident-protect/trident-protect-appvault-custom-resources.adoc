@@ -4,7 +4,7 @@ permalink: trident-protect/trident-protect-appvault-custom-resources.html
 keywords: trident. appvault, custom, protect, kubernetes 
 summary: 'O bucket custom resource (CR) do Trident Protect é conhecido como AppVault. AppVaults são a representação declarativa do fluxo de trabalho do Kubernetes de um bucket de storage.' 
 ---
-= Use objetos AppVault para gerenciar buckets
+= Use objetos do Trident Protect AppVault para gerenciar buckets
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 

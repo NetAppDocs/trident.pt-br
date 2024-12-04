@@ -4398,7 +4398,6 @@
   <block id="8eea62084ca7e541d918e823422bd82e" category="paragraph-title">Resultado</block>
   <block id="a2290b3f31cfd85a3e9ff7885be716a7" category="paragraph">Após o seu próximo login shell, você pode usar o comando auto-completação com o plugin tridentctl Protect.</block>
   <block id="7b6672be7a52979b1357ccc3d2a45f8a" category="summary">O Trident Protect permite que os administradores gerem pacotes que incluem informações úteis ao suporte da NetApp, incluindo logs, métricas e informações de topologia sobre os clusters e aplicativos em gerenciamento. Se você estiver conetado à Internet, poderá fazer upload de pacotes de suporte para o site de suporte da NetApp (NSS) usando um arquivo de recurso personalizado (CR).</block>
-  <block id="c06b3814928e21adcd4d633f11293a23" category="doc">Gerar um pacote de suporte</block>
   <block id="e984343e441956b7136d09919877b5ab" category="open-title">Crie um pacote de suporte usando um CR</block>
   <block id="dd942fa25b8e28c96c8d05e37b0f157e" category="list-text">Crie o arquivo de recurso personalizado (CR) e nomeie-o (por exemplo,<block ref="699c503b46d4ca3ec78905dff3704cac" prefix=" " category="inline-code"></block> ).</block>
   <block id="18924d9e76d2dc9a88bddb772904461d" category="list-text">Configure os seguintes atributos:</block>
@@ -4649,7 +4648,6 @@
   <block id="aec02c2a1b714f40a949aa18d1f2d588" category="list-text">Remover Trident Protect:</block>
   <block id="20c06650be80c297c0e4dc5ae977d44f" category="list-text">Remova o namespace Trident Protect:</block>
   <block id="a8c1fc9f09b8338dd9f8badd5c3d30c0" category="summary">Você pode criar um gancho de execução personalizado para um aplicativo usando o Trident Protect. Você precisa ter permissões de proprietário, administrador ou membro para criar ganchos de execução.</block>
-  <block id="cbb269e08085ebb437449cc744357ee6" category="doc">Gerenciar ganchos de execução</block>
   <block id="ccd62d676165e34c2e9c6d088c06e70f" category="paragraph">Um gancho de execução é uma ação personalizada que você pode configurar para ser executada em conjunto com uma operação de proteção de dados de um aplicativo gerenciado. Por exemplo, se você tiver um aplicativo de banco de dados, poderá usar um gancho de execução para pausar todas as transações de banco de dados antes de um snapshot e retomar as transações após a conclusão do snapshot. Isso garante snapshots consistentes com aplicativos.</block>
   <block id="83fbf1604bedff410ea11872b40ab9f0" category="section-title">Tipos de ganchos de execução</block>
   <block id="d702711249a4d54c15ce81c80152b8e7" category="paragraph">O Trident Protect suporta os seguintes tipos de ganchos de execução, com base em quando eles podem ser executados:</block>
@@ -4955,4 +4953,12 @@
   <block id="0ac202e458490a734271522fcedf4876" category="list-text">Certifique-se de que<block ref="8732863da72605a20ed96b4eee87a5fb" prefix=" " category="inline-code"></block> está em execução:</block>
   <block id="69eeaf73fccab6d6abcba46bd6a3a3bf" category="list-text">Certifique-se de que<block ref="452b142235e718663e27bc4f162c14ca" prefix=" " category="inline-code"></block> está ativado e em execução:</block>
   <block id="00ea3f7016d7b9a4ad023b106cc1e6d3" category="paragraph"><block ref="7e7b7908484dc2cebc13ec93d8042bd0" category="inline-link-macro-rx"></block> Se você estiver usando<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> com sanType (<block ref="0f64d0456878c73cbec1ccea842a6f14" prefix=" " category="inline-code"></block>SCSI sobre FC).</block>
+  <block id="0cc310db20eaee9161e8ef937010b536" category="doc">Gerenciar a autorização e o controle de acesso do Trident Protect</block>
+  <block id="97f3fa7a4bb86197f0db69aa160c73e9" category="doc">Use objetos do Trident Protect AppVault para gerenciar buckets</block>
+  <block id="bf4313699bccd15d73aa8653cfdfd754" category="doc">Defina um aplicativo para gerenciamento com o Trident Protect</block>
+  <block id="b6a8ee5a5280d899b4ea1be0f8697335" category="doc">Migrar aplicativos usando o Trident Protect</block>
+  <block id="8686ed080978191a10848ee52cd0c87a" category="doc">Proteja aplicativos usando o Trident Protect</block>
+  <block id="0539043b2ec0bd1bfae64dc58173dec7" category="doc">Restaure aplicativos usando o Trident Protect</block>
+  <block id="873e2eae9a82cbe9c291ade077f017d2" category="doc">Gerenciar ganchos de execução do Trident Protect</block>
+  <block id="6f8f09e1a22390ac35a40283a4dc713f" category="doc">Replique aplicações usando o NetApp SnapMirror e o Trident Protect</block>
 </blocks>

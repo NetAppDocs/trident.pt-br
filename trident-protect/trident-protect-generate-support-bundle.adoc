@@ -4,7 +4,7 @@ permalink: trident-protect/trident-protect-generate-support-bundle.html
 keywords: trident, protect, bundle, support, netapp, custom, resource, file 
 summary: 'O Trident Protect permite que os administradores gerem pacotes que incluem informações úteis ao suporte da NetApp, incluindo logs, métricas e informações de topologia sobre os clusters e aplicativos em gerenciamento. Se você estiver conetado à Internet, poderá fazer upload de pacotes de suporte para o site de suporte da NetApp (NSS) usando um arquivo de recurso personalizado (CR).' 
 ---
-= Gerar um pacote de suporte
+= Gerar um pacote de suporte Trident Protect
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 

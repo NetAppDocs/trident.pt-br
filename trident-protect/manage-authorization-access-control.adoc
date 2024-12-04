@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: manage, authentication, rbac 
 summary: 'O Trident Protect usa o modelo Kubernetes de controle de acesso baseado em funções (RBAC). Você pode usar os recursos do Trident Protect RBAC para controlar com mais precisão o acesso aos recursos.' 
 ---
-= Gerenciar autorização e controle de acesso
+= Gerenciar a autorização e o controle de acesso do Trident Protect
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
