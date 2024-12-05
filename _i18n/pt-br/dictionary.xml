@@ -520,10 +520,6 @@
   <block id="30136395f01879792198317c11831ea4" category="inline-link-macro">Kubernetes</block>
   <block id="58095fffdb6c13585af5e47e876f7afe" category="inline-link-macro">Conceitos e ferramentas do Kubernetes</block>
   <block id="1bc6462cd59612636c72620a6a67410b" category="admonition">Se esta for a primeira vez que usa o Kubernetes, você deve se familiarizar com o <block ref="41eecc10f74d492dbf2a2c207d5acb1b" category="inline-link-macro-rx"></block>.</block>
-  <block id="e8dadc588901af436e2c6036acf23973" category="inline-link-macro">Unidade de teste do NetApp</block>
-  <block id="8685ac2061f9dca7ab48f41e0871f7af" category="inline-link-macro">Guia de Instalação do kubeadm</block>
-  <block id="3ff64d30b8ccd0f89740b2ba54cf8bf3" category="paragraph">Outra opção é a <block ref="c7dbb75618a5e106a360075f923cb87f" category="inline-link-macro-rx"></block> fornecida pelo Kubernetes.</block>
-  <block id="80f4cfbe493e12651c3514c9481ce1ee" category="admonition">Não use um cluster do Kubernetes criado usando essas instruções em um ambiente de produção. Use os guias de implantação de produção fornecidos pela distribuição para clusters prontos para produção.</block>
   <block id="ad989553d20159458528f9cbeec280ac" category="section-title">Integração do Kubernetes com os produtos NetApp</block>
   <block id="c15968f29ef9905b44c7b9f373e75568" category="paragraph">O portfólio de produtos de storage do NetApp se integra a muitos aspectos de um cluster Kubernetes, fornecendo recursos avançados de gerenciamento de dados que melhoram o recurso, a funcionalidade, a performance e a disponibilidade da implantação do Kubernetes.</block>
   <block id="4d82a1ec1af02725042c8c785564ee7a" category="example-title">Amazon FSX para NetApp ONTAP</block>
@@ -3548,8 +3544,6 @@
   <block id="b1779edf31deaecac634566a2a377f62" category="paragraph">O Trident é um orquestrador de storage dinâmico e em conformidade com a Container Storage Interface (CSI) que se integra nativamente ao <block ref="c4f47b2d4c7b6c009c3ed9bc1f952dce" category="inline-link-macro-rx"></block>. O Trident é executado como um único Pod de controlador e um Pod de nó em cada nó de trabalho no cluster. <block ref="9f6208219ae600271f6632db354451ed" category="inline-link-macro-rx"></block>Consulte para obter detalhes.</block>
   <block id="d613d80a6fcacbbceeb665fc5b0846f0" category="inline-link-macro">Implante o Trident para Docker</block>
   <block id="5b6cbf8e3be454064a322ad7f9c47cc2" category="paragraph">O Trident também fornece integração direta com o ecossistema do Docker para plataformas de storage NetApp. O plug-in de volume do Docker do NetApp (nDVP) dá suporte ao provisionamento e gerenciamento de recursos de storage da plataforma de storage para hosts do Docker. <block ref="168e02b8c5756e29b56aa79aa4a1b715" category="inline-link-macro-rx"></block>Consulte para obter detalhes.</block>
-  <block id="3c22b34ac3f55b89b9b011bed80160de" category="section-title">Faça o test drive do Trident</block>
-  <block id="f8bae4faf187691bac6dbbda926fb426" category="paragraph">Para fazer um test drive, solicite acesso ao "Deploy and Clone Persistent Storage for containerized workloads" <block ref="eb9c34df0ed196dd801ef85207c8bf2c" category="inline-link-macro-rx"></block> usando uma imagem de laboratório pronta para uso. A unidade de teste fornece um ambiente sandbox com um cluster de Kubernetes de três nós e o Trident instalado e configurado. Esta é uma ótima maneira de se familiarizar com o Trident e explorar seus recursos.</block>
   <block id="ad82bf93e4b28ad012a8be09e30d3d59" category="paragraph">O Trident pode provisionar e gerenciar dispositivos de storage para aplicações em contêiner diretamente na plataforma de storage subjacente da NetApp HCI.</block>
   <block id="2c1264786e66608f1b91c735d79624ad" category="paragraph">Os sistemas ONTAP têm configurações all-flash, híbridas ou totalmente HDD e oferecem muitos modelos de implantação diferentes, incluindo hardware projetado (FAS e AFF), white-box (ONTAP Select) e somente para nuvem (Cloud Volumes ONTAP). O Trident oferece suporte a esses modelos de implantação do ONTAP.</block>
   <block id="10f0fa4079121b371145e16713fdbb44" category="section-title">Trident</block>
@@ -4961,4 +4955,5 @@
   <block id="0539043b2ec0bd1bfae64dc58173dec7" category="doc">Restaure aplicativos usando o Trident Protect</block>
   <block id="873e2eae9a82cbe9c291ade077f017d2" category="doc">Gerenciar ganchos de execução do Trident Protect</block>
   <block id="6f8f09e1a22390ac35a40283a4dc713f" category="doc">Replique aplicações usando o NetApp SnapMirror e o Trident Protect</block>
+  <block id="2fc23e09b483dc4495beb473646c0273" category="list-text"><block ref="2fc23e09b483dc4495beb473646c0273" category="inline-link-macro-rx"></block></block>
 </blocks>
