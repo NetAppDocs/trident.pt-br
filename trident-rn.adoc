@@ -144,13 +144,6 @@ A partir do lançamento de 24,10, o Astra Trident é renomeado para Trident (Net
 
 
 
-=== Desvalorizações
-
-* Suporte removido para EOL Windows Server 2019.
-
-
-
-
 == Mudanças em 24,02
 
 

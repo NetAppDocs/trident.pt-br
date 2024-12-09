@@ -17,19 +17,19 @@ Você pode instalar o Trident e começar a gerenciar recursos de storage em algu
 
 NOTE: Para Docker, link:../trident-docker/deploy-docker.html["Trident para Docker"]consulte .
 
-.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png["Um"] Instale o Trident
-[role="quick-margin-para"]
-O Trident oferece vários métodos e modos de instalação otimizados para uma variedade de ambientes e organizações.
-
-[role="quick-margin-para"]
-link:../trident-get-started/kubernetes-deploy.html["Instale o Trident"]
-
-.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png["Dois"] Prepare o nó de trabalho
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png["Um"] Prepare o nó de trabalho
 [role="quick-margin-para"]
 Todos os nós de trabalho no cluster do Kubernetes precisam ser capazes de montar os volumes provisionados para os pods.
 
 [role="quick-margin-para"]
 link:../trident-use/worker-node-prep.html["Prepare o nó de trabalho"]
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png["Dois"] Instale o Trident
+[role="quick-margin-para"]
+O Trident oferece vários métodos e modos de instalação otimizados para uma variedade de ambientes e organizações.
+
+[role="quick-margin-para"]
+link:../trident-get-started/kubernetes-deploy.html["Instale o Trident"]
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png["Três"] Crie um backend
 [role="quick-margin-para"]
