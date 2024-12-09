@@ -36,7 +36,7 @@ Configure as configurações de rede e nó necessárias para FC.
 
 === Definições de rede
 
-. Obtenha o WWPN das interfaces de destino. link:..https://docs.netapp.com/us-en/ontap-cli//network-interface-show.html["mostra da interface de rede"^]Consulte para obter mais informações.
+. Obtenha o WWPN das interfaces de destino.  https://docs.netapp.com/us-en/ontap-cli//network-interface-show.html["mostra da interface de rede"^]Consulte para obter mais informações.
 . Obtenha o WWPN para as interfaces no iniciador (Host).
 +
 Consulte os utilitários do sistema operacional host correspondentes.

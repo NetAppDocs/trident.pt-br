@@ -2906,7 +2906,6 @@
   <block id="98c3c9acd444d11890d48438db3c165e" category="paragraph">Você pode configurar pods do Kubernetes para acessar recursos da AWS autenticando como uma função do AWS IAM em vez de fornecer credenciais explícitas da AWS.</block>
   <block id="3f566b5ded6e7ac8c26dd3c07a2ea056" category="admonition">Para autenticar usando uma função do AWS IAM, você deve ter um cluster do Kubernetes implantado usando o EKS.</block>
   <block id="3a218e8961578d046aa713039445902b" category="section-title">Crie o segredo do AWS Secret Manager</block>
-  <block id="6a73f77169c507b4f8a8e33a9180355b" category="paragraph"><block ref="0d1bf1201bf9db7aed15db6de2873c7a" prefix="" category="inline-code"></block></block>
   <block id="3926fdac6344d565c95f560468946335" category="section-title">Criar política do IAM</block>
   <block id="78edc229f8df1c5e0840f6469bc28454" category="paragraph">Os exemplos a seguir criam uma política do IAM usando a AWS CLI:</block>
   <block id="96cc21e053acccb273475c8c6744b18e" category="paragraph"><block ref="21a8f9d92c42f5ae09a1d5ac91dbb3c5" prefix="" category="inline-code"></block></block>
@@ -4909,7 +4908,6 @@
   <block id="822b1839c387749c78601eebc94c8d7d" category="paragraph">Configure as configurações de rede e nó necessárias para FC.</block>
   <block id="f508b22c8fc4486b19fee39d5ded3841" category="section-title">Definições de rede</block>
   <block id="16fdd92def5a71313d6535c74ef67b81" category="inline-link-macro">mostra da interface de rede</block>
-  <block id="fc2e7b75efdee011ff06c37c7b71f6a6" category="list-text">Obtenha o WWPN das interfaces de destino. <block ref="cc71fd7fb2f6e7e70f421fe2150fdc04" category="inline-link-macro-rx"></block>Consulte para obter mais informações.</block>
   <block id="cc7e69899d736126df9787634ad41870" category="list-text">Obtenha o WWPN para as interfaces no iniciador (Host).</block>
   <block id="1089b965cabd19cfee7f3ef855fbd63d" category="paragraph">Consulte os utilitários do sistema operacional host correspondentes.</block>
   <block id="6f58745fc3a341adae0772d30d9e508c" category="list-text">Configure o zoneamento no switch FC usando WWPNs do host e do destino.</block>
@@ -4956,4 +4954,6 @@
   <block id="873e2eae9a82cbe9c291ade077f017d2" category="doc">Gerenciar ganchos de execução do Trident Protect</block>
   <block id="6f8f09e1a22390ac35a40283a4dc713f" category="doc">Replique aplicações usando o NetApp SnapMirror e o Trident Protect</block>
   <block id="2fc23e09b483dc4495beb473646c0273" category="list-text"><block ref="2fc23e09b483dc4495beb473646c0273" category="inline-link-macro-rx"></block></block>
+  <block id="e132245ad28668c6b32dee21fb8a3820" category="list-text">Obtenha o WWPN das interfaces de destino. <block ref="92fd8fd0370792cd397ea6fdc3c8edb0" category="inline-link-rx"></block>Consulte para obter mais informações.</block>
+  <block id="5597ca99169fee10411d6b2ace3c56ea" category="paragraph"><block ref="bf121260f097199f29e6e1734da8ea69" prefix="" category="inline-code"></block></block>
 </blocks>

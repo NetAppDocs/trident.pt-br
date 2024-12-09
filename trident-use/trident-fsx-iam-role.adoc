@@ -23,7 +23,7 @@ NOTE: Para autenticar usando uma função do AWS IAM, você deve ter um cluster 
 
 Este exemplo cria um segredo do AWS Secret Manager para armazenar credenciais do Trident CSI:
 
-`aws secretsmanager create-secret --name trident-secret --description "Trident CSI credentials" --secret-string "{"user":"vsadmin","password":"<svmpassword>"}"`
+`aws secretsmanager create-secret --name trident-secret --description "Trident CSI credentials" --secret-string "{"username":"vsadmin","password":"<svmpassword>"}"`
 
 
 
