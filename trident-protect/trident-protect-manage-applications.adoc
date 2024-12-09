@@ -24,9 +24,9 @@ Você precisa criar um AppVault CR que será usado ao executar operações de pr
 
 
 
-== Criar uma aplicação CR
+== Definir uma aplicação
 
-Você precisa criar um CR de aplicativo para cada aplicativo que você deseja gerenciar com o Trident Protect. Você pode adicionar um aplicativo para gerenciamento criando manualmente um CR de aplicativo ou usando a CLI Trident Protect para criar o CR.
+Você precisa definir cada aplicativo que deseja gerenciar com o Trident Protect. Você pode definir um aplicativo para gerenciamento criando manualmente um CR de aplicativo ou usando a CLI Trident Protect.
 
 [role="tabbed-block"]
 ====
@@ -53,13 +53,18 @@ metadata:
   namespace: my-app-namespace
 spec:
   includedNamespaces:
-    labelSelector: {}
-    namespace: my-app-namespace
+    - namespace: my-app-namespace
 ----
 
 
 
 
+. Depois de criar a aplicação CR para corresponder ao seu ambiente, aplique o CR. Por exemplo:
++
+[source, console]
+----
+kubectl apply -f maria-app.yaml
+----
 
 
 --
