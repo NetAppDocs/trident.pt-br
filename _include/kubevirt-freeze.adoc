@@ -1,0 +1,31 @@
+= 
+:allow-uri-read: 
+
+
+O Trident Protect 24,10 e 24.10.1 e versões mais recentes têm comportamento diferente quando você protege aplicativos em execução em VMs KubeVirt. Para ambas as versões, você pode ativar ou desativar o congelamento e o descongelamento do sistema de arquivos durante operações de proteção de dados.
+
+[NOTE]
+====
+Para todas as versões do Trident Protect, para habilitar ou desabilitar a funcionalidade de congelamento automático em ambientes OpenShift, talvez seja necessário conceder permissões privilegiadas para o namespace do aplicativo. Por exemplo:
+
+[source, console]
+----
+oc adm policy add-scc-to-user privileged -z default -n <application-namespace>
+----
+====
+.Trident Protect 24,10
+O Trident Protect 24,10 não garante automaticamente um estado consistente para os sistemas de arquivos da VM do KubeVirt durante operações de proteção de dados. Se você quiser proteger seus dados da VM KubeVirt usando o Trident Protect 24,10, você precisa ativar manualmente a funcionalidade congelar/descongelar para os sistemas de arquivos antes da operação de proteção de dados. Isso garante que os sistemas de arquivos estejam em um estado consistente.
+
+Você pode configurar o Trident Protect 24,10 para gerenciar o congelamento e o descongelamento do sistema de arquivos da VM durante operações de proteção de dados link:https://docs.openshift.com/container-platform/4.16/virt/install/installing-virt.html["configuração da virtualização"^]usando o seguinte comando:
+
+[source, console]
+----
+kubectl set env deployment/trident-protect-controller-manager NEPTUNE_VM_FREEZE=true -n trident-protect
+----
+.Trident Protect 24.10.1 e mais recente
+A partir do Trident Protect 24.10.1, o Trident Protect congela e descongela automaticamente os sistemas de arquivos KubeVirt durante operações de proteção de dados. Opcionalmente, você pode desativar esse comportamento automático usando o seguinte comando:
+
+[source, console]
+----
+kubectl set env deployment/trident-protect-controller-manager NEPTUNE_VM_FREEZE=false -n trident-protect
+----

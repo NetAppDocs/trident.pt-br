@@ -1,0 +1,83 @@
+= Anotações e rótulos de namespace durante operações de restauração e failover
+:allow-uri-read: 
+
+
+
+
+== Anotações e rótulos de namespace durante operações de restauração e failover
+
+Durante as operações de restauração e failover, rótulos e anotações no namespace de destino são feitos para corresponder aos rótulos e anotações no namespace de origem. Rótulos ou anotações do namespace de origem que não existem no namespace de destino são adicionados, e quaisquer rótulos ou anotações que já existem são sobrescritos para corresponder ao valor do namespace de origem. Rótulos ou anotações que existem apenas no namespace de destino permanecem inalterados.
+
+
+NOTE: Se você usar o RedHat OpenShift, é importante observar o papel crítico das anotações de namespace em ambientes OpenShift. As anotações de namespace garantem que os pods restaurados aderem às permissões apropriadas e às configurações de segurança definidas pelas restrições de contexto de segurança OpenShift (SCCs) e possam acessar volumes sem problemas de permissão. Para obter mais informações, consulte o https://docs.redhat.com/en/documentation/openshift_container_platform/4.17/html/authentication_and_authorization/managing-pod-security-policies["Documentação de restrições de contexto de segurança OpenShift"^].
+
+Você pode impedir que anotações específicas no namespace de destino sejam sobrescritas definindo a variável de ambiente do Kubernetes `RESTORE_SKIP_NAMESPACE_ANNOTATIONS` antes de executar a operação de restauração ou failover. Por exemplo:
+
+[source, console]
+----
+kubectl set env -n trident-protect deploy/trident-protect-controller-manager RESTORE_SKIP_NAMESPACE_ANNOTATIONS=<annotation_key_to_skip_1>,<annotation_key_to_skip_2>
+----
+Se instalou a aplicação de origem utilizando Helm com o `--create-namespace` sinalizador, é dado um tratamento especial à `name` tecla de identificação. Durante o processo de restauração ou failover, o Trident Protect copia esse rótulo para o namespace de destino, mas atualiza o valor para o valor do namespace de destino se o valor da origem corresponder ao namespace de origem. Se esse valor não corresponder ao namespace de origem, ele será copiado para o namespace de destino sem alterações.
+
+
+
+=== Exemplo
+
+O exemplo a seguir apresenta um namespace de origem e destino, cada um com anotações e rótulos diferentes. Você pode ver o estado do namespace de destino antes e depois da operação e como as anotações e rótulos são combinados ou substituídos no namespace de destino.
+
+
+
+==== Antes da operação de restauração ou failover
+
+A tabela a seguir ilustra o estado dos namespaces de origem e destino de exemplo antes da operação de restauração ou failover:
+
+[cols="1,2a,2a"]
+|===
+| Namespace | Anotações | Etiquetas 
+
+
+| Namespace ns-1 (fonte)  a| 
+* annotation.one/key: "updatedvalue"
+* annotation.two/key: "true"
+
+ a| 
+* ambiente de produção
+* conformidade hipaa
+* nome: ns-1
+
+
+
+
+| Namespace ns-2 (destino)  a| 
+* annotation.one/key: "true" (verdadeiro)
+* annotation.three/key: "false"
+
+ a| 
+* banco de dados
+
+
+|===
+
+
+==== Após a operação de restauração
+
+A tabela a seguir ilustra o estado do namespace de destino de exemplo após a operação de restauração ou failover. Algumas chaves foram adicionadas, algumas foram sobrescritas e o `name` rótulo foi atualizado para corresponder ao namespace de destino:
+
+[cols="1,2a,2a"]
+|===
+| Namespace | Anotações | Etiquetas 
+
+
+| Namespace ns-2 (destino)  a| 
+* annotation.one/key: "updatedvalue"
+* annotation.two/key: "true"
+* annotation.three/key: "false"
+
+ a| 
+* nome: ns-2
+* conformidade hipaa
+* ambiente de produção
+* banco de dados
+
+
+|===

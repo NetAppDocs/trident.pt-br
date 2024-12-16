@@ -37,7 +37,9 @@ O Trident Protect suporta os seguintes tipos de ganchos de execução, com base 
 Quando uma operação de proteção de dados é executada, os eventos de gancho de execução ocorrem na seguinte ordem:
 
 . Todos os ganchos de execução personalizados de pré-operação aplicáveis são executados nos contentores apropriados. Você pode criar e executar quantos ganchos de pré-operação personalizados você precisar, mas a ordem de execução desses ganchos antes da operação não é garantida nem configurável.
+. Ocorrem travamentos do sistema de arquivos, se aplicável. link:trident-protect-requirements.html#protecting-data-with-kubevirt-vms["Saiba mais sobre como configurar o congelamento do sistema de arquivos com o Trident Protect"].
 . A operação de proteção de dados é realizada.
+. Os sistemas de arquivos congelados não estão congelados, se aplicável.
 . Todos os ganchos de execução pós-operação personalizados aplicáveis são executados nos contentores apropriados. Você pode criar e executar quantos ganchos de pós-operação personalizados você precisar, mas a ordem de execução desses ganchos após a operação não é garantida nem configurável.
 
 
