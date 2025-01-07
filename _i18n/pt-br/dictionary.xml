@@ -4988,5 +4988,5 @@
   <block id="a16ec228f0e3336de76f224b11d860d9" category="list-text">Atualize o Trident Protect:</block>
   <block id="08810911e9a818361e28207072354bd4" category="list-text">Ocorrem travamentos do sistema de arquivos, se aplicável. <block ref="d0a15703ee89b8fa8b780fb2dbace2bd" category="inline-link-macro-rx"></block>.</block>
   <block id="caf47630bbafdc416f6b6ecdb585e83e" category="list-text">Os sistemas de arquivos congelados não estão congelados, se aplicável.</block>
-  <block id="2d9c57bbe7c29718be24410f0c38688e" category="list-text">*ResourceFilter.resourceMatchers*: Uma matriz de resourceMatcher objetos. Se você definir vários elementos nesse array, eles corresponderão como uma OPERAÇÃO OU, e os campos dentro de cada elemento (grupo, tipo, versão) corresponderão como uma OPERAÇÃO E.</block>
+  <block id="1eb6c79d30a4cb086ad406cb25fec350" category="list-text">*ResourceFilter.resourceMatchers*: Uma matriz de resourceMatcher objetos. Se você definir vários elementos nesse array, eles corresponderão como uma OPERAÇÃO OU, e os campos dentro de cada elemento (grupo, tipo, versão) corresponderão como uma OPERAÇÃO E.</block>
 </blocks>
