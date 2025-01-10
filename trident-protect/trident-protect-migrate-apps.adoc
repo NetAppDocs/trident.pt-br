@@ -50,22 +50,15 @@ Para clonar uma aplicação para o mesmo cluster, crie um snapshot ou backup e r
 
 === Clone para cluster diferente
 
-Para clonar uma aplicação para um cluster diferente (executar um clone entre clusters), crie um snapshot ou backup e restaure os dados para um cluster diferente. Certifique-se de que o Trident Protect está instalado no cluster de destino.
+Para clonar uma aplicação para um cluster diferente (executar um clone entre clusters), crie um backup no cluster de origem e restaure o backup para um cluster diferente. Certifique-se de que o Trident Protect está instalado no cluster de destino.
+
+
+NOTE: É possível replicar um aplicativo entre clusters diferentes usando link:trident-protect-use-snapmirror-replication.html["Replicação SnapMirror"]o .
 
 .Passos
-. Execute um dos seguintes procedimentos:
-+
-.. link:trident-protect-protect-apps.html#create-an-on-demand-snapshot["Criar um instantâneo"].
-.. link:trident-protect-protect-apps.html#create-an-on-demand-backup["Crie uma cópia de segurança"].
-
-
-. Verifique se o AppVault CR para o bucket de armazenamento de objetos que contém o backup ou o snapshot foi configurado no cluster de destino.
-. No cluster de destino, siga um destes procedimentos, dependendo se você criou um instantâneo ou um backup:
-+
-.. link:trident-protect-restore-apps.html#restore-from-a-snapshot-to-a-different-namespace["Restaure seus dados a partir do snapshot"].
-.. link:trident-protect-restore-apps.html#restore-from-a-backup-to-a-different-namespace["Restaure seus dados a partir do backup"].
-
-
+. link:trident-protect-protect-apps.html#create-an-on-demand-backup["Crie uma cópia de segurança"].
+. Verifique se o AppVault CR para o bucket de armazenamento de objetos que contém o backup foi configurado no cluster de destino.
+. No cluster de destino, link:trident-protect-restore-apps.html#restore-from-a-backup-to-a-different-namespace["restaure seus dados a partir do backup"].
 
 
 
