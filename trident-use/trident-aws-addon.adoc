@@ -51,14 +51,7 @@ image::../media/aws-eks-03.png[aws eks 03]
 +
 image::../media/aws-eks-04.png[aws eks 04]
 
-. (Opcional) Configure quaisquer configurações opcionais conforme necessário e selecione *Next*.
-+
-Siga o esquema de configuração *Add-on* e defina o parâmetro configurationValues na seção *valores de configuração* para o Role-arn criado na etapa anterior (o valor deve estar no seguinte formato: `eks.amazonaws.com/role-arn: arn:aws:iam::464262061435:role/AmazonEKS_FSXN_CSI_DriverRole`). Se você selecionar Substituir para o método de resolução de conflitos, uma ou mais configurações para o suplemento existente podem ser sobrescritas com as configurações de complemento do Amazon EKS. Se você não ativar essa opção e houver um conflito com suas configurações existentes, a operação falhará. Você pode usar a mensagem de erro resultante para solucionar o conflito. Antes de selecionar essa opção, certifique-se de que o complemento do Amazon EKS não gerencie as configurações que você precisa para gerenciar automaticamente.
-
-+
-
-NOTE: Ao configurar o parâmetro opcional `cloudIdentity` , certifique-se de especificar `AWS` como o `cloudProvider` durante a instalação do Trident usando o complemento EKS.
-
+. Expanda as *Configurações opcionais de configuração*, siga o esquema de configuração *Add-on* e defina o parâmetro configurationValues na seção *valores de configuração* para a função-arn que você criou na etapa anterior (o valor deve estar no seguinte formato: `eks.amazonaws.com/role-arn: arn:aws:iam::464262061435:role/AmazonEKS_FSXN_CSI_DriverRole`). Se você selecionar Substituir para o método de resolução de conflitos, uma ou mais configurações para o suplemento existente podem ser sobrescritas com as configurações de complemento do Amazon EKS. Se você não ativar essa opção e houver um conflito com suas configurações existentes, a operação falhará. Você pode usar a mensagem de erro resultante para solucionar o conflito. Antes de selecionar essa opção, certifique-se de que o complemento do Amazon EKS não gerencie as configurações que você precisa para gerenciar automaticamente.
 +
 image::../media/aws-eks-06.png[aws eks 06]
 
@@ -75,11 +68,8 @@ image::../media/aws-eks-05.png[aws eks 05]
 
 .Instale o complemento Astra Trident EKS usando a CLI:
 O seguinte exemplo de comando instala o complemento Astra Trident EKS:
-`eksctl create addon --cluster K8s-arm --name netapp_trident-operator --version v24.6.1-eksbuild`
-`eksctl create addon --cluster clusterName --name netapp_trident-operator --version v24.6.1-eksbuild.1` (Com uma versão dedicada)
-
-
-NOTE: Ao configurar o parâmetro opcional `cloudIdentity` , certifique-se de especificar `cloudProvider` durante a instalação do Trident usando o complemento EKS.
+`eksctl create addon --cluster K8s-arm --name netapp_trident-operator --version v24.10.0-eksbuild`
+`eksctl create addon --cluster clusterName --name netapp_trident-operator --version v24.10.0-eksbuild.1` (Com uma versão dedicada)
 
 .Desinstale o complemento Astra Trident EKS usando a CLI:
 O comando a seguir desinstala o complemento Astra Trident EKS:
