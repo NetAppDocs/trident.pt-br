@@ -145,7 +145,7 @@ spec:
 
 . (_Opcional_) se você precisar selecionar apenas determinados recursos do aplicativo para restaurar, adicione filtragem que inclua ou exclua recursos marcados com rótulos específicos:
 +
-** *ResourceFilter.resourceSelectionCriteria*: (Necessário para filtragem) Use `include or exclude` para incluir ou excluir um recurso definido em resourceMatchers. Adicione os seguintes parâmetros resourceMatchers para definir os recursos a serem incluídos ou excluídos:
+** *ResourceFilter.resourceSelectionCriteria*: (Necessário para filtragem) Use `Include` ou `Exclude` inclua ou exclua um recurso definido em resourceMatchers. Adicione os seguintes parâmetros resourceMatchers para definir os recursos a serem incluídos ou excluídos:
 +
 *** *ResourceFilter.resourceMatchers*: Uma matriz de resourceMatcher objetos. Se você definir vários elementos nesse array, eles corresponderão como uma OPERAÇÃO OU, e os campos dentro de cada elemento (grupo, tipo, versão) corresponderão como uma OPERAÇÃO E.
 +
@@ -163,7 +163,7 @@ Por exemplo:
 ----
 spec:
   resourceFilter:
-    resourceSelectionCriteria: "include"
+    resourceSelectionCriteria: "Include"
     resourceMatchers:
       - group: my-resource-group-1
         kind: my-resource-kind-1
@@ -247,7 +247,7 @@ spec:
 
 . (_Opcional_) se você precisar selecionar apenas determinados recursos do aplicativo para restaurar, adicione filtragem que inclua ou exclua recursos marcados com rótulos específicos:
 +
-** *ResourceFilter.resourceSelectionCriteria*: (Necessário para filtragem) Use `include or exclude` para incluir ou excluir um recurso definido em resourceMatchers. Adicione os seguintes parâmetros resourceMatchers para definir os recursos a serem incluídos ou excluídos:
+** *ResourceFilter.resourceSelectionCriteria*: (Necessário para filtragem) Use `Include` ou `Exclude` inclua ou exclua um recurso definido em resourceMatchers. Adicione os seguintes parâmetros resourceMatchers para definir os recursos a serem incluídos ou excluídos:
 +
 *** *ResourceFilter.resourceMatchers*: Uma matriz de resourceMatcher objetos. Se você definir vários elementos nesse array, eles corresponderão como uma OPERAÇÃO OU, e os campos dentro de cada elemento (grupo, tipo, versão) corresponderão como uma OPERAÇÃO E.
 +
@@ -265,7 +265,7 @@ Por exemplo:
 ----
 spec:
   resourceFilter:
-    resourceSelectionCriteria: "include"
+    resourceSelectionCriteria: "Include"
     resourceMatchers:
       - group: my-resource-group-1
         kind: my-resource-kind-1
@@ -352,7 +352,7 @@ spec:
 
 . (_Opcional_) se você precisar selecionar apenas determinados recursos do aplicativo para restaurar, adicione filtragem que inclua ou exclua recursos marcados com rótulos específicos:
 +
-** *ResourceFilter.resourceSelectionCriteria*: (Necessário para filtragem) Use `include or exclude` para incluir ou excluir um recurso definido em resourceMatchers. Adicione os seguintes parâmetros resourceMatchers para definir os recursos a serem incluídos ou excluídos:
+** *ResourceFilter.resourceSelectionCriteria*: (Necessário para filtragem) Use `Include` ou `Exclude` inclua ou exclua um recurso definido em resourceMatchers. Adicione os seguintes parâmetros resourceMatchers para definir os recursos a serem incluídos ou excluídos:
 +
 *** *ResourceFilter.resourceMatchers*: Uma matriz de resourceMatcher objetos. Se você definir vários elementos nesse array, eles corresponderão como uma OPERAÇÃO OU, e os campos dentro de cada elemento (grupo, tipo, versão) corresponderão como uma OPERAÇÃO E.
 +
@@ -370,7 +370,7 @@ Por exemplo:
 ----
 spec:
   resourceFilter:
-    resourceSelectionCriteria: "include"
+    resourceSelectionCriteria: "Include"
     resourceMatchers:
       - group: my-resource-group-1
         kind: my-resource-kind-1
@@ -459,7 +459,7 @@ spec:
 
 . (_Opcional_) se você precisar selecionar apenas determinados recursos do aplicativo para restaurar, adicione filtragem que inclua ou exclua recursos marcados com rótulos específicos:
 +
-** *ResourceFilter.resourceSelectionCriteria*: (Necessário para filtragem) Use `include or exclude` para incluir ou excluir um recurso definido em resourceMatchers. Adicione os seguintes parâmetros resourceMatchers para definir os recursos a serem incluídos ou excluídos:
+** *ResourceFilter.resourceSelectionCriteria*: (Necessário para filtragem) Use `Include` ou `Exclude` inclua ou exclua um recurso definido em resourceMatchers. Adicione os seguintes parâmetros resourceMatchers para definir os recursos a serem incluídos ou excluídos:
 +
 *** *ResourceFilter.resourceMatchers*: Uma matriz de resourceMatcher objetos. Se você definir vários elementos nesse array, eles corresponderão como uma OPERAÇÃO OU, e os campos dentro de cada elemento (grupo, tipo, versão) corresponderão como uma OPERAÇÃO E.
 +
@@ -477,7 +477,7 @@ Por exemplo:
 ----
 spec:
   resourceFilter:
-    resourceSelectionCriteria: "include"
+    resourceSelectionCriteria: "Include"
     resourceMatchers:
       - group: my-resource-group-1
         kind: my-resource-kind-1
