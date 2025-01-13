@@ -340,7 +340,7 @@ kubectl apply -f trident-protect-appvault-secondary-destination.yaml -n my-app-n
 *** *spec.namespaceMapping*: (_required_) os namespaces de destino e origem devem corresponder ao namespace de aplicativo definido no respetivo CR de aplicação.
 *** *Spec.sourceAppVaultRef*: (_required_) este valor deve corresponder ao nome do AppVault para o aplicativo de origem.
 *** *Spec.sourceApplicationName*: (_required_) esse valor deve corresponder ao nome do aplicativo de origem definido no CR do aplicativo de origem.
-*** *Spec.storageClassName*: (_required_) escolha o nome de uma classe de armazenamento válida no cluster. A classe de armazenamento deve ser colocada em Contato com a classe de armazenamento que está em uso no cluster de origem onde o aplicativo de origem é implantado.
+*** *Spec.storageClassName*: (_required_) escolha o nome de uma classe de armazenamento válida no cluster. A classe de storage deve ser vinculada a uma VM de storage do ONTAP que esteja vinculada ao ambiente de origem.
 *** *Spec.recurrenceRule*: Defina uma data de início no horário UTC e um intervalo de recorrência.
 +
 Exemplo YAML:

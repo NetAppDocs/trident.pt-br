@@ -4742,7 +4742,6 @@
   <block id="ad47c31cec730ddef75893f6207a8350" category="list-text">*spec.namespaceMapping*: (_required_) os namespaces de destino e origem devem corresponder ao namespace de aplicativo definido no respetivo CR de aplicação.</block>
   <block id="0d2f17f43053f85c97752c575bb2af3e" category="list-text">*Spec.sourceAppVaultRef*: (_required_) este valor deve corresponder ao nome do AppVault para o aplicativo de origem.</block>
   <block id="5c0044cad9c27e4f4742c4a031edd6eb" category="list-text">*Spec.sourceApplicationName*: (_required_) esse valor deve corresponder ao nome do aplicativo de origem definido no CR do aplicativo de origem.</block>
-  <block id="be4ed18b3b9c2261b9f3966d0d80e6c4" category="list-text">*Spec.storageClassName*: (_required_) escolha o nome de uma classe de armazenamento válida no cluster. A classe de armazenamento deve ser colocada em Contato com a classe de armazenamento que está em uso no cluster de origem onde o aplicativo de origem é implantado.</block>
   <block id="e1e70c108ffb369c9c05ac65820562c3" category="list-text">Depois de preencher o<block ref="e4fba3915616865173fe7feee130a30f" prefix=" " category="inline-code"></block> ficheiro com os valores corretos, aplique o CR:</block>
   <block id="d4c94febe4f13411fa761de57ad6cce6" category="open-title">Crie um AppMirrorRelationship usando a CLI</block>
   <block id="1d29e9d9da5d097b90cc18a976fa591c" category="list-text">Crie e aplique o objeto AppMirrorRelationship, substituindo valores entre parênteses por informações do seu ambiente. Por exemplo:</block>
@@ -4990,4 +4989,5 @@
   <block id="baafbccab17d07f9ba18e7becb7c76d2" category="inline-link-macro">restaure seus dados a partir do backup</block>
   <block id="878bbf0662ed19ef900e4e06bfad92d2" category="list-text">No cluster de destino, <block ref="11860f9f3ec51316f8ebc9805806b6cd" category="inline-link-macro-rx"></block>.</block>
   <block id="4a0207b6a74b63dcaaa4d58fe75ec431" category="list-text">*ResourceFilter.resourceSelectionCriteria*: (Necessário para filtragem) Use<block ref="f4d72a64acd8929c0cc9ed96a7a336cc" prefix=" " category="inline-code"></block> ou<block ref="843f2812f595e7ec7c5036e89fde02d6" prefix=" " category="inline-code"></block> inclua ou exclua um recurso definido em resourceMatchers. Adicione os seguintes parâmetros resourceMatchers para definir os recursos a serem incluídos ou excluídos:</block>
+  <block id="5e77ee724e7a9c6f34c1fd6a65b3f3b5" category="list-text">*Spec.storageClassName*: (_required_) escolha o nome de uma classe de armazenamento válida no cluster. A classe de storage deve ser vinculada a uma VM de storage do ONTAP que esteja vinculada ao ambiente de origem.</block>
 </blocks>
