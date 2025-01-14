@@ -43,7 +43,7 @@ Cada back-end provisiona volumes em uma única região do Google Cloud. Para cri
 | `location` | O Trident cria volumes de GCNV. Ao criar clusters de Kubernetes entre regiões, os volumes criados em a `location` podem ser usados em workloads programados em nós em várias regiões do Google Cloud. O tráfego entre regiões incorre em um custo adicional. |  
 
 
-| `apiKey` | Chave de API para a conta de serviço do Google Cloud com a `netappcloudvolumes.admin` função. Ele inclui o conteúdo formatado em JSON do arquivo de chave privada de uma conta de serviço do Google Cloud (copiado literalmente no arquivo de configuração de back-end). O `apiKey` deve incluir pares de chave-valor para as seguintes chaves: `type` `project_id` , , `client_email` `client_id` , , , , `auth_uri` `token_uri`, `auth_provider_x509_cert_url`, e `client_x509_cert_url`. |  
+| `apiKey` | Chave de API para a conta de serviço do Google Cloud com a `netapp.admin` função. Ele inclui o conteúdo formatado em JSON do arquivo de chave privada de uma conta de serviço do Google Cloud (copiado literalmente no arquivo de configuração de back-end). O `apiKey` deve incluir pares de chave-valor para as seguintes chaves: `type` `project_id` , , `client_email` `client_id` , , , , `auth_uri` `token_uri`, `auth_provider_x509_cert_url`, e `client_x509_cert_url`. |  
 
 
 | `nfsMountOptions` | Controle refinado das opções de montagem NFS. | "3" 
