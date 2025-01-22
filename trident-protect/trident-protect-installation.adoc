@@ -19,6 +19,10 @@ Se o seu ambiente atender aos requisitos do Trident Protect, siga estas etapas p
 
 NOTE: Por padrão, o Trident Protect coleta informações de suporte que ajudam em todos os casos de suporte da NetApp que você possa abrir, incluindo logs, métricas e informações de topologia sobre clusters e aplicativos gerenciados. O Trident Protect envia esses pacotes de suporte ao NetApp diariamente. Opcionalmente, você pode desativar essa coleção de pacotes de suporte ao instalar o Trident Protect. Você pode manualmente link:trident-protect-generate-support-bundle.html["gerar um pacote de suporte"] a qualquer momento.
 
+
+
+== Instale o Trident Protect
+
 [role="tabbed-block"]
 ====
 .Instale o Trident Protect do NetApp
@@ -117,14 +121,15 @@ kubectl create secret docker-registry regcred --docker-username=<registry-userna
 ----
 helm repo add netapp-trident-protect https://netapp.github.io/trident-protect-helm-chart
 ----
-. Crie um arquivo chamado `protectValues.yaml` que contenha as seguintes configurações de proteção do Trident:
+. Crie um arquivo chamado `protectValues.yaml`. Verifique se ele contém as seguintes configurações de proteção Trident:
 +
 [source, yaml]
 ----
+---
 image:
   registry: <private-registry-url>
 imagePullSecrets:
-- name: regcred
+  - name: regcred
 controller:
   image:
     registry: <private-registry-url>
@@ -133,10 +138,10 @@ rbacProxy:
     registry: <private-registry-url>
 crCleanup:
   imagePullSecrets:
-  - name: regcred
+    - name: regcred
 webhooksCleanup:
   imagePullSecrets:
-  - name: regcred
+    - name: regcred
 ----
 . Instale as CRDs Trident Protect:
 +
@@ -164,3 +169,73 @@ helm install trident-protect netapp-trident-protect/trident-protect --set autoSu
 
 --
 ====
+
+
+== Especifique os limites de recursos do contêiner do Trident Protect
+
+Você pode usar um arquivo de configuração para especificar limites de recursos para contentores do Trident Protect depois de instalar o Trident Protect. A definição de limites de recursos permite controlar quanto dos recursos do cluster são consumidos pelas operações do Trident Protect.
+
+.Passos
+. Crie um arquivo chamado `resourceLimits.yaml`.
+. Preencha o arquivo com opções de limite de recursos para contentores do Trident Protect de acordo com as necessidades do seu ambiente.
++
+O seguinte exemplo de arquivo de configuração mostra as configurações disponíveis e contém os vaules padrão para cada limite de recursos:
+
++
+[source, yaml]
+----
+---
+jobResources:
+  defaults:
+    limits:
+      cpu: 8000m
+      memory: 10000Mi
+      ephemeralStorage: ""
+    requests:
+      cpu: 100m
+      memory: 100Mi
+      ephemeralStorage: ""
+  resticVolumeBackup:
+    limits:
+      cpu: ""
+      memory: ""
+      ephemeralStorage: ""
+    requests:
+      cpu: ""
+      memory: ""
+      ephemeralStorage: ""
+  resticVolumeRestore:
+    limits:
+      cpu: ""
+      memory: ""
+      ephemeralStorage: ""
+    requests:
+      cpu: ""
+      memory: ""
+      ephemeralStorage: ""
+  kopiaVolumeBackup:
+    limits:
+      cpu: ""
+      memory: ""
+      ephemeralStorage: ""
+    requests:
+      cpu: ""
+      memory: ""
+      ephemeralStorage: ""
+  kopiaVolumeRestore:
+    limits:
+      cpu: ""
+      memory: ""
+      ephemeralStorage: ""
+    requests:
+      cpu: ""
+      memory: ""
+      ephemeralStorage: ""
+----
+. Aplique os valores do `resourceLimits.yaml` arquivo:
++
+[source, console]
+----
+helm update trident-protect -n trident-protect -f <resourceLimits.yaml>
+----
+

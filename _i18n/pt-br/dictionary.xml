@@ -4390,7 +4390,6 @@
   <block id="2dcd4437dbff8aff3bc16ac15a71b74d" category="list-text">Crie o namespace do sistema Trident Protect:</block>
   <block id="e0f6b701766eb28d805d7ba1e820f582" category="list-text">Inicie sessão no registo:</block>
   <block id="814565bb5d7e7359fff967986fd4195a" category="list-text">Crie um segredo para usar para autenticação de Registro privado:</block>
-  <block id="9fd6c1e403ca347a1528f0f6688f6a06" category="list-text">Crie um arquivo chamado<block ref="5744e710490761bdd5b4603b9b0487a7" prefix=" " category="inline-code"></block> que contenha as seguintes configurações de proteção do Trident:</block>
   <block id="86e8b34710172d33dcae839e1f4dd07e" category="summary">Você pode tornar o Trident Protect ciente de um aplicativo que deseja gerenciar criando um CR de aplicativo e um CR de AppVault associado.</block>
   <block id="80b940e5c68d020c06f9dc2f188d2169" category="doc">Definir uma aplicação para gestão</block>
   <block id="1e10d655f5307ce7f79aeee68a9e72f3" category="paragraph">Você pode definir um aplicativo que deseja gerenciar com o Trident Protect criando um CR de aplicativo e um CR de AppVault associado.</block>
@@ -4983,4 +4982,11 @@
   <block id="d05c8b60cfd355fccac41017c33ca892" category="paragraph">Você pode usar os exemplos CR a seguir para criar objetos AppVault para cada provedor de nuvem.</block>
   <block id="59264d37bdf7f6cbf4f94ad00dacdce1" category="section-title">Exemplos de criação do AppVault usando a CLI do Trident Protect</block>
   <block id="4db09810b323e73b4041a65c99bb14f8" category="paragraph">Você pode usar os seguintes exemplos de comandos CLI para criar o AppVault CRS para cada provedor.</block>
+  <block id="c8dac6733f0c00d0b3b8b239841a0255" category="list-text">Crie um arquivo chamado<block ref="5744e710490761bdd5b4603b9b0487a7" prefix=" " category="inline-code"></block>. Verifique se ele contém as seguintes configurações de proteção Trident:</block>
+  <block id="d9802724acbde7ce7749f0884262496a" category="section-title">Especifique os limites de recursos do contêiner do Trident Protect</block>
+  <block id="723ff7c28b60307db94ddb35dd6cc517" category="paragraph">Você pode usar um arquivo de configuração para especificar limites de recursos para contentores do Trident Protect depois de instalar o Trident Protect. A definição de limites de recursos permite controlar quanto dos recursos do cluster são consumidos pelas operações do Trident Protect.</block>
+  <block id="45d7099b61647936da59ccfbaa49ca5c" category="list-text">Crie um arquivo chamado<block ref="e66ad8c89b28dc43a24e6e1689a79cdc" prefix=" " category="inline-code"></block>.</block>
+  <block id="9f83417f7d6c999c56b0dcc3b274be23" category="list-text">Preencha o arquivo com opções de limite de recursos para contentores do Trident Protect de acordo com as necessidades do seu ambiente.</block>
+  <block id="816f46c4a8435f7f0f1498054f254865" category="paragraph">O seguinte exemplo de arquivo de configuração mostra as configurações disponíveis e contém os vaules padrão para cada limite de recursos:</block>
+  <block id="956fe3fe2ad4f9cb1b569d66b4ff1db5" category="list-text">Aplique os valores do<block ref="e66ad8c89b28dc43a24e6e1689a79cdc" prefix=" " category="inline-code"></block> arquivo:</block>
 </blocks>
