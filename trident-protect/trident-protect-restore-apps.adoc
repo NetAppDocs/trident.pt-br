@@ -102,7 +102,7 @@ A tabela a seguir ilustra o estado do namespace de destino de exemplo após a op
 
 == Restaure de um backup para um namespace diferente
 
-Quando você restaura um backup para um namespace diferente usando um BackupRestore CR, o Trident Protect restaura o aplicativo em um novo namespace, mas o aplicativo restaurado não é protegido automaticamente pelo Trident Protect. Para proteger o aplicativo restaurado, você precisa criar um CR de aplicativo para o aplicativo restaurado para que ele seja protegido pelo Trident Protect.
+Quando você restaura um backup para um namespace diferente usando um BackupRestore CR, o Trident Protect restaura o aplicativo em um novo namespace e cria um CR de aplicativo para o aplicativo restaurado. Para proteger o aplicativo restaurado, crie backups ou snapshots sob demanda ou estabeleça um cronograma de proteção.
 
 
 NOTE: Restaurar um backup para um namespace diferente com recursos existentes não alterará nenhum recurso que compartilhe nomes com aqueles no backup. Para restaurar todos os recursos no backup, exclua e recrie o namespace de destino ou restaure o backup para um novo namespace.
@@ -314,7 +314,7 @@ tridentctl-protect create backupinplacerestore <my_restore_name> --backup <names
 
 == Restauração de um snapshot para um namespace diferente
 
-É possível restaurar dados de um snapshot usando um arquivo de recurso personalizado (CR) para um namespace diferente ou namespace de origem original. Quando você restaura um snapshot para um namespace diferente usando um SnapshotRestore CR, o Trident Protect restaura o aplicativo em um novo namespace, mas o aplicativo restaurado não é protegido automaticamente pelo Trident Protect. Para proteger o aplicativo restaurado, você precisa criar um CR de aplicativo para o aplicativo restaurado para que ele seja protegido pelo Trident Protect.
+É possível restaurar dados de um snapshot usando um arquivo de recurso personalizado (CR) para um namespace diferente ou namespace de origem original. Quando você restaura um snapshot para um namespace diferente usando um SnapshotRestore CR, o Trident Protect restaura o aplicativo em um novo namespace e cria um CR de aplicativo para o aplicativo restaurado. Para proteger o aplicativo restaurado, crie backups ou snapshots sob demanda ou estabeleça um cronograma de proteção.
 
 [role="tabbed-block"]
 ====
