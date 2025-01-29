@@ -104,7 +104,7 @@ Você pode usar os recursos integrados de ajuda do plugin para obter ajuda detal
 +
 [source, console]
 ----
-tridentctl protect help
+tridentctl-protect help
 ----
 
 
@@ -178,4 +178,4 @@ source ~/.zsh/completions/tridentctl-completion.zsh
 --
 ====
 .Resultado
-Após o seu próximo login shell, você pode usar o comando auto-completação com o plugin tridentctl Protect.
+Após o seu próximo login shell, você pode usar o comando auto-completação com o plugin tridentctl-protect.

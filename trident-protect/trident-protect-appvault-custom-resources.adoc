@@ -242,42 +242,42 @@ Você pode usar os seguintes exemplos de comandos CLI para criar o AppVault CRS 
 --
 [source, console]
 ----
-tridentctl protect create vault GCP my-new-vault --bucket mybucket --project my-gcp-project --secret <gcp-creds>/<credentials>
+tridentctl-protect create vault GCP my-new-vault --bucket mybucket --project my-gcp-project --secret <gcp-creds>/<credentials>
 ----
 --
 .Amazon S3 (AWS)
 --
 [source, console]
 ----
-tridentctl protect create vault AWS <vault-name> --bucket <bucket-name> --secret  <secret-name>  --endpoint <s3-endpoint>
+tridentctl-protect create vault AWS <vault-name> --bucket <bucket-name> --secret  <secret-name>  --endpoint <s3-endpoint>
 ----
 --
 .Microsoft Azure
 --
 [source, console]
 ----
-tridentctl protect create vault Azure <vault-name> --account <account-name> --bucket <bucket-name> --secret <secret-name>
+tridentctl-protect create vault Azure <vault-name> --account <account-name> --bucket <bucket-name> --secret <secret-name>
 ----
 --
 .Genérico S3
 --
 [source, console]
 ----
-tridentctl protect create vault GenericS3 <vault-name> --bucket <bucket-name> --secret  <secret-name>  --endpoint <s3-endpoint>
+tridentctl-protect create vault GenericS3 <vault-name> --bucket <bucket-name> --secret  <secret-name>  --endpoint <s3-endpoint>
 ----
 --
 .ONTAP S3
 --
 [source, console]
 ----
-tridentctl protect create vault OntapS3 <vault-name> --bucket <bucket-name> --secret  <secret-name>  --endpoint <s3-endpoint>
+tridentctl-protect create vault OntapS3 <vault-name> --bucket <bucket-name> --secret  <secret-name>  --endpoint <s3-endpoint>
 ----
 --
 .StorageGRID S3
 --
 [source, console]
 ----
-tridentctl protect create vault StorageGridS3 s3vault --bucket <bucket-name> --secret  <secret-name>  --endpoint <s3-endpoint>
+tridentctl-protect create vault StorageGridS3 s3vault --bucket <bucket-name> --secret  <secret-name>  --endpoint <s3-endpoint>
 ----
 --
 ====
@@ -292,7 +292,7 @@ Você pode usar o plugin Trident Protect CLI para exibir informações sobre obj
 +
 [source, console]
 ----
-tridentctl protect get appvaultcontent gcp-vault --show-resources all
+tridentctl-protect get appvaultcontent gcp-vault --show-resources all
 ----
 +
 *Exemplo de saída*:
@@ -345,13 +345,13 @@ kubectl delete appvault <appvault_name> -n trident-protect
 
 
 --
-.Remova um AppVault usando a CLI do Trident
+.Remova um AppVault usando a CLI do Trident Protect
 --
 . Remova o objeto AppVault, substituindo `appvault_name` pelo nome do objeto AppVault para remover:
 +
 [source, console]
 ----
-tridentctl protect delete appvault <appvault_name> -n trident-protect
+tridentctl-protect delete appvault <appvault_name> -n trident-protect
 ----
 
 
