@@ -73,7 +73,7 @@ curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/relea
 
 --
 ====
-. Ativar permissões de execução para o binário:
+. Ativar permissões de execução para o binário do plugin:
 +
 [source, console]
 ----
@@ -85,13 +85,16 @@ chmod +x tridentctl-protect
 ----
 cp ./tridentctl-protect /usr/local/bin/
 ----
-. Opcionalmente, você pode copiar o binário para um local em seu diretório home. Nesse caso, talvez seja necessário adicionar o local à variável PATH:
+. Opcionalmente, você pode copiar o binário do plugin para um local em seu diretório home. Neste caso, é recomendável garantir que a localização faça parte da variável PATH:
 +
 [source, console]
 ----
 cp ./tridentctl-protect ~/bin/
 ----
 
+
+
+NOTE: Copiar o plugin para um local em sua variável PATH permite que você use o plugin digitando `tridentctl-protect` ou `tridentctl protect` de qualquer local.
 
 
 

@@ -4348,7 +4348,6 @@
   <block id="b64b2077b896969e7810dbb0a2de2f1a" category="open-title">Faça o download do plugin para CPUs Linux ARM64</block>
   <block id="d58e744bd40cf0f8373ee5b2c7d11387" category="open-title">Baixe o plugin para CPUs Mac AMD64</block>
   <block id="fd3e558ef6c1af851bddabf0eb1945d7" category="open-title">Baixe o plugin para CPUs Mac ARM64</block>
-  <block id="412a5def83fe5329b38679035cfea675" category="list-text">Ativar permissões de execução para o binário:</block>
   <block id="b23c395acc963a69b0a5f06a20bb4887" category="section-title">Veja a ajuda do plugin Trident CLI</block>
   <block id="305f79cb740685921820521a57e525e5" category="paragraph">Você pode usar os recursos integrados de ajuda do plugin para obter ajuda detalhada sobre os recursos do plugin:</block>
   <block id="09b4818c610e8f967a9f5257455a3a2a" category="list-text">Utilize a função de ajuda para visualizar as orientações de utilização:</block>
@@ -4880,7 +4879,6 @@
   <block id="aa2fd96b8dfdeb6aaaf2bb11da1413aa" category="list-text">Clone um FC-PVC existente.</block>
   <block id="de35bb06ba09c90d091b31450c61efd7" category="list-text">Redimensione um volume já implantado.</block>
   <block id="15286900a0d0667ffc4d515aeec6a1d2" category="list-text">Copie o binário do plugin para um local definido na variável PATH. Por exemplo,<block ref="7512824c50c61ea8d89d0f193a4f72d1" prefix=" " category="inline-code"></block> ou<block ref="ad2e864ce1a99daa836c3449f3ba705d" prefix=" " category="inline-code"></block> (você pode precisar de Privileges elevado):</block>
-  <block id="b3062a04e26d499596575c6767c02c16" category="list-text">Opcionalmente, você pode copiar o binário para um local em seu diretório home. Nesse caso, talvez seja necessário adicionar o local à variável PATH:</block>
   <block id="cff063350a0daf1b0ee4c6c97eb2e2de" category="admonition">Restaurar um backup para um namespace diferente com recursos existentes não alterará nenhum recurso que compartilhe nomes com aqueles no backup. Para restaurar todos os recursos no backup, exclua e recrie o namespace de destino ou restaure o backup para um novo namespace.</block>
   <block id="e8e7bb3124435135f9fc5dab713148e1" category="list-text">Ao usar nós de trabalho que executam RHEL/RedHat CoreOS com FC PVs, especifique a<block ref="70f68bb2f748b85de6526bfe236ea1e9" prefix=" " category="inline-code"></block> mountOption no StorageClass para executar a recuperação de espaço em linha. Consulte a<block ref="cef8948c7b8e90d5be591e67d93555a7" category="inline-link-rx"></block>.</block>
   <block id="0ac202e458490a734271522fcedf4876" category="list-text">Certifique-se de que<block ref="8732863da72605a20ed96b4eee87a5fb" prefix=" " category="inline-code"></block> está em execução:</block>
@@ -4989,4 +4987,7 @@
   <block id="0708d6413707329d6051a0456f0810ac" category="admonition">Você pode usar<block ref="deb04333ae980bc0147681e476e1941c" prefix=" " category="inline-code"></block> para exibir informações detalhadas de ajuda para este comando.</block>
   <block id="b0e7049d5aeb967991b6b3a21db08de3" category="paragraph">Quando você restaura um backup para um namespace diferente usando um BackupRestore CR, o Trident Protect restaura o aplicativo em um novo namespace e cria um CR de aplicativo para o aplicativo restaurado. Para proteger o aplicativo restaurado, crie backups ou snapshots sob demanda ou estabeleça um cronograma de proteção.</block>
   <block id="4b405223d9feceac91c5ef8df77b1961" category="paragraph">É possível restaurar dados de um snapshot usando um arquivo de recurso personalizado (CR) para um namespace diferente ou namespace de origem original. Quando você restaura um snapshot para um namespace diferente usando um SnapshotRestore CR, o Trident Protect restaura o aplicativo em um novo namespace e cria um CR de aplicativo para o aplicativo restaurado. Para proteger o aplicativo restaurado, crie backups ou snapshots sob demanda ou estabeleça um cronograma de proteção.</block>
+  <block id="375efef64643c8aa6bb8e0ba2159a82a" category="list-text">Ativar permissões de execução para o binário do plugin:</block>
+  <block id="eefd51253afc93c1ad54658882a65dec" category="list-text">Opcionalmente, você pode copiar o binário do plugin para um local em seu diretório home. Neste caso, é recomendável garantir que a localização faça parte da variável PATH:</block>
+  <block id="75b0e724fe59ed9d6eda0fcd4679bfee" category="admonition">Copiar o plugin para um local em sua variável PATH permite que você use o plugin digitando<block ref="d4845d5856667a10aee97f3404a35627" prefix=" " category="inline-code"></block> ou<block ref="e89ec374c6edc886ea12d28524834e68" prefix=" " category="inline-code"></block> de qualquer local.</block>
 </blocks>
