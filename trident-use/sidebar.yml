@@ -91,6 +91,8 @@ entries:
     url: "/trident-use/vol-custom-name.html"
   - title: Compartilhar volumes NFS em namespaces
     url: "/trident-use/volume-share.html"
+  - title: Replique volumes usando o SnapMirror
+    url: "/trident-use/vol-volume-replicate.html"
   - title: Use a topologia CSI
     url: "/trident-use/csi-topology.html"
   - title: Use snapshots

@@ -4992,4 +4992,164 @@
   <block id="dc5b2d9ecd49d3e5ee37059e2d80512f" category="section-title">O Trident protege a compatibilidade de clusters do Kubernetes</block>
   <block id="9ac0dd27d420b7b48ca72e463ae95e18" category="inline-link">estas instruções</block>
   <block id="664d28801abc192d5c7dfd7bfa758e98" category="admonition">Verifique se o cluster no qual você instala o Trident Protect está configurado com um controlador de snapshot em execução e as CRDs relacionadas. Para instalar um controlador instantâneo,<block ref="5d66944a2971d1b9b5f332812a6e737b" category="inline-link-rx"></block> consulte a .</block>
+  <block id="9560d298aea880d389acf56a45410c4b" category="summary">Você pode configurar a criptografia para proteger o tráfego entre o Trident e o back-end de storage.</block>
+  <block id="c994f1e00d22f7d8d4e7b3e7f50f8002" category="doc">Criptografia em trânsito Kerberos</block>
+  <block id="c8ea4672c0efc6fee26c8648f609a829" category="paragraph">Usando a criptografia em trânsito Kerberos, você pode melhorar a segurança de acesso aos dados habilitando a criptografia para o tráfego entre o cluster gerenciado e o back-end de armazenamento.</block>
+  <block id="420bac2406e93da0c7c791aca209017d" category="paragraph">O Trident oferece suporte à criptografia Kerberos para ONTAP como um back-end de armazenamento:</block>
+  <block id="796f801ad41f96aeb2e1a1950ed629e4" category="list-text">*On-Premise ONTAP* - o Trident oferece suporte à criptografia Kerberos em conexões NFSv3 e NFSv4 do Red Hat OpenShift e clusters do Kubernetes upstream para volumes ONTAP on-premise.</block>
+  <block id="0a710c309a5f6dc65b056833a5208521" category="paragraph">Você pode criar, excluir, redimensionar, snapshot, clone, clone somente leitura e importar volumes que usam criptografia NFS.</block>
+  <block id="2aff02c8ceb99a9445937af9d4d8f286" category="section-title">Configurar a criptografia Kerberos em trânsito com volumes ONTAP no local</block>
+  <block id="330282591e8caa9814eb88ec524b89cf" category="paragraph">Você pode ativar a criptografia Kerberos no tráfego de armazenamento entre o cluster gerenciado e um back-end de armazenamento ONTAP no local.</block>
+  <block id="daf34fb0fcb74d9bcf85abcebcc8e1f2" category="admonition">A criptografia Kerberos para tráfego NFS com backends de armazenamento ONTAP on-premise só é suportada usando o<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> driver de armazenamento.</block>
+  <block id="0ff02d27ae5cac1a12c6c403fd55443c" category="list-text">Certifique-se de que tem acesso ao<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block> utilitário.</block>
+  <block id="bef890ed7cc869346d4b483cd3e3ab00" category="list-text">Verifique se você tem acesso de administrador ao back-end de storage do ONTAP.</block>
+  <block id="160b05c1b85ce34d702a3568614baec1" category="list-text">Certifique-se de saber o nome do volume ou volumes que você compartilhará no back-end de storage do ONTAP.</block>
+  <block id="1a69d38f7b46901c58e85d024e87b034" category="inline-link">Ative o Kerberos em um LIF de dados</block>
+  <block id="d4a594e9e05807f063e76ba8e5520ce8" category="list-text">Certifique-se de que você preparou a VM de armazenamento ONTAP para oferecer suporte à criptografia Kerberos para volumes NFS. <block ref="6585cfb6b510f588abb97add305c4508" category="inline-link-rx"></block>Consulte para obter instruções.</block>
+  <block id="9fe985de654739fa6f48edb0d49059b4" category="inline-link">Guia de práticas recomendadas e aprimoramentos do NetApp NFSv4</block>
+  <block id="9c6a0d551d50340cca48e6cfa4355566" category="list-text">Certifique-se de que todos os volumes NFSv4 usados com criptografia Kerberos estejam configurados corretamente. Consulte a seção Configuração de domínio do NetApp NFSv4 (página 13) do<block ref="fcbfe3012009d21ef9ba8407142f85b6" category="inline-link-rx"></block>.</block>
+  <block id="7c67bfc9153da2055f6d09209f9853c7" category="section-title">Adicionar ou modificar políticas de exportação do ONTAP</block>
+  <block id="3afa4a2a4546fcf1b9a361d1bff9763b" category="paragraph">Você precisa adicionar regras às políticas de exportação existentes do ONTAP ou criar novas políticas de exportação que suportem a criptografia Kerberos para o volume raiz da VM de armazenamento do ONTAP, bem como quaisquer volumes do ONTAP compartilhados com o cluster do Kubernetes upstream. As regras de política de exportação que você adicionar ou as novas políticas de exportação que você criar precisam oferecer suporte aos seguintes protocolos de acesso e permissões de acesso:</block>
+  <block id="e21233a7f0d7fedb5883aea1dfed27cf" category="paragraph-title">Protocolos de acesso</block>
+  <block id="e10f51f4d0eb1b58929237c03db4b832" category="paragraph">Configurar a política de exportação com protocolos de acesso NFS, NFSv3 e NFSv4.</block>
+  <block id="baedff73fdfff23f65e8b80727cd3088" category="paragraph-title">Aceder aos detalhes</block>
+  <block id="892969be437eb53b05f372cc0ae74d6c" category="paragraph">Você pode configurar uma das três versões diferentes da criptografia Kerberos, dependendo de suas necessidades para o volume:</block>
+  <block id="fda32d078836aa6e69a3497be5f9cdca" category="list-text">*Kerberos 5* - (autenticação e criptografia)</block>
+  <block id="7d55fc39e32469f330297f866ec40e41" category="list-text">*Kerberos 5i* - (autenticação e criptografia com proteção de identidade)</block>
+  <block id="ec7a355c2dad88f01ddce6c662ff507f" category="list-text">*Kerberos 5P* - (autenticação e criptografia com proteção de identidade e privacidade)</block>
+  <block id="43c969c43b32e3dd3bcf607fcbe4eb43" category="paragraph">Configure a regra de política de exportação do ONTAP com as permissões de acesso apropriadas. Por exemplo, se os clusters estiverem montando os volumes NFS com uma mistura de criptografia Kerberos 5i e kerberos 5P, use as seguintes configurações de acesso:</block>
+  <block id="0370275db54735bcb50d5bfce36de4e6" category="cell">Acesso somente leitura</block>
+  <block id="dbdb2754b99a3cb725e62ef04c72ee06" category="cell">Acesso de leitura/escrita</block>
+  <block id="a3a9521b6675631e988004e7b8ffe7b4" category="cell">Acesso ao superusuário</block>
+  <block id="15395d0642f86c5992abbca5e56e2b29" category="cell">UNIX</block>
+  <block id="00d23a76e43b46dae9ec7aa9dcbebb32" category="cell">Ativado</block>
+  <block id="f22873ba6efee4accc10bd5a3d3ca9eb" category="cell">Kerberos 5i</block>
+  <block id="a98fd9001be872cb9763c171625ee881" category="cell">Kerberos 5P</block>
+  <block id="9a83b6e7170a551799b737b273fde5e1" category="paragraph">Consulte a documentação a seguir para saber como criar políticas de exportação e regras de política de exportação do ONTAP:</block>
+  <block id="bb53c6c29f127a298da7dd86bf00bb89" category="inline-link">Crie uma política de exportação</block>
+  <block id="2065c7b470f4d228b592158785fc8c0b" category="list-text"><block ref="2065c7b470f4d228b592158785fc8c0b" category="inline-link-rx"></block></block>
+  <block id="8c47b652d31bca921bb367b0e3c5ec6d" category="inline-link">Adicione uma regra a uma política de exportação</block>
+  <block id="249db3ace916cc1363d388978a8b6c5e" category="list-text"><block ref="249db3ace916cc1363d388978a8b6c5e" category="inline-link-rx"></block></block>
+  <block id="c21c2b66c343dfe9db6298e59c2cc767" category="section-title">Crie um back-end de storage</block>
+  <block id="449396632614b1e0731c51704890f8bd" category="paragraph">Você pode criar uma configuração de back-end de armazenamento Trident que inclua o recurso de criptografia Kerberos.</block>
+  <block id="0848c0a5d21711a3f8967a344553c492" category="paragraph">Quando você cria um arquivo de configuração de back-end de armazenamento que configura a criptografia Kerberos, você pode especificar uma das três versões diferentes da criptografia Kerberos usando o<block ref="21f59c061af833af5de20556ce76052d" prefix=" " category="inline-code"></block> parâmetro:</block>
+  <block id="619885da64e4ba4b0df04a00d78079b7" category="list-text"><block ref="47587c842cb0a2574a5a4c7c644b006d" prefix="" category="inline-code"></block> (autenticação e criptografia)</block>
+  <block id="aa734ef649b1255faccfc198980bf49a" category="list-text"><block ref="600550ee922e257041b75142ddab2319" prefix="" category="inline-code"></block> (autenticação e criptografia com proteção de identidade)</block>
+  <block id="4197df0e0ac8f9480069ee1e0dc22543" category="list-text"><block ref="b148e7f5a01830ae530070588af5e9e6" prefix="" category="inline-code"></block> (autenticação e criptografia com proteção de identidade e privacidade)</block>
+  <block id="c99e9f5ade1b20705438ad6882d112c2" category="paragraph">Especifique apenas um nível Kerberos. Se você especificar mais de um nível de criptografia Kerberos na lista de parâmetros, somente a primeira opção será usada.</block>
+  <block id="926a7d5402fb3ed0da8fcd630e3a8f8c" category="list-text">No cluster gerenciado, crie um arquivo de configuração de back-end de storage usando o exemplo a seguir. Substitua os valores entre parêntesis&gt; por informações do seu ambiente:</block>
+  <block id="2cd636101227e18554e5c5351bf5bbe3" category="list-text">Use o arquivo de configuração que você criou na etapa anterior para criar o backend:</block>
+  <block id="3204b0a88f0c8e6cb89ef2653173ddf1" category="paragraph">Você pode criar uma classe de armazenamento para provisionar volumes com criptografia Kerberos.</block>
+  <block id="03111bbdda72125f143e084557265c1c" category="paragraph">Ao criar um objeto de classe de armazenamento, você pode especificar uma das três versões diferentes da criptografia Kerberos usando o<block ref="e1d3d66c5926aa7fbc3186da8f9b476b" prefix=" " category="inline-code"></block> parâmetro:</block>
+  <block id="85eee746a5d30d5149d419a3dfd2fe4e" category="list-text"><block ref="ebd2fabd7ee9d78e670334fba38c5a6b" prefix="" category="inline-code"></block> (autenticação e criptografia)</block>
+  <block id="24dac19871e9929a42267b538a60ebe5" category="list-text"><block ref="82f5845550ca9ab77ce797c16bd7bca1" prefix="" category="inline-code"></block> (autenticação e criptografia com proteção de identidade)</block>
+  <block id="c36d9d41da2e174bfa8b3338450fb45c" category="list-text"><block ref="7a1dedb8f6c22fd4833b45267ad3b01a" prefix="" category="inline-code"></block> (autenticação e criptografia com proteção de identidade e privacidade)</block>
+  <block id="4a2e7c9ecf75ac18d4daec2783256280" category="paragraph">Especifique apenas um nível Kerberos. Se você especificar mais de um nível de criptografia Kerberos na lista de parâmetros, somente a primeira opção será usada. Se o nível de criptografia especificado na configuração de back-end de armazenamento for diferente do nível especificado no objeto de classe de armazenamento, o objeto de classe de armazenamento terá precedência.</block>
+  <block id="0bae6577bb0c45b6f2d82896713df9f9" category="list-text">Crie um objeto Kubernetes StorageClass, usando o exemplo a seguir:</block>
+  <block id="bd9c5e9bd5f130a6fbdbcaeb04656652" category="list-text">Crie a classe de armazenamento:</block>
+  <block id="2472867b1c2b8a486fe64cfc08afeba5" category="list-text">Certifique-se de que a classe de armazenamento foi criada:</block>
+  <block id="0a44f30bac4e15e0464a80627bef5882" category="section-title">Volumes de provisionamento</block>
+  <block id="37bd6ab74d66efd877ea77c0e69e593c" category="paragraph">Depois de criar um back-end de storage e uma classe de storage, agora é possível provisionar um volume. Para obter instruções,<block ref="70405bfb2744633a336a6c9abdd1df6e" category="inline-link-rx"></block> consulte .</block>
+  <block id="fe10ad21eb1ce607c403a8d609d5ab3e" category="section-title">Configurar a criptografia Kerberos em trânsito com volumes Azure NetApp Files</block>
+  <block id="cd21e25bc313d3805456542eac624499" category="paragraph">Você pode ativar a criptografia Kerberos no tráfego de armazenamento entre o cluster gerenciado e um único back-end de armazenamento Azure NetApp Files ou um pool virtual de backends de armazenamento Azure NetApp Files.</block>
+  <block id="04379b5e9a5ec6b970752d2b8d0341c8" category="list-text">Certifique-se de que você ativou o Trident no cluster gerenciado do Red Hat OpenShift.</block>
+  <block id="6c32a3d0f1a665987b98dde5a0f96d7d" category="inline-link">Documentação do Azure NetApp Files</block>
+  <block id="aa63a31f222305a4ce10d8c1020ab1fd" category="list-text">Certifique-se de que preparou o back-end de armazenamento Azure NetApp Files para criptografia Kerberos, observando os requisitos e seguindo as instruções em<block ref="54b351b1767d2d50eb8c87e19c20164c" category="inline-link-rx"></block>.</block>
+  <block id="4f07c8d51fef64025d4b746305177733" category="paragraph">Você pode criar uma configuração de back-end de armazenamento Azure NetApp Files que inclua o recurso de criptografia Kerberos.</block>
+  <block id="5c6eaa8dd4c4134f6ad836e97ffdee13" category="paragraph">Quando você cria um arquivo de configuração de back-end de armazenamento que configura a criptografia Kerberos, você pode defini-lo para que ele seja aplicado em um dos dois níveis possíveis:</block>
+  <block id="bc0557be41ea94e344d7ece1f311b7d4" category="list-text">O *nível de back-end de armazenamento* usando o<block ref="6a60a6d9955ef9fce24cf4e86efed7af" prefix=" " category="inline-code"></block> campo</block>
+  <block id="e30ee9a2b9976217a5fe28b412fe04d6" category="list-text">O *nível de pool virtual* usando o<block ref="533988f6253fcffab6270c1aafb50970" prefix=" " category="inline-code"></block> campo</block>
+  <block id="64864cec765a0e5c421369098904873c" category="paragraph">Quando você define a configuração no nível do pool virtual, o pool é selecionado usando o rótulo na classe de armazenamento.</block>
+  <block id="082ccae8192fda90d271d92200b3a7dd" category="paragraph">Em ambos os níveis, você pode especificar uma das três versões diferentes da criptografia Kerberos:</block>
+  <block id="853434fc4aabccb1e3341f56ef2a9424" category="list-text"><block ref="9ce0da43b8420d1a89f0d00da04312a2" prefix="" category="inline-code"></block> (autenticação e criptografia)</block>
+  <block id="44ea74e03aa9994870273996b8770ef6" category="list-text"><block ref="6bbaa5deea5e26abf8837d31bd265b6f" prefix="" category="inline-code"></block> (autenticação e criptografia com proteção de identidade)</block>
+  <block id="e22427c81cd5155061fad66ed3f13f52" category="list-text"><block ref="42b55bed7d0514cd2e2189a3edc9d87b" prefix="" category="inline-code"></block> (autenticação e criptografia com proteção de identidade e privacidade)</block>
+  <block id="c51fc706f0eb21d747d3ff2e2bb6c38b" category="list-text">No cluster gerenciado, crie um arquivo de configuração de back-end de storage usando um dos exemplos a seguir, dependendo de onde você precisa definir o back-end de storage (nível de back-end de armazenamento ou nível de pool virtual). Substitua os valores entre parêntesis&gt; por informações do seu ambiente:</block>
+  <block id="d51a5db438981d465f8fecc7ecbeb054" category="open-title">Exemplo de nível de back-end de storage</block>
+  <block id="83aab9b6ffc8c65b79350e009c49e5f4" category="open-title">Exemplo de nível de pool virtual</block>
+  <block id="1738a6ff1f0b418ce16cf74aabdceff1" category="section-title">Restauração de volume no local a partir de um instantâneo</block>
+  <block id="f29961e077241efec95d259658aa48f1" category="paragraph">O Trident fornece restauração rápida de volume no local a partir de um instantâneo usando o<block ref="2aabb3b01d0d54317a9eeef910e001f6" prefix=" " category="inline-code"></block> CR (TASR). Esse CR funciona como uma ação imperativa do Kubernetes e não persiste após a conclusão da operação.</block>
+  <block id="0219777660eb822cd45c74808c60e5e6" category="paragraph">O Trident oferece suporte à restauração de snapshot no<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>,<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block>, ,<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block><block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> ,<block ref="bc5779a2d33eeb1304bae57f15920cfc" prefix=" " category="inline-code"></block>, ,<block ref="5935ea92cdd7d975b4e764b429f21c01" prefix=" " category="inline-code"></block><block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block>, , e<block ref="c0d2a793e71b152662b3e8cd2da00620" prefix=" " category="inline-code"></block> drivers.</block>
+  <block id="e0bc0596a7d966cd8dab3ee0e924c9b5" category="paragraph">Você deve ter um PVC vinculado e instantâneo de volume disponível.</block>
+  <block id="d785d18f53979794a4ef9e08d186e3c4" category="list-text">Verifique se o status do PVC está vinculado.</block>
+  <block id="d0f2b7254060d8a37c98c1eb4289586d" category="list-text">Verifique se o instantâneo do volume está pronto para ser usado.</block>
+  <block id="da6aadede1bc870c9042c660fdf93f25" category="list-text">Crie o TASR CR. Este exemplo cria um CR para instantâneo de PVC<block ref="30520f4f96804df83914260b79f55962" prefix=" " category="inline-code"></block> e volume<block ref="06f2874897d3ec8426ec85e0ffda5544" prefix=" " category="inline-code"></block> .</block>
+  <block id="68fb76b60d3c1f9302a04ef3eb761c08" category="admonition">O TAR CR deve estar num espaço de nomes onde o PVC e VS existam.</block>
+  <block id="0c9991859e53bf37c58a2fd1233eb478" category="list-text">Aplique o CR para restaurar a partir do instantâneo. Este exemplo restaura do instantâneo<block ref="30520f4f96804df83914260b79f55962" prefix=" " category="inline-code"></block>.</block>
+  <block id="5dfd751b8f6ed15f558be3e46812461b" category="paragraph">O Trident restaura os dados do snapshot. Você pode verificar o status de restauração de snapshot.</block>
+  <block id="91f853f4fc1dc83a1a2f28c65af59d28" category="list-text">Na maioria dos casos, o Trident não tentará automaticamente a operação em caso de falha. Terá de efetuar novamente a operação.</block>
+  <block id="c83b74c2020dd836f5b401ecda0da78c" category="list-text">Os usuários do Kubernetes sem acesso de administrador podem ter permissão para que o administrador crie um TASR CR em seu namespace de aplicativo.</block>
+  <block id="cff310c77e35cf2f693ebbb39c78e89f" category="summary">O Trident é compatível com a criação de relacionamentos espelhados entre volumes de origem e destino para replicar volumes para recuperação de desastres.</block>
+  <block id="50e2eea9ba53d70147772db1c5d25f79" category="doc">Replique volumes usando o SnapMirror</block>
+  <block id="4f29610afffeab1dca63a82a40791008" category="paragraph">O Trident oferece suporte a relacionamentos espelhados entre um volume de origem em um cluster e o volume de destino no cluster com peering para replicação de dados para recuperação de desastres. Você pode usar uma Definição de recursos personalizados (CRD) para executar as seguintes operações:</block>
+  <block id="a682d8ef86abcae6c5a1db6186c5f02b" category="list-text">Criar relações de espelhamento entre volumes (PVCs)</block>
+  <block id="31a8f98d3378661a5b8abf15438f0bca" category="list-text">Remova as relações de espelho entre volumes</block>
+  <block id="a6349012892be516e5729d501a9649a7" category="list-text">Quebre as relações do espelho</block>
+  <block id="2597cb6d27f572bb6d7d2fd15f414795" category="list-text">Promover o volume secundário durante as condições de desastre (failovers)</block>
+  <block id="40f7c55be912a395aed2502927d3fcfa" category="list-text">Realizar a transição sem perda de aplicativos do cluster para o cluster (durante failovers planejados ou migrações)</block>
+  <block id="d193cd9a2432eca22e5cf0d06dcee1e6" category="section-title">Pré-requisitos de replicação</block>
+  <block id="55be807bf2be012ff44a04449cc5e8a8" category="paragraph">Certifique-se de que os seguintes pré-requisitos sejam atendidos antes de começar:</block>
+  <block id="3404cce75db90acf6a9d52860721a139" category="list-title">Clusters de ONTAP</block>
+  <block id="fbcc2a3b7506e5e36eb6f61b69bb75da" category="list-text">*Trident*: O Trident versão 22,10 ou posterior deve existir nos clusters do Kubernetes de origem e destino que utilizam o ONTAP como um back-end.</block>
+  <block id="5cc8ada79224d850ecd22fd22e550c47" category="list-title">Peering</block>
+  <block id="02b05cdd8f0a8c426f307085cc1004f7" category="list-text">*Cluster e SVM*: Os backends de storage do ONTAP devem ser colocados em Contato. <block ref="60333a598df416e49fbceb5a88dce370" category="inline-link-rx"></block>Consulte para obter mais informações.</block>
+  <block id="792f00dfd96560df18fe1c6b56861893" category="list-text">*Trident e SVM*: Os SVMs remotas com peering devem estar disponíveis para o Trident no cluster de destino.</block>
+  <block id="0c5e1b5bc54261ccadd2a72af1047ded" category="list-title">Drivers suportados</block>
+  <block id="57601c13c06c6ac6e23efaab44ced427" category="list-text">A replicação de volume é compatível com os drivers ONTAP-nas e ONTAP-san.</block>
+  <block id="3ce5b83f8896ef0d2e356d3972ec8898" category="section-title">Crie um PVC espelhado</block>
+  <block id="427a1ab7f39ee4f2dd7a0b7e35f572da" category="paragraph">Siga estas etapas e use os exemplos CRD para criar relação de espelhamento entre volumes primário e secundário.</block>
+  <block id="4dc69f665f0d76c17a577a352dd15b25" category="list-text">Execute as etapas a seguir no cluster primário do Kubernetes:</block>
+  <block id="cffc5263be00a76539edeeff72190d54" category="list-text">Crie um objeto StorageClass com o<block ref="23041ca302bab724a5a0a4ee923c745d" prefix=" " category="inline-code"></block> parâmetro.</block>
+  <block id="f1fe26832c26eb686c85bd72da8a62f1" category="list-text">Crie um PVC com StorageClass criado anteriormente.</block>
+  <block id="a306778c7affcc4dd2329c7f1e9a6389" category="list-text">Crie um MirrorRelationship CR com informações locais.</block>
+  <block id="12551ccb4392cf7715384812c34ff7dc" category="paragraph">O Trident obtém as informações internas para o volume e o estado atual de proteção de dados (DP) do volume e, em seguida, preenche o campo de status do espelhamento.</block>
+  <block id="7e36329a511f28054ceb0cb2aba7de3a" category="list-text">Obtenha o tridentMirrorRelacionship CR para obter o nome interno e SVM do PVC.</block>
+  <block id="ce01c03f932076e82348fc5aaefacc7d" category="list-text">Execute as etapas a seguir no cluster secundário do Kubernetes:</block>
+  <block id="dbe7fac150e57be9bc0d8e046792f4c3" category="list-text">Crie um StorageClass com o parâmetro Trident.NetApp.io/replicação: True.</block>
+  <block id="01d68e0f9630c032dc8a33358e46e65b" category="list-text">Crie um MirrorRelationship CR com informações de destino e origem.</block>
+  <block id="b4dcd7f617380594be36d544e6823841" category="paragraph">O Trident criará um relacionamento SnapMirror com o nome da política de relacionamento configurado (ou padrão para o ONTAP) e inicializá-lo.</block>
+  <block id="4ba5d2a91c95149a7ad924ebd0d9503d" category="list-text">Crie um PVC com StorageClass criado anteriormente para atuar como secundário (destino SnapMirror).</block>
+  <block id="14c271d9e62dcf6baaab0fde456f080f" category="paragraph">O Trident verificará se há CRD de relacionamento de espelhamento e não criará o volume se a relação não existir. Se o relacionamento existir, o Trident garantirá que o novo FlexVol volume seja colocado em um SVM que seja emparelhado com o SVM remoto definido no espelhamento.</block>
+  <block id="e71d1a5cbaac30e63ed507e4b62c705f" category="section-title">Estados de replicação de volume</block>
+  <block id="d802b3b47bb3c6b52714c9817598fcb8" category="paragraph">Um relacionamento de espelhamento do Trident (TMR) é um CRD que representa um fim de uma relação de replicação entre PVCs. O TMR de destino tem um estado, que informa ao Trident qual é o estado desejado. O TMR de destino tem os seguintes estados:</block>
+  <block id="546afd3b22376f948ae8d790e441d7da" category="list-text">* Estabelecido*: O PVC local é o volume de destino de uma relação de espelho, e esta é uma nova relação.</block>
+  <block id="724cfb5ec8bac42a80699bb79c4eccb9" category="list-text">*Promovido*: O PVC local é ReadWrite e montável, sem relação de espelho atualmente em vigor.</block>
+  <block id="d323366aa32e60d08a0f93bda543af47" category="list-text">* Restabelecido*: O PVC local é o volume de destino de uma relação de espelho e também estava anteriormente nessa relação de espelho.</block>
+  <block id="4c3cd5b62a43e82e03fffa6b238ed918" category="list-text">O estado restabelecido deve ser usado se o volume de destino estiver em uma relação com o volume de origem, porque ele sobrescreve o conteúdo do volume de destino.</block>
+  <block id="b2e7dc07859cd924ca5706b299986e57" category="list-text">O estado restabelecido falhará se o volume não estiver previamente em uma relação com a fonte.</block>
+  <block id="93f9c6ccc7d85e709509db31891ae5eb" category="section-title">Promover PVC secundário durante um failover não planejado</block>
+  <block id="4a76c8d930ec18b5aedc26b5d8e5246f" category="paragraph">Execute a seguinte etapa no cluster secundário do Kubernetes:</block>
+  <block id="78ac02218b5a9367bdcb4881538477cc" category="list-text">Atualize o campo _spec.State_ do TrigentMirrorRelationship para<block ref="1fe57d6202c7cfbb0ee344b1e0a6fb37" prefix=" " category="inline-code"></block>.</block>
+  <block id="ffe4cfc202d643b50342b93a4a11a82f" category="section-title">Promover PVC secundário durante um failover planejado</block>
+  <block id="1d60b89a076d7f30b8efdef50e842f68" category="paragraph">Durante um failover planejado (migração), execute as seguintes etapas para promover o PVC secundário:</block>
+  <block id="3310d9a60c164accb7c262ab6e9fbc65" category="list-text">No cluster primário do Kubernetes, crie um snapshot do PVC e aguarde até que o snapshot seja criado.</block>
+  <block id="8b17b79902950942165541a8ab704363" category="list-text">No cluster principal do Kubernetes, crie o SnapshotInfo CR para obter detalhes internos.</block>
+  <block id="678346d79faaa65b2da52e6d7ddce845" category="list-text">No cluster secundário do Kubernetes, atualize o campo _spec.State_ do _tridentMirrorRelationship_ CR para _promoted_ e _spec.promotedSnapshotHandle_ para ser o internalName do snapshot.</block>
+  <block id="7b007b14980acd66e9301e02a5670f47" category="list-text">No cluster secundário do Kubernetes, confirme o status (campo status.State) do TrigentMirrorRelationship para promovido.</block>
+  <block id="f69101c0107c4bbf8f0ccc9141beb68b" category="section-title">Restaurar uma relação de espelhamento após um failover</block>
+  <block id="9a023cbe1d3be933d8edb6228f9901ce" category="paragraph">Antes de restaurar uma relação de espelho, escolha o lado que você deseja fazer como o novo primário.</block>
+  <block id="1c7011adbcc0afa258396aff4f10266b" category="list-text">No cluster secundário do Kubernetes, certifique-se de que os valores do campo _spec.remoteVolumeHandle_ no TrigentMirrorRelationship sejam atualizados.</block>
+  <block id="ffb25f01fda2538ae98bc0c4b4d465a6" category="list-text">No cluster secundário do Kubernetes, atualize o campo _spec.mirror_ do TrigentMirrorRelationship para<block ref="036bbe13de7250844b100bc381b59214" prefix=" " category="inline-code"></block>.</block>
+  <block id="41a593c0bede63aac2726a18e4599087" category="section-title">Operações adicionais</block>
+  <block id="567147b40ff26562a6dfcddbde29e62e" category="paragraph">O Trident dá suporte às seguintes operações nos volumes primário e secundário:</block>
+  <block id="253093d00b66ff2357df5085c04b2758" category="section-title">Replique PVC primário para um novo PVC secundário</block>
+  <block id="301dcece9e67241c29ebbbac8a94274e" category="paragraph">Certifique-se de que você já tem um PVC primário e um PVC secundário.</block>
+  <block id="7f1c32cba6b98d1db7f3dfda1df76189" category="list-text">Exclua as CRDs PersistentVolumeClaim e TridentMirrorRelacionship do cluster secundário (destino) estabelecido.</block>
+  <block id="e655fd5342cff178f54ae5f5b2a3b7b6" category="list-text">Exclua o CRD do tridentMirrorRelationship do cluster primário (de origem).</block>
+  <block id="3eb69a135044d3f308d140dccb1dbe5e" category="list-text">Crie um novo CRD de TridentMirrorRelacionship no cluster primário (de origem) para o novo PVC secundário (de destino) que você deseja estabelecer.</block>
+  <block id="92c650dfb6284b5d24ed0e83a2338fa0" category="section-title">Redimensione um PVC espelhado, primário ou secundário</block>
+  <block id="66990a43216d28b5b6818b021d397574" category="paragraph">O PVC pode ser redimensionado como normal, o ONTAP irá expandir automaticamente qualquer destino flevxols se a quantidade de dados exceder o tamanho atual.</block>
+  <block id="4e2626fed5da19a4be8255f16a331609" category="section-title">Remova a replicação de um PVC</block>
+  <block id="e1abf7fa65d845d34c33d593ed070453" category="paragraph">Para remover a replicação, execute uma das seguintes operações no volume secundário atual:</block>
+  <block id="b3dd2c563dffb09f03c72bc16a72be62" category="list-text">Exclua o MirrorRelationship no PVC secundário. Isso quebra a relação de replicação.</block>
+  <block id="413ab8e64d0d4ccb3f08ef2a8653a525" category="list-text">Ou atualize o campo spec.State para _promovido_.</block>
+  <block id="c00cff9971607d7a0409066a0ecc3bcd" category="section-title">Excluir um PVC (que foi anteriormente espelhado)</block>
+  <block id="e52ffc7f9894586bbf7c4260d92073c4" category="paragraph">O Trident verifica se há PVCs replicados e libera a relação de replicação antes de tentar excluir o volume.</block>
+  <block id="8ec9c60105332c1be8facc42b496e14b" category="section-title">Eliminar um TMR</block>
+  <block id="a956a14d229badbbde1032651b3586fd" category="paragraph">A exclusão de um TMR em um lado de um relacionamento espelhado faz com que o TMR restante passe para o estado _promovido_ antes que o Trident conclua a exclusão. Se o TMR selecionado para exclusão já estiver no estado _promovido_, não há relacionamento de espelhamento existente e o TMR será removido e o Trident promoverá o PVC local para _ReadWrite_. Essa exclusão libera os metadados do SnapMirror para o volume local no ONTAP. Se este volume for usado em uma relação de espelho no futuro, ele deve usar um novo TMR com um estado de replicação de volume _established_ ao criar a nova relação de espelho.</block>
+  <block id="d41660149eb8930ad76a1dfe3dc5f2e3" category="section-title">Atualizar relações de espelho quando o ONTAP estiver online</block>
+  <block id="7079164c5ba86439b0719782591106dd" category="paragraph">As relações de espelho podem ser atualizadas a qualquer momento depois que são estabelecidas. Pode utilizar os<block ref="abb3a949c6d70e3e5d92f4ad2bf143a3" prefix=" " category="inline-code"></block> campos ou<block ref="ff0b4e3d4dfe8f6074b6943947345d4d" prefix=" " category="inline-code"></block> para atualizar as relações. Ao promover um volume de destino para um volume ReadWrite regular, você pode usar _promotedSnapshotHandle_ para especificar um snapshot específico para restaurar o volume atual.</block>
+  <block id="4eecab048a7c90cfb92e0f04884686e8" category="section-title">Atualizar relações de espelho quando o ONTAP estiver offline</block>
+  <block id="e782fcb9f3e7e8fa8b5ccdb3169c0e42" category="paragraph">Você pode usar um CRD para executar uma atualização do SnapMirror sem que o Trident tenha conetividade direta com o cluster do ONTAP. Consulte o seguinte formato de exemplo do TrigentActionMirrorUpdate:</block>
+  <block id="bc08468157c4a9e3a30eed7ba64cc309" category="paragraph"><block ref="1f9dfae8a369525bce4996df40963532" prefix="" category="inline-code"></block> Reflete o estado do CRD do TrigentActionMirrorUpdate. Ele pode tomar um valor de _successful_, _in progress_ ou _Failed_.</block>
 </blocks>
