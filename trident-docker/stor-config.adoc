@@ -311,7 +311,8 @@ link:https://github.com/NetApp/trident/tree/master/contrib/ontap/trident_role["G
 
 . Crie um nome de usuário para o usuário do Trident:
 +
-`security login create -username <user_name\> -application ontapi -authmethod <password\> -role <name_of_role_in_step_1\> –vserver <svm_name\> -comment "user_description"`
+`security login create -username <user_name\> -application ontapi -authmethod password -role <name_of_role_in_step_1\> –vserver <svm_name\> -comment "user_description"`
+`security login create -username <user_name\> -application http -authmethod password -role <name_of_role_in_step_1\> –vserver <svm_name\> -comment "user_description"`
 
 . Mapeie a função para o usuário:
 +
