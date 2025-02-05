@@ -7,7 +7,7 @@ summary: Avisos legais fornecem acesso a declarações de direitos autorais, mar
 = Avisos legais
 :allow-uri-read: 
 :icons: font
-:imagesdir: ../media/
+:imagesdir: ./media/
 
 
 [role="lead"]
