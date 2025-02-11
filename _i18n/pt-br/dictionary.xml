@@ -3555,17 +3555,14 @@
   <block id="0fe713481395212a8eb358f4cb188c04" category="section-title">Informações críticas sobre o Trident</block>
   <block id="8e7cb3d16dbeb8a9289495de8b479d1f" category="paragraph">*Você deve ler as seguintes informações críticas sobre o Trident.*</block>
   <block id="04dc1d4246222d48d4348b40baef0aac" category="example-title">&lt;strong&gt; informações críticas sobre o Trident &lt;/strong&gt;</block>
-  <block id="09a48eb36bc4152ed8fe5c428d4ece05" category="list-text">O Kubernetes 1,31 agora é compatível com o Trident. Atualize o Trident antes de atualizar o Kubernetes.</block>
   <block id="5e25fae885baef0275d27a764979b289" category="list-text">O Trident reforça estritamente o uso de configuração multipathing em ambientes SAN, com um valor recomendado de<block ref="db729c5c8df447087e5a84b961df14f6" prefix=" " category="inline-code"></block> no arquivo multipath.conf.</block>
   <block id="710f95d40d121f27f89b0faa6e178133" category="paragraph">O Trident é compatível com vários mecanismos de contêiner e orquestradores, incluindo os seguintes:</block>
-  <block id="c3524924959417328a5c2d4797b71b8f" category="list-text">Kubernetes 1,25 - 1,31</block>
   <block id="76073f246cf758836f21035e15541803" category="list-text">Rancher Kubernetes Engine 2 (RKE2) v1.28.5-rke2r1</block>
   <block id="e42907190e2666646d57ade5c061e6e2" category="paragraph">O Trident também trabalha com uma série de outras ofertas do Kubernetes totalmente gerenciadas e autogeridas, incluindo o Google Kubernetes Engine (GKE), o Amazon Elastic Kubernetes Services (EKS), o</block>
   <block id="4cb56edacf6f40b0077e559878cb88a1" category="paragraph">O Trident e o ONTAP podem ser usados como um provedor de storage para <block ref="98ab68800979b414641691275d2b9c15" category="inline-link-macro-rx"></block>o .</block>
   <block id="029f0e10fd529e4a0fd06a03bd5b1eaf" category="admonition">Antes de atualizar um cluster do Kubernetes do 1,24 para o 1,25 ou posterior que tenha o Trident instalado, <block ref="1b428bb9b9fe27db6cd8932526864634" category="inline-link-macro-rx"></block>consulte a .</block>
   <block id="90e5d592b7e0b2afb122e69c00372ddf" category="paragraph">Para usar o Trident, você precisa de um ou mais dos seguintes backends suportados:</block>
   <block id="6116c21c42b3138e811999de6433a0a6" category="paragraph">A tabela abaixo resume os recursos disponíveis com esta versão do Trident e as versões do Kubernetes compatíveis.</block>
-  <block id="cb6fdbc23b7af9715334e1bb04d2c4ac" category="paragraph">1,25 - 1,31</block>
   <block id="29fce9ae0f476afd36cf3ebf4de1d2a8" category="paragraph">Embora o Trident não suporte oficialmente sistemas operacionais específicos, sabe-se que os seguintes procedimentos funcionam:</block>
   <block id="779639a0216e7a8fd164ee8a7266d8b8" category="paragraph">Por padrão, o Trident é executado em um contentor e, portanto, será executado em qualquer trabalhador Linux. No entanto, esses funcionários precisam ser capazes de montar os volumes que o Trident fornece usando o cliente NFS padrão ou iniciador iSCSI, dependendo dos backends que você está usando.</block>
   <block id="ac65d911a6a42e3244db78a534db815a" category="paragraph">O Trident pode exigir alterações em um sistema de storage antes que uma configuração de back-end possa usá-lo.</block>
@@ -3573,7 +3570,6 @@
   <block id="31ae62dfe6cb254d32d0f67deda8d9ad" category="paragraph">O Trident requer acesso a portas específicas para comunicação.</block>
   <block id="2e442c7238666f1b73934ff5c2034b82" category="paragraph"><block ref="2e442c7238666f1b73934ff5c2034b82" category="inline-link-macro-rx"></block></block>
   <block id="ce8468ce4398f1403e56c8d07fbfbdff" category="paragraph">Para instalações com ar-gapped, a lista a seguir é uma referência das imagens de contentor necessárias para instalar o Trident. Use o<block ref="4ebf280824868255c952dc529072ecb9" prefix=" " category="inline-code"></block> comando para verificar a lista de imagens de contentor necessárias.</block>
-  <block id="ecfc1eb0b20cc5ae8492fc90fcbf996d" category="cell">v1.25.0, v1.26.0, v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0</block>
   <block id="84164a090d4c4deb277c3eaee7be8933" category="list-text">docker.io/NetApp/Trident:24.10.0</block>
   <block id="d32e454f258700e2a7e9bd38093759e7" category="list-text">docker.io/NetApp/Trident-AutoSupport:24,10</block>
   <block id="2008e365da289d546b62489addab8fe9" category="list-text">provisionador do registry.k8s.io/sig-storage/csi:v5,1.0</block>
@@ -5152,4 +5148,8 @@
   <block id="1d5144e260d8c4ece3c5d47a77d84c11" category="section-title">Atualize o complemento Trident EKS</block>
   <block id="ccab466451ff5a867710cce1b28c33a0" category="section-title">Desinstale/remova o complemento Trident EKS</block>
   <block id="e75af04fb72882c1d735055059f1a557" category="list-text">Clique na guia *Complementos* e, em seguida, clique em *Trident by NetApp*.*</block>
+  <block id="71daa7e0f7c4240ad5aa4024c97bafae" category="list-text">O Kubernetes 1,32 agora é compatível com o Trident. Atualize o Trident antes de atualizar o Kubernetes.</block>
+  <block id="58830b43d96c301076f2636c9bb946d5" category="list-text">Kubernetes 1,25 - 1,32</block>
+  <block id="2d95fd2a9f3bf1dcac56e3de82d288ad" category="paragraph">1,25 - 1,32</block>
+  <block id="2ec43b8882dfc130c999d1ebfae88d87" category="cell">v1.25.0, v1.26.0, v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0</block>
 </blocks>

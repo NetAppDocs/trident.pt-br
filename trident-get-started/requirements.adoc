@@ -25,7 +25,7 @@ Antes de instalar o Trident, você deve rever estes requisitos gerais do sistema
 ====
 []
 =====
-* O Kubernetes 1,31 agora é compatível com o Trident. Atualize o Trident antes de atualizar o Kubernetes.
+* O Kubernetes 1,32 agora é compatível com o Trident. Atualize o Trident antes de atualizar o Kubernetes.
 * O Trident reforça estritamente o uso de configuração multipathing em ambientes SAN, com um valor recomendado de `find_multipaths: no` no arquivo multipath.conf.
 +
 O uso de configuração não multipathing ou o uso `find_multipaths: yes` de ou `find_multipaths: smart` valor no arquivo multipath.conf resultará em falhas de montagem. A Trident recomenda o uso de `find_multipaths: no` desde a versão 21,07.
@@ -41,7 +41,7 @@ O uso de configuração não multipathing ou o uso `find_multipaths: yes` de ou 
 O Trident é compatível com vários mecanismos de contêiner e orquestradores, incluindo os seguintes:
 
 * Anthos On-Prem (VMware) e Anthos em bare metal 1,16
-* Kubernetes 1,25 - 1,31
+* Kubernetes 1,25 - 1,32
 * OpenShift 4,10 - 4,17
 * Rancher Kubernetes Engine 2 (RKE2) v1.28.5-rke2r1
 
@@ -49,7 +49,7 @@ O Trident é compatível com vários mecanismos de contêiner e orquestradores, 
 O operador Trident é suportado com estas versões:
 
 * Anthos On-Prem (VMware) e Anthos em bare metal 1,16
-* Kubernetes 1,25 - 1,31
+* Kubernetes 1,25 - 1,32
 * OpenShift 4,10 - 4,17
 * Rancher Kubernetes Engine 2 (RKE2) v1.28.5-rke2r1
 
@@ -88,56 +88,56 @@ A tabela abaixo resume os recursos disponíveis com esta versão do Trident e as
 
 
 | Trident  a| 
-1,25 - 1,31
+1,25 - 1,32
  a| 
 Não
 
 
 
 | Instantâneos de volume  a| 
-1,25 - 1,31
+1,25 - 1,32
  a| 
 Não
 
 
 
 | PVC a partir de instantâneos de volume  a| 
-1,25 - 1,31
+1,25 - 1,32
  a| 
 Não
 
 
 
 | Redimensionamento iSCSI PV  a| 
-1,25 - 1,31
+1,25 - 1,32
  a| 
 Não
 
 
 
 | ONTAP bidirectional CHAP  a| 
-1,25 - 1,31
+1,25 - 1,32
  a| 
 Não
 
 
 
 | Políticas de exportação dinâmica  a| 
-1,25 - 1,31
+1,25 - 1,32
  a| 
 Não
 
 
 
 | Operador Trident  a| 
-1,25 - 1,31
+1,25 - 1,32
  a| 
 Não
 
 
 
 | Topologia de CSI  a| 
-1,25 - 1,31
+1,25 - 1,32
  a| 
 Não
 
@@ -197,7 +197,7 @@ Para instalações com ar-gapped, a lista a seguir é uma referência das imagen
 | Versões do Kubernetes | Imagem do recipiente 
 
 
-| v1.25.0, v1.26.0, v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0  a| 
+| v1.25.0, v1.26.0, v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0  a| 
 * docker.io/NetApp/Trident:24.10.0
 * docker.io/NetApp/Trident-AutoSupport:24,10
 * provisionador do registry.k8s.io/sig-storage/csi:v5,1.0
