@@ -5152,4 +5152,17 @@
   <block id="58830b43d96c301076f2636c9bb946d5" category="list-text">Kubernetes 1,25 - 1,32</block>
   <block id="2d95fd2a9f3bf1dcac56e3de82d288ad" category="paragraph">1,25 - 1,32</block>
   <block id="2ec43b8882dfc130c999d1ebfae88d87" category="cell">v1.25.0, v1.26.0, v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0</block>
+  <block id="d1548585dadda37a28905a23e22cf65d" category="section-title">Restaure de um backup para um cluster diferente</block>
+  <block id="7fa8874b1f645ca2af9d81b51985b8fb" category="paragraph">Você pode restaurar um backup para um cluster diferente se houver um problema com o cluster original.</block>
+  <block id="17e2d63e3b45ecbfe13bcc32fec929d0" category="paragraph">*Antes de começar*</block>
+  <block id="dd4ee610bd1d035c73bc0cbcd80e46da" category="paragraph">Certifique-se de que os seguintes pré-requisitos são cumpridos:</block>
+  <block id="1d6028c560c8f6dbee841737e60a3d9d" category="list-text">O cluster de destino tem o Trident Protect instalado.</block>
+  <block id="b20f8883edb9068c67a2faeb3c083d38" category="list-text">O cluster de destino tem acesso ao caminho do bucket do mesmo AppVault que o cluster de origem, onde o backup é armazenado.</block>
+  <block id="0425d0358a4cba7a7cce5ddd727ab6a2" category="list-text">Verifique a disponibilidade do AppVault CR no cluster de destino usando o plugin Trident Protect CLI:</block>
+  <block id="1ff83a5266e9e025c2984e0c10dea90e" category="admonition">Verifique se o namespace destinado à restauração do aplicativo existe no cluster de destino.</block>
+  <block id="8d433ae9a21c49e9e5433ebd408605c0" category="list-text">Veja o conteúdo de backup do AppVault disponível no cluster de destino:</block>
+  <block id="378e6f0ba7080535a4462b5311befb40" category="paragraph">Executar esse comando exibe os backups disponíveis no AppVault, incluindo os clusters de origem, nomes de aplicativos correspondentes, carimbos de data/hora e caminhos de arquivamento.</block>
+  <block id="053aba80de03f3fdf626d1c858342330" category="list-text">Restaure o aplicativo para o cluster de destino usando o nome do AppVault e o caminho do arquivo:</block>
+  <block id="fceebbe32c1f7b24c54d6a4e8a0fa776" category="admonition">Se o BackupRestore CR não estiver disponível, você poderá usar o comando mencionado na etapa 2 para visualizar o conteúdo do backup.</block>
+  <block id="4ef55c1fec2de9218af40d16cbc021a4" category="list-text">Use o comando a seguir para restaurar o aplicativo, substituindo valores entre parênteses por informações do ambiente. O argumento namespace-mapping usa namespaces separados por dois pontos para mapear namespaces de origem para os namespaces de destino corretos no formato source1:dest1,source2:dest2. Por exemplo:</block>
 </blocks>
