@@ -71,7 +71,7 @@ Para usar o Trident, você precisa de um ou mais dos seguintes backends suportad
 * Azure NetApp Files
 * Cloud Volumes ONTAP
 * Google Cloud NetApp volumes
-* FAS/AFF/Selecione 9,5 ou posterior
+* FAS/AFF/Select (Selecionar)
 * NetApp All SAN Array (ASA)
 * Software NetApp HCI/Element 11 ou superior
 

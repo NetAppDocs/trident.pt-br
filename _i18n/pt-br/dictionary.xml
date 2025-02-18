@@ -576,7 +576,6 @@
   <block id="a5fd2691a6a5df653970895b1c5045ed" category="inline-link-macro">Atualize uma instalação do Helm</block>
   <block id="f787cd4b6963b13f12fa53131f58ef6c" category="section-title">Backends suportados (armazenamento)</block>
   <block id="a3c559e0541e9bb860178ce6fe414224" category="list-text">Cloud Volumes Service para GCP</block>
-  <block id="0ffed9ae8c0b8e64c5dc8cba81c4fe34" category="list-text">FAS/AFF/Selecione 9,5 ou posterior</block>
   <block id="1d3d126b8a5bad69c46ed03734beed47" category="list-text">NetApp All SAN Array (ASA)</block>
   <block id="6b51834314ece904405eb0ce1a6e6bd8" category="list-text">Software NetApp HCI/Element 11 ou superior</block>
   <block id="c7c7a6a5641f33e348244f9c43010e16" category="section-title">Requisitos de recursos</block>
@@ -5165,4 +5164,6 @@
   <block id="053aba80de03f3fdf626d1c858342330" category="list-text">Restaure o aplicativo para o cluster de destino usando o nome do AppVault e o caminho do arquivo:</block>
   <block id="fceebbe32c1f7b24c54d6a4e8a0fa776" category="admonition">Se o BackupRestore CR não estiver disponível, você poderá usar o comando mencionado na etapa 2 para visualizar o conteúdo do backup.</block>
   <block id="4ef55c1fec2de9218af40d16cbc021a4" category="list-text">Use o comando a seguir para restaurar o aplicativo, substituindo valores entre parênteses por informações do ambiente. O argumento namespace-mapping usa namespaces separados por dois pontos para mapear namespaces de origem para os namespaces de destino corretos no formato source1:dest1,source2:dest2. Por exemplo:</block>
+  <block id="e0020bd4ebab101e8b128426eb7025bd" category="list-text">FAS/AFF/Select (Selecionar)</block>
+  <block id="fcabe507223b9ffe86d4048df99d8ee5" category="paragraph">SCSI iSCSI em FC (pré-visualização técnica no Trident 24,10)</block>
 </blocks>

@@ -26,7 +26,7 @@ O Trident fornece os seguintes drivers de armazenamento SAN para se comunicar co
 
 
 | `ontap-san`  a| 
-ISCSI
+SCSI iSCSI em FC (pré-visualização técnica no Trident 24,10)
  a| 
 Bloco
  a| 
@@ -37,7 +37,7 @@ Sem sistema de arquivos; dispositivo de bloco bruto
 
 
 | `ontap-san`  a| 
-ISCSI
+SCSI iSCSI em FC (pré-visualização técnica no Trident 24,10)
  a| 
 Sistema de ficheiros
  a| 
