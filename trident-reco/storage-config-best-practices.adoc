@@ -68,7 +68,7 @@ O valor para `max-volumes` varia com base em vários critérios específicos par
 
 O `max-volumes` valor é o total de volumes provisionados em todos os nós do cluster ONTAP e não em um nó ONTAP individual. Como resultado, você pode encontrar algumas condições em que um nó de cluster do ONTAP pode ter muito mais ou menos volumes provisionados pelo Trident do que outro nó.
 
-Por exemplo, um cluster ONTAP de dois nós tem a capacidade de hospedar um máximo de 2000 volumes flexíveis. Ter a contagem de volume máxima definida para 1250 parece muito razoável. No entanto, se apenas https://library.netapp.com/ecmdocs/ECMP1368859/html/GUID-3AC7685D-B150-4C1F-A408-5ECEB3FF0011.html["agregados"^] de um nó forem atribuídos à SVM, ou se os agregados atribuídos de um nó não puderem ser provisionados (por exemplo, devido à capacidade), o outro nó se tornará o destino de todos os volumes provisionados pelo Trident. Isso significa que o limite de volume pode ser alcançado para esse nó antes que o `max-volumes` valor seja atingido, resultando em impacto no Trident e em outras operações de volume que usam esse nó. *Você pode evitar essa situação garantindo que os agregados de cada nó no cluster sejam atribuídos ao SVM usado pelo Trident em números iguais.*
+Por exemplo, um cluster de ONTAP de dois nós pode hospedar um máximo de 2000 volumes FlexVol. Ter a contagem de volume máxima definida para 1250 parece muito razoável. No entanto, se apenas https://library.netapp.com/ecmdocs/ECMP1368859/html/GUID-3AC7685D-B150-4C1F-A408-5ECEB3FF0011.html["agregados"^] de um nó forem atribuídos à SVM, ou se os agregados atribuídos de um nó não puderem ser provisionados (por exemplo, devido à capacidade), o outro nó se tornará o destino de todos os volumes provisionados pelo Trident. Isso significa que o limite de volume pode ser alcançado para esse nó antes que o `max-volumes` valor seja atingido, resultando em impacto no Trident e em outras operações de volume que usam esse nó. *Você pode evitar essa situação garantindo que os agregados de cada nó no cluster sejam atribuídos ao SVM usado pelo Trident em números iguais.*
 
 
 
@@ -158,13 +158,13 @@ storage:
 * Você deve aplicar os grupos de políticas por volume, para que cada volume obtenha toda a taxa de transferência, conforme especificado pelo grupo de políticas. Grupos de políticas compartilhadas não são suportados.
 
 
-Para obter mais informações sobre grupos de políticas de QoS, https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-cmpr-980/TOC__qos.html["Comandos de QoS ONTAP 9.8"^] consulte .
+Para obter mais informações sobre grupos de políticas de QoS, https://docs.netapp.com/us-en/ontap/concepts/manual-pages.html["Referência do comando ONTAP"^] consulte .
 
 
 
 === Limitar o acesso a recursos de storage aos membros do cluster do Kubernetes
 
-Limitar o acesso aos volumes NFS e iSCSI LUNs criados pelo Trident é um componente essencial da postura de segurança para a implantação do Kubernetes. Isso impede que os hosts que não fazem parte do cluster do Kubernetes acessem os volumes e potencialmente modifiquem os dados inesperadamente.
+Limitar o acesso a volumes NFS, iSCSI LUNs e FC LUNs criados pelo Trident é um componente essencial da postura de segurança para a implantação do Kubernetes. Isso impede que os hosts que não fazem parte do cluster do Kubernetes acessem os volumes e potencialmente modifiquem os dados inesperadamente.
 
 É importante entender que os namespaces são o limite lógico dos recursos no Kubernetes. A suposição é que os recursos no mesmo namespace são capazes de ser compartilhados, no entanto, é importante, não há capacidade entre namespace. Isso significa que, embora os PVS sejam objetos globais, quando vinculados a um PVC, eles só são acessíveis por pods que estão no mesmo namespace. *É fundamental garantir que os namespaces sejam usados para fornecer separação quando apropriado.*
 
@@ -288,7 +288,7 @@ Alguns dos documentos de melhores práticas estão listados abaixo. PESQUISE na 
 *ONTAP*
 
 * https://www.netapp.com/pdf.html?item=/media/10720-tr-4067.pdf["Guia de práticas recomendadas e implementação de NFS"^]
-* http://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sanag/home.html["Guia de administração DE SAN"^] (Para iSCSI)
+* http://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sanag/home.html["Administração de SAN"^] (Para iSCSI)
 * http://docs.netapp.com/ontap-9/topic/com.netapp.doc.exp-iscsi-rhel-cg/home.html["Configuração iSCSI Express para RHEL"^]
 
 

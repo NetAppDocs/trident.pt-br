@@ -52,7 +52,7 @@ Observe que, nas tabelas abaixo, nem todos os recursos são expostos por meio do
 | `ontap-nas-economy` | Nota de rodapé:3[] | Nota de rodapé:3[] | Nota de rodapé:5[] | Sim | Nota de rodapé:3[] | Sim | Nota de rodapé:3[] 
 
 
-| `ontap-nas-flexgroup` | Nota de rodapé:1[] | Não | Nota de rodapé:5[] | Sim | Nota de rodapé:1[] | Sim | Nota de rodapé:1[] 
+| `ontap-nas-flexgroup` | Nota de rodapé:1[] | NÃO | Nota de rodapé:5[] | Sim | Nota de rodapé:1[] | Sim | Nota de rodapé:1[] 
 |===
 A Trident oferece 2 drivers SAN para ONTAP, cujos recursos são mostrados abaixo.
 
@@ -67,7 +67,7 @@ A Trident oferece 2 drivers SAN para ONTAP, cujos recursos são mostrados abaixo
 | `ontap-san-economy` | Sim | Sim | Nota de rodapé:4[] | Sim | Nota de rodapé:3[] | Sim | Nota de rodapé:3[] 
 |===
 [verse]
-Nota de rodapé para as tabelas acima: Yesfootnote:1[]: Não gerenciado por Trident Yesfootnote:2[]: Gerenciado por Trident, mas não PV granular Yesfootnote:3[]: Não gerenciado por Trident e não PV granular Yesfootnote:4[]: Suportado para volumes de bloco bruto Yesfootnote:5[]: Suportado por Trident
+Nota de rodapé para as tabelas acima: Yesfootnote:1[]: Não gerenciado por Trident Yesfootnote:2[]: Gerenciado por Trident, mas não PV granular NOfootnote:3[]: Não gerenciado por Trident e não PV granular Yesfootnote:4[]: Suportado para volumes de bloco bruto Yesfootnote:5[]: Suportado por Trident
 
 Os recursos que não são granulares PV são aplicados a todo o Flexvolume e todos os PVS (ou seja, qtrees ou LUNs em FlexVols compartilhados) compartilharão um cronograma comum.
 
@@ -247,7 +247,7 @@ Uma solicitação de um PVC ReadWriteMany enviado para uma implantação do Trid
 Volumes persistentes são, com duas exceções, objetos imutáveis no Kubernetes. Uma vez criados, a política de recuperação e o tamanho podem ser modificados. No entanto, isso não impede que alguns aspetos do volume sejam modificados fora do Kubernetes. Isso pode ser desejável para personalizar o volume para aplicações específicas, para garantir que a capacidade não seja consumida acidentalmente ou simplesmente mover o volume para um controlador de armazenamento diferente por qualquer motivo.
 
 
-NOTE: Atualmente, os provisionadores in-tree do Kubernetes não são compatíveis com operações de redimensionamento de volume para PVS NFS ou iSCSI. O Trident é compatível com a expansão de volumes NFS e iSCSI.
+NOTE: No momento, os provisionadores in-tree do Kubernetes não são compatíveis com operações de redimensionamento de volume para PVS NFS, iSCSI ou FC. O Trident é compatível com a expansão de volumes NFS, iSCSI e FC.
 
 Os detalhes de ligação do PV não podem ser modificados após a criação.
 
@@ -277,7 +277,7 @@ Se um volume for copiado para outro local, o recurso de importação de volume p
 
 === Expanda volumes
 
-O Trident é compatível com o redimensionamento de PVS NFS e iSCSI. Isso permite que os usuários redimensionem seus volumes diretamente pela camada Kubernetes. A expansão de volume é possível para todas as principais plataformas de storage da NetApp, incluindo backends ONTAP, SolidFire/NetApp HCI e Cloud Volumes Service. Para permitir uma possível expansão posterior, defina `allowVolumeExpansion` como `true` no StorageClass associado ao volume. Sempre que for necessário redimensionar o volume persistente, edite a `spec.resources.requests.storage` anotação na reclamação volume persistente para o tamanho de volume pretendido. O Trident cuidará automaticamente do redimensionamento do volume no cluster de armazenamento.
+O Trident é compatível com o redimensionamento de PVS NFS, iSCSI e FC. Isso permite que os usuários redimensionem seus volumes diretamente pela camada Kubernetes. A expansão de volume é possível para todas as principais plataformas de storage da NetApp, incluindo backends ONTAP, SolidFire/NetApp HCI e Cloud Volumes Service. Para permitir uma possível expansão posterior, defina `allowVolumeExpansion` como `true` no StorageClass associado ao volume. Sempre que for necessário redimensionar o volume persistente, edite a `spec.resources.requests.storage` anotação na reclamação volume persistente para o tamanho de volume pretendido. O Trident cuidará automaticamente do redimensionamento do volume no cluster de armazenamento.
 
 
 
@@ -292,12 +292,6 @@ Se o `azure-netapp-files` driver ou `gcp-cvs` for usado, use o comando `tridentc
 Quando o comando acima é executado, o Trident irá encontrar o volume no backend e ler o seu tamanho. Ele irá adicionar automaticamente (e substituir, se necessário) o tamanho de volume do PVC configurado. O Trident então cria o novo PV e o Kubernetes liga o PVC ao PV.
 
 Se um recipiente fosse implantado de modo que fosse necessário o PVC importado específico, ele permaneceria em um estado pendente até que o par PVC/PV seja vinculado através do processo de importação de volume. Depois que o par de PVC / PV são ligados, o recipiente deve surgir, desde que não haja outros problemas.
-
-
-
-== Implantar serviços OpenShift
-
-Os serviços de cluster de valor agregado do OpenShift fornecem funcionalidade importante aos administradores de cluster e aos aplicativos que estão sendo hospedados. O storage que esses serviços usam pode ser provisionado usando os recursos do nó local. No entanto, isso geralmente limita a capacidade, o desempenho, a capacidade de recuperação e a sustentabilidade do serviço. Ao aproveitar um storage array empresarial para fornecer capacidade a esses serviços, é possível melhorar significativamente o serviço. No entanto, como em todas as aplicações, o OpenShift e os administradores de storage devem trabalhar em conjunto para determinar as melhores opções para cada um. A documentação da Red Hat deve ser muito utilizada para determinar os requisitos e garantir que as necessidades de dimensionamento e desempenho sejam atendidas.
 
 
 

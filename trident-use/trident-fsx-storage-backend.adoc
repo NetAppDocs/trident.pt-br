@@ -15,7 +15,7 @@ summary: 'Usando o Trident com o Amazon FSX for NetApp ONTAP, você pode garanti
 
 == Integração de driver SAN e nas ONTAP
 
-Você pode criar um arquivo de back-end usando as credenciais SVM (nome de usuário e senha) armazenadas no AWS Secret Manager, conforme mostrado neste exemplo:
+Para criar um back-end de armazenamento, você precisa criar um arquivo de configuração no formato JSON ou YAML. O arquivo precisa especificar o tipo de storage desejado (nas ou SAN), o sistema de arquivos e SVM para obtê-lo e como se autenticar com ele. O exemplo a seguir mostra como definir o storage baseado em nas e usar um segredo da AWS para armazenar as credenciais no SVM que você deseja usar:
 
 [role="tabbed-block"]
 ====
@@ -27,6 +27,7 @@ apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
 metadata:
   name: backend-tbc-ontap-nas
+  namespace: trident
 spec:
   version: 1
   storageDriverName: ontap-nas
@@ -48,6 +49,7 @@ spec:
   "kind": "TridentBackendConfig",
   "metadata": {
     "name": "backend-tbc-ontap-nas"
+    "namespace": "trident"
   },
   "spec": {
     "version": 1,
@@ -68,10 +70,32 @@ spec:
 ----
 --
 ====
-Para obter informações sobre como criar backends, consulte estas páginas:
+Execute os seguintes comandos para criar e validar a configuração de backend do Trident (TBC):
 
-* link:ontap-nas.html["Configurar um back-end com drivers nas ONTAP"]
-* link:ontap-san.html["Configure um back-end com drivers SAN ONTAP"]
+* Crie a configuração de back-end do Trident (TBC) a partir do arquivo yaml e execute o seguinte comando:
++
+[listing]
+----
+kubectl create -f backendconfig.yaml -n trident
+----
++
+[listing]
+----
+tridentbackendconfig.trident.netapp.io/backend-tbc-ontap-nas created
+----
+* Validar a configuração de back-end do Trident (TBC) foi criada com sucesso:
++
+[listing]
+----
+Kubectl get tbc -n trident
+----
++
+[listing]
+----
+NAME                         BACKEND NAME         BACKEND UUID                           PHASE   STATUS
+
+backend-tbc-ontap-nas        tbc-ontap-nas        933e0071-66ce-4324-b9ff-f96d916ac5e9   Bound   Success
+----
 
 
 
@@ -89,51 +113,23 @@ Você pode integrar o Trident com o Amazon FSX for NetApp ONTAP usando os seguin
 
 Para obter informações sobre o condutor, link:../trident-use/ontap-nas.html["Controladores NAS"]consulte e link:../trident-use/ontap-san.html["Controladores SAN"].
 
-
-
-== Exemplos de configurações
-
-.Configuração do AWS FSX for ONTAP com gerenciador de segredos
-[%collapsible]
-====
-[listing]
-----
-apiVersion: trident.netapp.io/v1
-kind: TridentBackendConfig
-metadata:
-  name: backend-tbc-ontap-nas
-spec:
-  version: 1
-  storageDriverName: ontap-nas
-  backendName: tbc-ontap-nas
-  svm: svm-name
-  aws:
-    fsxFilesystemID: fs-xxxxxxxxxx
-  managementLIF:
-  credentials:
-    name: "arn:aws:secretsmanager:us-west-2:xxxxxxxx:secret:secret-name"
-    type: awsarn
-----
-====
-.Configuração da classe de armazenamento para volumes SMB
-[%collapsible]
-====
-Usando `nasType`, `node-stage-secret-name` e `node-stage-secret-namespace`, você pode especificar um volume SMB e fornecer as credenciais necessárias do ative Directory. Os volumes SMB são suportados usando `ontap-nas` apenas o driver.
+Uma vez que o arquivo de configuração tenha sido criado, execute este comando para criá-lo no EKS:
 
 [listing]
 ----
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: nas-smb-sc
-provisioner: csi.trident.netapp.io
-parameters:
-  backendType: "ontap-nas"
-  trident.netapp.io/nasType: "smb"
-  csi.storage.k8s.io/node-stage-secret-name: "smbcreds"
-  csi.storage.k8s.io/node-stage-secret-namespace: "default"
+kubectl create -f configuration_file
 ----
-====
+Para verificar o status, execute este comando:
+
+[listing]
+----
+kubectl get tbc -n trident
+----
+[listing]
+----
+NAME                    BACKEND NAME            BACKEND UUID                           PHASE   STATUS
+backend-fsx-ontap-nas   backend-fsx-ontap-nas   7a551921-997c-4c37-a1d1-f2f4c87fa629   Bound   Success
+----
 
 
 == Configuração avançada de backend e exemplos
@@ -157,7 +153,7 @@ Consulte a tabela a seguir para obter as opções de configuração de back-end:
 | `managementLIF` | Endereço IP de um cluster ou LIF de gerenciamento de SVM Um nome de domínio totalmente qualificado (FQDN) pode ser especificado. Pode ser definido para usar endereços IPv6 se o Trident tiver sido instalado usando o sinalizador IPv6. Os endereços IPv6 devem ser definidos entre colchetes, como [28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]. Se você fornecer o `fsxFilesystemID` sob o `aws` campo, não precisará fornecer o `managementLIF` porque o Trident recupera as informações do SVM `managementLIF` da AWS. Portanto, você deve fornecer credenciais para um usuário sob o SVM (por exemplo: Vsadmin) e o usuário deve ter a `vsadmin` função. | "10,0.0,1", "[2001:1234:abcd::fefe]" 
 
 
-| `dataLIF` | Endereço IP do protocolo LIF. * ONTAP nas drivers*: Recomendamos especificar dataLIF. Se não for fornecido, o Trident obtém LIFs de dados do SVM. Você pode especificar um nome de domínio totalmente qualificado (FQDN) a ser usado para as operações de montagem NFS, permitindo que você crie um DNS de round-robin para balanceamento de carga em vários LIFs de dados. Pode ser alterado após a definição inicial. Consulte a . *Drivers SAN ONTAP*: Não especifique para iSCSI. O Trident usa o mapa ONTAP LUN seletivo para descobrir as LIFs iSCI necessárias para estabelecer uma sessão de vários caminhos. Um aviso é gerado se o dataLIF for definido explicitamente. Pode ser definido para usar endereços IPv6 se o Trident tiver sido instalado usando o sinalizador IPv6. Os endereços IPv6 devem ser definidos entre colchetes, como [28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]. |  
+| `dataLIF` | Endereço IP do protocolo LIF. * ONTAP nas drivers*: O NetApp recomenda especificar dataLIF. Se não for fornecido, o Trident obtém LIFs de dados do SVM. Você pode especificar um nome de domínio totalmente qualificado (FQDN) a ser usado para as operações de montagem NFS, permitindo que você crie um DNS de round-robin para balanceamento de carga em vários LIFs de dados. Pode ser alterado após a definição inicial. Consulte a . *Drivers SAN ONTAP*: Não especifique para iSCSI. O Trident usa o mapa ONTAP LUN seletivo para descobrir as LIFs iSCI necessárias para estabelecer uma sessão de vários caminhos. Um aviso é gerado se o dataLIF for definido explicitamente. Pode ser definido para usar endereços IPv6 se o Trident tiver sido instalado usando o sinalizador IPv6. Os endereços IPv6 devem ser definidos entre colchetes, como [28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]. |  
 
 
 | `autoExportPolicy` | Ativar a criação e atualização automática da política de exportação [Boolean]. Usando as `autoExportPolicy` opções e `autoExportCIDRs`, o Trident pode gerenciar políticas de exportação automaticamente. | `false` 
@@ -193,10 +189,10 @@ Consulte a tabela a seguir para obter as opções de configuração de back-end:
 | `limitAggregateUsage` | *Não especifique para o Amazon FSX for NetApp ONTAP.* O fornecido `fsxadmin` e `vsadmin` não contém as permissões necessárias para recuperar o uso agregado e limitá-lo usando o Trident. | Não utilizar. 
 
 
-| `limitVolumeSize` | Falha no provisionamento se o tamanho do volume solicitado estiver acima desse valor. Também restringe o tamanho máximo dos volumes que gerencia para qtrees e LUNs, e a `qtreesPerFlexvol` opção permite personalizar o número máximo de qtrees por FlexVol. | "" (não aplicado por padrão) 
+| `limitVolumeSize` | Falha no provisionamento se o tamanho do volume solicitado estiver acima desse valor. Também restringe o tamanho máximo dos volumes que gerencia para qtrees e LUNs, e a `qtreesPerFlexvol` opção permite personalizar o número máximo de qtrees por FlexVol volume | "" (não aplicado por padrão) 
 
 
-| `lunsPerFlexvol` | O máximo de LUNs por FlexVol tem de estar no intervalo [50, 200]. Apenas SAN. | "100" 
+| `lunsPerFlexvol` | O máximo de LUNs por FlexVol volume tem de estar no intervalo [50, 200]. Apenas SAN. | "100" 
 
 
 | `debugTraceFlags` | Debug flags para usar ao solucionar problemas. Por exemplo, não use `debugTraceFlags` a menos que você esteja solucionando problemas e exija um despejo de log detalhado. | nulo 
@@ -208,14 +204,13 @@ Consulte a tabela a seguir para obter as opções de configuração de back-end:
 | `nasType` | Configurar a criação de volumes NFS ou SMB. As opções são `nfs`, `smb`, ou null. *Deve definir como `smb` para volumes SMB.* A configuração como null padrão para volumes NFS. | `nfs` 
 
 
-| `qtreesPerFlexvol` | Qtrees máximos por FlexVol, têm de estar no intervalo [50, 300] | `"200"` 
+| `qtreesPerFlexvol` | Qtrees máximos por FlexVol volume, têm de estar no intervalo [50, 300] | `"200"` 
 
 
 | `smbShare` | Você pode especificar uma das seguintes opções: O nome de um compartilhamento SMB criado usando o Console de Gerenciamento da Microsoft ou a CLI do ONTAP ou um nome para permitir que o Trident crie o compartilhamento SMB. Esse parâmetro é necessário para backends do Amazon FSX for ONTAP. | `smb-share` 
 
 
-| `useREST` | Parâmetro booleano para usar APIs REST do ONTAP. *A visualização técnica* 
-`useREST` é fornecida como uma **prévia técnica** que é recomendada para ambientes de teste e não para cargas de trabalho de produção. Quando definido como `true`, o Trident usará APIs REST do ONTAP para se comunicar com o back-end. Esse recurso requer o ONTAP 9.11,1 e posterior. Além disso, a função de login do ONTAP usada deve ter acesso ao `ontap` aplicativo. Isso é satisfeito com as funções e `cluster-admin` predefinidas `vsadmin`. | `false` 
+| `useREST` | Parâmetro booleano para usar APIs REST do ONTAP. Quando definido como `true`, o Trident usará APIs REST do ONTAP para se comunicar com o back-end. Esse recurso requer o ONTAP 9.11,1 e posterior. Além disso, a função de login do ONTAP usada deve ter acesso ao `ontap` aplicativo. Isso é satisfeito com as funções e `cluster-admin` predefinidas `vsadmin`. | `false` 
 
 
 | `aws` | Você pode especificar o seguinte no arquivo de configuração do AWS FSX for ONTAP: - `fsxFilesystemID`: Especifique o ID do sistema de arquivos AWS FSX.  `apiRegion`- : Nome da região da API AWS.  `apikey`- : Chave da API da AWS.  `secretKey`- : Chave secreta da AWS. | ``
@@ -265,7 +260,7 @@ Você pode controlar o provisionamento padrão usando essas opções na `default
 | `luksEncryption` | Ativar encriptação LUKS. link:../trident-reco/security-reco.html#Use-Linux-Unified-Key-Setup-(LUKS)["Usar a configuração de chave unificada do Linux (LUKS)"]Consulte a . Apenas SAN. | "" 
 
 
-| `tieringPolicy` | Política de disposição em camadas para usar	`none` | `snapshot-only` Para configuração pré-ONTAP 9.5 SVM-DR 
+| `tieringPolicy` | Política de disposição em camadas para usar	`none` |  
 
 
 | `unixPermissions` | Modo para novos volumes. *Deixe vazio para volumes SMB.* | "" 

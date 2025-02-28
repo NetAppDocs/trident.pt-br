@@ -28,16 +28,27 @@ Consulte a tabela a seguir para obter as opções de configuração de back-end:
 | `version` |  | Sempre 1 
 
 
-| `storageDriverName` | Nome do controlador de armazenamento | `ontap-nas` `ontap-nas-economy`, , `ontap-nas-flexgroup` `ontap-san` , , , `ontap-san-economy` 
+| `storageDriverName` | Nome do controlador de armazenamento | `ontap-san` ou `ontap-san-economy` 
 
 
 | `backendName` | Nome personalizado ou back-end de storage | Nome do driver e dataLIF 
 
 
-| `managementLIF` | Endereço IP de um cluster ou LIF de gerenciamento de SVM. Um nome de domínio totalmente qualificado (FQDN) pode ser especificado. Pode ser definido para usar endereços IPv6 se o Trident tiver sido instalado usando o sinalizador IPv6. Os endereços IPv6 devem ser definidos entre colchetes, como `[28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]` . Para o switchover MetroCluster otimizado, consulte o <<mcc-best>>. | "10,0.0,1", "[2001:1234:abcd::fefe]" 
+| `managementLIF`  a| 
+Endereço IP de um cluster ou LIF de gerenciamento de SVM.
+
+Um nome de domínio totalmente qualificado (FQDN) pode ser especificado.
+
+Pode ser definido para usar endereços IPv6 se o Trident tiver sido instalado usando o sinalizador IPv6. Os endereços IPv6 devem ser definidos entre colchetes, como `[28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]` .
+
+Para o switchover MetroCluster otimizado, consulte o <<mcc-best>>.
 
 
-| `dataLIF` | Endereço IP do protocolo LIF. Pode ser definido para usar endereços IPv6 se o Trident tiver sido instalado usando o sinalizador IPv6. Os endereços IPv6 devem ser definidos entre colchetes, como `[28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]` . *Não especifique para iSCSI.* O Trident usa link:https://docs.netapp.com/us-en/ontap/san-admin/selective-lun-map-concept.html["Mapa de LUN seletivo da ONTAP"^] para descobrir os LIFs iSCI necessários para estabelecer uma sessão de vários caminhos. Um aviso é gerado se `dataLIF` for definido explicitamente. *Omita para MetroCluster.* Consulte <<mcc-best>>. | Derivado do SVM 
+NOTE: Se você estiver usando credenciais "vsadmin", `managementLIF` deve ser a do SVM; se estiver usando credenciais "admin", `managementLIF` será a do cluster.
+| "10,0.0,1", "[2001:1234:abcd::fefe]" 
+
+
+| `dataLIF` | Endereço IP do protocolo LIF. Pode ser definido para usar endereços IPv6 se o Trident tiver sido instalado usando o sinalizador IPv6. Os endereços IPv6 devem ser definidos entre colchetes, como `[28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]` . *Não especifique para iSCSI.* O Trident usa link:https://docs.netapp.com/us-en/ontap/san-admin/selective-lun-map-concept.html["Mapa de LUN seletivo da ONTAP"^] para descobrir as LIFs iSCSI necessárias para estabelecer uma sessão de vários caminhos. Um aviso é gerado se `dataLIF` for definido explicitamente. *Omita para MetroCluster.* Consulte <<mcc-best>>. | Derivado do SVM 
 
 
 | `svm` | Máquina virtual de armazenamento para usar *omit for MetroCluster.* Consulte <<mcc-best>>. | Derivado se uma SVM `managementLIF` for especificada 
@@ -87,12 +98,14 @@ Agregado para provisionamento (opcional; se definido, deve ser atribuído ao SVM
 
 
 NOTE: Quando o agregado é atualizado no SVM, ele é atualizado automaticamente no Trident polling SVM sem ter que reiniciar a controladora Trident. Quando você tiver configurado um agregado específico no Trident para provisionar volumes, se o agregado for renomeado ou movido para fora do SVM, o back-end mudará para o estado com falha no Trident durante a pesquisa do agregado SVM. Você precisa alterar o agregado para um que esteja presente no SVM ou removê-lo completamente para colocar o back-end on-line.
+
+*Não especifique para ASA R2*.
  a| 
 ""
 
 
 
-| `limitAggregateUsage` | Falha no provisionamento se o uso estiver acima dessa porcentagem. Se você estiver usando um back-end do Amazon FSX for NetApp ONTAP, não  `limitAggregateUsage`especifique . O fornecido `fsxadmin` e `vsadmin` não contém as permissões necessárias para recuperar o uso agregado e limitá-lo usando o Trident. | "" (não aplicado por padrão) 
+| `limitAggregateUsage` | Falha no provisionamento se o uso estiver acima dessa porcentagem. Se você estiver usando um back-end do Amazon FSX for NetApp ONTAP, não  `limitAggregateUsage`especifique . O fornecido `fsxadmin` e `vsadmin` não contém as permissões necessárias para recuperar o uso agregado e limitá-lo usando o Trident. *Não especifique para ASA R2*. | "" (não aplicado por padrão) 
 
 
 | `limitVolumeSize` | Falha no provisionamento se o tamanho do volume solicitado estiver acima desse valor. Também restringe o tamanho máximo dos volumes que gerencia para LUNs. | "" (não aplicado por padrão) 
@@ -105,14 +118,14 @@ NOTE: Quando o agregado é atualizado no SVM, ele é atualizado automaticamente 
 
 
 | `useREST` | Parâmetro booleano para usar APIs REST do ONTAP. 
-`useREST` Quando definido como `true`, o Trident usa APIs REST do ONTAP para se comunicar com o back-end; quando definido como `false`, o Trident usa chamadas ZAPI do ONTAP para se comunicar com o back-end. Esse recurso requer o ONTAP 9.11,1 e posterior. Além disso, a função de login do ONTAP usada deve ter acesso ao `ontap` aplicativo. Isso é satisfeito com as funções e `cluster-admin` predefinidas `vsadmin`. Começando com a versão Trident 24,06 e ONTAP 9.15,1 ou posterior, `userREST` é definido como `true` por padrão; altere
-`useREST` para para `false` usar chamadas ONTAP ZAPI. 
-`useREST` É totalmente qualificado para NVMe/TCP. | `true` Para ONTAP 9.15,1 ou posterior, caso contrário `false`. 
+`useREST` Quando definido como `true`, o Trident usa APIs REST do ONTAP para se comunicar com o back-end; quando definido como `false`, o Trident usa chamadas ONTAPI (ZAPI) para se comunicar com o back-end. Esse recurso requer o ONTAP 9.11,1 e posterior. Além disso, a função de login do ONTAP usada deve ter acesso ao `ontap` aplicativo. Isso é satisfeito com as funções e `cluster-admin` predefinidas `vsadmin`. Começando com a versão Trident 24,06 e ONTAP 9.15.1 ou posterior, `userREST` é definido como `true` por padrão; altere
+`useREST` para `false` usar chamadas ONTAPI (ZAPI). 
+`useREST` É totalmente qualificado para NVMe/TCP. *Se especificado, defina sempre como `true` para ASA R2*. | `true` Para ONTAP 9.15,1 ou posterior, caso contrário `false`. 
 
 
  a| 
 `sanType`
-| Use para selecionar `iscsi` iSCSI, `nvme` NVMe/TCP ou `fcp` SCSI por Fibre Channel (FC). *'fcp' (SCSI sobre FC) é um recurso de pré-visualização técnica na versão do Trident 24,10.* | `iscsi` se estiver em branco 
+| Use para selecionar `iscsi` iSCSI, `nvme` NVMe/TCP ou `fcp` SCSI por Fibre Channel (FC). | `iscsi` se estiver em branco 
 
 
 | `formatOptions`  a| 
@@ -150,13 +163,13 @@ Você pode controlar o provisionamento padrão usando essas opções na `default
 | Parâmetro | Descrição | Padrão 
 
 
-| `spaceAllocation` | Alocação de espaço para LUNs | "verdadeiro" 
+| `spaceAllocation` | Alocação de espaço para LUNs | "True" *se especificado, defina como `true` para ASA R2*. 
 
 
-| `spaceReserve` | Modo de reserva de espaço; "nenhum" (fino) ou "volume" (grosso) | "nenhum" 
+| `spaceReserve` | Modo de reserva de espaço; "nenhum" (fino) ou "volume" (grosso). *Defina como `none` para ASA R2*. | "nenhum" 
 
 
-| `snapshotPolicy` | Política de instantâneos a utilizar | "nenhum" 
+| `snapshotPolicy` | Política de instantâneos a utilizar. *Defina como `none` para ASA R2*. | "nenhum" 
 
 
 | `qosPolicy` | Grupo de políticas de QoS a atribuir aos volumes criados. Escolha uma das qosPolicy ou adaptiveQosPolicy por pool de armazenamento/backend. O uso de grupos de política de QoS com Trident requer o ONTAP 9.8 ou posterior. Você deve usar um grupo de políticas de QoS não compartilhado e garantir que o grupo de políticas seja aplicado individualmente a cada componente. Um grupo de políticas de QoS compartilhado impõe o limite máximo da taxa de transferência total de todos os workloads. | "" 
@@ -165,22 +178,19 @@ Você pode controlar o provisionamento padrão usando essas opções na `default
 | `adaptiveQosPolicy` | Grupo de políticas de QoS adaptável a atribuir para volumes criados. Escolha uma das qosPolicy ou adaptiveQosPolicy por pool de armazenamento/backend | "" 
 
 
-| `snapshotReserve` | Porcentagem de volume reservado para snapshots | "0" se `snapshotPolicy` for "nenhum", caso contrário "" 
+| `snapshotReserve` | Porcentagem de volume reservado para snapshots. *Não especifique para ASA R2*. | "0" se `snapshotPolicy` for "nenhum", caso contrário "" 
 
 
 | `splitOnClone` | Divida um clone de seu pai na criação | "falso" 
 
 
-| `encryption` | Ative a criptografia de volume do NetApp (NVE) no novo volume; o padrão é `false`. O NVE deve ser licenciado e habilitado no cluster para usar essa opção. Se NAE estiver ativado no back-end, qualquer volume provisionado no Trident será NAE habilitado. Para obter mais informações, consulte: link:../trident-reco/security-reco.html["Como o Trident funciona com NVE e NAE"]. | "falso" 
+| `encryption` | Ative a criptografia de volume do NetApp (NVE) no novo volume; o padrão é `false`. O NVE deve ser licenciado e habilitado no cluster para usar essa opção. Se NAE estiver ativado no back-end, qualquer volume provisionado no Trident será NAE habilitado. Para obter mais informações, consulte: link:../trident-reco/security-reco.html["Como o Trident funciona com NVE e NAE"]. | "False" *se especificado, defina como `true` para ASA R2*. 
 
 
-| `luksEncryption` | Ativar encriptação LUKS. link:../trident-reco/security-luks.html["Usar a configuração de chave unificada do Linux (LUKS)"]Consulte a . A criptografia LUKS não é compatível com NVMe/TCP. | "" 
+| `luksEncryption` | Ativar encriptação LUKS. link:../trident-reco/security-luks.html["Usar a configuração de chave unificada do Linux (LUKS)"]Consulte a . A criptografia LUKS não é compatível com NVMe/TCP. | "" definido como `false` para ASA R2. 
 
 
-| `securityStyle` | Estilo de segurança para novos volumes | `unix` 
-
-
-| `tieringPolicy` | Política de disposição em camadas para usar "nenhuma" | "Somente snapshot" para configuração pré-ONTAP 9.5 SVM-DR 
+| `tieringPolicy` | Política de disposição em camadas para usar "nenhum" *não especifique para o ASA R2*. |  
 
 
 | `nameTemplate` | Modelo para criar nomes de volume personalizados. | "" 
@@ -237,7 +247,7 @@ Atualmente, o redimensionamento é a única maneira de usar o novo cálculo para
 Os exemplos a seguir mostram configurações básicas que deixam a maioria dos parâmetros padrão. Esta é a maneira mais fácil de definir um backend.
 
 
-NOTE: Se você estiver usando o Amazon FSX no NetApp ONTAP com Trident, recomendamos que você especifique nomes DNS para LIFs em vez de endereços IP.
+NOTE: Se você estiver usando o Amazon FSX no NetApp ONTAP com Trident, o NetApp recomenda que você especifique nomes DNS para LIFs em vez de endereços IP.
 
 .Exemplo de SAN ONTAP
 [%collapsible]
@@ -258,38 +268,33 @@ username: vsadmin
 password: <password>
 ----
 ====
+.Exemplo de MetroCluster
+[#mcc-best%collapsible]
+====
+Você pode configurar o back-end para evitar ter que atualizar manualmente a definição do back-end após o switchover e o switchback durante link:../trident-reco/backup.html#svm-replication-and-recovery["Replicação e recuperação da SVM"]o .
+
+Para comutação e switchback contínuos, especifique o SVM usando `managementLIF` e omite os `svm` parâmetros. Por exemplo:
+
+[listing]
+----
+version: 1
+storageDriverName: ontap-san
+managementLIF: 192.168.1.66
+username: vsadmin
+password: password
+----
+====
 .Exemplo de economia de SAN ONTAP
 [%collapsible]
 ====
 [listing]
 ----
----
 version: 1
 storageDriverName: ontap-san-economy
 managementLIF: 10.0.0.1
 svm: svm_iscsi_eco
 username: vsadmin
 password: <password>
-----
-====
-[[mcc-best]]
-. exemplo
-
-
-[]
-====
-Você pode configurar o back-end para evitar ter que atualizar manualmente a definição do back-end após o switchover e o switchback durante link:../trident-reco/backup.html#svm-replication-and-recovery["Replicação e recuperação da SVM"]o .
-
-Para comutação e switchback contínuos, especifique o SVM usando `managementLIF` e omite os `dataLIF` parâmetros e. `svm` Por exemplo:
-
-[listing]
-----
----
-version: 1
-storageDriverName: ontap-san
-managementLIF: 192.168.1.66
-username: vsadmin
-password: password
 ----
 ====
 .Exemplo de autenticação baseada em certificado
@@ -375,6 +380,25 @@ sanType: nvme
 useREST: true
 ----
 ====
+.Exemplo de SCSI em FC (FCP)
+[%collapsible]
+====
+Você precisa ter um SVM configurado com FC no back-end do ONTAP. Essa é uma configuração básica de back-end para FC.
+
+[listing]
+----
+---
+version: 1
+backendName: fcp-backend
+storageDriverName: ontap-san
+managementLIF: 10.0.0.1
+svm: svm_fc
+username: vsadmin
+password: password
+sanType: fcp
+useREST: true
+----
+====
 .Exemplo de configuração de backend com nameTemplate
 [%collapsible]
 ====
@@ -394,7 +418,7 @@ defaults: {
 "labels": {"cluster": "ClusterA", "PVC": "{{.volume.Namespace}}_{{.volume.RequestName}}"}
 ----
 ====
-.Exemplo de formatOptions para o driver <code> ONTAP-san-economy</code>
+.Exemplo de formatOptions para o driver ONTAP-san-Economy
 [%collapsible]
 ====
 [listing]
@@ -419,7 +443,7 @@ defaults:
 
 Nesses arquivos de definição de back-end de exemplo, padrões específicos são definidos para todos os pools de armazenamento, como `spaceReserve` em nenhum, `spaceAllocation` em falso e `encryption` em falso. Os pools virtuais são definidos na seção armazenamento.
 
-O Trident define rótulos de provisionamento no campo "Comentários". Os comentários são definidos no FlexVol. O Trident copia todas as etiquetas presentes em um pool virtual para o volume de storage no provisionamento. Por conveniência, os administradores de storage podem definir rótulos por pool virtual e volumes de grupo por rótulo.
+O Trident define rótulos de provisionamento no campo "Comentários". Os comentários são definidos nas cópias do FlexVol volume Trident todas as etiquetas presentes em um pool virtual para o volume de storage no provisionamento. Por conveniência, os administradores de storage podem definir rótulos por pool virtual e volumes de grupo por rótulo.
 
 Nesses exemplos, alguns dos pools de armazenamento definem seus próprios `spaceReserve` `spaceAllocation` valores , e `encryption` , e alguns pools substituem os valores padrão.
 

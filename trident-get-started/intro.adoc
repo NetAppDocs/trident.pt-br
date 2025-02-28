@@ -18,7 +18,7 @@ O Trident é um projeto de código aberto totalmente suportado mantido pela NetA
 
 == O que é o Trident?
 
-O NetApp Trident permite o consumo e o gerenciamento de recursos de armazenamento em todas as plataformas de armazenamento populares da NetApp, na nuvem pública ou no local, incluindo ONTAP (AFF, FAS, Select, nuvem, Amazon FSX for NetApp ONTAP), software Element (NetApp HCI, SolidFire), serviço Azure NetApp Files e Cloud Volumes Service no Google Cloud.
+O NetApp Trident possibilita o consumo e o gerenciamento de recursos de storage em todas as plataformas de storage populares da NetApp, na nuvem pública ou no local, incluindo clusters ONTAP on-premises (AFF, FAS e ASA), ONTAP Select, Cloud Volumes ONTAP, software Element (NetApp HCI, SolidFire), Azure NetApp Files, Amazon FSX for NetApp ONTAP e Cloud Volumes Service no Google Cloud.
 
 O Trident é um orquestrador de storage dinâmico e em conformidade com a Container Storage Interface (CSI) que se integra nativamente ao link:https://kubernetes.io/["Kubernetes"^]. O Trident é executado como um único Pod de controlador e um Pod de nó em cada nó de trabalho no cluster. link:../trident-get-started/architecture.html["Arquitetura da Trident"]Consulte para obter detalhes.
 
@@ -76,6 +76,6 @@ O Trident pode provisionar e gerenciar dispositivos de storage para aplicações
 ====
 link:https://docs.netapp.com/us-en/ontap/index.html["NetApp ONTAP"^] É o sistema operacional de storage unificado multiprotocolo da NetApp que oferece recursos avançados de gerenciamento de dados para qualquer aplicação.
 
-Os sistemas ONTAP têm configurações all-flash, híbridas ou totalmente HDD e oferecem muitos modelos de implantação diferentes, incluindo hardware projetado (FAS e AFF), white-box (ONTAP Select) e somente para nuvem (Cloud Volumes ONTAP). O Trident oferece suporte a esses modelos de implantação do ONTAP.
+Os sistemas ONTAP têm configurações all-flash, híbridas ou totalmente HDD e oferecem muitos modelos de implantação diferentes: Clusters FAS, AFA e ASA no local, ONTAP Select e Cloud Volumes ONTAP. O Trident oferece suporte a esses modelos de implantação do ONTAP.
 
 ====

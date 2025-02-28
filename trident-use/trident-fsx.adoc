@@ -16,7 +16,7 @@ https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/what-is-fsx-ontap.html["Amazon
 
 Você pode integrar o sistema de arquivos do Amazon FSX for NetApp ONTAP ao Trident para garantir que os clusters do Kubernetes executados no Amazon Elastic Kubernetes Service (EKS) possam provisionar volumes persistentes de bloco e arquivo com o respaldo do ONTAP.
 
-Um sistema de arquivos é o principal recurso do Amazon FSX, análogo a um cluster do ONTAP no local. Em cada SVM, você pode criar um ou vários volumes, que são contentores de dados que armazenam os arquivos e pastas em seu sistema de arquivos. Com o Amazon FSX for NetApp ONTAP, o Data ONTAP será fornecido como um sistema de arquivos gerenciado na nuvem. O novo tipo de sistema de arquivos é chamado de *NetApp ONTAP*.
+Um sistema de arquivos é o principal recurso do Amazon FSX, análogo a um cluster do ONTAP no local. Em cada SVM, você pode criar um ou vários volumes, que são contentores de dados que armazenam os arquivos e pastas em seu sistema de arquivos. Com o Amazon FSX for NetApp ONTAP será fornecido como um sistema de arquivos gerenciado na nuvem. O novo tipo de sistema de arquivos é chamado de *NetApp ONTAP*.
 
 Usando o Trident com o Amazon FSX for NetApp ONTAP, você pode garantir que os clusters do Kubernetes executados no Amazon Elastic Kubernetes Service (EKS) provisionem volumes persistentes de bloco e arquivo com o respaldo do do ONTAP.
 
@@ -71,6 +71,56 @@ Para obter detalhes sobre como ativar a autenticação, consulte a autenticaçã
 
 * link:ontap-nas-prep.html["Autenticação nas ONTAP"]
 * link:ontap-san-prep.html["Autenticação SAN ONTAP"]
+
+
+
+
+== Imagens de máquinas da Amazon testadas (AMIS)
+
+O cluster do EKS é compatível com vários sistemas operacionais, mas a AWS otimizou determinadas AMIS (Amazon Machine Images) para contêineres e EKS. Os AMIS a seguir foram testados com o Trident 24,10.
+
+|===
+
+
+| AMI | NAS | Economia nas | SAN | SAN-economia 
+
+
+| AL2023_x86_64_STANDARD | Sim | Sim | Sim | Sim 
+
+
+| AL2_x86_64 | Sim | Sim | Sim** | Sim** 
+
+
+| BOTTLEROCKET_x86_64 | Sim* | Sim | N/A. | N/A. 
+
+
+| AL2023_ARM_64_STANDARD | Sim | Sim | Sim | Sim 
+
+
+| AL2_ARM_64 | Sim | Sim | Sim** | Sim** 
+
+
+| BOTTLEROCKET_ARM_64 | Sim* | Sim | N/A. | N/A. 
+|===
+* *Deve usar "nolock" nas opções de montagem.
+* ** Não é possível excluir o PV sem reiniciar o nó
+
+
+
+NOTE: Se o seu IAM desejado não está listado aqui, isso não significa que ele não é suportado; simplesmente significa que ele não foi testado. Esta lista serve como um guia para AMIS conhecido por funcionar.
+
+*Testes realizados com*:
+
+* Versão EKS: 1,30
+* Método de instalação: Helm e como um suplemento da AWS
+* Para nas, tanto o NFSv3 quanto o NFSv4,1 foram testados.
+* Para SAN, apenas o iSCSI foi testado, não o NVMe-of.
+
+
+*Testes realizados*:
+
+* Criar: Classe de armazenamento, pvc, pod
+* Excluir: Pod, PVC (regular, qtree/lun – economia, nas com backup da AWS)
 
 
 

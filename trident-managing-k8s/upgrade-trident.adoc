@@ -38,11 +38,11 @@ Ao atualizar para a versão mais recente do Trident, considere o seguinte:
 
 As versões do Trident seguem uma convenção de nomenclatura baseada em data `YY.MM`, onde "YY" é os últimos dois dígitos do ano e "MM" é o mês. Os lançamentos de ponto seguem uma `YY.MM.X` convenção, onde "X" é o nível de patch. Você selecionará a versão para a qual atualizar com base na versão da qual você está atualizando.
 
-* Você pode fazer uma atualização direta para qualquer versão de destino que esteja dentro de uma janela de quatro versões da versão instalada. Por exemplo, você pode atualizar diretamente de 23,04 (ou qualquer lançamento de 23,04 pontos) para 24,06.
-* Se você estiver atualizando de uma versão fora da janela de quatro versões, execute uma atualização em várias etapas. Use as instruções de atualização do link:../earlier-versions.html["versão anterior"]para atualizar para a versão mais recente que se encaixa na janela de quatro versões. Por exemplo, se você estiver executando o 22,01 e quiser atualizar para o 24,06:
+* Você pode fazer uma atualização direta para qualquer versão de destino que esteja dentro de uma janela de quatro versões da versão instalada. Por exemplo, você pode atualizar diretamente de 24,06 (ou qualquer lançamento de 24,06 pontos) para 25,02.
+* Se você estiver atualizando de uma versão fora da janela de quatro versões, execute uma atualização em várias etapas. Use as instruções de atualização do link:../earlier-versions.html["versão anterior"]para atualizar para a versão mais recente que se encaixa na janela de quatro versões. Por exemplo, se você estiver executando o 23,01 e quiser atualizar para o 25,02:
 +
-.. Primeiro upgrade de 22,07 para 23,04.
-.. Em seguida, atualize de 23,04 para 24,06.
+.. Primeiro upgrade de 23,01 para 24,02.
+.. Em seguida, atualize de 24,02 para 25,02.
 
 
 

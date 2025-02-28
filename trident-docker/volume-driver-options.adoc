@@ -20,7 +20,7 @@ Usar essas opções durante a operação de criação de volume é simples. Forn
 
 == Opções de volume ONTAP
 
-As opções de criação de volume para NFS e iSCSI incluem o seguinte:
+As opções de criação de volume para NFS, iSCSI e FC incluem o seguinte:
 
 [cols="2*"]
 |===

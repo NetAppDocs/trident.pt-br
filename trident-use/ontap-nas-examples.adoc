@@ -28,7 +28,7 @@ Consulte a tabela a seguir para obter as opções de configuração de back-end:
 | `version` |  | Sempre 1 
 
 
-| `storageDriverName` | Nome do controlador de armazenamento | "ONTAP-nas", "ONTAP-nas-economy", "ONTAP-nas-FlexGroup", "ONTAP-san", "ONTAP-san-economy" 
+| `storageDriverName` | Nome do controlador de armazenamento | `ontap-nas`, `ontap-nas-economy`, ou `ontap-nas-flexgroup` 
 
 
 | `backendName` | Nome personalizado ou back-end de storage | Nome do driver e dataLIF 
@@ -37,7 +37,7 @@ Consulte a tabela a seguir para obter as opções de configuração de back-end:
 | `managementLIF` | Endereço IP de um cluster ou LIF de gerenciamento de SVM Um nome de domínio totalmente qualificado (FQDN) pode ser especificado. Pode ser definido para usar endereços IPv6 se o Trident tiver sido instalado usando o sinalizador IPv6. Os endereços IPv6 devem ser definidos entre colchetes, como `[28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]` . Para o switchover MetroCluster otimizado, consulte o <<mcc-best>>. | "10,0.0,1", "[2001:1234:abcd::fefe]" 
 
 
-| `dataLIF` | Endereço IP do protocolo LIF. Recomendamos especificar `dataLIF`. Se não for fornecido, o Trident obtém LIFs de dados do SVM. Você pode especificar um nome de domínio totalmente qualificado (FQDN) a ser usado para as operações de montagem NFS, permitindo que você crie um DNS de round-robin para balanceamento de carga em vários LIFs de dados. Pode ser alterado após a definição inicial. Consulte a . Pode ser definido para usar endereços IPv6 se o Trident tiver sido instalado usando o sinalizador IPv6. Os endereços IPv6 devem ser definidos entre colchetes, como `[28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]` . *Omita para MetroCluster.* Consulte <<mcc-best>>. | Endereço especificado ou derivado do SVM, se não for especificado (não recomendado) 
+| `dataLIF` | Endereço IP do protocolo LIF. A NetApp recomenda `dataLIF` especificar . Se não for fornecido, o Trident obtém LIFs de dados do SVM. Você pode especificar um nome de domínio totalmente qualificado (FQDN) a ser usado para as operações de montagem NFS, permitindo que você crie um DNS de round-robin para balanceamento de carga em vários LIFs de dados. Pode ser alterado após a definição inicial. Consulte a . Pode ser definido para usar endereços IPv6 se o Trident tiver sido instalado usando o sinalizador IPv6. Os endereços IPv6 devem ser definidos entre colchetes, como `[28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]` . *Omita para MetroCluster.* Consulte <<mcc-best>>. | Endereço especificado ou derivado do SVM, se não for especificado (não recomendado) 
 
 
 | `svm` | Máquina virtual de armazenamento para usar *omit for MetroCluster.* Consulte <<mcc-best>>. | Derivado se uma SVM `managementLIF` for especificada 
@@ -96,7 +96,7 @@ NOTE: Quando a lista de agregados é atualizada no SVM, a lista é atualizada au
 | "" 
 
 
-| `limitVolumeSize` | Falha no provisionamento se o tamanho do volume solicitado estiver acima desse valor. Também restringe o tamanho máximo dos volumes que gerencia para qtrees, e a `qtreesPerFlexvol` opção permite personalizar o número máximo de qtrees por FlexVol. | "" (não aplicado por padrão) 
+| `limitVolumeSize` | Falha no provisionamento se o tamanho do volume solicitado estiver acima desse valor. Também restringe o tamanho máximo dos volumes que gerencia para qtrees, e a `qtreesPerFlexvol` opção permite personalizar o número máximo de qtrees por FlexVol volume | "" (não aplicado por padrão) 
 
 
 | `debugTraceFlags` | Debug flags para usar ao solucionar problemas. Por exemplo, não use `debugTraceFlags` a menos que você esteja solucionando problemas e exija um despejo de log detalhado. | nulo 
@@ -114,7 +114,7 @@ NOTE: Quando a lista de agregados é atualizada no SVM, a lista é atualizada au
 | `smbShare` | Você pode especificar uma das seguintes opções: O nome de um compartilhamento SMB criado usando o Console de Gerenciamento da Microsoft ou a CLI do ONTAP; um nome para permitir que o Trident crie o compartilhamento SMB; ou você pode deixar o parâmetro em branco para impedir o acesso comum ao compartilhamento a volumes. Esse parâmetro é opcional para o ONTAP no local. Esse parâmetro é necessário para backends do Amazon FSX for ONTAP e não pode ficar em branco. | `smb-share` 
 
 
-| `useREST` | Parâmetro booleano para usar APIs REST do ONTAP.  `useREST` Quando definido como `true`, o Trident usa APIs REST do ONTAP para se comunicar com o back-end; quando definido como `false`, o Trident usa chamadas ZAPI do ONTAP para se comunicar com o back-end. Esse recurso requer o ONTAP 9.11,1 e posterior. Além disso, a função de login do ONTAP usada deve ter acesso ao `ontap` aplicativo. Isso é satisfeito com as funções e `cluster-admin` predefinidas `vsadmin`. Começando com a versão Trident 24,06 e ONTAP 9.15,1 ou posterior, `userREST` é definido como `true` por padrão; altere `useREST` para para `false` usar chamadas ONTAP ZAPI. | `true` Para ONTAP 9.15,1 ou posterior, caso contrário `false`. 
+| `useREST` | Parâmetro booleano para usar APIs REST do ONTAP.  `useREST` Quando definido como `true`, o Trident usa APIs REST do ONTAP para se comunicar com o back-end; quando definido como `false`, o Trident usa chamadas ONTAPI (ZAPI) para se comunicar com o back-end. Esse recurso requer o ONTAP 9.11,1 e posterior. Além disso, a função de login do ONTAP usada deve ter acesso ao `ontap` aplicativo. Isso é satisfeito com as funções e `cluster-admin` predefinidas `vsadmin`. Começando com a versão Trident 24,06 e ONTAP 9.15.1 ou posterior, `userREST` é definido como `true` por padrão; altere `useREST` para `false` usar chamadas ONTAPI (ZAPI). | `true` Para ONTAP 9.15,1 ou posterior, caso contrário `false`. 
 
 
 | `limitVolumePoolSize` | Tamanho máximo de FlexVol requestable ao usar Qtrees no back-end ONTAP-nas-Economy. | "" (não aplicado por padrão) 
@@ -157,7 +157,7 @@ Você pode controlar o provisionamento padrão usando essas opções na `default
 | `encryption` | Ative a criptografia de volume do NetApp (NVE) no novo volume; o padrão é `false`. O NVE deve ser licenciado e habilitado no cluster para usar essa opção. Se NAE estiver ativado no back-end, qualquer volume provisionado no Trident será NAE habilitado. Para obter mais informações, consulte: link:../trident-reco/security-reco.html["Como o Trident funciona com NVE e NAE"]. | "falso" 
 
 
-| `tieringPolicy` | Política de disposição em camadas para usar "nenhuma" | "Somente snapshot" para configuração pré-ONTAP 9.5 SVM-DR 
+| `tieringPolicy` | Política de disposição em camadas para usar "nenhuma" |  
 
 
 | `unixPermissions` | Modo para novos volumes | "777" para volumes NFS; vazio (não aplicável) para volumes SMB 

@@ -1,0 +1,124 @@
+---
+sidebar: sidebar 
+permalink: trident-use/vol-clone-cross-namespace.html 
+keywords: volref, volume reference, clone, pvc, pv, nfs, namespace, cvna, cross-namespace, sharing, volumesnapshots 
+summary: Usando o Trident, você pode criar novos volumes usando volumes existentes ou volumes de volumesnapshots de um namespace diferente dentro do mesmo cluster K8s. 
+---
+= Clonar volumes entre namespaces
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Com o Trident, você pode criar novos volumes usando volumes existentes ou volumes de volume a partir de um namespace diferente dentro do mesmo cluster do Kubernetes.
+
+
+
+== Pré-requisitos
+
+Antes de clonar volumes, certifique-se de que os backends de origem e destino são do mesmo tipo e têm a mesma classe de armazenamento.
+
+
+
+== Início rápido
+
+Você pode configurar a clonagem de volume NFS em apenas algumas etapas.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png["Um"] Configure o PVC de origem para clonar o volume
+[role="quick-margin-para"]
+O proprietário do namespace de origem concede permissão para acessar os dados no PVC de origem.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png["Dois"] Conceda permissão para criar um CR no namespace de destino
+[role="quick-margin-para"]
+O administrador do cluster concede permissão ao proprietário do namespace de destino para criar o CredentVolumeReference CR.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png["Três"] Crie TridentVolumeReference no namespace de destino
+[role="quick-margin-para"]
+O proprietário do namespace de destino cria o TrigentVolumeReference CR para se referir ao PVC de origem.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-4.png["Quatro"] Crie o clone PVC no namespace de destino
+[role="quick-margin-para"]
+O proprietário do namespace de destino cria PVC para clonar o PVC a partir do namespace de origem.
+
+
+
+== Configure os namespaces de origem e destino
+
+Para garantir a segurança, a clonagem de volumes entre namespaces requer colaboração e ação do proprietário do namespace de origem, do administrador do cluster e do proprietário do namespace de destino. A função de usuário é designada em cada etapa.
+
+.Passos
+. *Proprietário do namespace de origem:* Crie o PVC (`pvc1`) no namespace de origem (`namespace1`) que concede permissão para compartilhar com o namespace de destino (`namespace2`) usando a `cloneToNamespace` anotação.
++
+[listing]
+----
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pvc1
+  namespace: namespace1
+  annotations:
+    trident.netapp.io/cloneToNamespace: namespace2
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: trident-csi
+  resources:
+    requests:
+      storage: 100Gi
+----
++
+A Trident cria o PV e seu volume de storage NFS no back-end.
+
++
+[NOTE]
+====
+** Você pode compartilhar o PVC para vários namespaces usando uma lista delimitada por vírgulas. Por exemplo, `trident.netapp.io/cloneToNamespace: namespace2,namespace3,namespace4`.
+** Você pode compartilhar com todos os namespaces usando `*`. Por exemplo, `trident.netapp.io/cloneToNamespace: *`
+** Você pode atualizar o PVC para incluir a `cloneToNamespace` anotação a qualquer momento.
+
+
+====
+. *Cluster admin:* Crie a função personalizada e kubeconfig para conceder permissão ao proprietário do namespace de destino para criar o TridentVolumeReference CR no namespace de destino(`namespace2` ).
+. *Proprietário do namespace de destino:* Crie um CredentVolumeReference CR no namespace de destino que se refere ao namespace de origem `pvc1` .
++
+[listing]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentVolumeReference
+metadata:
+  name: my-first-tvr
+  namespace: namespace2
+spec:
+  pvcName: pvc1
+  pvcNamespace: namespace1
+----
+. *Proprietário do namespace de destino:* Crie um PVC (`pvc2`) no namespace de destino (`namespace2`) usando `cloneFromPVC` ou `cloneFromSnapshot` e `cloneFromNamespace` anotações para designar o PVC de origem.
++
+[listing]
+----
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  annotations:
+    trident.netapp.io/cloneFromPVC: pvc1
+    trident.netapp.io/cloneFromNamespace: namespace1
+  name: pvc2
+  namespace: namespace2
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: trident-csi
+  resources:
+    requests:
+      storage: 100Gi
+----
++
+Limitações
+
++
+** Para PVCs provisionados com drivers de economia ONTAP-nas, os clones somente leitura não são compatíveis.
+
+
+

@@ -26,8 +26,8 @@ NOTE: Para atualizar do Trident que foi instalado usando o operador com escopo d
 .Sobre esta tarefa
 O Trident fornece um arquivo de pacote que você pode usar para instalar o operador e criar objetos associados para sua versão do Kubernetes.
 
-* Para clusters que executam o Kubernetes 1,24, link:https://github.com/NetApp/trident/tree/stable/v24.10/deploy/bundle_pre_1_25.yaml["bundle_pre_1_25.yaml"^]use o .
-* Para clusters que executam o Kubernetes 1,25 ou posterior, link:https://github.com/NetApp/trident/tree/stable/v24.10/deploy/bundle_post_1_25.yaml["bundle_post_1_25.yaml"^]use o .
+* Para clusters que executam o Kubernetes 1,24, link:https://github.com/NetApp/trident/tree/stable/v25.02/deploy/bundle_pre_1_25.yaml["bundle_pre_1_25.yaml"^]use o .
+* Para clusters que executam o Kubernetes 1,25 ou posterior, link:https://github.com/NetApp/trident/tree/stable/v25.02/deploy/bundle_post_1_25.yaml["bundle_post_1_25.yaml"^]use o .
 
 
 .Antes de começar
@@ -48,11 +48,11 @@ kubectl delete -f 23.07.0/trident-installer/deploy/<bundle.yaml> -n trident
 ----
 . Se você personalizou sua instalação inicial usando `TridentOrchestrator` atributos, você pode editar o `TridentOrchestrator` objeto para modificar os parâmetros de instalação. Isso pode incluir alterações feitas para especificar Registros de imagens Trident e CSI espelhados para o modo offline, habilitar logs de depuração ou especificar segredos de recebimento de imagens.
 . Instale o Trident usando o pacote correto do arquivo YAML para o seu ambiente, onde _<bundle.yaml>_ é
-`bundle_pre_1_25.yaml` ou `bundle_post_1_25.yaml` baseado na sua versão do Kubernetes. Por exemplo, se você estiver instalando o Trident 24,10, execute o seguinte comando:
+`bundle_pre_1_25.yaml` ou `bundle_post_1_25.yaml` baseado na sua versão do Kubernetes. Por exemplo, se você estiver instalando o Trident 25,02, execute o seguinte comando:
 +
 [listing]
 ----
-kubectl create -f 24.10.0/trident-installer/deploy/<bundle.yaml> -n trident
+kubectl create -f 25.02.0/trident-installer/deploy/<bundle.yaml> -n trident
 ----
 
 
@@ -83,14 +83,14 @@ helm mapkubeapis trident  --namespace trident
 
 
 .Passos
-. Se link:../trident-get-started/kubernetes-deploy-helm.html#deploy-the-trident-operator-and-install-trident-using-helm["Trident instalado usando Helm"]você , você pode usar `helm upgrade trident netapp-trident/trident-operator --version 100.2410.0` o para atualizar em uma etapa. Se você não adicionou o repositório Helm ou não pode usá-lo para atualizar:
+. Se link:../trident-get-started/kubernetes-deploy-helm.html#deploy-the-trident-operator-and-install-trident-using-helm["Trident instalado usando Helm"]você , você pode usar `helm upgrade trident netapp-trident/trident-operator --version 100.2502.0` o para atualizar em uma etapa. Se você não adicionou o repositório Helm ou não pode usá-lo para atualizar:
 +
 .. Transfira a versão mais recente do Trident a partir de link:https://github.com/NetApp/trident/releases/latest["A seção _assets_ no GitHub"^].
-.. Use o `helm upgrade` comando onde `trident-operator-24.10.0.tgz` reflete a versão para a qual você deseja atualizar.
+.. Use o `helm upgrade` comando onde `trident-operator-25.02.0.tgz` reflete a versão para a qual você deseja atualizar.
 +
 [listing]
 ----
-helm upgrade <name> trident-operator-24.10.0.tgz
+helm upgrade <name> trident-operator-25.02.0.tgz
 ----
 +
 
@@ -115,11 +115,11 @@ NOTE: Antes de alternar entre os métodos de instalação, revise link:../triden
 +
 [listing]
 ----
-# Download the release required [24.10.0]
-mkdir 24.10.0
-cd 24.10.0
-wget https://github.com/NetApp/trident/releases/download/v24.10.0/trident-installer-24.10.0.tar.gz
-tar -xf trident-installer-24.10.0.tar.gz
+# Download the release required [25.02.0]
+mkdir 25.02.0
+cd 25.02.0
+wget https://github.com/NetApp/trident/releases/download/v25.02.0/trident-installer-25.02.0.tar.gz
+tar -xf trident-installer-25.02.0.tar.gz
 cd trident-installer
 ----
 . Crie o `tridentorchestrator` CRD a partir do manifesto.
@@ -176,6 +176,6 @@ kubectl describe torc trident | grep Message -A 3
 Message:                Trident installed
 Namespace:              trident
 Status:                 Installed
-Version:                v24.10.0
+Version:                v25.02.0
 ----
 

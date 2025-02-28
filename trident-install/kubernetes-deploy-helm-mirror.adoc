@@ -16,7 +16,7 @@ Você pode implantar o operador Trident e instalar o Trident usando o Helm. Este
 
 
 
-== Informações críticas sobre o Trident 24,10
+== Informações críticas sobre o Trident 25,02
 
 *Você deve ler as seguintes informações críticas sobre o Trident.*
 
@@ -55,7 +55,7 @@ IMPORTANT: Ao instalar o Trident em um repositório privado, se você estiver us
 ----
 helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
 ----
-. Use `helm install` e especifique um nome para a localização do Registro de imagens e implantação. O link:../trident-get-started/requirements.html#container-images-and-corresponding-kubernetes-versions["Imagens de Trident e CSI"] pode estar localizado em um Registro ou Registros diferentes, mas todas as imagens CSI devem estar localizadas no mesmo Registro. Nos exemplos, `100.2410.0` é a versão do Trident que você está instalando.
+. Use `helm install` e especifique um nome para a localização do Registro de imagens e implantação. O link:../trident-get-started/requirements.html#container-images-and-corresponding-kubernetes-versions["Imagens de Trident e CSI"] pode estar localizado em um Registro ou Registros diferentes, mas todas as imagens CSI devem estar localizadas no mesmo Registro. Nos exemplos, `100.2502.0` é a versão do Trident que você está instalando.
 +
 [role="tabbed-block"]
 ====
@@ -63,14 +63,14 @@ helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
 --
 [listing]
 ----
-helm install <name> netapp-trident/trident-operator --version 100.2410.0 --set imageRegistry=<your-registry> --create-namespace --namespace <trident-namespace> --set nodePrep={iscsi}
+helm install <name> netapp-trident/trident-operator --version 100.2502.0 --set imageRegistry=<your-registry> --create-namespace --namespace <trident-namespace> --set nodePrep={iscsi}
 ----
 --
 .Imagens em diferentes registos
 --
 [listing]
 ----
-helm install <name> netapp-trident/trident-operator --version 100.2410.0 --set imageRegistry=<your-registry> --set operatorImage=<your-registry>/trident-operator:24.10.0 --set tridentAutosupportImage=<your-registry>/trident-autosupport:24.10 --set tridentImage=<your-registry>/trident:24.10.0 --create-namespace --namespace <trident-namespace> --set nodePrep={iscsi}
+helm install <name> netapp-trident/trident-operator --version 100.2502.0 --set imageRegistry=<your-registry> --set operatorImage=<your-registry>/trident-operator:25.02.0 --set tridentAutosupportImage=<your-registry>/trident-autosupport:25.02 --set tridentImage=<your-registry>/trident:25.02.0 --create-namespace --namespace <trident-namespace> --set nodePrep={iscsi}
 ----
 --
 ====
@@ -102,11 +102,11 @@ Especifique um arquivo YAML com substituições. Isso pode ser especificado vár
 Especifique substituições na linha de comando.
 
 |===
-Por exemplo, para alterar o valor padrão `debug` do , execute o seguinte comando onde `100.2410.0` está a versão do Trident que está a instalar:
+Por exemplo, para alterar o valor padrão `debug` do , execute o seguinte comando onde `100.2502.0` está a versão do Trident que está a instalar:
 
 [listing]
 ----
-helm install <name> netapp-trident/trident-operator --version 100.2410.0  --create-namespace --namespace trident --set tridentDebug=true
+helm install <name> netapp-trident/trident-operator --version 100.2502.0  --create-namespace --namespace trident --set tridentDebug=true
 ----
 Para adicionar o valor nodePrep, execute o seguinte comando:
 
