@@ -41,6 +41,8 @@ sidebar:
       url: "/trident-rn.html"
     - title: Versões anteriores
       url: "/earlier-versions.html"
+    - title: Problemas conhecidos
+      url: "/known-issues.html"
   - section: trident-get-started
   - section: trident-install
   - section: trident-use

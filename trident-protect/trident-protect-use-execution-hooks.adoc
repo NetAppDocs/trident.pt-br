@@ -58,6 +58,9 @@ NOTE: O exemplo de pedido anterior só se aplica quando você executa um backup 
 NOTE: Você deve sempre testar seus scripts de gancho de execução antes de habilitá-los em um ambiente de produção. Você pode usar o comando 'kubectl exec' para testar convenientemente os scripts. Depois de habilitar os ganchos de execução em um ambiente de produção, teste os snapshots e backups resultantes para garantir que eles sejam consistentes. Você pode fazer isso clonando o aplicativo para um namespace temporário, restaurando o snapshot ou o backup e testando o aplicativo.
 
 
+NOTE: Se um gancho de execução pré-snapshot adicionar, alterar ou remover recursos do Kubernetes, essas alterações serão incluídas no snapshot ou backup e em qualquer operação de restauração subsequente.
+
+
 
 == Notas importantes sobre ganchos de execução personalizados
 
@@ -196,4 +199,178 @@ tridentctl-protect create exechook <my_exec_hook_name> --action <action_type> --
 
 
 --
+====
+
+
+== Execute manualmente um gancho de execução
+
+Você pode executar manualmente um gancho de execução para fins de teste ou se precisar executar novamente o gancho manualmente após uma falha. Você precisa ter permissões de proprietário, administrador ou membro para executar manualmente os ganchos de execução.
+
+Executar manualmente um gancho de execução consiste em duas etapas básicas:
+
+. Crie um backup de recursos, que coleta recursos e cria um backup deles, determinando onde o gancho será executado
+. Execute o gancho de execução contra o backup
+
+
+.Passo 1: Crie um backup de recursos
+[%collapsible]
+====
+[role="tabbed-block"]
+=====
+.Use um CR
+--
+.Passos
+. Crie o arquivo de recurso personalizado (CR) e nomeie-o `trident-protect-resource-backup.yaml`.
+. Configure os seguintes atributos para corresponder ao ambiente do Trident Protect e à configuração do cluster:
++
+** *metadata.name*: (_required_) o nome deste recurso personalizado; escolha um nome único e sensível para o seu ambiente.
+** *Spec.applicationRef*: (_required_) o nome do Kubernetes do aplicativo para o qual criar o backup de recursos.
+** *Spec.appVaultRef*: (_required_) o nome do AppVault onde o conteúdo de backup é armazenado.
+** *Spec.appArchivePath*: O caminho dentro do AppVault onde o conteúdo do backup é armazenado. Você pode usar o seguinte comando para encontrar este caminho:
++
+[source, console]
+----
+kubectl get backups <BACKUP_NAME> -n my-app-namespace -o jsonpath='{.status.appArchivePath}'
+----
++
+Exemplo YAML:
+
++
+[source, yaml]
+----
+---
+apiVersion: protect.trident.netapp.io/v1
+kind: ResourceBackup
+metadata:
+  name: example-resource-backup
+spec:
+  applicationRef: my-app-name
+  appVaultRef: my-appvault-name
+  appArchivePath: example-resource-backup
+----
+
+
+. Depois de preencher o ficheiro CR com os valores corretos, aplique o CR:
++
+[source, console]
+----
+kubectl apply -f trident-protect-resource-backup.yaml
+----
+
+
+--
+.Use a CLI
+--
+.Passos
+. Crie o backup, substituindo valores entre parênteses por informações do seu ambiente. Por exemplo:
++
+[source, console]
+----
+tridentctl protect create resourcebackup <my_backup_name> --app <my_app_name> --appvault <my_appvault_name> -n <my_app_namespace> --app-archive-path <app_archive_path>
+----
+. Ver o estado da cópia de segurança. Você pode usar este comando de exemplo repetidamente até que a operação esteja concluída:
++
+[source, console]
+----
+tridentctl protect get resourcebackup -n <my_app_namespace> <my_backup_name>
+----
+. Verifique se o backup foi bem-sucedido:
++
+[source, console]
+----
+kubectl describe resourcebackup <my_backup_name>
+----
+
+
+--
+=====
+====
+.Passo 2: Execute o gancho de execução
+[%collapsible]
+====
+[role="tabbed-block"]
+=====
+.Use um CR
+--
+.Passos
+. Crie o arquivo de recurso personalizado (CR) e nomeie-o `trident-protect-hook-run.yaml`.
+. Configure os seguintes atributos para corresponder ao ambiente do Trident Protect e à configuração do cluster:
++
+** *metadata.name*: (_required_) o nome deste recurso personalizado; escolha um nome único e sensível para o seu ambiente.
+** *Spec.applicationRef*: (_required_) Certifique-se de que este valor corresponde ao nome da aplicação do ResourceBackup CR criado na etapa 1.
+** *Spec.appVaultRef*: (_required_) Certifique-se de que este valor corresponde ao appVaultRef do ResourceBackup CR criado na etapa 1.
+** *Spec.appArchivePath*: Certifique-se de que este valor corresponda ao appArchivePath do ResourceBackup CR criado na etapa 1.
++
+[source, console]
+----
+kubectl get backups <BACKUP_NAME> -n my-app-namespace -o jsonpath='{.status.appArchivePath}'
+----
+** *Spec.action*: (_required_) Uma cadeia de carateres indicando qual ação o gancho de execução tomará, supondo que quaisquer filtros de gancho de execução especificados sejam correspondentes. Valores possíveis:
++
+*** Snapshot
+*** Backup
+*** Restaurar
+*** Failover
+
+
+** *Spec.stage*: (_required_) Uma cadeia de carateres indicando qual estágio durante a ação o gancho de execução deve ser executado. Esta corrida de gancho não vai correr ganchos em qualquer outro estágio. Valores possíveis:
++
+*** Pre
+*** Post
++
+Exemplo YAML:
+
++
+[source, yaml]
+----
+---
+apiVersion: protect.trident.netapp.io/v1
+kind: ExecHooksRun
+metadata:
+  name: example-hook-run
+spec:
+  applicationRef: my-app-name
+  appVaultRef: my-appvault-name
+  appArchivePath: example-resource-backup
+  stage: Post
+  action: Failover
+----
+
+
+
+
+. Depois de preencher o ficheiro CR com os valores corretos, aplique o CR:
++
+[source, console]
+----
+kubectl apply -f trident-protect-hook-run.yaml
+----
+
+
+--
+.Use a CLI
+--
+.Passos
+. Crie a solicitação de execução manual do hook run:
++
+[source, console]
+----
+tridentctl protect create exechooksrun <my_exec_hook_run_name> -n <my_app_namespace> --action snapshot --stage <pre_or_post> --app <my_app_name> --appvault <my_appvault_name> --path <my_backup_name>
+----
+. Verifique o status da execução do hook run. Você pode executar este comando repetidamente até que a operação esteja concluída:
++
+[source, console]
+----
+tridentctl protect get exechooksrun -n <my_app_namespace> <my_exec_hook_run_name>
+----
+. Descreva o objeto exechooksrun para ver os detalhes e status finais:
++
+[source, console]
+----
+kubectl -n <my_app_namespace> describe exechooksrun <my_exec_hook_run_name>
+----
+
+
+--
+=====
 ====

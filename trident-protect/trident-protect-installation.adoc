@@ -17,9 +17,6 @@ summary: Se o seu ambiente atender aos requisitos, siga estas etapas para instal
 Se o seu ambiente atender aos requisitos do Trident Protect, siga estas etapas para instalar o Trident Protect no cluster. Você pode obter o Trident Protect do NetApp, ou instalá-lo a partir de seu próprio Registro privado. A instalação a partir de um registo privado é útil se o cluster não conseguir aceder à Internet.
 
 
-NOTE: Por padrão, o Trident Protect coleta informações de suporte que ajudam em todos os casos de suporte da NetApp que você possa abrir, incluindo logs, métricas e informações de topologia sobre clusters e aplicativos gerenciados. O Trident Protect envia esses pacotes de suporte ao NetApp diariamente. Opcionalmente, você pode desativar essa coleção de pacotes de suporte ao instalar o Trident Protect. Você pode manualmente link:trident-protect-generate-support-bundle.html["gerar um pacote de suporte"] a qualquer momento.
-
-
 
 == Instale o Trident Protect
 
@@ -38,24 +35,14 @@ helm repo add netapp-trident-protect https://netapp.github.io/trident-protect-he
 +
 [source, console]
 ----
-helm install trident-protect-crds netapp-trident-protect/trident-protect-crds --version 100.2410.1 --create-namespace --namespace trident-protect
+helm install trident-protect-crds netapp-trident-protect/trident-protect-crds --version 100.2502.0 --create-namespace --namespace trident-protect
 ----
-. Use o Helm para instalar o Trident Protect usando um dos seguintes comandos. Substitua `<name_of_cluster>` por um nome de cluster, que será atribuído ao cluster e usado para identificar os backups e snapshots do cluster:
-+
-** Instale o Trident Protect normalmente:
+. Use o Helm para instalar o Trident Protect. Substitua `<name_of_cluster>` por um nome de cluster, que será atribuído ao cluster e usado para identificar os backups e snapshots do cluster:
 +
 [source, console]
 ----
-helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name_of_cluster> --version 100.2410.1 --create-namespace --namespace trident-protect
+helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name_of_cluster> --version 100.2502.0 --create-namespace --namespace trident-protect
 ----
-** Instale o Trident Protect e desative os carregamentos diários programados do pacote de suporte do Trident Protect AutoSupport:
-+
-[source, console]
-----
-helm install trident-protect netapp-trident-protect/trident-protect --set autoSupport.enabled=false --set clusterName=<name_of_cluster> --version 100.2410.1 --create-namespace --namespace trident-protect
-----
-
-
 
 
 --
@@ -68,14 +55,14 @@ Você pode instalar o Trident Protect a partir de um Registro de imagem privado 
 +
 [source, console]
 ----
-netapp/controller:24.10.1
-netapp/restic:24.10.1
-netapp/kopia:24.10.1
-netapp/trident-autosupport:24.10.0
-netapp/exechook:24.10.1
-netapp/resourcebackup:24.10.1
-netapp/resourcerestore:24.10.1
-netapp/resourcedelete:24.10.1
+netapp/controller:25.02.0
+netapp/restic:25.02.0
+netapp/kopia:25.02.0
+netapp/trident-autosupport:25.02.0
+netapp/exechook:25.02.0
+netapp/resourcebackup:25.02.0
+netapp/resourcerestore:25.02.0
+netapp/resourcedelete:25.02.0
 bitnami/kubectl:1.30.2
 kubebuilder/kube-rbac-proxy:v0.16.0
 ----
@@ -85,17 +72,17 @@ Por exemplo:
 +
 [source, console]
 ----
-docker pull netapp/controller:24.10.1
+docker pull netapp/controller:25.02.0
 ----
 +
 [source, console]
 ----
-docker tag netapp/controller:24.10.1 <private-registry-url>/controller:24.10.1
+docker tag netapp/controller:25.02.0 <private-registry-url>/controller:25.02.0
 ----
 +
 [source, console]
 ----
-docker push <private-registry-url>/controller:24.10.1
+docker push <private-registry-url>/controller:25.02.0
 ----
 . Crie o namespace do sistema Trident Protect:
 +
@@ -147,95 +134,15 @@ webhooksCleanup:
 +
 [source, console]
 ----
-helm install trident-protect-crds netapp-trident-protect/trident-protect-crds --version 100.2410.1 --create-namespace --namespace trident-protect
+helm install trident-protect-crds netapp-trident-protect/trident-protect-crds --version 100.2502.0 --create-namespace --namespace trident-protect
 ----
-. Use o Helm para instalar o Trident Protect usando um dos seguintes comandos. Substitua `<name_of_cluster>` por um nome de cluster, que será atribuído ao cluster e usado para identificar os backups e snapshots do cluster:
-+
-** Instale o Trident Protect normalmente:
+. Use o Helm para instalar o Trident Protect. Substitua `<name_of_cluster>` por um nome de cluster, que será atribuído ao cluster e usado para identificar os backups e snapshots do cluster:
 +
 [source, console]
 ----
-helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name_of_cluster> --version 100.2410.1 --create-namespace --namespace trident-protect -f protectValues.yaml
+helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name_of_cluster> --version 100.2502.0 --create-namespace --namespace trident-protect -f protectValues.yaml
 ----
-** Instale o Trident Protect e desative os carregamentos diários programados do pacote de suporte do Trident Protect AutoSupport:
-+
-[source, console]
-----
-helm install trident-protect netapp-trident-protect/trident-protect --set autoSupport.enabled=false --set clusterName=<name_of_cluster> --version 100.2410.1 --create-namespace --namespace trident-protect -f protectValues.yaml
-----
-
-
 
 
 --
 ====
-
-
-== Especifique os limites de recursos do contêiner do Trident Protect
-
-Você pode usar um arquivo de configuração para especificar limites de recursos para contentores do Trident Protect depois de instalar o Trident Protect. A definição de limites de recursos permite controlar quanto dos recursos do cluster são consumidos pelas operações do Trident Protect.
-
-.Passos
-. Crie um arquivo chamado `resourceLimits.yaml`.
-. Preencha o arquivo com opções de limite de recursos para contentores do Trident Protect de acordo com as necessidades do seu ambiente.
-+
-O seguinte exemplo de arquivo de configuração mostra as configurações disponíveis e contém os vaules padrão para cada limite de recursos:
-
-+
-[source, yaml]
-----
----
-jobResources:
-  defaults:
-    limits:
-      cpu: 8000m
-      memory: 10000Mi
-      ephemeralStorage: ""
-    requests:
-      cpu: 100m
-      memory: 100Mi
-      ephemeralStorage: ""
-  resticVolumeBackup:
-    limits:
-      cpu: ""
-      memory: ""
-      ephemeralStorage: ""
-    requests:
-      cpu: ""
-      memory: ""
-      ephemeralStorage: ""
-  resticVolumeRestore:
-    limits:
-      cpu: ""
-      memory: ""
-      ephemeralStorage: ""
-    requests:
-      cpu: ""
-      memory: ""
-      ephemeralStorage: ""
-  kopiaVolumeBackup:
-    limits:
-      cpu: ""
-      memory: ""
-      ephemeralStorage: ""
-    requests:
-      cpu: ""
-      memory: ""
-      ephemeralStorage: ""
-  kopiaVolumeRestore:
-    limits:
-      cpu: ""
-      memory: ""
-      ephemeralStorage: ""
-    requests:
-      cpu: ""
-      memory: ""
-      ephemeralStorage: ""
-----
-. Aplique os valores do `resourceLimits.yaml` arquivo:
-+
-[source, console]
-----
-helm upgrade trident-protect -n trident-protect -f <resourceLimits.yaml> --reuse-values
-----
-

@@ -4,15 +4,6 @@
 
 O Trident Protect 24,10 e 24.10.1 e versões mais recentes têm comportamento diferente quando você protege aplicativos em execução em VMs KubeVirt. Para ambas as versões, você pode ativar ou desativar o congelamento e o descongelamento do sistema de arquivos durante operações de proteção de dados.
 
-[NOTE]
-====
-Para todas as versões do Trident Protect, para habilitar ou desabilitar a funcionalidade de congelamento automático em ambientes OpenShift, talvez seja necessário conceder permissões privilegiadas para o namespace do aplicativo. Por exemplo:
-
-[source, console]
-----
-oc adm policy add-scc-to-user privileged -z default -n <application-namespace>
-----
-====
 .Trident Protect 24,10
 O Trident Protect 24,10 não garante automaticamente um estado consistente para os sistemas de arquivos da VM do KubeVirt durante operações de proteção de dados. Se você quiser proteger seus dados da VM KubeVirt usando o Trident Protect 24,10, você precisa ativar manualmente a funcionalidade congelar/descongelar para os sistemas de arquivos antes da operação de proteção de dados. Isso garante que os sistemas de arquivos estejam em um estado consistente.
 

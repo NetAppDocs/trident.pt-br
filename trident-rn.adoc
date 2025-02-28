@@ -21,7 +21,7 @@ WARNING: O `tridentctl` binário para Linux que é fornecido no arquivo zip do i
 
 == Novidades em 25,02
 
-A partir do Trident 25,02, o resumo do que há de novo fornece detalhes sobre melhorias, correções e descontinuações para versões do Trident e do Trident Protect.
+A partir do Trident 25,02, o resumo Novidades fornece detalhes sobre melhorias, correções e descontinuações para versões do Trident e do Trident Protect.
 
 
 
