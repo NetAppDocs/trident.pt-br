@@ -26,7 +26,7 @@ Antes de criar um objeto AppVault, você precisa garantir que o AppVault e o con
 
 === Senhas do repositório do controlador de dados
 
-Quando você cria objetos AppVault usando o CRS ou o plug-in Trident Protect CLI, você pode instruir o Trident Protect para usar um segredo Kubernetes que contém senhas personalizadas para a criptografia do repositório Restic e do Kopia. Se você não especificar um segredo, o Trident Protect usa `password` para ambas as senhas.
+Quando você cria objetos AppVault usando o CRS ou o plug-in Trident Protect CLI, você pode instruir o Trident Protect para usar um segredo Kubernetes que contém senhas personalizadas para a criptografia do repositório Restic e do Kopia. Se você não especificar um segredo, o Trident Protect usará uma senha padrão.
 
 * Ao criar manualmente o AppVault CRS, você pode usar o campo *spec.properties.dataMoverPasswordSecretRef* para especificar o segredo.
 * Ao criar objetos AppVault usando a CLI do Trident Protect, você pode usar o `--data-mover-password-secret-ref` argumento para especificar o segredo.
