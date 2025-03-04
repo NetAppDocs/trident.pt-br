@@ -69,7 +69,6 @@ A partir do Trident 25,02, o resumo Novidades fornece detalhes sobre melhorias, 
 ** Credenciais de configuração de back-end fixas para oferecer suporte a todas as partições ARN () da AWS disponíveislink:https://github.com/NetApp/trident/issues/913["Problema nº 913"].
 ** Opção adicionada para desativar a reconciliação do configurador automático no operador Trident (link:https://github.com/NetApp/trident/issues/924["Problema nº 924"]).
 ** Adicionado securityContext para o contentor csi-Resizer (link:https://github.com/NetApp/trident/issues/976["Problema nº 976"]).
-** Logouts removidos para portais não CHAP não-CHAP intermitentemente insalubres durante a auto-recuperação iSCSI (link:https://github.com/NetApp/trident/issues/961["Problema nº 961"]).
 
 
 
