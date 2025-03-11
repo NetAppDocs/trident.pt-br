@@ -4193,7 +4193,6 @@
   <block id="eb5dcb495342ee5285be31fb17267ccc" category="section-title">Remova um AppVault</block>
   <block id="086d4622dbc50dc37c51fc80568681a2" category="paragraph">Você pode remover um objeto AppVault a qualquer momento.</block>
   <block id="79f2a1cdb1287644a5d3176157cc43c4" category="admonition">Não remova a<block ref="276c63528ef3085f91fb1bc80a3febc0" prefix=" " category="inline-code"></block> chave no AppVault CR antes de excluir o objeto AppVault. Se você fizer isso, isso pode resultar em dados residuais no bucket do AppVault e recursos órfãos no cluster.</block>
-  <block id="49e2b1aa2d6325460e3268f3fac8fd30" category="paragraph">Certifique-se de que você excluiu todos os snapshots e backups armazenados no bucket associado.</block>
   <block id="33850d305da8c5eb949c81e70e40a54d" category="open-title">Remova um AppVault usando a CLI do Kubernetes</block>
   <block id="1921311333af338cd3327c59e3b9a4ab" category="list-text">Remova o objeto AppVault, substituindo<block ref="c57e6773097b6f688f96a88c56c16d47" prefix=" " category="inline-code"></block> pelo nome do objeto AppVault para remover:</block>
   <block id="6c4ae71603666b23d3e05193118a3147" category="summary">Você pode usar o comando protectctl para criar e interagir com os recursos personalizados do Trident Protect.</block>
@@ -5098,7 +5097,6 @@
   <block id="50da178eec9235ba0a85999374d51cba" category="list-text">Opção adicionada para desativar a reconciliação do configurador automático no operador Trident (<block ref="95579fcabb606a95f307c6ba89588c08" category="inline-link-macro-rx"></block>).</block>
   <block id="16aa6756a13a48723b3d2bc4bf50c104" category="inline-link-macro">Problema nº 976</block>
   <block id="60b04b91abae29736bd23b21579be5cb" category="list-text">Adicionado securityContext para o contentor csi-Resizer (<block ref="a97be45bfcdf3eeaee81dc9917811f8f" category="inline-link-macro-rx"></block>).</block>
-  <block id="eeda04a5133a10ebd4956c7d83dfd389" category="list-text">Logouts removidos para portais não CHAP não-CHAP intermitentemente insalubres durante a auto-recuperação iSCSI (<block ref="0939f851f18acedadb7fdffdec6d140b" category="inline-link-macro-rx"></block>).</block>
   <block id="cb1f1e88b6db83dc715d1cb1d8733445" category="section-title">Trident Protect</block>
   <block id="b094c3f306a844e9e49992f69a84cfa4" category="paragraph">O NetApp Trident Protect oferece recursos avançados de gerenciamento de dados de aplicações que aprimoram o recurso e a disponibilidade de aplicações Kubernetes com monitoramento de estado e respaldo dos sistemas de storage da NetApp ONTAP e do provisionador de storage NetApp Trident CSI.</block>
   <block id="38fc414fc29442833eb9eb53cc2e1d14" category="list-text">Adicionado suporte de backup e restauração para VMs de virtualização KubeVirt / OpenShift para o volumeMode: File and volumeMode: Armazenamento de bloco (dispositivo bruto) para replicação de armazenamento já disponível através do AppMirrorRelationship.</block>
@@ -5300,11 +5298,9 @@
   <block id="7fc5875d06887df5109a87a0ada90eca" category="section-title">Configurar a autenticação e as senhas do AppVault</block>
   <block id="27d0259b1ba2ddf3e1540b7e284626ca" category="paragraph">Antes de criar um objeto AppVault, você precisa garantir que o AppVault e o controlador de dados que você escolher possam autenticar com o provedor e quaisquer recursos relacionados.</block>
   <block id="8e2c4d33f50c044b257a84cd65ff1c79" category="section-title">Senhas do repositório do controlador de dados</block>
-  <block id="821c1dc7cb99d19026af83809b8224a2" category="list-text">Ao criar manualmente o AppVault CRS, você pode usar o campo *spec.properties.dataMoverPasswordSecretRef* para especificar o segredo.</block>
   <block id="12ae6793b05f84758a85b289757c4f34" category="list-text">Ao criar objetos AppVault usando a CLI do Trident Protect, você pode usar o<block ref="66f22eb4f5e5b0147ea7521212b07044" prefix=" " category="inline-code"></block> argumento para especificar o segredo.</block>
   <block id="e64d157c7a9e337d525d51f62d9d0809" category="section-title">Crie um segredo de senha do repositório do mover de dados</block>
   <block id="fc114cb2ee6c7bff559d58e2a7454cab" category="paragraph">Use os exemplos a seguir para criar o segredo da senha. Quando você cria objetos AppVault, você pode instruir o Trident Protect para usar esse segredo para autenticar com o repositório do controlador de dados.</block>
-  <block id="b041b65d4425445c68140c454aca2a99" category="open-title">Use a CLI do Trident Protect</block>
   <block id="571768fad7edd9c4f57173c592c1f86c" category="section-title">Exemplos de geração de chaves AppVault para provedores de nuvem</block>
   <block id="4d813fb6887e4d4533c00424efc22903" category="paragraph">Ao definir um AppVault CR, você precisa incluir credenciais para acessar os recursos hospedados pelo provedor. A forma como você gera as chaves para as credenciais será diferente dependendo do provedor. A seguir estão exemplos de geração de chaves de linha de comando para vários provedores. Você pode usar os exemplos a seguir para criar chaves para as credenciais de cada provedor de nuvem.</block>
   <block id="3e2db83ddd4087c64413cfd7c14100b6" category="section-title">Exemplos de criação do AppVault</block>
@@ -5388,4 +5384,7 @@
   <block id="8430f2c56dfc9e79fcaf741392d54499" category="list-text">Descreva o objeto exechooksrun para ver os detalhes e status finais:</block>
   <block id="b343abb76f62f4eef4afa255e885eee4" category="paragraph">A partir do Trident 25,02, o resumo Novidades fornece detalhes sobre melhorias, correções e descontinuações para versões do Trident e do Trident Protect.</block>
   <block id="5674eb46caea5efcff5615daf30ab92d" category="paragraph">Quando você cria objetos AppVault usando o CRS ou o plug-in Trident Protect CLI, você pode instruir o Trident Protect para usar um segredo Kubernetes que contém senhas personalizadas para a criptografia do repositório Restic e do Kopia. Se você não especificar um segredo, o Trident Protect usará uma senha padrão.</block>
+  <block id="3703eceb9535f8a68e38a00f0ed1092d" category="list-text">Ao criar manualmente o AppVault CRS, você pode usar o campo *spec.dataMoverPasswordSecretRef* para especificar o segredo.</block>
+  <block id="4fc9faf161c64ed80d0fb8ca9aa0882e" category="admonition">Dependendo do motor de dados que você está usando, você só precisa incluir a senha correspondente para esse controlador de dados. Por exemplo, se você estiver usando Restic e não planeja usar o Kopia no futuro, você pode incluir apenas a senha Restic quando criar o segredo.</block>
+  <block id="6a346946ba0777d650b6e41a4c30c7b6" category="paragraph">Certifique-se de que você excluiu todos os CRS de snapshot e backup que estão sendo usados pelo AppVault que deseja excluir.</block>
 </blocks>
