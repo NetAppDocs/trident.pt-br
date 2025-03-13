@@ -1,0 +1,50 @@
+= 
+:allow-uri-read: 
+
+
+. (_Opcional_) se você precisar selecionar apenas determinados recursos do aplicativo para restaurar, adicione filtragem que inclua ou exclua recursos marcados com rótulos específicos:
++
+
+NOTE: O Trident Protect seleciona alguns recursos automaticamente por causa de seu relacionamento com os recursos selecionados. Por exemplo, se você selecionar um recurso de reivindicação de volume persistente e tiver um pod associado, o Trident Protect também restaurará o pod associado.
+
++
+** *ResourceFilter.resourceSelectionCriteria*: (Necessário para filtragem) Use `Include` ou `Exclude` inclua ou exclua um recurso definido em resourceMatchers. Adicione os seguintes parâmetros resourceMatchers para definir os recursos a serem incluídos ou excluídos:
++
+*** *ResourceFilter.resourceMatchers*: Uma matriz de resourceMatcher objetos. Se você definir vários elementos nesse array, eles corresponderão como uma OPERAÇÃO OU, e os campos dentro de cada elemento (grupo, tipo, versão) corresponderão como uma OPERAÇÃO E.
++
+**** *ResourceMatchers[].group*: (_Optional_) Grupo do recurso a ser filtrado.
+**** *ResourceMatchers[].kind*: (_Opcional_) tipo do recurso a ser filtrado.
+**** *ResourceMatchers[].version*: (_Optional_) versão do recurso a ser filtrado.
+**** *ResourceMatchers[].names*: (_Optional_) nomes no campo Kubernetes metadata.name do recurso a ser filtrado.
+**** *ResourceMatchers[].namespaces*: (_Optional_) namespaces no campo Kubernetes metadata.name do recurso a ser filtrado.
+**** *ResourceMatchers[].labelSelectors*: (_Optional_) string de seleção de etiquetas no campo Kubernetes metadata.name do recurso, conforme definido no https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors["Documentação do Kubernetes"^]. Por exemplo `"trident.netapp.io/os=linux"`: .
++
+Por exemplo:
+
++
+[source, yaml]
+----
+spec:
+  resourceFilter:
+    resourceSelectionCriteria: "Include"
+    resourceMatchers:
+      - group: my-resource-group-1
+        kind: my-resource-kind-1
+        version: my-resource-version-1
+        names: ["my-resource-names"]
+        namespaces: ["my-resource-namespaces"]
+        labelSelectors: ["trident.netapp.io/os=linux"]
+      - group: my-resource-group-2
+        kind: my-resource-kind-2
+        version: my-resource-version-2
+        names: ["my-resource-names"]
+        namespaces: ["my-resource-namespaces"]
+        labelSelectors: ["trident.netapp.io/os=linux"]
+----
+
+
+
+
+
+
+
