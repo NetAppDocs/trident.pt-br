@@ -34,7 +34,7 @@ NOTE: A criptografia Kerberos para tráfego NFS com backends de armazenamento ON
 * Certifique-se de que tem acesso ao `tridentctl` utilitário.
 * Verifique se você tem acesso de administrador ao back-end de storage do ONTAP.
 * Certifique-se de saber o nome do volume ou volumes que você compartilhará no back-end de storage do ONTAP.
-* Certifique-se de que você preparou a VM de armazenamento ONTAP para oferecer suporte à criptografia Kerberos para volumes NFS.  https://docs.netapp.com/us-en/ontap/nfs-config/create-kerberos-config-task.html["Ative o Kerberos em um LIF de dados"^]Consulte para obter instruções.
+* Certifique-se de que você preparou a VM de armazenamento ONTAP para oferecer suporte à criptografia Kerberos para volumes NFS.  https://docs.netapp.com/us-en/ontap/nfs-config/create-kerberos-config-task.html["Ative o Kerberos em um dataLIF"^]Consulte para obter instruções.
 * Certifique-se de que todos os volumes NFSv4 usados com criptografia Kerberos estejam configurados corretamente. Consulte a seção Configuração de domínio do NetApp NFSv4 (página 13) do https://www.netapp.com/media/16398-tr-3580.pdf["Guia de práticas recomendadas e aprimoramentos do NetApp NFSv4"^].
 
 

@@ -331,7 +331,7 @@ As variáveis na tabela abaixo resultarão no manual do Ansible criando um PV e 
 | `openshift_logging_storage_kind` | Defina como `nfs` para que o instalador crie um NFS PV para o serviço de log. 
 
 
-| `openshift_logging_storage_host` | O nome do host ou endereço IP do host NFS. Isso deve ser definido para o LIF de dados da sua máquina virtual. 
+| `openshift_logging_storage_host` | O nome do host ou endereço IP do host NFS. Isso deve ser definido como dataLIF para sua máquina virtual. 
 
 
 | `openshift_logging_storage_nfs_directory` | O caminho de montagem para a exportação NFS. Por exemplo, se o volume for juntado como `/openshift_logging`, você usaria esse caminho para essa variável. 
@@ -399,7 +399,7 @@ NOTE: As tabelas abaixo contêm apenas as variáveis que são relevantes para a 
 | `openshift_metrics_storage_kind` | Defina como `nfs` para que o instalador crie um NFS PV para o serviço de log. 
 
 
-| `openshift_metrics_storage_host` | O nome do host ou endereço IP do host NFS. Isso deve ser definido como o LIF de dados para o SVM. 
+| `openshift_metrics_storage_host` | O nome do host ou endereço IP do host NFS. Isso deve ser definido como dataLIF para o SVM. 
 
 
 | `openshift_metrics_storage_nfs_directory` | O caminho de montagem para a exportação NFS. Por exemplo, se o volume for juntado como `/openshift_metrics`, você usaria esse caminho para essa variável. 

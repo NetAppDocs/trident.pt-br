@@ -90,7 +90,7 @@ Endereço IP do ONTAP Management LIF. Você pode especificar um nome de domínio
 | `dataLIF`  a| 
 Endereço IP do protocolo LIF.
 
-* ONTAP nas drivers*: A NetApp recomenda especificar `dataLIF`. Se não for fornecido, o Trident obtém LIFs de dados do SVM. Você pode especificar um nome de domínio totalmente qualificado (FQDN) a ser usado para as operações de montagem NFS, permitindo que você crie um DNS de round-robin para balanceamento de carga em vários LIFs de dados.
+* ONTAP nas drivers*: A NetApp recomenda especificar `dataLIF`. Se não for fornecido, o Trident buscará os dados LIFs do SVM. Você pode especificar um nome de domínio totalmente qualificado (FQDN) a ser usado para as operações de montagem NFS, permitindo que você crie um DNS round-robin para balanceamento de carga entre vários dataLIFs.
 
 *Drivers SAN ONTAP*: Não especifique para iSCSI ou FC. O Trident usa link:https://docs.netapp.com/us-en/ontap/san-admin/selective-lun-map-concept.html["Mapa de LUN seletivo da ONTAP"^] para descobrir as LIFs iSCSI ou FC necessárias para estabelecer uma sessão de vários caminhos. Um aviso é gerado se `dataLIF` for definido explicitamente.
  a| 
