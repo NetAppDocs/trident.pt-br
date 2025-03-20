@@ -114,7 +114,7 @@ NOTE: Quando a lista de agregados é atualizada no SVM, a lista é atualizada au
 | `smbShare` | Você pode especificar uma das seguintes opções: O nome de um compartilhamento SMB criado usando o Console de Gerenciamento da Microsoft ou a CLI do ONTAP; um nome para permitir que o Trident crie o compartilhamento SMB; ou você pode deixar o parâmetro em branco para impedir o acesso comum ao compartilhamento a volumes. Esse parâmetro é opcional para o ONTAP no local. Esse parâmetro é necessário para backends do Amazon FSX for ONTAP e não pode ficar em branco. | `smb-share` 
 
 
-| `useREST` | Parâmetro booleano para usar APIs REST do ONTAP.  `useREST` Quando definido como `true`, o Trident usa APIs REST do ONTAP para se comunicar com o back-end; quando definido como `false`, o Trident usa chamadas ONTAPI (ZAPI) para se comunicar com o back-end. Esse recurso requer o ONTAP 9.11,1 e posterior. Além disso, a função de login do ONTAP usada deve ter acesso ao `ontap` aplicativo. Isso é satisfeito com as funções e `cluster-admin` predefinidas `vsadmin`. Começando com a versão Trident 24,06 e ONTAP 9.15.1 ou posterior, `useREST` é definido como `true` por padrão; altere `useREST` para `false` usar chamadas ONTAPI (ZAPI). | `true` Para ONTAP 9.15,1 ou posterior, caso contrário `false`. 
+| `useREST` | Parâmetro booleano para usar APIs REST do ONTAP.  `useREST` Quando definido como `true`, o Trident usa APIs REST do ONTAP para se comunicar com o back-end; quando definido como `false`, o Trident usa chamadas ONTAPI (ZAPI) para se comunicar com o back-end. Esse recurso requer o ONTAP 9.11,1 e posterior. Além disso, a função de login do ONTAP usada deve ter acesso ao `ontapi` aplicativo. Isso é satisfeito com as funções e `cluster-admin` predefinidas `vsadmin`. Começando com a versão Trident 24,06 e ONTAP 9.15.1 ou posterior, `useREST` é definido como `true` por padrão; altere `useREST` para `false` usar chamadas ONTAPI (ZAPI). | `true` Para ONTAP 9.15,1 ou posterior, caso contrário `false`. 
 
 
 | `limitVolumePoolSize` | Tamanho máximo de FlexVol requestable ao usar Qtrees no back-end ONTAP-nas-Economy. | "" (não aplicado por padrão) 
@@ -219,7 +219,7 @@ O cálculo é o seguinte:
 ----
 Total volume size = (PVC requested size) / (1 - (snapshotReserve percentage) / 100)
 ----
-Para snapshotServe de 50%, e a solicitação de PVC de 5GiB, o volume total é de 2/.5 10GiB e o tamanho disponível é de 5GiB, o que o usuário solicitou na solicitação de PVC. O `volume show` comando deve mostrar resultados semelhantes a este exemplo:
+Para snapshotServe de 50%, e a solicitação de PVC de 5GiB, o volume total é de 5/.5 10GiB e o tamanho disponível é de 5GiB, o que o usuário solicitou na solicitação de PVC. O `volume show` comando deve mostrar resultados semelhantes a este exemplo:
 
 image::../media/volume-show-nas.png[Mostra a saída do comando volume show.]
 

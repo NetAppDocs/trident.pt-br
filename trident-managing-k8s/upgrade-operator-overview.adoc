@@ -30,7 +30,7 @@ Um dos muitos link:../trident-get-started/kubernetes-deploy.html["Benefícios de
 
 
 
-TIP: Para obter mais informações sobre a arquitetura do Trident no cluster do Kubernetes, link:trident-concepts/intro.html#trident-architecture["Arquitetura da Trident"]consulte .
+TIP: Para obter mais informações sobre a arquitetura do Trident no cluster do Kubernetes, link:../trident-get-started/architecture.html["Arquitetura da Trident"^]consulte .
 
 
 
