@@ -4973,7 +4973,6 @@
   <block id="90de0fd1d09f4fc27d99667555a8a12f" category="paragraph">Os sistemas ONTAP têm configurações all-flash, híbridas ou totalmente HDD e oferecem muitos modelos de implantação diferentes: Clusters FAS, AFA e ASA no local, ONTAP Select e Cloud Volumes ONTAP. O Trident oferece suporte a esses modelos de implantação do ONTAP.</block>
   <block id="30712450d512dae0e7becb73c6a439fb" category="list-text">Kubernetes 1,26 - 1,32</block>
   <block id="bde4e01f8df98626e0dc1c36a8e06a5a" category="admonition">Antes de atualizar um cluster do Kubernetes do 1,25 para o 1,26 ou posterior que tenha o Trident instalado, <block ref="1b428bb9b9fe27db6cd8932526864634" category="inline-link-macro-rx"></block>consulte a .</block>
-  <block id="2322d8185ec207b8d8522a92de761c94" category="list-text">Clusters FAS, AFF ou ASA no local executando ONTAP 9,6 ou superior</block>
   <block id="4cd3b50237790ab53e31a7a9fbd28583" category="section-title">Suporte do Trident para virtualização KubeVirt e OpenShift</block>
   <block id="8f323a9e5c0c5162cc6e0d48e0cb1850" category="paragraph-title">Drivers de armazenamento suportados:</block>
   <block id="0c30a28f9129b866c1d3cdcfa8c2fe15" category="paragraph">O Trident oferece suporte aos seguintes drivers ONTAP para virtualização KubeVirt e OpenShift:</block>
@@ -5435,4 +5434,6 @@
   <block id="d858eab1cb0b74aa1e6d052d7c06bd76" category="list-text">OpenShift 4,10 - 4,18</block>
   <block id="42113cf11e30b764619d3a98db65262d" category="list-text">Rancher Kubernetes Engine 2 (RKE2) v1.26.7-rke2r1, v1.28.5-rke2r1</block>
   <block id="e516fe45e3db545de8d5d292a67f4990" category="list-text">Adicionado suporte de backup e restauração para VMs de virtualização KubeVirt / OpenShift para o volume Mode: File e volumeMode: Armazenamento de bloco (dispositivo bruto). Esse suporte é compatível com todos os drivers Trident e aprimora os recursos de proteção existentes ao replicar storage usando o NetApp SnapMirror com Trident Protect.</block>
+  <block id="fc1d748db1b5b488ce7af7d17ea15d55" category="inline-link-macro">Suporte à versão de software</block>
+  <block id="ee19283e867cf4e5840d2811a74b89e5" category="list-text">Versões de cluster FAS, AFF ou ASA R2 no local com suporte limitado do NetApp. <block ref="50931d770a2149cdd08c9f8b08c33f00" category="inline-link-macro-rx"></block>Consulte .</block>
 </blocks>
