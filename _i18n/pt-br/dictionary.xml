@@ -5461,4 +5461,8 @@
   <block id="8d8a8010684a930aa7760c829cad4141" category="list-text">*LabelSeletor*: (_Opcional_) filtra os recursos com escopo de cluster com base em seus rótulos.</block>
   <block id="47edbb9e6d6e6e874eb40c274a0e2e0f" category="sidebar">Blog posts</block>
   <block id="4a5fadb6b0890cea5e8d53c37411aaf0" category="cell"><block ref="bc35d038baf172a19349f289d31fbf9d" prefix="" category="inline-code"></block></block>
+  <block id="022571ee546e1a953d857961a8cd0442" category="paragraph">Crie um PersistentVolumeClaim (PVC) que use o Kubernetes StorageClass configurado para solicitar acesso ao PV. Em seguida, pode montar o PV num pod.</block>
+  <block id="f79367bddbaecd3962f7c740a1b2178f" category="paragraph">Um<block ref="b1b93f46fc69df9fe663c091f4d6c2b4" category="inline-link-rx"></block> (PVC) é um pedido de acesso ao Persistentvolume no cluster.</block>
+  <block id="79a251ee7369fdcdb0847d35254afcf8" category="paragraph">Depois de criar o PVC, você pode montar o volume em um pod.</block>
+  <block id="a305c8fb2137d8a4a767905590079e89" category="section-title">Crie o PVC</block>
 </blocks>

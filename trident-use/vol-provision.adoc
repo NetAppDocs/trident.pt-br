@@ -12,45 +12,70 @@ summary: 'Crie um Persistentvolume (PV) e um PersistentVolumeClaim (PVC) que use
 
 
 [role="lead"]
-Crie um Persistentvolume (PV) e um PersistentVolumeClaim (PVC) que use o Kubernetes StorageClass configurado para solicitar acesso ao PV. Em seguida, pode montar o PV num pod.
+Crie um PersistentVolumeClaim (PVC) que use o Kubernetes StorageClass configurado para solicitar acesso ao PV. Em seguida, pode montar o PV num pod.
 
 
 
 == Visão geral
 
-A link:https://kubernetes.io/docs/concepts/storage/persistent-volumes/["_Persistentvolume_"^] (PV) é um recurso de armazenamento físico provisionado pelo administrador de cluster em um cluster do Kubernetes. O https://kubernetes.io/docs/concepts/storage/persistent-volumes["_PersistentVolumeClaim_"^] (PVC) é um pedido de acesso ao Persistentvolume no cluster.
+Um https://kubernetes.io/docs/concepts/storage/persistent-volumes["_PersistentVolumeClaim_"^] (PVC) é um pedido de acesso ao Persistentvolume no cluster.
 
 O PVC pode ser configurado para solicitar o armazenamento de um determinado tamanho ou modo de acesso. Usando o StorageClass associado, o administrador do cluster pode controlar mais do que o Persistentvolume e o modo de acesso, como desempenho ou nível de serviço.
 
-Depois de criar o PV e o PVC, você pode montar o volume em um pod.
+Depois de criar o PVC, você pode montar o volume em um pod.
+
+
+
+== Crie o PVC
+
+.Passos
+. Crie o PVC.
++
+[listing]
+----
+kubectl create -f pvc.yaml
+----
+. Verifique o estado do PVC.
++
+[listing]
+----
+kubectl get pvc
+----
+
+
+[listing]
+----
+NAME        STATUS  VOLUME     CAPACITY   ACCESS MODES  STORAGECLASS AGE
+pvc-storage Bound   pv-name    1Gi        RWO                  5m
+----
+. Monte o volume num pod.
++
+[listing]
+----
+kubectl create -f pv-pod.yaml
+----
++
+
+NOTE: Pode monitorizar o progresso utilizando `kubectl get pod --watch`o .
+
+. Verifique se o volume está montado no `/my/mount/path`.
++
+[listing]
+----
+kubectl exec -it task-pv-pod -- df -h /my/mount/path
+----
+. Agora você pode excluir o Pod. O aplicativo Pod não existirá mais, mas o volume permanecerá.
++
+[listing]
+----
+kubectl delete pod pv-pod
+----
+
 
 
 
 === Manifestos de amostra
 
-.Persistentvolume Sample MANIFEST
-[%collapsible]
-====
-Este manifesto de exemplo mostra um PV básico de 10Gi que está associado ao StorageClass . `basic-csi`
-
-[listing]
-----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: pv-storage
-  labels:
-    type: local
-spec:
-  storageClassName: basic-csi
-  capacity:
-    storage: 10Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/my/host/path"
-----
-====
 .PersistentVolumeClaim amostra manifestos
 [%collapsible]
 ====
@@ -78,7 +103,6 @@ Este exemplo mostra um PVC básico para NVMe/TCP com acesso RWO associado a um S
 
 [listing]
 ----
----
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -106,9 +130,9 @@ metadata:
   name: pv-pod
 spec:
   volumes:
-    - name: pv-storage
+    - name: storage
       persistentVolumeClaim:
-       claimName: basic
+       claimName: pvc-storage
   containers:
     - name: pv-container
       image: nginx
@@ -117,90 +141,26 @@ spec:
           name: "http-server"
       volumeMounts:
         - mountPath: "/my/mount/path"
-          name: pv-storage
+          name: storage
 ----
 .Configuração básica NVMe/TCP
 [listing]
 ----
----
 apiVersion: v1
 kind: Pod
 metadata:
-  creationTimestamp: null
-  labels:
-    run: nginx
-  name: nginx
+  name: pod-nginx
 spec:
-  containers:
-    - image: nginx
-      name: nginx
-      resources: {}
-      volumeMounts:
-        - mountPath: "/usr/share/nginx/html"
-          name: task-pv-storage
-  dnsPolicy: ClusterFirst
-  restartPolicy: Always
   volumes:
-    - name: task-pv-storage
+    - name: basic-pvc
       persistentVolumeClaim:
-      claimName: pvc-san-nvme
+        claimName: pvc-san-nvme
+  containers:
+    - name: task-pv-container
+      image: nginx
+      volumeMounts:
+        - mountPath: "/my/mount/path"
+          name: basic-pvc
 ----
 ====
-
-
-== Crie o PV e o PVC
-
-.Passos
-. Crie o PV.
-+
-[listing]
-----
-kubectl create -f pv.yaml
-----
-. Verifique o estado do PV.
-+
-[listing]
-----
-kubectl get pv
-NAME        CAPACITY  ACCESS MODES  RECLAIM POLICY  STATUS    CLAIM  STORAGECLASS  REASON  AGE
-pv-storage  4Gi       RWO           Retain          Available                              7s
-----
-. Crie o PVC.
-+
-[listing]
-----
-kubectl create -f pvc.yaml
-----
-. Verifique o estado do PVC.
-+
-[listing]
-----
-kubectl get pvc
-NAME        STATUS VOLUME     CAPACITY ACCESS MODES STORAGECLASS AGE
-pvc-storage Bound  pv-name 2Gi      RWO                       5m
-----
-. Monte o volume num pod.
-+
-[listing]
-----
-kubectl create -f pv-pod.yaml
-----
-+
-
-NOTE: Pode monitorizar o progresso utilizando `kubectl get pod --watch`o .
-
-. Verifique se o volume está montado no `/my/mount/path`.
-+
-[listing]
-----
-kubectl exec -it task-pv-pod -- df -h /my/mount/path
-----
-. Agora você pode excluir o Pod. O aplicativo Pod não existirá mais, mas o volume permanecerá.
-+
-[listing]
-----
-kubectl delete pod pv-pod
-----
-
-
 link:../trident-reference/objects.html["Objetos Kubernetes e Trident"]Consulte para obter detalhes sobre como as classes de armazenamento interagem com os `PersistentVolumeClaim` parâmetros e para controlar como o Trident provisiona volumes.
