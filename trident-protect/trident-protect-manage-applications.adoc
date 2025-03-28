@@ -39,7 +39,13 @@ Você precisa definir cada aplicativo que deseja gerenciar com o Trident Protect
 .. Configure os seguintes atributos:
 +
 *** *metadata.name*: (_required_) o nome do recurso personalizado do aplicativo. Observe o nome escolhido porque outros arquivos CR necessários para operações de proteção referem-se a esse valor.
-*** *spec.includedNamespaces*: (_required_) Use rótulos de namespace ou um nome de namespace para especificar namespaces nos quais os recursos da aplicação existem. O namespace da aplicação deve ser parte dessa lista.
+*** *spec.includedNamespaces*: (_required_) Use o seletor de namespace e rótulo para especificar os namespaces e recursos que o aplicativo usa. O namespace do aplicativo deve fazer parte dessa lista. O seletor de etiquetas é opcional e pode ser usado para filtrar recursos dentro de cada namespace especificado.
+*** *spec.includedClusterScopedResources*: (_Optional_) Use este atributo para especificar recursos com escopo de cluster a serem incluídos na definição do aplicativo. Esse atributo permite que você selecione esses recursos com base em seu grupo, versão, tipo e rótulos.
++
+**** *GroupVersionKind*: (_required_) especifica o grupo API, a versão e o tipo do recurso com escopo de cluster.
+**** *LabelSeletor*: (_Opcional_) filtra os recursos com escopo de cluster com base em seus rótulos.
+
+
 *** *metadata.annotations.protect.trident.netapp.io/skip-vm-freeze*: (_Optional_) esta anotação só é aplicável a aplicações definidas a partir de máquinas virtuais, como em ambientes KubeVirt, onde os congelamentos do sistema de arquivos ocorrem antes dos instantâneos. Especifique se este aplicativo pode gravar no sistema de arquivos durante um snapshot. Se definido como verdadeiro, o aplicativo ignora a configuração global e pode gravar no sistema de arquivos durante um instantâneo. Se definido como false, o aplicativo ignora a configuração global e o sistema de arquivos é congelado durante um snapshot. Se especificado mas o aplicativo não tiver máquinas virtuais na definição do aplicativo, a anotação é ignorada. Se não for especificado, o aplicativo segue o link:trident-protect-requirements.html#protecting-data-with-kubevirt-vms["Definição Global Trident Protect Freeze (congelamento global)"].
 +
 [NOTE]
@@ -66,10 +72,23 @@ metadata:
   namespace: my-app-namespace
 spec:
   includedNamespaces:
-  - labelSelector: {}
-    namespace: namespace-1
-  - labelSelector: {}
-    namespace: namespace-2
+    - namespace: namespace-1
+      labelSelector:
+        matchLabels:
+          app: example-app
+    - namespace: namespace-2
+      labelSelector:
+        matchLabels:
+          app: another-example-app
+  includedClusterScopedResources:
+    - groupVersionKind:
+        group: rbac.authorization.k8s.io
+        kind: ClusterRole
+        version: v1
+      labelSelector:
+        matchLabels:
+          mylabel: test
+
 ----
 
 
