@@ -46,6 +46,10 @@ NOTE: Os volumes criados pelo Trident não estão associados a nenhum Grupo de A
 O NetApp ONTAP fornece criptografia de dados em repouso para proteger dados confidenciais caso um disco seja roubado, retornado ou reutilizado. Para obter detalhes, link:https://docs.netapp.com/us-en/ontap/encryption-at-rest/configure-netapp-volume-encryption-concept.html["Configurar a visão geral da encriptação de volume do NetApp"^]consulte .
 
 * Se o NAE estiver ativado no back-end, qualquer volume provisionado no Trident será habilitado para NAE.
++
+** Você pode definir a criptografia NVE como `""` para criar volumes habilitados para NAE.
+
+
 * Se o NAE não estiver habilitado no back-end, qualquer volume provisionado no Trident será habilitado para NVE, a menos que você defina o sinalizador de criptografia NVE como `false` na configuração de back-end.
 
 
