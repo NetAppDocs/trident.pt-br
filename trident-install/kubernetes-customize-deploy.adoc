@@ -87,7 +87,7 @@ Defina como identidade da carga de trabalho ("azure.Workload.identity/client-id:
 
 
 | `imageRegistry` | Caminho para o Registro interno, do formato
-`<registry FQDN>[:port][/subpath]` | `"k8s.gcr.io"` (Kubernetes mais de 1,19) ou `"quay.io/k8scsi"` 
+`<registry FQDN>[:port][/subpath]` | `"registry.k8s.io"` 
 
 
 | `kubeletDir` | Caminho para o diretório kubelet no host | `"/var/lib/kubelet"` 
