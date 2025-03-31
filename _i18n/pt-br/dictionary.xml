@@ -4986,7 +4986,6 @@
   <block id="78cd2bf2aaf1655ef471d7da97aa4ef9" category="list-text">docker.io/NetApp/Trident-AutoSupport:25,02</block>
   <block id="b55333d21cb50b1d1d34c529c999482f" category="list-text">provisionador do registry.k8s.io/sig-storage/csi:v5,2.0</block>
   <block id="c9341ee9faa017471dec7dabe41bf3e4" category="list-text">registry.k8s.io/sig-storage/csi-attacher:v4,8.0</block>
-  <block id="8185908867d5a8954eddf078ff1f303e" category="list-text">registry.k8s.io/sig-storage/csi-resizer:v1.13.0</block>
   <block id="f174408325f6885e97fc18e213950cb7" category="list-text">registry.k8s.io/sig-storage/csi-snapshotter:v8,2.0</block>
   <block id="7e8b00e8f801232796015a8859867e55" category="list-text">registry.k8s.io/sig-storage/csi-node-driver-registrador:v2.13.0</block>
   <block id="7abdbff8f015a0a5e1ca6bcf8e7a955c" category="list-text">docker.io/NetApp/Trident-operador:25.02.0 (opcional)</block>
@@ -5461,4 +5460,5 @@
   <block id="a305c8fb2137d8a4a767905590079e89" category="section-title">Crie o PVC</block>
   <block id="06034bca671a3028021f1a722aac7b41" category="paragraph">Configure um objeto Kubernetes StorageClass e crie a classe de storage para instruir o Trident a provisionar volumes. Crie um PersistentVolumeClaim (PVC) que use o Kubernetes StorageClass configurado para solicitar acesso ao PV. Em seguida, pode montar o PV num pod.</block>
   <block id="5de805965faeb85a54098223ea3a3334" category="paragraph">Depois de criar o PVC, você pode montar o volume em um pod.</block>
+  <block id="06489d7f99c3b214c8b9a539006a642c" category="list-text">registry.k8s.io/sig-storage/csi-resizer:v1.13.2</block>
 </blocks>
