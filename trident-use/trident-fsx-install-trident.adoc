@@ -29,27 +29,32 @@ Se quiser utilizar a funcionalidade de instantâneos, instale o suplemento do co
 . Baixe o pacote de instalação do Trident
 +
 O pacote de instalação do Trident contém tudo o que você precisa para implantar o operador Trident e instalar o Trident. Baixe e extraia a versão mais recente do instalador do Trident da seção Assets no GitHub.
-`wget https://github.com/NetApp/trident/releases/download/v25.02.0/trident-installer-25.02.0.tar.gz`
-`tar -xf trident-installer-25.02.0.tar.gz`
-`cd trident-installer`
 
++
+[source, console]
+----
+wget https://github.com/NetApp/trident/releases/download/v25.02.0/trident-installer-25.02.0.tar.gz
+tar -xf trident-installer-25.02.0.tar.gz
+cd trident-installer
+----
 . Defina os valores para os sinalizadores *provedor de nuvem* e *identidade de nuvem* usando as seguintes variáveis de ambiente:
 +
 O exemplo a seguir instala o Trident e define o `cloud-provider` sinalizador como `$CP`, e `cloud-identity` como `$CI`:
 
 +
-[listing]
+[source, console]
 ----
-helm install trident trident-operator-100.2502.0.tgz --set cloudProvider="AWS" \
-
-    --set cloudIdentity="'eks.amazonaws.com/role-arn: arn:aws:iam::<accountID>:role/<AmazonEKS_FSxN_CSI_DriverRole>'" \
-    -–namespace trident --create-namespace
+helm install trident trident-operator-100.2502.0.tgz \
+--set cloudProvider="AWS" \
+--set cloudIdentity="'eks.amazonaws.com/role-arn: arn:aws:iam::<accountID>:role/<AmazonEKS_FSxN_CSI_DriverRole>'" \
+--namespace trident \
+--create-namespace
 ----
 +
 Você pode usar o `helm list` comando para revisar detalhes de instalação, como nome, namespace, gráfico, status, versão do aplicativo e número de revisão.
 
 +
-[listing]
+[source, console]
 ----
 helm list -n trident
 ----
@@ -63,14 +68,14 @@ trident-operator    trident     1           2024-10-14 14:31:22.463122 +0300 IDT
 +
 ** A partir da versão 25,02, o Trident oferece suporte à configuração automática de back-end. O Trident cria as classes de back-end e storage sem problemas após a instalação do Trident. Para ativar a configuração automática de back-end, adicione o `ontapConfigurator` parâmetro e especifique `authType` `fsxnID` , `protocols` durante a instalação.
 +
-[listing]
+[source, console]
 ----
-helm install trident trident-operator-100.2502.0.tgz --set cloudProvider=$CP --set cloudIdentity=$CI -–namespace trident\
-  --set ontapConfigurator.enabled=true\
-  --set ontapConfigurator.svms[0].fsxnID="fs-0dfeaa884a68b1cab"\
-  --set ontapConfigurator.svms[0].protocols[0]=iscsi \
-  --set ontapConfigurator.svms[0].protocols[1]=nfs \
-  --set ontapConfigurator.svms[0].authType="awsarn"
+helm install trident trident-operator-100.2502.0.tgz --set cloudProvider=$CP --set cloudIdentity=$CI --namespace trident \
+--set ontapConfigurator.enabled=true \
+--set ontapConfigurator.svms[0].fsxnID="fs-0dfeaa884a68b1cab" \
+--set ontapConfigurator.svms[0].protocols[0]=iscsi \
+--set ontapConfigurator.svms[0].protocols[1]=nfs \
+--set ontapConfigurator.svms[0].authType="awsarn"
 ----
 +
 
@@ -112,29 +117,29 @@ Verifique se você tem o seguinte antes de configurar o complemento do Trident p
 --
 O seguinte comando de exemplo instala o complemento do Trident EKS:
 
-[listing]
+[source, console]
 ----
 eksctl create addon --name netapp_trident-operator --cluster <cluster_name> \
-    --service-account-role-arn arn:aws:iam::<account_id>:role/<role_name> --force
+--service-account-role-arn arn:aws:iam::<account_id>:role/<role_name> --force
 ----
 --
 .Console de gerenciamento
 --
 . Abra o console do Amazon EKS em https://console.aws.amazon.com/eks/home#/clusters[].
-. No painel de navegação esquerdo, clique em *clusters*.
-. Clique no nome do cluster para o qual você deseja configurar o complemento NetApp Trident CSI.
-. Clique em *Add-ons* e, em seguida, clique em *Get more add-ons*.
+. No painel de navegação esquerdo, selecione *clusters*.
+. Selecione o nome do cluster para o qual deseja configurar o complemento NetApp Trident CSI.
+. Selecione *Add-ons* e, em seguida, selecione *Get more add-ons*.
 . Na página *Select add-ons*, faça o seguinte:
 +
 .. Na seção addons do AWS Marketplace, marque a caixa de seleção *Trident by NetApp*.
-.. Clique em *seguinte*.
+.. Selecione *seguinte*.
 
 
 . Na página de configurações *Configure Selected add-ons*, faça o seguinte:
 +
 .. Selecione a *versão* que você gostaria de usar.
 .. Para *Selecione função IAM*, deixe em *não definido*.
-.. Expanda as *Configurações opcionais de configuração*, siga o esquema de configuração *Add-on* e defina o parâmetro configurationValues na seção *valores de configuração* para a função-arn que você criou na etapa anterior (o valor deve estar no seguinte formato: `eks.amazonaws.com/role-arn: arn:aws:iam::464262061435:role/AmazonEKS_FSXN_CSI_DriverRole`). Se você selecionar Substituir para o método de resolução de conflitos, uma ou mais configurações para o suplemento existente podem ser sobrescritas com as configurações de complemento do Amazon EKS. Se você não ativar essa opção e houver um conflito com suas configurações existentes, a operação falhará. Você pode usar a mensagem de erro resultante para solucionar o conflito. Antes de selecionar essa opção, certifique-se de que o complemento do Amazon EKS não gerencie as configurações que você precisa para gerenciar automaticamente.
+.. Expanda as *Configurações opcionais de configuração*, siga o esquema de configuração *Add-on* e defina o parâmetro configurationValues na seção *valores de configuração* para a função-arn que você criou na etapa anterior (o valor deve estar no seguinte formato: `'eks.amazonaws.com/role-arn: arn:aws:iam::464262061435:role/AmazonEKS_FSXN_CSI_DriverRole'`). Se você selecionar Substituir para o método de resolução de conflitos, uma ou mais configurações para o suplemento existente podem ser sobrescritas com as configurações de complemento do Amazon EKS. Se você não ativar essa opção e houver um conflito com suas configurações existentes, a operação falhará. Você pode usar a mensagem de erro resultante para solucionar o conflito. Antes de selecionar essa opção, certifique-se de que o complemento do Amazon EKS não gerencie as configurações que você precisa para gerenciar automaticamente.
 
 
 . Escolha *seguinte*.
@@ -149,43 +154,45 @@ Depois que a instalação do complemento estiver concluída, você verá o compl
 --
 . Crie o `add-on.json` arquivo:
 +
-[listing]
+[source, json]
 ----
-add-on.json
 {
-
-   "clusterName": "<eks-cluster>",
-   "addonName": "netapp_trident-operator",
-   "addonVersion": "v24.10.0-eksbuild.1",
-   "serviceAccountRoleArn": "<arn:aws:iam::123456:role/astratrident-role>",
-   "configurationValues": "{"cloudIdentity": "'eks.amazonaws.com/role-arn: <arn:aws:iam::123456:role/astratrident-role>'",
-   "cloudProvider": "AWS"}"
+  "clusterName": "<eks-cluster>",
+  "addonName": "netapp_trident-operator",
+  "addonVersion": "v24.10.0-eksbuild.1",
+  "serviceAccountRoleArn": "<arn:aws:iam::123456:role/astratrident-role>",
+  "configurationValues": {
+    "cloudIdentity": "'eks.amazonaws.com/role-arn: arn:aws:iam::464262061435:role/AmazonEKS_FSXN_CSI_DriverRole'",
+    "cloudProvider": "AWS"
+  }
 }
 ----
 +
 ** A partir da versão 25,02, o Trident oferece suporte à configuração automática de back-end. O Trident cria as classes de back-end e storage sem problemas após a instalação do Trident. Para ativar a configuração automática de back-end, adicione o `ontapConfigurator` parâmetro e especifique `authType` `fsxnID` , `protocols` durante a instalação.
 +
-[listing]
+[source, json]
 ----
 {
-   "clusterName": "<eks-cluster>",
-   "addonName": "netapp_trident-operator",
-   "addonVersion": "v24.10.0-eksbuild.1",
-   "serviceAccountRoleArn": "arn:aws:iam::123456:role/astratrident-role",
-   "configurationValues": "{"cloudIdentity": "'eks.amazonaws.com/role-arn: arn:aws:iam::123456:role/astratrident-role'",
-   "ontapConfigurator": {
-        "enabled": true,
-        "svms": [
-          {
-            "authType": "awsarn",
-            "fsxnID": "fs-0dfeaa884a68b1cab",
-            "protocols": [
-              "nfs",
-              "iscsi"
-            ]
-          }
-        ]
-      }}"
+  "clusterName": "<eks-cluster>",
+  "addonName": "netapp_trident-operator",
+  "addonVersion": "v24.10.0-eksbuild.1",
+  "serviceAccountRoleArn": "arn:aws:iam::123456:role/astratrident-role",
+  "configurationValues": {
+    "cloudIdentity": "'eks.amazonaws.com/role-arn: arn:aws:iam::464262061435:role/AmazonEKS_FSXN_CSI_DriverRole'",
+    "ontapConfigurator": {
+      "enabled": true,
+      "svms": [
+        {
+          "authType": "awsarn",
+          "fsxnID": "fs-0dfeaa884a68b1cab",
+          "protocols": [
+            "nfs",
+            "iscsi"
+          ]
+        }
+      ]
+    }
+  }
 }
 ----
 +
@@ -196,8 +203,10 @@ NOTE: Para desativar a configuração automática de back-end, atualize a versã
 
 . Instale o complemento Trident EKS.
 +
-`aws eks create-addon --cli-input-json file://add-on.json`
-
+[source, console]
+----
+aws eks create-addon --cli-input-json file://add-on.json
+----
 
 
 --
@@ -233,15 +242,15 @@ Se você remover `--force` a opção e qualquer uma das configurações de compl
 .Console de gerenciamento
 --
 . Abra o console do Amazon EKS https://console.aws.amazon.com/eks/home#/clusters[] .
-. No painel de navegação esquerdo, clique em *clusters*.
-. Clique no nome do cluster para o qual você deseja atualizar o complemento NetApp Trident CSI.
-. Clique na guia *Complementos*.
-. Clique em *Trident by NetApp* e, em seguida, clique em *Edit*.
+. No painel de navegação esquerdo, selecione *clusters*.
+. Selecione o nome do cluster para o qual deseja atualizar o complemento NetApp Trident CSI.
+. Selecione a guia *Complementos*.
+. Selecione *Trident by NetApp* e, em seguida, selecione *Edit*.
 . Na página *Configurar Trident by NetApp*, faça o seguinte:
 +
 .. Selecione a *versão* que você gostaria de usar.
 .. Expanda *Configurações opcionais de configuração* e modifique conforme necessário.
-.. Clique em *Salvar alterações*.
+.. Selecione *Salvar alterações*.
 
 
 
@@ -251,11 +260,10 @@ Se você remover `--force` a opção e qualquer uma das configurações de compl
 --
 O exemplo a seguir atualiza o complemento EKS:
 
-[listing]
+[source, console]
 ----
-
 aws eks update-addon --cluster-name my-cluster netapp_trident-operator vpc-cni --addon-version v24.6.1-eksbuild.1 \
-    --service-account-role-arn arn:aws:iam::111122223333:role/role-name --configuration-values '{}' --resolve-conflicts --preserve
+--service-account-role-arn arn:aws:iam::111122223333:role/role-name --configuration-values '{}' --resolve-conflicts --preserve
 ----
 --
 ====
@@ -277,21 +285,24 @@ NOTE: Se o complemento tiver uma conta do IAM associada a ele, a conta do IAM n�
 .eksctl
 --
 O seguinte comando desinstala o complemento do Trident EKS:
-`eksctl delete addon --cluster K8s-arm --name netapp_trident-operator`
 
+[source, console]
+----
+eksctl delete addon --cluster K8s-arm --name netapp_trident-operator
+----
 --
 .Console de gerenciamento
 --
 . Abra o console do Amazon EKS em https://console.aws.amazon.com/eks/home#/clusters[].
-. No painel de navegação esquerdo, clique em *clusters*.
-. Clique no nome do cluster para o qual você deseja remover o complemento NetApp Trident CSI.
-. Clique na guia *Complementos* e, em seguida, clique em *Trident by NetApp*.*
-. Clique em *Remover*.
+. No painel de navegação esquerdo, selecione *clusters*.
+. Selecione o nome do cluster para o qual deseja remover o complemento NetApp Trident CSI.
+. Selecione a guia *Complementos* e, em seguida, selecione *Trident by NetApp*.*
+. Selecione *Remover*.
 . Na caixa de diálogo *Remover NetApp_Trident-operator confirmation*, faça o seguinte:
 +
 .. Se você quiser que o Amazon EKS pare de gerenciar as configurações do complemento, selecione *Preserve on cluster*. Faça isso se quiser manter o software complementar no cluster para que você possa gerenciar todas as configurações do complemento por conta própria.
 .. Digite *NetApp_Trident-operator*.
-.. Clique em *Remover*.
+.. Selecione *Remover*.
 
 
 
@@ -301,7 +312,9 @@ O seguinte comando desinstala o complemento do Trident EKS:
 --
 Substitua `my-cluster` pelo nome do cluster e execute o seguinte comando.
 
-`aws eks delete-addon --cluster-name my-cluster --addon-name netapp_trident-operator --preserve`
-
+[source, console]
+----
+aws eks delete-addon --cluster-name my-cluster --addon-name netapp_trident-operator --preserve
+----
 --
 ====

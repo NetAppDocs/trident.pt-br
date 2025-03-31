@@ -2845,40 +2845,27 @@
   <block id="77f6e3db9b70538186091595d9c8c9e8" category="list-text">Complemento EKS</block>
   <block id="e477faed39be08642267684bb501d931" category="open-title">Console de gerenciamento</block>
   <block id="e8d532dbf6904e2793dbda6fd0d03818" category="list-text">Abra o console do Amazon EKS em<block ref="c4765fcd1a0f97cf67c0365ddc45d563" category="inline-link-rx"></block>.</block>
-  <block id="8d1588a59bc508adad8a62ccaaa1c610" category="list-text">No painel de navegação esquerdo, clique em *clusters*.</block>
-  <block id="32d9b71b3fc3fad1385ba62a9bf6bf46" category="list-text">Clique no nome do cluster para o qual você deseja configurar o complemento NetApp Trident CSI.</block>
-  <block id="91e45a55d3dd23153429aac3c45c53ae" category="list-text">Clique em *Add-ons* e, em seguida, clique em *Get more add-ons*.</block>
-  <block id="5a378b18f7bf0c4cabc6c655cd2f535e" category="list-text">Clique em *seguinte*.</block>
   <block id="cacc1ddf612923b1c73b0a9a76659f42" category="list-text">Na página de configurações *Configure Selected add-ons*, faça o seguinte:</block>
   <block id="149e81257342cd05b0256d010b0b4a37" category="list-text">Selecione a *versão* que você gostaria de usar.</block>
   <block id="1df543472a35a3acfd632037832987f6" category="list-text">Para *Selecione função IAM*, deixe em *não definido*.</block>
-  <block id="e873d41466e1383d951643c07a043d80" category="list-text">Expanda as *Configurações opcionais de configuração*, siga o esquema de configuração *Add-on* e defina o parâmetro configurationValues na seção *valores de configuração* para a função-arn que você criou na etapa anterior (o valor deve estar no seguinte formato:<block ref="ee1eb31b5aebe5472fc52cb0ae20b077" prefix=" " category="inline-code"></block>). Se você selecionar Substituir para o método de resolução de conflitos, uma ou mais configurações para o suplemento existente podem ser sobrescritas com as configurações de complemento do Amazon EKS. Se você não ativar essa opção e houver um conflito com suas configurações existentes, a operação falhará. Você pode usar a mensagem de erro resultante para solucionar o conflito. Antes de selecionar essa opção, certifique-se de que o complemento do Amazon EKS não gerencie as configurações que você precisa para gerenciar automaticamente.</block>
   <block id="dfe4bfc5bd8b8d180411468fbdbb4033" category="list-text">Escolha *seguinte*.</block>
   <block id="fbadf292f84bef20d7678936dbe4c4ce" category="list-text">Na página *Revisão e adição*, escolha *criar*.</block>
   <block id="46bfc11fb8f185d278ea910b0052a317" category="paragraph">Depois que a instalação do complemento estiver concluída, você verá o complemento instalado.</block>
   <block id="7820fdb5d8b3ebe0c69c86cf8bd2d0cf" category="open-title">CLI DA AWS</block>
   <block id="375fe5880d846c5b389735de8ae80b0a" category="list-text">Crie o<block ref="feef18acfb11dc53b7100577c6d640c4" prefix=" " category="inline-code"></block> arquivo:</block>
-  <block id="e907c98f301b06586956529abca9e22c" category="paragraph"><block ref="f9c32cfc7736c461770afa4dd4053bda" prefix="" category="inline-code"></block></block>
   <block id="41c9d4e34cce02a882f325b51fa9d2f4" category="list-text">Verifique a versão atual do seu complemento FSxN Trident CSI. Substitua<block ref="e2eb89f0ffaf521a0d2eeaffca04d117" prefix=" " category="inline-code"></block> pelo nome do cluster.<block ref="7b5be2809a3021f978155d101cf059cf" prefix=" " category="inline-code"></block></block>
   <block id="52b5830420efb96c3a91beb52bac3b23" category="paragraph">*Exemplo de saída:*</block>
   <block id="b3f252777a69b110667756babe83a98f" category="inline-link-macro">Complementos</block>
   <block id="25626757a73152ece7fdadb90ede4b7c" category="inline-link-macro">Gerenciamento de campo do Kubernetes</block>
   <block id="751f793ade8de1ed590e0f90ac05d8e1" category="paragraph">Se você remover<block ref="c23ab3adaec8ca15ff3ffd0971be6152" prefix=" " category="inline-code"></block> a opção e qualquer uma das configurações de complemento do Amazon EKS entrar em conflito com as configurações existentes, a atualização do complemento do Amazon EKS falhará; você receberá uma mensagem de erro para ajudá-lo a resolver o conflito. Antes de especificar essa opção, verifique se o complemento do Amazon EKS não gerencia as configurações que você precisa gerenciar, pois essas configurações são sobrescritas com essa opção. Para obter mais informações sobre outras opções para essa configuração, <block ref="aea621f0e078efb8367c5d5e894674cd" category="inline-link-macro-rx"></block>consulte . Para obter mais informações sobre o gerenciamento de campo do Amazon EKS Kubernetes, <block ref="97bdcfd76d2ff3e4855f6b36ebad236e" category="inline-link-macro-rx"></block>consulte .</block>
   <block id="b0c6845b636be8c810182f985c930fed" category="list-text">Abra o console do Amazon EKS<block ref="c4765fcd1a0f97cf67c0365ddc45d563" category="inline-link-rx"></block> .</block>
-  <block id="69bd32cd7d6c3b5f9de30250cec1b478" category="list-text">Clique no nome do cluster para o qual você deseja atualizar o complemento NetApp Trident CSI.</block>
-  <block id="a02487427219ab03773fe3c66fa96556" category="list-text">Clique na guia *Complementos*.</block>
-  <block id="3dca1b912e3d43e2a746fbcde32a6018" category="list-text">Clique em *Salvar alterações*.</block>
   <block id="5f06738a5749e735a4681f5c09e2bafc" category="paragraph">O exemplo a seguir atualiza o complemento EKS:</block>
   <block id="d8c918c170a0768203b4c2a6218e22bf" category="paragraph">Você tem duas opções para remover um complemento do Amazon EKS:</block>
   <block id="577a7d77fb14f745abf0c5ee04b72879" category="admonition">Se o complemento tiver uma conta do IAM associada a ele, a conta do IAM não será removida.</block>
-  <block id="ae7c26e7d90f669e27bf9a36527336ec" category="list-text">No painel de navegação esquerdo, clique em *clusters*.</block>
-  <block id="99e7173540f126412137b25a0caaf2d1" category="list-text">Clique no nome do cluster para o qual você deseja remover o complemento NetApp Trident CSI.</block>
-  <block id="03b194a23dcb353466fbfb7acff64363" category="list-text">Clique em *Remover*.</block>
   <block id="c8e9b5ea2470965edac225c56a879d07" category="list-text">Na caixa de diálogo *Remover NetApp_Trident-operator confirmation*, faça o seguinte:</block>
   <block id="10aba138eb518a0cc15662934a1f6e18" category="list-text">Se você quiser que o Amazon EKS pare de gerenciar as configurações do complemento, selecione *Preserve on cluster*. Faça isso se quiser manter o software complementar no cluster para que você possa gerenciar todas as configurações do complemento por conta própria.</block>
   <block id="ecca191ac54751ba8120816fbe45777e" category="list-text">Digite *NetApp_Trident-operator*.</block>
   <block id="bb7c6bde1fc26965ada02923bac65350" category="paragraph">Substitua<block ref="e2eb89f0ffaf521a0d2eeaffca04d117" prefix=" " category="inline-code"></block> pelo nome do cluster e execute o seguinte comando.</block>
-  <block id="3f0c01bb690234ddb3284c5ce5c26da2" category="paragraph"><block ref="c2f1a783b03bad400b0ebf4321b8a171" prefix="" category="inline-code"></block></block>
   <block id="23e0e5bfdd7b1fef2ab4d932aae742e5" category="doc">Configure o back-end de armazenamento</block>
   <block id="9303b8f40cf82f5e37702c7a6387e725" category="section-title">Integração de driver SAN e nas ONTAP</block>
   <block id="42f3b65b98b18c792b7b5534e40d2646" category="section-title">Detalhes do driver FSX for ONTAP</block>
@@ -4914,7 +4901,6 @@
   <block id="b70329a4cd0d7e433e8af087eebce89a" category="list-text">Trident instalado que inclui o cloudProvider para especificar "GCP" e cloudIdentity especificando a nova conta de serviço do GCP. Um exemplo é dado abaixo.</block>
   <block id="73a8d79444c307e1446b60eb6a9ba8f1" category="paragraph">Verifique se você tem o seguinte antes de configurar o complemento do Trident para o AWS EKS:</block>
   <block id="5c48b2cb013af0c5d292d6bc5659074c" category="section-title">Instale/desinstale o complemento Trident EKS usando a CLI</block>
-  <block id="a241de540e9d861e242ac606150f4f07" category="paragraph">O seguinte comando desinstala o complemento do Trident EKS:<block ref="09a3e9c644b219341aa6e2e8a8922e59" prefix=" " category="inline-code"></block></block>
   <block id="1095f7331744c1accf45762c2da50a60" category="paragraph">O Trident simplifica o gerenciamento de armazenamento do Amazon FSX for NetApp ONTAP no Kubernetes para permitir que seus desenvolvedores e administradores se concentrem na implantação de aplicativos.</block>
   <block id="aa9c9ff1836c624104eb3a256a7b8b69" category="section-title">Instale o Trident através do leme</block>
   <block id="b3dc88ff9246a994ccb2a892f1ad7486" category="list-text">Baixe o pacote de instalação do Trident</block>
@@ -5159,15 +5145,12 @@
   <block id="bc04665b1c712547a7dcc87033ae7152" category="paragraph">Você pode instalar o Trident usando um dos seguintes métodos:</block>
   <block id="a01b2c45a64c7d0c2a2aa3ce418eaa04" category="inline-link-macro">Ativar a funcionalidade de instantâneos para volumes CSI</block>
   <block id="9adc02aa546c3838bddb73a67ebaa4e2" category="paragraph">Se quiser utilizar a funcionalidade de instantâneos, instale o suplemento do controlador de instantâneos CSI. <block ref="d2fce68a585fb4c517040885fb7393e9" category="inline-link-macro-rx"></block>Consulte para obter mais informações.</block>
-  <block id="6ba41cf97f4e906d09aa6843f1ed9454" category="paragraph">O pacote de instalação do Trident contém tudo o que você precisa para implantar o operador Trident e instalar o Trident. Baixe e extraia a versão mais recente do instalador do Trident da seção Assets no GitHub.<block ref="e8c87a263e5870f710a0a586ca803df2" prefix=" " category="inline-code"></block><block ref="b58dc755603e4aae34e32d22a572af73" prefix=" " category="inline-code"></block><block ref="1600ccf6988d672a315af82be4e93709" prefix=" " category="inline-code"></block></block>
   <block id="cae9d6c5ad1015a95a7e9dd5e473837a" category="list-text">A partir da versão 25,02, o Trident oferece suporte à configuração automática de back-end. O Trident cria as classes de back-end e storage sem problemas após a instalação do Trident. Para ativar a configuração automática de back-end, adicione o<block ref="4c65cbb4d2559a68fba50cf196427b85" prefix=" " category="inline-code"></block> parâmetro e especifique<block ref="280fa711b12d488436b7cdcbfb2543fc" prefix=" " category="inline-code"></block><block ref="ac590318582c1d8275a50180aba8a35c" prefix=" " category="inline-code"></block> ,<block ref="66203c461b36a2af573149f0aa6164ff" prefix=" " category="inline-code"></block> durante a instalação.</block>
   <block id="df5baf46554bffd06bf1e8e9ae5e6b52" category="paragraph">O seguinte comando de exemplo instala o complemento do Trident EKS:</block>
   <block id="9149c64ca750a0bdd666354b3bbb7170" category="list-text">Na seção addons do AWS Marketplace, marque a caixa de seleção *Trident by NetApp*.</block>
   <block id="9c41f50f85f97003fc3d5010449c3a08" category="list-text">Instale o complemento Trident EKS.</block>
-  <block id="33a60a0cdf016b1736b4b0ea747bcb0f" category="list-text">Clique em *Trident by NetApp* e, em seguida, clique em *Edit*.</block>
   <block id="87d54c3153674640af4f36dd72f8953a" category="list-text">Na página *Configurar Trident by NetApp*, faça o seguinte:</block>
   <block id="7d91a8c58620fc2b878600d5ab834bda" category="list-text">*Remover software complementar inteiramente do cluster* – a NetApp recomenda que você remova o complemento do Amazon EKS do cluster somente se não houver recursos no cluster que dependam dele. Remova<block ref="4b4ac0f998920a46fd2015e11d01d3e7" prefix=" " category="inline-code"></block> a opção do<block ref="099af53f601532dbd31e0ea99ffdeb64" prefix=" " category="inline-code"></block> comando para remover o complemento.</block>
-  <block id="8d86b9c4fd938269229a9ccc306de933" category="list-text">Clique na guia *Complementos* e, em seguida, clique em *Trident by NetApp*.*</block>
   <block id="996d0bc5ff30cfbcef97caeaf2c6b353" category="paragraph">Para criar um back-end de armazenamento, você precisa criar um arquivo de configuração no formato JSON ou YAML. O arquivo precisa especificar o tipo de storage desejado (nas ou SAN), o sistema de arquivos e SVM para obtê-lo e como se autenticar com ele. O exemplo a seguir mostra como definir o storage baseado em nas e usar um segredo da AWS para armazenar as credenciais no SVM que você deseja usar:</block>
   <block id="301909df91f724e7a48b15a1b5d05fa2" category="paragraph">Execute os seguintes comandos para criar e validar a configuração de backend do Trident (TBC):</block>
   <block id="d072ff8aa34f8a629a86f50ed8e738e5" category="list-text">Crie a configuração de back-end do Trident (TBC) a partir do arquivo yaml e execute o seguinte comando:</block>
@@ -5461,4 +5444,18 @@
   <block id="06034bca671a3028021f1a722aac7b41" category="paragraph">Configure um objeto Kubernetes StorageClass e crie a classe de storage para instruir o Trident a provisionar volumes. Crie um PersistentVolumeClaim (PVC) que use o Kubernetes StorageClass configurado para solicitar acesso ao PV. Em seguida, pode montar o PV num pod.</block>
   <block id="5de805965faeb85a54098223ea3a3334" category="paragraph">Depois de criar o PVC, você pode montar o volume em um pod.</block>
   <block id="06489d7f99c3b214c8b9a539006a642c" category="list-text">registry.k8s.io/sig-storage/csi-resizer:v1.13.2</block>
+  <block id="65fec8b0751214bea1821a56ae85cf6b" category="paragraph">O pacote de instalação do Trident contém tudo o que você precisa para implantar o operador Trident e instalar o Trident. Baixe e extraia a versão mais recente do instalador do Trident da seção Assets no GitHub.</block>
+  <block id="89fb75fa5ae260c326092b78970469ed" category="list-text">No painel de navegação esquerdo, selecione *clusters*.</block>
+  <block id="abdaa0762abc2037a71287c94bceae14" category="list-text">Selecione o nome do cluster para o qual deseja configurar o complemento NetApp Trident CSI.</block>
+  <block id="691da62871e09bf9c944f36b9de07889" category="list-text">Selecione *Add-ons* e, em seguida, selecione *Get more add-ons*.</block>
+  <block id="e6cd86d61f4639c8a27006c6c29b3e9f" category="list-text">Selecione *seguinte*.</block>
+  <block id="156546d6235c5f4068fefc5cac8a5068" category="list-text">Expanda as *Configurações opcionais de configuração*, siga o esquema de configuração *Add-on* e defina o parâmetro configurationValues na seção *valores de configuração* para a função-arn que você criou na etapa anterior (o valor deve estar no seguinte formato:<block ref="2830f9a9af39ef8725d6362f632214e1" prefix=" " category="inline-code"></block>). Se você selecionar Substituir para o método de resolução de conflitos, uma ou mais configurações para o suplemento existente podem ser sobrescritas com as configurações de complemento do Amazon EKS. Se você não ativar essa opção e houver um conflito com suas configurações existentes, a operação falhará. Você pode usar a mensagem de erro resultante para solucionar o conflito. Antes de selecionar essa opção, certifique-se de que o complemento do Amazon EKS não gerencie as configurações que você precisa para gerenciar automaticamente.</block>
+  <block id="ce7f62393ec7cbcc106793e2c9ab41e8" category="list-text">Selecione o nome do cluster para o qual deseja atualizar o complemento NetApp Trident CSI.</block>
+  <block id="f90a2b79ab21cae46f34d96bb4501334" category="list-text">Selecione a guia *Complementos*.</block>
+  <block id="38b15bc2ab2d3588a9a19b123eaec1b5" category="list-text">Selecione *Trident by NetApp* e, em seguida, selecione *Edit*.</block>
+  <block id="302ef561e28f7d7cd13d1042cece78e1" category="list-text">Selecione *Salvar alterações*.</block>
+  <block id="b7cd6be51eaf277b357ed1c976d66d06" category="list-text">No painel de navegação esquerdo, selecione *clusters*.</block>
+  <block id="1ca28d22337393f531c7c8028230ed76" category="list-text">Selecione o nome do cluster para o qual deseja remover o complemento NetApp Trident CSI.</block>
+  <block id="85f27397ddcaf9ec996f312d1d89ecf9" category="list-text">Selecione a guia *Complementos* e, em seguida, selecione *Trident by NetApp*.*</block>
+  <block id="6f99fa9b2e1f4893851a8aeb82d171f9" category="list-text">Selecione *Remover*.</block>
 </blocks>
