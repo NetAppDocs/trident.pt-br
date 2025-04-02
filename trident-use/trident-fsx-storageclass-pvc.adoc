@@ -24,7 +24,7 @@ Configure um objeto Kubernetes StorageClass e crie a classe de storage para inst
 
 O https://kubernetes.io/docs/concepts/storage/storage-classes/["Objeto Kubernetes StorageClass"^] identifica o Trident como o provisionador usado para essa classe e instrui o Trident a provisionar um volume. Por exemplo:
 
-[listing]
+[source, YAML]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -38,7 +38,7 @@ parameters:
 ----
 Para provisionar volumes NFSv3 no AWS Bottlerocket, adicione o necessário `mountOptions` à classe de armazenamento:
 
-[listing]
+[source, YAML]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -63,21 +63,24 @@ link:../trident-reference/objects.html["Objetos Kubernetes e Trident"]Consulte p
 .Passos
 . Esse é um objeto do Kubernetes, então use `kubectl` para criá-lo no Kubernetes.
 +
-[listing]
+[source, console]
 ----
 kubectl create -f storage-class-ontapnas.yaml
 ----
 . Agora você deve ver uma classe de armazenamento *Basic-csi* no Kubernetes e no Trident, e o Trident deve ter descoberto os pools no back-end.
 +
-[listing]
+[source, console]
 ----
 kubectl get sc basic-csi
+----
+
+
+[listing]
+----
 NAME         PROVISIONER             AGE
 basic-csi    csi.trident.netapp.io   15h
 
 ----
-
-
 
 
 == Crie o PVC
@@ -97,7 +100,7 @@ Depois de criar o PVC, você pode montar o volume em um pod.
 ====
 Este manifesto de exemplo mostra um PV básico de 10Gi que está associado ao StorageClass . `basic-csi`
 
-[listing]
+[source, YAML]
 ----
 apiVersion: v1
 kind: PersistentVolume
@@ -123,7 +126,7 @@ Estes exemplos mostram opções básicas de configuração de PVC.
 .PVC com acesso RWX
 Este exemplo mostra um PVC básico com acesso RWX associado a um StorageClass `basic-csi` chamado .
 
-[listing]
+[source, YAML]
 ----
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -140,9 +143,8 @@ spec:
 .PVC com NVMe/TCP
 Este exemplo mostra um PVC básico para NVMe/TCP com acesso RWX associado a um StorageClass `protection-gold` chamado .
 
-[listing]
+[source, YAML]
 ----
----
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -163,13 +165,13 @@ storageClassName: protection-gold
 .Passos
 . Crie o PVC.
 +
-[listing]
+[source, console]
 ----
 kubectl create -f pvc.yaml
 ----
 . Verifique o estado do PVC.
 +
-[listing]
+[source, console]
 ----
 kubectl get pvc
 ----

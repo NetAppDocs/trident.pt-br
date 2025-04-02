@@ -52,38 +52,16 @@ image::../media/aws-eks-03.png[aws eks 03]
 +
 image::../media/aws-eks-04.png[aws eks 04]
 
-. Configure quaisquer definições de configuração opcionais conforme necessário e selecione *seguinte*.
+. Siga o esquema de configuração *Add-on* e defina o parâmetro Configuration Values na seção *Configuration Values* para o Role-arn criado na etapa anterior(Etapa 1).
 +
-Siga o esquema de configuração *Add-on* e defina o parâmetro Configuration values na seção *Configuration values* para o Role-arn criado na etapa anterior(Etapa 1) (o valor deve estar no seguinte formato: `eks.amazonaws.com/role-arn: arn:aws:iam::464262061435:role/AmazonEKS_FSXN_CSI_DriverRole`). OBSERVAÇÃO: Se você selecionar Substituir para o método de resolução de conflitos, uma ou mais configurações do complemento existente podem ser sobrescritas com as configurações de complemento do Amazon EKS. Se você não ativar essa opção e houver um conflito com suas configurações existentes, a operação falhará. Você pode usar a mensagem de erro resultante para solucionar o conflito. Antes de selecionar essa opção, certifique-se de que o complemento do Amazon EKS não gerencie as configurações que você precisa para gerenciar automaticamente.
+O valor deve estar no seguinte formato: `eks.amazonaws.com/role-arn: arn:aws:iam::464262061435:role/AmazonEKS_FSXN_CSI_DriverRole`.
+
++
+
+NOTE: Se você selecionar Substituir para o método de resolução de conflitos, uma ou mais configurações para o suplemento existente podem ser sobrescritas com as configurações de complemento do Amazon EKS. Se você não ativar essa opção e houver um conflito com suas configurações existentes, a operação falhará. Você pode usar a mensagem de erro resultante para solucionar o conflito. Antes de selecionar essa opção, certifique-se de que o complemento do Amazon EKS não gerencie as configurações que você precisa para gerenciar automaticamente.
 
 +
 image::../media/aws-eks-06.png[aws eks 06]
-
-+
-** A partir da versão 25,02, o Trident oferece suporte à configuração automática de back-end. O Trident cria as classes de back-end e storage sem problemas após a instalação do Trident. Para ativar a configuração automática de back-end, adicione o `ontapConfigurator` parâmetro e especifique `authType`, `fsxnID` e `protocols` no esquema de configuração de complemento juntamente com `cloudIdentity` durante a instalação.
-+
-[listing]
-----
-"ontapConfigurator": {
-        "enabled": true,
-        "svms": [
-          {
-            "authType": "awsarn",
-            "fsxnID": "fs-0dfeaa884a68b1cab",
-            "protocols": [
-              "nfs",
-              "iscsi"
-            ]
-          }
-        ]
-      }}"
-
-----
-+
-
-NOTE: Para desativar a configuração automática de back-end, atualize a versão de lançamento do Trident e defina o *ontapConfigurator* como *false*.
-
-
 
 . Selecione *criar*.
 . Verifique se o status do complemento é _ative_.

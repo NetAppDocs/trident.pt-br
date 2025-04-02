@@ -37,7 +37,6 @@ A partir do Trident 25,02, o resumo Novidades fornece detalhes sobre melhorias, 
 ** Adicionado suporte para Force Detach para volumes ONTAP-nas durante cenários de encerramento de nó não gracioso. Os novos volumes ONTAP-nas agora utilizarão políticas de exportação por volume gerenciadas pelo Trident. Forneceu um caminho de atualização para que os volumes existentes façam a transição para o novo modelo de política de exportação na não publicação, sem afetar os workloads ativos.
 ** Adicionada anotação cloneFromSnapshot.
 ** Adicionado suporte para clonagem de volume entre namespace.
-** Adicionada configuração de back-end automática para instalação baseada no EKS add-on e no Helm para o Amazon FSX for NetApp ONTAP.
 ** Correcções de verificação melhoradas de recuperação automática iSCSI para iniciar redigitalizações por ID de host, canal, destino e LUN exato.
 ** Adicionado suporte para Kubernetes 1,32.
 

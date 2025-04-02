@@ -17,7 +17,7 @@ Implantar um aplicativo de amostra.
 .Passos
 . Monte o volume num pod.
 +
-[listing]
+[source, console]
 ----
 kubectl create -f pv-pod.yaml
 ----
@@ -25,7 +25,7 @@ kubectl create -f pv-pod.yaml
 Estes exemplos mostram configurações básicas para anexar o PVC a um pod: *Configuração básica*:
 
 +
-[listing]
+[source, console]
 ----
 kind: Pod
 apiVersion: v1
@@ -52,7 +52,7 @@ NOTE: Pode monitorizar o progresso utilizando `kubectl get pod --watch`o .
 
 . Verifique se o volume está montado no `/my/mount/path`.
 +
-[listing]
+[source, console]
 ----
 kubectl exec -it pv-pod -- df -h /my/mount/path
 ----
@@ -65,7 +65,7 @@ Filesystem                                                        Size  Used  Av
 ----
 Agora você pode excluir o Pod. O aplicativo Pod não existirá mais, mas o volume permanecerá.
 
-[listing]
+[source, console]
 ----
 kubectl delete pod pv-pod
 ----

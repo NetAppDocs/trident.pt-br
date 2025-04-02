@@ -104,7 +104,7 @@ Consulte a tabela a seguir para obter as opções de configuração de back-end:
 `""` 
 
 
-| `credentials` | Especifique as credenciais do FSX SVM para armazenar no AWS Secret Manager.  `name`- : Nome do recurso Amazon (ARN) do segredo, que contém as credenciais do SVM.  `type`- : Defina para `awsarn`. link:https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_secret.html["Crie um segredo do AWS Secrets Manager"^]Consulte para obter mais informações. |  
+| `credentials` | Especifique as credenciais do FSX SVM para armazenar no AWS Secrets Manager.  `name`- : Nome do recurso Amazon (ARN) do segredo, que contém as credenciais do SVM.  `type`- : Defina para `awsarn`. link:https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_secret.html["Crie um segredo do AWS Secrets Manager"^]Consulte para obter mais informações. |  
 |===
 
 
@@ -112,7 +112,7 @@ Consulte a tabela a seguir para obter as opções de configuração de back-end:
 
 Você pode alterar o dataLIF após a configuração inicial executando o seguinte comando para fornecer o novo arquivo JSON de back-end com dataLIF atualizado.
 
-[listing]
+[source, console]
 ----
 tridentctl update backend <backend-name> -f <path-to-backend-json-file-with-updated-dataLIF>
 ----
@@ -174,7 +174,7 @@ Você pode controlar o provisionamento padrão usando essas opções na `default
 ====
 Usando `nasType`, `node-stage-secret-name` e `node-stage-secret-namespace`, você pode especificar um volume SMB e fornecer as credenciais necessárias do ative Directory. Os volumes SMB são suportados usando `ontap-nas` apenas o driver.
 
-[listing]
+[source, console]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -188,10 +188,10 @@ parameters:
   csi.storage.k8s.io/node-stage-secret-namespace: "default"
 ----
 ====
-.Configuração do AWS FSX for ONTAP com gerenciador de segredos
+.Configuração para o AWS FSX for ONTAP com o Gerenciador de Segredos
 [%collapsible]
 ====
-[listing]
+[source, console]
 ----
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
