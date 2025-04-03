@@ -62,6 +62,7 @@ RWO, ROX, RWX, RWOP
 * Use `ontap-san-economy` somente se a contagem de uso de volume persistente for esperada ser maior que link:https://docs.netapp.com/us-en/ontap/volumes/storage-limits-reference.html["Limites de volume ONTAP suportados"^].
 * Use `ontap-nas-economy` somente se a contagem de uso de volume persistente for esperada para ser maior do que link:https://docs.netapp.com/us-en/ontap/volumes/storage-limits-reference.html["Limites de volume ONTAP suportados"^] e o `ontap-san-economy` driver não puder ser usado.
 * Não use o uso `ontap-nas-economy` se você antecipar a necessidade de proteção de dados, recuperação de desastres ou mobilidade.
+* O NetApp não recomenda o uso do FlexVol com crescimento automático em todos os drivers ONTAP, exceto ONTAP-san. Como solução alternativa, o Trident oferece suporte ao uso de reserva de snapshot e dimensiona os volumes FlexVol de acordo.
 
 
 ====

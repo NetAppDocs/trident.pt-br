@@ -5452,4 +5452,5 @@
   <block id="fa1c8065dc4d2b862bfba881472c0aac" category="admonition">Substitua<block ref="2befb7722283d545949c6220c6548fe4" prefix=" " category="inline-code"></block> pelo ARN da função criada na etapa anterior.</block>
   <block id="44308ffe82692c268b99d3caefca907e" category="list-text">Verifique a versão atual do seu complemento FSxN Trident CSI. Substitua<block ref="e2eb89f0ffaf521a0d2eeaffca04d117" prefix=" " category="inline-code"></block> pelo nome do cluster.</block>
   <block id="a1dc4a2136ed260b34021d64aaa6980a" category="list-text">Atualize o complemento para a versão retornada em ATUALIZAÇÃO DISPONÍVEL na saída da etapa anterior.</block>
+  <block id="0ca34892a0e67f37b07d196ec272007d" category="list-text">O NetApp não recomenda o uso do FlexVol com crescimento automático em todos os drivers ONTAP, exceto ONTAP-san. Como solução alternativa, o Trident oferece suporte ao uso de reserva de snapshot e dimensiona os volumes FlexVol de acordo.</block>
 </blocks>
