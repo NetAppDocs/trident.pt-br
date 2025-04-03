@@ -4052,7 +4052,6 @@
   <block id="39e92ae6d270535c1cad298373650560" category="list-text">O Trident não pode impedir que namespaces de destino gravem no volume compartilhado. Você deve usar o bloqueio de arquivos ou outros processos para evitar a substituição de dados de volume compartilhado.</block>
   <block id="b709b82e3d76fa5433fd3117387424b7" category="paragraph-title">Ferramentas SCSI sobre FC</block>
   <block id="867cf4bbcb92ecc7017612aafa765813" category="inline-link-macro">Maneiras de configurar hosts SAN FC &amp;amp; FC-NVMe</block>
-  <block id="fb42223c0808d27492a06be4e773dc26" category="paragraph"><block ref="ee9d56c9130a1d3814c95b35eb7c82a4" category="inline-link-macro-rx"></block>Consulte para obter mais informações.</block>
   <block id="16649adc62ed952ba4dac811c548cbfb" category="paragraph">O Trident tenta detetar automaticamente se o nó pode executar serviços iSCSI ou NFS.</block>
   <block id="ff577472362d5ec5388791cc868e283e" category="paragraph">O Trident cria eventos para o nó para identificar os serviços descobertos. Para rever estes eventos, execute:</block>
   <block id="e0dbb340725a054b795eaa2c5ce9925a" category="paragraph">O Trident identifica os serviços ativados para cada nó no CR do nó Trident. Para visualizar os serviços descobertos, execute:</block>
@@ -5453,4 +5452,7 @@
   <block id="44308ffe82692c268b99d3caefca907e" category="list-text">Verifique a versão atual do seu complemento FSxN Trident CSI. Substitua<block ref="e2eb89f0ffaf521a0d2eeaffca04d117" prefix=" " category="inline-code"></block> pelo nome do cluster.</block>
   <block id="a1dc4a2136ed260b34021d64aaa6980a" category="list-text">Atualize o complemento para a versão retornada em ATUALIZAÇÃO DISPONÍVEL na saída da etapa anterior.</block>
   <block id="0ca34892a0e67f37b07d196ec272007d" category="list-text">O NetApp não recomenda o uso do FlexVol com crescimento automático em todos os drivers ONTAP, exceto ONTAP-san. Como solução alternativa, o Trident oferece suporte ao uso de reserva de snapshot e dimensiona os volumes FlexVol de acordo.</block>
+  <block id="67ed8fb72dc668ae9c7c1114df8f02ed" category="paragraph"> a <block ref="ee9d56c9130a1d3814c95b35eb7c82a4" category="inline-link-macro-rx"></block>Consulte para obter mais informações sobre como configurar seus hosts SAN FC e FC-NVMe.</block>
+  <block id="1b9fede0aad66dda6d8b01b66280fff4" category="paragraph">*Pontos a considerar*: * SCSI sobre FC é suportado em ambientes OpenShift e KubeVirt. * SCSI sobre FC não é suportado no Docker. * A autorrecuperação iSCSI não se aplica a SCSI via FC.</block>
+  <block id="5e6c49c79d451ce5d17472c430c69454" category="admonition">Certifique-se de<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> que contém<block ref="2a81b35478c9ccb4f9392dcc40edb8e6" prefix=" " category="inline-code"></block><block ref="a4a918a45181164207929d52aec36aec" prefix=" " category="inline-code"></block> em .</block>
 </blocks>
