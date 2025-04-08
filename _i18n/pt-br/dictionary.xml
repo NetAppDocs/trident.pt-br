@@ -5389,7 +5389,6 @@
   <block id="e516fe45e3db545de8d5d292a67f4990" category="list-text">Adicionado suporte de backup e restauração para VMs de virtualização KubeVirt / OpenShift para o volume Mode: File e volumeMode: Armazenamento de bloco (dispositivo bruto). Esse suporte é compatível com todos os drivers Trident e aprimora os recursos de proteção existentes ao replicar storage usando o NetApp SnapMirror com Trident Protect.</block>
   <block id="fc1d748db1b5b488ce7af7d17ea15d55" category="inline-link-macro">Suporte à versão de software</block>
   <block id="ee19283e867cf4e5840d2811a74b89e5" category="list-text">Versões de cluster FAS, AFF ou ASA R2 no local com suporte limitado do NetApp. <block ref="50931d770a2149cdd08c9f8b08c33f00" category="inline-link-macro-rx"></block>Consulte .</block>
-  <block id="8456fc955091af12a31da6fc68123005" category="list-text">Você pode definir a criptografia NVE como<block ref="9d4568c009d203ab10e33ea9953a0264" prefix=" " category="inline-code"></block> para criar volumes habilitados para NAE.</block>
   <block id="1906137ea73af1894fec1becb00e0aee" category="summary">Você pode encontrar alguns ótimos blogs NetApp Trident e Trident Protect.</block>
   <block id="0db80d8cadbd011f12ade006191e47b0" category="doc">Trident e Trident protegem blogs</block>
   <block id="c5497cf98d8e6141ba38e1421502c2d4" category="paragraph">Você pode encontrar alguns ótimos blogs do NetApp Trident e do Trident Protect aqui:</block>
@@ -5456,4 +5455,5 @@
   <block id="1b9fede0aad66dda6d8b01b66280fff4" category="paragraph">*Pontos a considerar*: * SCSI sobre FC é suportado em ambientes OpenShift e KubeVirt. * SCSI sobre FC não é suportado no Docker. * A autorrecuperação iSCSI não se aplica a SCSI via FC.</block>
   <block id="5e6c49c79d451ce5d17472c430c69454" category="admonition">Certifique-se de<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block> que contém<block ref="2a81b35478c9ccb4f9392dcc40edb8e6" prefix=" " category="inline-code"></block><block ref="a4a918a45181164207929d52aec36aec" prefix=" " category="inline-code"></block> em .</block>
   <block id="ce3d3f85c4d1d4dd7826863d9428b4e5" category="admonition">Para obter ajuda com o Trident, crie um pacote de suporte usando<block ref="1d41e2024c69110ad6054ffc785ca8e0" prefix=" " category="inline-code"></block> e envie-o para o suporte da NetApp.</block>
+  <block id="8ef3114bf1395e8f04d7b3404982499e" category="list-text">Você pode definir o sinalizador de criptografia NVE como<block ref="9d4568c009d203ab10e33ea9953a0264" prefix=" " category="inline-code"></block> para criar volumes habilitados para NAE.</block>
 </blocks>

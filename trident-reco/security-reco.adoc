@@ -47,7 +47,7 @@ O NetApp ONTAP fornece criptografia de dados em repouso para proteger dados conf
 
 * Se o NAE estiver ativado no back-end, qualquer volume provisionado no Trident será habilitado para NAE.
 +
-** Você pode definir a criptografia NVE como `""` para criar volumes habilitados para NAE.
+** Você pode definir o sinalizador de criptografia NVE como `""` para criar volumes habilitados para NAE.
 
 
 * Se o NAE não estiver habilitado no back-end, qualquer volume provisionado no Trident será habilitado para NVE, a menos que você defina o sinalizador de criptografia NVE como `false` na configuração de back-end.
