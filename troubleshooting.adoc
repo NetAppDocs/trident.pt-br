@@ -15,6 +15,9 @@ summary: Use os ponteiros fornecidos aqui para solucionar problemas que você po
 Use os ponteiros fornecidos aqui para solucionar problemas que você pode encontrar ao instalar e usar o Trident.
 
 
+NOTE: Para obter ajuda com o Trident, crie um pacote de suporte usando `tridentctl logs -a -n trident` e envie-o para o suporte da NetApp.
+
+
 
 == Resolução de problemas gerais
 
