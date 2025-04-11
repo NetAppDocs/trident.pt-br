@@ -2801,7 +2801,6 @@
   <block id="2af6474930eac7fe47a45b3658bef5bf" category="image-alt">aws eks 05</block>
   <block id="76b4586b7207f884c66397194b773e14" category="summary">Saiba mais sobre as opções de configuração de back-end para o Amazon FSX for ONTAP. Esta seção fornece exemplos de configuração de back-end.</block>
   <block id="533a7baf9026dddae6baef47ea605b08" category="doc">Implantar um aplicativo de amostra</block>
-  <block id="fae865e1123e24de7eca1790ec73dc32" category="paragraph">Implantar um aplicativo de amostra.</block>
   <block id="6a308a8072d1cf8c73629852d7f0b1af" category="list-text">Monte o volume num pod.</block>
   <block id="c09ee63e688125cf9517a66bb5a0a5a6" category="paragraph">Estes exemplos mostram configurações básicas para anexar o PVC a um pod: *Configuração básica*:</block>
   <block id="b5450caedb9c7aa352b9fb0427aee784" category="admonition">Pode monitorizar o progresso utilizando<block ref="6abdceb61753f298491e021c4da24ddd" prefix=" " category="inline-code"></block>o .</block>
@@ -5466,4 +5465,5 @@
   <block id="9355f48a9876fcaefe0351294df4e05c" category="list-text">Depois de preencher o<block ref="cb18a3ae8903eb525dd256cfa3d4576e" prefix=" " category="inline-code"></block> ficheiro com os valores corretos, aplique o CR:</block>
   <block id="1bd9850ddb901f0e741293ec737c5de6" category="list-text">Crie o agendamento de backup, substituindo valores entre parênteses por informações do seu ambiente. Por exemplo:</block>
   <block id="ab5807fb06fd654f730a4ed5a02bb950" category="paragraph">Você pode definir o<block ref="61df7cc86eb24ab1300f0e74e74bb50c" prefix=" " category="inline-code"></block> sinalizador para<block ref="f9f90eeaf400d228facde6bc48da5cfb" prefix=" " category="inline-code"></block> backup completo constante ou personalizá-lo com base em suas necessidades. Por exemplo, se você escolher a granularidade diária, poderá especificar os dias da semana em que o backup completo deve ocorrer. Por exemplo, use<block ref="d416cce9d6bcb838c8958b9fbb84dffa" prefix=" " category="inline-code"></block> para agendar o backup completo às segundas e quintas-feiras.</block>
+  <block id="a346cffc17b34fc56f3020d8b33d30c3" category="paragraph">Quando a classe de armazenamento e PVC são criados, você pode montar o PV em um pod. Esta seção lista o comando de exemplo e a configuração para anexar o PV a um pod.</block>
 </blocks>

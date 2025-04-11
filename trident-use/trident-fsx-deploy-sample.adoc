@@ -12,7 +12,7 @@ summary: Saiba mais sobre as opções de configuração de back-end para o Amazo
 
 
 [role="lead"]
-Implantar um aplicativo de amostra.
+Quando a classe de armazenamento e PVC são criados, você pode montar o PV em um pod. Esta seção lista o comando de exemplo e a configuração para anexar o PV a um pod.
 
 .Passos
 . Monte o volume num pod.
