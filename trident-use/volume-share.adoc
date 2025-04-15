@@ -60,7 +60,7 @@ Para garantir a segurança, o compartilhamento entre namespace requer colaboraç
 .Passos
 . *Proprietário do namespace de origem:* Crie o PVC (`pvc1`) no namespace de origem que concede permissão para compartilhar com o namespace de destino (`namespace2`) usando a `shareToNamespace` anotação.
 +
-[listing]
+[source, yaml]
 ----
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -92,7 +92,7 @@ A Trident cria o PV e seu volume de storage NFS no back-end.
 . *Cluster admin:* Crie a função personalizada e kubeconfig para conceder permissão ao proprietário do namespace de destino para criar o TridentVolumeReference CR no namespace de destino.
 . *Proprietário do namespace de destino:* Crie um CredentVolumeReference CR no namespace de destino que se refere ao namespace de origem `pvc1` .
 +
-[listing]
+[source, yaml]
 ----
 apiVersion: trident.netapp.io/v1
 kind: TridentVolumeReference
@@ -105,7 +105,7 @@ spec:
 ----
 . *Proprietário do namespace de destino:* Crie um PVC (`pvc2`) no namespace de destino (`namespace2`) usando a `shareFromPVC` anotação para designar o PVC de origem.
 +
-[listing]
+[source, yaml]
 ----
 kind: PersistentVolumeClaim
 apiVersion: v1

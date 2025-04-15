@@ -147,7 +147,7 @@ Consulte a tabela a seguir para obter as opções de configuração de back-end:
 | `storageDriverName` | Nome do controlador de armazenamento | `ontap-nas` `ontap-nas-economy`, , `ontap-nas-flexgroup` `ontap-san` , , , `ontap-san-economy` 
 
 
-| `backendName` | Nome personalizado ou back-end de storage | Nome do driver 
+| `backendName` | Nome personalizado ou back-end de storage | Nome do driver e dataLIF 
 
 
 | `managementLIF` | Endereço IP de um cluster ou LIF de gerenciamento de SVM Um nome de domínio totalmente qualificado (FQDN) pode ser especificado. Pode ser definido para usar endereços IPv6 se o Trident tiver sido instalado usando o sinalizador IPv6. Os endereços IPv6 devem ser definidos entre colchetes, como [28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]. Se você fornecer o `fsxFilesystemID` sob o `aws` campo, não precisará fornecer o `managementLIF` porque o Trident recupera as informações do SVM `managementLIF` da AWS. Portanto, você deve fornecer credenciais para um usuário sob o SVM (por exemplo: Vsadmin) e o usuário deve ter a `vsadmin` função. | "10,0.0,1", "[2001:1234:abcd::fefe]" 
@@ -248,7 +248,7 @@ Você pode controlar o provisionamento padrão usando essas opções na `default
 | `adaptiveQosPolicy` | Grupo de políticas de QoS adaptável a atribuir para volumes criados. Escolha uma das qosPolicy ou adaptiveQosPolicy por pool de armazenamento ou backend. Não suportado pela ONTAP-nas-Economy. | "" 
 
 
-| `snapshotReserve` | Porcentagem de volume reservado para snapshots "0" | Se `snapshotPolicy` for `none`, `else` "" 
+| `snapshotReserve` | Percentagem de volume reservado para instantâneos "0" | Se `snapshotPolicy` for `none`, `else` "" 
 
 
 | `splitOnClone` | Divida um clone de seu pai na criação | `false` 

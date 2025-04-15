@@ -20,13 +20,13 @@ Várias instâncias do Trident são necessárias quando você deseja ter várias
 
 . Inicie a primeira instância especificando um alias e um arquivo de configuração.
 +
-[listing]
+[source, console]
 ----
 docker plugin install --grant-all-permissions --alias silver netapp/trident-plugin:21.07 config=silver.json
 ----
 . Inicie a segunda instância, especificando um alias diferente e arquivo de configuração.
 +
-[listing]
+[source, console]
 ----
 docker plugin install --grant-all-permissions --alias gold netapp/trident-plugin:21.07 config=gold.json
 ----
@@ -35,7 +35,7 @@ docker plugin install --grant-all-permissions --alias gold netapp/trident-plugin
 Por exemplo, para o volume de ouro:
 
 +
-[listing]
+[source, console]
 ----
 docker volume create -d gold --name ntapGold
 ----
@@ -43,7 +43,7 @@ docker volume create -d gold --name ntapGold
 Por exemplo, para o volume prateado:
 
 +
-[listing]
+[source, console]
 ----
 docker volume create -d silver --name ntapSilver
 ----
@@ -55,13 +55,13 @@ docker volume create -d silver --name ntapSilver
 
 . Inicie o plugin com uma configuração NFS usando um ID de driver personalizado:
 +
-[listing]
+[source, console]
 ----
 sudo trident --volume-driver=netapp-nas --config=/path/to/config-nfs.json
 ----
 . Inicie o plug-in com uma configuração iSCSI usando um ID de driver personalizado:
 +
-[listing]
+[source, console]
 ----
 sudo trident --volume-driver=netapp-san --config=/path/to/config-iscsi.json
 ----
@@ -70,7 +70,7 @@ sudo trident --volume-driver=netapp-san --config=/path/to/config-iscsi.json
 Por exemplo, para NFS:
 
 +
-[listing]
+[source, console]
 ----
 docker volume create -d netapp-nas --name my_nfs_vol
 ----
@@ -78,7 +78,7 @@ docker volume create -d netapp-nas --name my_nfs_vol
 Por exemplo, para iSCSI:
 
 +
-[listing]
+[source, console]
 ----
 docker volume create -d netapp-san --name my_iscsi_vol
 ----

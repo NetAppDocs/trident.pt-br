@@ -104,41 +104,18 @@ Esta é a configuração mínima absoluta de back-end. Com essa configuração, 
 
 Essa configuração é ideal quando você está apenas começando a usar o Google Cloud NetApp volumes e experimentando tudo. No entanto, na prática, é provável que você precise fornecer um escopo adicional para os volumes provisionados.
 
-[listing]
+[source, yaml]
 ----
 ---
-
 apiVersion: v1
 kind: Secret
 metadata:
   name: backend-tbc-gcnv-secret
 type: Opaque
 stringData:
-  private_key_id: 'f2cb6ed6d7cc10c453f7d3406fc700c5df0ab9ec'
+  private_key_id: f2cb6ed6d7cc10c453f7d3406fc700c5df0ab9ec
   private_key: |
     -----BEGIN PRIVATE KEY-----\n
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m\n
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m\n
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m\n
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m\n
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m\n
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m\n
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m\n
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m\n
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m\n
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m\n
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m\n
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m\n
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m\n
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m\n
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m\n
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m\n
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m\n
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m\n
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m\n
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m\n
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m\n
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m\n
     znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m\n
     znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m\n
     znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m\n
@@ -146,7 +123,6 @@ stringData:
     -----END PRIVATE KEY-----\n
 
 ---
-
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
 metadata:
@@ -154,14 +130,14 @@ metadata:
 spec:
   version: 1
   storageDriverName: google-cloud-netapp-volumes
-  projectNumber: '123455380079'
+  projectNumber: "123455380079"
   location: europe-west6
   serviceLevel: premium
   apiKey:
     type: service_account
     project_id: my-gcnv-project
     client_email: myproject-prod@my-gcnv-project.iam.gserviceaccount.com
-    client_id: '103346282737811234567'
+    client_id: "103346282737811234567"
     auth_uri: https://accounts.google.com/o/oauth2/auth
     token_uri: https://oauth2.googleapis.com/token
     auth_provider_x509_cert_url: https://www.googleapis.com/oauth2/v1/certs
@@ -173,9 +149,8 @@ spec:
 .Configuração para volumes SMB
 [%collapsible]
 ====
-[listing]
+[source, yaml]
 ----
-
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
 metadata:
@@ -184,7 +159,7 @@ metadata:
 spec:
   version: 1
   storageDriverName: google-cloud-netapp-volumes
-  projectNumber: '123456789'
+  projectNumber: "123456789"
   location: asia-east1
   serviceLevel: flex
   nasType: smb
@@ -192,53 +167,30 @@ spec:
     type: service_account
     project_id: cloud-native-data
     client_email: trident-sample@cloud-native-data.iam.gserviceaccount.com
-    client_id: '123456789737813416734'
+    client_id: "123456789737813416734"
     auth_uri: https://accounts.google.com/o/oauth2/auth
     token_uri: https://oauth2.googleapis.com/token
     auth_provider_x509_cert_url: https://www.googleapis.com/oauth2/v1/certs
     client_x509_cert_url: https://www.googleapis.com/robot/v1/metadata/x509/trident-sample%40cloud-native-data.iam.gserviceaccount.com
   credentials:
     name: backend-tbc-gcnv-secret
-
 ----
 ====
 .Configuração com filtro StoragePools
 [%collapsible]
 ====
-[listing]
+[source, yaml]
 ----
-
+---
 apiVersion: v1
 kind: Secret
 metadata:
   name: backend-tbc-gcnv-secret
 type: Opaque
 stringData:
-  private_key_id: 'f2cb6ed6d7cc10c453f7d3406fc700c5df0ab9ec'
+  private_key_id: f2cb6ed6d7cc10c453f7d3406fc700c5df0ab9ec
   private_key: |
     -----BEGIN PRIVATE KEY-----
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
     znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
     znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
     znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
@@ -246,7 +198,6 @@ stringData:
     -----END PRIVATE KEY-----
 
 ---
-
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
 metadata:
@@ -254,24 +205,23 @@ metadata:
 spec:
   version: 1
   storageDriverName: google-cloud-netapp-volumes
-  projectNumber: '123455380079'
+  projectNumber: "123455380079"
   location: europe-west6
   serviceLevel: premium
   storagePools:
-  - premium-pool1-europe-west6
-  - premium-pool2-europe-west6
+    - premium-pool1-europe-west6
+    - premium-pool2-europe-west6
   apiKey:
     type: service_account
     project_id: my-gcnv-project
     client_email: myproject-prod@my-gcnv-project.iam.gserviceaccount.com
-    client_id: '103346282737811234567'
+    client_id: "103346282737811234567"
     auth_uri: https://accounts.google.com/o/oauth2/auth
     token_uri: https://oauth2.googleapis.com/token
     auth_provider_x509_cert_url: https://www.googleapis.com/oauth2/v1/certs
     client_x509_cert_url: https://www.googleapis.com/robot/v1/metadata/x509/myproject-prod%40my-gcnv-project.iam.gserviceaccount.com
   credentials:
     name: backend-tbc-gcnv-secret
-
 ----
 ====
 .Configuração do pool virtual
@@ -283,40 +233,18 @@ Você também pode definir alguns valores padrão para serem aplicáveis a todos
 
 Para obter mais informações, link:../trident-concepts/virtual-storage-pool.html["Pools virtuais"]consulte .
 
-[listing]
+[source, yaml]
 ----
 ---
-
 apiVersion: v1
 kind: Secret
 metadata:
   name: backend-tbc-gcnv-secret
 type: Opaque
 stringData:
-  private_key_id: 'f2cb6ed6d7cc10c453f7d3406fc700c5df0ab9ec'
+  private_key_id: f2cb6ed6d7cc10c453f7d3406fc700c5df0ab9ec
   private_key: |
     -----BEGIN PRIVATE KEY-----
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
-    znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
     znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
     znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
     znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE4jK3bl/qp8B4Kws8zX5ojY9m
@@ -325,7 +253,6 @@ stringData:
     -----END PRIVATE KEY-----
 
 ---
-
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
 metadata:
@@ -333,13 +260,13 @@ metadata:
 spec:
   version: 1
   storageDriverName: google-cloud-netapp-volumes
-  projectNumber: '123455380079'
+  projectNumber: "123455380079"
   location: europe-west6
   apiKey:
     type: service_account
     project_id: my-gcnv-project
     client_email: myproject-prod@my-gcnv-project.iam.gserviceaccount.com
-    client_id: '103346282737811234567'
+    client_id: "103346282737811234567"
     auth_uri: https://accounts.google.com/o/oauth2/auth
     token_uri: https://oauth2.googleapis.com/token
     auth_provider_x509_cert_url: https://www.googleapis.com/oauth2/v1/certs
@@ -347,14 +274,14 @@ spec:
   credentials:
     name: backend-tbc-gcnv-secret
   defaults:
-    snapshotReserve: '10'
+    snapshotReserve: "10"
     exportRule: 10.0.0.0/24
   storage:
     - labels:
         performance: extreme
       serviceLevel: extreme
       defaults:
-        snapshotReserve: '5'
+        snapshotReserve: "5"
         exportRule: 0.0.0.0/0
     - labels:
         performance: premium
@@ -367,7 +294,7 @@ spec:
 .Identidade de nuvem para GKE
 [%collapsible]
 ====
-[listing]
+[source, yaml]
 ----
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
@@ -388,7 +315,7 @@ spec:
 ====
 O Trident facilita o provisionamento de volumes para workloads com base em regiões e zonas de disponibilidade. O `supportedTopologies` bloco nesta configuração de back-end é usado para fornecer uma lista de regiões e zonas por back-end. Os valores de região e zona especificados aqui devem corresponder aos valores de região e zona dos rótulos em cada nó de cluster do Kubernetes. Essas regiões e zonas representam a lista de valores permitidos que podem ser fornecidos em uma classe de armazenamento. Para classes de armazenamento que contêm um subconjunto das regiões e zonas fornecidas em um back-end, o Trident cria volumes na região e na zona mencionadas. Para obter mais informações, link:../trident-use/csi-topology.html["Use a topologia CSI"]consulte .
 
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -400,10 +327,11 @@ clientSecret: SECRET
 location: asia-east1
 serviceLevel: flex
 supportedTopologies:
-- topology.kubernetes.io/region: asia-east1
-  topology.kubernetes.io/zone: asia-east1-a
-- topology.kubernetes.io/region: asia-east1
-  topology.kubernetes.io/zone: asia-east1-b
+  - topology.kubernetes.io/region: asia-east1
+    topology.kubernetes.io/zone: asia-east1-a
+  - topology.kubernetes.io/region: asia-east1
+    topology.kubernetes.io/zone: asia-east1-b
+
 ----
 ====
 
@@ -439,7 +367,7 @@ Depois de identificar e corrigir o problema com o arquivo de configuração, voc
 
 A seguir está uma definição básica `StorageClass` que se refere ao backend acima.
 
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -448,13 +376,12 @@ metadata:
 provisioner: csi.trident.netapp.io
 parameters:
   backendType: "google-cloud-netapp-volumes"
-
 ----
 * Exemplo de definições usando o `parameter.selector` campo:*
 
 Usando `parameter.selector` você pode especificar para cada `StorageClass` um link:../trident-concepts/virtual-storage-pool.html["pool virtual"] que é usado para hospedar um volume. O volume terá os aspetos definidos no pool escolhido.
 
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -462,8 +389,9 @@ metadata:
   name: extreme-sc
 provisioner: csi.trident.netapp.io
 parameters:
-  selector: "performance=extreme"
-  backendType: "google-cloud-netapp-volumes"
+  selector: performance=extreme
+  backendType: google-cloud-netapp-volumes
+
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -471,8 +399,9 @@ metadata:
   name: premium-sc
 provisioner: csi.trident.netapp.io
 parameters:
-  selector: "performance=premium"
-  backendType: "google-cloud-netapp-volumes"
+  selector: performance=premium
+  backendType: google-cloud-netapp-volumes
+
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -480,9 +409,8 @@ metadata:
   name: standard-sc
 provisioner: csi.trident.netapp.io
 parameters:
-  selector: "performance=standard"
-  backendType: "google-cloud-netapp-volumes"
-
+  selector: performance=standard
+  backendType: google-cloud-netapp-volumes
 ----
 Para obter mais detalhes sobre classes de armazenamento, link:../trident-use/create-stor-class.html["Crie uma classe de armazenamento"^]consulte .
 
@@ -495,7 +423,7 @@ Usando `nasType`, `node-stage-secret-name` e  `node-stage-secret-namespace`, voc
 .Configuração básica no namespace padrão
 [%collapsible]
 ====
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -507,13 +435,12 @@ parameters:
   trident.netapp.io/nasType: "smb"
   csi.storage.k8s.io/node-stage-secret-name: "smbcreds"
   csi.storage.k8s.io/node-stage-secret-namespace: "default"
-
 ----
 ====
 .Usando diferentes segredos por namespace
 [%collapsible]
 ====
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -530,7 +457,7 @@ parameters:
 .Usando diferentes segredos por volume
 [%collapsible]
 ====
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -551,7 +478,7 @@ NOTE: `nasType: smb` Filtros para pools compatíveis com volumes SMB. `nasType: 
 
 === Exemplo de definição de PVC
 
-[listing]
+[source, yaml]
 ----
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -564,7 +491,6 @@ spec:
     requests:
       storage: 100Gi
   storageClassName: gcnv-nfs-sc
-
 ----
 Para verificar se o PVC está vinculado, execute o seguinte comando:
 
@@ -574,5 +500,4 @@ kubectl get pvc gcnv-nfs-pvc
 
 NAME          STATUS   VOLUME                                    CAPACITY  ACCESS MODES   STORAGECLASS AGE
 gcnv-nfs-pvc  Bound    pvc-b00f2414-e229-40e6-9b16-ee03eb79a213  100Gi     RWX            gcnv-nfs-sc  1m
-
 ----

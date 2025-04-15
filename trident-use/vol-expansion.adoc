@@ -32,7 +32,9 @@ Edite a definição StorageClass para definir o `allowVolumeExpansion` campo com
 [listing]
 ----
 cat storageclass-ontapsan.yaml
----
+----
+[source, yaml]
+----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
@@ -53,6 +55,9 @@ Edite a definição de PVC e atualize o `spec.resources.requests.storage` para r
 [listing]
 ----
 cat pvc-ontapsan.yaml
+----
+[source, yaml]
+----
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -120,6 +125,9 @@ Para redimensionar o PV que foi criado de 1Gi a 2Gi, edite a definição de PVC 
 [listing]
 ----
 kubectl edit pvc san-pvc
+----
+[source, yaml]
+----
 # Please edit the object below. Lines beginning with a '#' will be ignored,
 # and an empty file will abort the edit. If an error occurs while saving this file will be
 # reopened with the relevant failures.
@@ -145,7 +153,7 @@ spec:
   resources:
     requests:
       storage: 2Gi
- ...
+ # ...
 ----
 
 
@@ -186,7 +194,9 @@ Edite a definição StorageClass para definir o `allowVolumeExpansion` campo com
 [listing]
 ----
 cat storageclass-ontapsan.yaml
----
+----
+[source, yaml]
+----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
@@ -207,6 +217,9 @@ Edite a definição de PVC e atualize o `spec.resources.requests.storage` para r
 [listing]
 ----
 cat pvc-ontapsan.yaml
+----
+[source, yaml]
+----
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -274,6 +287,9 @@ Para redimensionar o PV que foi criado de 1Gi a 2Gi, edite a definição de PVC 
 [listing]
 ----
 kubectl edit pvc san-pvc
+----
+[source, yaml]
+----
 # Please edit the object below. Lines beginning with a '#' will be ignored,
 # and an empty file will abort the edit. If an error occurs while saving this file will be
 # reopened with the relevant failures.
@@ -299,7 +315,7 @@ spec:
   resources:
     requests:
       storage: 2Gi
- ...
+ # ...
 ----
 
 
@@ -337,6 +353,9 @@ Para redimensionar um PV NFS, o administrador primeiro precisa configurar a clas
 [listing]
 ----
 cat storageclass-ontapnas.yaml
+----
+[source, yaml]
+----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
@@ -355,6 +374,9 @@ Se você já criou uma classe de armazenamento sem essa opção, você pode simp
 [listing]
 ----
 cat pvc-ontapnas.yaml
+----
+[source, yaml]
+----
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -388,6 +410,9 @@ Para redimensionar o 20MiB PV recém-criado para 1GiB, edite o PVC e defina `spe
 [listing]
 ----
 kubectl edit pvc ontapnas20mb
+----
+[source, yaml]
+----
 # Please edit the object below. Lines beginning with a '#' will be ignored,
 # and an empty file will abort the edit. If an error occurs while saving this file will be
 # reopened with the relevant failures.
@@ -413,7 +438,7 @@ spec:
   resources:
     requests:
       storage: 1Gi
-...
+# ...
 ----
 
 

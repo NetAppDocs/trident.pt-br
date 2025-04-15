@@ -136,7 +136,7 @@ Depois que a instalação do complemento estiver concluída, você verá o compl
 --
 . Crie o `add-on.json` arquivo:
 +
-[source, JSON]
+[source, json]
 ----
 {
   "clusterName": "<eks-cluster>",
@@ -144,7 +144,7 @@ Depois que a instalação do complemento estiver concluída, você verá o compl
   "addonVersion": "v24.10.0-eksbuild.1",
   "serviceAccountRoleArn": "<role ARN>",
   "configurationValues": {
-    "cloudIdentity": "'cloudIdentity": "'eks.amazonaws.com/role-arn: <role ARN>'",
+    "cloudIdentity": "'cloudIdentity: eks.amazonaws.com/role-arn: <role ARN>'",
     "cloudProvider": "AWS"
   }
 }

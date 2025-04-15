@@ -51,7 +51,7 @@ Uma definição de backend de exemplo será assim:
 ====
 .YAML
 --
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -66,7 +66,7 @@ password: password
 --
 .JSON
 --
-[listing]
+[source, json]
 ----
 {
   "version": 1,
@@ -174,6 +174,9 @@ Você pode atualizar um back-end existente para usar um método de autenticaçã
 [listing]
 ----
 cat cert-backend-updated.json
+----
+[source, json]
+----
 {
 "version": 1,
 "storageDriverName": "ontap-nas",
@@ -185,7 +188,9 @@ cat cert-backend-updated.json
 "password": "password",
 "storagePrefix": "myPrefix_"
 }
-
+----
+[listing]
+----
 #Update backend with tridentctl
 tridentctl update backend NasBackend -f cert-backend-updated.json -n trident
 +------------+----------------+--------------------------------------+--------+---------+
@@ -285,7 +290,7 @@ NOTE: Não use NAT (Network Address Translation) ao usar políticas de exportaç
 
 Há duas opções de configuração que devem ser usadas. Aqui está um exemplo de definição de backend:
 
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -296,8 +301,9 @@ svm: svm1
 username: vsadmin
 password: password
 autoExportCIDRs:
-- 192.168.0.0/24
+  - 192.168.0.0/24
 autoExportPolicy: true
+
 ----
 
 NOTE: Ao usar esse recurso, você deve garantir que a junção raiz do SVM tenha uma política de exportação criada anteriormente com uma regra de exportação que permita o bloco CIDR do nó (como a política de exportação padrão). Siga sempre as melhores práticas recomendadas pela NetApp para dedicar um SVM para Trident.

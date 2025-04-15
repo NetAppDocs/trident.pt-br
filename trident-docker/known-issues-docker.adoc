@@ -21,19 +21,19 @@ Encontre informações sobre problemas e limitações conhecidos ao usar o Tride
 .Solução alternativa
 . Desative o plugin.
 +
-[listing]
+[source, console]
 ----
 docker plugin disable -f netapp:latest
 ----
 . Remova o plugin.
 +
-[listing]
+[source, console]
 ----
 docker plugin rm -f netapp:latest
 ----
 . Reinstale o plugin fornecendo o parâmetro extra `config`.
 +
-[listing]
+[source, console]
 ----
 docker plugin install netapp/trident-plugin:20.10 --alias netapp --grant-all-permissions config=config.json
 ----

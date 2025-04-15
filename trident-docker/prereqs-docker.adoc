@@ -21,7 +21,7 @@ Você precisa instalar e configurar os pré-requisitos de protocolo necessários
 * Verifique se sua implantação atende a todos link:../trident-get-started/requirements.html["requisitos"]os .
 * Verifique se você tem uma versão suportada do Docker instalada. Se a versão do Docker estiver desatualizada, https://docs.docker.com/engine/install/["instale ou atualize-o."^].
 +
-[listing]
+[source, console]
 ----
 docker --version
 ----
@@ -38,14 +38,14 @@ Instale as ferramentas NFS usando os comandos do seu sistema operacional.
 ====
 .RHEL 8 MAIS
 --
-[listing]
+[source, console]
 ----
 sudo yum install -y nfs-utils
 ----
 --
 .Ubuntu
 --
-[listing]
+[source, console]
 ----
 sudo apt-get install -y nfs-common
 ----
@@ -66,25 +66,25 @@ Instale as ferramentas iSCSI utilizando os comandos do seu sistema operativo.
 --
 . Instale os seguintes pacotes de sistema:
 +
-[listing]
+[source, console]
 ----
 sudo yum install -y lsscsi iscsi-initiator-utils sg3_utils device-mapper-multipath
 ----
 . Verifique se a versão iscsi-iniciador-utils é 6,2.0,874-2.el7 ou posterior:
 +
-[listing]
+[source, console]
 ----
 rpm -q iscsi-initiator-utils
 ----
 . Definir a digitalização para manual:
 +
-[listing]
+[source, console]
 ----
 sudo sed -i 's/^\(node.session.scan\).*/\1 = manual/' /etc/iscsi/iscsid.conf
 ----
 . Ativar multipathing:
 +
-[listing]
+[source, console]
 ----
 sudo mpathconf --enable --with_multipathd y --find_multipaths n
 ----
@@ -94,13 +94,13 @@ NOTE: Certifique-se de `etc/multipath.conf` que contém `find_multipaths no` `de
 
 . Certifique-se de que `iscsid` e `multipathd` estão a funcionar:
 +
-[listing]
+[source, console]
 ----
 sudo systemctl enable --now iscsid multipathd
 ----
 . Ativar e iniciar `iscsi`:
 +
-[listing]
+[source, console]
 ----
 sudo systemctl enable --now iscsi
 ----
@@ -111,25 +111,25 @@ sudo systemctl enable --now iscsi
 --
 . Instale os seguintes pacotes de sistema:
 +
-[listing]
+[source, console]
 ----
 sudo apt-get install -y open-iscsi lsscsi sg3-utils multipath-tools scsitools
 ----
 . Verifique se a versão Open-iscsi é 2,0.874-5ubuntu2.10 ou posterior (para bionic) ou 2,0.874-7.1ubuntu6.1 ou posterior (para focal):
 +
-[listing]
+[source, console]
 ----
 dpkg -l open-iscsi
 ----
 . Definir a digitalização para manual:
 +
-[listing]
+[source, console]
 ----
 sudo sed -i 's/^\(node.session.scan\).*/\1 = manual/' /etc/iscsi/iscsid.conf
 ----
 . Ativar multipathing:
 +
-[listing]
+[source, console]
 ----
 sudo tee /etc/multipath.conf <<-EOF
 defaults {
@@ -146,7 +146,7 @@ NOTE: Certifique-se de `etc/multipath.conf` que contém `find_multipaths no` `de
 
 . Certifique-se de que `open-iscsi` e `multipath-tools` estão ativados e em execução:
 +
-[listing]
+[source, console]
 ----
 sudo systemctl status multipath-tools
 sudo systemctl enable --now open-iscsi.service
@@ -173,7 +173,7 @@ Instale as ferramentas NVMe usando os comandos do seu sistema operacional.
 ====
 .RHEL 9
 --
-[listing]
+[source, console]
 ----
 sudo yum install nvme-cli
 sudo yum install linux-modules-extra-$(uname -r)
@@ -182,7 +182,7 @@ sudo modprobe nvme-tcp
 --
 .Ubuntu
 --
-[listing]
+[source, console]
 ----
 sudo apt install nvme-cli
 sudo apt -y install linux-modules-extra-$(uname -r)
@@ -205,13 +205,13 @@ Instale as ferramentas FC usando os comandos do seu sistema operacional.
 --
 . Instale os seguintes pacotes de sistema:
 +
-[listing]
+[source, console]
 ----
 sudo yum install -y lsscsi device-mapper-multipath
 ----
 . Ativar multipathing:
 +
-[listing]
+[source, console]
 ----
 sudo mpathconf --enable --with_multipathd y --find_multipaths n
 ----
@@ -221,7 +221,7 @@ NOTE: Certifique-se de `etc/multipath.conf` que contém `find_multipaths no` `de
 
 . Certifique-se de que `multipathd` está em execução:
 +
-[listing]
+[source, console]
 ----
 sudo systemctl enable --now multipathd
 ----
@@ -232,13 +232,13 @@ sudo systemctl enable --now multipathd
 --
 . Instale os seguintes pacotes de sistema:
 +
-[listing]
+[source, console]
 ----
 sudo apt-get install -y lsscsi sg3-utils multipath-tools scsitools
 ----
 . Ativar multipathing:
 +
-[listing]
+[source, console]
 ----
 sudo tee /etc/multipath.conf <<-EOF
 defaults {
@@ -255,7 +255,7 @@ NOTE: Certifique-se de `etc/multipath.conf` que contém `find_multipaths no` `de
 
 . Certifique-se de que `multipath-tools` está ativado e em execução:
 +
-[listing]
+[source, console]
 ----
 sudo systemctl status multipath-tools
 ----

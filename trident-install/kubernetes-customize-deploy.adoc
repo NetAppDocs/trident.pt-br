@@ -162,11 +162,10 @@ Você pode usar os atributos em <<Opções de configuração>> ao definir `Tride
 .Configuração personalizada básica
 [%collapsible]
 ====
-Este é um exemplo para uma instalação personalizada básica.
+Este exemplo, criado após executar o `cat deploy/crds/tridentorchestrator_cr_imagepullsecrets.yaml` comando, representa uma instalação personalizada básica:
 
-[listing]
+[source, yaml]
 ----
-cat deploy/crds/tridentorchestrator_cr_imagepullsecrets.yaml
 apiVersion: trident.netapp.io/v1
 kind: TridentOrchestrator
 metadata:
@@ -183,7 +182,7 @@ spec:
 ====
 Este exemplo instala o Trident com seletores de nó.
 
-[listing]
+[source, yaml]
 ----
 apiVersion: trident.netapp.io/v1
 kind: TridentOrchestrator
@@ -201,11 +200,10 @@ spec:
 .Nós de trabalho do Windows
 [%collapsible]
 ====
-Este exemplo instala o Trident em um nó de trabalho do Windows.
+Este exemplo, criado após executar o `cat deploy/crds/tridentorchestrator_cr.yaml` comando, instala o Trident em um nó de trabalho do Windows.
 
-[listing]
+[source, yaml]
 ----
-cat deploy/crds/tridentorchestrator_cr.yaml
 apiVersion: trident.netapp.io/v1
 kind: TridentOrchestrator
 metadata:
@@ -221,7 +219,7 @@ spec:
 ====
 Este exemplo instala o Trident para habilitar identidades gerenciadas em um cluster AKS.
 
-[listing]
+[source, yaml]
 ----
 apiVersion: trident.netapp.io/v1
 kind: TridentOrchestrator
@@ -238,7 +236,7 @@ spec:
 ====
 Este exemplo instala o Trident para uso com uma identidade de nuvem em um cluster AKS.
 
-[listing]
+[source, yaml]
 ----
 apiVersion: trident.netapp.io/v1
 kind: TridentOrchestrator
@@ -257,7 +255,7 @@ spec:
 ====
 Este exemplo instala o Trident para uso com uma identidade de nuvem em um cluster AKS.
 
-[listing]
+[source, yaml]
 ----
 apiVersion: trident.netapp.io/v1
 kind: TridentOrchestrator
@@ -275,7 +273,7 @@ spec:
 ====
 Este exemplo instala o Trident para uso com uma identidade de nuvem em um cluster GKE.
 
-[listing]
+[source, yaml]
 ----
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig

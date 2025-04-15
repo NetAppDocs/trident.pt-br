@@ -135,7 +135,7 @@ Considere o seguinte ao criar grupos de política de QoS:
 
 [listing]
 ----
-  ---
+---
 version: 1
 storageDriverName: ontap-nas
 managementLIF: 0.0.0.0
@@ -146,14 +146,15 @@ password: pass
 defaults:
   qosPolicy: standard-pg
 storage:
-- labels:
-    performance: extreme
-  defaults:
-    adaptiveQosPolicy: extremely-adaptive-pg
-- labels:
-    performance: premium
-  defaults:
-    qosPolicy: premium-pg
+  - labels:
+      performance: extreme
+    defaults:
+      adaptiveQosPolicy: extremely-adaptive-pg
+  - labels:
+      performance: premium
+    defaults:
+      qosPolicy: premium-pg
+
 ----
 * Você deve aplicar os grupos de políticas por volume, para que cada volume obtenha toda a taxa de transferência, conforme especificado pelo grupo de políticas. Grupos de políticas compartilhadas não são suportados.
 

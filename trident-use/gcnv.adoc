@@ -56,7 +56,7 @@ Para instalar o Trident usando o operador Trident, edite `tridentorchestrator_cr
 
 Por exemplo:
 
-[listing]
+[source, yaml]
 ----
 apiVersion: trident.netapp.io/v1
 kind: TridentOrchestrator

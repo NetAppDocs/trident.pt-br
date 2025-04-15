@@ -56,7 +56,7 @@ Uma definição de backend de exemplo será assim:
 ====
 .YAML
 --
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
@@ -70,7 +70,7 @@ password: password
 --
 .JSON
 --
-[listing]
+[source, json]
 ----
 {
   "version": 1,
@@ -266,7 +266,7 @@ Consulte as páginas a seguir para obter mais informações:
 
 O Trident pode autenticar sessões iSCSI com CHAP bidirecional para os `ontap-san` drivers e `ontap-san-economy`. Isso requer a ativação da `useCHAP` opção na definição de backend. Quando definido como `true`, o Trident configura a segurança do iniciador padrão do SVM para CHAP bidirecional e define o nome de usuário e os segredos do arquivo de back-end. O NetApp recomenda o uso de CHAP bidirecional para autenticar conexões. Veja a seguinte configuração de exemplo:
 
-[listing]
+[source, yaml]
 ----
 ---
 version: 1

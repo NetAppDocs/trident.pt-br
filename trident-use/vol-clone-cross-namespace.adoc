@@ -51,7 +51,7 @@ Para garantir a segurança, a clonagem de volumes entre namespaces requer colabo
 .Passos
 . *Proprietário do namespace de origem:* Crie o PVC (`pvc1`) no namespace de origem (`namespace1`) que concede permissão para compartilhar com o namespace de destino (`namespace2`) usando a `cloneToNamespace` anotação.
 +
-[listing]
+[source, yaml]
 ----
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -83,7 +83,7 @@ A Trident cria o PV e seu volume de storage NFS no back-end.
 . *Cluster admin:* Crie a função personalizada e kubeconfig para conceder permissão ao proprietário do namespace de destino para criar o TridentVolumeReference CR no namespace de destino(`namespace2` ).
 . *Proprietário do namespace de destino:* Crie um CredentVolumeReference CR no namespace de destino que se refere ao namespace de origem `pvc1` .
 +
-[listing]
+[source, yaml]
 ----
 apiVersion: trident.netapp.io/v1
 kind: TridentVolumeReference
@@ -96,7 +96,7 @@ spec:
 ----
 . *Proprietário do namespace de destino:* Crie um PVC (`pvc2`) no namespace de destino (`namespace2`) usando `cloneFromPVC` ou `cloneFromSnapshot` e `cloneFromNamespace` anotações para designar o PVC de origem.
 +
-[listing]
+[source, yaml]
 ----
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -114,11 +114,11 @@ spec:
     requests:
       storage: 100Gi
 ----
-+
-Limitações
-
-+
-** Para PVCs provisionados com drivers de economia ONTAP-nas, os clones somente leitura não são compatíveis.
 
 
+
+
+== Limitações
+
+* Para PVCs provisionados com drivers de economia ONTAP-nas, os clones somente leitura não são compatíveis.
 

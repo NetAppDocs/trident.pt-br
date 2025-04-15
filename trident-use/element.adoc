@@ -91,7 +91,7 @@ Consulte a tabela a seguir para obter as opções de configuração de back-end:
 | `TenantName` | Nome do locatário a utilizar (criado se não for encontrado) |  
 
 
-| `InitiatorIFace` | Restringir o tráfego iSCSI a uma interface de host específica | "padrão" 
+| `InitiatorIFace` | Restringir o tráfego iSCSI a uma interface de host específica | "predefinição" 
 
 
 | `UseCHAP` | Use CHAP para autenticar iSCSI. Trident usa CHAP. | verdadeiro 
@@ -106,7 +106,7 @@ Consulte a tabela a seguir para obter as opções de configuração de back-end:
 | `limitVolumeSize` | Falha no provisionamento se o tamanho do volume solicitado estiver acima desse valor | "" (não aplicado por padrão) 
 
 
-| `debugTraceFlags` | Debug flags para usar ao solucionar problemas. Por exemplo, "api":false, "método":true" | nulo 
+| `debugTraceFlags` | Debug flags para usar ao solucionar problemas. Por exemplo, "api":false, "method":true" | nulo 
 |===
 
 WARNING: Não use `debugTraceFlags` a menos que você esteja solucionando problemas e exija um despejo de log detalhado.
@@ -117,35 +117,34 @@ WARNING: Não use `debugTraceFlags` a menos que você esteja solucionando proble
 
 Este exemplo mostra um arquivo de back-end usando autenticação CHAP e modelagem de três tipos de volume com garantias de QoS específicas. Provavelmente você definiria classes de armazenamento para consumir cada uma delas usando o `IOPS` parâmetro de classe de armazenamento.
 
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
 storageDriverName: solidfire-san
 Endpoint: https://<user>:<password>@<mvip>/json-rpc/8.0
-SVIP: "<svip>:3260"
-TenantName: "<tenant>"
+SVIP: <svip>:3260
+TenantName: <tenant>
 labels:
   k8scluster: dev1
   backend: dev1-element-cluster
 UseCHAP: true
 Types:
-- Type: Bronze
-  Qos:
-    minIOPS: 1000
-    maxIOPS: 2000
-    burstIOPS: 4000
-- Type: Silver
-  Qos:
-    minIOPS: 4000
-    maxIOPS: 6000
-    burstIOPS: 8000
-- Type: Gold
-  Qos:
-    minIOPS: 6000
-    maxIOPS: 8000
-    burstIOPS: 10000
-
+  - Type: Bronze
+    Qos:
+      minIOPS: 1000
+      maxIOPS: 2000
+      burstIOPS: 4000
+  - Type: Silver
+    Qos:
+      minIOPS: 4000
+      maxIOPS: 6000
+      burstIOPS: 8000
+  - Type: Gold
+    Qos:
+      minIOPS: 6000
+      maxIOPS: 8000
+      burstIOPS: 10000
 ----
 
 
@@ -157,63 +156,64 @@ O Trident copia rótulos presentes em um pool de storage para a LUN de storage d
 
 No arquivo de definição de back-end de exemplo mostrado abaixo, padrões específicos são definidos para todos os pools de armazenamento, que definem o `type` em Prata. Os pools virtuais são definidos na `storage` seção. Neste exemplo, alguns dos pools de armazenamento definem seu próprio tipo, e alguns pools substituem os valores padrão definidos acima.
 
-[listing]
+[source, yaml]
 ----
 ---
 version: 1
 storageDriverName: solidfire-san
 Endpoint: https://<user>:<password>@<mvip>/json-rpc/8.0
-SVIP: "<svip>:3260"
-TenantName: "<tenant>"
+SVIP: <svip>:3260
+TenantName: <tenant>
 UseCHAP: true
 Types:
-- Type: Bronze
-  Qos:
-    minIOPS: 1000
-    maxIOPS: 2000
-    burstIOPS: 4000
-- Type: Silver
-  Qos:
-    minIOPS: 4000
-    maxIOPS: 6000
-    burstIOPS: 8000
-- Type: Gold
-  Qos:
-    minIOPS: 6000
-    maxIOPS: 8000
-    burstIOPS: 10000
+  - Type: Bronze
+    Qos:
+      minIOPS: 1000
+      maxIOPS: 2000
+      burstIOPS: 4000
+  - Type: Silver
+    Qos:
+      minIOPS: 4000
+      maxIOPS: 6000
+      burstIOPS: 8000
+  - Type: Gold
+    Qos:
+      minIOPS: 6000
+      maxIOPS: 8000
+      burstIOPS: 10000
 type: Silver
 labels:
   store: solidfire
   k8scluster: dev-1-cluster
 region: us-east-1
 storage:
-- labels:
-    performance: gold
-    cost: '4'
-  zone: us-east-1a
-  type: Gold
-- labels:
-    performance: silver
-    cost: '3'
-  zone: us-east-1b
-  type: Silver
-- labels:
-    performance: bronze
-    cost: '2'
-  zone: us-east-1c
-  type: Bronze
-- labels:
-    performance: silver
-    cost: '1'
-  zone: us-east-1d
+  - labels:
+      performance: gold
+      cost: "4"
+    zone: us-east-1a
+    type: Gold
+  - labels:
+      performance: silver
+      cost: "3"
+    zone: us-east-1b
+    type: Silver
+  - labels:
+      performance: bronze
+      cost: "2"
+    zone: us-east-1c
+    type: Bronze
+  - labels:
+      performance: silver
+      cost: "1"
+    zone: us-east-1d
+
 
 ----
 As seguintes definições do StorageClass referem-se aos pools virtuais acima. Usando o `parameters.selector` campo, cada StorageClass chama qual(s) pool(s) virtual(s) pode(m) ser(ão) usado(s) para hospedar um volume. O volume terá os aspetos definidos no pool virtual escolhido.
 
 O primeiro StorageClass ) (`solidfire-gold-four`será mapeado para o primeiro pool virtual. Este é o único pool que oferece desempenho de ouro com um `Volume Type QoS` de ouro. O último StorageClass ) (`solidfire-silver`chama qualquer pool de armazenamento que ofereça um desempenho prateado. O Trident decidirá qual pool virtual é selecionado e garante que o requisito de armazenamento seja atendido.
 
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -221,8 +221,9 @@ metadata:
   name: solidfire-gold-four
 provisioner: csi.trident.netapp.io
 parameters:
-  selector: "performance=gold; cost=4"
-  fsType: "ext4"
+  selector: performance=gold; cost=4
+  fsType: ext4
+
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -230,8 +231,9 @@ metadata:
   name: solidfire-silver-three
 provisioner: csi.trident.netapp.io
 parameters:
-  selector: "performance=silver; cost=3"
-  fsType: "ext4"
+  selector: performance=silver; cost=3
+  fsType: ext4
+
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -239,8 +241,9 @@ metadata:
   name: solidfire-bronze-two
 provisioner: csi.trident.netapp.io
 parameters:
-  selector: "performance=bronze; cost=2"
-  fsType: "ext4"
+  selector: performance=bronze; cost=2
+  fsType: ext4
+
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -248,8 +251,9 @@ metadata:
   name: solidfire-silver-one
 provisioner: csi.trident.netapp.io
 parameters:
-  selector: "performance=silver; cost=1"
-  fsType: "ext4"
+  selector: performance=silver; cost=1
+  fsType: ext4
+
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -257,8 +261,8 @@ metadata:
   name: solidfire-silver
 provisioner: csi.trident.netapp.io
 parameters:
-  selector: "performance=silver"
-  fsType: "ext4"
+  selector: performance=silver
+  fsType: ext4
 ----
 
 

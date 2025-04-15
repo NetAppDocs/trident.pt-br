@@ -91,7 +91,7 @@ O Trident oferece suporte aos seguintes drivers ONTAP para virtualização KubeV
 
 .Pontos a considerar:
 * Atualize a classe de armazenamento para ter o `fsType` parâmetro (por exemplo: `fsType: "ext4"`) No ambiente de virtualização OpenShift. Se necessário, defina o modo de volume para bloquear explicitamente usando o `volumeMode=Block` parâmetro no `dataVolumeTemplates` para notificar CDI para criar volumes de dados de bloco.
-* _RWX modo de acesso para drivers de armazenamento em bloco_: Os drivers ONTAP-san (iSCSI, NVMe/TCP, FC) e ONTAP-san-Economy (iSCSI) são suportados apenas com "VolumeMode: Block" (dispositivo bruto). Para esses drivers, o `fstype` parâmetro não pode ser usado porque os volumes são fornecidos no modo de dispositivo bruto.
+* _RWX modo de acesso para drivers de armazenamento em bloco_: Os drivers ONTAP-San (iSCSI, NVMe/TCP, FC) e ONTAP-san-Economy (iSCSI) são suportados apenas com "VolumeMode: Block" (dispositivo bruto). Para esses drivers, o `fstype` parâmetro não pode ser usado porque os volumes são fornecidos no modo de dispositivo bruto.
 * Para fluxos de trabalho de migração em tempo real em que o modo de acesso RWX é necessário, essas combinações são suportadas:
 +
 ** DE NFS `volumeMode=Filesystem`

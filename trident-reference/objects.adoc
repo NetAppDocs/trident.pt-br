@@ -118,7 +118,7 @@ Os objetos Kubernetes `StorageClass` são especificados por nome em `PersistentV
 
 Um objeto do Kubernetes `StorageClass` que usa o Trident é parecido com este:
 
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -126,8 +126,7 @@ metadata:
   name: <Name>
 provisioner: csi.trident.netapp.io
 mountOptions: <Mount Options>
-parameters:
-  <Trident Parameters>
+parameters: <Trident Parameters>
 allowVolumeExpansion: true
 volumeBindingMode: Immediate
 ----
@@ -245,7 +244,7 @@ Os objetos do Kubernetes `VolumeSnapshotClass` são análogos ao `StorageClasses
 
 A `VolumeSnapshotClass` deve ser definida por um administrador para criar instantâneos. Uma classe de instantâneo de volume é criada com a seguinte definição:
 
-[listing]
+[source, yaml]
 ----
 apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshotClass
@@ -453,7 +452,7 @@ Se você precisar de mais controle sobre a cota de recurso padrão e Classe de p
 
 O seguinte é um exemplo de um objeto 'ResourceQuota' priorizando o daemonset do Trident.
 
-[listing]
+[source, yaml]
 ----
 apiVersion: <version>
 kind: ResourceQuota
@@ -463,10 +462,11 @@ metadata:
     app: node.csi.trident.netapp.io
 spec:
   scopeSelector:
-     matchExpressions:
-       - operator : In
-         scopeName: PriorityClass
-         values: ["system-node-critical"]
+    matchExpressions:
+      - operator: In
+        scopeName: PriorityClass
+        values:
+          - system-node-critical
 ----
 Para obter mais informações sobre cotas de recursos, link:https://kubernetes.io/docs/concepts/policy/resource-quotas/["Kubernetes: Cotas de recursos"^]consulte .
 
