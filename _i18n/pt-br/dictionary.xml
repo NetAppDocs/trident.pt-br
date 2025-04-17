@@ -4431,7 +4431,6 @@
   <block id="cc37bc9830a1edb8e50e296af8ade03b" category="list-text">Escolha do cronograma de replicação (inclui recursos do Kubernetes e dados de volume persistente)</block>
   <block id="55960a396448d8f19fb182dfd2b04d90" category="list-text">Definir o tempo para a captura instantânea</block>
   <block id="7fe804bb721f10861ae38239b332f774" category="inline-link-macro">Recursos personalizados do AppVault</block>
-  <block id="38886c5d59d709a7506113ab8fa737eb" category="list-text">Crie um AppVault para o aplicativo de origem no cluster de origem. Dependendo do seu fornecedor de storage, modifique um exemplo no <block ref="789b31b0a5cabea5de04107e65439f53" category="inline-link-macro-rx"></block> para se adequar ao seu ambiente:</block>
   <block id="bb557baccf285d1ab6b4cdc32daf5848" category="open-title">Crie um AppVault usando um CR</block>
   <block id="32429298e62d70d6afc71defdbdd3c42" category="list-text">Crie o arquivo de recurso personalizado (CR) e nomeie-o (por exemplo,<block ref="0992b18d0f3771479838d4ddbaa2b097" prefix=" " category="inline-code"></block> ).</block>
   <block id="4b60a832776a25dfdf74d5dac3d3111f" category="list-text">*metadata.name*: (_required_) o nome do recurso personalizado do AppVault. Anote o nome que você escolher, porque outros arquivos CR necessários para uma relação de replicação referem-se a esse valor.</block>
@@ -4449,7 +4448,6 @@
   <block id="8af3a24bfad8f2e7a06abec1e5bc710e" category="list-text">Depois de preencher o<block ref="0992b18d0f3771479838d4ddbaa2b097" prefix=" " category="inline-code"></block> ficheiro com os valores corretos, aplique o CR:</block>
   <block id="65b1402ebaf9b35766ab033225a55f41" category="open-title">Crie um AppVault usando a CLI</block>
   <block id="d686d91628b89b1ba45ca8bf5274eece" category="list-text">Crie o AppVault, substituindo valores entre parênteses por informações do seu ambiente:</block>
-  <block id="c244d23f9be6389c5ac873426253b152" category="list-text">Criar a aplicação de origem CR:</block>
   <block id="93b7f025ad50fefb3f6b0c5ee86d6162" category="open-title">Crie o aplicativo de origem usando um CR</block>
   <block id="793bc477cba966a8d3771d018030c3c4" category="list-text">Crie o arquivo de recurso personalizado (CR) e nomeie-o (por exemplo,<block ref="3e2c6ff026eba99761434b4f79aaa782" prefix=" " category="inline-code"></block> ).</block>
   <block id="3bf6684ac69fda7ed549f87ecb72678d" category="list-text">*metadata.name*: (_required_) o nome do recurso personalizado do aplicativo. Anote o nome que você escolher, porque outros arquivos CR necessários para uma relação de replicação referem-se a esse valor.</block>
@@ -4458,8 +4456,6 @@
   <block id="948be8a05d305f0b3dece0e8dcaf4546" category="list-text">Depois de preencher o<block ref="3e2c6ff026eba99761434b4f79aaa782" prefix=" " category="inline-code"></block> ficheiro com os valores corretos, aplique o CR:</block>
   <block id="677aa747b5e08444532c7cc040384124" category="open-title">Crie o aplicativo de origem usando a CLI</block>
   <block id="feaddb5b204f8f8f1226cc6f02275f5c" category="list-text">Crie o aplicativo de origem. Por exemplo:</block>
-  <block id="2111432c46f82ea9d065a1168a7bca3d" category="list-text">Opcionalmente, tire um snapshot do aplicativo de origem. Este instantâneo é utilizado como base para a aplicação no cluster de destino. Se você pular esta etapa, precisará esperar que o próximo snapshot agendado seja executado para que você tenha um snapshot recente.</block>
-  <block id="84caf200e79d5962bc7f3516e9ad328c" category="open-title">Tire um instantâneo usando um CR</block>
   <block id="929d5ad53cad5d51ead7578004e2d5e5" category="list-text">Crie um agendamento de replicação para o aplicativo de origem:</block>
   <block id="57cc31c4785dfe52bb22cc8d375a3b67" category="list-text">Crie o arquivo de recurso personalizado (CR) e nomeie-o (por exemplo,<block ref="8898becea7c9a79dd32acb9c34818b46" prefix=" " category="inline-code"></block> ).</block>
   <block id="87918fdbe5607aeceec3ec53bc40a2f8" category="list-text">*metadata.name*: (_required_) o nome do recurso personalizado de agendamento.</block>
@@ -4471,14 +4467,10 @@
   <block id="8c33ed4b89c2cd001ffad0203fe3c3b6" category="list-text">*Spec.recurrenceRule*: Defina uma data de início no horário UTC e um intervalo de recorrência.</block>
   <block id="35ef995e5b9fe2ba99491ff849d63302" category="list-text">*Spec.snapshotRetention*: Deve ser definido como 2.</block>
   <block id="7c6d1c687b69c90909ec8375ac84883e" category="list-text">Depois de preencher o<block ref="8898becea7c9a79dd32acb9c34818b46" prefix=" " category="inline-code"></block> ficheiro com os valores corretos, aplique o CR:</block>
-  <block id="3feb4a62c8b59cd52ae22845d363c901" category="open-title">Tire um instantâneo usando a CLI</block>
-  <block id="a1e2bc47f1a3bfef13f10398ea862ec3" category="list-text">Crie um aplicativo de origem AppVault CR no cluster de destino idêntico ao AppVault CR aplicado no cluster de origem e nomeie-o (por exemplo,<block ref="3ad9e8b652d0a9a977e2534bf143ea29" prefix=" " category="inline-code"></block> ).</block>
   <block id="04a53b4d2f7e20d9df207bfb6beb6ee7" category="list-text">Aplicar o CR:</block>
-  <block id="b90466d65b799b761b892272fec2c528" category="list-text">Crie um AppVault para o aplicativo de destino no cluster de destino. Dependendo do seu fornecedor de storage, modifique um exemplo no <block ref="789b31b0a5cabea5de04107e65439f53" category="inline-link-macro-rx"></block> para se adequar ao seu ambiente:</block>
   <block id="d5ab09bc69c7800783bce2e14f2e456f" category="list-text">Crie o arquivo de recurso personalizado (CR) e nomeie-o (por exemplo,<block ref="b851e4210e3875aa9242df636b0b3068" prefix=" " category="inline-code"></block> ).</block>
   <block id="7fab67e3c762a0a044dd84f11a740dd7" category="list-text">*spec.providerConfig*: (_required_) armazena a configuração necessária para acessar o AppVault usando o provedor especificado. Escolha um<block ref="070a97dcde31faecac1fc843e205039c" prefix=" " category="inline-code"></block> e quaisquer outros detalhes necessários para o seu provedor. Anote os valores que você escolher, porque outros arquivos CR necessários para uma relação de replicação se referem a esses valores. <block ref="789b31b0a5cabea5de04107e65439f53" category="inline-link-macro-rx"></block>Consulte para obter exemplos de AppVault CRS com outros provedores.</block>
   <block id="4758f7c104e1f75364dadc9f8310e51d" category="list-text">Depois de preencher o<block ref="b851e4210e3875aa9242df636b0b3068" prefix=" " category="inline-code"></block> ficheiro com os valores corretos, aplique o CR:</block>
-  <block id="852c44e158b3265857137f38ef65ac49" category="list-text">Crie um arquivo CR AppMirrorRelationship:</block>
   <block id="15e5c4ea8565e669f02393ab1d7b1021" category="open-title">Crie um AppMirrorRelationship usando um CR</block>
   <block id="3ca407ea70946200511f8d2e1008f20f" category="list-text">Crie o arquivo de recurso personalizado (CR) e nomeie-o (por exemplo,<block ref="e4fba3915616865173fe7feee130a30f" prefix=" " category="inline-code"></block> ).</block>
   <block id="52e868ab750f66344086c9bc5d6dadeb" category="list-text">*metadata.name:* (obrigatório) o nome do recurso personalizado AppMirrorRelationship.</block>
@@ -4492,26 +4484,20 @@
   <block id="86d47ead9019d8e9c93c863f7ab4e41b" category="list-text">(_Optional_) Verifique o estado e o estado da relação de replicação:</block>
   <block id="70cc2bec279e168711b67e789468c45c" category="section-title">Failover para o cluster de destino</block>
   <block id="196c4df78e5add7c9590d6a1c18367ec" category="paragraph">Com o Trident Protect, você pode fazer failover de aplicações replicadas para um cluster de destino. Este procedimento interrompe a relação de replicação e coloca a aplicação online no cluster de destino. O Trident Protect não interrompe o aplicativo no cluster de origem se ele estiver operacional.</block>
-  <block id="ffb2e8a8e2a97e36799531c053229941" category="list-text">Abra o arquivo CR do AppMirrorRelationship (por exemplo,<block ref="e4fba3915616865173fe7feee130a30f" prefix=" " category="inline-code"></block> ) e altere o valor de *spec.desiredState* para<block ref="2c42d7d277f63fcbe64b041b997ceaed" prefix=" " category="inline-code"></block>.</block>
   <block id="2d258c624d61d2388efacfc246d2439e" category="list-text">Salve o arquivo CR.</block>
   <block id="66ccf267a388b1a30a7530a93ea5ce18" category="list-text">(_Optional_) Crie todos os programas de proteção que você precisa no aplicativo com falha.</block>
   <block id="ea7117a895b98283737d3855ef6a2adc" category="section-title">Ressincronizar uma relação de replicação com falha</block>
   <block id="c91dda18aff454993264381ffa25993f" category="paragraph">A operação ressincronizada restabelece a relação de replicação. Depois de executar uma operação ressincronizada, o aplicativo de origem original se torna o aplicativo em execução e quaisquer alterações feitas no aplicativo em execução no cluster de destino serão descartadas.</block>
   <block id="86e073f24d64b270ed8fd6bac00280eb" category="paragraph">O processo pára o aplicativo no cluster de destino antes de restabelecer a replicação.</block>
   <block id="63a5fb6889ac843fec3c274399995a88" category="admonition">Todos os dados gravados na aplicação de destino durante o failover serão perdidos.</block>
-  <block id="40b77bd147004d34167c59a33489e3ca" category="list-text">Crie um instantâneo do aplicativo de origem.</block>
-  <block id="b0952495915865cc8c4cee9f26959545" category="list-text">Abra o arquivo CR do AppMirrorRelationship (por exemplo,<block ref="e4fba3915616865173fe7feee130a30f" prefix=" " category="inline-code"></block> ) e altere o valor de spec.desiredState para<block ref="072f9734fceb02f516b50d4174ac0f18" prefix=" " category="inline-code"></block>.</block>
   <block id="c7e41946fafafcb541aaa5a67635b607" category="list-text">Se você criou quaisquer programações de proteção no cluster de destino para proteger o aplicativo com falha, remova-os. Quaisquer programações restantes causam falhas de snapshot de volume.</block>
   <block id="6e81bcb9e218ada350c173457300a0ed" category="section-title">Ressincronização reversa de uma relação de replicação com falha</block>
   <block id="b29e882c5e41f060c9261101cb1cab06" category="paragraph">Quando você faz a ressincronização reversa de uma relação de replicação com falha, o aplicativo de destino se torna o aplicativo de origem e a origem se torna o destino. As alterações feitas na aplicação de destino durante o failover são mantidas.</block>
-  <block id="6916d76a20f4ca4fffa219680ae6e418" category="list-text">Exclua o AppMirrorRelationship CR no cluster de destino original. Isso faz com que o destino se torne a fonte. Se houver planos de proteção restantes no novo cluster de destino, remova-os.</block>
   <block id="3c890586eb43d0d71cdcb47011358420" category="list-text">Configure uma relação de replicação aplicando os arquivos CR usados originalmente para configurar a relação com os clusters opostos.</block>
-  <block id="e4d13c88dbb2196550655288d4cf351a" category="list-text">Certifique-se de que o AppVault CRS esteja pronto em cada cluster.</block>
   <block id="8a427fa57d96e74516c008754320b521" category="list-text">Configure uma relação de replicação no cluster oposto, configurando valores para a direção inversa.</block>
   <block id="792322eb4a0bf1a122100fc009041d9b" category="section-title">Sentido de replicação da aplicação inversa</block>
   <block id="eb89cf8a1850f41e41a65f7b65ec9c87" category="paragraph">Quando você inverte a direção da replicação, o Trident Protect move o aplicativo para o back-end de storage de destino e continua replicando de volta para o back-end de storage de origem original. O Trident Protect interrompe a aplicação de origem e replica os dados para o destino antes de fazer o failover para a aplicação de destino.</block>
   <block id="4625c1e6ccf2351ad9a08dcee33270c8" category="paragraph">Nesta situação, você está trocando a origem e o destino.</block>
-  <block id="06275f61faab68bc1c01a07a41aadfed" category="list-text">Criar um instantâneo de encerramento:</block>
   <block id="4f902591d45de06985f0af6d869c8a04" category="open-title">Crie um instantâneo de encerramento utilizando um CR</block>
   <block id="1f6c30c2bcecec90eda54cd7038f326b" category="list-text">Desative as programações de políticas de proteção para o aplicativo de origem.</block>
   <block id="4a4cfa535eb9cd705b5999ffaa6a738b" category="list-text">Criar um ficheiro ShutdownSnapshot CR:</block>
@@ -4521,9 +4507,6 @@
   <block id="4390dd9bb73a0c56ac3c54b54b1fe51a" category="list-text">Depois de preencher o<block ref="9bab8384d1fd26e8737f71771039462f" prefix=" " category="inline-code"></block> ficheiro com os valores corretos, aplique o CR:</block>
   <block id="f450395b52edc310f6e53fe1a9e24477" category="open-title">Crie um instantâneo de encerramento usando a CLI</block>
   <block id="01eb7f0adf446989c265a6179909de7b" category="list-text">Crie o instantâneo de encerramento, substituindo valores entre parênteses por informações do seu ambiente. Por exemplo:</block>
-  <block id="5c29a32288e71f1820e4af984e4616d6" category="list-text">Após a conclusão do snapshot, obtenha o status do snapshot:</block>
-  <block id="eae3a231fcdd07328a039c0bd1b3ebdf" category="list-text">Encontre o valor de *shutdownsnapshot.status.appArchivePath* usando o seguinte comando, e Registre a última parte do caminho do arquivo (também chamado de basename; isso será tudo após a última barra):</block>
-  <block id="9facdd349a186c792ec6a26f5b938472" category="list-text">Execute um failover do cluster de destino para o cluster de origem, com a seguinte alteração:</block>
   <block id="bdd0666b03fe73dd725c0376fdb435e0" category="admonition">Na etapa 2 do procedimento de failover, inclua o<block ref="60464bee8fcac84cb209df68a2b05fba" prefix=" " category="inline-code"></block> campo no arquivo AppMirrorRelationship CR e defina seu valor para o nome de base registrado na etapa 3 acima.</block>
   <block id="ab486212bb19e45c8e71532739574a22" category="list-text">Ative programações de proteção no novo cluster de origem.</block>
   <block id="aea4fd534bd3152673956c6bbd7c115c" category="paragraph">As seguintes ações ocorrem devido à replicação reversa:</block>
@@ -4539,7 +4522,6 @@
   <block id="9cbd7771b861e31b5edb23d83de4758c" category="list-text">Comece com um estado com falha em excesso.</block>
   <block id="39d2beed854377dcad2ea22fe9e58477" category="section-title">Excluir uma relação de replicação</block>
   <block id="a6c87e2b66308cd117a39af0fdac9885" category="paragraph">Você pode excluir um relacionamento de replicação a qualquer momento. Quando você exclui a relação de replicação do aplicativo, isso resulta em dois aplicativos separados sem relação entre eles.</block>
-  <block id="146012b834b7d1f68305ff2495a1beb7" category="list-text">Excluir o AppMirrorRelationship CR:</block>
   <block id="c4407b1cc5192fe600872654a5ffe223" category="list-text">Adição de novos recursos do Trident para workflows nativos do Kubernetes:</block>
   <block id="7e7397a7b79323762c61941fc0e6b5f9" category="list-text">Proteção de dados</block>
   <block id="5866b98c049a53ea6dc7f50f9349f434" category="list-text">Migração de dados</block>
@@ -5460,4 +5442,23 @@
   <block id="5a71b77feca506fc8eba218b4e65048b" category="paragraph">O Trident restaura os dados do snapshot. Você pode verificar o status de restauração de snapshot:</block>
   <block id="9d577c00c4cbb5d99e7a8a6589113669" category="paragraph">Ao excluir um volume persistente com instantâneos associados, o volume Trident correspondente é atualizado para um "estado de exclusão". Remova os instantâneos de volume para excluir o volume Trident.</block>
   <block id="27e9bd9989c090489f69126b9910d7d8" category="list-text">Você também pode obter logs de depuração para cada back-end, incluindo<block ref="effa2d809c72dcb6cce15a1e0b040e63" prefix=" " category="inline-code"></block> na sua definição de back-end. Por exemplo, inclua<block ref="825a719baa5b5b7445c98535815fac39" prefix=" " category="inline-code"></block> para obter chamadas de API e transversais de método nos logs do Trident. Os backends existentes podem ter<block ref="effa2d809c72dcb6cce15a1e0b040e63" prefix=" " category="inline-code"></block> sido configurados com um<block ref="ad782b779edfd8199198bed41b3e3b6b" prefix=" " category="inline-code"></block>.</block>
+  <block id="1e8493e925b9f37d24c0573c08c6643a" category="list-text">No cluster de origem, crie um AppVault para o aplicativo de origem. Dependendo do seu fornecedor de storage, modifique um exemplo no <block ref="789b31b0a5cabea5de04107e65439f53" category="inline-link-macro-rx"></block> para se adequar ao seu ambiente:</block>
+  <block id="a42a308559809e0fc20b13ea51d5d3d4" category="list-text">No cluster de origem, crie a aplicação de origem CR:</block>
+  <block id="75ffc8eca312c20c922ba2b9df1fde04" category="list-text">Opcionalmente, no cluster de origem, faça um snapshot de desligamento do aplicativo de origem. Este instantâneo é utilizado como base para a aplicação no cluster de destino. Se você pular esta etapa, precisará esperar que o próximo snapshot agendado seja executado para que você tenha um snapshot recente.</block>
+  <block id="663f822dd7baf35b6905a0333070ed81" category="open-title">Tire um instantâneo de encerramento utilizando um CR</block>
+  <block id="15b08a67c1cea1e1d7463ca2d0c98610" category="open-title">Faça um instantâneo de encerramento usando a CLI</block>
+  <block id="85d88f09b637997959adc6d50a42d56f" category="list-text">No cluster de destino, crie um aplicativo de origem AppVault CR idêntico ao AppVault CR aplicado no cluster de origem e nomeie-o (por exemplo,<block ref="3ad9e8b652d0a9a977e2534bf143ea29" prefix=" " category="inline-code"></block> ).</block>
+  <block id="8af8219e9797756f7e348dd40e365632" category="list-text">Crie um AppVault CR de destino para o aplicativo de destino no cluster de destino. Dependendo do seu fornecedor de storage, modifique um exemplo no <block ref="789b31b0a5cabea5de04107e65439f53" category="inline-link-macro-rx"></block> para se adequar ao seu ambiente:</block>
+  <block id="f454fc9c64d31c07a352c043fe184940" category="list-text">No cluster de destino, crie um arquivo CR AppMirrorRelationship:</block>
+  <block id="3d9dc864aeb5b914422a6a665c53ceeb" category="list-text">(_Optional_) no cluster de destino, verifique o estado e o estado da relação de replicação:</block>
+  <block id="fe07abfd92e0d0809a7eb71ce3f79b4b" category="list-text">No cluster de destino, edite o arquivo CR AppMirrorRelationship (por exemplo,<block ref="e4fba3915616865173fe7feee130a30f" prefix=" " category="inline-code"></block> ) e altere o valor de *spec.desiredState* para<block ref="2c42d7d277f63fcbe64b041b997ceaed" prefix=" " category="inline-code"></block>.</block>
+  <block id="2ebd442ba9080ba8f10b660fd69bb379" category="list-text">Opcional: No cluster de origem, crie um instantâneo do aplicativo de origem. Isso garante que as alterações mais recentes do cluster de origem sejam capturadas.</block>
+  <block id="4d77fef9f6bd1f87593e41a1d32a7ea4" category="list-text">No cluster de destino, edite o arquivo CR AppMirrorRelationship (por exemplo,<block ref="e4fba3915616865173fe7feee130a30f" prefix=" " category="inline-code"></block> ) e altere o valor de spec.desiredState para<block ref="072f9734fceb02f516b50d4174ac0f18" prefix=" " category="inline-code"></block>.</block>
+  <block id="cd7eea117bba074d0250983f81bb10e4" category="list-text">No cluster de destino original, exclua o AppMirrorRelationship CR. Isso faz com que o destino se torne a fonte. Se houver planos de proteção restantes no novo cluster de destino, remova-os.</block>
+  <block id="5ca8234bb17898bdaa8421e9bab83a0b" category="list-text">Certifique-se de que o novo destino (cluster de origem original) esteja configurado com o AppVault CRS.</block>
+  <block id="e319bd320145e358af8fd5dbada2d800" category="list-text">No cluster de origem, crie um instantâneo de encerramento:</block>
+  <block id="47d8460d4aa2253d733ecb9b355e4319" category="list-text">No cluster de origem, após a conclusão do instantâneo de encerramento, obtenha o status do instantâneo de encerramento:</block>
+  <block id="00e7f88da8b7690738f8546262d2fe54" category="list-text">No cluster de origem, encontre o valor de *shutdownsnapshot.status.appArchivePath* usando o seguinte comando, e Registre a última parte do caminho do arquivo (também chamado de basename; isso será tudo após a última barra):</block>
+  <block id="579f2feb3d9edaa336d3ccb69c3fb855" category="list-text">Faça um failover do novo cluster de destino para o novo cluster de origem, com a seguinte alteração:</block>
+  <block id="23b4dec181e41ab3962cf73b28ffe58c" category="list-text">No cluster de dessinização atual, exclua o AppMirrorRelationship CR:</block>
 </blocks>
