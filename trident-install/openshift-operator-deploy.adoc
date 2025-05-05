@@ -1,0 +1,62 @@
+---
+sidebar: sidebar 
+permalink: trident-get-started/openshift-operator-deploy.html 
+keywords: deploy, trident, methods, operator, openshift, operatorhub 
+summary: Se você usar o Red Hat OpenShift, você pode instalar o Trident usando um operador. 
+---
+= Instale o Trident usando o OpenShift OperatorHub
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se você usar o Red Hat OpenShift, você pode instalar o NetApp Trident usando o operador certificado Red Hat. Use este procedimento para instalar o Trident a partir da Plataforma de contêiner do Red Hat OpenShift.
+
+.Antes de começar
+Antes de iniciar a instalação, link:../trident-get-started/requirements.html/["Prepare seu ambiente para a instalação do Trident"].
+
+
+
+== Localize e instale o operador Trident
+
+.Passos
+. Navegue até o OpenShift OperatorHub e procure por NetApp Trident.
++
+image::../media/openshift-operator-01.png[Operador Trident]
+
+. Clique em *Instalar*.
++
+image::../media/openshift-operator-02.png[Instale]
+
+. Selecione as opções necessárias e clique em *Instalar*.
++
+image::../media/openshift-operator-03.png[Instale]
+
+. Uma vez concluída a instalação, o operador fica visível na lista de operadores instalados.
++
+image::../media/openshift-operator-04.png[Instalado]
+
+. Crie um TORC como a instalação do pacote do operador.
+
+
+
+
+== Desinstale o operador Trident
+
+.Passos
+. Selecione o operador Trident na lista de operador instalado.
++
+image::../media/openshift-operator-05.png[Instale]
+
+. Selecione se pretende eliminar toda a instância do operador.
++
+image::../media/openshift-operator-06.png[Instalado]
+
++
+
+WARNING: Se você não selecionar a caixa de seleção *Excluir todas as instâncias operand deste operador*, o Trident não será desinstalado.
+
+. Clique em *Desinstalar*.
+

@@ -1,0 +1,58 @@
+---
+sidebar: sidebar 
+permalink: trident-get-started/openshift-certified-operator-deploy.html 
+keywords: deploy, trident, methods, operator, openshift, operatorhub, certified operator, community operator 
+summary: Se você usar o Red Hat OpenShift, você pode instalar o Trident usando um operador. 
+---
+= Mude do operador comunitário Trident para o operador certificado OpenShift
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Para mudar do Operador de Trident da Comunidade NetApp para o Operador de Trident certificado OpenShift da Red Hat, você precisará desinstalar o operador da comunidade e, em seguida, instalar o operador certificado usando o Operator Hub.
+
+.Antes de começar
+Antes de iniciar a instalação, link:../trident-get-started/requirements.html/["Prepare seu ambiente para a instalação do Trident"].
+
+
+
+== Desinstale o operador da comunidade NetApp Trident
+
+.Passos
+. Use o console OpenShift para navegar até o OperatorHub.
++
+image::../media/openshift-operator-05.png[Instale]
+
+. Encontre o operador da comunidade NetApp Trident.
++
+image::../media/openshift-operator-06.png[Instalado]
+
++
+
+WARNING: Não selecione *Excluir todas as instâncias operand deste operador*.
+
+. Clique em *Desinstalar*.
+
+
+
+
+== Instale o Operador certificado OpenShift
+
+.Passos
+. Navegue até o Red Hat OperatorHub.
+. Procure e selecione o Operador NetApp Trident.
++
+image::../media/openshift-operator-05.png[Instale]
+
+. Siga as instruções apresentadas no ecrã para instalar o operador.
+
+
+
+
+== Verificação
+
+* Verifique o OperatorHub na consola para garantir que o novo operador certificado foi instalado com sucesso.
+
