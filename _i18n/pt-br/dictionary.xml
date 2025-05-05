@@ -5116,7 +5116,6 @@
   <block id="fc61af20b92225aae2a169587940eb14" category="doc">Clonar volumes entre namespaces</block>
   <block id="7d3b4ba16dd9908f0a9572976f62cb92" category="paragraph">Com o Trident, você pode criar novos volumes usando volumes existentes ou volumes de volume a partir de um namespace diferente dentro do mesmo cluster do Kubernetes.</block>
   <block id="12bf911acc3865647e24aa6cc61fad9d" category="paragraph">Antes de clonar volumes, certifique-se de que os backends de origem e destino são do mesmo tipo e têm a mesma classe de armazenamento.</block>
-  <block id="0338234dde0d63169da560597ab080e5" category="paragraph">Você pode configurar a clonagem de volume NFS em apenas algumas etapas.</block>
   <block id="9e556d1188a1d7d3f911546d9c8f70f1" category="paragraph-title"><block ref="58f667aaf05f87159670e12bd9bc076b" category="inline-image-macro-rx" type="image"></block> Configure o PVC de origem para clonar o volume</block>
   <block id="4f371bbe8ba542b2ca00eb9f3a3a2716" category="paragraph-title"><block ref="beadfa85a2fdca06b91edc1131c603e6" category="inline-image-macro-rx" type="image"></block> Crie o clone PVC no namespace de destino</block>
   <block id="a77fe76c8980416f14767484ab56a324" category="paragraph">O proprietário do namespace de destino cria PVC para clonar o PVC a partir do namespace de origem.</block>
@@ -5483,4 +5482,6 @@
   <block id="0e9e7400617f4a815b5ec92f2030b580" category="sidebar">Instale usando o operador certificado OpenShift</block>
   <block id="93e4eff1c01241084bfc9427074bacea" category="sidebar">Instale o Trident usando o OpenShift OperatorHub</block>
   <block id="c9e3d6c8fc80db4773cf69e205f2b571" category="sidebar">Mude do operador comunitário Trident para o operador certificado OpenShift</block>
+  <block id="88f2acec92adfdf94ffec73a8fda60a6" category="paragraph">Você pode configurar a clonagem de volume em apenas algumas etapas.</block>
+  <block id="e44a637a848aa60ef27cfc477d692412" category="paragraph">O Trident cria o PV e seu volume de armazenamento de back-end.</block>
 </blocks>
