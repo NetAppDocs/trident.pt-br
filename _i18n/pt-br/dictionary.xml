@@ -5454,7 +5454,6 @@
   <block id="c282cc9924716a0ecdcc1864c8821950" category="doc">Mude do operador comunitário Trident para o operador certificado OpenShift</block>
   <block id="92da9bfce4b6635fcf5d3f3725accbbc" category="paragraph">Para mudar do Operador de Trident da Comunidade NetApp para o Operador de Trident certificado OpenShift da Red Hat, você precisará desinstalar o operador da comunidade e, em seguida, instalar o operador certificado usando o Operator Hub.</block>
   <block id="cec1c482e499b4748371d5e19359dacd" category="inline-link-macro">Prepare seu ambiente para a instalação do Trident</block>
-  <block id="32bc521a76f74eeb913f8006ab760ef5" category="paragraph">Antes de iniciar a instalação, <block ref="77baaa0182ec347ebf1b91f8f0f5fa8c" category="inline-link-macro-rx"></block>.</block>
   <block id="82c3da1e712e572f424c3b7bf7dafcaf" category="section-title">Desinstale o operador da comunidade NetApp Trident</block>
   <block id="ae76609b28371ddbc9f46be837040994" category="list-text">Use o console OpenShift para navegar até o OperatorHub.</block>
   <block id="349838fb1d851d3e2014b9fe39203275" category="image-alt">Instale</block>
@@ -5484,4 +5483,5 @@
   <block id="c9e3d6c8fc80db4773cf69e205f2b571" category="sidebar">Mude do operador comunitário Trident para o operador certificado OpenShift</block>
   <block id="88f2acec92adfdf94ffec73a8fda60a6" category="paragraph">Você pode configurar a clonagem de volume em apenas algumas etapas.</block>
   <block id="e44a637a848aa60ef27cfc477d692412" category="paragraph">O Trident cria o PV e seu volume de armazenamento de back-end.</block>
+  <block id="9f965f02f635b760a84c43d43aba854f" category="paragraph">Antes de iniciar a instalação, <block ref="a24ee29cd883cbf52de58a68b0fed1a7" category="inline-link-macro-rx"></block>.</block>
 </blocks>
