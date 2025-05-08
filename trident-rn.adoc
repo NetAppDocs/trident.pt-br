@@ -19,7 +19,27 @@ WARNING: O `tridentctl` binário para Linux que é fornecido no arquivo zip do i
 
 
 
-== Novidades em 25,02
+== Novidades em 25.02.1
+
+
+
+=== Trident
+
+
+
+==== Correções
+
+* *Kubernetes*:
++
+** Corrigido um problema no operador Trident em que nomes e versões de imagens sidecar eram incorretamente preenchidos ao usar um Registro de imagem não padrão (link:https://github.com/NetApp/trident/issues/983["Problema nº 983"]).
+** Corrigido o problema em que as sessões multipath não recuperavam durante um failover do ONTAP (link:https://github.com/NetApp/trident/issues/961["Problema nº 961"]).
+
+
+
+
+
+
+== Mudanças em 25,02
 
 A partir do Trident 25,02, o resumo Novidades fornece detalhes sobre melhorias, correções e descontinuações para versões do Trident e do Trident Protect.
 
@@ -103,6 +123,28 @@ O NetApp Trident Protect oferece recursos avançados de gerenciamento de dados d
 * As anotações SCC são agora restauradas para os valores originais.
 * Eficiência de restauração aprimorada com suporte para operações paralelas.
 * Suporte aprimorado para hook timeouts de execução para aplicativos maiores.
+
+
+
+
+== Mudanças em 24.10.1
+
+
+
+=== Melhorias
+
+* *Kubernetes*: Adicionado suporte ao Kubernetes 1,32.
+* Foi adicionada a deteção e o registo do estado da ligação iSCSI quando as sessões iSCSI devem ser efetuadas, mas não são (link:https://github.com/NetApp/trident/issues/961["Problema nº 961"]).
+
+
+
+
+=== Correções
+
+* Corrigido endereços IP de nó ausentes das políticas de exportação automática (link:https://github.com/NetApp/trident/issues/965["Problema nº 965"]).
+* Políticas de exportação automáticas fixas alternando prematuramente para política de volume por ONTAP-nas-Economy.
+* Dependências do Trident e do Trident-ASUP atualizadas para endereçar CVE-2024-45337 e CVE-2024-45310.
+* Logouts removidos para portais não CHAP não-CHAP intermitentemente insalubres durante a auto-recuperação iSCSI (link:https://github.com/NetApp/trident/issues/961["Problema nº 961"]).
 
 
 
