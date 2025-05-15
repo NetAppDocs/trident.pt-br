@@ -319,7 +319,7 @@ O serviço de log pode, opcionalmente, ser implantado tanto para aplicativos qua
 A configuração das variáveis do Ansible de acordo com o método de implantação é importante para garantir que o storage correto seja utilizado pelos serviços subjacentes. Vejamos as opções para cada um dos métodos de implantação.
 
 
-NOTE: As tabelas abaixo contêm apenas as variáveis relevantes para a configuração de armazenamento, uma vez que se refere ao serviço de registo. Você pode encontrar outras opções nas link:https://docs.openshift.com/container-platform/3.11/install_config/aggregate_logging.html["Documentação de Registro do RedHat OpenShift"^] quais devem ser revisadas, configuradas e usadas de acordo com sua implantação.
+NOTE: As tabelas abaixo contêm apenas as variáveis relevantes para a configuração de armazenamento, uma vez que se refere ao serviço de registo. Você pode encontrar outras opções nas link:https://docs.openshift.com/container-platform/3.11/install_config/aggregate_logging.html["Documentação de Registro do Red Hat OpenShift"^] quais devem ser revisadas, configuradas e usadas de acordo com sua implantação.
 
 As variáveis na tabela abaixo resultarão no manual do Ansible criando um PV e PVC para o serviço de Registro usando os detalhes fornecidos. Esse método é significativamente menos flexível do que usar o manual de instalação de componentes após a instalação do OpenShift, no entanto, se você tiver volumes existentes disponíveis, é uma opção.
 
@@ -378,7 +378,7 @@ Se o cluster do OpenShift já estiver em execução e, portanto, o Trident tiver
 
 Se você estiver implantando o log como parte do processo inicial de instalação do OpenShift, então você só precisará seguir o processo de implantação padrão. O Ansible configurará e implantará os serviços necessários e os objetos OpenShift para que o serviço fique disponível assim que o Ansible for concluído.
 
-No entanto, se você estiver implantando após a instalação inicial, o manual de estratégia de componentes precisará ser usado pelo Ansible. Este processo pode mudar ligeiramente com versões diferentes do OpenShift, portanto, certifique-se de ler e seguir link:https://docs.openshift.com/container-platform/3.11/welcome/index.html["Documentação do RedHat OpenShift Container Platform 3,11"^] para a sua versão.
+No entanto, se você estiver implantando após a instalação inicial, o manual de estratégia de componentes precisará ser usado pelo Ansible. Este processo pode mudar ligeiramente com versões diferentes do OpenShift, portanto, certifique-se de ler e seguir link:https://docs.openshift.com/container-platform/3.11/welcome/index.html["Documentação do Red Hat OpenShift Container Platform 3,11"^] para a sua versão.
 
 
 
@@ -434,4 +434,4 @@ Se o cluster do OpenShift já estiver em execução e, portanto, o Trident tiver
 
 Com as variáveis apropriadas do Ansible definidas no arquivo de hosts/inventário, implante o serviço com o Ansible. Se você estiver implantando no horário de instalação do OpenShift, o PV será criado e usado automaticamente. Se você estiver implantando usando os playbooks de componentes, após a instalação do OpenShift, o Ansible criará todos os PVCs necessários e, depois que o Trident provisionou o storage para eles, implantará o serviço.
 
-As variáveis acima, e o processo de implantação, podem mudar com cada versão do OpenShift. Certifique-se de rever e seguir link:https://docs.openshift.com/container-platform/3.11/install_config/cluster_metrics.html["Guia de implantação do OpenShift da RedHat"^] a sua versão para que ela seja configurada para o seu ambiente.
+As variáveis acima, e o processo de implantação, podem mudar com cada versão do OpenShift. Certifique-se de rever e seguir link:https://docs.openshift.com/container-platform/3.11/install_config/cluster_metrics.html["Guia de implantação do OpenShift da Red Hat"^] a sua versão para que ela seja configurada para o seu ambiente.

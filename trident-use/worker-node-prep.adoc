@@ -18,7 +18,7 @@ Todos os nós de trabalho no cluster do Kubernetes precisam ser capazes de monta
 
 == Selecionar as ferramentas certas
 
-Se você estiver usando uma combinação de drivers, você deve instalar todas as ferramentas necessárias para seus drivers. Versões recentes do RedHat CoreOS têm as ferramentas instaladas por padrão.
+Se você estiver usando uma combinação de drivers, você deve instalar todas as ferramentas necessárias para seus drivers. Versões recentes do Red Hat Enterprise Linux CoreOS (RHCOS) têm as ferramentas instaladas por padrão.
 
 .Ferramentas NFS
 link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#nfs-volumes["Instalar as ferramentas NFS"] se estiver a utilizar: `ontap-nas`, `ontap-nas-economy`, `ontap-nas-flexgroup`, , , `azure-netapp-files` `gcp-cvs` .
@@ -140,7 +140,7 @@ Instale as ferramentas iSCSI utilizando os comandos do seu sistema operativo.
 ----
 sudo sed -i 's/^\(node.session.auth.chap_algs\).*/\1 = MD5/' /etc/iscsi/iscsid.conf
 ----
-* Ao usar nós de trabalho que executam RHEL/RedHat CoreOS com iSCSI PVs, especifique a `discard` mountOption no StorageClass para executar a recuperação de espaço em linha. Consulte a https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_file_systems/discarding-unused-blocks_managing-file-systems["Documentação da RedHat"^].
+* Ao usar nós de trabalho que executam RHEL/Red Hat Enterprise Linux CoreOS (RHCOS) com iSCSI PVs, especifique a `discard` mountOption no StorageClass para executar a recuperação de espaço em linha. Consulte a https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_file_systems/discarding-unused-blocks_managing-file-systems["Documentação da Red Hat"^].
 
 
 [role="tabbed-block"]
@@ -367,7 +367,7 @@ Consulte a seguinte documentação do ONTAP para obter detalhes:
 
 Instale as ferramentas FC usando os comandos do seu sistema operacional.
 
-* Ao usar nós de trabalho que executam RHEL/RedHat CoreOS com FC PVs, especifique a `discard` mountOption no StorageClass para executar a recuperação de espaço em linha. Consulte a https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_file_systems/discarding-unused-blocks_managing-file-systems["Documentação da RedHat"^].
+* Ao usar nós de trabalho que executam RHEL/Red Hat Enterprise Linux CoreOS (RHCOS) com FC PVs, especifique a `discard` mountOption no StorageClass para executar a recuperação de espaço em linha. Consulte a https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_file_systems/discarding-unused-blocks_managing-file-systems["Documentação da Red Hat"^].
 
 
 [role="tabbed-block"]
