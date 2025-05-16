@@ -418,7 +418,7 @@ Para obter mais detalhes sobre classes de armazenamento, link:../trident-use/cre
 
 === Definições de exemplo para volumes SMB
 
-Usando `nasType`, `node-stage-secret-name` e  `node-stage-secret-namespace`, você pode especificar um volume SMB e fornecer as credenciais necessárias do ative Directory.
+Usando `nasType`, `node-stage-secret-name` e  `node-stage-secret-namespace`, você pode especificar um volume SMB e fornecer as credenciais necessárias do ative Directory. Qualquer usuário/senha do ative Directory com nenhuma ou nenhuma permissão pode ser usada para o segredo da etapa do nó.
 
 .Configuração básica no namespace padrão
 [%collapsible]
