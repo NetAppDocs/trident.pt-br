@@ -228,7 +228,7 @@ Para instalações com ar-gapped, a lista a seguir é uma referência das imagen
 * docker.io/NetApp/Trident-AutoSupport:25,02
 * provisionador do registry.k8s.io/sig-storage/csi:v5,2.0
 * registry.k8s.io/sig-storage/csi-attacher:v4,8.0
-* registry.k8s.io/sig-storage/csi-resizer:v1.13.2
+* registry.k8s.io/sig-storage/csi-resizer:v1.13.1
 * registry.k8s.io/sig-storage/csi-snapshotter:v8,2.0
 * registry.k8s.io/sig-storage/csi-node-driver-registrador:v2.13.0
 * docker.io/NetApp/Trident-operador:25.02.0 (opcional)
