@@ -18,7 +18,7 @@ Entenda os requisitos, as opções de autenticação e as políticas de exporta�
 
 == Requisitos
 
-* Para todos os back-ends do ONTAP, o Trident requer pelo menos um agregado atribuído ao SVM.
+* Para todos os backends ONTAP, o Trident exige que pelo menos um agregado seja atribuído ao SVM.
 * Você pode executar mais de um driver e criar classes de armazenamento que apontam para um ou outro. Por exemplo, você pode configurar uma classe Gold que usa o `ontap-nas` driver e uma classe Bronze que usa o `ontap-nas-economy` um.
 * Todos os seus nós de trabalho do Kubernetes precisam ter as ferramentas NFS apropriadas instaladas. link:worker-node-prep.html["aqui"]Consulte para obter mais detalhes.
 * O Trident dá suporte a volumes SMB montados em pods executados apenas em nós do Windows. <<Prepare-se para provisionar volumes SMB>>Consulte para obter detalhes.
