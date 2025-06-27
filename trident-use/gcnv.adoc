@@ -81,7 +81,7 @@ O exemplo a seguir instala o Trident e define `cloudProvider` o GCP usando a var
 
 [listing]
 ----
-helm install trident trident-operator-100.2502.0.tgz --set cloudProvider=$CP --set cloudIdentity="$ANNOTATION"
+helm install trident trident-operator-100.6.0.tgz --set cloudProvider=$CP --set cloudIdentity="$ANNOTATION"
 ----
 --
 .<code>dtridentctl</code>

@@ -49,12 +49,9 @@ O Trident Protect suporta os seguintes backends de armazenamento:
 
 Certifique-se de que o back-end de storage atenda aos seguintes requisitos:
 
-* Certifique-se de que o storage NetApp conectado ao cluster esteja usando o Astra Trident 24,02 ou mais recente (recomenda-se o Trident 24,10).
-+
-** Se o Astra Trident for mais antigo que a versão 24.06.1 e você planeja usar a funcionalidade de recuperação de desastres do NetApp SnapMirror, é necessário habilitar manualmente o Supervisor de Controle Astra.
+* Certifique-se de que o armazenamento NetApp conectado ao cluster esteja usando o Trident 24.02 ou mais recente (Trident 24.10 é recomendado).
 
 
-* Certifique-se de que você tem o mais recente software de previsão Astra Control (instalado e habilitado por padrão a partir do Astra Trident 24.06.1).
 * Verifique se você tem um back-end de storage do NetApp ONTAP.
 * Certifique-se de ter configurado um bucket de armazenamento de objetos para armazenar backups.
 * Crie namespaces de aplicações que você planeja usar para aplicações ou operações de gerenciamento de dados de aplicações. O Trident Protect não cria esses namespaces para você; se você especificar um namespace inexistente em um recurso personalizado, a operação falhará.
@@ -90,6 +87,9 @@ NOTE: Você pode habilitar diretórios de snapshot por padrão para novos volume
 
 O Trident Protect 24,10 e 24.10.1 e versões mais recentes têm comportamento diferente quando você protege aplicativos em execução em VMs KubeVirt. Para ambas as versões, você pode ativar ou desativar o congelamento e o descongelamento do sistema de arquivos durante operações de proteção de dados.
 
+
+NOTE: Durante as operações de restauração, qualquer  `VirtualMachineSnapshots` criados para uma máquina virtual (VM) não são restaurados.
+
 .Trident Protect 24,10
 O Trident Protect 24,10 não garante automaticamente um estado consistente para os sistemas de arquivos da VM do KubeVirt durante operações de proteção de dados. Se você quiser proteger seus dados da VM KubeVirt usando o Trident Protect 24,10, você precisa ativar manualmente a funcionalidade congelar/descongelar para os sistemas de arquivos antes da operação de proteção de dados. Isso garante que os sistemas de arquivos estejam em um estado consistente.
 
@@ -124,13 +124,22 @@ A replicação do NetApp SnapMirror está disponível para uso com o Trident Pro
 
 Se você planeja usar a replicação do SnapMirror, verifique se o cluster do ONTAP atende aos seguintes requisitos:
 
-* *Parceiro de Controle Astra ou Trident*: O Trident ou o Provisioner do Astra Control devem existir nos clusters do Kubernetes de origem e destino que utilizam o ONTAP como um back-end. O Trident Protect oferece suporte à replicação com a tecnologia NetApp SnapMirror usando classes de armazenamento com os seguintes drivers:
+* *NetApp Trident*: O NetApp Trident deve existir nos clusters Kubernetes de origem e destino que utilizam o ONTAP como backend. O Trident Protect oferece suporte à replicação com a tecnologia NetApp SnapMirror usando classes de armazenamento com os seguintes drivers:
 +
-** `ontap-nas`
-** `ontap-san`
+** `ontap-nas` : NFS
+** `ontap-san` : iSCSI
+** `ontap-san` :FC
+** `ontap-san` : NVMe/TCP (requer no mínimo a versão ONTAP 9.15.1)
 
 
 * *Licenças*: As licenças assíncronas do ONTAP SnapMirror usando o pacote proteção de dados devem estar ativadas nos clusters ONTAP de origem e destino.  https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html["Visão geral do licenciamento do SnapMirror no ONTAP"^]Consulte para obter mais informações.
++
+A partir do ONTAP 9.10,1, todas as licenças são entregues como um arquivo de licença NetApp (NLF), que é um único arquivo que permite vários recursos. link:https://docs.netapp.com/us-en/ontap/system-admin/manage-licenses-concept.html#licenses-included-with-ontap-one["Licenças incluídas no ONTAP One"^]Consulte para obter mais informações.
+
++
+
+NOTE: Somente a proteção assíncrona SnapMirror é suportada.
+
 
 
 
@@ -144,9 +153,8 @@ Certifique-se de que seu ambiente atenda aos seguintes requisitos se você plane
 
 NOTE: Certifique-se de que os nomes do SVM usados na relação de replicação entre dois clusters ONTAP sejam exclusivos.
 
-* *Supervisor de Controle Astra ou Trident e SVM*: Os SVMs remotos em Contato devem estar disponíveis para o Astra Control Provisioner ou Trident no cluster de destino.
+* *NetApp Trident e SVM*: Os SVMs remotos pareados devem estar disponíveis para o NetApp Trident no cluster de destino.
 * *Backends gerenciados*: Você precisa adicionar e gerenciar backends de armazenamento ONTAP no Trident Protect para criar uma relação de replicação.
-* *NVMe em TCP*: O Trident Protect não oferece suporte à replicação NetApp SnapMirror para back-ends de armazenamento que estejam usando o protocolo NVMe em TCP.
 
 
 

@@ -16,9 +16,13 @@ summary: Você pode usar o Trident Protect para restaurar seu aplicativo a parti
 [role="lead"]
 Você pode usar o Trident Protect para restaurar seu aplicativo a partir de um snapshot ou backup. A restauração a partir de um instantâneo existente será mais rápida ao restaurar o aplicativo para o mesmo cluster.
 
+[NOTE]
+====
+* Quando você restaura um aplicativo, todos os ganchos de execução configurados para o aplicativo são restaurados com o aplicativo. Se um gancho de execução pós-restauração estiver presente, ele será executado automaticamente como parte da operação de restauração.
+* A restauração de um backup para um namespace diferente ou para o namespace original é suportada para volumes qtree. No entanto, a restauração de um snapshot para um namespace diferente ou para o namespace original não é suportada para volumes qtree.
 
-NOTE: Quando você restaura um aplicativo, todos os ganchos de execução configurados para o aplicativo são restaurados com o aplicativo. Se um gancho de execução pós-restauração estiver presente, ele será executado automaticamente como parte da operação de restauração.
 
+====
 
 
 == Anotações e rótulos de namespace durante operações de restauração e failover
@@ -97,6 +101,22 @@ A tabela a seguir ilustra o estado do namespace de destino de exemplo após a op
 * banco de dados
 
 
+|===
+
+
+== Anotações suportadas
+
+Esta seção lista as anotações suportadas para configurar diversos comportamentos no sistema. Se uma anotação não for definida explicitamente pelo usuário, o sistema usará o valor padrão.
+
+[cols="1,1,3,1"]
+|===
+| Anotação | Tipo | Descrição | Valor padrão 
+
+
+| protect.trident.netapp.io/data-mover-timeout-sec | cadeia de carateres | O tempo máximo (em segundos) permitido para a operação do movimentador de dados ser interrompida. | 300 
+
+
+| protect.trident.netapp.io/kopia-content-cache-size-limit-mb | número inteiro | O limite máximo de tamanho (em megabytes) para o cache de conteúdo do Kopia. | 1000 
 |===
 
 

@@ -100,6 +100,18 @@ NOTE: Você pode configurar o Trident Protect para congelar e descongelar sistem
 
 
 
+== Ganchos de execução durante operações de failover e reverso
+
+Ao usar o relacionamento do AppMirror para proteger seu aplicativo, há comportamentos específicos relacionados aos ganchos de execução dos quais você deve estar ciente durante operações de failover e reverso.
+
+* Durante o failover, os ganchos de execução são copiados automaticamente do cluster de origem para o cluster de destino. Não é necessário recriá-los manualmente. Após o failover, os ganchos de execução permanecem presentes no aplicativo e serão executados durante quaisquer ações relevantes.
+* Durante a sincronização reversa ou ressincronização reversa, quaisquer ganchos de execução existentes no aplicativo são removidos. Quando o aplicativo de origem se torna o aplicativo de destino, esses ganchos de execução não são válidos e são excluídos para impedir sua execução.
+
+
+Para saber mais sobre ganchos de execução, consulte link:../trident-protect/trident-protect-use-execution-hooks.html["Gerenciar ganchos de execução do Trident Protect"] .
+
+
+
 == Configure uma relação de replicação
 
 A configuração de uma relação de replicação envolve o seguinte:
@@ -216,11 +228,21 @@ tridentctl-protect create app <my-app-name> --namespaces <namespaces-to-be-inclu
 
 --
 ====
-. Opcionalmente, no cluster de origem, faça um snapshot de desligamento do aplicativo de origem. Este instantâneo é utilizado como base para a aplicação no cluster de destino. Se você pular esta etapa, precisará esperar que o próximo snapshot agendado seja executado para que você tenha um snapshot recente.
+. Opcionalmente, no cluster de origem, faça um snapshot do aplicativo de origem. Este instantâneo é utilizado como base para a aplicação no cluster de destino. Se você pular esta etapa, precisará esperar que o próximo snapshot agendado seja executado para que você tenha um snapshot recente.
++
+[NOTE]
+====
+Além do cronograma fornecido abaixo, recomenda-se criar um cronograma de snapshots diários separado, com um período de retenção de 7 dias, para manter um snapshot comum entre clusters ONTAP pareados. Isso garante que os snapshots fiquem disponíveis por até 7 dias, mas o período de retenção pode ser personalizado de acordo com as necessidades do usuário.
+
+Em caso de failover, o sistema pode usar esses snapshots por até 7 dias para operações reversas. Essa abordagem torna o processo de reversão mais rápido e eficiente, pois apenas as alterações feitas desde o último snapshot serão transferidas, e não todos os dados.
+
+Se um cronograma existente para o aplicativo já atender aos requisitos de retenção desejados, nenhum cronograma adicional será necessário.
+
+====
 +
 [role="tabbed-block"]
 ====
-.Tire um instantâneo de encerramento utilizando um CR
+.Tire um instantâneo usando um CR
 --
 .. Crie um agendamento de replicação para o aplicativo de origem:
 +
@@ -271,7 +293,7 @@ kubectl apply -f trident-protect-schedule.yaml -n my-app-namespace
 
 
 --
-.Faça um instantâneo de encerramento usando a CLI
+.Tire um instantâneo usando a CLI
 --
 .. Crie o snapshot, substituindo valores entre parênteses por informações do seu ambiente. Por exemplo:
 +

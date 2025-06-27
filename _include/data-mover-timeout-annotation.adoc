@@ -1,0 +1,34 @@
+= Anotação de tempo limite do movimentador de dados
+:allow-uri-read: 
+
+
+
+
+== Anotação de tempo limite do movimentador de dados
+
+Durante as operações de backup e restauração, você pode usar a anotação  `protect.trident.netapp.io/data-mover-timeout-sec` para configurar o tempo limite para operações de movimentação de dados. Esta anotação especifica o tempo máximo, em segundos, que um movimentador de dados deve aguardar a conclusão de uma operação específica antes de atingir o tempo limite. É particularmente útil em situações em que problemas de rede ou outros fatores podem causar a paralisação das operações de movimentação de dados. Ela ajuda a detectar e lidar com operações paralisadas, em vez de definir um tempo limite geral para todo o processo. Por exemplo, se não houver progresso na restauração dos dados do volume devido a problemas de rede, a operação atingirá o tempo limite com base na duração especificada.
+
+Você pode usar esta anotação no seu arquivo YAML, conforme mostrado abaixo:
+
+[source, yaml]
+----
+---
+apiVersion: protect.trident.netapp.io/v1
+kind: BackupRestore
+metadata:
+  name: bkp-restore-kopia
+  namespace: trident-protect
+  annotations: # Optional annotations to configure data movement timeout
+    protect.trident.netapp.io/data-mover-timeout-sec: "2"
+spec:
+  appVaultRef: appvault-name
+  appArchivePath: my-backup-path
+  namespaceMapping: [{"source": "my-source-namespace", "destination": "my-destination-namespace"}]
+  storageClassMapping:
+    destination: "${destinationStorageClass}"
+    source: "${sourceStorageClass}"
+----
+Neste exemplo, a anotação falha  `BackupRestore` operação se não houver progresso dentro de 2 segundos na operação de restauração.
+
+
+NOTE: Se o valor da anotação for menor ou igual a 0, a operação falhará imediatamente.
