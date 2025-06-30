@@ -69,6 +69,13 @@ NOTE: Se você selecionar Substituir para o método de resolução de conflitos,
 +
 image::../media/aws-eks-06.png[aws eks 06]
 
+
+
+
+NOTE: Pule esta etapa se estiver usando a associação de identidade do Pod.
+
+E
+
 . Selecione *criar*.
 . Verifique se o status do complemento é _ative_.
 +

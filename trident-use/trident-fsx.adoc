@@ -77,7 +77,7 @@ Para obter detalhes sobre como ativar a autenticação, consulte a autenticaçã
 
 == Imagens de máquinas da Amazon testadas (AMIS)
 
-O cluster do EKS é compatível com vários sistemas operacionais, mas a AWS otimizou determinadas AMIS (Amazon Machine Images) para contêineres e EKS. Os AMIS a seguir foram testados com o Trident 24,10.
+O cluster do EKS é compatível com vários sistemas operacionais, mas a AWS otimizou determinadas AMIS (Amazon Machine Images) para contêineres e EKS. As seguintes AMIs foram testadas com o NetApp Trident 25.02.
 
 |===
 
@@ -85,33 +85,34 @@ O cluster do EKS é compatível com vários sistemas operacionais, mas a AWS oti
 | AMI | NAS | Economia nas | SAN | SAN-economia 
 
 
-| AL2023_x86_64_STANDARD | Sim | Sim | Sim | Sim 
+| AL2023_x86_64_STANDARD | Sim | Sim | Sim* | Sim* 
 
 
 | AL2_x86_64 | Sim | Sim | Sim** | Sim** 
 
 
-| BOTTLEROCKET_x86_64 | Sim* | Sim | N/A. | N/A. 
+| BOTTLEROCKET_x86_64 | Sim*** | Sim | N/A. | N/A. 
 
 
-| AL2023_ARM_64_STANDARD | Sim | Sim | Sim | Sim 
+| AL2023_ARM_64_STANDARD | Sim | Sim | Sim* | Sim* 
 
 
 | AL2_ARM_64 | Sim | Sim | Sim** | Sim** 
 
 
-| BOTTLEROCKET_ARM_64 | Sim* | Sim | N/A. | N/A. 
+| BOTTLEROCKET_ARM_64 | Sim*** | Sim | N/A. | N/A. 
 |===
-* *Deve usar "nolock" nas opções de montagem.
+* * Suporta nodePrep somente com iSCSI.
 * ** Não é possível excluir o PV sem reiniciar o nó
+* *** Não funciona com NFSv3 com Trident versão 25.02, mas funciona com a versão 24.10. Funciona com NFSv4.1 em ambas as versões.
 
 
 
-NOTE: Se o seu IAM desejado não está listado aqui, isso não significa que ele não é suportado; simplesmente significa que ele não foi testado. Esta lista serve como um guia para AMIS conhecido por funcionar.
+NOTE: Se o seu IAM desejado não está listado aqui, isso não significa que ele não é suportado; simplesmente significa que ele não foi testado. Esta lista serve como um guia para AMIs que são conhecidas por funcionar.
 
 *Testes realizados com*:
 
-* Versão EKS: 1,30
+* Versão EKS: 1,31
 * Método de instalação: Helm e como um suplemento da AWS
 * Para nas, tanto o NFSv3 quanto o NFSv4,1 foram testados.
 * Para SAN, apenas o iSCSI foi testado, não o NVMe-of.
