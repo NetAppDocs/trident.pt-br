@@ -8,7 +8,7 @@ summary: A NetApp está continuamente melhorando e aprimorando seus produtos e s
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
-:imagesdir: ../media/
+:imagesdir: ./media/
 
 
 [role="lead"]

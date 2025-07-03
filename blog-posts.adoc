@@ -8,7 +8,7 @@ summary: Você pode encontrar alguns ótimos blogs NetApp Trident e Trident Prot
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
-:imagesdir: ../media/
+:imagesdir: ./media/
 
 
 [role="lead"]

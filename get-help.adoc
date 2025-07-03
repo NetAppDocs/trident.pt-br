@@ -8,7 +8,7 @@ summary: O NetApp fornece suporte para Trident de várias maneiras. Amplas opç�
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
-:imagesdir: ../media/
+:imagesdir: ./media/
 
 
 [role="lead"]

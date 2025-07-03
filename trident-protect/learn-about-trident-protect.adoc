@@ -7,7 +7,7 @@ summary: O Trident Protect permite que você proteja seus aplicativos e dados de
 = Saiba mais sobre o Trident Protect
 :allow-uri-read: 
 :icons: font
-:imagesdir: ./media/
+:imagesdir: ../media/
 
 
 [role="lead"]

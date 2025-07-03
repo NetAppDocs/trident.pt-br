@@ -5499,7 +5499,6 @@
   <block id="0ae48837f8ebc5da6e90828852d02027" category="admonition">Esta etapa não é necessária para a versão 25.06 e posteriores.</block>
   <block id="ed98e5c2a168d1606df0370fe371df28" category="paragraph">Ao atualizar a partir da versão 24.10, os snapshots executados durante a atualização podem falhar. Essa falha não impede a criação de snapshots futuros, sejam eles manuais ou agendados. Se um snapshot falhar durante a atualização, você pode criar um novo snapshot manualmente para garantir a proteção do seu aplicativo.</block>
   <block id="756accba0f305693c47126f932bd7ac6" category="paragraph">Para evitar possíveis falhas, você pode desabilitar todos os agendamentos de snapshots antes da atualização e reabilitá-los posteriormente. No entanto, isso resultará na perda de snapshots agendados durante o período de atualização.</block>
-  <block id="814a37dc29d2671dd3cdbf3982ee4a85" category="admonition">Esta etapa é necessária se você estiver atualizando de uma versão anterior à 25.06, pois os CRDs agora estão incluídos no gráfico do Trident Protect Helm.</block>
   <block id="8e903b2b577c535f6f70248f34e61228" category="list-text">Execute este comando para mudar o gerenciamento de CRDs de <block ref="23901a54edbcff97a89483ac3112545c" prefix=" " category="inline-code"></block> para <block ref="9a82c7a4099124e5bfaa83e7c5997bd4" prefix=" " category="inline-code"></block> :</block>
   <block id="da4df818678014568aed9623276fd9f5" category="list-text">Execute este comando para excluir o segredo do Helm para o <block ref="23901a54edbcff97a89483ac3112545c" prefix=" " category="inline-code"></block> gráfico:</block>
   <block id="aeea10a9d4e3d29e20b749a201f0ae46" category="admonition">Não desinstale o <block ref="23901a54edbcff97a89483ac3112545c" prefix=" " category="inline-code"></block> gráfico usando o Helm, pois isso pode remover seus CRDs e quaisquer dados relacionados.</block>
@@ -5561,7 +5560,6 @@
   <block id="9bfdfc993711fd8c92649ae6040af106" category="list-text">Problema corrigido em que as operações de divisão de clones estavam sendo feitas de forma síncrona ao usar a API REST do ONTAP.</block>
   <block id="d7061136425214e6ed7ba38910be5772" category="section-title">Depreciações:</block>
   <block id="eb0a31990fe8d3afbb4177136e0a9c3b" category="list-text">*Kubernetes*: Kubernetes mínimo suportado atualizado para v1.27.</block>
-  <block id="9b6a034e6854c5f27feb3ac185829f8d" category="section-title">Trident Protect</block>
   <block id="df6370ee6ad8bc05b4c28dc223a119ea" category="list-text">Tempos de restauração melhorados, oferecendo a opção de fazer backups completos mais frequentes.</block>
   <block id="6d133839389fad9d044a57e7cd98852e" category="list-text">Granularidade aprimorada da definição do aplicativo e restauração seletiva com filtragem Grupo-Versão-Tipo (GVK).</block>
   <block id="d22659d02ebeb222423ac210fcf66e17" category="list-text">Ressincronização eficiente e replicação reversa ao usar o AppMirrorRelationship (AMR) com o NetApp SnapMirror, para evitar a replicação completa de PVC.</block>
@@ -5703,4 +5701,5 @@
   <block id="5e93028f6e11493fcce0c15271413cc3" category="list-text">Adicionado suporte para ONTAP ASA r2 para NVMe/TCP além de iSCSI. <block ref="0ffed2115293f61a0df2b3c8f01851e1" category="inline-link-macro-rx"></block>Consulte .</block>
   <block id="674d1c5daba14e57bb12199e316a830d" category="list-text">Adicionado suporte SMB seguro para volumes ONTAP-NAS e ONTAP-NAS-Economy. Usuários e grupos do Active Directory agora podem ser usados com volumes SMB para maior segurança. <block ref="4f989a35378d98430cb4c4899de0cc08" category="inline-link-macro-rx"></block>Consulte .</block>
   <block id="68e904dfe8bbc558c556cc39aaca54b6" category="list-text">Adicionado suporte para replicação de volume com SnapMirror para backends NVMe. <block ref="0837d9a30d067376d83aa60bb79334f8" category="inline-link-macro-rx"></block>Consulte .</block>
+  <block id="afce633f05d99c109d2b0429ee891495" category="admonition">Esta etapa é necessária se você estiver atualizando de uma versão anterior à 25.06, pois os CRDs agora estão incluídos no gráfico do Trident Protect Helm.</block>
 </blocks>

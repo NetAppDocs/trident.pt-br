@@ -8,7 +8,7 @@ summary: Você pode usar o seletor de versão para navegar entre a versão mais 
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
-:imagesdir: ../media/
+:imagesdir: ./media/
 
 
 [role="lead"]
