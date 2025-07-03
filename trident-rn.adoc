@@ -42,7 +42,7 @@ O resumo de novidades fornece detalhes sobre melhorias, correções e descontinu
 ** Limpeza LUKS aprimorada para dispositivos LUKS com falha, mas parcialmente formatados.
 ** Idempotência de nó Trident aprimorada para conexão e desanexação de volume NVMe.
 ** Adicionado  `internalID` campo para a configuração do volume Trident para o driver ONTAP-SAN-Economy.
-** Adicionado suporte para replicação de volume com SnapMirror para backends NVMe. link:../trident-use/vol-volume-replicate.html["Replique volumes usando o SnapMirror"^]Consulte .
+** Adicionado suporte para replicação de volume com SnapMirror para backends NVMe. link:https://docs.netapp.com/us-en/trident/trident-use/vol-volume-replicate.html["Replique volumes usando o SnapMirror"^]Consulte .
 
 
 
