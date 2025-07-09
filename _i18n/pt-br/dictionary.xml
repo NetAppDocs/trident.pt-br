@@ -5702,4 +5702,5 @@
   <block id="674d1c5daba14e57bb12199e316a830d" category="list-text">Adicionado suporte SMB seguro para volumes ONTAP-NAS e ONTAP-NAS-Economy. Usuários e grupos do Active Directory agora podem ser usados com volumes SMB para maior segurança. <block ref="4f989a35378d98430cb4c4899de0cc08" category="inline-link-macro-rx"></block>Consulte .</block>
   <block id="68e904dfe8bbc558c556cc39aaca54b6" category="list-text">Adicionado suporte para replicação de volume com SnapMirror para backends NVMe. <block ref="0837d9a30d067376d83aa60bb79334f8" category="inline-link-macro-rx"></block>Consulte .</block>
   <block id="afce633f05d99c109d2b0429ee891495" category="admonition">Esta etapa é necessária se você estiver atualizando de uma versão anterior à 25.06, pois os CRDs agora estão incluídos no gráfico do Trident Protect Helm.</block>
+  <block id="78ba3dee1dfae1136825fa94b594e8b0" category="paragraph"><block ref="b370fec489f67cf82a40d70295a9ea9a" category="inline-xref-macro-rx"></block></block>
 </blocks>
