@@ -2700,7 +2700,6 @@
   <block id="036c0eabd455d8a92d350429f2f5747e" category="cell">Grupo de políticas de QoS adaptável a atribuir para volumes criados. Escolha uma das qosPolicy ou adaptiveQosPolicy por pool de armazenamento/backend</block>
   <block id="b8ae61dc50cf8e8b79e68bc4a8d36393" category="cell"><block ref="0f179ba2bc32ab5d8f60692f5b800c86" prefix="" category="inline-code"></block></block>
   <block id="a56dcba8eacdac67fb510e1434d560d8" category="inline-link-macro">Usar a configuração de chave unificada do Linux (LUKS)</block>
-  <block id="e29a6d196232b6cdf3ae52f871ba291b" category="cell">Ativar encriptação LUKS. <block ref="569f9f91cdcc19909b8acbf6f423daf7" category="inline-link-macro-rx"></block>Consulte a . A criptografia LUKS não é compatível com NVMe/TCP.</block>
   <block id="d981d675ba14b9478a2c2da5c7df780b" category="cell">Tamanho máximo de FlexVol requestable ao usar LUNs no back-end ONTAP-san-econômico.</block>
   <block id="e6e049b4753c744e95db32b0eeed8d5c" category="paragraph">Atualmente, o redimensionamento é a única maneira de usar o novo cálculo para um volume existente.</block>
   <block id="4930386ddaad825d64732ee9ec5e65b8" category="example-title">Exemplo de SAN ONTAP</block>
@@ -5703,4 +5702,5 @@
   <block id="68e904dfe8bbc558c556cc39aaca54b6" category="list-text">Adicionado suporte para replicação de volume com SnapMirror para backends NVMe. <block ref="0837d9a30d067376d83aa60bb79334f8" category="inline-link-macro-rx"></block>Consulte .</block>
   <block id="afce633f05d99c109d2b0429ee891495" category="admonition">Esta etapa é necessária se você estiver atualizando de uma versão anterior à 25.06, pois os CRDs agora estão incluídos no gráfico do Trident Protect Helm.</block>
   <block id="78ba3dee1dfae1136825fa94b594e8b0" category="paragraph"><block ref="b370fec489f67cf82a40d70295a9ea9a" category="inline-xref-macro-rx"></block></block>
+  <block id="b71ccf1062cee8c376a7eb37e3c42603" category="cell">Ativar encriptação LUKS. <block ref="569f9f91cdcc19909b8acbf6f423daf7" category="inline-link-macro-rx"></block>Consulte a .</block>
 </blocks>
