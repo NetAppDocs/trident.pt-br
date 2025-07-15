@@ -55,6 +55,9 @@ Cada back-end provisiona volumes em uma única região do Google Cloud. Para cri
 | `serviceLevel` | O nível de serviço de um pool de storage e seus volumes. Os valores são `flex`, `standard`, `premium`, `extreme` ou . |  
 
 
+| `labels` | Conjunto de rótulos arbitrários formatados em JSON para aplicar em volumes | "" 
+
+
 | `network` | Rede do Google Cloud usada para volumes GCNV. |  
 
 
