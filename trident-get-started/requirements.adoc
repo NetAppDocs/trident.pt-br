@@ -108,8 +108,6 @@ O Trident suporta os seguintes drivers ONTAP para virtualização KubeVirt e Ope
 
 A tabela abaixo resume os recursos disponíveis com esta versão do Trident e as versões do Kubernetes compatíveis.
 
-<<check for 25.06>>
-
 [cols="3"]
 |===
 | Recurso | Versão do Kubernetes | É necessário ter portões? 
@@ -219,8 +217,6 @@ link:../trident-reference/ports.html["Portas Trident"]
 == Imagens de contêineres e versões correspondentes do Kubernetes
 
 Para instalações com ar-gapped, a lista a seguir é uma referência das imagens de contentor necessárias para instalar o Trident. Use o `tridentctl images` comando para verificar a lista de imagens de contentor necessárias.
-
-<<check for 25.06>>
 
 [cols="2"]
 |===
