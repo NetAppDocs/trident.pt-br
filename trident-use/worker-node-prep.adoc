@@ -141,6 +141,7 @@ Instale as ferramentas iSCSI utilizando os comandos do seu sistema operativo.
 sudo sed -i 's/^\(node.session.auth.chap_algs\).*/\1 = MD5/' /etc/iscsi/iscsid.conf
 ----
 * Ao usar nós de trabalho que executam RHEL/Red Hat Enterprise Linux CoreOS (RHCOS) com iSCSI PVs, especifique a `discard` mountOption no StorageClass para executar a recuperação de espaço em linha. Consulte a https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_file_systems/discarding-unused-blocks_managing-file-systems["Documentação da Red Hat"^].
+* Certifique-se de ter atualizado para a versão mais recente do  `multipath-tools` .
 
 
 [role="tabbed-block"]
