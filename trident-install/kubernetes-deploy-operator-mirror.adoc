@@ -16,7 +16,7 @@ Você pode implantar manualmente o operador Trident para instalar o Trident. Est
 
 
 
-== Informações críticas sobre o Trident 25,05
+== Informações críticas sobre o Trident 25,06
 
 *Você deve ler as seguintes informações críticas sobre o Trident.*
 
