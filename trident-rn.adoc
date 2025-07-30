@@ -268,7 +268,7 @@ O NetApp Trident Protect oferece recursos avançados de gerenciamento de dados d
 * Tamanho mínimo de volume Azure NetApp Files reduzido para 50 GiB. O novo tamanho mínimo do Azure deverá estar disponível em novembro.
 * Parâmetro de configuração adicionado `denyNewVolumePools` para restringir drivers de economia ONTAP-nas e economia ONTAP-SAN a pools FlexVol pré-existentes.
 * Adição, remoção ou renomeação de agregados do SVM em todos os drivers ONTAP.
-* Adicionada sobrecarga de 18MiB TB aos LUNs LUKS para garantir que o tamanho de PVC relatado seja utilizável.
+* Adicionou 18 MiB de sobrecarga aos LUNs LUKS para garantir que o tamanho de PVC relatado seja utilizável.
 * Estágio de nó ONTAP-SAN e ONTAP-SAN aprimorado e manipulação de erros de desinstalação para permitir a remoção do estágio para remover dispositivos após um estágio com falha.
 * Adicionado um gerador de funções personalizado, permitindo que os clientes criem um papel minimalista para o Trident no ONTAP.
 * Adicionado registo adicional para resolução de problemas `lsscsi` (link:https://github.com/NetApp/trident/issues/792["Problema nº 792"]).
@@ -374,7 +374,7 @@ A partir do lançamento de 24,10, o Astra Trident é renomeado para Trident (Net
 * Falhas de instalação do Trident fixas devido a transações obsoletas.
 * Corrigido o tridentctl para ignorar mensagens de aviso do Kubernetes (link:https://github.com/NetApp/trident/issues/892["Problema nº 892"]).
 * A prioridade do controlador Trident foi alterada `SecurityContextConstraint` para `0` (link:https://github.com/NetApp/trident/issues/887["Problema nº 887"] ).
-* Os drivers ONTAP agora aceitam tamanhos de volume abaixo de 20MiB (link:https://github.com/NetApp/trident/issues/885["Problema[ n.o 885"] ).
+* Os drivers ONTAP agora aceitam tamanhos de volume abaixo de 20 MiB ( link:https://github.com/NetApp/trident/issues/885["Problema[ n.o 885"] ).
 * Corrigido Trident para evitar a redução de volumes FlexVol durante a operação de redimensionamento para o driver ONTAP-SAN.
 * Falha fixa de importação de volume do ANF com NFS v4,1.
 
