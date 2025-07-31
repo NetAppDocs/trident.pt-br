@@ -163,7 +163,8 @@ Verifique se você tem o seguinte antes de configurar o complemento do Trident p
 ----
 {
 
-  "cloudIdentity": "'eks.amazonaws.com/role-arn: <role ARN>'"
+  "cloudIdentity": "'eks.amazonaws.com/role-arn: <role ARN>'",
+  "cloudProvider": "AWS"
 
 }
 ----
@@ -189,7 +190,7 @@ Depois que a instalação do complemento estiver concluída, você verá o compl
 {
   "clusterName": "<eks-cluster>",
   "addonName": "netapp_trident-operator",
-  "addonVersion": "v25.02.1-eksbuild.1",
+  "addonVersion": "v25.6.0-eksbuild.1",
 }
 ----
 *Para autenticação IRSA, use o seguinte formato*:
@@ -199,7 +200,7 @@ Depois que a instalação do complemento estiver concluída, você verá o compl
 {
   "clusterName": "<eks-cluster>",
   "addonName": "netapp_trident-operator",
-  "addonVersion": "v25.02.1-eksbuild.1",
+  "addonVersion": "v25.6.0-eksbuild.1",
   "serviceAccountRoleArn": "<role ARN>",
   "configurationValues": {
     "cloudIdentity": "'eks.amazonaws.com/role-arn: <role ARN>'",
@@ -256,7 +257,7 @@ O exemplo a seguir atualiza o complemento EKS:
 
 [source, console]
 ----
-aws eks update-addon --cluster-name <eks_cluster_name> --addon-name netapp_trident-operator --addon-version v25.02.1-eksbuild.1 \
+aws eks update-addon --cluster-name <eks_cluster_name> --addon-name netapp_trident-operator --addon-version v25.6.0-eksbuild.1 \
   --service-account-role-arn <role-ARN> --resolve-conflict preserve \
   --configuration-values “{\"cloudIdentity\": \"'eks.amazonaws.com/role-arn: <role ARN>'\"}"
 ----
@@ -277,13 +278,13 @@ eksctl get addon --name netapp_trident-operator --cluster my-cluster
 [listing]
 ----
 NAME                        VERSION             STATUS    ISSUES    IAMROLE    UPDATE AVAILABLE    CONFIGURATION VALUES
-netapp_trident-operator    v25.02.1-eksbuild.1    ACTIVE    0       {"cloudIdentity":"'eks.amazonaws.com/role-arn: arn:aws:iam::139763910815:role/AmazonEKS_FSXN_CSI_DriverRole'"}
+netapp_trident-operator    v25.6.0-eksbuild.1    ACTIVE    0       {"cloudIdentity":"'eks.amazonaws.com/role-arn: arn:aws:iam::139763910815:role/AmazonEKS_FSXN_CSI_DriverRole'"}
 ----
 * Atualize o complemento para a versão retornada em ATUALIZAÇÃO DISPONÍVEL na saída da etapa anterior.
 +
 [source, console]
 ----
-eksctl update addon --name netapp_trident-operator --version v25.02.1-eksbuild.1 --cluster my-cluster --force
+eksctl update addon --name netapp_trident-operator --version v25.6.0-eksbuild.1 --cluster my-cluster --force
 ----
 
 
