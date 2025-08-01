@@ -5322,8 +5322,6 @@
   <block id="f19e5d93360a2cdbfe64b6c513e8d263" category="list-text">Clique em *Instalar*.</block>
   <block id="86499c179913093d38f20a089bb4967f" category="list-text">Selecione as opções necessárias e clique em *Instalar*.</block>
   <block id="301a8f7d2ea6785da5f183d668f629b2" category="list-text">Uma vez concluída a instalação, o operador fica visível na lista de operadores instalados.</block>
-  <block id="daf49607bdd50d5294748814ce67ed21" category="list-text">Crie um TORC como a instalação do pacote do operador.</block>
-  <block id="7f95b6a9d45bd5ee11107a5abb5dd69c" category="section-title">Desinstale o operador Trident</block>
   <block id="9838ab5306db947832d94d1cd49a486a" category="list-text">Selecione o operador Trident na lista de operador instalado.</block>
   <block id="b5a7424a278ddd01fa4e381b58d1e00d" category="list-text">Selecione se pretende eliminar toda a instância do operador.</block>
   <block id="28ed84868f638999e59e306d6b87b07c" category="admonition">Se você não selecionar a caixa de seleção *Excluir todas as instâncias operand deste operador*, o Trident não será desinstalado.</block>
@@ -5745,4 +5743,5 @@
   <block id="99be75de31964ff7afed59629c2827c9" category="list-text">números<block ref="415d01607bfb64fa0b7efaf0fe064e86" prefix=" " category="inline-code"></block></block>
   <block id="f0fbfac7ddb67830c39dcddb2e0101aa" category="list-text">sublinhados<block ref="b14a7b8059d9c055954c92674ce60032" prefix=" " category="inline-code"></block></block>
   <block id="c76231732eebaec2e2411ed7cfd30e2c" category="list-text">hífens<block ref="336d5ebc5436534e61d16e63ddfca327" prefix=" " category="inline-code"></block></block>
+  <block id="3304691bb80d9d42f8bae0707e46c701" category="paragraph">== Desinstalar operador Trident</block>
 </blocks>
