@@ -30,7 +30,7 @@ Se quiser utilizar a funcionalidade de instantâneos, instale o suplemento do co
 ====
 .Identidade do Pod
 --
-. Adicione o repositório NetApp Trident à configuração do helm:
+. Adicione o repositório Helm do Trident:
 +
 [source, console]
 ----
@@ -62,7 +62,7 @@ trident-operator    trident     1           2024-10-14 14:31:22.463122 +0300 IDT
 --
 .Associação de contas de serviço (IRSA)
 --
-. Adicione o repositório NetApp Trident à configuração do helm:
+. Adicione o repositório Helm do Trident:
 +
 [source, console]
 ----
