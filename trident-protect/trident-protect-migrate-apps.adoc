@@ -14,7 +14,7 @@ summary: Você pode restaurar os dados de backup ou snapshot para um cluster ou 
 
 
 [role="lead"]
-Você pode migrar seus aplicativos entre clusters ou classes de armazenamento restaurando seus dados de backup ou snapshot para um cluster ou classe de armazenamento diferente.
+Você pode migrar seus aplicativos entre clusters ou para diferentes classes de armazenamento restaurando dados de backup.
 
 
 NOTE: Quando você migra um aplicativo, todos os ganchos de execução configurados para o aplicativo são migrados com o aplicativo. Se um gancho de execução pós-restauração estiver presente, ele será executado automaticamente como parte da operação de restauração.
@@ -65,7 +65,7 @@ NOTE: É possível replicar um aplicativo entre clusters diferentes usando link:
 
 == Migrar aplicações de uma classe de storage para outra classe de storage
 
-É possível migrar aplicativos de uma classe de armazenamento para outra classe de armazenamento restaurando um snapshot para a classe de armazenamento de destino diferente.
+Você pode migrar aplicativos de uma classe de armazenamento para uma classe de armazenamento diferente restaurando um backup para a classe de armazenamento de destino.
 
 Por exemplo (excluindo os segredos do CR de restauração):
 
@@ -79,11 +79,11 @@ spec:
   appArchivePath: "${snapshotArchivePath}"
   appVaultRef: "${appVaultCRName}"
   namespaceMapping:
-    destination: "${destinationNamespace}"
-    source: "${sourceNamespace}"
+    - destination: "${destinationNamespace}"
+      source: "${sourceNamespace}"
   storageClassMapping:
-    destination: "${destinationStorageClass}"
-    source: "${sourceStorageClass}"
+    - destination: "${destinationStorageClass}"
+      source: "${sourceStorageClass}"
   resourceFilter:
     resourceMatchers:
       kind: Secret
