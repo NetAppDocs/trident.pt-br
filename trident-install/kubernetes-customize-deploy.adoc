@@ -117,7 +117,12 @@ Defina como identidade da carga de trabalho ("azure.Workload.identity/client-id:
 | `nodePluginTolerations` | Substitui as tolerâncias do Kubernetes para pods. Segue o mesmo formato que `pod.spec.Tolerations`. | Sem padrão; opcional 
 
 
-| `nodePrep` | Permite que o Trident prepare os nós do cluster do Kubernetes para gerenciar volumes usando o protocolo de storage de dados especificado. *Atualmente, `iscsi` é o único valor suportado.* |  
+| `nodePrep`  a| 
+Permite que o Trident prepare os nós do cluster do Kubernetes para gerenciar volumes usando o protocolo de storage de dados especificado. *Atualmente, `iscsi` é o único valor suportado.*
+
+
+NOTE: A partir do OpenShift 4.19, a versão mínima do Trident suportada para esse recurso é 25.06.1.
+|  
 
 
 | `enableAutoBackendConfig` | Permite a configuração automática de back-end, que cria facilmente classes de back-end e armazenamento com base em parâmetros de entrada. | Sem padrão; opcional 

@@ -240,7 +240,12 @@ WARNING: Não remova a afinidade padrão do arquivo values.yaml. Quando você qu
 | `iscsiSelfHealingWaitTime` | A duração após a qual a auto-recuperação iSCSI inicia uma tentativa de resolver uma sessão obsoleta executando um logout e login subsequente. | `7m0s` 
 
 
-| `nodePrep` | Permite que o Trident prepare os nós do cluster do Kubernetes para gerenciar volumes usando o protocolo de storage de dados especificado. *Atualmente, `iscsi` é o único valor suportado.* |  
+| `nodePrep`  a| 
+Permite que o Trident prepare os nós do cluster do Kubernetes para gerenciar volumes usando o protocolo de storage de dados especificado. *Atualmente, `iscsi` é o único valor suportado.*
+
+
+NOTE: A partir do OpenShift 4.19, a versão mínima do Trident suportada para esse recurso é 25.06.1.
+|  
 |===
 
 

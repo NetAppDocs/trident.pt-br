@@ -253,5 +253,10 @@ WARNING: Não remova a afinidade padrão do arquivo values.yaml. Quando você qu
 | `excludePodSecurityPolicy` | Exclui a criação da diretiva de segurança do pod do operador. | `false` 
 
 
-| `nodePrep` | Permite que o Trident prepare os nós do cluster do Kubernetes para gerenciar volumes usando o protocolo de storage de dados especificado. *Atualmente, `iscsi` é o único valor suportado.* |  
+| `nodePrep`  a| 
+Permite que o Trident prepare os nós do cluster do Kubernetes para gerenciar volumes usando o protocolo de storage de dados especificado. *Atualmente, `iscsi` é o único valor suportado.*
+
+
+NOTE: A partir do OpenShift 4.19, a versão mínima do Trident suportada para esse recurso é 25.06.1.
+|  
 |===

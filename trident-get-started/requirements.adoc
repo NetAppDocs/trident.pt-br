@@ -42,7 +42,7 @@ O Trident é compatível com vários mecanismos de contêiner e orquestradores, 
 
 * Anthos On-Prem (VMware) e Anthos em bare metal 1,16
 * Kubernetes 1,27 - 1,33
-* OpenShift 4.14 - 4.18
+* OpenShift 4.14 - 4.19 (Se você planeja usar a preparação do nó iSCSI com o OpenShift 4.19, a versão mínima do Trident suportada é 25.06.1.)
 * Rancher Kubernetes Engine 2 (RKE2) v1.27.x - 1.33.x
 
 
