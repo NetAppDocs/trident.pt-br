@@ -5485,7 +5485,6 @@
   <block id="85cb66a45776909e333f8847ee91255d" category="paragraph">O <block ref="4a238bd658ede8bc190a54f7df8c3483" prefix=" " category="inline-code"></block> objeto contém detalhes que identificam o grupo de instantâneos, como <block ref="e8dbdd2405d28658285ebd383044be1a" prefix=" " category="inline-code"></block> e volumeSnapshotHandles individuais existentes no sistema de armazenamento.</block>
   <block id="a4314d759b2ba28d3d385366f2595052" category="paragraph">Quando uma solicitação de snapshot é recebida, o Trident cria o snapshot do grupo de volumes no backend. Após a criação do snapshot do grupo de volumes, o Trident configura um <block ref="4a238bd658ede8bc190a54f7df8c3483" prefix=" " category="inline-code"></block> objeto e, assim, expõe o instantâneo à API do Kubernetes.</block>
   <block id="fc679dfce4052095eac6de2f7f86cd16" category="paragraph">As notas de versão fornecem informações sobre novos recursos, aprimoramentos e correções de bugs na versão mais recente do NetApp Trident.</block>
-  <block id="d8789e2b2a964b430285afd098847d7e" category="section-title">Novidades em 25,06</block>
   <block id="08f1535b065719df5968364b00b95026" category="paragraph">O resumo de novidades fornece detalhes sobre melhorias, correções e descontinuações para as versões do Trident e do Trident Protect.</block>
   <block id="b73e3aa94514d51e32ca4c9fa306ce1e" category="inline-link-macro">Trabalhar com instantâneos de grupos de volumes</block>
   <block id="d5bb517310bc551b239857e32401ac1f" category="inline-link-macro">Habilitar SMB seguro</block>
@@ -5752,4 +5751,12 @@
   <block id="11162de38772a3876602bb4d9d213f43" category="section-title">Mapeamento de classes de armazenamento</block>
   <block id="b48c8c7ca3eb5e63afdfe6bbd74a35c9" category="paragraph">O<block ref="b57d666629acffb30cc697faadc136b5" prefix=" " category="inline-code"></block> atributo define um mapeamento de uma classe de armazenamento presente no aplicativo de origem para uma nova classe de armazenamento no cluster de destino.  Você pode usar isso ao migrar aplicativos entre clusters com diferentes classes de armazenamento ou ao alterar o backend de armazenamento para operações de BackupRestore.</block>
   <block id="27f5153068cecd37b6fa4a136586658d" category="sidebar">Usar configurações avançadas</block>
+  <block id="78b16a5d2427fb1cb647b8ff8e8936dd" category="section-title">Novidades em 25.06.1</block>
+  <block id="56f0b7f1d902abcea5e9a924acc8cf68" category="list-text">Corrigido um problema em que os NQNs não eram verificados antes de serem desmapeados dos subsistemas.</block>
+  <block id="74ede3b036d836536636c89ae6208dc1" category="list-text">Corrigido um problema em que várias tentativas de fechar um dispositivo LUKS levavam a falhas na desanexação de volumes.</block>
+  <block id="e593abd973cbfe8b821587be547d75a8" category="list-text">Corrigido o problema de desempacotamento do volume iSCSI quando o caminho do dispositivo foi alterado desde sua criação.</block>
+  <block id="ba928ee331d175497be64b1981e81596" category="list-text">Clonagem de blocos de volumes em classes de armazenamento.</block>
+  <block id="4f8bdbf86c4afec9c1de4e403735e1df" category="list-text">*OpenShift*: Corrigido um problema em que a preparação do nó iSCSI falhava com o OCP 4.19.</block>
+  <block id="4437218698cd37b58221a09f0b779bab" category="list-text">Aumentou o tempo limite ao clonar um volume usando backends SolidFire (<block ref="ff387119bc332768d9a3831513d005d5" category="inline-link-macro-rx"></block> ).</block>
+  <block id="3dca4d7450a120a0a20749c485d209b2" category="section-title">Mudanças em 25.06</block>
 </blocks>
