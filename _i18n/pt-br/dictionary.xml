@@ -5767,4 +5767,5 @@
   <block id="5df2f935f2bc3df2c6378f665b3d6659" category="list-text">Você pode adicionar o<block ref="e9a7558decb5e432d8b7c4d536cc9876" prefix=" " category="inline-code"></block> parâmetro para configurar e habilitar os serviços iSCSI e Multipath em todos os nós de trabalho do OpenShift.</block>
   <block id="f61306bfa8c6de676059739358d4479f" category="list-text">Clique em *Criar*; o Trident Orchestrator será totalmente instalado.</block>
   <block id="7f95b6a9d45bd5ee11107a5abb5dd69c" category="section-title">Desinstalar operador Trident</block>
+  <block id="b94d4c5305d8d32a875a24a5b1501274" category="admonition">Para clientes que usam o SolidFire, não atualizem para a versão 25.06.1 devido a um problema conhecido ao cancelar a publicação de volumes.  A versão 25.06.2 será lançada em breve para resolver esse problema.</block>
 </blocks>
