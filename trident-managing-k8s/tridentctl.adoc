@@ -251,9 +251,9 @@ Você também pode atualizar o estado de back-end usando `userState` o campo no 
 Siga estas etapas para atualizar o `userState` usando o `backend.json` arquivo:
 
 . Edite o `backend.json` arquivo para incluir o `userState` campo com o seu valor definido como 'uspended'.
-. Atualize o backend usando o `tridentctl backend update` comando e o caminho para o arquivo atualizado `backend.json`.
+. Atualize o backend usando o `tridentctl update backend` comando e o caminho para o atualizado `backend.json` arquivo.
 +
-*Exemplo*: `tridentctl backend update -f /<path to backend JSON file>/backend.json`
+*Exemplo*: `tridentctl update backend  -f /<path to backend JSON file>/backend.json -n trident`
 
 
 

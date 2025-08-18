@@ -927,8 +927,6 @@
   <block id="0ecd11c1d7a287401d148a23bbd7a2f8" category="open-title">JSON</block>
   <block id="4c8c9b9d93d68dc932195b1aa0583910" category="paragraph">Siga estas etapas para atualizar o<block ref="aa531c83e844d5d66725984798da11b8" prefix=" " category="inline-code"></block> usando o<block ref="9c15d32711e9ef8c6f76deda35452e13" prefix=" " category="inline-code"></block> arquivo:</block>
   <block id="13cf048f75b63ff6bd6513e6ceb81fe0" category="list-text">Edite o<block ref="9c15d32711e9ef8c6f76deda35452e13" prefix=" " category="inline-code"></block> arquivo para incluir o<block ref="aa531c83e844d5d66725984798da11b8" prefix=" " category="inline-code"></block> campo com o seu valor definido como 'uspended'.</block>
-  <block id="90457d836d77c63b0e475cddbb6f1d4c" category="list-text">Atualize o backend usando o<block ref="ad782b779edfd8199198bed41b3e3b6b" prefix=" " category="inline-code"></block> comando e o caminho para o arquivo atualizado<block ref="9c15d32711e9ef8c6f76deda35452e13" prefix=" " category="inline-code"></block>.</block>
-  <block id="a7c9f5fb8c3dd89cd4acee279df59630" category="paragraph">*Exemplo*:<block ref="cc34ac0a771977b41f88a8dac4a25a01" prefix=" " category="inline-code"></block></block>
   <block id="9463f87bbed1fcdacfb8d40e185ca2bc" category="open-title">YAML</block>
   <block id="a0c475f6592b0a660cc2db104d607b3f" category="paragraph">Você pode editar o tbc depois que ele foi aplicado usando o<block ref="cdf774783c0eec7f2639a3c0d70d29ff" prefix=" " category="inline-code"></block> comando. O exemplo a seguir atualiza o estado de back-end para suspender usando a<block ref="c7d1d8826ecea15bd2786371bbe65f70" prefix=" " category="inline-code"></block> opção:</block>
   <block id="2af72f100c356273d46284f6fd1dfc08" category="section-title">versão</block>
@@ -5768,4 +5766,6 @@
   <block id="f61306bfa8c6de676059739358d4479f" category="list-text">Clique em *Criar*; o Trident Orchestrator será totalmente instalado.</block>
   <block id="7f95b6a9d45bd5ee11107a5abb5dd69c" category="section-title">Desinstalar operador Trident</block>
   <block id="b94d4c5305d8d32a875a24a5b1501274" category="admonition">Para clientes que usam o SolidFire, não atualizem para a versão 25.06.1 devido a um problema conhecido ao cancelar a publicação de volumes.  A versão 25.06.2 será lançada em breve para resolver esse problema.</block>
+  <block id="4011c398b0ff3b95197b4f4713f3216e" category="list-text">Atualize o backend usando o<block ref="defd1e55f93269ac9278afc086951ba8" prefix=" " category="inline-code"></block> comando e o caminho para o atualizado<block ref="9c15d32711e9ef8c6f76deda35452e13" prefix=" " category="inline-code"></block> arquivo.</block>
+  <block id="f05848de69e82db6963b7b9c5322a67f" category="paragraph">*Exemplo*:<block ref="7aa76d5ff854a67029ba30d1a11e1e53" prefix=" " category="inline-code"></block></block>
 </blocks>
