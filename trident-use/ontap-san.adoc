@@ -136,7 +136,7 @@ O Trident dá suporte ao protocolo NVMe (non-volátil Memory Express) usando `on
 
 O Trident não suporta:
 
-* DH-HMAC-CHAP que é suportado nativamente pelo NVMe
+* DH-HMAC-CHAP que é suportado nativamente por NVMe
 * Multipathing de mapeador de dispositivos (DM)
 * Criptografia LUKS
 

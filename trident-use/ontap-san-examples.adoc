@@ -124,11 +124,18 @@ NOTE: Quando o agregado é atualizado no SVM, ele é atualizado automaticamente 
 | `debugTraceFlags` | Debug flags para usar ao solucionar problemas. Por exemplo, não use a menos que você esteja solucionando problemas e exija um despejo de log detalhado. | `null` 
 
 
-| `useREST` | Parâmetro booleano para usar APIs REST do ONTAP. 
-`useREST` Quando definido como `true`, o Trident usa APIs REST do ONTAP para se comunicar com o back-end; quando definido como `false`, o Trident usa chamadas ONTAPI (ZAPI) para se comunicar com o back-end. Esse recurso requer o ONTAP 9.11,1 e posterior. Além disso, a função de login do ONTAP usada deve ter acesso ao `ontapi` aplicativo. Isso é satisfeito com as funções e `cluster-admin` predefinidas `vsadmin`. Começando com a versão Trident 24,06 e ONTAP 9.15.1 ou posterior,
-`useREST` é definido como `true` por padrão; altere
-`useREST` para `false` usar chamadas ONTAPI (ZAPI). 
-`useREST` É totalmente qualificado para NVMe/TCP. *Se especificado, sempre definido como  `true` para sistemas ASA r2*. | `true` Para ONTAP 9.15,1 ou posterior, caso contrário `false`. 
+| `useREST`  a| 
+Parâmetro booleano para usar APIs REST do ONTAP .
+
+ `useREST`Quando definido para `true` , O Trident usa APIs REST ONTAP para se comunicar com o backend; quando definido como `false` O Trident usa chamadas ONTAPI (ZAPI) para se comunicar com o backend.  Este recurso requer o ONTAP 9.11.1 e posterior.  Além disso, a função de login ONTAP usada deve ter acesso ao `ontapi` aplicativo.  Isto é satisfeito pelo pré-definido `vsadmin` e `cluster-admin` papéis.  A partir da versão Trident 24.06 e ONTAP 9.15.1 ou posterior, `useREST` está definido para `true` por padrão; mudança `useREST` para `false` para usar chamadas ONTAPI (ZAPI).
+
+`useREST`é totalmente qualificado para NVMe/TCP.
+
+
+NOTE: O NVMe é compatível apenas com APIs REST ONTAP e não com ONTAPI (ZAPI).
+
+*Se especificado, sempre definido como `true` para sistemas ASA r2*.
+| `true` Para ONTAP 9.15,1 ou posterior, caso contrário `false`. 
 
 
  a| 
