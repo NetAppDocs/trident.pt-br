@@ -5774,4 +5774,6 @@
   <block id="42f93278b0d15c8d0f6613813bf586d5" category="section-title">Autenticar conexões com CHAP bidirecional</block>
   <block id="9ffdb95250e26c7a6b468126ac7c75b0" category="section-title">Como funciona</block>
   <block id="81f2df0265026a1a04bda5484798a10d" category="section-title">Gire as credenciais e atualize os backends</block>
+  <block id="4bdb23ea513714e3ddde2986c05c669f" category="inline-link-macro">Aprimorando a consistência de dados: instantâneos de grupos de volume na virtualização OpenShift com Trident</block>
+  <block id="299fb00578f305c7fc8cabf601fd1c80" category="list-text">19 de agosto de 2025:<block ref="e5b6bdace6eea699ef0d8738f7d6c354" category="inline-link-macro-rx"></block></block>
 </blocks>

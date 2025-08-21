@@ -19,6 +19,7 @@ Você pode encontrar alguns ótimos blogs do NetApp Trident e do Trident Protect
 == Trident blogs
 
 * 09 de maio de 2025: link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Automatic-Trident-backend-configuration-for-FSx-for-ONTAP-with-the-Amazon-EKS/ba-p/460586["Configuração automática do backend Trident para FSx para ONTAP com o complemento Amazon EKS"^]
+* 19 de agosto de 2025:link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Enhancing-Data-Consistency-Volume-Group-Snapshots-in-OpenShift-virtualization/ba-p/462798["Aprimorando a consistência de dados: instantâneos de grupos de volume na virtualização OpenShift com Trident"]
 * 15 de abril de 2025: link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/NetApp-Trident-with-Google-Cloud-NetApp-Volumes-for-SMB-Protocol/ba-p/460118["NetApp Trident com Google Cloud NetApp Volumes para protocolo SMB"^]
 * 14 de abril de 2025: link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Leveraging-Fiber-Channel-Protocol-with-Trident-25-02-for-Persistent-Storage-on/ba-p/460091["Aproveitando o Protocolo Fibre Channel com o Trident 25.02 para Armazenamento Persistente no Kubernetes"^]
 * 14 de abril de 2025: link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Unlocking-the-power-of-NetApp-ASA-r2-systems-for-Kubernetes-block-storage/ba-p/460113["Desbloqueando o poder dos sistemas NetApp ASA r2 para armazenamento em bloco do Kubernetes"^]
