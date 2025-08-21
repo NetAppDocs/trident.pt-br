@@ -140,3 +140,6 @@ O Trident não suporta:
 * Multipathing de mapeador de dispositivos (DM)
 * Criptografia LUKS
 
+
+
+NOTE: O NVMe é compatível apenas com APIs REST ONTAP e não com ONTAPI (ZAPI).
