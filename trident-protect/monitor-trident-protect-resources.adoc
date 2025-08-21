@@ -49,6 +49,12 @@ Você pode instalar métricas de estado do kube usando o Helm.
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
 ----
+. Aplique o Prometheus ServiceMonitor CRD ao cluster:
++
+[source, console]
+----
+kubectl apply -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/main/example/prometheus-operator-crd/monitoring.coreos.com_servicemonitors.yaml
+----
 . Crie um arquivo de configuração para o gráfico Helm (por exemplo, `metrics-config.yaml` ). Você pode personalizar o seguinte exemplo de configuração para corresponder ao seu ambiente:
 +
 .Metrics-config.yaml: Configuração do gráfico Helm do kube-State-metrics

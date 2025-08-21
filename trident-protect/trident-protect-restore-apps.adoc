@@ -279,6 +279,7 @@ Certifique-se de que os seguintes pré-requisitos são cumpridos:
 
 * O cluster de destino tem o Trident Protect instalado.
 * O cluster de destino tem acesso ao caminho do bucket do mesmo AppVault que o cluster de origem, onde o backup é armazenado.
+* Certifique-se de que seu ambiente local pode se conectar ao bucket de armazenamento de objetos definido no AppVault CR ao executar o `tridentctl-protect get appvaultcontent` comando.  Se restrições de rede impedirem o acesso, execute a CLI do Trident Protect de dentro de um pod no cluster de destino.
 * Certifique-se de que a expiração do token de sessão da AWS seja suficiente para quaisquer operações de restauração de longa duração. Se o token expirar durante a operação de restauração, a operação pode falhar.
 +
 ** Consulte a https://docs.aws.amazon.com/STS/latest/APIReference/API_GetSessionToken.html["Documentação da API da AWS"^] para obter mais informações sobre como verificar a expiração do token de sessão atual.
