@@ -599,7 +599,6 @@
   <block id="68934a3e9455fa72420237eb05902327" category="cell">falso</block>
   <block id="077e99fe42ced522b462656cffffe09c" category="cell"><block ref="d5276bb17ae062102e883a18454c2f1b" prefix="" category="inline-code"></block></block>
   <block id="4448b73eac083e33b7142f0e5790fac5" category="cell">Tempo limite para operações do Kubernetes</block>
-  <block id="ff1e5aff28fa6b984ca73f22322bbe5f" category="cell"><block ref="e4d71bf2abad047425f4463e27bb83b0" prefix="" category="inline-code"></block></block>
   <block id="42cf123e93ecc5c0297652edbc547fc0" category="cell"><block ref="2fac1659431903a30e063d49b3effb9d" prefix="" category="inline-code"></block></block>
   <block id="4a213b7c3b997ffb0794b25909381d16" category="cell">Não envie pacotes AutoSupport para o NetApp automaticamente</block>
   <block id="2bccac20e55391730a985f9819e1cc41" category="cell"><block ref="7ecc687ea7566f05fd13fde7be607bfc" prefix="" category="inline-code"></block></block>
@@ -5778,4 +5777,7 @@
   <block id="a21cecd213989d401167ec6cfba8d998" category="list-text">11 de novembro de 2024:<block ref="daed3e0cfbeb06368e36167c5fc4f468" category="inline-link-macro-rx"></block></block>
   <block id="dcae39a3bdbd6a2685507ccc14623d62" category="list-text">Aplique o Prometheus ServiceMonitor CRD ao cluster:</block>
   <block id="e95fc483374f2aa2997fb27e7235f723" category="list-text">Certifique-se de que seu ambiente local pode se conectar ao bucket de armazenamento de objetos definido no AppVault CR ao executar o<block ref="f9adf231483d5dde9cfc10a610b748d3" prefix=" " category="inline-code"></block> comando.  Se restrições de rede impedirem o acesso, execute a CLI do Trident Protect de dentro de um pod no cluster de destino.</block>
+  <block id="710d51eba716c95765550f52a1c4fd61" category="cell"><block ref="4aff31f193e6ea4df2a1c4f841bad5d6" prefix="" category="inline-code"></block></block>
+  <block id="68087b4c898b9466dc989d8086e173dc" category="cell">Substitui o tempo limite padrão de 180 segundos para a maioria das operações da API do Kubernetes (se diferente de zero, em segundos).</block>
+  <block id="bd3dd99c8eae44e2ae2bfc8f00dc3db0" category="cell"><block ref="045117b0e0a11a242b9765e79cbf113f" prefix="" category="inline-code"></block></block>
 </blocks>
