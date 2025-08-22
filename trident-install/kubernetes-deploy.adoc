@@ -206,7 +206,8 @@ Você pode decidir alterar seu método de instalação. Antes de fazer isso, con
 
 * Sempre use o mesmo método para instalar e desinstalar o Trident. Se você tiver implantado com `tridentctl`o , você deve usar a versão apropriada `tridentctl` do binário para desinstalar o Trident. Da mesma forma, se você estiver implantando com o operador, edite o `TridentOrchestrator` CR e defina `spec.uninstall=true` como desinstalar o Trident.
 * Se você tiver uma implantação baseada no operador que deseja remover e usar `tridentctl` para implantar o Trident, primeiro edite `TridentOrchestrator` e defina `spec.uninstall=true` como desinstalar o Trident. Em seguida, exclua `TridentOrchestrator` e a implantação do operador. Você pode instalar usando `tridentctl`o .
-* Se você tiver uma implantação manual baseada no operador e quiser usar a implantação do operador Trident baseada no Helm, desinstale manualmente o operador primeiro e execute a instalação do Helm. Isso permite que o Helm implante o operador Trident com as etiquetas e anotações necessárias. Se você não fizer isso, sua implantação de operador Trident baseada em Helm falhará com erro de validação de rótulo e erro de validação de anotação. Se você tem uma `tridentctl` implantação baseada em -, você pode usar a implantação baseada em Helm sem problemas.
+* Se você tiver uma implantação manual baseada em operador e quiser usar a implantação do operador Trident baseada em Helm, primeiro desinstale manualmente o operador e depois execute a instalação do Helm.  Isso permite que o Helm implante o operador Trident com os rótulos e anotações necessários.  Se você não fizer isso, a implantação do operador Trident baseado em Helm falhará com erro de validação de rótulo e erro de validação de anotação.
+* Se você tem um `tridentctl` implantação baseada em Helm ou em Operador sem desinstalar o Trident.
 
 
 
