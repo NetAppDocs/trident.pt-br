@@ -202,7 +202,12 @@ WARNING: Não remova a afinidade padrão do arquivo values.yaml. Quando você qu
 | `tridentIPv6` | Permite ativar o Trident para funcionar em clusters IPv6. | `false` 
 
 
-| `tridentK8sTimeout` | Substitui o tempo limite padrão de 180 segundos para a maioria das operações da API do Kubernetes (se diferente de zero, em segundos). | `180` 
+| `tridentK8sTimeout`  a| 
+Substitui o tempo limite padrão de 180 segundos para a maioria das operações da API do Kubernetes (se diferente de zero, em segundos).
+
+
+NOTE: O `tridentK8sTimeout` O parâmetro é aplicável somente para instalação do Trident .
+| `180` 
 
 
 | `tridentHttpRequestTimeout` | Substitui o tempo limite padrão de 90 segundos para as solicitações HTTP, `0s` sendo uma duração infinita para o tempo limite. Valores negativos não são permitidos. | `"90s"` 

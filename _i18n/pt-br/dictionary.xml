@@ -598,7 +598,6 @@
   <block id="d293f031e5664526b25f3a65012401b7" category="cell"><block ref="fdb7cb8f657426e7c409bfd6d1a36ce4" prefix="" category="inline-code"></block></block>
   <block id="68934a3e9455fa72420237eb05902327" category="cell">falso</block>
   <block id="077e99fe42ced522b462656cffffe09c" category="cell"><block ref="d5276bb17ae062102e883a18454c2f1b" prefix="" category="inline-code"></block></block>
-  <block id="4448b73eac083e33b7142f0e5790fac5" category="cell">Tempo limite para operações do Kubernetes</block>
   <block id="42cf123e93ecc5c0297652edbc547fc0" category="cell"><block ref="2fac1659431903a30e063d49b3effb9d" prefix="" category="inline-code"></block></block>
   <block id="4a213b7c3b997ffb0794b25909381d16" category="cell">Não envie pacotes AutoSupport para o NetApp automaticamente</block>
   <block id="2bccac20e55391730a985f9819e1cc41" category="cell"><block ref="7ecc687ea7566f05fd13fde7be607bfc" prefix="" category="inline-code"></block></block>
@@ -5781,4 +5780,7 @@
   <block id="bd3dd99c8eae44e2ae2bfc8f00dc3db0" category="cell"><block ref="045117b0e0a11a242b9765e79cbf113f" prefix="" category="inline-code"></block></block>
   <block id="44a97f581d6467983edc4e5900722f32" category="list-text">Se você tiver uma implantação manual baseada em operador e quiser usar a implantação do operador Trident baseada em Helm, primeiro desinstale manualmente o operador e depois execute a instalação do Helm.  Isso permite que o Helm implante o operador Trident com os rótulos e anotações necessários.  Se você não fizer isso, a implantação do operador Trident baseado em Helm falhará com erro de validação de rótulo e erro de validação de anotação.</block>
   <block id="96fa331785e435bbddfc7f404fa5ce84" category="list-text">Se você tem um<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block> implantação baseada em Helm ou em Operador sem desinstalar o Trident.</block>
+  <block id="ebc465247274e830568c785a604321aa" category="paragraph">Tempo limite para operações do Kubernetes.</block>
+  <block id="487b75b94dd20a59c7005f9de6a6c4a0" category="admonition">O<block ref="d5276bb17ae062102e883a18454c2f1b" prefix=" " category="inline-code"></block> O parâmetro é aplicável somente para instalação do Trident .</block>
+  <block id="0784343c721b59e3c2426a1b76297982" category="admonition">O<block ref="b958a6de9ca123713491252f2ab02f59" prefix=" " category="inline-code"></block> O parâmetro é aplicável somente para instalação do Trident .</block>
 </blocks>
