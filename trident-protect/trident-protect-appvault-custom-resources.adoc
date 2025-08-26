@@ -107,9 +107,50 @@ Para obter mais informações sobre as políticas do Amazon S3, consulte os exem
 
 
 
+=== Identidade do Pod EKS para autenticação do Amazon S3 (AWS)
+
+O Trident Protect oferece suporte ao EKS Pod Identity para operações de movimentação de dados do Kopia.  Este recurso permite acesso seguro aos buckets do S3 sem armazenar credenciais da AWS em segredos do Kubernetes.
+
+*Requisitos para EKS Pod Identity com Trident Protect*
+
+Antes de usar o EKS Pod Identity com o Trident Protect, certifique-se do seguinte:
+
+* Seu cluster EKS tem a Identidade do Pod habilitada.
+* Você criou uma função do IAM com as permissões de bucket do S3 necessárias. Para saber mais, consultelink:https://docs.netapp.com/us-en/trident/trident-protect/trident-protect-appvault-custom-resources.html#s3-compatible-storage-iam-permissions["Permissões de IAM de armazenamento compatível com S3"] .
+* A função IAM está associada às seguintes contas de serviço de proteção do Trident :
++
+** `<trident-protect>-controller-manager`
+** `<trident-protect>-resource-backup`
+** `<trident-protect>-resource-restore`
+** `<trident-protect>-resource-delete`
+
+
+
+
+Para obter instruções detalhadas sobre como habilitar a identidade do pod e associar funções do IAM a contas de serviço, consulte o https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html["Documentação de identidade do pod AWS EKS"^] .
+
+*Configuração do AppVault* Ao usar o EKS Pod Identity, configure seu AppVault CR com o `useIAM: true` sinalizador em vez de credenciais explícitas:
+
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: AppVault
+metadata:
+  name: eks-protect-vault
+  namespace: trident-protect
+spec:
+  providerType: AWS
+  providerConfig:
+    s3:
+      bucketName: trident-protect-aws
+      endpoint: s3.example.com
+      useIAM: true
+----
+
+
 === Exemplos de geração de chaves AppVault para provedores de nuvem
 
-Ao definir um AppVault CR, você precisa incluir credenciais para acessar os recursos hospedados pelo provedor. A forma como você gera as chaves para as credenciais será diferente dependendo do provedor. A seguir estão exemplos de geração de chaves de linha de comando para vários provedores. Você pode usar os exemplos a seguir para criar chaves para as credenciais de cada provedor de nuvem.
+Ao definir um AppVault CR, você precisa incluir credenciais para acessar os recursos hospedados pelo provedor, a menos que esteja usando a autenticação do IAM.  A maneira como você gera as chaves para as credenciais varia de acordo com o provedor.  A seguir estão exemplos de geração de chaves de linha de comando para vários provedores.  Você pode usar os exemplos a seguir para criar chaves para as credenciais de cada provedor de nuvem.
 
 [role="tabbed-block"]
 ====
@@ -249,6 +290,9 @@ spec:
         key: sessionToken
         name: s3-secret
 ----
+
+NOTE: Para ambientes EKS usando Pod Identity com o movimentador de dados Kopia, você pode remover o `providerCredentials` seção e adicionar `useIAM: true` sob o `s3` configuração em vez disso.
+
 --
 .Microsoft Azure
 --

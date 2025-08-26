@@ -29,7 +29,7 @@ Você pode impedir que anotações específicas no namespace de destino sejam so
 
 [source, console]
 ----
-kubectl set env -n trident-protect deploy/trident-protect-controller-manager RESTORE_SKIP_NAMESPACE_ANNOTATIONS=<annotation_key_to_skip_1>,<annotation_key_to_skip_2>
+helm install trident-protect --set tridentProtectControllerManager.env.RESTORE_SKIP_NAMESPACE_ANNOTATIONS=<annotation_key_to_skip_1>,<annotation_key_to_skip_2>
 ----
 
 NOTE: Ao executar uma operação de restauração ou failover, quaisquer anotações e rótulos de namespace especificados em `restoreSkipNamespaceAnnotations` e `restoreSkipNamespaceLabels` são excluídos da operação de restauração ou failover.  Certifique-se de que essas configurações sejam definidas durante a instalação inicial do Helm. Para saber mais, consultelink:../trident-protect/trident-protect-customize-installation.html#configure-autoSupport-and-namespace-filtering-options["Configurar opções de filtragem de namespace e AutoSupport"] .
