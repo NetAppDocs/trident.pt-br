@@ -89,7 +89,7 @@ A Trident cria o PV e seu volume de storage NFS no back-end.
 
 
 ====
-. *Cluster admin:* Crie a função personalizada e kubeconfig para conceder permissão ao proprietário do namespace de destino para criar o TridentVolumeReference CR no namespace de destino.
+. *Administrador do cluster:* Certifique-se de que o RBAC adequado esteja em vigor para conceder permissão ao proprietário do namespace de destino para criar o TridentVolumeReference CR no namespace de destino.
 . *Proprietário do namespace de destino:* Crie um CredentVolumeReference CR no namespace de destino que se refere ao namespace de origem `pvc1` .
 +
 [source, yaml]
