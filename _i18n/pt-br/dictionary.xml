@@ -6,7 +6,6 @@
   <block id="96ab491ef73d5db0cd15f55e1552cc22" category="section-title">Questões gerais</block>
   <block id="b4f83b03956523a39e8bbbd0895f0f29" category="inline-link-macro">Cloud Insights</block>
   <block id="3c70f31b6cfd2fccfef3e715c4c4cabb" category="inline-link-macro">Personalize a instalação do tridentctl</block>
-  <block id="3a766ef0e7ab8dbf17dc86487efd5fbf" category="paragraph">O instalador do Trident cria um ClusterRole Kubernetes, que tem acesso específico aos recursos Persistentvolume, PersistentVolumeClaim, StorageClass e segredo do cluster do Kubernetes. <block ref="118dd7a3d307a499ad0f9c547981393b" category="inline-link-macro-rx"></block>Consulte a .</block>
   <block id="92d1656d06303733c5e1398fb273a17e" category="section-title">Solução de problemas e suporte</block>
   <block id="a3d907947129a58ee6f9e23074840c8f" category="section-title">Como faço para levantar um caso de suporte?</block>
   <block id="0265687df6c09d532b03477776c6d075" category="paragraph">Para levantar um caso de suporte, execute um dos seguintes procedimentos:</block>
@@ -5804,4 +5803,5 @@
   <block id="cedc87a271db7f699ec07464bfd0a9ee" category="paragraph">*Configuração do AppVault* Ao usar o EKS Pod Identity, configure seu AppVault CR com o<block ref="df9bc6a254da3cea83fc8b7c71c71ea9" prefix=" " category="inline-code"></block> sinalizador em vez de credenciais explícitas:</block>
   <block id="ed69194cde8739a857f51b02498a0c27" category="paragraph">Ao definir um AppVault CR, você precisa incluir credenciais para acessar os recursos hospedados pelo provedor, a menos que esteja usando a autenticação do IAM.  A maneira como você gera as chaves para as credenciais varia de acordo com o provedor.  A seguir estão exemplos de geração de chaves de linha de comando para vários provedores.  Você pode usar os exemplos a seguir para criar chaves para as credenciais de cada provedor de nuvem.</block>
   <block id="0d96febdd171c11830ca8b96c7a4f8e4" category="admonition">Para ambientes EKS usando Pod Identity com o movimentador de dados Kopia, você pode remover o<block ref="84695890ad88faf0bb2d6cdae8c01d51" prefix=" " category="inline-code"></block> seção e adicionar<block ref="df9bc6a254da3cea83fc8b7c71c71ea9" prefix=" " category="inline-code"></block> sob o<block ref="c0828e0381730befd1f7a025057c74fb" prefix=" " category="inline-code"></block> configuração em vez disso.</block>
+  <block id="3d939b5d63f5846e5d71053999d3972e" category="paragraph">O instalador do Trident cria um Kubernetes ClusterRole, que tem acesso específico aos recursos PersistentVolume, PersistentVolumeClaim, StorageClass e Secret do cluster Kubernetes. Consulte <block ref="ddc7df443077796093efdaf5a64d03cd" category="inline-link-macro-rx"></block> .</block>
 </blocks>
