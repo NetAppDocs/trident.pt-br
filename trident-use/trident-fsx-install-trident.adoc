@@ -149,6 +149,10 @@ Verifique se você tem o seguinte antes de configurar o complemento do Trident p
 
 . Na página de configurações *Configure Selected add-ons*, faça o seguinte:
 +
+
+NOTE: *Ignore estas etapas se estiver usando a associação de identidade do Pod.*
+
++
 .. Selecione a *versão* que você gostaria de usar.
 .. Se você estiver usando a autenticação IRSA, certifique-se de definir os valores de configuração disponíveis nas Configurações opcionais:
 +
