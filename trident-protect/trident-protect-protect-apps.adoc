@@ -172,122 +172,17 @@ Opcionalmente, você pode usar o `--full-backup` sinalizador para especificar se
 ====
 
 
-== Crie um agendamento de backup
-
-Você pode agendar um backup completo não incremental. Por padrão, todos os backups são incrementais. Executar um backup completo periodicamente, juntamente com backups incrementais no meio, ajuda a reduzir o risco associado às restaurações.
-
-
-NOTE: Os recursos com escopo de cluster são incluídos em um backup, snapshot ou clone se forem explicitamente referenciados na definição do aplicativo ou se tiverem referências a qualquer um dos namespaces do aplicativo.
-
-.Antes de começar
-Certifique-se de que a expiração do token de sessão da AWS seja suficiente para quaisquer operações de backup S3 de longa execução. Se o token expirar durante a operação de backup, a operação pode falhar.
-
-* Consulte a https://docs.aws.amazon.com/STS/latest/APIReference/API_GetSessionToken.html["Documentação da API da AWS"^] para obter mais informações sobre como verificar a expiração do token de sessão atual.
-* Consulte o https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html["Documentação do AWS IAM"^] para obter mais informações sobre credenciais com recursos da AWS.
-
-
-[role="tabbed-block"]
-====
-.Crie uma agenda usando um CR
---
-.Passos
-. Crie o arquivo de recurso personalizado (CR) e nomeie-o `trident-backup-schedule-cr.yaml`.
-. No arquivo criado, configure os seguintes atributos:
-+
-** *metadata.name*: (_required_) o nome deste recurso personalizado; escolha um nome único e sensível para o seu ambiente.
-** *Spec.dataMover*: (_Optional_) Uma cadeia de carateres indicando qual ferramenta de backup usar para a operação de backup. Valores possíveis (sensíveis a maiúsculas e minúsculas):
-+
-*** `Restic`
-*** `Kopia` (predefinição)
-
-
-** *Spec.applicationRef*: O nome do Kubernetes do aplicativo para fazer backup.
-** *Spec.appVaultRef*: (_required_) o nome do AppVault onde o conteúdo de backup deve ser armazenado.
-** *Spec.backupRetention*: O número de backups a reter. Zero indica que nenhum backup deve ser criado.
-** *Spec.snapshotRetention*: O número de instantâneos a reter. Zero indica que nenhum instantâneo deve ser criado.
-** *spec.granularity*: a frequência em que o horário deve ser executado. Valores possíveis, juntamente com campos associados obrigatórios:
-+
-*** `hourly` (requer que você `spec.minute` especifique )
-*** `daily` (requer que você especifique `spec.minute` e `spec.hour`)
-*** `weekly` (requer especificar `spec.minute, spec.hour`, e `spec.dayOfWeek`)
-*** `monthly` (requer especificar `spec.minute, spec.hour`, e `spec.dayOfMonth`)
-
-
-** *Spec.dayOfMonth*: (_Optional_) o dia do mês (1 - 31) em que a programação deve ser executada. Este campo é necessário se a granularidade estiver definida como `monthly`.
-** *Spec.DayOfWeek*: (_Optional_) o dia da semana (0 - 7) em que o horário deve ser executado. Os valores de 0 ou 7 indicam domingo. Este campo é necessário se a granularidade estiver definida como `weekly`.
-** *Spec.hour*: (_Optional_) a hora do dia (0 - 23) em que o horário deve ser executado. Este campo é necessário se a granularidade estiver definida como `daily`, `weekly` `monthly` ou .
-** *Spec.minute*: (_Optional_) o minuto da hora (0 - 59) que o horário deve ser executado. Este campo é necessário se a granularidade estiver definida como `hourly`, , `daily` `weekly` , ou `monthly`.
-** *metadata.annotations.protect.trident.netapp.io/full-backup-rule*: (_Optional_) esta anotação é usada para especificar a regra para agendar o backup completo. Você pode configurá-lo para `always` backup completo constante ou personalizá-lo com base em suas necessidades. Por exemplo, se você escolher a granularidade diária, poderá especificar os dias da semana em que o backup completo deve ocorrer.
-+
-[source, yaml]
-----
----
-apiVersion: protect.trident.netapp.io/v1
-kind: Schedule
-metadata:
-  namespace: my-app-namespace
-  name: my-cr-name
-  annotations:
-    protect.trident.netapp.io/full-backup-rule: "Monday,Thursday"
-spec:
-  dataMover: Kopia
-  applicationRef: my-application
-  appVaultRef: appvault-name
-  backupRetention: "15"
-  snapshotRetention: "15"
-  granularity: daily
-  dayOfMonth: "1"
-  dayOfWeek: "0"
-  hour: "0"
-  minute: "0"
-----
-
-
-. Depois de preencher o `trident-backup-schedule-cr.yaml` ficheiro com os valores corretos, aplique o CR:
-+
-[source, console]
-----
-kubectl apply -f trident-backup-schedule-cr.yaml
-----
-
-
---
-.Crie uma agenda usando a CLI
---
-.Passos
-. Crie o agendamento de backup, substituindo valores entre parênteses por informações do seu ambiente. Por exemplo:
-+
-
-NOTE: Você pode usar `tridentctl-protect create schedule --help` para exibir informações detalhadas de ajuda para este comando.
-
-+
-[source, console]
-----
-tridentctl-protect create schedule <my_schedule_name> --appvault <my_appvault_name> --app <name_of_app_to_snapshot> --backup-retention <how_many_backups_to_retain> --data-mover <Kopia_or_Restic> --day-of-month <day_of_month_to_run_schedule> --day-of-week <day_of_month_to_run_schedule> --granularity <frequency_to_run> --hour <hour_of_day_to_run> --minute <minute_of_hour_to_run> --recurrence-rule <recurrence> --snapshot-retention <how_many_snapshots_to_retain> -n <application_namespace> --full-backup-rule <string>
-----
-+
-Você pode definir o `--full-backup-rule` sinalizador para `always` backup completo constante ou personalizá-lo com base em suas necessidades. Por exemplo, se você escolher a granularidade diária, poderá especificar os dias da semana em que o backup completo deve ocorrer. Por exemplo, use `--full-backup-rule "Monday,Thursday"` para agendar o backup completo às segundas e quintas-feiras.
-
-
-
---
-====
-
-
 == Criar um cronograma de proteção de dados
 
-Uma política de proteção protege um aplicativo criando snapshots, backups ou ambos em um cronograma definido. Você pode optar por criar snapshots e backups por hora, diariamente, semanalmente e mensalmente, e especificar o número de cópias a reter.
+Uma política de proteção protege um aplicativo criando instantâneos, backups ou ambos em um cronograma definido.  Você pode optar por criar snapshots e backups por hora, dia, semana e mês, e pode especificar o número de cópias a serem mantidas.  Você pode agendar um backup completo não incremental usando a anotação full-backup-rule.  Por padrão, todos os backups são incrementais.  Executar um backup completo periodicamente, juntamente com backups incrementais entre eles, ajuda a reduzir o risco associado às restaurações.
+
+[NOTE]
+====
+* Você pode criar agendamentos apenas para instantâneos definindo `backupRetention` para zero e `snapshotRetention` para um valor maior que zero.  Contexto `snapshotRetention` para zero significa que todos os backups agendados ainda criarão instantâneos, mas eles são temporários e serão excluídos imediatamente após a conclusão do backup.
+* Os recursos com escopo de cluster são incluídos em um backup, snapshot ou clone se forem explicitamente referenciados na definição do aplicativo ou se tiverem referências a qualquer um dos namespaces do aplicativo.
 
 
-NOTE: Os recursos com escopo de cluster são incluídos em um backup, snapshot ou clone se forem explicitamente referenciados na definição do aplicativo ou se tiverem referências a qualquer um dos namespaces do aplicativo.
-
-.Antes de começar
-Certifique-se de que a expiração do token de sessão da AWS seja suficiente para quaisquer operações de backup S3 de longa execução. Se o token expirar durante a operação de backup, a operação pode falhar.
-
-* Consulte a https://docs.aws.amazon.com/STS/latest/APIReference/API_GetSessionToken.html["Documentação da API da AWS"^] para obter mais informações sobre como verificar a expiração do token de sessão atual.
-* Consulte o https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html["Documentação do AWS IAM"^] para obter mais informações sobre credenciais com recursos da AWS.
-
-
+====
 [role="tabbed-block"]
 ====
 .Crie uma agenda usando um CR
@@ -305,20 +200,25 @@ Certifique-se de que a expiração do token de sessão da AWS seja suficiente pa
 
 ** *Spec.applicationRef*: O nome do Kubernetes do aplicativo para fazer backup.
 ** *Spec.appVaultRef*: (_required_) o nome do AppVault onde o conteúdo de backup deve ser armazenado.
-** *Spec.backupRetention*: O número de backups a reter. Zero indica que nenhum backup deve ser criado.
+** *spec.backupRetention*: O número de backups a serem retidos.  Zero indica que nenhum backup deve ser criado (somente instantâneos).
 ** *Spec.snapshotRetention*: O número de instantâneos a reter. Zero indica que nenhum instantâneo deve ser criado.
 ** *spec.granularity*: a frequência em que o horário deve ser executado. Valores possíveis, juntamente com campos associados obrigatórios:
 +
-*** `hourly` (requer que você `spec.minute` especifique )
-*** `daily` (requer que você especifique `spec.minute` e `spec.hour`)
-*** `weekly` (requer especificar `spec.minute, spec.hour`, e `spec.dayOfWeek`)
-*** `monthly` (requer especificar `spec.minute, spec.hour`, e `spec.dayOfMonth`)
+*** `Hourly`(requer que você especifique `spec.minute` )
+*** `Daily`(requer que você especifique `spec.minute` e `spec.hour` )
+*** `Weekly`(requer que você especifique `spec.minute, spec.hour` , e `spec.dayOfWeek` )
+*** `Monthly`(requer que você especifique `spec.minute, spec.hour` , e `spec.dayOfMonth` )
+*** `Custom`
 
 
-** *Spec.dayOfMonth*: (_Optional_) o dia do mês (1 - 31) em que a programação deve ser executada. Este campo é necessário se a granularidade estiver definida como `monthly`.
-** *Spec.DayOfWeek*: (_Optional_) o dia da semana (0 - 7) em que o horário deve ser executado. Os valores de 0 ou 7 indicam domingo. Este campo é necessário se a granularidade estiver definida como `weekly`.
-** *Spec.hour*: (_Optional_) a hora do dia (0 - 23) em que o horário deve ser executado. Este campo é necessário se a granularidade estiver definida como `daily`, `weekly` `monthly` ou .
-** *Spec.minute*: (_Optional_) o minuto da hora (0 - 59) que o horário deve ser executado. Este campo é necessário se a granularidade estiver definida como `hourly`, , `daily` `weekly` , ou `monthly`.
+** *spec.dayOfMonth*: (_Opcional_) O dia do mês (1 - 31) em que o agendamento deve ser executado.  Este campo é obrigatório se a granularidade estiver definida como `Monthly` .  O valor deve ser fornecido como uma string.
+** *spec.dayOfWeek*: (_Opcional_) O dia da semana (0 - 7) em que a programação deve ser executada.  Valores de 0 ou 7 indicam domingo.  Este campo é obrigatório se a granularidade estiver definida como `Weekly` .  O valor deve ser fornecido como uma string.
+** *spec.hour*: (_Opcional_) A hora do dia (0 - 23) em que a programação deve ser executada.  Este campo é obrigatório se a granularidade estiver definida como `Daily` , `Weekly` , ou `Monthly` .  O valor deve ser fornecido como uma string.
+** *spec.minute*: (_Opcional_) O minuto da hora (0 - 59) em que a programação deve ser executada.  Este campo é obrigatório se a granularidade estiver definida como `Hourly` , `Daily` , `Weekly` , ou `Monthly` .  O valor deve ser fornecido como uma string.
+** *metadata.annotations.protect.trident.netapp.io/full-backup-rule*: (_Optional_) esta anotação é usada para especificar a regra para agendar o backup completo. Você pode configurá-lo para `always` backup completo constante ou personalizá-lo com base em suas necessidades. Por exemplo, se você escolher a granularidade diária, poderá especificar os dias da semana em que o backup completo deve ocorrer.
++
+Exemplo de YAML para agendamento de backup e snapshot:
+
 +
 [source, yaml]
 ----
@@ -328,16 +228,37 @@ kind: Schedule
 metadata:
   namespace: my-app-namespace
   name: my-cr-name
+  annotations:
+    protect.trident.netapp.io/full-backup-rule: "Monday,Thursday"
 spec:
   dataMover: Kopia
   applicationRef: my-application
   appVaultRef: appvault-name
   backupRetention: "15"
   snapshotRetention: "15"
-  granularity: <monthly>
-  dayOfMonth: "1"
-  dayOfWeek: "0"
+  granularity: Daily
   hour: "0"
+  minute: "0"
+----
++
+Exemplo de YAML para programação somente de snapshot:
+
++
+[source, yaml]
+----
+---
+apiVersion: protect.trident.netapp.io/v1
+kind: Schedule
+metadata:
+  namespace: my-app-namespace
+  name: my-snapshot-schedule
+spec:
+  applicationRef: my-application
+  appVaultRef: appvault-name
+  backupRetention: "0"
+  snapshotRetention: "15"
+  granularity: Daily
+  hour: "2"
   minute: "0"
 ----
 
@@ -362,8 +283,14 @@ NOTE: Você pode usar `tridentctl-protect create schedule --help` para exibir in
 +
 [source, console]
 ----
-tridentctl-protect create schedule <my_schedule_name> --appvault <my_appvault_name> --app <name_of_app_to_snapshot> --backup-retention <how_many_backups_to_retain> --data-mover <Kopia_or_Restic> --day-of-month <day_of_month_to_run_schedule> --day-of-week <day_of_month_to_run_schedule> --granularity <frequency_to_run> --hour <hour_of_day_to_run> --minute <minute_of_hour_to_run> --recurrence-rule <recurrence> --snapshot-retention <how_many_snapshots_to_retain> -n <application_namespace>
+tridentctl-protect create schedule <my_schedule_name> --appvault <my_appvault_name> --app <name_of_app_to_snapshot> --backup-retention <how_many_backups_to_retain> --data-mover <Kopia_or_Restic> --day-of-month <day_of_month_to_run_schedule> --day-of-week <day_of_month_to_run_schedule> --granularity <frequency_to_run> --hour <hour_of_day_to_run> --minute <minute_of_hour_to_run> --recurrence-rule <recurrence> --snapshot-retention <how_many_snapshots_to_retain> -n <application_namespace> --full-backup-rule <string>
 ----
++
+Você pode definir o `--full-backup-rule` sinalizador para `always` backup completo constante ou personalizá-lo com base em suas necessidades. Por exemplo, se você escolher a granularidade diária, poderá especificar os dias da semana em que o backup completo deve ocorrer. Por exemplo, use `--full-backup-rule "Monday,Thursday"` para agendar o backup completo às segundas e quintas-feiras.
+
++
+Para agendamentos somente de instantâneos, defina `--backup-retention 0` e especifique um valor maior que 0 para `--snapshot-retention` .
+
 
 
 --

@@ -31,9 +31,13 @@ O Trident Protect é compatível com uma ampla variedade de ofertas do Kubernete
 * Kubernetes upstream
 
 
+[NOTE]
+====
+* Os backups do Trident Protect são suportados apenas em nós de computação Linux.  Os nós de computação do Windows não são suportados para operações de backup.
+* Verifique se o cluster no qual você instala o Trident Protect está configurado com um controlador de snapshot em execução e as CRDs relacionadas. Para instalar um controlador instantâneo, https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploy-a-volume-snapshot-controller["estas instruções"] consulte a .
 
-NOTE: Verifique se o cluster no qual você instala o Trident Protect está configurado com um controlador de snapshot em execução e as CRDs relacionadas. Para instalar um controlador instantâneo, https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploy-a-volume-snapshot-controller["estas instruções"] consulte a .
 
+====
 
 
 == O Trident protege a compatibilidade de back-end de storage
