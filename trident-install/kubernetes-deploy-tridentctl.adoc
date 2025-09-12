@@ -195,3 +195,16 @@ Para obter mais informações sobre a força desapegada, link:..trident-get-star
 tridentctl install --enable-force-detach=true -n trident
 ----
 ====
+.Habilitar operações simultâneas do controlador Trident
+[%collapsible]
+====
+Para habilitar operações simultâneas do controlador Trident para melhor rendimento, adicione o `--enable-concurrency` opção durante a instalação, conforme mostrado neste exemplo.
+
+
+NOTE: *Visualização técnica*: Este recurso é experimental no NetApp Trident 25.06 e atualmente oferece suporte a fluxos de trabalho paralelos limitados com o driver ONTAP-SAN (protocolos iSCSI e FCP).
+
+[listing]
+----
+tridentctl install --enable-concurrency -n trident
+----
+====
