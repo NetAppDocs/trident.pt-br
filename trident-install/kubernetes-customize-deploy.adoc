@@ -128,6 +128,11 @@ Permite que o Trident prepare os nós do cluster do Kubernetes para gerenciar vo
 
 NOTE: A partir do OpenShift 4.19, a versão mínima do Trident suportada para esse recurso é 25.06.1.
 |  
+
+
+| `k8sAPIQPS`  a| 
+O limite de consultas por segundo (QPS) usado pelo controlador durante a comunicação com o servidor da API do Kubernetes.  O valor de Burst é definido automaticamente com base no valor QPS.
+| `100`; opcional 
 |===
 
 NOTE: Para obter mais informações sobre a formatação dos parâmetros do pod, link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/["Atribuindo pods a nós"^]consulte .
