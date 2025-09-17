@@ -218,6 +218,31 @@ link:../trident-reference/ports.html["Portas Trident"]
 
 Para instalações com ar-gapped, a lista a seguir é uma referência das imagens de contentor necessárias para instalar o Trident. Use o `tridentctl images` comando para verificar a lista de imagens de contentor necessárias.
 
+
+
+=== Imagens de contêiner necessárias para o Trident 25.06.2
+
+[cols="2"]
+|===
+| Versões do Kubernetes | Imagem do recipiente 
+
+
+| v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0  a| 
+* docker.io/netapp/trident:25.06.2
+* docker.io/NetApp/Trident-AutoSupport:25,06
+* provisionador do registry.k8s.io/sig-storage/csi:v5,2.0
+* registry.k8s.io/sig-storage/csi-attacher:v4.8.1
+* registry.k8s.io/sig-storage/csi-resizer:v1.13.2
+* registry.k8s.io/sig-storage/csi-snapshotter:v8.2.1
+* registry.k8s.io/sig-storage/csi-node-driver-registrador:v2.13.0
+* docker.io/netapp/trident-operator:25.06.2 (opcional)
+
+
+|===
+
+
+=== Imagens de contêiner necessárias para o Trident 25.06
+
 [cols="2"]
 |===
 | Versões do Kubernetes | Imagem do recipiente 

@@ -254,11 +254,6 @@ NOTE: *Visualização técnica*: Este recurso é experimental no NetApp Trident 
 | `k8sAPIQPS`  a| 
 O limite de consultas por segundo (QPS) usado pelo controlador durante a comunicação com o servidor da API do Kubernetes.  O valor de Burst é definido automaticamente com base no valor QPS.
 | `100`; opcional 
-
-
-| `k8sAPIQPS`  a| 
-O limite de consultas por segundo (QPS) usado pelo controlador durante a comunicação com o servidor da API do Kubernetes.  O valor de Burst é definido automaticamente com base no valor QPS.
-| `100`; opcional 
 |===
 
 

@@ -5677,7 +5677,6 @@
   <block id="11162de38772a3876602bb4d9d213f43" category="section-title">Mapeamento de classes de armazenamento</block>
   <block id="b48c8c7ca3eb5e63afdfe6bbd74a35c9" category="paragraph">O<block ref="b57d666629acffb30cc697faadc136b5" prefix=" " category="inline-code"></block> atributo define um mapeamento de uma classe de armazenamento presente no aplicativo de origem para uma nova classe de armazenamento no cluster de destino.  Você pode usar isso ao migrar aplicativos entre clusters com diferentes classes de armazenamento ou ao alterar o backend de armazenamento para operações de BackupRestore.</block>
   <block id="27f5153068cecd37b6fa4a136586658d" category="sidebar">Usar configurações avançadas</block>
-  <block id="78b16a5d2427fb1cb647b8ff8e8936dd" category="section-title">Novidades em 25.06.1</block>
   <block id="56f0b7f1d902abcea5e9a924acc8cf68" category="list-text">Corrigido um problema em que os NQNs não eram verificados antes de serem desmapeados dos subsistemas.</block>
   <block id="74ede3b036d836536636c89ae6208dc1" category="list-text">Corrigido um problema em que várias tentativas de fechar um dispositivo LUKS levavam a falhas na desanexação de volumes.</block>
   <block id="e593abd973cbfe8b821587be547d75a8" category="list-text">Corrigido o problema de desempacotamento do volume iSCSI quando o caminho do dispositivo foi alterado desde sua criação.</block>
@@ -5814,4 +5813,11 @@
   <block id="e6bd8d0922b2f21a4aea7439cad54ba6" category="paragraph">Para habilitar operações simultâneas do controlador Trident para melhor rendimento, adicione o<block ref="663f61c1cf47f8a531c8d769e8bf59f4" prefix=" " category="inline-code"></block> opção durante a instalação, conforme mostrado neste exemplo.</block>
   <block id="6b37510d663e6eea4cd2d594f41e9e80" category="section-title">Uso simultâneo do driver Trident SAN/iSCSI e EBS-CSI</block>
   <block id="dd601ed3d730aa713757843173c1c8c5" category="paragraph">Se você planeja usar drivers ontap-san (por exemplo, iSCSI) com AWS (EKS, ROSA, EC2 ou qualquer outra instância), a configuração multipath necessária nos nós pode entrar em conflito com o driver CSI do Amazon Elastic Block Store (EBS).  Para garantir que o multipathing funcione sem interferir nos discos EBS no mesmo nó, você precisa excluir o EBS da sua configuração de multipathing.  Este exemplo mostra um<block ref="9ac80d53ede05256c28cf9e043eb423c" prefix=" " category="inline-code"></block> arquivo que inclui as configurações necessárias do Trident , excluindo discos EBS do multipathing:</block>
+  <block id="f5df426ed26da0917a8092b8f0b273d7" category="section-title">Imagens de contêiner necessárias para o Trident 25.06.2</block>
+  <block id="2bf22bcd28ba853a9453f882ca5dd194" category="list-text">docker.io/netapp/trident:25.06.2</block>
+  <block id="1f8b4ae7badb9c9b5fd03f3770bf252f" category="list-text">docker.io/netapp/trident-operator:25.06.2 (opcional)</block>
+  <block id="543f0a02b84be74ac68a52c8fb383d86" category="section-title">Imagens de contêiner necessárias para o Trident 25.06</block>
+  <block id="c70a7b422c141acedc1060dd737c17a5" category="section-title">Novidades em 25.06.2</block>
+  <block id="3e49406f91b1756e000630d03496d0da" category="list-text">*Kubernetes*: Corrigido um problema crítico em que dispositivos iSCSI incorretos eram descobertos ao desanexar volumes de nós do Kubernetes.</block>
+  <block id="76adb46eab5f5dd5b58c3c8a62320c12" category="section-title">Mudanças em 25.06.1</block>
 </blocks>
