@@ -21,6 +21,9 @@ Com o Trident, você pode criar novos volumes usando volumes existentes ou volum
 Antes de clonar volumes, certifique-se de que os backends de origem e destino são do mesmo tipo e têm a mesma classe de armazenamento.
 
 
+NOTE: A clonagem entre namespaces é suportada apenas para `ontap-san` e `ontap-nas` drivers de armazenamento.  Clones somente leitura não são suportados.
+
+
 
 == Início rápido
 
