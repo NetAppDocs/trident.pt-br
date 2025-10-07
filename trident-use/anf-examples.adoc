@@ -93,7 +93,7 @@ Os backends Azure NetApp Files fornecem essas opções de configuração.
 | `qosType` | Representa o tipo de QoS: Automático ou Manual. *Prévia técnica do Trident 25.06* | Auto 
 
 
-| `maxThroughput` | Define a taxa de transferência máxima permitida. Suportado apenas para pools de capacidade de QoS manual. *Prévia técnica para Trident 25.06* | `4 MiB/sec` 
+| `maxThroughput` | Define a taxa de transferência máxima permitida em MiB/seg. Suportado apenas para pools de capacidade de QoS manual. *Prévia técnica para Trident 25.06* | `4 MiB/sec` 
 |===
 
 NOTE: Para obter mais informações sobre recursos de rede, link:https://docs.microsoft.com/en-us/azure/azure-netapp-files/configure-network-features["Configurar recursos de rede para um volume Azure NetApp Files"^]consulte .
