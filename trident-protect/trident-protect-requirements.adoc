@@ -166,3 +166,16 @@ NOTE: Certifique-se de que os nomes do SVM usados na relação de replicação e
 === Configuração Trident / ONTAP para replicação SnapMirror
 
 O Trident Protect exige que você configure pelo menos um back-end de storage compatível com a replicação para os clusters de origem e destino. Se os clusters de origem e destino forem iguais, o aplicativo de destino deverá usar um back-end de storage diferente do aplicativo de origem para obter a melhor resiliência.
+
+
+
+=== Requisitos de cluster do Kubernetes para replicação do SnapMirror
+
+Certifique-se de que seus clusters do Kubernetes atendam aos seguintes requisitos:
+
+* *Acessibilidade do AppVault*: Os clusters de origem e destino devem ter acesso à rede para ler e gravar no AppVault para replicação de objetos do aplicativo.
+* *Conectividade de rede*: configure regras de firewall, permissões de bucket e listas de permissões de IP para permitir a comunicação entre os dois clusters e o AppVault através de WANs.
+
+
+
+NOTE: Muitos ambientes corporativos implementam políticas rígidas de firewall em conexões WAN.  Verifique esses requisitos de rede com sua equipe de infraestrutura antes de configurar a replicação.
