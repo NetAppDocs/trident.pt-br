@@ -100,7 +100,7 @@ O Trident suporta a importação de volume usando os `ontap-nas` drivers e `onta
 
 [NOTE]
 ====
-* O `ontap-nas-economy` driver não pode importar e gerenciar qtrees.
+* O Trident não suporta importação de volume usando o `ontap-nas-economy` motorista.
 * Os `ontap-nas` drivers e `ontap-nas-flexgroup` não permitem nomes de volume duplicados.
 
 

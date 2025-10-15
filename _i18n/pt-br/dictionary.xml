@@ -2909,7 +2909,6 @@
   <block id="a9e31569460a0b133fdd97c5f482c04e" category="admonition">Não inclua parâmetros adicionais, como nome PV ou tamanho do volume. Isso pode fazer com que o comando de importação falhe.</block>
   <block id="37c0e0081d2fa3ebdf688df7e37ecd7a" category="paragraph">Reveja os exemplos de importação de volume a seguir para drivers suportados.</block>
   <block id="b8cd11aae04b2508e6cf401f43cdb4f9" category="section-title">ONTAP nas e ONTAP nas FlexGroup</block>
-  <block id="6551d29114ca8e4ced094b1f68242124" category="list-text">O<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block> driver não pode importar e gerenciar qtrees.</block>
   <block id="15f21f5d1f84f4b986a4db037c57333d" category="list-text">Os<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> drivers e<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> não permitem nomes de volume duplicados.</block>
   <block id="3fa3bc64b029b88f42b842bb7dc4e52d" category="paragraph-title">Exemplos de ONTAP nas</block>
   <block id="77fe25c67ee05760d58e91a98e3ff055" category="paragraph">A seguir mostra um exemplo de um volume gerenciado e uma importação de volume não gerenciado.</block>
@@ -5828,4 +5827,5 @@
   <block id="996b8601627b0cb893a41930ccbbeb4b" category="paragraph">O Trident oferece aos usuários do Kubernetes a capacidade de expandir seus volumes depois que eles são criados. Encontre informações sobre as configurações necessárias para expandir volumes iSCSI, NFS, SMB, NVMe/TCP e FC.</block>
   <block id="1b4288d16f58084404fbffe338e680fb" category="paragraph">O Trident suporta importação de volume usando o<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> (iSCSI, NVMe/TCP e FC) e<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> motoristas.</block>
   <block id="19cfd1d1df86c48cee153f9fbaa31f0f" category="paragraph">O Trident pode importar volumes ONTAP SAN FlexVol que contêm um único LUN. Isto é consistente com o<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> driver, que cria um FlexVol volume para cada PVC e um LUN dentro do FlexVol volume. O Trident importa o FlexVol volume e o associa à definição de PVC. Trident pode importar<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> volumes que contêm vários LUNs.</block>
+  <block id="e214c4610b9128a251097b5d36c60e8b" category="list-text">O Trident não suporta importação de volume usando o<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block> motorista.</block>
 </blocks>
