@@ -149,9 +149,9 @@ tridentctl import volume nas_blog unmanaged_volume -f <path-to-pvc-file> --no-ma
 
 === San ONTAP
 
-O Trident suporta a importação de volume usando os `ontap-san` drivers e `ontap-san-economy`.
+O Trident suporta importação de volume usando o `ontap-san` (iSCSI, NVMe/TCP e FC) e `ontap-san-economy` motoristas.
 
-O Trident pode importar volumes ONTAP SAN FlexVol que contenham um único LUN. Isso é consistente com o `ontap-san` driver, que cria um FlexVol volume para cada PVC e um LUN dentro do FlexVol volume. A Trident importa o FlexVol volume e associa-o à definição de PVC.
+O Trident pode importar volumes ONTAP SAN FlexVol que contêm um único LUN. Isto é consistente com o `ontap-san` driver, que cria um FlexVol volume para cada PVC e um LUN dentro do FlexVol volume. O Trident importa o FlexVol volume e o associa à definição de PVC. Trident pode importar `ontap-san-economy` volumes que contêm vários LUNs.
 
 .Exemplos de SAN ONTAP
 A seguir mostra um exemplo de um volume gerenciado e uma importação de volume não gerenciado.
