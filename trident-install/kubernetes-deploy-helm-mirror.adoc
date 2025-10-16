@@ -25,7 +25,7 @@ Você pode implantar o operador Trident e instalar o Trident usando o Helm. Este
 ====
 []
 =====
-* O Kubernetes 1,33 agora é compatível com o Trident. Atualize o Trident antes de atualizar o Kubernetes.
+* O Kubernetes 1.34 agora é compatível com o Trident. Atualize o Trident antes de atualizar o Kubernetes.
 * O Trident reforça estritamente o uso de configuração multipathing em ambientes SAN, com um valor recomendado de `find_multipaths: no` no arquivo multipath.conf.
 +
 O uso de configuração não multipathing ou o uso `find_multipaths: yes` de ou `find_multipaths: smart` valor no arquivo multipath.conf resultará em falhas de montagem. A Trident recomenda o uso de `find_multipaths: no` desde a versão 21,07.
