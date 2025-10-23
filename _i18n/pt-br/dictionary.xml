@@ -2527,8 +2527,6 @@
   <block id="4a54228eb2be79492f8f76bb814ddf63" category="cell">Valor codificado em base64 da chave privada do cliente. Usado para autenticação baseada em certificado</block>
   <block id="b071cd8105f8f59b777098388b7a3322" category="cell"><block ref="8468461bca00a47ab5ddba2afc45f52c" prefix="" category="inline-code"></block></block>
   <block id="ffe4ce29fe1a6176d496c40332e9cb98" category="cell">Valor codificado em base64 do certificado CA confiável. Opcional. Usado para autenticação baseada em certificado</block>
-  <block id="83425e975af1b2d60355aa4162300198" category="cell">Nome de usuário para se conetar ao cluster/SVM. Usado para autenticação baseada em credenciais</block>
-  <block id="63d06d6cc41e485615f99a3aad0002b3" category="cell">Senha para se conectar ao cluster/SVM. Usado para autenticação baseada em credenciais</block>
   <block id="e3f688f3aa653574b3253640aa98f47c" category="cell">Prefixo usado ao provisionar novos volumes na SVM. Não pode ser atualizado depois de configurá-lo</block>
   <block id="86780ad6247dfbcd90ca1455ee592852" category="cell">"Trident"</block>
   <block id="280a6a6866847c57b1a98bbcdc929268" category="cell">"" (não aplicado por padrão)</block>
@@ -2673,8 +2671,6 @@
   <block id="62fbbf4cfd0cc0a82f953199d14a61e3" category="cell"><block ref="2ebe107bb3bc9551fbb0e5033046931c" prefix="" category="inline-code"></block></block>
   <block id="a379a576b788ab047d5e6405ff4f3511" category="cell">Nome de utilizador alvo. Necessário se<block ref="68978ccf4ed83900c8dd27558ca5ec18" prefix=" " category="inline-code"></block></block>
   <block id="2da9f60cc5b99a5987580c38e6db0842" category="cell">Valor codificado em base64 do certificado CA confiável. Opcional. Usado para autenticação baseada em certificado.</block>
-  <block id="394d848f17683e31e21f6cde5fd9e3e4" category="cell">Nome de usuário necessário para se comunicar com o cluster ONTAP. Usado para autenticação baseada em credenciais.</block>
-  <block id="6f0acf4836d44b03512e1caa0d774777" category="cell">Senha necessária para se comunicar com o cluster ONTAP. Usado para autenticação baseada em credenciais.</block>
   <block id="972abf48cbbadbcd573754140d35e19a" category="cell">Máquina virtual de armazenamento para usar</block>
   <block id="a0de2cc0c77c388210e1f48423eea29c" category="cell">Prefixo usado ao provisionar novos volumes na SVM. Não pode ser modificado mais tarde. Para atualizar esse parâmetro, você precisará criar um novo backend.</block>
   <block id="56d1e7863190cbf5e7689e2821d0959e" category="cell"><block ref="47cb44be55a0dffa15dfc900a4c687be" prefix="" category="inline-code"></block></block>
@@ -5830,4 +5826,19 @@
   <block id="844c50b4f1aab48821867a1209be687b" category="admonition">_Embora o Trident seja compatível com as versões 1.27.x a 1.34.x do Rancher Kubernetes Engine 2 (RKE2), o Trident foi qualificado atualmente apenas no RKE2 v1.28.5+rke2r1._</block>
   <block id="27f15237580e8f85cd2846baf40ad83b" category="paragraph">1,27 - 1,34</block>
   <block id="73b1fe6d150d74c875ee4a368dd3b1a9" category="cell">v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0</block>
+  <block id="431f7ca0be64e2c321d4d4be79b721aa" category="inline-link-macro">Autenticar o Trident em um SVM de backend usando credenciais do Active Directory</block>
+  <block id="ebce82cad933beb695765f374ca16800" category="cell">Nome de usuário para conectar ao cluster/SVM. Usado para autenticação baseada em credenciais. Para autenticação do Active Directory, consulte <block ref="c266761f957eda011224921a8539eded" category="inline-link-macro-rx"></block>.</block>
+  <block id="c48567e30df98d399ca8a25594294caa" category="cell">Senha para conectar ao cluster/SVM. Usado para autenticação baseada em credenciais. Para autenticação do Active Directory, consulte <block ref="c266761f957eda011224921a8539eded" category="inline-link-macro-rx"></block>.</block>
+  <block id="50d0e6e4ea5256d25a55581de47b2a0f" category="cell">Nome de usuário necessário para se comunicar com o cluster ONTAP . Usado para autenticação baseada em credenciais. Para autenticação do Active Directory, consulte <block ref="c266761f957eda011224921a8539eded" category="inline-link-macro-rx"></block>.</block>
+  <block id="dece0a70145f48ad3b540f19d6ed5df8" category="cell">Senha necessária para se comunicar com o cluster ONTAP . Usado para autenticação baseada em credenciais. Para autenticação do Active Directory, consulte <block ref="c266761f957eda011224921a8539eded" category="inline-link-macro-rx"></block>.</block>
+  <block id="27e5aeb0225e5a43e4c8c17f706a0a14" category="inline-link-macro">Configurar o acesso do controlador de domínio do Active Directory no ONTAP</block>
+  <block id="2d6f3231a7f0c1252294552c9ce9c1e0" category="paragraph">Você pode configurar o Trident para autenticar em um SVM de backend usando credenciais do Active Directory (AD). Antes que uma conta do AD possa acessar o SVM, você deve configurar o acesso do controlador de domínio do AD ao cluster ou SVM. Para administração de cluster com uma conta do AD, você deve criar um túnel de domínio. Consulte <block ref="affb415ae65d1b8ff6d4848fb0c01200" category="inline-link-macro-rx"></block> para mais detalhes.</block>
+  <block id="fca3ffea6534176432f58b5a22ed22e1" category="list-title">passos</block>
+  <block id="fa349cdbbc85b9c18e91508e377f8475" category="list-text">Configurar as definições do Sistema de Nomes de Domínio (DNS) para um SVM de backend:</block>
+  <block id="1ffd05fea44ee961865d2fb5edc44bed" category="paragraph"><block ref="c3a0bdbd7b81f16edc3a67d3fbf4564b" prefix="" category="inline-code"></block></block>
+  <block id="c1ddcdee488a34a4b44c78f926dfee75" category="list-text">Execute o seguinte comando para criar uma conta de computador para o SVM no Active Directory:</block>
+  <block id="1e1b13ed7ccf639907d02e773fed43f5" category="paragraph"><block ref="c53a082488a948b7a70806546ba7211d" prefix="" category="inline-code"></block></block>
+  <block id="34dd5efc5c883d290ed743abcc3fccb1" category="list-text">Use este comando para criar um usuário ou grupo do AD para gerenciar o cluster ou SVM</block>
+  <block id="82a5f11771bfe77a499bcb96a45ce13f" category="paragraph"><block ref="22ec37652eb447176b3d5645ac4a7dbb" prefix="" category="inline-code"></block></block>
+  <block id="743fda998716813dc210d0fd0c3f2b65" category="list-text">No arquivo de configuração do backend do Trident , defina o<block ref="14c4b06b824ec593239362517f538b29" prefix=" " category="inline-code"></block> e<block ref="5f4dcc3b5aa765d61d8327deb882cf99" prefix=" " category="inline-code"></block> parâmetros para o nome do usuário ou grupo do AD e senha, respectivamente.</block>
 </blocks>
