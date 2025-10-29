@@ -96,7 +96,7 @@ NOTE: Quando a lista de agregados é atualizada no SVM, a lista é atualizada au
 | "" 
 
 
-| `limitVolumeSize` | Falha no provisionamento se o tamanho do volume solicitado estiver acima desse valor. Também restringe o tamanho máximo dos volumes que gerencia para qtrees, e a `qtreesPerFlexvol` opção permite personalizar o número máximo de qtrees por FlexVol volume | "" (não aplicado por padrão) 
+| `limitVolumeSize` | O provisionamento falhará se o tamanho do volume solicitado for superior a este valor. | "" (não aplicado por padrão) 
 
 
 | `debugTraceFlags` | Debug flags para usar ao solucionar problemas. Por exemplo, não use `debugTraceFlags` a menos que você esteja solucionando problemas e exija um despejo de log detalhado. | nulo 
