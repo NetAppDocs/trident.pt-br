@@ -264,6 +264,13 @@ A política de disposição em categorias a ser usada, o padrão é `none`.
  a| 
 `none`
 
+
+
+| `skipRecoveryQueue`  a| 
+Durante a exclusão de um volume, ignore a fila de recuperação no armazenamento e exclua o volume imediatamente.
+ a| 
+``
+
 |===
 
 
