@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: trident-use/backend_ops_tridentctl.html 
-keywords: backends, storage system, anf, cvs for aws, cvs for gcp, element, hci, solidfire, ontap, aff, fas, ontap select, configure backends, tridentctl, create backends, delete backends, view backends, update backends 
+keywords: backends, storage system, anf, element, hci, solidfire, ontap, aff, fas, ontap select, configure backends, tridentctl, create backends, delete backends, view backends, update backends 
 summary: 'Saiba mais sobre como executar operações de gerenciamento de back-end usando `tridentctl`o .' 
 ---
 = Execute o gerenciamento de back-end com o tridentctl

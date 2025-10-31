@@ -33,7 +33,12 @@ Auto-suporte:: A documentação do Trident está disponível para os meses 25 - 
 
 
  a| 
-link:https://docs.netapp.com/us-en/trident/index.html["25,06"^]
+link:https://docs.netapp.com/us-en/trident/index.html["25,10"^]
+| Outubro de 2026 | Outubro de 2027 | Outubro de 2028 
+
+
+ a| 
+link:https://docs.netapp.com/us-en/trident-2506/index.html["25,06"^]
 | Junho de 2026 | Junho de 2027 | Junho de 2028 
 
 
@@ -44,47 +49,37 @@ link:https://docs.netapp.com/us-en/trident-2502/index.html["25,02"^]
 
  a| 
 link:https://docs.netapp.com/us-en/trident-2410/index.html["24,10"^]
-| Outubro de 2025 | Outubro de 2026 | Outubro de 2027 
+| -- | Outubro de 2026 | Outubro de 2027 
 
 
  a| 
 link:https://docs.netapp.com/us-en/trident-2406/index.html["24,06"^]
-| Junho de 2025 | Junho de 2026 | Junho de 2027 
+| -- | Junho de 2026 | Junho de 2027 
 
 
  a| 
 link:https://docs.netapp.com/us-en/trident-2402/index.html["24,02"^]
-| Fevereiro de 2025 | Fevereiro de 2026 | Fevereiro de 2027 
+| -- | Fevereiro de 2026 | Fevereiro de 2027 
 
 
  a| 
 link:https://docs.netapp.com/us-en/trident-2310/index.html["23,10"^]
-| -- | Outubro de 2025 | Outubro de 2026 
+| -- | -- | Outubro de 2026 
 
 
  a| 
 link:https://docs.netapp.com/us-en/trident-2307/index.html["23,07"^]
-| -- | Julho de 2025 | Julho de 2026 
+| -- | -- | Julho de 2026 
 
 
  a| 
 link:https://docs.netapp.com/us-en/trident-2304/index.html["23,04"^]
-| -- | Abril de 2025 | Abril de 2026 
+| -- | -- | Abril de 2026 
 
 
  a| 
 link:https://docs.netapp.com/us-en/trident-2301/index.html["23,01"^]
 | -- | -- | Janeiro de 2026 
-
-
- a| 
-link:https://docs.netapp.com/us-en/trident-2210/index.html["22,10"^]
-| -- | -- | Outubro de 2025 
-
-
- a| 
-link:https://docs.netapp.com/us-en/trident-2207/index.html["22,07"^]
-| -- | -- | Julho de 2025 
 |===
 
 

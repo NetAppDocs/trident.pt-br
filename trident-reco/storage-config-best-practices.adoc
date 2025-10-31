@@ -74,7 +74,7 @@ Por exemplo, um cluster de ONTAP de dois nós pode hospedar um máximo de 2000 v
 
 === Clonar um volume
 
-O NetApp Trident oferece suporte à clonagem de volumes ao usar o  `ontap-nas` ,  `ontap-san` ,  `solidfire-san` , e  `gcp-cvs` drivers de armazenamento. Ao usar os `ontap-nas-flexgroup` drivers ou `ontap-nas-economy`, a clonagem não é suportada. Criar um novo volume a partir de um volume existente resultará na criação de um novo instantâneo.
+O NetApp Trident suporta a clonagem de volumes ao usar o `ontap-nas` , `ontap-san` , e `solidfire-san` drivers de armazenamento. Ao usar o `ontap-nas-flexgroup` ou `ontap-nas-economy` Drivers, clonagem não é suportada. Criar um novo volume a partir de um volume existente resultará na criação de um novo snapshot.
 
 
 WARNING: Evite clonar um PVC associado a uma StorageClass diferente. Execute operações de clonagem dentro da mesma StorageClass para garantir a compatibilidade e evitar comportamentos inesperados.

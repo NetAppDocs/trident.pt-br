@@ -20,9 +20,6 @@ Saiba mais sobre as opções de configuração de back-end NFS e SMB para Azure 
 
 O Trident usa sua configuração de back-end (sub-rede, rede virtual, nível de serviço e local) para criar volumes Azure NetApp Files em pools de capacidade disponíveis no local solicitado e corresponder ao nível de serviço e à sub-rede solicitados.
 
-
-NOTE: * A partir da versão NetApp Trident 25.06, pools de capacidade de QoS manuais são suportados como uma prévia técnica.*
-
 Os backends Azure NetApp Files fornecem essas opções de configuração.
 
 [cols="3"]
@@ -90,10 +87,10 @@ Os backends Azure NetApp Files fornecem essas opções de configuração.
 | `supportedTopologies` | Representa uma lista de regiões e zonas que são suportadas por este backend. Para obter mais informações, link:../trident-use/csi-topology.html["Use a topologia CSI"]consulte . |  
 
 
-| `qosType` | Representa o tipo de QoS: Automático ou Manual. *Prévia técnica do Trident 25.06* | Auto 
+| `qosType` | Representa o tipo de QoS: Automático ou Manual. | Auto 
 
 
-| `maxThroughput` | Define a taxa de transferência máxima permitida em MiB/seg. Suportado apenas para pools de capacidade de QoS manual. *Prévia técnica para Trident 25.06* | `4 MiB/sec` 
+| `maxThroughput` | Define a taxa de transferência máxima permitida em MiB/s. Suportado apenas para pools de capacidade de QoS manual. | `4 MiB/sec` 
 |===
 
 NOTE: Para obter mais informações sobre recursos de rede, link:https://docs.microsoft.com/en-us/azure/azure-netapp-files/configure-network-features["Configurar recursos de rede para um volume Azure NetApp Files"^]consulte .
@@ -257,7 +254,7 @@ capacityPools:
 .Exemplo de backend com pools de capacidade de QoS manuais
 [%collapsible]
 ====
-Esta configuração de backend coloca volumes no Azure  `eastus` localização com pools de capacidade de QoS manuais. *Prévia técnica no NetApp Trident 25.06*.
+Essa configuração de backend coloca volumes no Azure. `eastus` Localização com pools de capacidade QoS manuais.
 
 [source, yaml]
 ----
