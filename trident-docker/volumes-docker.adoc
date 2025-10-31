@@ -68,7 +68,7 @@ Execute as etapas abaixo para atualizar o Trident para Docker.
 
 == Clonar um volume
 
-Ao usar o `ontap-nas` , `ontap-san` , e `solidfire-san` Os drivers de armazenamento, como o Trident, podem clonar volumes. Ao usar o `ontap-nas-flexgroup` ou `ontap-nas-economy` Drivers, clonagem não é suportada. Criar um novo volume a partir de um volume existente resultará na criação de um novo snapshot.
+Ao usar o `ontap-nas` , `ontap-san` , `solidfire-san` , e `gcp-cvs storage drivers` O Trident pode clonar volumes. Ao usar o `ontap-nas-flexgroup` ou `ontap-nas-economy` Drivers, clonagem não é suportada. Criar um novo volume a partir de um volume existente resultará na criação de um novo snapshot.
 
 * Inspecione o volume para enumerar instantâneos:
 +

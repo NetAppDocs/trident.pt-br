@@ -16,7 +16,7 @@ Você pode implantar o operador Trident e instalar o Trident usando o Helm. Este
 
 
 
-== Informações críticas sobre o Trident 25.10
+== Informações críticas sobre o Trident 25.06
 
 *Você deve ler as seguintes informações críticas sobre o Trident.*
 
@@ -70,7 +70,7 @@ helm install <name> netapp-trident/trident-operator --version 100.2506.0 --set i
 --
 [source, console]
 ----
-helm install <name> netapp-trident/trident-operator --version 100.2506.0 --set imageRegistry=<your-registry> --set operatorImage=<your-registry>/trident-operator:25.10.0 --set tridentAutosupportImage=<your-registry>/trident-autosupport:25.10 --set tridentImage=<your-registry>/trident:25.10.0 --create-namespace --namespace <trident-namespace> --set nodePrep={iscsi}
+helm install <name> netapp-trident/trident-operator --version 100.2506.0 --set imageRegistry=<your-registry> --set operatorImage=<your-registry>/trident-operator:25.06.0 --set tridentAutosupportImage=<your-registry>/trident-autosupport:25.06 --set tridentImage=<your-registry>/trident:25.06.0 --create-namespace --namespace <trident-namespace> --set nodePrep={iscsi}
 ----
 --
 ====
@@ -252,7 +252,7 @@ NOTE: O `tridentK8sTimeout` O parâmetro é aplicável somente para instalação
 | `windows` | Permite que o Trident seja instalado no nó de trabalho do Windows. | `false` 
 
 
-| `enableForceDetach` | Permite ativar a função de desprendimento forçado. Você pode automatizar o processo de desanexação forçada por meio da integração com o operador de verificação de integridade do nó (NHC). Para obter informações, consultelink:../trident-reco/force-detach.html["Automatizando o failover de aplicações com estado usando o Trident."] . | `false` 
+| `enableForceDetach` | Permite ativar a função forçar desanexar. | `false` 
 
 
 | `excludePodSecurityPolicy` | Exclui a criação da diretiva de segurança do pod do operador. | `false` 
@@ -264,119 +264,4 @@ Permite que o Trident prepare os nós do cluster do Kubernetes para gerenciar vo
 
 NOTE: A partir do OpenShift 4.19, a versão mínima do Trident suportada para esse recurso é 25.06.1.
 |  
-
-
-| `resources`  a| 
-Define os limites de recursos e as solicitações do Kubernetes para o controlador Trident , o nó e os pods do operador.  Você pode configurar CPU e memória para cada contêiner e sidecar para gerenciar a alocação de recursos no Kubernetes.
-
-Para obter mais informações sobre como configurar solicitações e limites de recursos, consultelink:https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/["Gerenciamento de recursos para pods e contêineres"^] .
-
-[WARNING]
-====
-* NÃO altere os nomes de nenhum contêiner ou campo.
-* NÃO altere o recuo - o recuo do YAML é fundamental para a análise correta.
-
-
-====
-[NOTE]
-====
-* Por padrão, não há limites aplicados; apenas as solicitações possuem valores padrão.
-* Os nomes dos contêineres são listados conforme aparecem nas especificações do pod.
-* Os sidecars estão listados abaixo de cada contêiner principal.
-* Verifique o TORC. `status.CurrentInstallationParams` Campo para visualizar os valores atualmente aplicados.
-
-
-==== a| 
-[source, yaml]
-----
-resources:
-  controller:
-    trident-main:
-      requests:
-        cpu: 10m
-        memory: 80Mi
-      limits:
-          cpu:
-          memory:
-    csi-provisioner:
-      requests:
-        cpu: 2m
-        memory: 20Mi
-      limits:
-        cpu:
-        memory:
-    csi-attacher:
-      requests:
-        cpu: 2m
-        memory: 20Mi
-      limits:
-        cpu:
-        memory:
-    csi-resizer:
-      requests:
-        cpu: 3m
-        memory: 20Mi
-      limits:
-        cpu:
-        memory:
-    csi-snapshotter:
-      requests:
-        cpu: 2m
-        memory: 20Mi
-      limits:
-        cpu:
-        memory:
-    trident-autosupport:
-      requests:
-        cpu: 1m
-        memory: 30Mi
-      limits:
-        cpu:
-        memory:
-  node:
-    linux:
-      trident-main:
-        requests:
-          cpu: 10m
-          memory: 60Mi
-        limits:
-          cpu:
-          memory:
-      node-driver-registrar:
-        requests:
-          cpu: 1m
-          memory: 10Mi
-        limits:
-          cpu:
-          memory:
-    windows:
-      trident-main:
-        requests:
-          cpu: 6m
-          memory: 40Mi
-        limits:
-          cpu:
-          memory:
-      node-driver-registrar:
-        requests:
-          cpu: 6m
-          memory: 40Mi
-        limits:
-          cpu:
-          memory:
-      liveness-probe:
-        requests:
-          cpu: 2m
-          memory: 40Mi
-        limits:
-          cpu:
-          memory:
-  operator:
-    requests:
-      cpu: 10m
-      memory: 40Mi
-    limits:
-      cpu:
-      memory:
-----
 |===

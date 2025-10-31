@@ -24,6 +24,8 @@ entries:
       url: "/trident-use/gcnv-prep.html"
     - title: Opções de configuração e exemplos
       url: "/trident-use/gcnv-examples.html"
+  - title: Cloud Volumes Service para Google Cloud
+    url: "/trident-use/gcp.html"
   - title: NetApp HCI ou SolidFire
     url: "/trident-use/element.html"
   - title: Controladores SAN ONTAP

@@ -21,7 +21,7 @@ Todos os nós de trabalho no cluster do Kubernetes precisam ser capazes de monta
 Se você estiver usando uma combinação de drivers, você deve instalar todas as ferramentas necessárias para seus drivers. Versões recentes do Red Hat Enterprise Linux CoreOS (RHCOS) têm as ferramentas instaladas por padrão.
 
 .Ferramentas NFS
-link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#nfs-volumes["Instalar as ferramentas NFS"]Se você estiver usando: `ontap-nas` , `ontap-nas-economy` , `ontap-nas-flexgroup` , ou `azure-netapp-files` .
+link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#nfs-volumes["Instalar as ferramentas NFS"]Se você estiver usando: `ontap-nas` , `ontap-nas-economy` , `ontap-nas-flexgroup` , `azure-netapp-files` , `gcp-cvs` .
 
 .Ferramentas iSCSI
 link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#install-the-iscsi-tools["Instale as ferramentas iSCSI"] se estiver a utilizar: `ontap-san`, `ontap-san-economy`, `solidfire-san`.

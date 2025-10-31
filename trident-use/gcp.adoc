@@ -1,0 +1,448 @@
+---
+sidebar: sidebar 
+permalink: trident-use/gcp.html 
+keywords: trident backend, cloud volumes service for google cloud platform, google cloud platform, gcp, storage pool labels, storage pool, cvs, cvs-performance, service type, service level, cloud volumes service, cloud volumes, drivers, access modes, rwo, rwx, rwp, rwop, file system 
+summary: Aprenda como configurar o Cloud Volumes Service para Google Cloud como backend da sua instalação do Trident usando as configurações de exemplo fornecidas. 
+---
+= Configure um Cloud Volumes Service para o backend do Google Cloud.
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Aprenda como configurar o NetApp Cloud Volumes Service para Google Cloud como backend para sua instalação do Trident usando as configurações de exemplo fornecidas.
+
+
+
+== Detalhes do driver do Google Cloud
+
+A Trident fornece o `gcp-cvs` O driver deve se comunicar com o cluster. Os modos de acesso suportados são: _ReadWriteOnce_ (RWO), _ReadOnlyMany_ (ROX), _ReadWriteMany_ (RWX), _ReadWriteOncePod_ (RWOP).
+
+[cols="1, 1, 1, 2, 2"]
+|===
+| Condutor | Protocolo | VolumeMode | Modos de acesso suportados | Sistemas de arquivos suportados 
+
+
+| `gcp-cvs`  a| 
+NFS
+ a| 
+Sistema de ficheiros
+ a| 
+RWO, ROX, RWX, RWOP
+ a| 
+`nfs`
+
+|===
+
+
+== Saiba mais sobre o suporte do Trident para o Cloud Volumes Service do Google Cloud.
+
+O Trident pode criar volumes do Cloud Volumes Service de duas maneiras diferentes.link:https://cloud.google.com/architecture/partners/netapp-cloud-volumes/service-types["tipos de serviço"^] :
+
+* *CVS-Performance*: O tipo de serviço Trident padrão. Este tipo de serviço otimizado para desempenho é mais adequado para cargas de trabalho de produção que valorizam o desempenho. O tipo de serviço CVS-Performance é uma opção de hardware que suporta volumes com tamanho mínimo de 100 GiB. Você pode escolher um dos seguintes:link:https://cloud.google.com/architecture/partners/netapp-cloud-volumes/service-levels#service_levels_for_the_cvs-performance_service_type["três níveis de serviço"^] :
++
+** `standard`
+** `premium`
+** `extreme`
+
+
+* *CVS*: O tipo de serviço CVS oferece alta disponibilidade zonal com níveis de desempenho limitados a moderados. O tipo de serviço CVS é uma opção de software que utiliza pools de armazenamento para suportar volumes tão pequenos quanto 1 GiB. O pool de armazenamento pode conter até 50 volumes, onde todos os volumes compartilham a capacidade e o desempenho do pool. Você pode escolher um dos seguintes:link:https://cloud.google.com/architecture/partners/netapp-cloud-volumes/service-levels#service_levels_for_the_cvs_service_type["dois níveis de serviço"^] :
++
+** `standardsw`
+** `zoneredundantstandardsw`
+
+
+
+
+.O que você vai precisar
+Para configurar e usar o https://cloud.netapp.com/cloud-volumes-service-for-gcp?utm_source=NetAppTrident_ReadTheDocs&utm_campaign=Trident["Cloud Volumes Service para Google Cloud"^] Para o backend, você precisa do seguinte:
+
+* Uma conta do Google Cloud configurada com o serviço NetApp Cloud Volumes Service.
+* Número do projeto da sua conta do Google Cloud
+* conta de serviço do Google Cloud com o `netappcloudvolumes.admin` papel
+* Arquivo de chave de API para sua conta do Cloud Volumes Service .
+
+
+
+
+== Opções de configuração de back-end
+
+Cada back-end provisiona volumes em uma única região do Google Cloud. Para criar volumes em outras regiões, você pode definir backends adicionais.
+
+[cols="1, 2, 1"]
+|===
+| Parâmetro | Descrição | Padrão 
+
+
+| `version` |  | Sempre 1 
+
+
+| `storageDriverName` | Nome do controlador de armazenamento | "gcp-cvs" 
+
+
+| `backendName` | Nome personalizado ou back-end de storage | Nome do driver e parte da chave da API 
+
+
+| `storageClass` | Parâmetro opcional usado para especificar o tipo de serviço CVS. Usar `software` Para selecionar o tipo de serviço CVS. Caso contrário, o Trident assume o tipo de serviço CVS-Performance.(`hardware` ). |  
+
+
+| `storagePools` | Somente o tipo de serviço CVS. Parâmetro opcional usado para especificar os conjuntos de armazenamento para a criação de volumes. |  
+
+
+| `projectNumber` | Número do projeto da conta Google Cloud. O valor é encontrado na página inicial do portal do Google Cloud. |  
+
+
+| `hostProjectNumber` | Obrigatório se estiver usando uma rede VPC compartilhada. Neste cenário, `projectNumber` é o projeto de serviço, e `hostProjectNumber` é o projeto anfitrião. |  
+
+
+| `apiRegion` | A região do Google Cloud onde o Trident cria volumes do Cloud Volumes Service . Ao criar clusters Kubernetes entre regiões, os volumes criados em uma região são mantidos. `apiRegion` Pode ser usado em cargas de trabalho agendadas em nós em várias regiões do Google Cloud. O tráfego entre regiões diferentes acarreta um custo adicional. |  
+
+
+| `apiKey` | Chave de API para a conta de serviço do Google Cloud com o `netappcloudvolumes.admin` papel. Inclui o conteúdo formatado em JSON do arquivo de chave privada de uma conta de serviço do Google Cloud (copiado integralmente para o arquivo de configuração do backend). |  
+
+
+| `proxyURL` | URL do proxy, caso seja necessário um servidor proxy para conectar-se à conta CVS. O servidor proxy pode ser um proxy HTTP ou um proxy HTTPS. Para um proxy HTTPS, a validação do certificado é ignorada para permitir o uso de certificados autoassinados no servidor proxy. Servidores proxy com autenticação ativada não são suportados. |  
+
+
+| `nfsMountOptions` | Controle refinado das opções de montagem NFS. | "3" 
+
+
+| `limitVolumeSize` | Falha no provisionamento se o tamanho do volume solicitado estiver acima desse valor. | "" (não aplicado por padrão) 
+
+
+| `serviceLevel` | O nível de desempenho ou serviço CVS para novos volumes. Os valores de desempenho do CVS são `standard` , `premium` , ou `extreme` . Os valores CVS são `standardsw` ou `zoneredundantstandardsw` . | A configuração padrão do CVS-Performance é "standard". O padrão do CVS é "standardsw". 
+
+
+| `network` | A rede do Google Cloud é usada para os volumes do Cloud Volumes Service . | "predefinição" 
+
+
+| `debugTraceFlags` | Sinalizadores de depuração a serem usados na resolução de problemas. Exemplo, `\{"api":false, "method":true}` . Não utilize esta opção a menos que esteja solucionando problemas e precise de um despejo de logs detalhado. | nulo 
+
+
+| `allowedTopologies` | Para habilitar o acesso entre regiões, sua definição de StorageClass para `allowedTopologies` Deve incluir todas as regiões. Por exemplo:
+`- key: topology.kubernetes.io/region
+  values:
+  - us-east1
+  - europe-west1` |  
+|===
+
+
+== Opções de provisionamento de volume
+
+Você pode controlar o provisionamento de volume padrão `defaults` na seção do arquivo de configuração.
+
+[cols=",,"]
+|===
+| Parâmetro | Descrição | Padrão 
+
+
+| `exportRule` | Regras de exportação para novos volumes. Deve ser uma lista separada por vírgulas de qualquer combinação de endereços IPv4 ou sub-redes IPv4 na notação CIDR. | "0,0.0,0/0" 
+
+
+| `snapshotDir` | Acesso ao `.snapshot` diretório | "falso" 
+
+
+| `snapshotReserve` | Porcentagem de volume reservado para snapshots | "" (aceitar o valor padrão CVS de 0) 
+
+
+| `size` | O tamanho dos novos volumes. O requisito mínimo de desempenho do CVS é de 100 GiB. O tamanho mínimo exigido pelo CVS é 1 GiB. | O tipo de serviço CVS-Performance tem como padrão "100GiB". O tipo de serviço CVS não define um valor padrão, mas requer um mínimo de 1 GiB. 
+|===
+
+
+== Exemplos de tipos de serviço CVS-Performance
+
+Os exemplos a seguir fornecem configurações de amostra para o tipo de serviço CVS-Performance.
+
+.Exemplo 1: Configuração mínima
+[%collapsible]
+====
+Esta é a configuração mínima de backend usando o tipo de serviço CVS-Performance padrão com o nível de serviço "standard" padrão.
+
+[source, yaml]
+----
+---
+version: 1
+storageDriverName: gcp-cvs
+projectNumber: "012345678901"
+apiRegion: us-west2
+apiKey:
+  type: service_account
+  project_id: my-gcp-project
+  private_key_id: <id_value>
+  private_key: |
+    -----BEGIN PRIVATE KEY-----
+    <key_value>
+    -----END PRIVATE KEY-----
+  client_email: cloudvolumes-admin-sa@my-gcp-project.iam.gserviceaccount.com
+  client_id: "123456789012345678901"
+  auth_uri: https://accounts.google.com/o/oauth2/auth
+  token_uri: https://oauth2.googleapis.com/token
+  auth_provider_x509_cert_url: https://www.googleapis.com/oauth2/v1/certs
+  client_x509_cert_url: https://www.googleapis.com/robot/v1/metadata/x509/cloudvolumes-admin-sa%40my-gcp-project.iam.gserviceaccount.com
+----
+====
+.Exemplo 2: Configuração do nível de serviço
+[%collapsible]
+====
+Este exemplo ilustra as opções de configuração do backend, incluindo o nível de serviço e os valores padrão de volume.
+
+[source, yaml]
+----
+---
+version: 1
+storageDriverName: gcp-cvs
+projectNumber: '012345678901'
+apiRegion: us-west2
+apiKey:
+  type: service_account
+  project_id: my-gcp-project
+  private_key_id: "<id_value>"
+  private_key: |
+    -----BEGIN PRIVATE KEY-----
+    <key_value>
+    -----END PRIVATE KEY-----
+  client_email: cloudvolumes-admin-sa@my-gcp-project.iam.gserviceaccount.com
+  client_id: '123456789012345678901'
+  auth_uri: https://accounts.google.com/o/oauth2/auth
+  token_uri: https://oauth2.googleapis.com/token
+  auth_provider_x509_cert_url: https://www.googleapis.com/oauth2/v1/certs
+  client_x509_cert_url: https://www.googleapis.com/robot/v1/metadata/x509/cloudvolumes-admin-sa%40my-gcp-project.iam.gserviceaccount.com
+proxyURL: http://proxy-server-hostname/
+nfsMountOptions: vers=3,proto=tcp,timeo=600
+limitVolumeSize: 10Ti
+serviceLevel: premium
+defaults:
+  snapshotDir: 'true'
+  snapshotReserve: '5'
+  exportRule: 10.0.0.0/24,10.0.1.0/24,10.0.2.100
+  size: 5Ti
+----
+====
+.Exemplo 3: Configuração de pool virtual
+[%collapsible]
+====
+Este exemplo usa `storage` para configurar pools virtuais e o `StorageClasses` que se referem a eles. Consulte<<Definições de classe de armazenamento>> para ver como as classes de armazenamento foram definidas.
+
+Aqui, são definidos valores padrão específicos para todos os pools virtuais, que definem o `snapshotReserve` a 5% e o `exportRule` para 0.0.0.0/0. Os pools virtuais são definidos em `storage` seção. Cada piscina virtual individual define a sua própria. `serviceLevel` E algumas pools sobrescrevem os valores padrão. Rótulos de piscinas virtuais foram usados para diferenciar as piscinas com base em `performance` e `protection` .
+
+[source, yaml]
+----
+---
+version: 1
+storageDriverName: gcp-cvs
+projectNumber: '012345678901'
+apiRegion: us-west2
+apiKey:
+  type: service_account
+  project_id: my-gcp-project
+  private_key_id: "<id_value>"
+  private_key: |
+    -----BEGIN PRIVATE KEY-----
+    <key_value>
+    -----END PRIVATE KEY-----
+  client_email: cloudvolumes-admin-sa@my-gcp-project.iam.gserviceaccount.com
+  client_id: '123456789012345678901'
+  auth_uri: https://accounts.google.com/o/oauth2/auth
+  token_uri: https://oauth2.googleapis.com/token
+  auth_provider_x509_cert_url: https://www.googleapis.com/oauth2/v1/certs
+  client_x509_cert_url: https://www.googleapis.com/robot/v1/metadata/x509/cloudvolumes-admin-sa%40my-gcp-project.iam.gserviceaccount.com
+nfsMountOptions: vers=3,proto=tcp,timeo=600
+defaults:
+  snapshotReserve: '5'
+  exportRule: 0.0.0.0/0
+labels:
+  cloud: gcp
+region: us-west2
+storage:
+- labels:
+    performance: extreme
+    protection: extra
+  serviceLevel: extreme
+  defaults:
+    snapshotDir: 'true'
+    snapshotReserve: '10'
+    exportRule: 10.0.0.0/24
+- labels:
+    performance: extreme
+    protection: standard
+  serviceLevel: extreme
+- labels:
+    performance: premium
+    protection: extra
+  serviceLevel: premium
+  defaults:
+    snapshotDir: 'true'
+    snapshotReserve: '10'
+- labels:
+    performance: premium
+    protection: standard
+  serviceLevel: premium
+- labels:
+    performance: standard
+  serviceLevel: standard
+
+----
+====
+
+
+=== Definições de classe de armazenamento
+
+As seguintes definições de StorageClass aplicam-se ao exemplo de configuração de pool virtual. Usando `parameters.selector` Você pode especificar para cada StorageClass o pool virtual usado para hospedar um volume. O volume terá os aspectos definidos na piscina escolhida.
+
+.Exemplo de classe de armazenamento
+[%collapsible]
+====
+[source, yaml]
+----
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: cvs-extreme-extra-protection
+provisioner: csi.trident.netapp.io
+parameters:
+  selector: performance=extreme; protection=extra
+allowVolumeExpansion: true
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: cvs-extreme-standard-protection
+provisioner: csi.trident.netapp.io
+parameters:
+  selector: performance=premium; protection=standard
+allowVolumeExpansion: true
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: cvs-premium-extra-protection
+provisioner: csi.trident.netapp.io
+parameters:
+  selector: performance=premium; protection=extra
+allowVolumeExpansion: true
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: cvs-premium
+provisioner: csi.trident.netapp.io
+parameters:
+  selector: performance=premium; protection=standard
+allowVolumeExpansion: true
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: cvs-standard
+provisioner: csi.trident.netapp.io
+parameters:
+  selector: performance=standard
+allowVolumeExpansion: true
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: cvs-extra-protection
+provisioner: csi.trident.netapp.io
+parameters:
+  selector: protection=extra
+allowVolumeExpansion: true
+
+----
+====
+* A primeira StorageClass(`cvs-extreme-extra-protection` ) mapeia para a primeira piscina virtual. Esta é a única piscina que oferece desempenho extremo com uma reserva instantânea de 10%.
+* A última StorageClass(`cvs-extra-protection` ) menciona qualquer pool de armazenamento que forneça uma reserva de snapshot de 10%. O Trident decide qual pool virtual será selecionado e garante que o requisito de reserva de snapshots seja atendido.
+
+
+
+
+== Exemplos de tipos de serviço CVS
+
+Os exemplos a seguir fornecem configurações de amostra para o tipo de serviço CVS.
+
+.Exemplo 1: Configuração mínima
+[%collapsible]
+====
+Esta é a configuração mínima de backend usando `storageClass` para especificar o tipo de serviço CVS e o padrão `standardsw` nível de serviço.
+
+[source, yaml]
+----
+---
+version: 1
+storageDriverName: gcp-cvs
+projectNumber: '012345678901'
+storageClass: software
+apiRegion: us-east4
+apiKey:
+  type: service_account
+  project_id: my-gcp-project
+  private_key_id: "<id_value>"
+  private_key: |
+    -----BEGIN PRIVATE KEY-----
+    <key_value>
+    -----END PRIVATE KEY-----
+  client_email: cloudvolumes-admin-sa@my-gcp-project.iam.gserviceaccount.com
+  client_id: '123456789012345678901'
+  auth_uri: https://accounts.google.com/o/oauth2/auth
+  token_uri: https://oauth2.googleapis.com/token
+  auth_provider_x509_cert_url: https://www.googleapis.com/oauth2/v1/certs
+  client_x509_cert_url: https://www.googleapis.com/robot/v1/metadata/x509/cloudvolumes-admin-sa%40my-gcp-project.iam.gserviceaccount.com
+serviceLevel: standardsw
+----
+====
+.Exemplo 2: Configuração do pool de armazenamento
+[%collapsible]
+====
+Esta configuração de backend de exemplo usa `storagePools` Para configurar um pool de armazenamento.
+
+[source, yaml]
+----
+---
+version: 1
+storageDriverName: gcp-cvs
+backendName: gcp-std-so-with-pool
+projectNumber: '531265380079'
+apiRegion: europe-west1
+apiKey:
+  type: service_account
+  project_id: cloud-native-data
+  private_key_id: "<id_value>"
+  private_key: |-
+    -----BEGIN PRIVATE KEY-----
+    <key_value>
+    -----END PRIVATE KEY-----
+  client_email: cloudvolumes-admin-sa@cloud-native-data.iam.gserviceaccount.com
+  client_id: '107071413297115343396'
+  auth_uri: https://accounts.google.com/o/oauth2/auth
+  token_uri: https://oauth2.googleapis.com/token
+  auth_provider_x509_cert_url: https://www.googleapis.com/oauth2/v1/certs
+  client_x509_cert_url: https://www.googleapis.com/robot/v1/metadata/x509/cloudvolumes-admin-sa%40cloud-native-data.iam.gserviceaccount.com
+storageClass: software
+zone: europe-west1-b
+network: default
+storagePools:
+- 1bc7f380-3314-6005-45e9-c7dc8c2d7509
+serviceLevel: Standardsw
+
+----
+====
+
+
+== O que se segue?
+
+Depois de criar o arquivo de configuração de back-end, execute o seguinte comando:
+
+[listing]
+----
+tridentctl create backend -f <backend-file>
+----
+Se a criação do backend falhar, algo está errado com a configuração do backend. Você pode exibir os logs para determinar a causa executando o seguinte comando:
+
+[listing]
+----
+tridentctl logs
+----
+Depois de identificar e corrigir o problema com o arquivo de configuração, você pode executar o comando create novamente.

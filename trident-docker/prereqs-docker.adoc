@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: trident-docker/prereqs-docker.html 
-keywords: deploy, Trident, docker, trident for docker, nfs, iscsi, protcol, nfs protocol, iscsi protocol, configure host, host config, nvme/tcp, fc, nvme 
+keywords: deploy, Trident, docker, trident for docker, nfs, iscsi, protcol, nfs protocol, iscsi protocol, configure host, host config, nvme/tcp, nvme 
 summary: Você precisa instalar e configurar os pré-requisitos de protocolo necessários no seu host antes de implantar o Trident. 
 ---
 = Pré-requisitos para implantação

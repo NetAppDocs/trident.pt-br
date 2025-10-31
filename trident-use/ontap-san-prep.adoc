@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: trident-use/ontap-san-prep.html 
-keywords: trident backend, ontap san, ontap-san, ontap-san-economy, fcp, asa r2, iscsi, nvme/tcp, fc 
+keywords: trident backend, ontap san, ontap-san, ontap-san-economy, fcp, asa r2, iscsi, nvme/tcp 
 summary: Saiba mais sobre como se preparar para configurar um back-end ONTAP com drivers SAN ONTAP. 
 ---
 = Prepare-se para configurar o back-end com drivers SAN ONTAP
@@ -21,7 +21,7 @@ Entenda os requisitos e as opções de autenticação para configurar um back-en
 Para todos os backends ONTAP, o Trident exige que pelo menos um agregado seja atribuído ao SVM.
 
 
-NOTE: link:https://docs.netapp.com/us-en/asa-r2/get-started/learn-about.html["Sistemas ASA r2"^]Diferem de outros sistemas ONTAP (ASA, AFF e FAS) na implementação de sua camada de armazenamento. Nos sistemas ASA r2, as zonas de disponibilidade de armazenamento são usadas em vez de agregados. Consultelink:https://kb.netapp.com/on-prem/ASAr2/ASAr2_KBs/su_create_by_SVM_admin_using_CLI_fails_with_error_No_candidate_aggregates_are_available_for_storage_services["isto"^] Artigo da Base de Conhecimento sobre como atribuir agregados a SVMs em sistemas ASA r2.
+NOTE: link:https://docs.netapp.com/us-en/asa-r2/get-started/learn-about.html["Sistemas ASA r2"^]diferem de outros sistemas ONTAP (ASA, AFF e FAS) na implementação de sua camada de armazenamento. Nos sistemas ASA r2, as zonas de disponibilidade de armazenamento são usadas em vez de agregados. Consultelink:https://kb.netapp.com/on-prem/ASAr2/ASAr2_KBs/su_create_by_SVM_admin_using_CLI_fails_with_error_No_candidate_aggregates_are_available_for_storage_services["isto"^] Artigo da Base de Conhecimento sobre como atribuir agregados a SVMs em sistemas ASA r2.
 
 Lembre-se de que você também pode executar mais de um driver e criar classes de armazenamento que apontam para um ou outro. Por exemplo, você pode configurar uma `san-dev` classe que usa o `ontap-san` driver e uma `san-default` classe que usa a `ontap-san-economy` mesma.
 
