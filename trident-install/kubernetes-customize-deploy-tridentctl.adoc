@@ -35,7 +35,7 @@ Se você precisar personalizar a instalação além do que os argumentos do inst
 * `trident-service.yaml`
 * `trident-namespace.yaml`
 * `trident-serviceaccount.yaml`
-* `trident-resourcequota.yaml`
+* `trident-resourcequota.yaml`*
 
 
 Depois de gerar esses arquivos, você pode modificá-los de acordo com suas necessidades e, em seguida, usá-los `--use-custom-yaml` para instalar sua implantação personalizada.

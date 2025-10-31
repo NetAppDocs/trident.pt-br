@@ -342,7 +342,7 @@ tridentctl get volumes -n trident
 
 == Expandir um volume NFS
 
-O Trident suporta a expansão de volume para PVs NFS provisionados em `ontap-nas` , `ontap-nas-economy` , `ontap-nas-flexgroup` , `gcp-cvs` , e `azure-netapp-files` back-ends.
+O Trident suporta a expansão de volume para PVs NFS provisionados em `ontap-nas` , `ontap-nas-economy` , `ontap-nas-flexgroup` , e `azure-netapp-files` back-ends.
 
 
 

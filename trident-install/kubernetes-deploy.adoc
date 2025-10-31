@@ -16,7 +16,7 @@ Para garantir que o Trident possa ser instalado em uma ampla variedade de ambien
 
 
 
-== Informações críticas sobre o Trident 25.06
+== Informações críticas sobre o Trident 25.10
 
 *Você deve ler as seguintes informações críticas sobre o Trident.*
 

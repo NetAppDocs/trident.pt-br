@@ -22,7 +22,6 @@ Ao atualizar para a versão mais recente do Trident, considere o seguinte:
 
 * Deve haver apenas uma instância do Trident instalada em todos os namespaces em um determinado cluster do Kubernetes.
 * O Trident 23,07 e posterior requer instantâneos de volume v1 e não suporta mais instantâneos alfa ou beta.
-* Se você criou o Cloud Volumes Service para o Google Cloud nolink:../trident-use/gcp.html#learn-about-trident-support-for-cloud-volumes-service-for-google-cloud["Tipo de serviço CVS"] Você precisa atualizar a configuração do backend para usar o `standardsw` ou `zoneredundantstandardsw` Nível de serviço ao atualizar do Trident 23.01. A falha na atualização do `serviceLevel` Problemas no backend podem causar falhas nos volumes. Consulte link:../trident-use/gcp.html#cvs-service-type-examples["Exemplos de tipos de serviço da CVS"] para mais detalhes.
 * Ao atualizar, é importante que você forneça `parameter.fsType` em `StorageClasses` usado pelo Trident. Você pode excluir e recriar `StorageClasses` sem interromper volumes pré-existentes.
 +
 ** Este é um ** requisito** para aplicação de https://kubernetes.io/docs/tasks/configure-pod-container/security-context/["contextos de segurança"^] volumes SAN.

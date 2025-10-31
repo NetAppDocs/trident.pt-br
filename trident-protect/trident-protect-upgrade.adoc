@@ -18,9 +18,12 @@ Você pode atualizar o Trident Protect para a versão mais recente para aproveit
 
 [NOTE]
 ====
-Ao atualizar a partir da versão 24.10, os snapshots executados durante a atualização podem falhar. Essa falha não impede a criação de snapshots futuros, sejam eles manuais ou agendados. Se um snapshot falhar durante a atualização, você pode criar um novo snapshot manualmente para garantir a proteção do seu aplicativo.
-
+* Ao atualizar a partir da versão 24.10, os snapshots executados durante a atualização podem falhar. Essa falha não impede a criação de snapshots futuros, sejam eles manuais ou agendados. Se um snapshot falhar durante a atualização, você pode criar um novo snapshot manualmente para garantir a proteção do seu aplicativo.
++
 Para evitar possíveis falhas, você pode desabilitar todos os agendamentos de snapshots antes da atualização e reabilitá-los posteriormente. No entanto, isso resultará na perda de snapshots agendados durante o período de atualização.
+
+* Para instalações em registros privados, certifique-se de que o gráfico Helm e as imagens necessárias para a versão desejada estejam disponíveis em seu registro privado e verifique se seus valores Helm personalizados são compatíveis com a nova versão do gráfico. Para obter mais informações, consultelink:trident-protect-installation.html["Instale o Trident Protect a partir de um registo privado"] .
+
 
 ====
 Para atualizar o Trident Protect, execute as etapas a seguir.
@@ -60,6 +63,10 @@ kubectl delete secret -n trident-protect -l name=trident-protect-crds,owner=helm
 +
 [source, console]
 ----
-helm upgrade trident-protect netapp-trident-protect/trident-protect --version 100.2506.0 --namespace trident-protect
+helm upgrade trident-protect netapp-trident-protect/trident-protect --version 100.2510.0 --namespace trident-protect
 ----
++
+
+NOTE: Você pode configurar o nível de registro durante a atualização adicionando `--set logLevel=debug` ao comando de atualização. O nível de registro padrão é `warn` . O registro de depuração é recomendado para a resolução de problemas, pois ajuda o suporte da NetApp a diagnosticar problemas sem exigir alterações no nível de registro ou reprodução do problema.
+
 
