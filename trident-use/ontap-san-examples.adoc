@@ -160,11 +160,10 @@ NOTE: O NVMe é compatível apenas com APIs REST ONTAP e não com ONTAPI (ZAPI).
 
 === Recomendações para o uso de formatOptions
 
-A Trident recomenda a seguinte opção para agilizar o processo de formatação:
+A Trident recomenda as seguintes opções para agilizar o processo de formatação:
 
-*-e nodiscard:*
-
-* Manter, não tente descartar blocos no tempo mkfs (descartar blocos inicialmente é útil em dispositivos de estado sólido e armazenamento esparso / thin-provisionado). Isso substitui a opção obsoleta "-K" e é aplicável a todos os sistemas de arquivos (xfs, ext3 e ext4).
+* *-E nodiscard (ext3, ext4):* Não tente descartar blocos no momento da criação do sistema de arquivos (o descarte inicial de blocos é útil em dispositivos de estado sólido e armazenamento com provisionamento esparso/dinâmico). Esta opção substitui a opção obsoleta "-K" e é aplicável aos sistemas de arquivos ext3 e ext4.
+* *-K (xfs):* Não tente descartar blocos no momento do mkfs. Essa opção se aplica ao sistema de arquivos xfs.
 
 
 
