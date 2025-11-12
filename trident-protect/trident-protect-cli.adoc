@@ -122,11 +122,11 @@ Depois de instalar o plugin Trident Protect CLI, você pode ativar a auto-conclu
 .Ative a auto-conclusão para o shell Bash
 --
 .Passos
-. Faça o download do script de conclusão:
+. Crie o script de conclusão:
 +
 [source, console]
 ----
-curl -L -O https://github.com/NetApp/tridentctl-protect/releases/download/25.10.0/tridentctl-completion.bash
+tridentctl-protect completion bash > tridentctl-completion.bash
 ----
 . Crie um novo diretório em seu diretório inicial para conter o script:
 +
@@ -152,11 +152,11 @@ source ~/.bash/completions/tridentctl-completion.bash
 .Ative a auto-conclusão para o shell Z.
 --
 .Passos
-. Faça o download do script de conclusão:
+. Crie o script de conclusão:
 +
 [source, console]
 ----
-curl -L -O https://github.com/NetApp/tridentctl-protect/releases/download/25.10.0/tridentctl-completion.zsh
+tridentctl-protect completion zsh > tridentctl-completion.zsh
 ----
 . Crie um novo diretório em seu diretório inicial para conter o script:
 +
