@@ -103,6 +103,9 @@ Se você receber um erro "sem pools de capacidade encontrados" ao criar um PVC, 
 
 Os valores para `resourceGroups`, `netappAccounts`, `capacityPools`, , `virtualNetwork` e `subnet` podem ser especificados usando nomes curtos ou totalmente qualificados. Nomes totalmente qualificados são recomendados na maioria das situações, pois nomes curtos podem corresponder vários recursos com o mesmo nome.
 
+
+NOTE: Se a rede virtual (vNet) estiver localizada em um grupo de recursos diferente da conta de armazenamento do Azure NetApp Files (ANF), especifique o grupo de recursos da rede virtual ao configurar a lista resourceGroups para o backend.
+
 Os `resourceGroups` valores , `netappAccounts`, e `capacityPools` são filtros que restringem o conjunto de recursos descobertos aos disponíveis para esse back-end de armazenamento e podem ser especificados em qualquer combinação. Nomes totalmente qualificados seguem este formato:
 
 [cols="2"]
@@ -194,13 +197,13 @@ spec:
   version: 1
   storageDriverName: azure-netapp-files
   capacityPools:
-    - ultra-pool
+    - resource-group-1/netapp-account-1/ultra-pool
   resourceGroups:
-    - aks-ami-eastus-rg
+    - resource-group-1
   netappAccounts:
-    - smb-na
-  virtualNetwork: eastus-prod-vnet
-  subnet: eastus-anf-subnet
+    -  resource-group-1/netapp-account-1
+  virtualNetwork: resource-group-1/eastus-prod-vnet
+  subnet: resource-group-1/eastus-prod-vnet/eastus-anf-subnet
 ----
 ====
 .Identidade de nuvem para AKS
@@ -306,8 +309,8 @@ serviceLevel: Ultra
 capacityPools:
   - application-group-1/account-1/ultra-1
   - application-group-1/account-1/ultra-2
-virtualNetwork: my-virtual-network
-subnet: my-subnet
+virtualNetwork: application-group-1/eastus-prod-vnet
+subnet: application-group-1/eastus-prod-vnet/my-subnet
 networkFeatures: Standard
 nfsMountOptions: vers=3,proto=tcp,timeo=600
 limitVolumeSize: 500Gi
@@ -345,20 +348,20 @@ storage:
       performance: gold
     serviceLevel: Ultra
     capacityPools:
-      - ultra-1
-      - ultra-2
+      - application-group-1/netapp-account-1/ultra-1
+      - application-group-1/netapp-account-1/ultra-2
     networkFeatures: Standard
   - labels:
       performance: silver
     serviceLevel: Premium
     capacityPools:
-      - premium-1
+      - application-group-1/netapp-account-1/premium-1
   - labels:
       performance: bronze
     serviceLevel: Standard
     capacityPools:
-      - standard-1
-      - standard-2
+      - application-group-1/netapp-account-1/standard-1
+      - application-group-1/netapp-account-1/standard-2
 
 ----
 ====

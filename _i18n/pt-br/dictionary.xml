@@ -5942,4 +5942,5 @@
   <block id="da88dec11cfebffca5dfcf278b6ef68c" category="list-text">Adicionada uma anotação ao CR de agendamento para configurar o tempo limite de vinculação do PVC, que será usado pelo CR de backup:<block ref="728633ade1403bcbcd881fc22ec19596" prefix=" " category="inline-code"></block> . Ver<block ref="8a2f8872ebe6d6c56e608637c3cdaf0f" category="inline-link-macro-rx"></block> .</block>
   <block id="506953e8ef42800e0b5f740b30b09a33" category="list-text"><block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix="" category="inline-code"></block> - somente para o protocolo iSCSI.</block>
   <block id="ebe98a8374dc31f4dd5bb51932ba3ba4" category="admonition">O recurso de snapshot de grupo de volumes não é compatível com os sistemas de armazenamento NetApp ASA r2 ou AFX.</block>
+  <block id="b3fd6a68d255a3fb79774387cf52d7e4" category="admonition">Se a rede virtual (vNet) estiver localizada em um grupo de recursos diferente da conta de armazenamento do Azure NetApp Files (ANF), especifique o grupo de recursos da rede virtual ao configurar a lista resourceGroups para o backend.</block>
 </blocks>
