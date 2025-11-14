@@ -39,6 +39,9 @@ link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#ins
 
 *Pontos a considerar*: * SCSI sobre FC é suportado em ambientes OpenShift e KubeVirt. * SCSI sobre FC não é suportado no Docker. * A autorrecuperação iSCSI não se aplica a SCSI via FC.
 
+.Ferramentas SMB
+link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#prepare-to-provision-smb-volumes["Prepare-se para provisionar volumes SMB"] Se você estiver usando: `ontap-nas` Para provisionar volumes SMB.
+
 
 
 == Detecção de serviço de nós
@@ -441,3 +444,79 @@ sudo systemctl status multipath-tools
 
 --
 ====
+
+
+== Prepare-se para provisionar volumes SMB
+
+Você pode provisionar volumes SMB usando `ontap-nas` motoristas.
+
+
+WARNING: É necessário configurar os protocolos NFS e SMB/CIFS na SVM para criar um `ontap-nas-economy` volume SMB para clusters no local do ONTAP. A falha na configuração desses protocolos fará com que a criação de volume SMB falhe.
+
+
+NOTE: `autoExportPolicy` Não é compatível com volumes SMB.
+
+.Antes de começar
+Antes de provisionar volumes SMB, você deve ter o seguinte:
+
+* Um cluster do Kubernetes com um nó de controlador Linux e pelo menos um nó de trabalho do Windows que executa o Windows Server 2022. O Trident dá suporte a volumes SMB montados em pods executados apenas em nós do Windows.
+* Pelo menos um segredo do Trident contendo suas credenciais do ative Directory. Para gerar segredo `smbcreds`:
++
+[listing]
+----
+kubectl create secret generic smbcreds --from-literal username=user --from-literal password='password'
+----
+* Um proxy CSI configurado como um serviço Windows. Para configurar um `csi-proxy`, link:https://github.com/kubernetes-csi/csi-proxy["GitHub: CSI Proxy"^]consulte ou link:https://github.com/Azure/aks-engine/blob/master/docs/topics/csi-proxy-windows.md["GitHub: CSI Proxy para Windows"^] para nós do Kubernetes executados no Windows.
+
+
+.Passos
+. Para o ONTAP no local, você pode criar, opcionalmente, um compartilhamento SMB ou o Trident pode criar um para você.
++
+
+NOTE: Compartilhamentos SMB são necessários para o Amazon FSX for ONTAP.
+
++
+Você pode criar os compartilhamentos de administração SMB de duas maneiras usando o link:https://learn.microsoft.com/en-us/troubleshoot/windows-server/system-management-components/what-is-microsoft-management-console["Microsoft Management Console"^]snap-in pastas compartilhadas ou usando a CLI do ONTAP. Para criar compartilhamentos SMB usando a CLI do ONTAP:
+
++
+.. Se necessário, crie a estrutura do caminho do diretório para o compartilhamento.
++
+O `vserver cifs share create` comando verifica o caminho especificado na opção -path durante a criação de compartilhamento. Se o caminho especificado não existir, o comando falhará.
+
+.. Crie um compartilhamento SMB associado ao SVM especificado:
++
+[listing]
+----
+vserver cifs share create -vserver vserver_name -share-name share_name -path path [-share-properties share_properties,...] [other_attributes] [-comment text]
+----
+.. Verifique se o compartilhamento foi criado:
++
+[listing]
+----
+vserver cifs share show -share-name share_name
+----
++
+
+NOTE: link:https://docs.netapp.com/us-en/ontap/smb-config/create-share-task.html["Crie um compartilhamento SMB"^]Consulte para obter detalhes completos.
+
+
+
+. Ao criar o back-end, você deve configurar o seguinte para especificar volumes SMB. Para obter todas as opções de configuração de back-end do FSX for ONTAP, link:trident-fsx-examples.html["Opções e exemplos de configuração do FSX for ONTAP"]consulte .
++
+[cols="1,2,1"]
+|===
+| Parâmetro | Descrição | Exemplo 
+
+
+| `smbShare` | Você pode especificar uma das seguintes opções: O nome de um compartilhamento SMB criado usando o Console de Gerenciamento da Microsoft ou a CLI do ONTAP; um nome para permitir que o Trident crie o compartilhamento SMB; ou você pode deixar o parâmetro em branco para impedir o acesso comum ao compartilhamento a volumes. Esse parâmetro é opcional para o ONTAP no local. Esse parâmetro é necessário para backends do Amazon FSX for ONTAP e não pode ficar em branco. | `smb-share` 
+
+
+| `nasType` | *Tem de estar definido para `smb`.* Se nulo, o padrão é `nfs`. | `smb` 
+
+
+| `securityStyle` | Estilo de segurança para novos volumes. *Deve ser definido como `ntfs` ou `mixed` para volumes SMB.* | `ntfs` Ou `mixed` para volumes SMB 
+
+
+| `unixPermissions` | Modo para novos volumes. *Deve ser deixado vazio para volumes SMB.* | "" 
+|===
+
