@@ -20,25 +20,26 @@ Com o Trident, você pode atribuir nomes e rótulos significativos aos volumes c
 
 Nomes de volume e etiquetas personalizáveis suportam:
 
-. Operações de criação, importação e clonagem de volume.
-. No caso do driver ONTAP-nas-Economy, apenas o nome do volume Qtree está em conformidade com o modelo de nome.
-. No caso do driver ONTAP-san-Economy, apenas o nome LUN está em conformidade com o modelo de nome.
+* Operações de criação, importação e clonagem de volume.
+* No caso do `ontap-nas-economy` No driver, apenas o nome do volume Qtree está em conformidade com o modelo de nome.
+* No caso do `ontap-san-economy` No driver, apenas o nome da LUN está em conformidade com o modelo de nome.
 
 
 
 
 == Limitações
 
-. Os nomes de volume personalizáveis são compatíveis apenas com drivers locais da ONTAP.
-. Nomes de volume personalizáveis não se aplicam a volumes existentes.
+* Os nomes de volumes personalizados são compatíveis apenas com drivers ONTAP locais.
+* Etiquetas personalizadas são suportadas apenas para o `ontap-san`, `ontap-nas`, e `ontap-nas-flexgroup` motoristas.
+* Nomes de volume personalizados não se aplicam a volumes existentes.
 
 
 
 
 == Principais comportamentos de nomes de volume personalizáveis
 
-. Se ocorrer uma falha devido à sintaxe inválida em um modelo de nome, a criação do backend falhará. No entanto, se o aplicativo modelo falhar, o volume será nomeado de acordo com a convenção de nomenclatura existente.
-. O prefixo de armazenamento não é aplicável quando um volume é nomeado usando um modelo de nome da configuração de back-end. Qualquer valor de prefixo desejado pode ser adicionado diretamente ao modelo.
+* Se ocorrer uma falha devido à sintaxe inválida em um modelo de nome, a criação do backend falhará. No entanto, se o aplicativo modelo falhar, o volume será nomeado de acordo com a convenção de nomenclatura existente.
+* O prefixo de armazenamento não é aplicável quando um volume é nomeado usando um modelo de nome da configuração de back-end. Qualquer valor de prefixo desejado pode ser adicionado diretamente ao modelo.
 
 
 
