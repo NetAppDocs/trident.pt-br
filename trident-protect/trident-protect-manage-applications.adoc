@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: trident-protect/trident-protect-manage-applications.html 
 keywords: appvault, data protection, custom resource, namespace, application, cluster 
-summary: Você pode tornar o Trident Protect ciente de um aplicativo que deseja gerenciar criando um CR de aplicativo e um CR de AppVault associado. 
+summary: 'Você pode fazer com que o Trident Protect reconheça um aplicativo que deseja gerenciar criando um CR (Create Request) para o aplicativo e um CR associado para o AppVault.' 
 ---
-= Defina um aplicativo para gerenciamento com o Trident Protect
+= Defina uma aplicação para gestão com o Trident Protect.
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -14,19 +14,19 @@ summary: Você pode tornar o Trident Protect ciente de um aplicativo que deseja 
 
 
 [role="lead"]
-Você pode definir um aplicativo que deseja gerenciar com o Trident Protect criando um CR de aplicativo e um CR de AppVault associado.
+Você pode definir um aplicativo que deseja gerenciar com o Trident Protect criando um CR (Create Request) de aplicativo e um CR do AppVault associado.
 
 
 
 == Crie um AppVault CR
 
-Você precisa criar um AppVault CR que será usado ao executar operações de proteção de dados no aplicativo, e o AppVault CR precisa residir no cluster onde o Trident Protect está instalado. O AppVault CR é específico para o seu ambiente; para exemplos do AppVault CRS, consulte link:trident-protect-appvault-custom-resources.html["Recursos personalizados do AppVault."]
+Você precisa criar um AppVault CR que será usado ao executar operações de proteção de dados no aplicativo, e o AppVault CR precisa residir no cluster onde o Trident Protect está instalado. O pedido de configuração (CR) do AppVault é específico para o seu ambiente; para exemplos de pedidos de configuração do AppVault, consulte [link para a documentação].link:trident-protect-appvault-custom-resources.html["Recursos personalizados do AppVault."]
 
 
 
 == Definir uma aplicação
 
-Você precisa definir cada aplicativo que deseja gerenciar com o Trident Protect. Você pode definir um aplicativo para gerenciamento criando manualmente um CR de aplicativo ou usando a CLI Trident Protect.
+Você precisa definir cada aplicativo que deseja gerenciar com o Trident Protect.  Você pode definir um aplicativo para gerenciamento criando manualmente uma solicitação de configuração (CR) do aplicativo ou usando a CLI do Trident Protect.
 
 [role="tabbed-block"]
 ====
@@ -46,7 +46,7 @@ Você precisa definir cada aplicativo que deseja gerenciar com o Trident Protect
 **** *LabelSeletor*: (_Opcional_) filtra os recursos com escopo de cluster com base em seus rótulos.
 
 
-*** *metadata.annotations.protect.trident.netapp.io/skip-vm-freeze*: (_Optional_) esta anotação só é aplicável a aplicações definidas a partir de máquinas virtuais, como em ambientes KubeVirt, onde os congelamentos do sistema de arquivos ocorrem antes dos instantâneos. Especifique se este aplicativo pode gravar no sistema de arquivos durante um snapshot. Se definido como verdadeiro, o aplicativo ignora a configuração global e pode gravar no sistema de arquivos durante um instantâneo. Se definido como false, o aplicativo ignora a configuração global e o sistema de arquivos é congelado durante um snapshot. Se especificado mas o aplicativo não tiver máquinas virtuais na definição do aplicativo, a anotação é ignorada. Se não for especificado, o aplicativo segue o link:trident-protect-requirements.html#protecting-data-with-kubevirt-vms["Definição Global Trident Protect Freeze (congelamento global)"].
+*** *metadata.annotations.protect.trident.netapp.io/skip-vm-freeze*: (_Opcional_) Esta anotação só se aplica a aplicações definidas a partir de máquinas virtuais, como em ambientes KubeVirt, onde o congelamento do sistema de arquivos ocorre antes dos snapshots. Especifique se este aplicativo pode gravar no sistema de arquivos durante um snapshot. Se definido como verdadeiro, o aplicativo ignora a configuração global e pode gravar no sistema de arquivos durante um snapshot. Se definido como falso, o aplicativo ignora a configuração global e o sistema de arquivos é congelado durante a captura de um instantâneo. Se especificada, mas a aplicação não tiver máquinas virtuais na definição da aplicação, a anotação será ignorada. Caso não seja especificado, o aplicativo segue olink:trident-protect-requirements.html#protecting-data-with-kubevirt-vms["configuração de congelamento global do Trident Protect"] .
 +
 [NOTE]
 ====
@@ -153,7 +153,7 @@ kubectl apply -f maria-app.yaml
 .Passos
 . Crie e aplique a definição do aplicativo usando um dos exemplos a seguir, substituindo valores entre parênteses por informações do ambiente. Você pode incluir namespaces e recursos na definição do aplicativo usando listas separadas por vírgulas com os argumentos mostrados nos exemplos.
 +
-Opcionalmente, você pode usar uma anotação ao criar um aplicativo para especificar se o aplicativo pode gravar no sistema de arquivos durante um snapshot. Isso só se aplica a aplicativos definidos a partir de máquinas virtuais, como em ambientes KubeVirt, onde os congelamentos do sistema de arquivos ocorrem antes dos snapshots. Se você definir a anotação como `true`, o aplicativo ignora a configuração global e pode gravar no sistema de arquivos durante um instantâneo. Se você defini-lo como `false`, o aplicativo ignora a configuração global e o sistema de arquivos é congelado durante um snapshot. Se utilizar a anotação mas a aplicação não tiver máquinas virtuais na definição da aplicação, a anotação é ignorada. Se não utilizar a anotação, a aplicação segue a link:trident-protect-requirements.html#protecting-data-with-kubevirt-vms["Definição Global Trident Protect Freeze (congelamento global)"].
+Você pode, opcionalmente, usar uma anotação ao criar um aplicativo para especificar se o aplicativo pode gravar no sistema de arquivos durante um snapshot. Isso só se aplica a aplicativos definidos a partir de máquinas virtuais, como em ambientes KubeVirt, onde o congelamento do sistema de arquivos ocorre antes dos snapshots. Se você definir a anotação para `true` , o aplicativo ignora a configuração global e pode gravar no sistema de arquivos durante um snapshot. Se você definir para `false` , o aplicativo ignora a configuração global e o sistema de arquivos fica congelado durante a captura de um snapshot. Se você usar a anotação, mas o aplicativo não tiver máquinas virtuais na definição do aplicativo, a anotação será ignorada. Se você não usar a anotação, o aplicativo seguirá o padrão.link:trident-protect-requirements.html#protecting-data-with-kubevirt-vms["configuração de congelamento global do Trident Protect"] .
 
 +
 Para especificar a anotação quando você usa a CLI para criar um aplicativo, você pode usar o `--annotation` sinalizador.

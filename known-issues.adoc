@@ -20,4 +20,4 @@ Os seguintes problemas conhecidos afetam a versão atual:
 
 == Restaurar backups Restic de arquivos grandes pode falhar
 
-Ao restaurar arquivos 30GB ou maiores de um backup do Amazon S3 feito usando o Restic, a operação de restauração pode falhar. Como solução alternativa, faça backup dos dados usando o Kopia como o controlador de dados (o Kopia é o controlador de dados padrão para backups).  https://docs.netapp.com/us-en/trident/trident-protect/trident-protect-protect-apps.html["Proteja aplicativos usando o Trident Protect"^]Consulte para obter instruções.
+Ao restaurar arquivos de 30 GB ou maiores a partir de um backup do Amazon S3 feito com o Restic, a operação de restauração pode falhar. Como solução alternativa, faça backup dos dados usando o Kopia como gerenciador de dados (o Kopia é o gerenciador de dados padrão para backups). Consulte https://docs.netapp.com/us-en/trident/trident-protect/trident-protect-protect-apps.html["Proteja aplicativos usando o Trident Protect."^] para obter instruções.

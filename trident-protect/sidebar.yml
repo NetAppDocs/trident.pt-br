@@ -1,8 +1,8 @@
 ---
 section: trident-protect
-title: Proteja aplicações com o Trident Protect
+title: Proteja seus aplicativos com o Trident Protect.
 entries:
-- title: Saiba mais sobre o Trident Protect
+- title: Saiba mais sobre o Trident Protect.
   url: "/trident-protect/learn-about-trident-protect.html"
 - title: Instale o Trident Protect
   entries:
@@ -14,15 +14,15 @@ entries:
     url: "/trident-protect/trident-protect-cli.html"
   - title: Personalize a instalação do Trident Protect
     url: "/trident-protect/trident-protect-customize-installation.html"
-- title: Gerenciar o Trident Protect
+- title: Gerenciar Trident Protect
   entries:
   - title: Gerenciar autorização e controle de acesso
     url: "/trident-protect/manage-authorization-access-control.html"
-  - title: Monitorar os recursos do Trident Protect
+  - title: Monitorar recursos do Trident Protect
     url: "/trident-protect/monitor-trident-protect-resources.html"
-  - title: Gerar um pacote de suporte Trident Protect
+  - title: Gere um pacote de suporte Trident Protect
     url: "/trident-protect/trident-protect-generate-support-bundle.html"
-  - title: Atualizar o Trident Protect
+  - title: Aprimore o Trident Protect
     url: "/trident-protect/trident-protect-upgrade.html"
 - title: Gerenciar e proteger aplicativos
   entries:
@@ -34,7 +34,7 @@ entries:
     url: "/trident-protect/trident-protect-protect-apps.html"
   - title: Restaurar aplicativos
     entries:
-    - title: Restaure aplicativos usando o Trident Protect
+    - title: Restaure aplicativos usando o Trident Protect.
       url: "/trident-protect/trident-protect-restore-apps.html"
     - title: Usar configurações avançadas
       url: "/trident-protect/trident-protect-restore-settings.html"
@@ -42,7 +42,7 @@ entries:
     url: "/trident-protect/trident-protect-use-snapmirror-replication.html"
   - title: Migrar aplicações
     url: "/trident-protect/trident-protect-migrate-apps.html"
-  - title: Gerencie ganchos de execução com o Trident Protect
+  - title: Gerencie os ganchos de execução com o Trident Protect.
     url: "/trident-protect/trident-protect-use-execution-hooks.html"
-- title: Desinstalar o Trident Protect
+- title: Desinstale o Trident Protect.
   url: "/trident-protect/trident-protect-uninstall.html"

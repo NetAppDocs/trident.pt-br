@@ -16,13 +16,13 @@ Você pode personalizar a configuração padrão do Trident Protect para atender
 
 
 
-== Especifique os limites de recursos do contêiner do Trident Protect
+== Especifique os limites de recursos do contêiner Trident Protect.
 
-Você pode usar um arquivo de configuração para especificar limites de recursos para contentores do Trident Protect depois de instalar o Trident Protect. A definição de limites de recursos permite controlar quanto dos recursos do cluster são consumidos pelas operações do Trident Protect.
+Você pode usar um arquivo de configuração para especificar limites de recursos para os contêineres do Trident Protect após a instalação do Trident Protect.  A definição de limites de recursos permite controlar a quantidade de recursos do cluster que são consumidos pelas operações do Trident Protect.
 
 .Passos
 . Crie um arquivo chamado `resourceLimits.yaml`.
-. Preencha o arquivo com opções de limite de recursos para contentores do Trident Protect de acordo com as necessidades do seu ambiente.
+. Preencha o arquivo com as opções de limite de recursos para os contêineres do Trident Protect de acordo com as necessidades do seu ambiente.
 +
 O seguinte exemplo de arquivo de configuração mostra as configurações disponíveis e contém os valores padrão para cada limite de recursos:
 
@@ -89,7 +89,7 @@ helm upgrade trident-protect -n trident-protect netapp-trident-protect/trident-p
 
 == Personalizar restrições de contexto de segurança
 
-Você pode usar um arquivo de configuração para modificar o OpenShift security Context constraint (SCCs) para Trident Protect Containers depois de instalar o Trident Protect. Essas restrições definem restrições de segurança para pods em um cluster Red Hat OpenShift.
+Você pode usar um arquivo de configuração para modificar as restrições de contexto de segurança (SCCs) do OpenShift para contêineres Trident Protect após instalar o Trident Protect. Essas restrições definem as limitações de segurança para os pods em um cluster Red Hat OpenShift.
 
 .Passos
 . Crie um arquivo chamado `sccconfig.yaml`.
@@ -134,7 +134,7 @@ Isso substituirá os valores padrão pelos especificados no `sccconfig.yaml` arq
 
 
 
-== Configurar configurações adicionais do gráfico do leme de proteção Trident
+== Configure as definições adicionais do gráfico de navegação do Trident Protect.
 
 Você pode personalizar as configurações do AutoSupport e a filtragem de namespace para atender aos seus requisitos específicos.  A tabela a seguir descreve os parâmetros de configuração disponíveis:
 
@@ -148,7 +148,7 @@ Você pode personalizar as configurações do AutoSupport e a filtragem de names
 | autoSupport.inseguro | booleano | Ignora a verificação TLS para conexões proxy AutoSupport quando definido como `true` .  Use somente para conexões proxy inseguras.  (padrão: `false` ) 
 
 
-| autoSupport.habilitado | booleano | Habilita ou desabilita uploads diários do pacote Trident Protect AutoSupport .  Quando definido para `false` , os uploads diários agendados estão desabilitados, mas você ainda pode gerar pacotes de suporte manualmente.  (padrão: `true` ) 
+| autoSupport.habilitado | booleano | Ativa ou desativa os uploads diários do pacote Trident Protect AutoSupport . Quando definido para `false` Os uploads diários agendados estão desativados, mas você ainda pode gerar pacotes de suporte manualmente. (padrão: `true` ) 
 
 
 | restaurarSkipNamespaceAnnotations | cadeia de carateres | Lista separada por vírgulas de anotações de namespace a serem excluídas das operações de backup e restauração.  Permite filtrar namespaces com base em anotações. 
@@ -204,9 +204,9 @@ helm upgrade trident-protect -n trident-protect netapp-trident-protect/trident-p
 ====
 
 
-== Restringir os pods do Trident Protect a nós específicos
+== Restrinja os pods do Trident Protect a nós específicos.
 
-Você pode usar a restrição de seleção de nó do Kubernetes nodeSeletor para controlar quais dos seus nós estão qualificados para executar pods do Trident Protect, com base em rótulos de nó. Por padrão, o Trident Protect está restrito a nós que estão executando o Linux. Você pode personalizar ainda mais essas restrições dependendo de suas necessidades.
+Você pode usar a restrição de seleção de nós `nodeSelector` do Kubernetes para controlar quais de seus nós são elegíveis para executar pods do Trident Protect, com base nos rótulos dos nós.  Por padrão, o Trident Protect é restrito a nós que executam Linux. Você pode personalizar ainda mais essas restrições de acordo com suas necessidades.
 
 .Passos
 . Crie um arquivo chamado `nodeSelectorConfig.yaml`.

@@ -4,7 +4,7 @@ permalink: trident-protect/trident-protect-upgrade.html
 keywords: trident, protect, netapp, upgrade, new, version 
 summary: Você pode atualizar o Trident Protect para a versão mais recente para aproveitar os novos recursos ou correções de bugs. 
 ---
-= Atualizar o Trident Protect
+= Aprimore o Trident Protect
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -22,11 +22,11 @@ Você pode atualizar o Trident Protect para a versão mais recente para aproveit
 +
 Para evitar possíveis falhas, você pode desabilitar todos os agendamentos de snapshots antes da atualização e reabilitá-los posteriormente. No entanto, isso resultará na perda de snapshots agendados durante o período de atualização.
 
-* Para instalações em registros privados, certifique-se de que o gráfico Helm e as imagens necessárias para a versão desejada estejam disponíveis em seu registro privado e verifique se seus valores Helm personalizados são compatíveis com a nova versão do gráfico. Para obter mais informações, consultelink:trident-protect-installation.html["Instale o Trident Protect a partir de um registo privado"] .
+* Para instalações em registros privados, certifique-se de que o gráfico Helm e as imagens necessárias para a versão desejada estejam disponíveis em seu registro privado e verifique se seus valores Helm personalizados são compatíveis com a nova versão do gráfico. Para obter mais informações, consultelink:trident-protect-installation.html["Instale o Trident Protect a partir de um registro privado."] .
 
 
 ====
-Para atualizar o Trident Protect, execute as etapas a seguir.
+Para atualizar o Trident Protect, siga os passos abaixo.
 
 .Passos
 . Atualize o repositório Helm do Trident:
@@ -38,7 +38,7 @@ helm repo update
 . Atualize os CRDs do Trident Protect:
 +
 
-NOTE: Esta etapa é necessária se você estiver atualizando de uma versão anterior à 25.06, pois os CRDs agora estão incluídos no gráfico do Trident Protect Helm.
+NOTE: Esta etapa é necessária se você estiver atualizando de uma versão anterior à 25.06, pois os CRDs agora estão incluídos no gráfico Helm do Trident Protect.
 
 +
 .. Execute este comando para mudar o gerenciamento de CRDs de  `trident-protect-crds` para  `trident-protect` :
@@ -59,7 +59,7 @@ kubectl delete secret -n trident-protect -l name=trident-protect-crds,owner=helm
 ----
 
 
-. Atualize o Trident Protect:
+. Aprimore o Trident Protect:
 +
 [source, console]
 ----

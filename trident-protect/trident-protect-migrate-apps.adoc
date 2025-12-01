@@ -4,7 +4,7 @@ permalink: trident-protect/trident-protect-migrate-apps.html
 keywords: trident, protect, migrate, storage, restore, backup 
 summary: Você pode restaurar os dados de backup ou snapshot para um cluster ou classe de armazenamento diferente 
 ---
-= Migrar aplicativos usando o Trident Protect
+= Migre aplicativos usando o Trident Protect.
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -50,7 +50,7 @@ Para clonar uma aplicação para o mesmo cluster, crie um snapshot ou backup e r
 
 === Clone para cluster diferente
 
-Para clonar uma aplicação para um cluster diferente (executar um clone entre clusters), crie um backup no cluster de origem e restaure o backup para um cluster diferente. Certifique-se de que o Trident Protect está instalado no cluster de destino.
+Para clonar um aplicativo para um cluster diferente (realizar uma clonagem entre clusters), crie um backup no cluster de origem e, em seguida, restaure o backup em um cluster diferente. Certifique-se de que o Trident Protect esteja instalado no cluster de destino.
 
 
 NOTE: É possível replicar um aplicativo entre clusters diferentes usando link:trident-protect-use-snapmirror-replication.html["Replicação SnapMirror"]o .

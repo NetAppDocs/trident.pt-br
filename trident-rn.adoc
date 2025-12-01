@@ -90,7 +90,7 @@ NOTE: Não deve ser usado em ambientes de produção.
 
 === Trident Protect
 
-O NetApp Trident Protect oferece recursos avançados de gerenciamento de dados de aplicações que aprimoram o recurso e a disponibilidade de aplicações Kubernetes com monitoramento de estado e respaldo dos sistemas de storage da NetApp ONTAP e do provisionador de storage NetApp Trident CSI.
+O NetApp Trident Protect oferece recursos avançados de gerenciamento de dados de aplicativos que aprimoram a funcionalidade e a disponibilidade de aplicativos Kubernetes com estado, com suporte dos sistemas de armazenamento NetApp ONTAP e do provisionador de armazenamento NetApp Trident CSI.
 
 
 
@@ -229,7 +229,7 @@ NOTE: Este recurso é experimental e atualmente suporta fluxos de trabalho paral
 
 === Trident Protect
 
-O NetApp Trident Protect oferece recursos avançados de gerenciamento de dados de aplicações que aprimoram o recurso e a disponibilidade de aplicações Kubernetes com monitoramento de estado e respaldo dos sistemas de storage da NetApp ONTAP e do provisionador de storage NetApp Trident CSI.
+O NetApp Trident Protect oferece recursos avançados de gerenciamento de dados de aplicativos que aprimoram a funcionalidade e a disponibilidade de aplicativos Kubernetes com estado, com suporte dos sistemas de armazenamento NetApp ONTAP e do provisionador de armazenamento NetApp Trident CSI.
 
 
 
@@ -280,7 +280,7 @@ O NetApp Trident Protect oferece recursos avançados de gerenciamento de dados d
 
 == Mudanças em 25,02
 
-A partir do Trident 25,02, o resumo Novidades fornece detalhes sobre melhorias, correções e descontinuações para versões do Trident e do Trident Protect.
+A partir da versão 25.02 do Trident , o resumo "Novidades" fornece detalhes sobre melhorias, correções e itens descontinuados para as versões do Trident e do Trident Protect.
 
 
 
@@ -335,19 +335,19 @@ A partir do Trident 25,02, o resumo Novidades fornece detalhes sobre melhorias, 
 
 === Trident Protect
 
-O NetApp Trident Protect oferece recursos avançados de gerenciamento de dados de aplicações que aprimoram o recurso e a disponibilidade de aplicações Kubernetes com monitoramento de estado e respaldo dos sistemas de storage da NetApp ONTAP e do provisionador de storage NetApp Trident CSI.
+O NetApp Trident Protect oferece recursos avançados de gerenciamento de dados de aplicativos que aprimoram a funcionalidade e a disponibilidade de aplicativos Kubernetes com estado, com suporte dos sistemas de armazenamento NetApp ONTAP e do provisionador de armazenamento NetApp Trident CSI.
 
 
 
 ==== Melhorias
 
-* Adicionado suporte de backup e restauração para VMs de virtualização KubeVirt / OpenShift para o volume Mode: File e volumeMode: Armazenamento de bloco (dispositivo bruto). Esse suporte é compatível com todos os drivers Trident e aprimora os recursos de proteção existentes ao replicar storage usando o NetApp SnapMirror com Trident Protect.
+* Adicionado suporte para backup e restauração de VMs de virtualização KubeVirt / OpenShift para armazenamento com volumeMode: File e volumeMode: Block (dispositivo bruto). Este suporte é compatível com todos os drivers Trident e aprimora os recursos de proteção existentes ao replicar o armazenamento usando o NetApp SnapMirror com Trident Protect.
 * Adicionada a capacidade de controlar o comportamento de congelamento no nível da aplicação para ambientes Kubevirt.
 * Adicionado suporte para configurar conexões proxy AutoSupport.
 * Adicionada a capacidade de definir um segredo para a criptografia do controlador de dados (Kopia / Restic).
 * Adicionado a capacidade de executar manualmente um gancho de execução.
 * Adicionada a capacidade de configurar restrições de contexto de segurança (SCCs) durante a instalação do Trident Protect.
-* Adicionado suporte para configurar o nodeSeletor durante a instalação do Trident Protect.
+* Adicionada a possibilidade de configurar o nodeSelector durante a instalação do Trident Protect.
 * Adicionado suporte para proxy de saída HTTP / HTTPS para objetos AppVault.
 * Extended ResourceFilter para habilitar a exclusão de recursos com escopo de cluster.
 * Adicionado suporte para o token de sessão da AWS nas credenciais do S3 AppVault.
@@ -417,7 +417,7 @@ O NetApp Trident Protect oferece recursos avançados de gerenciamento de dados d
 ** Recuperação de desastres
 ** Mobilidade de aplicativos
 +
-link:./trident-protect/learn-about-trident-protect.html["Saiba mais sobre o Trident Protect"].
+link:./trident-protect/learn-about-trident-protect.html["Saiba mais sobre o Trident Protect."].
 
 
 

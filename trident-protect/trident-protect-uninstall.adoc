@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: trident-protect/trident-protect-uninstall.html 
 keywords: trident, protect, netapp, uninstall, full version 
-summary: Talvez seja necessário remover componentes do Trident Protect se você estiver atualizando de uma versão de avaliação para uma versão completa do produto. 
+summary: Você pode precisar remover componentes do Trident Protect se estiver atualizando de uma versão de avaliação para a versão completa do produto. 
 ---
-= Desinstalar o Trident Protect
+= Desinstale o Trident Protect.
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -14,12 +14,12 @@ summary: Talvez seja necessário remover componentes do Trident Protect se você
 
 
 [role="lead"]
-Talvez seja necessário remover componentes do Trident Protect se você estiver atualizando de uma versão de avaliação para uma versão completa do produto.
+Você pode precisar remover componentes do Trident Protect se estiver atualizando de uma versão de avaliação para a versão completa do produto.
 
-Para remover o Trident Protect, execute as etapas a seguir.
+Para remover o Trident Protect, siga os passos abaixo.
 
 .Passos
-. Remova os arquivos Trident Protect CR:
+. Remova os arquivos CR do Trident Protect:
 +
 
 NOTE: Esta etapa não é necessária para a versão 25.06 e posteriores.

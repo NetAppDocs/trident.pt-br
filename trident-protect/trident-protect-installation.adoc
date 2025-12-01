@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: trident-protect/trident-protect-installation.html 
 keywords: install, trident, protect, requirements, registry 
-summary: Se o seu ambiente atender aos requisitos, siga estas etapas para instalar o Trident Protect. 
+summary: Se o seu ambiente atender aos requisitos, você pode seguir estas etapas para instalar o Trident Protect. 
 ---
-= Instalar e configurar o Trident Protect
+= Instale e configure o Trident Protect.
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -14,7 +14,7 @@ summary: Se o seu ambiente atender aos requisitos, siga estas etapas para instal
 
 
 [role="lead"]
-Se o seu ambiente atender aos requisitos do Trident Protect, siga estas etapas para instalar o Trident Protect no cluster. Você pode obter o Trident Protect do NetApp, ou instalá-lo a partir de seu próprio Registro privado. A instalação a partir de um registo privado é útil se o cluster não conseguir aceder à Internet.
+Se o seu ambiente atender aos requisitos do Trident Protect, você pode seguir estas etapas para instalar o Trident Protect em seu cluster.  Você pode obter o Trident Protect da NetApp ou instalá-lo a partir do seu próprio registro privado. A instalação a partir de um registro privado é útil caso seu cluster não tenha acesso à Internet.
 
 
 
@@ -22,7 +22,7 @@ Se o seu ambiente atender aos requisitos do Trident Protect, siga estas etapas p
 
 [role="tabbed-block"]
 ====
-.Instale o Trident Protect do NetApp
+.Instale o Trident Protect da NetApp.
 --
 .Passos
 . Adicione o repositório Helm do Trident:
@@ -31,7 +31,7 @@ Se o seu ambiente atender aos requisitos do Trident Protect, siga estas etapas p
 ----
 helm repo add netapp-trident-protect https://netapp.github.io/trident-protect-helm-chart
 ----
-. Use o Helm para instalar o Trident Protect. Substitua `<name-of-cluster>` por um nome de cluster, que será atribuído ao cluster e usado para identificar os backups e snapshots do cluster:
+. Use o Helm para instalar o Trident Protect. Substituir `<name-of-cluster>` com um nome de cluster, que será atribuído ao cluster e usado para identificar os backups e snapshots do cluster:
 +
 [source, console]
 ----
@@ -49,9 +49,9 @@ O registro de depuração ajuda o suporte da NetApp a solucionar problemas sem e
 
 
 --
-.Instale o Trident Protect a partir de um registo privado
+.Instale o Trident Protect a partir de um registro privado.
 --
-Você pode instalar o Trident Protect a partir de um Registro de imagem privado se o cluster do Kubernetes não conseguir acessar a Internet. Nestes exemplos, substitua valores entre parênteses por informações do seu ambiente:
+Você pode instalar o Trident Protect a partir de um registro de imagens privado caso seu cluster Kubernetes não tenha acesso à Internet. Nestes exemplos, substitua os valores entre colchetes por informações do seu ambiente:
 
 .Passos
 . Puxe as seguintes imagens para a sua máquina local, atualize as etiquetas e, em seguida, envie-as para o seu registo privado:
@@ -115,7 +115,7 @@ kubectl create secret docker-registry regcred --docker-username=<registry-userna
 ----
 helm repo add netapp-trident-protect https://netapp.github.io/trident-protect-helm-chart
 ----
-. Crie um arquivo chamado `protectValues.yaml`. Verifique se ele contém as seguintes configurações de proteção Trident:
+. Crie um arquivo chamado `protectValues.yaml` . Certifique-se de que contenha as seguintes configurações do Trident Protect:
 +
 [source, yaml]
 ----
@@ -128,7 +128,7 @@ imagePullSecrets:
 
 NOTE: O `imageRegistry` e `imagePullSecrets` Os valores se aplicam a todas as imagens componentes, incluindo `resourcebackup` e `resourcerestore` . Se você enviar imagens para um caminho de repositório específico dentro do seu registro (por exemplo, `example.com:443/my-repo`), inclua o caminho completo no campo de registro. Isso garantirá que todas as imagens sejam extraídas de `<private-registry-url>/<image-name>:<tag>`.
 
-. Use o Helm para instalar o Trident Protect. Substitua `<name_of_cluster>` por um nome de cluster, que será atribuído ao cluster e usado para identificar os backups e snapshots do cluster:
+. Use o Helm para instalar o Trident Protect. Substituir `<name_of_cluster>` com um nome de cluster, que será atribuído ao cluster e usado para identificar os backups e snapshots do cluster:
 +
 [source, console]
 ----

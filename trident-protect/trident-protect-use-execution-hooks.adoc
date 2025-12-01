@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: trident-protect/trident-protect-use-execution-hooks.html 
 keywords: trident, protect, execution hooks 
-summary: Você pode criar um gancho de execução personalizado para um aplicativo usando o Trident Protect. Você precisa ter permissões de proprietário, administrador ou membro para criar ganchos de execução. 
+summary: Você pode criar um gancho de execução personalizado para um aplicativo usando o Trident Protect. Você precisa ter permissões de Proprietário, Administrador ou Membro para criar ganchos de execução. 
 ---
-= Gerenciar ganchos de execução do Trident Protect
+= Gerenciar os ganchos de execução do Trident Protect
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -20,7 +20,7 @@ Um gancho de execução é uma ação personalizada que você pode configurar pa
 
 == Tipos de ganchos de execução
 
-O Trident Protect suporta os seguintes tipos de ganchos de execução, com base em quando eles podem ser executados:
+O Trident Protect suporta os seguintes tipos de ganchos de execução, com base em quando podem ser executados:
 
 * Pré-instantâneo
 * Pós-snapshot
@@ -37,7 +37,7 @@ O Trident Protect suporta os seguintes tipos de ganchos de execução, com base 
 Quando uma operação de proteção de dados é executada, os eventos de gancho de execução ocorrem na seguinte ordem:
 
 . Todos os ganchos de execução personalizados de pré-operação aplicáveis são executados nos contentores apropriados. Você pode criar e executar quantos ganchos de pré-operação personalizados você precisar, mas a ordem de execução desses ganchos antes da operação não é garantida nem configurável.
-. Ocorrem travamentos do sistema de arquivos, se aplicável. link:trident-protect-requirements.html#protecting-data-with-kubevirt-vms["Saiba mais sobre como configurar o congelamento do sistema de arquivos com o Trident Protect"].
+. Congelamentos do sistema de arquivos ocorrem, se aplicável. link:trident-protect-requirements.html#protecting-data-with-kubevirt-vms["Saiba mais sobre como configurar o congelamento do sistema de arquivos com o Trident Protect."].
 . A operação de proteção de dados é realizada.
 . Os sistemas de arquivos congelados não estão congelados, se aplicável.
 . Todos os ganchos de execução pós-operação personalizados aplicáveis são executados nos contentores apropriados. Você pode criar e executar quantos ganchos de pós-operação personalizados você precisar, mas a ordem de execução desses ganchos após a operação não é garantida nem configurável.
@@ -67,9 +67,9 @@ NOTE: Se um gancho de execução pré-snapshot adicionar, alterar ou remover rec
 Considere o seguinte ao Planejar ganchos de execução para seus aplicativos.
 
 * Um gancho de execução deve usar um script para executar ações. Muitos ganchos de execução podem referenciar o mesmo script.
-* O Trident Protect requer que os scripts que os ganchos de execução usam sejam escritos no formato de scripts shell executáveis.
+* O Trident Protect exige que os scripts usados ​​pelos ganchos de execução sejam escritos no formato de scripts shell executáveis.
 * O tamanho do script está limitado a 96kbMB.
-* O Trident Protect usa configurações de gancho de execução e quaisquer critérios correspondentes para determinar quais ganchos são aplicáveis a uma operação de snapshot, backup ou restauração.
+* O Trident Protect utiliza as configurações de ganchos de execução e quaisquer critérios correspondentes para determinar quais ganchos são aplicáveis ​​a uma operação de snapshot, backup ou restauração.
 
 
 
@@ -81,7 +81,7 @@ NOTE: Como os ganchos de execução geralmente reduzem ou desativam completament
 
 Quando você adiciona ou edita um gancho de execução para um aplicativo, você pode adicionar filtros ao gancho de execução para gerenciar quais contentores o gancho corresponderá. Os filtros são úteis para aplicativos que usam a mesma imagem de contentor em todos os contentores, mas podem usar cada imagem para um propósito diferente (como o Elasticsearch). Os filtros permitem criar cenários onde os ganchos de execução são executados em alguns, mas não necessariamente em todos os contentores idênticos. Se você criar vários filtros para um único gancho de execução, eles serão combinados com um operador LÓGICO E. Você pode ter até 10 filtros ativos por gancho de execução.
 
-Cada filtro que você adicionar a um gancho de execução usa uma expressão regular para corresponder a containers em seu cluster. Quando um gancho corresponde a um recipiente, o gancho executará o script associado nesse recipiente. As expressões regulares para filtros usam a sintaxe da expressão regular 2 (RE2), que não suporta a criação de um filtro que exclui contentores da lista de correspondências. Para obter informações sobre a sintaxe que o Trident Protect suporta para expressões regulares em filtros de gancho de execução, https://github.com/google/re2/wiki/Syntax["Suporte à sintaxe da expressão regular 2 (RE2)"^] consulte .
+Cada filtro que você adiciona a um gancho de execução usa uma expressão regular para corresponder aos contêineres no seu cluster. Quando um gancho corresponde a um contêiner, o gancho executará seu script associado naquele contêiner. Expressões regulares para filtros usam a sintaxe Regular Expression 2 (RE2), que não oferece suporte à criação de um filtro que exclua contêineres da lista de correspondências. Para obter informações sobre a sintaxe que o Trident Protect suporta para expressões regulares em filtros de gancho de execução, consulte https://github.com/google/re2/wiki/Syntax["Suporte à sintaxe da expressão regular 2 (RE2)"^] .
 
 
 NOTE: Se você adicionar um filtro de namespace a um gancho de execução que é executado após uma operação de restauração ou clone e a origem e destino de restauração ou clone estiverem em namespaces diferentes, o filtro de namespace será aplicado somente ao namespace de destino.
@@ -96,7 +96,7 @@ Visite o https://github.com/NetApp/Verda["Projeto NetApp Verda GitHub"] para bai
 
 == Crie um gancho de execução
 
-Você pode criar um gancho de execução personalizado para um aplicativo usando o Trident Protect. Você precisa ter permissões de proprietário, administrador ou membro para criar ganchos de execução.
+Você pode criar um gancho de execução personalizado para um aplicativo usando o Trident Protect. Você precisa ter permissões de Proprietário, Administrador ou Membro para criar ganchos de execução.
 
 [role="tabbed-block"]
 ====
@@ -104,7 +104,7 @@ Você pode criar um gancho de execução personalizado para um aplicativo usando
 --
 .Passos
 . Crie o arquivo de recurso personalizado (CR) e nomeie-o `trident-protect-hook.yaml`.
-. Configure os seguintes atributos para corresponder ao ambiente do Trident Protect e à configuração do cluster:
+. Configure os seguintes atributos para corresponder ao seu ambiente Trident Protect e à configuração do cluster:
 +
 ** *metadata.name*: (_required_) o nome deste recurso personalizado; escolha um nome único e sensível para o seu ambiente.
 ** *Spec.applicationRef*: (_required_) o nome do Kubernetes do aplicativo para o qual executar o gancho de execução.
@@ -221,7 +221,7 @@ Executar manualmente um gancho de execução consiste em duas etapas básicas:
 --
 .Passos
 . Crie o arquivo de recurso personalizado (CR) e nomeie-o `trident-protect-resource-backup.yaml`.
-. Configure os seguintes atributos para corresponder ao ambiente do Trident Protect e à configuração do cluster:
+. Configure os seguintes atributos para corresponder ao seu ambiente Trident Protect e à configuração do cluster:
 +
 ** *metadata.name*: (_required_) o nome deste recurso personalizado; escolha um nome único e sensível para o seu ambiente.
 ** *Spec.applicationRef*: (_required_) o nome do Kubernetes do aplicativo para o qual criar o backup de recursos.
@@ -294,7 +294,7 @@ kubectl describe resourcebackup <my_backup_name>
 --
 .Passos
 . Crie o arquivo de recurso personalizado (CR) e nomeie-o `trident-protect-hook-run.yaml`.
-. Configure os seguintes atributos para corresponder ao ambiente do Trident Protect e à configuração do cluster:
+. Configure os seguintes atributos para corresponder ao seu ambiente Trident Protect e à configuração do cluster:
 +
 ** *metadata.name*: (_required_) o nome deste recurso personalizado; escolha um nome único e sensível para o seu ambiente.
 ** *Spec.applicationRef*: (_required_) Certifique-se de que este valor corresponde ao nome da aplicação do ResourceBackup CR criado na etapa 1.

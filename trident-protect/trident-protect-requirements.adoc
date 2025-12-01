@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-protect/trident-protect-requirements.html 
 keywords: trident protect, application, cluster, snapmirror replication, ontap, configuration 
-summary: Comece verificando a prontidão do seu ambiente operacional, clusters de aplicativos, aplicativos e licenças. Certifique-se de que seu ambiente atenda a esses requisitos para implantar e operar o Trident Protect. 
+summary: Comece verificando se seu ambiente operacional, clusters de aplicativos, aplicativos e licenças estão prontos. Certifique-se de que seu ambiente atenda a esses requisitos para implantar e operar o Trident Protect. 
 ---
 = Requisitos do Trident Protect
 :hardbreaks:
@@ -14,13 +14,13 @@ summary: Comece verificando a prontidão do seu ambiente operacional, clusters d
 
 
 [role="lead"]
-Comece verificando a prontidão do seu ambiente operacional, clusters de aplicativos, aplicativos e licenças. Certifique-se de que seu ambiente atenda a esses requisitos para implantar e operar o Trident Protect.
+Comece verificando se seu ambiente operacional, clusters de aplicativos, aplicativos e licenças estão prontos. Certifique-se de que seu ambiente atenda a esses requisitos para implantar e operar o Trident Protect.
 
 
 
-== O Trident protege a compatibilidade de clusters do Kubernetes
+== Compatibilidade do cluster Kubernetes com o Trident Protect
 
-O Trident Protect é compatível com uma ampla variedade de ofertas do Kubernetes totalmente gerenciadas e autogeridas, incluindo:
+O Trident Protect é compatível com uma ampla gama de ofertas de Kubernetes totalmente gerenciadas e autogerenciadas, incluindo:
 
 * Amazon Elastic Kubernetes Service (EKS)
 * Google Kubernetes Engine (GKE)
@@ -33,16 +33,16 @@ O Trident Protect é compatível com uma ampla variedade de ofertas do Kubernete
 
 [NOTE]
 ====
-* Os backups do Trident Protect são suportados apenas em nós de computação Linux.  Os nós de computação do Windows não são suportados para operações de backup.
-* Verifique se o cluster no qual você instala o Trident Protect está configurado com um controlador de snapshot em execução e as CRDs relacionadas. Para instalar um controlador instantâneo, https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploy-a-volume-snapshot-controller["estas instruções"] consulte a .
+* Os backups do Trident Protect são suportados apenas em nós de computação Linux. Os nós de computação do Windows não são suportados para operações de backup.
+* Certifique-se de que o cluster no qual você instala o Trident Protect esteja configurado com um controlador de snapshots em execução e os CRDs relacionados. Para instalar um controlador de snapshots, consulte https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploy-a-volume-snapshot-controller["estas instruções"] .
 
 
 ====
 
 
-== O Trident protege a compatibilidade de back-end de storage
+== Compatibilidade com o backend de armazenamento Trident Protect
 
-O Trident Protect suporta os seguintes backends de armazenamento:
+O Trident Protect é compatível com os seguintes sistemas de armazenamento:
 
 * Amazon FSX para NetApp ONTAP
 * Cloud Volumes ONTAP
@@ -58,14 +58,14 @@ Certifique-se de que o back-end de storage atenda aos seguintes requisitos:
 
 * Verifique se você tem um back-end de storage do NetApp ONTAP.
 * Certifique-se de ter configurado um bucket de armazenamento de objetos para armazenar backups.
-* Crie namespaces de aplicações que você planeja usar para aplicações ou operações de gerenciamento de dados de aplicações. O Trident Protect não cria esses namespaces para você; se você especificar um namespace inexistente em um recurso personalizado, a operação falhará.
+* Crie todos os namespaces de aplicativos que você planeja usar para aplicativos ou operações de gerenciamento de dados de aplicativos. O Trident Protect não cria esses namespaces para você; se você especificar um namespace inexistente em um recurso personalizado, a operação falhará.
 
 
 
 
 == Requisitos para volumes nas-economia
 
-O Trident Protect é compatível com operações de backup e restauração em volumes com economia nas. Snapshots, clones e replicação SnapMirror para volumes nas-Economy atualmente não são compatíveis. Você precisa ativar um diretório de snapshot para cada volume de economia nas que você planeja usar com o Trident Protect.
+O Trident Protect oferece suporte a operações de backup e restauração para volumes NAS Economy. Atualmente, não há suporte para snapshots, clones e replicação do SnapMirror para volumes nas-economy.  Você precisa habilitar um diretório de snapshots para cada volume nas-economy que planeja usar com o Trident Protect.
 
 [NOTE]
 ====
@@ -89,7 +89,7 @@ NOTE: Você pode habilitar diretórios de snapshot por padrão para novos volume
 
 == Proteção de dados com máquinas virtuais do KubeVirt
 
-O Trident Protect oferece recursos de congelamento e descongelamento do sistema de arquivos para máquinas virtuais KubeVirt durante operações de proteção de dados, garantindo a consistência dos dados. O método de configuração e o comportamento padrão para operações de congelamento de máquinas virtuais variam entre as versões do Trident Protect, sendo que as versões mais recentes oferecem configuração simplificada por meio de parâmetros do gráfico Helm.
+O Trident Protect oferece recursos de congelamento e descongelamento do sistema de arquivos para máquinas virtuais KubeVirt durante operações de proteção de dados, garantindo a consistência dos dados.  O método de configuração e o comportamento padrão para operações de congelamento de máquinas virtuais variam entre as versões do Trident Protect, sendo que as versões mais recentes oferecem configuração simplificada por meio de parâmetros do gráfico Helm.
 
 
 NOTE: Durante as operações de restauração, qualquer  `VirtualMachineSnapshots` criados para uma máquina virtual (VM) não são restaurados.
@@ -97,7 +97,7 @@ NOTE: Durante as operações de restauração, qualquer  `VirtualMachineSnapshot
 .Trident Protect 25.10 e versões mais recentes
 [%collapsible%open]
 ====
-O Trident Protect congela e descongela automaticamente os sistemas de arquivos do KubeVirt durante as operações de proteção de dados para garantir a consistência. A partir do Trident Protect 25.10, você pode desativar esse comportamento usando o `vm.freeze` parâmetro durante a instalação do gráfico Helm. O parâmetro está ativado por padrão.
+O Trident Protect congela e descongela automaticamente os sistemas de arquivos do KubeVirt durante as operações de proteção de dados para garantir a consistência.  A partir do Trident Protect 25.10, você pode desativar esse comportamento usando o `vm.freeze` parâmetro durante a instalação do gráfico Helm. O parâmetro está ativado por padrão.
 
 [source, console]
 ----
@@ -107,19 +107,19 @@ helm install ... --set vm.freeze=false ...
 .Trident Protect 24.10.1 a 25.06
 [%collapsible]
 ====
-A partir do Trident Protect 24.10.1, o Trident Protect congela e descongela automaticamente os sistemas de arquivos KubeVirt durante operações de proteção de dados. Opcionalmente, você pode desativar esse comportamento automático usando o seguinte comando:
+A partir da versão 24.10.1 do Trident Protect, o sistema congela e descongela automaticamente os sistemas de arquivos do KubeVirt durante as operações de proteção de dados. Opcionalmente, você pode desativar esse comportamento automático usando o seguinte comando:
 
 [source, console]
 ----
 kubectl set env deployment/trident-protect-controller-manager NEPTUNE_VM_FREEZE=false -n trident-protect
 ----
 ====
-.Trident Protect 24,10
+.Trident Protect 24.10
 [%collapsible]
 ====
-O Trident Protect 24,10 não garante automaticamente um estado consistente para os sistemas de arquivos da VM do KubeVirt durante operações de proteção de dados. Se você quiser proteger seus dados da VM KubeVirt usando o Trident Protect 24,10, você precisa ativar manualmente a funcionalidade congelar/descongelar para os sistemas de arquivos antes da operação de proteção de dados. Isso garante que os sistemas de arquivos estejam em um estado consistente.
+O Trident Protect 24.10 não garante automaticamente um estado consistente para os sistemas de arquivos das VMs do KubeVirt durante as operações de proteção de dados.  Se você deseja proteger os dados da sua máquina virtual KubeVirt usando o Trident Protect 24.10, precisa habilitar manualmente a funcionalidade de congelamento/descongelamento dos sistemas de arquivos antes da operação de proteção de dados. Isso garante que os sistemas de arquivos estejam em um estado consistente.
 
-Você pode configurar o Trident Protect 24,10 para gerenciar o congelamento e o descongelamento do sistema de arquivos da VM durante operações de proteção de dados link:https://docs.openshift.com/container-platform/4.16/virt/install/installing-virt.html["configuração da virtualização"^]usando o seguinte comando:
+Você pode configurar o Trident Protect 24.10 para gerenciar o congelamento e o descongelamento do sistema de arquivos da VM durante as operações de proteção de dados.link:https://docs.openshift.com/container-platform/4.16/virt/install/installing-virt.html["configuração da virtualização"^] e então usando o seguinte comando:
 
 [source, console]
 ----
@@ -130,7 +130,7 @@ kubectl set env deployment/trident-protect-controller-manager NEPTUNE_VM_FREEZE=
 
 == Requisitos para replicação do SnapMirror
 
-A replicação do NetApp SnapMirror está disponível para uso com o Trident Protect para as seguintes soluções da ONTAP:
+A replicação NetApp SnapMirror está disponível para uso com o Trident Protect para as seguintes soluções ONTAP :
 
 * Clusters NetApp FAS, AFF e ASA no local
 * NetApp ONTAP Select
@@ -144,7 +144,7 @@ A replicação do NetApp SnapMirror está disponível para uso com o Trident Pro
 
 Se você planeja usar a replicação do SnapMirror, verifique se o cluster do ONTAP atende aos seguintes requisitos:
 
-* *NetApp Trident*: O NetApp Trident deve existir nos clusters Kubernetes de origem e destino que utilizam o ONTAP como backend. O Trident Protect oferece suporte à replicação com a tecnologia NetApp SnapMirror usando classes de armazenamento com os seguintes drivers:
+* * NetApp Trident*: O NetApp Trident deve estar presente nos clusters Kubernetes de origem e destino que utilizam o ONTAP como backend. O Trident Protect oferece suporte à replicação com a tecnologia NetApp SnapMirror usando classes de armazenamento com suporte dos seguintes drivers:
 +
 ** `ontap-nas` : NFS
 ** `ontap-san` : iSCSI
@@ -181,7 +181,7 @@ NOTE: Certifique-se de que os nomes do SVM usados na relação de replicação e
 
 === Configuração Trident / ONTAP para replicação SnapMirror
 
-O Trident Protect exige que você configure pelo menos um back-end de storage compatível com a replicação para os clusters de origem e destino. Se os clusters de origem e destino forem iguais, o aplicativo de destino deverá usar um back-end de storage diferente do aplicativo de origem para obter a melhor resiliência.
+O Trident Protect exige que você configure pelo menos um backend de armazenamento que suporte replicação para os clusters de origem e destino. Se os clusters de origem e destino forem os mesmos, o aplicativo de destino deverá usar um backend de armazenamento diferente do aplicativo de origem para obter a melhor resiliência.
 
 
 

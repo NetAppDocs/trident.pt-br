@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-protect/trident-protect-cli.html 
 keywords: trident, protect, command line utility, cli, netapp, custom, resources 
-summary: Você pode usar o comando protectctl para criar e interagir com os recursos personalizados do Trident Protect. 
+summary: Você pode usar o comando protectctl para criar e interagir com recursos personalizados do Trident Protect. 
 ---
 = Instale o plugin Trident Protect CLI
 :hardbreaks:
@@ -14,7 +14,7 @@ summary: Você pode usar o comando protectctl para criar e interagir com os recu
 
 
 [role="lead"]
-Você pode usar o plugin de linha de comando Trident Protect, que é uma extensão do utilitário Trident `tridentctl`, para criar e interagir com o Trident Protect custom Resources (CRS).
+Você pode usar o plugin de linha de comando Trident Protect, que é uma extensão do Trident. `tridentctl` Utilitário para criar e interagir com recursos personalizados (CRs) do Trident Protect.
 
 
 
@@ -27,7 +27,7 @@ Antes de usar o utilitário de linha de comando, você precisa instalá-lo na m�
 .Faça o download do plugin para CPUs Linux AMD64
 --
 .Passos
-. Faça o download do plugin Trident Protect CLI:
+. Baixe o plugin Trident Protect CLI:
 +
 [source, console]
 ----
@@ -39,7 +39,7 @@ curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/relea
 .Faça o download do plugin para CPUs Linux ARM64
 --
 .Passos
-. Faça o download do plugin Trident Protect CLI:
+. Baixe o plugin Trident Protect CLI:
 +
 [source, console]
 ----
@@ -51,7 +51,7 @@ curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/relea
 .Baixe o plugin para CPUs Mac AMD64
 --
 .Passos
-. Faça o download do plugin Trident Protect CLI:
+. Baixe o plugin Trident Protect CLI:
 +
 [source, console]
 ----
@@ -63,7 +63,7 @@ curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/relea
 .Baixe o plugin para CPUs Mac ARM64
 --
 .Passos
-. Faça o download do plugin Trident Protect CLI:
+. Baixe o plugin Trident Protect CLI:
 +
 [source, console]
 ----
@@ -115,7 +115,7 @@ tridentctl-protect help
 
 == Ativar a auto-conclusão do comando
 
-Depois de instalar o plugin Trident Protect CLI, você pode ativar a auto-conclusão para determinados comandos.
+Após instalar o plugin Trident Protect CLI, você pode ativar o recurso de autocompletar para determinados comandos.
 
 [role="tabbed-block"]
 ====
