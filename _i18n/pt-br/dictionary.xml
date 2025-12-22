@@ -540,9 +540,7 @@
   <block id="1f7219b07d5bce7feec002a9f4dc2201" category="cell">Operador Trident</block>
   <block id="443432948b68bb63d707ce7ecc4a021a" category="cell">Topologia de CSI</block>
   <block id="af7c8216a3289efe1a298a19c00b8b8c" category="section-title">Sistemas operacionais de host testados</block>
-  <block id="a3460163c4a2854c79a419dda57ac917" category="list-text">RHEL 8 OU SUPERIOR (AMD64 E ARM64)</block>
   <block id="8554748be67b956e550de942edae807d" category="admonition">O NVMe/TCP requer o RHEL 9 ou posterior.</block>
-  <block id="f51a58a0cffb9f9953edce6411578b53" category="list-text">Ubuntu 22,04 ou posterior (AMD64 e ARM64)</block>
   <block id="de547bcab0e20f54ec4d5e95ba44b0b1" category="list-text">Windows Server 2022</block>
   <block id="11ea58814ce429c3e3254a63f8cde7a4" category="paragraph">O<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block> utilitário também é executado em qualquer uma dessas distribuições do Linux.</block>
   <block id="13d80777c8fd43e555c1f5b1b72d7ef0" category="section-title">Configuração de host</block>
@@ -4963,7 +4961,6 @@
   <block id="e80b6a304e29d5dfcb9150f47d69db94" category="section-title">Suporte ao Trident para virtualização KubeVirt e OpenShift</block>
   <block id="cffd29fb8e17cb30625130ee24cd667d" category="paragraph">O Trident suporta os seguintes drivers ONTAP para virtualização KubeVirt e OpenShift:</block>
   <block id="0ae326ef84f2a6bc4be48951f88c0162" category="list-text">Atualize a classe de armazenamento para ter o<block ref="7cfbb6f07899c8071ff38e69dca190e2" prefix=" " category="inline-code"></block> parâmetro (por exemplo:<block ref="6db865adcb81b7cf881ff9839476f850" prefix=" " category="inline-code"></block>) No ambiente de virtualização OpenShift. Se necessário, defina o modo de volume para bloquear explicitamente usando o<block ref="1467a571dd94848f616edc4a0c33b927" prefix=" " category="inline-code"></block> parâmetro no<block ref="c6dda2fd1e6d70d582099348cfe6c847" prefix=" " category="inline-code"></block> para notificar CDI para criar volumes de dados de bloco.</block>
-  <block id="daa6a182f8035711e9635994f572c7bc" category="list-text">Versões do Red Hat Enterprise Linux CoreOS (RHCOS) suportadas pela OpenShift Container Platform (AMD64 e ARM64)</block>
   <block id="2bf380408feee0a9443f217c907f0681" category="inline-link-macro">Documentação de Registro do Red Hat OpenShift</block>
   <block id="796814ebd3d324fe438f0c699c37c89e" category="admonition">As tabelas abaixo contêm apenas as variáveis relevantes para a configuração de armazenamento, uma vez que se refere ao serviço de registo. Você pode encontrar outras opções nas <block ref="202ad309c67a74272d432350a2d0cf76" category="inline-link-macro-rx"></block> quais devem ser revisadas, configuradas e usadas de acordo com sua implantação.</block>
   <block id="3a298688c4d78e1b7532d3859cd16a57" category="inline-link-macro">Documentação do Red Hat OpenShift Container Platform 3,11</block>
@@ -5964,4 +5961,8 @@
   <block id="e40bdae327bee4d52c74e4b3250b08ce" category="cell"><block ref="27081e7eec2d2a1beae20d90b1d5af4f" prefix="" category="inline-code"></block></block>
   <block id="304bbbc132c2b33e03e087cb6838276e" category="cell">Habilite a autenticação IAM para acessar os buckets do S3.  Aplicável à identidade do Pod EKS.</block>
   <block id="09a18f0598e032559af2cd41ba3aa659" category="list-text">Certifique-se de que exista pelo menos uma classe VolumeSnapshotClass. Para obter mais informações, consulte<block ref="9597869a9c7d53c1c9b0a0dcb905675c" category="inline-link-macro-rx"></block> .</block>
+  <block id="01a2f6f3fc3712c00aaaff540b7187f3" category="list-text">Versões do Red Hat Enterprise Linux CoreOS (RHCOS) suportadas pela plataforma OpenShift Container em AMD64 e ARM64</block>
+  <block id="1c93bd59e1abbbe543685399acba3c3b" category="list-text">Red Hat Enterprise Linux (RHEL) 8 ou posterior em AMD64 e ARM64</block>
+  <block id="d79b838675f4d040c12110c1c22fcf32" category="list-text">Ubuntu 22.04 LTS ou posterior em AMD64 e ARM64</block>
+  <block id="02869471b3c4ac5c57fb8c2e1d4355dd" category="list-text">SUSE Linux Enterprise Server (SLES) 15 ou posterior</block>
 </blocks>
