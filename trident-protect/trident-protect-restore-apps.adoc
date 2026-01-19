@@ -30,9 +30,13 @@ Você pode usar o Trident Protect para restaurar seu aplicativo a partir de um s
 
 Ao restaurar um backup para um namespace diferente usando um CR de BackupRestore, o Trident Protect restaura o aplicativo em um novo namespace e cria um CR de aplicativo para o aplicativo restaurado. Para proteger a aplicação restaurada, crie backups ou snapshots sob demanda, ou estabeleça um cronograma de proteção.
 
+[NOTE]
+====
+* Restaurar um backup para um namespace diferente com recursos existentes não alterará nenhum recurso que compartilhe nomes com aqueles no backup. Para restaurar todos os recursos no backup, exclua e recrie o namespace de destino ou restaure o backup para um novo namespace.
+* Ao usar uma solicitação de restauração (CR) para restaurar em um novo namespace, você deve criar manualmente o namespace de destino antes de aplicar a CR. O Trident Protect cria namespaces automaticamente apenas quando se utiliza a CLI (linha de comando).
 
-NOTE: Restaurar um backup para um namespace diferente com recursos existentes não alterará nenhum recurso que compartilhe nomes com aqueles no backup. Para restaurar todos os recursos no backup, exclua e recrie o namespace de destino ou restaure o backup para um novo namespace.
 
+====
 .Antes de começar
 Certifique-se de que a expiração do token de sessão da AWS seja suficiente para quaisquer operações de restauração S3 de longa duração. Se o token expirar durante a operação de restauração, a operação pode falhar.
 
@@ -271,9 +275,13 @@ tridentctl-protect create backupinplacerestore <my_restore_name> \
 
 Você pode restaurar um backup para um cluster diferente se houver um problema com o cluster original.
 
+[NOTE]
+====
+* Ao restaurar backups usando o Kopia como o movimentador de dados, você pode, opcionalmente, especificar anotações no CR ou usar a CLI para controlar o comportamento do armazenamento temporário usado pelo Kopia. Consulte o https://kopia.io/docs/getting-started/["Documentação da Kopia"^] Para obter mais informações sobre as opções que você pode configurar. Use o `tridentctl-protect create --help` Para obter mais informações sobre como especificar anotações com a CLI do Trident Protect, consulte o comando.
+* Ao usar uma solicitação de restauração (CR) para restaurar em um novo namespace, você deve criar manualmente o namespace de destino antes de aplicar a CR. O Trident Protect cria namespaces automaticamente apenas quando se utiliza a CLI (linha de comando).
 
-NOTE: Ao restaurar backups usando o Kopia como o movimentador de dados, você pode, opcionalmente, especificar anotações no CR ou usar a CLI para controlar o comportamento do armazenamento temporário usado pelo Kopia. Consulte o https://kopia.io/docs/getting-started/["Documentação da Kopia"^] Para obter mais informações sobre as opções que você pode configurar. Use o `tridentctl-protect create --help` Para obter mais informações sobre como especificar anotações com a CLI do Trident Protect, consulte o comando.
 
+====
 .Antes de começar
 Certifique-se de que os seguintes pré-requisitos são cumpridos:
 
@@ -397,9 +405,13 @@ tridentctl-protect create backuprestore <restore_name> \
 
 Você pode restaurar dados de um snapshot usando um arquivo de recurso personalizado (CR) para um namespace diferente ou para o namespace de origem original. Ao restaurar um snapshot para um namespace diferente usando um CR de SnapshotRestore, o Trident Protect restaura o aplicativo em um novo namespace e cria um CR de aplicativo para o aplicativo restaurado. Para proteger a aplicação restaurada, crie backups ou snapshots sob demanda, ou estabeleça um cronograma de proteção.
 
+[NOTE]
+====
+* O SnapshotRestore oferece suporte ao `spec.storageClassMapping` atributo, mas somente quando as classes de armazenamento de origem e destino usam o mesmo backend de armazenamento.  Se você tentar restaurar para um `StorageClass` que usa um backend de armazenamento diferente, a operação de restauração falhará.
+* Ao usar uma solicitação de restauração (CR) para restaurar em um novo namespace, você deve criar manualmente o namespace de destino antes de aplicar a CR. O Trident Protect cria namespaces automaticamente apenas quando se utiliza a CLI (linha de comando).
 
-NOTE: O SnapshotRestore oferece suporte ao `spec.storageClassMapping` atributo, mas somente quando as classes de armazenamento de origem e destino usam o mesmo backend de armazenamento.  Se você tentar restaurar para um `StorageClass` que usa um backend de armazenamento diferente, a operação de restauração falhará.
 
+====
 .Antes de começar
 Certifique-se de que a expiração do token de sessão da AWS seja suficiente para quaisquer operações de restauração S3 de longa duração. Se o token expirar durante a operação de restauração, a operação pode falhar.
 

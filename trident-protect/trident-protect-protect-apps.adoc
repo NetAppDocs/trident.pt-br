@@ -328,13 +328,25 @@ tridentctl-protect create schedule <my_schedule_name> \
   --snapshot-retention <how_many_snapshots_to_retain> \
   --snapshot-reclaim-policy <Retain|Delete (default Delete)> \
   --full-backup-rule <string> \
+  --run-immediately <true|false> \
   -n <application_namespace>
 ----
 +
-Você pode definir o `--full-backup-rule` sinalizador para `always` backup completo constante ou personalizá-lo com base em suas necessidades. Por exemplo, se você escolher a granularidade diária, poderá especificar os dias da semana em que o backup completo deve ocorrer. Por exemplo, use `--full-backup-rule "Monday,Thursday"` para agendar o backup completo às segundas e quintas-feiras.
+As seguintes opções oferecem controle adicional sobre sua programação:
 
 +
-Para agendamentos somente de instantâneos, defina `--backup-retention 0` e especifique um valor maior que 0 para `--snapshot-retention` .
+** *Agendamento completo de backups*: Use o `--full-backup-rule` Sinalizador para agendar backups completos não incrementais. Esta flag só funciona com `--granularity Daily`. Valores possíveis:
++
+*** `Always`Faça um backup completo todos os dias.
+*** Dias da semana específicos: Especifique um ou mais dias separados por vírgulas (por exemplo, `"Monday,Thursday"`). Valores válidos: segunda-feira, terça-feira, quarta-feira, quinta-feira, sexta-feira, sábado, domingo.
++
+
+NOTE: O `--full-backup-rule` A opção de sinalizar não funciona com granularidade horária, semanal ou mensal.
+
+
+
+** *Agendamentos somente para instantâneos*: Definir `--backup-retention 0` e especifique um valor maior que zero para `--snapshot-retention`.
+
 
 
 
@@ -351,7 +363,7 @@ A tabela a seguir descreve as anotações que você pode usar ao criar uma solic
 | Anotação | Tipo | Descrição | Valor padrão 
 
 
-| protect.trident.netapp.io/regra-de-backup-completo | cadeia de carateres | Especifica a regra para agendamento de backups completos. Você pode configurá-lo para `always` Para backup completo constante ou personalize de acordo com suas necessidades. Por exemplo, se você escolher a granularidade diária, poderá especificar os dias da semana em que o backup completo deve ocorrer (por exemplo, `"Monday,Thursday"` ). | Não configurado (todos os backups são incrementais) 
+| protect.trident.netapp.io/regra-de-backup-completo | cadeia de carateres | Especifica a regra para agendamento de backups completos. Você pode configurá-lo para `Always` Para backup completo constante ou personalize de acordo com suas necessidades. Por exemplo, se você escolher a granularidade diária, poderá especificar os dias da semana em que o backup completo deve ocorrer (por exemplo, `"Monday,Thursday"`). Os valores válidos para dias úteis são: segunda-feira, terça-feira, quarta-feira, quinta-feira, sexta-feira, sábado e domingo. Observe que esta anotação só pode ser usada com cronogramas que possuem `granularity` definido para `Daily`. | Não configurado (todos os backups são incrementais) 
 
 
 | protect.trident.netapp.io/snapshot-completion-timeout | cadeia de carateres | Tempo máximo permitido para a conclusão da operação de captura instantânea. | "60m" 

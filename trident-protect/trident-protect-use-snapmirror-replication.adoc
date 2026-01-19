@@ -364,7 +364,11 @@ kubectl apply -f trident-protect-appvault-secondary-destination.yaml -n trident-
 ----
 
 
-. No cluster de destino, crie um arquivo CR AppMirrorRelationship:
+. No cluster de destino, crie um arquivo CR AppMirrorRelationship.
++
+
+NOTE: Ao usar uma solicitação de alteração (CR), crie manualmente o namespace de destino antes de aplicar a CR. O Trident Protect cria namespaces automaticamente apenas quando se utiliza a CLI (linha de comando).
+
 +
 [role="tabbed-block"]
 ====
