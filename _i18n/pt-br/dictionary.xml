@@ -5971,4 +5971,7 @@
   <block id="11442c99db3d2b2bf685a98052263ff2" category="list-text">Ao usar uma solicitação de restauração (CR) para restaurar em um novo namespace, você deve criar manualmente o namespace de destino antes de aplicar a CR. O Trident Protect cria namespaces automaticamente apenas quando se utiliza a CLI (linha de comando).</block>
   <block id="0f98c9dc4568dec3e7387b839805d490" category="list-text">No cluster de destino, crie um arquivo CR AppMirrorRelationship.</block>
   <block id="b056e38029a731ef20ed5ec00c3dcfd8" category="admonition">Ao usar uma solicitação de alteração (CR), crie manualmente o namespace de destino antes de aplicar a CR. O Trident Protect cria namespaces automaticamente apenas quando se utiliza a CLI (linha de comando).</block>
+  <block id="5d644af86a05d68ceba69b7be5855202" category="paragraph">O seguinte comando de exemplo instala o Trident EKS add-on versão 25.6.1:<block ref="c0283be6b5622fc9d2b8ebb2d7fd26c9" prefix=" " category="inline-code"></block> (com uma versão dedicada)</block>
+  <block id="5ebe108c241a46f56c18ffb59389b015" category="paragraph">O seguinte comando de exemplo instala o Trident EKS add-on versão 25.6.2:<block ref="c1c3ee7d0d3404bd1e2b5bdd62f81d43" prefix=" " category="inline-code"></block> (com uma versão dedicada)</block>
+  <block id="7400a1a595f19cde496a4d3cdf6a4570" category="admonition">Use o</block>
 </blocks>

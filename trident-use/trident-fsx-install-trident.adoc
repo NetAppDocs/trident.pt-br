@@ -189,6 +189,9 @@ Depois que a instalação do complemento estiver concluída, você verá o compl
 
 *Para Identidade do Pod, use o seguinte formato*:
 
+
+NOTE: Use o
+
 [source, json]
 ----
 {
