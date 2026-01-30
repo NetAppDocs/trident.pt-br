@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
 permalink: trident-use/vol-import.html 
-keywords: volumes, import volumes, drivers, tridentctl import, pv, persistent volumes, pvc, disaster recovery, dr, clone, reuse, managed volume, unmanaged volume, managed 
-summary: 'Você pode importar volumes de armazenamento existentes como um PV do Kubernetes usando `tridentctl import`o .' 
+keywords: volumes, import volumes, drivers, tridentctl import, pv, persistent volumes, pvc, disaster recovery, dr, clone, reuse, managed volume, unmanaged volume, managed, annotations 
+summary: 'Você pode importar volumes de armazenamento existentes como um PV do Kubernetes usando  `tridentctl import` ou anotações de PVC.' 
 ---
 = Importar volumes
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: 'Você pode importar volumes de armazenamento existentes como um PV do 
 
 
 [role="lead"]
-Você pode importar volumes de armazenamento existentes como um PV do Kubernetes usando `tridentctl import`o .
+Você pode importar volumes de armazenamento existentes como um PV do Kubernetes usando  `tridentctl import` ou criando uma Persistent Volume Claim (PVC) com anotações de importação do Trident.
 
 
 
@@ -59,10 +59,17 @@ TIP: Essas opções são úteis se você deseja usar o Kubernetes para cargas de
 
 == Importar um volume
 
-Pode utilizar `tridentctl import` para importar um volume.
+Você pode importar um volume usando  `tridentctl import` ou criando um PVC com anotações de importação do Trident.
 
+
+NOTE: Se você utiliza anotações PVC, não precisa baixar ou usar `tridentctl` para importar o volume.
+
+[role="tabbed-block"]
+====
+.Usando tridentctl
+--
 .Passos
-. Crie o arquivo PVC (Persistent volume Claim) (por exemplo, `pvc.yaml`) que será usado para criar o PVC. O ficheiro PVC deve incluir `name` `namespace` , , , `accessModes` `storageClassName` e . Opcionalmente, você pode especificar `unixPermissions` em sua definição de PVC.
+. Crie um arquivo PVC (por exemplo, `pvc.yaml`) que será usado para criar o PVC. O arquivo PVC deve incluir `name`, `namespace`, `accessModes` e `storageClassName`. Opcionalmente, você pode especificar `unixPermissions` na sua definição de PVC.
 +
 O seguinte é um exemplo de uma especificação mínima:
 
@@ -81,7 +88,7 @@ spec:
 ----
 +
 
-WARNING: Não inclua parâmetros adicionais, como nome PV ou tamanho do volume. Isso pode fazer com que o comando de importação falhe.
+NOTE: Inclua apenas os parâmetros necessários. Parâmetros adicionais, como o nome do PV ou o tamanho do volume, podem fazer com que o comando de importação falhe.
 
 . Use o `tridentctl import` Comando para especificar o nome do backend Trident que contém o volume e o nome que identifica exclusivamente o volume no armazenamento (por exemplo: ONTAP FlexVol, Element Volume). O `-f` É necessário fornecer o argumento para especificar o caminho para o arquivo PVC.
 +
@@ -91,6 +98,58 @@ tridentctl import volume <backendName> <volumeName> -f <path-to-pvc-file>
 ----
 
 
+--
+.Usando anotações em PVC
+--
+.Passos
+. Crie um arquivo YAML de PVC (por exemplo,  `pvc.yaml`) com as anotações de importação do Trident necessárias. O arquivo de PVC deve incluir:
++
+** `name` e  `namespace` em metadados
+** `accessModes`, `resources.requests.storage`, e `storageClassName` em especificação
+** Anotações:
++
+*** `trident.netapp.io/importOriginalName`: Nome do volume no backend
+*** `trident.netapp.io/importBackendUUID`: UUID do backend onde o volume existe
+*** `trident.netapp.io/notManaged` (_Opcional_): Defina como  `"true"` para volumes não gerenciados. O padrão é  `"false"`.
++
+A seguir está um exemplo de especificação para importar um volume gerenciado:
+
++
+[source, yaml]
+----
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: <pvc-name>
+  namespace: <namespace>
+  annotations:
+    trident.netapp.io/importOriginalName: "<volume-name>"
+    trident.netapp.io/importBackendUUID: "<backend-uuid>"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: <size>
+  storageClassName: <storage-class-name>
+----
+
+
+
+
+. Aplique o arquivo YAML do PVC ao seu cluster Kubernetes:
++
+[listing]
+----
+kubectl apply -f <pvc-file>.yaml
+----
++
+Trident importará automaticamente o volume e o vinculará ao PVC.
+
+
+
+--
+====
 
 
 == Exemplos
@@ -112,8 +171,8 @@ O Trident suporta a importação de volume usando os `ontap-nas` drivers e `onta
 ====
 Cada volume criado com o `ontap-nas` driver é um FlexVol volume no cluster do ONTAP. Importar volumes FlexVol com o `ontap-nas` driver funciona da mesma forma. Um volume FlexVol que já existe em um cluster ONTAP pode ser importado como `ontap-nas` PVC. Da mesma forma, os vols FlexGroup podem ser importados como `ontap-nas-flexgroup` PVCs.
 
-.Exemplos de ONTAP nas
-A seguir mostra um exemplo de um volume gerenciado e uma importação de volume não gerenciado.
+.Exemplos de ONTAP NAS usando tridentctl
+Os exemplos a seguir mostram como importar volumes gerenciados e não gerenciados usando `tridentctl`.
 
 [role="tabbed-block"]
 ====
@@ -150,6 +209,60 @@ tridentctl import volume nas_blog unmanaged_volume -f <path-to-pvc-file> --no-ma
 ----
 --
 ====
+.Exemplos do ONTAP NAS usando anotações PVC
+Os exemplos a seguir mostram como importar volumes gerenciados e não gerenciados usando anotações PVC.
+
+[role="tabbed-block"]
+====
+.Volume gerenciado
+--
+O exemplo a seguir importa um volume de 1GiB `ontap-nas` nomeado `ontap_volume1` do backend `81abcb27-ea63-49bb-b606-0a5315ac5f21` com o modo de acesso RWO definido usando anotações PVC:
+
+[source, yaml]
+----
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: <managed-imported-volume>
+  namespace: <namespace>
+  annotations:
+    trident.netapp.io/importOriginalName: "ontap_volume1"
+    trident.netapp.io/importBackendUUID: "81abcb27-ea63-49bb-b606-0a5315ac5f21"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: <storage-class-name>
+
+----
+--
+.Volume não gerenciado
+--
+O exemplo a seguir importa 1Gi `ontap-nas` volume nomeado `ontap-volume2` do backend `34abcb27-ea63-49bb-b606-0a5315ac5f34` com o modo de acesso RWO definido usando anotações PVC:
+
+[source, yaml]
+----
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: <umanaged-imported-volume>
+  namespace: <namespace>
+  annotations:
+    trident.netapp.io/importOriginalName: "ontap-volume2"
+    trident.netapp.io/importBackendUUID: "34abcb27-ea63-49bb-b606-0a5315ac5f34"
+    trident.netapp.io/notManaged: "true"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: <storage-class-name>
+----
+--
+====
 
 
 === San ONTAP
@@ -158,8 +271,7 @@ O Trident suporta importação de volume usando o `ontap-san` (iSCSI, NVMe/TCP e
 
 O Trident pode importar volumes ONTAP SAN FlexVol que contêm um único LUN. Isto é consistente com o `ontap-san` driver, que cria um FlexVol volume para cada PVC e um LUN dentro do FlexVol volume. O Trident importa o FlexVol volume e o associa à definição de PVC. Trident pode importar `ontap-san-economy` volumes que contêm vários LUNs.
 
-.Exemplos de SAN ONTAP
-A seguir mostra um exemplo de um volume gerenciado e uma importação de volume não gerenciado.
+Os exemplos a seguir mostram como importar volumes gerenciados e não gerenciados:
 
 [role="tabbed-block"]
 ====
@@ -211,7 +323,6 @@ O Trident suporta o software NetApp Element e a importação de volume NetApp HC
 
 NOTE: O driver Element suporta nomes de volume duplicados. No entanto, o Trident retorna um erro se houver nomes de volume duplicados. Como solução alternativa, clone o volume, forneça um nome de volume exclusivo e importe o volume clonado.
 
-.Exemplo de elemento
 O exemplo a seguir importa um `element-managed` volume no backend . `element_default`
 
 [listing]
@@ -233,7 +344,6 @@ O Trident suporta a importação de volume usando `azure-netapp-files` o driver.
 
 NOTE: Para importar um volume Azure NetApp Files, identifique o volume pelo seu caminho de volume. O caminho do volume é a parte do caminho de exportação do volume após o `:/`. Por exemplo, se o caminho de montagem for `10.0.0.2:/importvol1`, o caminho do volume será `importvol1`.
 
-.Exemplo de Azure NetApp Files
 O exemplo a seguir importa um `azure-netapp-files` volume no back-end `azurenetappfiles_40517` com o caminho do volume `importvol1` .
 
 [listing]
@@ -252,8 +362,7 @@ tridentctl import volume azurenetappfiles_40517 importvol1 -f <path-to-pvc-file>
 
 O Trident suporta a importação de volume usando `google-cloud-netapp-volumes` o driver.
 
-.Exemplo do Google Cloud NetApp volumes
-O exemplo a seguir importa um `google-cloud-netapp-volumes` volume no back-end `backend-tbc-gcnv1` com o `testvoleasiaeast1` volume .
+O exemplo a seguir importa um volume no backend `backend-tbc-gcnv1` com o volume `testvoleasiaeast1`.
 
 [listing]
 ----
