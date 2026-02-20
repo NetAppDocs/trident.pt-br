@@ -1,0 +1,48 @@
+= Operações suportadas
+:allow-uri-read: 
+
+
+sidebar: sidebar permalink: trident-asar2-support.html keywords: asar2, trident, fcp, nvme, tcp, nvme/tcp, fibre channel summary: NetApp Trident oferece suporte ao ONTAP ASA r2 para iSCSI e NVMe/TCP. --- = Suporte do NetApp Trident para sistemas de storage ONTAP ASA r2 :hardbreaks: :icons: font :imagesdir: ./media/
+
+[role="lead"]
+NetApp Trident 25.02 e versões posteriores suportam sistemas NetApp ASA r2 como backends de armazenamento. Consulte link:https://docs.netapp.com/us-en/asa-r2/get-started/learn-about.html["Sistemas ASA r2"^] para mais informações.
+
+ASA r2 sistemas requerem o `ontap-san`driver. Trident não oferece suporte ao `ontap-san-economy`driver para sistemas ASA r2.
+
+Ao especificar  `ontap-san` como o  `storageDriverName` na configuração do backend, o Trident detecta automaticamente o sistema de storage ASA r2.
+
+Trident oferece proteção de dados limitada para sistemas ASA r2 com Trident protect.
+
+Os protocolos SAN suportados dependem da sua versão do Trident:
+
+* Trident 25.02 e versões posteriores suportam iSCSI.
+* Trident 25.06 e versões posteriores suportam NVMe/TCP além de iSCSI.
+
+
+Você deve atribuir pelo menos um agregado à máquina virtual de storage (SVM) para o storage de backend ONTAP. Consulte link:https://kb.netapp.com/on-prem/ASAr2/ASAr2_KBs/su_create_by_SVM_admin_using_CLI_fails_with_error_No_candidate_aggregates_are_available_for_storage_services["Atribuindo agregados a SVMs em sistemas ASA r2"^] para obter instruções.
+
+
+
+== Operações suportadas
+
+* Provisionamento de volumes persistentes (PVs)
+* Provisionamento dinâmico de volumes
+* Criando e excluindo volumes
+* Clonando volumes
+* Expansão de volumes
+* Gerenciando classes de armazenamento
+
+
+
+
+== Operações não suportadas
+
+* Criptografia LUKS
+* SnapMirror volume replicação
+* Limitação do uso agregado
+* Modo de reserva de espaço
+* Instantâneos
+* Camadas
+
+
+Para obter mais informações, consulte link:https://docs.netapp.com/us-en/trident/trident-use/ontap-san-examples.html["Exemplos e opções de configuração de SAN ONTAP"^] .
