@@ -16,9 +16,23 @@ Antes de configurar o back-end do Azure NetApp Files, você precisa garantir que
 
 
 
+== Ambientes de nuvem Azure suportados
+
+Trident oferece suporte a back-ends do Azure NetApp Files em vários ambientes de nuvem do Azure.
+
+As nuvens do Microsoft Azure compatíveis incluem:
+
+* Azure Commercial
+* Azure Government (Azure Government / MAG)
+
+
+Ao preparar seu ambiente, certifique-se de que sua assinatura do Azure, configuração de identidade e recursos do Azure NetApp Files sejam criados no ambiente de nuvem do Azure apropriado.
+
+
+
 == Pré-requisitos para volumes NFS e SMB
 
-Se você estiver usando o Azure NetApp Files pela primeira vez ou em um novo local, será necessária alguma configuração inicial para configurar o Azure NetApp Files e criar um volume NFS. Consulte a https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-quickstart-set-up-account-create-volumes["Azure: Configure o Azure NetApp Files e crie um volume NFS"^].
+Se você estiver usando o Azure NetApp Files pela primeira vez ou em um novo local, será necessária alguma configuração inicial para configurar o Azure NetApp Files e criar um volume NFS. Consulte  https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-quickstart-set-up-account-create-volumes["Azure: Configure o Azure NetApp Files e crie um volume NFS"^].
 
 Para configurar e usar um https://azure.microsoft.com/en-us/services/netapp/["Azure NetApp Files"^] back-end, você precisa do seguinte:
 
@@ -26,6 +40,7 @@ Para configurar e usar um https://azure.microsoft.com/en-us/services/netapp/["Az
 ====
 * `subscriptionID` `tenantID`, , `clientID`, , `location` E `clientSecret` são opcionais ao usar identidades gerenciadas em um cluster AKS.
 * `tenantID` `clientID`, , E `clientSecret` são opcionais ao usar uma identidade de nuvem em um cluster AKS.
+* As implantações do Azure NetApp Files em nuvens Azure não comerciais exigem endpoints do Azure Resource Manager e de autenticação específicos da nuvem. Certifique-se de que Trident e qualquer configuração de backend usem os endpoints apropriados para o seu ambiente de nuvem Azure.
 
 
 ====

@@ -248,6 +248,7 @@ Uma política de proteção protege um aplicativo criando instantâneos, backups
 ** *spec.dayOfWeek*: (_Opcional_) O dia da semana (0 - 7) em que a programação deve ser executada.  Valores de 0 ou 7 indicam domingo.  Este campo é obrigatório se a granularidade estiver definida como `Weekly` .  O valor deve ser fornecido como uma string.
 ** *spec.hour*: (_Opcional_) A hora do dia (0 - 23) em que a programação deve ser executada.  Este campo é obrigatório se a granularidade estiver definida como `Daily` , `Weekly` , ou `Monthly` .  O valor deve ser fornecido como uma string.
 ** *spec.minute*: (_Opcional_) O minuto da hora (0 - 59) em que a programação deve ser executada.  Este campo é obrigatório se a granularidade estiver definida como `Hourly` , `Daily` , `Weekly` , ou `Monthly` .  O valor deve ser fornecido como uma string.
+** *spec.runImmediately*: (_Opcional_) Defina como  `true` para acionar uma execução única e imediata da linha de base (backup e/ou snapshot de acordo com as configurações de retenção) quando o agendamento for criado. O padrão é  `false`. Isso não modifica a recorrência subsequente.
 +
 Exemplo de YAML para agendamento de backup e snapshot:
 
@@ -290,6 +291,28 @@ spec:
   granularity: Daily
   hour: "2"
   minute: "0"
+----
++
+Exemplo de YAML para agendamento com execução imediata:
+
++
+[source, yaml]
+----
+---
+apiVersion: protect.trident.netapp.io/v1
+kind: Schedule
+metadata:
+  namespace: my-app-namespace
+  name: my-daily-schedule-run-immediately
+spec:
+  applicationRef: my-application
+  appVaultRef: appvault-name
+  backupRetention: "7"
+  snapshotRetention: "7"
+  granularity: Daily
+  hour: "3"
+  minute: "0"
+  runImmediately: true
 ----
 
 
@@ -345,6 +368,7 @@ NOTE: O `--full-backup-rule` A opção de sinalizar não funciona com granularid
 
 
 
+** *Proteção de linha de base imediata*: Use `--run-immediately true` para criar um backup ou snapshot inicial imediatamente quando o agendamento for criado, em vez de esperar pela primeira execução agendada. O padrão é `false`.
 ** *Agendamentos somente para instantâneos*: Definir `--backup-retention 0` e especifique um valor maior que zero para `--snapshot-retention`.
 
 

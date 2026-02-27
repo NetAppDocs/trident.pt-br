@@ -19,6 +19,90 @@ WARNING: O `tridentctl` binário para Linux que é fornecido no arquivo zip do i
 
 
 
+== O que há de novo em 26.02
+
+Saiba o que há de novo no NetApp Trident e Trident Protect, incluindo melhorias, correções e descontinuações.
+
+
+
+=== Trident
+
+
+
+==== Melhorias
+
+* O suporte à simultaneidade para os drivers ONTAP-NAS (somente NFS), ONTAP-SAN (iSCSI, FCP, NVMe) e Google Cloud NetApp Volumes agora está disponível para o público em geral (GA).
+* Adicionado suporte para configuração automática de backend para Amazon FSx for NetApp ONTAP. Quando você cria um StorageClass que inclui os parâmetros necessários, NetApp Trident cria automaticamente o backend correspondente e VolumeSnapshotClass (se necessário).
+* Adicionado suporte para diferentes nuvens do Microsoft Azure, como Azure Government e Azure China, e configuração personalizada de nuvem para backends do Azure NetApp Files.
+* Escalabilidade aprimorada do controlador para volumes NVMe.
+* Adicionado suporte para a funcionalidade de volume com crescimento automático. Você pode controlar o comportamento do crescimento automático definindo políticas personalizadas de volume com crescimento automático do NetApp Trident.
+* Adicionado suporte para armazenamento em blocos do Google Cloud NetApp Volumes (SAN/iSCSI).
+* Adicionado suporte para armazenamento em camadas automático para Google Cloud NetApp Volumes. Agora você pode otimizar os custos de armazenamento ao adicionar controles nativos do Kubernetes para configurar o ONTAP FabricPool armazenamento em camadas automático para Google Cloud NetApp Volumes por meio do NetApp Trident.
+* Adicionado suporte para Kubernetes 1.35.
+
+
+
+
+==== Melhorias experimentais
+
+
+NOTE: Não deve ser usado em ambientes de produção.
+
+* *[Prévia Técnica]*: adicionado suporte para simultaneidade para os drivers ONTAP-NAS-Economy e ONTAP-SAN-Economy.
+
+
+
+
+==== Correções
+
+* *Kubernetes*:
++
+** Corrigido um problema em que a remoção da publicação de um clone somente leitura removia as regras de política de exportação do volume de origem nos drivers ONTAP-NAS, ONTAP-NAS-Economy e Google Cloud NetApp Volumes link:https://github.com/NetApp/trident/issues/1086["Problema #1086"].
+** As imagens do kubectl foram alteradas para variantes leves baseadas em Alpine para evitar falhas de pull após a descontinuação pública de imagens pela Bitnami https://github.com/NetApp/trident/issues/1080["Problema #1080"].
+** Corrigida a preservação das anotações da implantação existente durante a atualização do Trident link:https://github.com/NetApp/trident/issues/1004["Problema #1004"].
+** Permitir clonagem entre diferentes classes de armazenamento se ambas as classes de armazenamento apontarem para o mesmo backend link:https://github.com/NetApp/trident/issues/1104["Problema #1104"].
+** Corrigidas falhas na preparação de nós causadas por timeouts em ambientes de nuvem com latências de rede. Aumentados os valores de timeout para instalações baseadas em nuvem.
+** Corrigido um problema na criação de LUN que fazia com que o atributo de tipo de sistema de arquivos permanecesse não definido quando o processo entrava em estado de nova tentativa.
+** Corrigida a pesquisa de volume da API REST para ignorar o estado do volume, evitando falsos negativos durante as consultas de volume.
+** Eficiência aprimorada do controlador Trident para o driver ontap-nas-economy quando usado em larga escala.
+** Definir internalID durante a importação de LUN no driver ontap-san-economy.
+** Aumentamos os limites de consulta do Azure Resource Graph para lidar com mais subnets.
+** Melhorados os tempos limite de divisão de clones CSI e ONTAP para evitar condições de corrida com alguns aplicativos de backup link:https://github.com/NetApp/trident/issues/1098["Problema #1098"], link:https://github.com/NetApp/trident/issues/1100["Problema #1100"].
+** Correção na supressão de mensagens de erro do LUKS link:https://github.com/NetApp/trident/issues/1069["Problema #1069"].
+** Correção no tratamento de mapeadores LUKS obsoletos para os protocolos iSCSI e NVMe. A lógica de limpeza aprimorada evita falhas de montagem causadas por mapeadores de dispositivos órfãos.
+
+
+* Limitações de escala corrigidas para volumes RWX NVMe.
+* Atualizado o pacote OpenTelemetry-Go para corrigir link:https://nvd.nist.gov/vuln/detail/cve-2026-24051["CVE-2026-24051"].
+
+
+
+
+=== Trident Protect
+
+
+
+==== Melhorias
+
+* Trident Protect agora desativa automaticamente os agendamentos de proteção e cancela as operações em andamento antes de uma restauração no local, e os reativa após a conclusão da restauração. Para saber mais, consulte link:trident-protect/trident-protect-restore-apps.html["Restaure aplicativos usando o Trident Protect."^].
+* Adicionado o campo  `runImmediately` ao schedule CR e o sinalizador CLI  `--run-immediately` para acionar um backup ou snapshot imediato após a criação do agendamento. Para saber mais, consulte link:trident-protect/trident-protect-protect-apps.html#create-a-data-protection-schedule["Criar um cronograma de proteção de dados"^].
+* Adicionada a possibilidade de especificar um nome personalizado para a aplicação restaurada usando o  `destinationApplicationName` campo no CR de restauração ou o  `--destination-app-name` parâmetro da CLI. Para saber mais, consulte link:trident-protect/trident-protect-restore-apps.html["Restaure aplicativos usando o Trident Protect."^].
+
+
+
+
+==== Correções
+
+* Corrigidas falhas na restauração causadas pela criação de pods antes que as contas de serviço necessárias estivessem disponíveis.
+* Corrigido  `Roles`e  `RoleBindings` sendo ignorados durante as restaurações de aplicativos.
+* Corrigido o problema em que o nome do cluster de origem não era exibido na saída  `tridentctl-protect get appvaultcontent`, apesar de estar configurado corretamente.
+* Corrigidos erros de restauração do Kopia que eram ignorados devido à falta de  `pipefail` tratamento.
+* Corrigidas falhas em snapshots e backup causadas por filtros de recursos que excluíam volumes persistentes.
+* Corrigida a restauração incorreta de PVC em aplicações com múltiplos namespaces que possuíam PVC com nomes idênticos em diferentes namespaces, o que poderia resultar em perda de dados.
+
+
+
+
 == O que há de novo na versão 25.10
 
 Saiba mais sobre as novidades do Trident e do Trident Protect, incluindo melhorias, correções e recursos descontinuados.

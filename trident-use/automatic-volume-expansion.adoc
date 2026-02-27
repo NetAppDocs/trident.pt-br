@@ -1,0 +1,441 @@
+---
+sidebar: sidebar 
+permalink: trident-use/automatic-volume-expansion.html 
+keywords: trident, autogrow, automatic volume expansion, autogrow policy, pvc resize, ontap, kubernetes 
+summary: Configure e gerencie a expansão automática de volume usando as Políticas de Crescimento Automático do Trident no Trident. 
+---
+= Expansão de volume automática
+:allow-uri-read: 
+
+
+A expansão de volume automática permite que os Volumes Persistentes (PVs) provisionados pelo Trident cresçam automaticamente quando sua capacidade utilizada atingir um limite definido.
+
+Essa funcionalidade é implementada usando *Autogrow Policies (AGPs)*. Uma Autogrow Policy define:
+
+* O limite de utilização que desencadeia a expansão
+* A quantidade pela qual o volume cresce
+* O tamanho máximo que o volume pode atingir
+
+
+A expansão de volume automática reduz a sobrecarga operacional e ajuda a evitar interrupções nos aplicativos causadas por volumes cheios.
+
+
+
+== Requisitos
+
+* Trident 26.02 ou posterior
+* Permissões RBAC para criar `TridentAutogrowPolicy` recursos personalizados
+* StorageClasses deve incluir `allowVolumeExpansion: true`
+* Protocolos ONTAP suportados:
++
+** NFS
+** ISCSI
+** FCP
+** NVMe
+
+
+
+
+
+NOTE: Os volumes de bloco bruto ONTAP NVMe anteriores à ONTAP 9.16.1 não suportam expansão automática.
+
+
+NOTE: Para volumes SAN, se  `growthAmount` for menor ou igual a 50MiB, Trident aumenta o valor para 51MiB antes de redimensionar, desde que o tamanho resultante não exceda  `maxSize`.
+
+
+NOTE: Em ambientes já existentes, a expansão automática pode não funcionar para determinados volumes existentes devido ao comportamento de migração de publicação de volume.
+
+
+
+== Criar uma política de crescimento automático
+
+As políticas de crescimento automático são recursos personalizados do Kubernetes do tipo `TridentAutogrowPolicy`.
+
+Uma Autogrow Policy define quando e como os volumes se expandem.
+
+
+
+=== Definições de campo
+
+[cols="1,3,1"]
+|===
+| Campo | Descrição | Obrigatório 
+
+
+| `metadata.name` | Identificador único da política. | Sim 
+
+
+| `usedThreshold` | Percentual da capacidade utilizada que desencadeia a expansão. | Sim 
+
+
+| `growthAmount` | Quantidade a ser aumentada quando o limite for atingido. Pode ser especificada como uma porcentagem (por exemplo, `"10%"`) ou um valor fixo (por exemplo, `"5Gi"`). O padrão é  `10%` se não for especificado. | Não 
+
+
+| `maxSize` | Limite máximo de volume. Se não for especificado, o volume pode crescer sem um limite superior imposto. | Não 
+|===
+
+
+=== Exemplo: política de crescimento automático padrão
+
+O exemplo a seguir cria uma política que aciona a expansão com 80% de utilização, cresce em 10% e limita o crescimento a 500Gi.
+
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentAutogrowPolicy
+metadata:
+  name: standard-autogrow
+spec:
+  usedThreshold: "80%"
+  growthAmount: "10%"
+  maxSize: "500Gi"
+----
+
+
+=== Crie a política
+
+. Salve a definição YAML em um arquivo.
+. Aplique a política:
+
+
+[listing]
+----
+kubectl apply -f autogrow-policy.yaml
+----
+. Verifique a criação:
+
+
+[listing]
+----
+kubectl get tridentautogrowpolicy standard-autogrow
+----
+Saída esperada:
+
+[listing]
+----
+NAME                USED THRESHOLD   GROWTH AMOUNT   STATE
+standard-autogrow   80%              10%             Success
+----
+
+
+== Exemplos de configuração
+
+
+
+=== Política conservadora para bancos de dados de produção
+
+Utilize um limite inferior e um incremento maior para cargas de trabalho de banco de dados de produção, onde evitar o esgotamento da capacidade é crucial.
+
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentAutogrowPolicy
+metadata:
+  name: production-db-policy
+spec:
+  usedThreshold: "75%"
+  growthAmount: "20%"
+  maxSize: "5Ti"
+----
+
+
+=== Armazenamento de logs com crescimento fixo
+
+Utilize um incremento de tamanho fixo quando etapas de crescimento previsíveis forem preferidas.
+
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentAutogrowPolicy
+metadata:
+  name: log-storage-policy
+spec:
+  usedThreshold: "90%"
+  growthAmount: "10Gi"
+  maxSize: "100Gi"
+----
+
+
+=== Política de crescimento automático com valores padrão
+
+Se apenas  `usedThreshold` for especificado,  `growthAmount` será  `10%` por padrão e  `maxSize` será ilimitado.
+
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentAutogrowPolicy
+metadata:
+  name: logs-policy
+spec:
+  usedThreshold: "85%"
+----
+
+
+=== Política de crescimento automático com padrão growthAmount
+
+Especifique um tamanho máximo enquanto utiliza o incremento de crescimento padrão.
+
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentAutogrowPolicy
+metadata:
+  name: default-ga-policy
+spec:
+  usedThreshold: "70%"
+  maxSize: "100Gi"
+----
+
+
+=== Política de crescimento automático com padrão maxSize
+
+Permita crescimento irrestrito enquanto especifica uma porcentagem de crescimento personalizada.
+
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentAutogrowPolicy
+metadata:
+  name: default-ms-policy
+spec:
+  usedThreshold: "80%"
+  growthAmount: "150%"
+----
+
+
+=== Política de autogrow com percentuais fracionários
+
+As porcentagens fracionárias permitem um controle granular dos limites e incrementos de crescimento.
+
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentAutogrowPolicy
+metadata:
+  name: fractional-policy
+spec:
+  usedThreshold: "80.28%"
+  growthAmount: "10.65%"
+  maxSize: "100Gi"
+----
+
+
+== Estados de política
+
+[cols="1,3"]
+|===
+| Estado | Descrição 
+
+
+| Sucesso | Política validada e pronta para uso. 
+
+
+| Falha | Foram detectados erros de validação. Revise e corrija a especificação. 
+
+
+| Excluindo | Exclusão em andamento. Os finalizadores impedem a remoção enquanto os volumes fizerem referência à política. 
+|===
+
+
+== Gerenciar políticas de crescimento automático
+
+
+
+=== Listar políticas
+
+[listing]
+----
+kubectl get tridentautogrowpolicy
+----
+
+
+=== Ver detalhes da política
+
+[listing]
+----
+kubectl describe tridentautogrowpolicy production-db-policy
+----
+
+
+=== Usando tridentctl
+
+[listing]
+----
+tridentctl get autogrowpolicy
+tridentctl get autogrowpolicy production-db-policy -o yaml
+----
+
+
+=== Atualizar uma política de crescimento automático
+
+
+IMPORTANT: As alterações afetam todos os volumes que atualmente utilizam a política.
+
+[listing]
+----
+kubectl edit tridentautogrowpolicy production-db-policy
+----
+As atualizações serão aplicadas durante a próxima operação de crescimento. Não é necessário reiniciar o volume.
+
+
+
+=== Excluir uma política de crescimento automático
+
+As políticas de Autogrow incluem proteção de finalização para evitar a exclusão durante o uso.
+
+[listing]
+----
+kubectl delete tridentautogrowpolicy production-db-policy
+----
+Se os volumes fizerem referência à política, ela permanecerá no estado  `Deleting` até que todas as referências sejam removidas.
+
+Para identificar volumes usando uma política:
+
+[listing]
+----
+tridentctl get autogrowpolicy production-db-policy -o yaml
+----
+Remova a política dos volumes:
+
+[listing]
+----
+kubectl annotate pvc <pvc-name> \
+  trident.netapp.io/autogrowPolicy="none" \
+  --overwrite
+----
+
+
+== Configurar a política de crescimento automático em um StorageClass
+
+Associe uma política usando a  `trident.netapp.io/autogrowPolicy` anotação.
+
+[source, yaml]
+----
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ontap-gold
+  annotations:
+    trident.netapp.io/autogrowPolicy: "production-db-policy"
+provisioner: csi.trident.netapp.io
+parameters:
+  backendType: "ontap-san"
+  fsType: "ext4"
+allowVolumeExpansion: true
+----
+Verifique a anotação:
+
+[listing]
+----
+kubectl get storageclass ontap-gold \
+  -o jsonpath='{.metadata.annotations.trident\.netapp\.io/autogrowPolicy}'
+----
+
+
+=== Atualizar a política de crescimento automático em um StorageClass
+
+[listing]
+----
+kubectl annotate storageclass ontap-gold \
+  trident.netapp.io/autogrowPolicy="standard-autogrow" \
+  --overwrite
+----
+
+
+=== Remover a política de crescimento automático de um StorageClass
+
+Opção 1: remover anotação
+
+[listing]
+----
+kubectl annotate storageclass ontap-gold \
+  trident.netapp.io/autogrowPolicy-
+----
+Opção 2: definir anotação para `none`
+
+[listing]
+----
+kubectl annotate storageclass ontap-gold \
+  trident.netapp.io/autogrowPolicy="none" \
+  --overwrite
+----
+
+
+== Aplicar a política de crescimento automático a um PVC
+
+Aplicar uma política no nível do PVC para substituir o comportamento do StorageClass.
+
+[source, yaml]
+----
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: database-pvc
+  annotations:
+    trident.netapp.io/autogrowPolicy: "production-db-policy"
+spec:
+  storageClassName: ontap-gold
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Gi
+----
+Desative o crescimento automático em um PVC:
+
+[listing]
+----
+kubectl annotate pvc database-pvc \
+  trident.netapp.io/autogrowPolicy="none" \
+  --overwrite
+----
+
+
+== Monitorar o uso da política de crescimento automático
+
+Listar políticas:
+
+[listing]
+----
+kubectl get tridentautogrowpolicy
+----
+Descubra qual política um PVC utiliza:
+
+[listing]
+----
+kubectl get pvc database-pvc \
+  -o jsonpath='{.metadata.annotations.trident\.netapp\.io/autogrowPolicy}'
+----
+Monitorar eventos:
+
+[listing]
+----
+kubectl get events \
+  --field-selector involvedObject.kind=TridentAutogrowPolicy
+----
+
+
+== Solução de problemas
+
+[cols="1,3,2"]
+|===
+| Problema | Possível causa | Resolução 
+
+
+| Política em  `Failed` estado | Especificação inválida | Corrija a política e reaplique 
+
+
+| O volume não expande | `maxSize` alcançado | Aumentar `maxSize` 
+
+
+| Expansões frequentes | Limiar muito baixo | Aumentar `usedThreshold` 
+
+
+| PVC mostra `AutogrowPolicyNotFound` | Política não existe | Verifique o nome da política 
+
+
+| PVC mostra `AutogrowPolicyNotUsable` | Política em  `Failed` estado | Resolver erros de validação 
+
+
+| TAGRI repetidamente rejeitado | `maxSize` excedeu | Aumente `maxSize` ou ajuste `growthAmount` 
+|===

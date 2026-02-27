@@ -12,8 +12,9 @@ summary: Você pode usar o seletor de versão para navegar entre a versão mais 
 
 
 [role="lead"]
-Se você não estiver executando o Trident 25.10, a documentação para versões anteriores está disponível com base nolink:get-help.html["Ciclo de vida do suporte da Trident"] .
+Se você não estiver executando Trident 26.02, a documentação para versões anteriores está disponível com base no link:get-help.html["Ciclo de vida do suporte da Trident"].
 
+* https://docs.netapp.com/us-en/trident-2510/index.html["Trident 25.10"^]
 * https://docs.netapp.com/us-en/trident-2506/index.html["Trident 25.06"^]
 * https://docs.netapp.com/us-en/trident-2502/index.html["Trident 25,02"^]
 * https://docs.netapp.com/us-en/trident-2410/index.html["Trident 24,10"^]

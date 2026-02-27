@@ -25,7 +25,7 @@ Antes de instalar o Trident, você deve rever estes requisitos gerais do sistema
 ====
 []
 =====
-* O Kubernetes 1.34 agora é compatível com o Trident. Atualize o Trident antes de atualizar o Kubernetes.
+* Kubernetes 1.35 agora é compatível com Trident. Atualize Trident antes de atualizar Kubernetes.
 * O Trident reforça estritamente o uso de configuração multipathing em ambientes SAN, com um valor recomendado de `find_multipaths: no` no arquivo multipath.conf.
 +
 O uso de configuração não multipathing ou o uso `find_multipaths: yes` de ou `find_multipaths: smart` valor no arquivo multipath.conf resultará em falhas de montagem. A Trident recomenda o uso de `find_multipaths: no` desde a versão 21,07.
@@ -41,7 +41,7 @@ O uso de configuração não multipathing ou o uso `find_multipaths: yes` de ou 
 O Trident é compatível com vários mecanismos de contêiner e orquestradores, incluindo os seguintes:
 
 * Anthos On-Prem (VMware) e Anthos em bare metal 1,16
-* Kubernetes 1.27 - 1.34
+* Kubernetes 1.27 - 1.35
 * OpenShift 4.12, 4.14 - 4.20 (Se você planeja usar a preparação de nós iSCSI com o OpenShift 4.19, a versão mínima do Trident suportada é a 25.06.1.)
 +
 
@@ -114,56 +114,56 @@ A tabela abaixo resume os recursos disponíveis com esta versão do Trident e as
 
 
 | Trident  a| 
-1,27 - 1,34
+1.27 - 1.35
  a| 
 Não
 
 
 
 | Instantâneos de volume  a| 
-1,27 - 1,34
+1.27 - 1.35
  a| 
 Não
 
 
 
 | PVC a partir de instantâneos de volume  a| 
-1,27 - 1,34
+1.27 - 1.35
  a| 
 Não
 
 
 
 | Redimensionamento iSCSI PV  a| 
-1,27 - 1,34
+1.27 - 1.35
  a| 
 Não
 
 
 
 | ONTAP bidirectional CHAP  a| 
-1,27 - 1,34
+1.27 - 1.35
  a| 
 Não
 
 
 
 | Políticas de exportação dinâmica  a| 
-1,27 - 1,34
+1.27 - 1.35
  a| 
 Não
 
 
 
 | Operador Trident  a| 
-1,27 - 1,34
+1.27 - 1.35
  a| 
 Não
 
 
 
 | Topologia de CSI  a| 
-1,27 - 1,34
+1.27 - 1.35
  a| 
 Não
 
@@ -221,15 +221,15 @@ Para instalações com ar-gapped, a lista a seguir é uma referência das imagen
 
 
 
-=== Imagens de contêiner necessárias para o Trident 25.10
+=== Imagens de contêiner necessárias para Trident 26.02
 
 [cols="2"]
 |===
 | Versões do Kubernetes | Imagem do recipiente 
 
 
-| v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0  a| 
-* docker.io/netapp/trident:25.10.0
+| v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.35.0  a| 
+* docker.io/netapp/trident:26.02.0
 * docker.io/netapp/trident-autosupport:25.10
 * registry.k8s.io/sig-storage/csi-provisioner:v5.3.0
 * registry.k8s.io/sig-storage/csi-attacher:v4.10.0
