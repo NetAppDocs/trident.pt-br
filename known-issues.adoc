@@ -18,6 +18,21 @@ Os seguintes problemas conhecidos afetam a versão atual:
 
 
 
+== VolumeSnapshots não atingindo o estado ReadyToUse
+
+[WARNING]
+====
+Existe um problema conhecido com o `csi-snapshotter` sidecar. Em todas as versões do Kubernetes, VolumeGroupSnapshots `v1beta1` impede que VolumeSnapshots alcancem o `ReadyToUse` estado.
+
+====
+Duas soluções alternativas estão disponíveis:
+
+. Exclua os CRDs VolumeGroupSnapshots para desativar VolumeGroupSnapshots e, em seguida, reinstale Trident.
+. Instale VolumeGroupSnapshots `v1beta2` e  `snapshot-controller` versão 8.4.0 ou posterior e, em seguida, reinstale Trident. VolumeGroupSnapshots não funciona em versões do Kubernetes anteriores à v1.34.
+
+
+
+
 == Restaurar backups Restic de arquivos grandes pode falhar
 
 Ao restaurar arquivos de 30 GB ou maiores a partir de um backup do Amazon S3 feito com o Restic, a operação de restauração pode falhar. Como solução alternativa, faça backup dos dados usando o Kopia como gerenciador de dados (o Kopia é o gerenciador de dados padrão para backups). Consulte https://docs.netapp.com/us-en/trident/trident-protect/trident-protect-protect-apps.html["Proteja aplicativos usando o Trident Protect."^] para obter instruções.

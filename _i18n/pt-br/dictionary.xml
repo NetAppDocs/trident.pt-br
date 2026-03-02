@@ -5234,7 +5234,6 @@
   <block id="5df2f935f2bc3df2c6378f665b3d6659" category="list-text">Você pode adicionar o<block ref="e9a7558decb5e432d8b7c4d536cc9876" prefix=" " category="inline-code"></block> parâmetro para configurar e habilitar os serviços iSCSI e Multipath em todos os nós de trabalho do OpenShift.</block>
   <block id="f61306bfa8c6de676059739358d4479f" category="list-text">Clique em *Criar*; o Trident Orchestrator será totalmente instalado.</block>
   <block id="7f95b6a9d45bd5ee11107a5abb5dd69c" category="section-title">Desinstalar operador Trident</block>
-  <block id="b94d4c5305d8d32a875a24a5b1501274" category="admonition">Para clientes que usam o SolidFire, não atualizem para a versão 25.06.1 devido a um problema conhecido ao cancelar a publicação de volumes.  A versão 25.06.2 será lançada em breve para resolver esse problema.</block>
   <block id="4011c398b0ff3b95197b4f4713f3216e" category="list-text">Atualize o backend usando o<block ref="defd1e55f93269ac9278afc086951ba8" prefix=" " category="inline-code"></block> comando e o caminho para o atualizado<block ref="9c15d32711e9ef8c6f76deda35452e13" prefix=" " category="inline-code"></block> arquivo.</block>
   <block id="f05848de69e82db6963b7b9c5322a67f" category="paragraph">*Exemplo*:<block ref="7aa76d5ff854a67029ba30d1a11e1e53" prefix=" " category="inline-code"></block></block>
   <block id="b8331cd182c8a703fc1ad6851d01da14" category="list-text">Depois de preencher o<block ref="699c503b46d4ca3ec78905dff3704cac" prefix=" " category="inline-code"></block> arquivo com os valores corretos, aplique o CR:</block>
@@ -5355,7 +5354,6 @@
   <block id="e214c4610b9128a251097b5d36c60e8b" category="list-text">O Trident não suporta importação de volume usando o<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block> motorista.</block>
   <block id="ed323fee394548d260c31d933876b771" category="section-title">Os clientes NFSv4.2 relatam "argumento inválido" após atualizar o ONTAP quando esperavam que "v4.2-xattrs" estivesse habilitado</block>
   <block id="b9785b666a04771c63b539840201a4db" category="paragraph">Após a atualização do ONTAP, os clientes NFSv4.2 podem relatar erros de "argumento inválido" ao tentar montar exportações NFSv4.2. Este problema ocorre quando o<block ref="5a54626559918ca9ebb6414eebaa97bf" prefix=" " category="inline-code"></block> a opção não está habilitada no SVM. .Solução alternativa Habilite o<block ref="5a54626559918ca9ebb6414eebaa97bf" prefix=" " category="inline-code"></block> opção no SVM ou atualize para o ONTAP 9.12.1 ou posterior, onde esta opção é habilitada por padrão.</block>
-  <block id="844c50b4f1aab48821867a1209be687b" category="admonition">_Embora o Trident seja compatível com as versões 1.27.x a 1.34.x do Rancher Kubernetes Engine 2 (RKE2), o Trident foi qualificado atualmente apenas no RKE2 v1.28.5+rke2r1._</block>
   <block id="431f7ca0be64e2c321d4d4be79b721aa" category="inline-link-macro">Autenticar o Trident em um SVM de backend usando credenciais do Active Directory</block>
   <block id="ebce82cad933beb695765f374ca16800" category="cell">Nome de usuário para conectar ao cluster/SVM. Usado para autenticação baseada em credenciais. Para autenticação do Active Directory, consulte <block ref="c266761f957eda011224921a8539eded" category="inline-link-macro-rx"></block>.</block>
   <block id="c48567e30df98d399ca8a25594294caa" category="cell">Senha para conectar ao cluster/SVM. Usado para autenticação baseada em credenciais. Para autenticação do Active Directory, consulte <block ref="c266761f957eda011224921a8539eded" category="inline-link-macro-rx"></block>.</block>
@@ -5644,11 +5642,9 @@
   <block id="c6f0dfdaf60b2fd022cd1b94ce713c90" category="paragraph">Este exemplo configura solicitações e limites de recursos do Kubernetes para o controlador Trident e para os pods dos nós Trident Windows e Linux.</block>
   <block id="b320bddb4a4bb9ebc05f4941f7f248a0" category="list-text">registry.k8s.io/sig-storage/csi-snapshotter:v8.3.0</block>
   <block id="80aabc2f42a52376f3d884d3b02360f4" category="admonition">Se você usa o Red Hat OpenShift, é importante observar o papel crítico das anotações de namespace em ambientes OpenShift. As anotações de namespace garantem que os pods restaurados cumpram as permissões e configurações de segurança apropriadas definidas pelas restrições de contexto de segurança (SCCs) do OpenShift e possam acessar volumes sem problemas de permissão. Para mais informações, consulte o<block ref="842acfa178c0bbf09e368bf9db0716b8" category="inline-link-macro-rx"></block> .</block>
-  <block id="0547999ac2794529491ce433caf5eadb" category="list-text">OpenShift 4.12, 4.14 - 4.20 (Se você planeja usar a preparação de nós iSCSI com o OpenShift 4.19, a versão mínima do Trident suportada é a 25.06.1.)</block>
   <block id="5137aa193de4e4cc652a198db463acd3" category="admonition">Por padrão, as métricas do Trident são expostas na porta de destino.<block ref="bc3c4a6331a8a9950945a1aa8c95ab8a" prefix=" " category="inline-code"></block> no<block ref="ae3b848d2daecffc635ae20b0b882d8f" prefix=" " category="inline-code"></block> ponto final. Essas métricas são *ativadas por padrão* quando o Trident é instalado. Você pode configurar o consumo de métricas do Trident via HTTPS na porta.<block ref="c24f4c5eef7ec01c46e003a9296c8645" prefix=" " category="inline-code"></block> também.</block>
   <block id="e4850469bb389cec2e3ac44d4276ffb0" category="inline-link-macro">Documentação do operador Prometheus</block>
   <block id="faa779ed6ae9bda26148b1ff6bf0cc52" category="paragraph">Você deve definir um alvo do Prometheus para coletar as métricas e obter informações sobre os backends gerenciados Trident , os volumes que ele cria e assim por diante. Ver<block ref="64a51bde051e46320750fd80d285a3d9" category="inline-link-macro-rx"></block> .</block>
-  <block id="0bca60aba2da7f8ae6d6dac4fb580afe" category="list-text">Rancher Kubernetes Engine 2 (RKE2) v1.28.x - 1.34.x</block>
   <block id="3802caa8e4bea50419dcef8b68f5b82e" category="paragraph">A Trident recomenda as seguintes opções para agilizar o processo de formatação:</block>
   <block id="8b081afdb240ed6d03a50d7b70aac895" category="list-text">*-E nodiscard (ext3, ext4):* Não tente descartar blocos no momento da criação do sistema de arquivos (o descarte inicial de blocos é útil em dispositivos de estado sólido e armazenamento com provisionamento esparso/dinâmico). Esta opção substitui a opção obsoleta "-K" e é aplicável aos sistemas de arquivos ext3 e ext4.</block>
   <block id="01f770831133fae79fa85eb89c42b8f2" category="list-text">*-K (xfs):* Não tente descartar blocos no momento do mkfs. Essa opção se aplica ao sistema de arquivos xfs.</block>
@@ -5928,7 +5924,6 @@
   <block id="ae3918e109e702f2d03b5027de8a73eb" category="paragraph">O exemplo a seguir importa um volume no backend<block ref="c082d32d434314708cccf35dd974ac32" prefix=" " category="inline-code"></block> com o volume<block ref="acdf8df0c694db089171ecaf51f80166" prefix=" " category="inline-code"></block>.</block>
   <block id="36a57158e28c15925c88aebde90472b6" category="admonition">Após executar este comando, ONTAP solicitará a entrada do certificado. Cole o conteúdo do <block ref="0c7b1ee06b5fdaab7c83f24275255cf5" prefix=" " category="inline-code"></block> arquivo gerado na etapa 1, depois insira <block ref="b1a326c06d88bf042f73d70f50197905" prefix=" " category="inline-code"></block> para concluir a instalação.</block>
   <block id="02356881e19a0d2738b050b76923c98e" category="doc">Operações suportadas</block>
-  <block id="7620488d5fb7b77dda771508677fd29e" category="paragraph">sidebar: sidebar permalink: trident-asar2-support.html keywords: asar2, trident, fcp, nvme, tcp, nvme/tcp, fibre channel summary: NetApp Trident oferece suporte ao ONTAP ASA r2 para iSCSI e NVMe/TCP. --- = Suporte do NetApp Trident para sistemas de storage ONTAP ASA r2 :hardbreaks: :icons: font :imagesdir: ./media/</block>
   <block id="9d20e3956cff4f7ce8f40089410b6eda" category="paragraph">NetApp Trident 25.02 e versões posteriores suportam sistemas NetApp ASA r2 como backends de armazenamento. Consulte <block ref="9f40590ca1185cea7261c2a60fc922ea" category="inline-link-macro-rx"></block> para mais informações.</block>
   <block id="1be09f20bc514ebd461d2bb177d2eb7f" category="paragraph">ASA r2 sistemas requerem o<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>driver. Trident não oferece suporte ao<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block>driver para sistemas ASA r2.</block>
   <block id="a7feabe5a282558971f299220f74bae8" category="paragraph">Ao especificar <block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> como o <block ref="d45aebe724c55b101f2ae8924ba3d486" prefix=" " category="inline-code"></block> na configuração do backend, o Trident detecta automaticamente o sistema de storage ASA r2.</block>
@@ -6038,8 +6033,6 @@
   <block id="3efcec6a387ab5737e772a3baeea51b2" category="list-text">Kubernetes 1.27 - 1.35</block>
   <block id="43e43f38c3caf4af908ea20149dccef1" category="paragraph">1.27 - 1.35</block>
   <block id="ac6cc7900e3d9478b2fcf3a73c070b29" category="section-title">Imagens de contêiner necessárias para Trident 26.02</block>
-  <block id="5efca7076d66285d044c3d550f412284" category="cell">v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.35.0</block>
-  <block id="4711816ecf930de7bedb0fff0ed5f46a" category="list-text">docker.io/netapp/trident:26.02.0</block>
   <block id="627219ce2083b03812e10846d1307811" category="list-text">*spec.runImmediately*: (_Opcional_) Defina como <block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block> para acionar uma execução única e imediata da linha de base (backup e/ou snapshot de acordo com as configurações de retenção) quando o agendamento for criado. O padrão é <block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>. Isso não modifica a recorrência subsequente.</block>
   <block id="b267d2c4b44dd537f81ddd4d1ca1cdd8" category="paragraph">Exemplo de YAML para agendamento com execução imediata:</block>
   <block id="ea89dfc546da2da95449976a3262efd9" category="list-text">*Proteção de linha de base imediata*: Use<block ref="40c288e5937b634afc8b0a225fcdb4cf" prefix=" " category="inline-code"></block> para criar um backup ou snapshot inicial imediatamente quando o agendamento for criado, em vez de esperar pela primeira execução agendada. O padrão é<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>.</block>
@@ -6057,14 +6050,6 @@
   <block id="f65c06826afa8d10471cd5dee9af7426" category="section-title">Etapa 2: atualize Trident Protect</block>
   <block id="900b2ff0e4545565ae3f08238031bafd" category="section-title">O que há de novo em 26.02</block>
   <block id="15472a280efaab6ff08ec110afd8de46" category="paragraph">Saiba o que há de novo no NetApp Trident e Trident Protect, incluindo melhorias, correções e descontinuações.</block>
-  <block id="0cd674dc13f7f0d0cd814406895c6c26" category="list-text">O suporte à simultaneidade para os drivers ONTAP-NAS (somente NFS), ONTAP-SAN (iSCSI, FCP, NVMe) e Google Cloud NetApp Volumes agora está disponível para o público em geral (GA).</block>
-  <block id="338c280673458e2a0d8326791500585f" category="list-text">Adicionado suporte para configuração automática de backend para Amazon FSx for NetApp ONTAP. Quando você cria um StorageClass que inclui os parâmetros necessários, NetApp Trident cria automaticamente o backend correspondente e VolumeSnapshotClass (se necessário).</block>
-  <block id="88be3cb839b87cd59251186a46ce2131" category="list-text">Adicionado suporte para diferentes nuvens do Microsoft Azure, como Azure Government e Azure China, e configuração personalizada de nuvem para backends do Azure NetApp Files.</block>
-  <block id="326b034ae63f6d3994c281a8cac9f8ec" category="list-text">Escalabilidade aprimorada do controlador para volumes NVMe.</block>
-  <block id="4b16c8e89b3ae74b883249dfbda3fb76" category="list-text">Adicionado suporte para a funcionalidade de volume com crescimento automático. Você pode controlar o comportamento do crescimento automático definindo políticas personalizadas de volume com crescimento automático do NetApp Trident.</block>
-  <block id="56eb637028c773a0b3f0928d684b0858" category="list-text">Adicionado suporte para armazenamento em blocos do Google Cloud NetApp Volumes (SAN/iSCSI).</block>
-  <block id="d0301040d2b23da6942cccd05795fb8f" category="list-text">Adicionado suporte para armazenamento em camadas automático para Google Cloud NetApp Volumes. Agora você pode otimizar os custos de armazenamento ao adicionar controles nativos do Kubernetes para configurar o ONTAP FabricPool armazenamento em camadas automático para Google Cloud NetApp Volumes por meio do NetApp Trident.</block>
-  <block id="2bfdbe4418b0bc08ea91cca205c02d4f" category="list-text">Adicionado suporte para Kubernetes 1.35.</block>
   <block id="7311a436928a6eeb8c6adc3401143feb" category="list-text">*[Prévia Técnica]*: adicionado suporte para simultaneidade para os drivers ONTAP-NAS-Economy e ONTAP-SAN-Economy.</block>
   <block id="4c74a316da3601aa60b802f3ba8e8ca9" category="inline-link-macro">Problema #1086</block>
   <block id="0a1b89da458ac0294d519466f17db4e9" category="list-text">Corrigido um problema em que a remoção da publicação de um clone somente leitura removia as regras de política de exportação do volume de origem nos drivers ONTAP-NAS, ONTAP-NAS-Economy e Google Cloud NetApp Volumes <block ref="34642f06ac184977842d0b61f89276bf" category="inline-link-macro-rx"></block>.</block>
@@ -6154,107 +6139,26 @@
   <block id="e354cb28235dafa136e3bb2951da5976" category="paragraph">O exemplo a seguir instala Trident e define<block ref="d19f2c0377f3ed7cab9377cf066cb7ef" prefix=" " category="inline-code"></block> usando<block ref="e7b51407a2bfaa34b58afce0107e9a5f" prefix=" " category="inline-code"></block> e define<block ref="89abe9fddbe3cf0f9bcd7779fe4aed69" prefix=" " category="inline-code"></block> usando<block ref="c9d280b28993d1d105c3fbafb5868a15" prefix=" " category="inline-code"></block>:</block>
   <block id="dd65a9b1594d71259218948b0e7d9403" category="paragraph">Defina os valores para os parâmetros *cloud provider* e *cloud identity* usando as seguintes variáveis de ambiente:</block>
   <block id="ebc14fa9723daa39f7a3620b5c70ee28" category="paragraph">O exemplo a seguir instala Trident e define <block ref="e33bb4eb32023da4a8ea7a1ba6927067" prefix=" " category="inline-code"></block> como <block ref="e7b51407a2bfaa34b58afce0107e9a5f" prefix=" " category="inline-code"></block> e <block ref="c5af480af77c330e04a1fce1f6c2b03a" prefix=" " category="inline-code"></block> como <block ref="c9d280b28993d1d105c3fbafb5868a15" prefix=" " category="inline-code"></block>:</block>
-  <block id="4431d6cabbe63411158ce47a87075100" category="summary">Configure e gerencie a expansão automática de volume usando as Políticas de Crescimento Automático do Trident no Trident.</block>
   <block id="c5c1e2b25189cb805d40d5edaff3a9ac" category="doc">Expansão de volume automática</block>
-  <block id="05b985d01acfd656ed032d9bc7d59b64" category="paragraph">A expansão de volume automática permite que os Volumes Persistentes (PVs) provisionados pelo Trident cresçam automaticamente quando sua capacidade utilizada atingir um limite definido.</block>
-  <block id="8744b6bf99be8c012a456c7593bdee48" category="paragraph">Essa funcionalidade é implementada usando *Autogrow Policies (AGPs)*. Uma Autogrow Policy define:</block>
   <block id="8d81b7eeed8b82e0fdde76c9b21413d5" category="list-text">O limite de utilização que desencadeia a expansão</block>
   <block id="afe5ec242306d084478fbbb7d22d7a22" category="list-text">A quantidade pela qual o volume cresce</block>
   <block id="3ce9a3a1c103f1e626dbee6a0235da0a" category="list-text">O tamanho máximo que o volume pode atingir</block>
-  <block id="f3142d8afac2286e464184d23e9be335" category="paragraph">A expansão de volume automática reduz a sobrecarga operacional e ajuda a evitar interrupções nos aplicativos causadas por volumes cheios.</block>
   <block id="5970ba32e517360957a1a5328597a42f" category="list-text">Trident 26.02 ou posterior</block>
-  <block id="7de7745d1c9c8eb6f9bbae0549ad5e2b" category="list-text">Permissões RBAC para criar<block ref="785854d43993e53bddae51b76513d6be" prefix=" " category="inline-code"></block> recursos personalizados</block>
-  <block id="37420a74404f89ebeaa964dfd9948430" category="list-text">StorageClasses deve incluir<block ref="41bff9aad0d85451896a93a22edd478a" prefix=" " category="inline-code"></block></block>
   <block id="65092a645c4b02f8a9b562376070dc6a" category="list-text">Protocolos ONTAP suportados:</block>
   <block id="a7c815fafe60ae637d38216fa6300395" category="list-text">FCP</block>
   <block id="70d9e3c68d42d6ec42ab792e06c44357" category="list-text">NVMe</block>
-  <block id="5db6e4ff2c3aa3867d13359cb8452238" category="admonition">Os volumes de bloco bruto ONTAP NVMe anteriores à ONTAP 9.16.1 não suportam expansão automática.</block>
-  <block id="5a107b7e0ff0cf845f66fdf1c9a461c1" category="admonition">Para volumes SAN, se <block ref="b8975976fc99a32ebfa6029b743acee3" prefix=" " category="inline-code"></block> for menor ou igual a 50MiB, Trident aumenta o valor para 51MiB antes de redimensionar, desde que o tamanho resultante não exceda <block ref="b78e1120b12abd7215d67324fe9476ff" prefix=" " category="inline-code"></block>.</block>
   <block id="69999debfe8e265ab59b7d6bb13b14ef" category="admonition">Em ambientes já existentes, a expansão automática pode não funcionar para determinados volumes existentes devido ao comportamento de migração de publicação de volume.</block>
   <block id="f5130e45647f9ca05d1dc8689e0952e3" category="section-title">Criar uma política de crescimento automático</block>
-  <block id="d7d77ebb2e9ac153ea4f3fb857d1404f" category="paragraph">As políticas de crescimento automático são recursos personalizados do Kubernetes do tipo<block ref="785854d43993e53bddae51b76513d6be" prefix=" " category="inline-code"></block>.</block>
-  <block id="c8f59a2fd1bd94b489580d051e8c18bb" category="paragraph">Uma Autogrow Policy define quando e como os volumes se expandem.</block>
-  <block id="ca8bd5f6386efc9750b392e945b0492f" category="section-title">Definições de campo</block>
-  <block id="3edef07062ce16bdb7176deb08146753" category="cell"><block ref="765cecee8002899c6cc0bea7842f7fe5" prefix="" category="inline-code"></block></block>
-  <block id="919a60d22df5af995ec919a856e03083" category="cell">Identificador único da política.</block>
-  <block id="6559bfdec61ba0fdf4bb4170d44d3b6e" category="cell"><block ref="b89d4d9ef2127a19b1fd6bdb32024b88" prefix="" category="inline-code"></block></block>
-  <block id="24f9739c831043a919cd961eb05cd4fc" category="cell">Percentual da capacidade utilizada que desencadeia a expansão.</block>
-  <block id="a8ac65bbcca844c519112e2a0fd585dc" category="cell"><block ref="b8975976fc99a32ebfa6029b743acee3" prefix="" category="inline-code"></block></block>
-  <block id="9d396c3ef1efa932a335669ffac4ccdd" category="cell">Quantidade a ser aumentada quando o limite for atingido. Pode ser especificada como uma porcentagem (por exemplo,<block ref="70ead32841956db772f45f40e3c3774c" prefix=" " category="inline-code"></block>) ou um valor fixo (por exemplo,<block ref="f8850a9a2722dacb85fe765edf367e2d" prefix=" " category="inline-code"></block>). O padrão é <block ref="bb1a5a2b7eec4f940f8e78abe48d68bf" prefix=" " category="inline-code"></block> se não for especificado.</block>
-  <block id="53fa92b69b520221539f22b6a850f945" category="cell"><block ref="b78e1120b12abd7215d67324fe9476ff" prefix="" category="inline-code"></block></block>
-  <block id="794e2938483731640e76be5a85d68b25" category="cell">Limite máximo de volume. Se não for especificado, o volume pode crescer sem um limite superior imposto.</block>
-  <block id="053243817e050955ef10aef683324bbe" category="section-title">Exemplo: política de crescimento automático padrão</block>
-  <block id="a4b0c6d5e0f61e08b3142ebb028e8bac" category="paragraph">O exemplo a seguir cria uma política que aciona a expansão com 80% de utilização, cresce em 10% e limita o crescimento a 500Gi.</block>
-  <block id="acaa1d46643095a73079b7d23273e254" category="section-title">Crie a política</block>
-  <block id="d75da22dc42e57c75a740560e85952f2" category="list-text">Salve a definição YAML em um arquivo.</block>
-  <block id="06d0a1748ca2593f14c5fbba6e4111f1" category="list-text">Aplique a política:</block>
-  <block id="bec1f1326646b26cbd4a8894830275f5" category="list-text">Verifique a criação:</block>
-  <block id="d15e02bf0c54e008af2e8212aa7c7d4f" category="paragraph">Saída esperada:</block>
   <block id="18676fa799168f2bdd968065f654b90a" category="section-title">Exemplos de configuração</block>
   <block id="c3370c7a5bc0e7d0006f3c8310734e1c" category="section-title">Política conservadora para bancos de dados de produção</block>
-  <block id="e98efa44f764f9733009c866bab3d0d2" category="paragraph">Utilize um limite inferior e um incremento maior para cargas de trabalho de banco de dados de produção, onde evitar o esgotamento da capacidade é crucial.</block>
-  <block id="ae68a5fc0b46aab6af709e82213f1df1" category="section-title">Armazenamento de logs com crescimento fixo</block>
-  <block id="0b20fe91ee5df99ffab0454bc6d730f9" category="paragraph">Utilize um incremento de tamanho fixo quando etapas de crescimento previsíveis forem preferidas.</block>
-  <block id="b5b8f71ccacaab0c3084a8001d860801" category="section-title">Política de crescimento automático com valores padrão</block>
-  <block id="56f9736a2e7a91291c4790e71aee82ea" category="paragraph">Se apenas <block ref="b89d4d9ef2127a19b1fd6bdb32024b88" prefix=" " category="inline-code"></block> for especificado, <block ref="b8975976fc99a32ebfa6029b743acee3" prefix=" " category="inline-code"></block> será <block ref="bb1a5a2b7eec4f940f8e78abe48d68bf" prefix=" " category="inline-code"></block> por padrão e <block ref="b78e1120b12abd7215d67324fe9476ff" prefix=" " category="inline-code"></block> será ilimitado.</block>
-  <block id="b5fc9db1b7ca7b0f79be4cb27dcd4aa8" category="section-title">Política de crescimento automático com padrão growthAmount</block>
-  <block id="b70ffe86a4e41b0de208c9de42ee9be8" category="paragraph">Especifique um tamanho máximo enquanto utiliza o incremento de crescimento padrão.</block>
-  <block id="21a0db03870f1f47e26f420207bbac3c" category="section-title">Política de crescimento automático com padrão maxSize</block>
-  <block id="c1d5311f0efec14e9e57392fc15dde10" category="paragraph">Permita crescimento irrestrito enquanto especifica uma porcentagem de crescimento personalizada.</block>
-  <block id="2f857eb76c2a43a5905dcf9daf614a8a" category="section-title">Política de autogrow com percentuais fracionários</block>
-  <block id="e2dc44c1b9c32f47b9fe94e976044a9d" category="paragraph">As porcentagens fracionárias permitem um controle granular dos limites e incrementos de crescimento.</block>
   <block id="c5b8210f63684973e3529d8893838478" category="section-title">Estados de política</block>
   <block id="46a2a41cc6e552044816a2d04634545d" category="cell">Estado</block>
   <block id="505a83f220c02df2f85c3810cd9ceb38" category="cell">Sucesso</block>
-  <block id="fbd6d64d8e28126247475bedc540979d" category="cell">Política validada e pronta para uso.</block>
-  <block id="899bef1f26ac5a843fa15b2500e6b1b5" category="cell">Foram detectados erros de validação. Revise e corrija a especificação.</block>
   <block id="ffbb410a55bb31f801dea6387e2745ac" category="cell">Excluindo</block>
-  <block id="722212fbea0dbbb78ba4b71b1717258e" category="cell">Exclusão em andamento. Os finalizadores impedem a remoção enquanto os volumes fizerem referência à política.</block>
   <block id="7847741f22918a5ba2c62a0957705cd4" category="section-title">Gerenciar políticas de crescimento automático</block>
-  <block id="64f972ec7ebfc63ed24f775c80d59396" category="section-title">Listar políticas</block>
   <block id="0963baeb80881f2591bd06d7c9106b2c" category="section-title">Ver detalhes da política</block>
   <block id="98f5cd9a2cbea70399d87c5824290f9d" category="section-title">Atualizar uma política de crescimento automático</block>
-  <block id="c67d5bc73347f01a6075d9f38cb3f0a3" category="admonition">As alterações afetam todos os volumes que atualmente utilizam a política.</block>
-  <block id="308becce311bab0fd272c5164092b69b" category="paragraph">As atualizações serão aplicadas durante a próxima operação de crescimento. Não é necessário reiniciar o volume.</block>
   <block id="d73a44f1efd76ad4c6b0a239a95393b5" category="section-title">Excluir uma política de crescimento automático</block>
-  <block id="03d0f8e91f88248ed37a5eabfda09fb6" category="paragraph">As políticas de Autogrow incluem proteção de finalização para evitar a exclusão durante o uso.</block>
-  <block id="c2ee1b6ea6cab0cc178468683aee04e3" category="paragraph">Se os volumes fizerem referência à política, ela permanecerá no estado <block ref="ffbb410a55bb31f801dea6387e2745ac" prefix=" " category="inline-code"></block> até que todas as referências sejam removidas.</block>
-  <block id="70bc5a292072a57e7abd715bc5ca1eb9" category="paragraph">Para identificar volumes usando uma política:</block>
-  <block id="beda8223d76ff7f3a24810bd51e6fa4e" category="paragraph">Remova a política dos volumes:</block>
-  <block id="d291ae0fc2326ed35e07d909f0a04351" category="section-title">Configurar a política de crescimento automático em um StorageClass</block>
-  <block id="edec1cf972696290e5507eda3d3b260d" category="paragraph">Associe uma política usando a <block ref="d3ebc760d856a789e9b6f2f04b100023" prefix=" " category="inline-code"></block> anotação.</block>
-  <block id="3d4cdcd772a5e091be1d7b0a589a59e7" category="paragraph">Verifique a anotação:</block>
-  <block id="2bdcdf22c17f5d25fd8deb041de6c7c2" category="section-title">Atualizar a política de crescimento automático em um StorageClass</block>
-  <block id="514752c1197295a4ee06fed95748c717" category="section-title">Remover a política de crescimento automático de um StorageClass</block>
-  <block id="1be637b7d332f23262e87c1e62a91e3f" category="paragraph">Opção 1: remover anotação</block>
-  <block id="7c32958c93824523b039811dff6e9f5c" category="paragraph">Opção 2: definir anotação para<block ref="334c4a4c42fdb79d7ebc3e73b517e6f8" prefix=" " category="inline-code"></block></block>
-  <block id="ad27878601d64c95783c24e4ead1c9c7" category="section-title">Aplicar a política de crescimento automático a um PVC</block>
-  <block id="31fc6be91568bca00c3b4be696dc2302" category="paragraph">Aplicar uma política no nível do PVC para substituir o comportamento do StorageClass.</block>
-  <block id="485f24bf8898757c475dfe1d5cd65646" category="paragraph">Desative o crescimento automático em um PVC:</block>
-  <block id="45eeb5028890cef4641347bedb08cce8" category="section-title">Monitorar o uso da política de crescimento automático</block>
-  <block id="9b3756ecb53876435c29f328805b5d9a" category="paragraph">Listar políticas:</block>
-  <block id="5255bb974a782141dac5a67fb21489a7" category="paragraph">Descubra qual política um PVC utiliza:</block>
-  <block id="c4880dc7ec4e91144f452fe61887eb04" category="paragraph">Monitorar eventos:</block>
-  <block id="642facf67e0ad311eee88b3ab8381590" category="cell">Problema</block>
-  <block id="0d1d3d5d416350d799209a3ab6ea4824" category="cell">Possível causa</block>
-  <block id="b5a4b64b2aa505bd7c11f79b8a9f458d" category="cell">Resolução</block>
-  <block id="fb87bf50bb773104c56a93f09f74ca97" category="cell">Política em <block ref="d7c8c85bf79bbe1b7188497c32c3b0ca" prefix=" " category="inline-code"></block> estado</block>
-  <block id="a4f90ae476b9b8369ccd158570d2390c" category="cell">Especificação inválida</block>
-  <block id="4829c1d3316af7e10ca16897777fe307" category="cell">Corrija a política e reaplique</block>
-  <block id="e761d3b4f72826c779f37e432f85b46d" category="cell">O volume não expande</block>
-  <block id="5506df6f90195d2776e6ab05bfe5d280" category="cell"><block ref="b78e1120b12abd7215d67324fe9476ff" prefix="" category="inline-code"></block> alcançado</block>
-  <block id="effd7e7c48952072d2455c0474828b91" category="cell">Aumentar<block ref="b78e1120b12abd7215d67324fe9476ff" prefix=" " category="inline-code"></block></block>
-  <block id="5a1fa9239426a01c8fcb83e79c189366" category="cell">Expansões frequentes</block>
-  <block id="ff4837a3bcc573b7f509605b114f8794" category="cell">Limiar muito baixo</block>
-  <block id="24fde2a7dd3fbb55c4773323c7eb9d7e" category="cell">Aumentar<block ref="b89d4d9ef2127a19b1fd6bdb32024b88" prefix=" " category="inline-code"></block></block>
-  <block id="de8006ee4bff7c5cca67a233a1425f7f" category="cell">PVC mostra<block ref="6d9afb9b36669e4b3a10df2c92726a1d" prefix=" " category="inline-code"></block></block>
-  <block id="d726fa7ccc92f4ccf09c236f456e7843" category="cell">Política não existe</block>
-  <block id="88be40e87063d8de83efe09ff5c22f94" category="cell">Verifique o nome da política</block>
-  <block id="e89e886c509a8a31789c451d642ab3ae" category="cell">PVC mostra<block ref="335c1bcda171678e4caf6ea5dd5abf36" prefix=" " category="inline-code"></block></block>
-  <block id="68e84c9dcbc56424284427bad6cbe06b" category="cell">Resolver erros de validação</block>
-  <block id="e88d0e6ad66cb32d3082ea6c15fadc4e" category="cell">TAGRI repetidamente rejeitado</block>
-  <block id="a15cd7028ab9440e82999cb6fc630ef4" category="cell"><block ref="b78e1120b12abd7215d67324fe9476ff" prefix="" category="inline-code"></block> excedeu</block>
-  <block id="ae1db572a79eb0a356b15ed9606c10da" category="cell">Aumente<block ref="b78e1120b12abd7215d67324fe9476ff" prefix=" " category="inline-code"></block> ou ajuste<block ref="b8975976fc99a32ebfa6029b743acee3" prefix=" " category="inline-code"></block></block>
   <block id="a7d2fe608fafbe7aab36a7d35c1c1f76" category="summary">Compreenda a escalabilidade do controlador, o comportamento de concorrência e a maturidade dos recursos.</block>
   <block id="3e763e2b1294995bd50b4c7f4ec3e8b2" category="doc">Escalabilidade do controlador</block>
   <block id="7c722282ff2880e6d4f4a9dbdba1c4d7" category="paragraph">Trident introduz escalabilidade do controlador por meio de maior simultaneidade entre vários drivers de armazenamento. Os clientes podem identificar quais drivers do Trident oferecem suporte à escalabilidade do controlador na disponibilidade geral e quais drivers estão disponíveis como prévia técnica no Trident 26.02. Isso permite decisões de implantação informadas e o gerenciamento adequado de riscos para ambientes Kubernetes escaláveis.</block>
@@ -6579,5 +6483,217 @@
   <block id="85d72c32c8b3a4ec780181f2d80353e6" category="list-text">O limite de 64 nós se aplica por volume RWX NVMe.</block>
   <block id="f8441ad262aed57fe834868e18fef751" category="list-text">Outros modos de acesso e outros protocolos não são afetados.</block>
   <block id="e9bfcc730facb3fb0d4f568b0c0d94e5" category="sidebar">Configurar armazenamento em blocos</block>
-  <block id="0a016d1270ba974707ac8af9f53a2e63" category="sidebar">Configurar configuração automática de backend</block>
+  <block id="a65039090aec95e4e36c9e0bb3f2c78f" category="section-title">VolumeSnapshots não atingindo o estado ReadyToUse</block>
+  <block id="0e14aafcb9d65542bb9e7d2fe3c6e355" category="paragraph">Existe um problema conhecido com o<block ref="22971c572be5287cd926ba5f52538b65" prefix=" " category="inline-code"></block> sidecar. Em todas as versões do Kubernetes, VolumeGroupSnapshots<block ref="ee21100dace47d83bcefcb7dea09cdd3" prefix=" " category="inline-code"></block> impede que VolumeSnapshots alcancem o<block ref="a87026a344997ce04709fb7b1377c9e7" prefix=" " category="inline-code"></block> estado.</block>
+  <block id="791735d716b346dae5819444cf3822a3" category="paragraph">Duas soluções alternativas estão disponíveis:</block>
+  <block id="f707d7e24f85853fa65412720b4ccf70" category="list-text">Exclua os CRDs VolumeGroupSnapshots para desativar VolumeGroupSnapshots e, em seguida, reinstale Trident.</block>
+  <block id="c9644b1386fe489395415704ac0e7e8f" category="list-text">Instale VolumeGroupSnapshots<block ref="26237abe1a9f48388cfc22a74b49b3d2" prefix=" " category="inline-code"></block> e <block ref="106ed44c271b7d02c288d45962a36249" prefix=" " category="inline-code"></block> versão 8.4.0 ou posterior e, em seguida, reinstale Trident. VolumeGroupSnapshots não funciona em versões do Kubernetes anteriores à v1.34.</block>
+  <block id="daed52db7c601a094cad7fbdfc21ed65" category="summary">NetApp Trident oferece suporte ao ONTAP ASA r2 para iSCSI e NVMe/TCP.</block>
+  <block id="bb36b98a1bf8375b9d3906703dad4dbb" category="doc">NetApp Trident suporte para sistemas de storage ONTAP ASA r2</block>
+  <block id="2558e4b797d243bba4d45d38e97897b8" category="section-title">Plataformas Kubernetes suportadas</block>
+  <block id="0e2ef50b7c69ffbf62cb09918ee19243" category="paragraph">Trident é compatível com uma variedade de distribuições e plataformas Kubernetes.</block>
+  <block id="743dd0163ccee4a4f89d41bf4005a591" category="paragraph">As plataformas suportadas incluem:</block>
+  <block id="9dc48bb809ddb16298a6203467073aba" category="list-text">SUSE Harvester 1.7.0 (ONTAP iSCSI)</block>
+  <block id="ec92eeadf77128110614c3ae4b04e5c6" category="list-text">OpenShift 4.12, 4.14 - 4.21 (se você planeja usar a preparação de nó iSCSI com OpenShift 4.19, a versão mínima do Trident suportada é 25.06.1.)</block>
+  <block id="991b6998365b18269e10fd6932757c88" category="list-text">Rancher Kubernetes Engine 2 (RKE2) v1.28.x - 1.35.x</block>
+  <block id="8d64b27a6d71fd535c11f889aa7bab23" category="cell">v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.35.0</block>
+  <block id="c707950f03771f414f81ae094c2a267c" category="list-text">docker.io/netapp/trident:25.10.0</block>
+  <block id="fa39b55af1ef0692bcd52101a2886102" category="inline-link-macro">Documentação sobre escalabilidade do controlador</block>
+  <block id="132f0447aa079a2a979713029f6c5c0f" category="list-text">Adicionada disponibilidade geral (GA) para suporte à simultaneidade para ONTAP-NAS (somente NFS), ONTAP-SAN (iSCSI, FCP, NVMe) e Google Cloud NetApp Volumes (GCNV) drivers, graduando essa funcionalidade da versão de pré-visualização técnica. Consulte a <block ref="2cdc5fbb0ceee513eb25d6f3a67c7e5a" category="inline-link-macro-rx"></block> para mais informações.</block>
+  <block id="79c677a07b8e51f9201ddd1c415adbfc" category="inline-link-macro">Documentação de expansão automática de volume</block>
+  <block id="bc3e246915169868930c0ee0e959ac01" category="list-text">Adicionado suporte para volume com crescimento automático no Trident com base em políticas AutoGrow do Trident personalizadas e definidas pelo usuário. Consulte a <block ref="a7492e90c94d8dac09c3e235d76ad157" category="inline-link-macro-rx"></block> para mais informações.</block>
+  <block id="f1ce9012acefe1573350ec9a275586e1" category="inline-link-macro">Documentação de volumes NVMe</block>
+  <block id="d64e31d264670bc5bb4d277ec52e11bf" category="list-text">Concorrência de nós Trident aprimorada para melhorar a escalabilidade das operações de nós para volumes NVMe. Veja a <block ref="62b786b7a7858209491e5527e6756cf9" category="inline-link-macro-rx"></block> para mais informações.</block>
+  <block id="960cb4eabfd2ed61ed7d9d341b9db051" category="inline-link-macro">Configure o armazenamento em camadas automático para a documentação do Google Cloud NetApp Volumes</block>
+  <block id="cf29405754ca46eff4d1ac1e8660f0d0" category="list-text">Adicionado suporte para o armazenamento automático em camadas de volumes NAS do GCNV por meio de anotações de PVC <block ref="a3e48f0594dda6037d37d52d343489b0" prefix="(" category="inline-code"></block>,<block ref="dbcd3e39f9838cf1a4cd4282c88a4d40" prefix=" " category="inline-code"></block>), incluindo seleção de pool e herança de clones. Veja a <block ref="d2bd62cb3e4e9a240b83e91db1904a44" category="inline-link-macro-rx"></block> para mais informações.</block>
+  <block id="3d1c3457c57a67aa1261a00c491531ae" category="inline-link-macro">Documentação de configuração de blocos do Google Cloud NetApp Volumes</block>
+  <block id="24b6d159af48f2ad16c50b2120b816bf" category="list-text">Adicionado suporte para volumes de bloco SAN GCNV (iSCSI) usando o<block ref="0ffa63dea74ac96b64836a273ee062bb" prefix=" " category="inline-code"></block> driver, incluindo provisionamento, mapeamento de grupo de hosts por nó para acesso a LUN e operações de clonagem a partir de volume. Consulte a<block ref="d9e346867b3e384bbbdd1c2d5b29c137" category="inline-link-macro-rx"></block> para mais informações.</block>
+  <block id="2e0ebc9390cad6b06468e0dd7a381973" category="inline-link-macro">Documentação de configuração do backend do Amazon FSx for NetApp ONTAP</block>
+  <block id="aaf04faa854f63ba7e0d47b80c29b9c9" category="list-text">Adicionado suporte para configuração automática de backend para Amazon FSx for NetApp ONTAP. Quando você cria um StorageClass que inclui os parâmetros necessários, Trident cria automaticamente o backend correspondente e o VolumeSnapshotClass, se necessário. Veja o <block ref="09369af1700ce5c7823f26ae413e56a7" category="inline-link-macro-rx"></block> para mais informações.</block>
+  <block id="f95c8a4475ff340ef046246c0c849166" category="inline-link-macro">Documentação de configuração do backend do Azure NetApp Files</block>
+  <block id="6eb24a3243ef3dc1f05eff9604a173a6" category="list-text">Adicionado suporte para diferentes nuvens do Microsoft Azure, como Azure Government e Azure China, e configuração personalizada de nuvem para backends do Azure NetApp Files. Veja a <block ref="4e9e5b49f39a6fbe1064450752ff81e6" category="inline-link-macro-rx"></block> para mais informações.</block>
+  <block id="15867a7811f736f8877cd402ddda159c" category="inline-link-macro">Documentação de requisitos</block>
+  <block id="1a4f07a2ad9994c7471bfd0c745619e7" category="list-text">Adicionado suporte para Kubernetes 1.35. Veja a <block ref="828495d4e8327d8b9cec4516431f4186" category="inline-link-macro-rx"></block> para mais informações.</block>
+  <block id="7dcbfc054c3b07861db3f7ce9431ef8c" category="admonition">Para clientes que utilizam SolidFire, não atualizem para a versão 25.06.1 devido a um problema conhecido ao cancelar a publicação de volumes. A versão 25.06.2 será lançada em breve para corrigir esse problema.</block>
+  <block id="2d182a7ab511ccb3d269a7a50785226d" category="summary">Configure e gerencie a expansão automática de volume usando as Políticas de Crescimento Automático do Trident.</block>
+  <block id="f35e4c53f5dd5cf7f66cb0f2632c0ec9" category="paragraph">A expansão de volume permite que os Volumes Persistentes provisionados pelo Trident cresçam automaticamente quando a capacidade utilizada atinge um limite definido. Essa funcionalidade reduz a sobrecarga operacional e ajuda a evitar interrupções nos aplicativos causadas pelo esgotamento da capacidade.</block>
+  <block id="8b057886f0c63560fb462624b87988d3" category="paragraph">A expansão de volume automática é implementada usando Autogrow Policies. Uma Autogrow Policy define:</block>
+  <block id="f194983a4f5c93b4f4788469b4372653" category="paragraph">Os volumes aumentam de tamanho automaticamente quando o limite de utilização definido é excedido. Os volumes nunca são reduzidos automaticamente.</block>
+  <block id="72e7e5d6921df6ef726f79ae4b5598ab" category="paragraph">Antes de configurar a expansão automática de volume, certifique-se de que os seguintes requisitos sejam atendidos:</block>
+  <block id="550fa0f1a58ef45e52d4e327c8363b05" category="list-text">Permissões de controle de acesso baseadas em funções para criar <block ref="785854d43993e53bddae51b76513d6be" prefix=" " category="inline-code"></block> recursos personalizados</block>
+  <block id="d65d8cf51037ac2b5227ecc668bcc424" category="list-text">StorageClasses configurado com<block ref="41bff9aad0d85451896a93a22edd478a" prefix=" " category="inline-code"></block></block>
+  <block id="65d8121019c0a0fdeb453e848ab0c506" category="list-text">Sistema de Arquivos de Rede</block>
+  <block id="1c01ba6365cc1a63f21002af09bfabb2" category="list-text">Internet Small Computer Systems Interface</block>
+  <block id="2ece8545cb8cad1bfe8d121e6b221358" category="list-text">Protocolo Fibre Channel</block>
+  <block id="6d403e90026e021280e3bf7be489c0c6" category="list-text">Non-Volatile Memory Express over Fabrics</block>
+  <block id="f89fade625f46ac0801e1c58bcc219b1" category="list-text">Os volumes de bloco bruto do ONTAP Non-Volatile Memory Express anteriores ao ONTAP 9.16.1 não suportam expansão automática.</block>
+  <block id="79c1f6e047330955b15e414a9754811f" category="list-text">Para volumes de rede de área de armazenamento, se <block ref="b8975976fc99a32ebfa6029b743acee3" prefix=" " category="inline-code"></block> for menor ou igual a 50 mebibytes, Trident aumenta automaticamente o valor para 51 mebibytes antes de redimensionar, desde que o tamanho resultante não exceda <block ref="b78e1120b12abd7215d67324fe9476ff" prefix=" " category="inline-code"></block>.</block>
+  <block id="694eddd4570562a7b60b1bcdd363d725" category="list-text">Quando um volume atinge<block ref="b78e1120b12abd7215d67324fe9476ff" prefix=" " category="inline-code"></block>, nenhuma expansão adicional ocorre.</block>
+  <block id="68bb75f716bd49935341200bea0c291a" category="list-text">Protocolos suportados para expansão automática de volume:</block>
+  <block id="c300edae1ce25b2d904c13ab45802931" category="section-title">Provisionar volumes com política de crescimento automático</block>
+  <block id="ef752dc2c9b5a9327eef395f09a31ff8" category="paragraph">A política de volume com crescimento automático pode ser configurada em dois níveis:</block>
+  <block id="723f64a520be321dd9117222d0b9d52d" category="list-text">Nível da classe de armazenamento: define o padrão para todos os volumes (usando anotação)</block>
+  <block id="21c0b104b6b005ca76bad21f2d705cdc" category="list-text">Nível PVC: substitui o padrão da classe de armazenamento (usando anotação)</block>
+  <block id="3f9b887a82fa2117ca86aa7c26ae7238" category="paragraph">As políticas de crescimento automático permitem a expansão automática do volume quando os volumes atingem um limite de capacidade definido.</block>
+  <block id="9e2b13cf05e3acd43a5b403b1fcc4daa" category="paragraph">Certifique-se de ter:</block>
+  <block id="30c8db50debd656b38da6b2bc5776a5d" category="list-text">Trident 26.02 ou posterior instalado</block>
+  <block id="4f441c27f3a2146d9eac0b06ea2d691e" category="list-text">Permissões de controle de acesso baseadas em funções para criar <block ref="785854d43993e53bddae51b76513d6be" prefix=" " category="inline-code"></block> recursos</block>
+  <block id="f56b79bf3c300d0656b5590a8b28cdbc" category="list-text">Compreensão dos requisitos de crescimento da carga de trabalho</block>
+  <block id="643ab8a4f3f99c83afc84893ef6c6e18" category="paragraph">Uma Autogrow Policy define como os volumes se expandem automaticamente quando atingem um limite de capacidade definido.</block>
+  <block id="027064727de35da06f0ec5ad6661d02c" category="paragraph">Você pode criar políticas de crescimento automático em qualquer ponto do seu fluxo de trabalho:</block>
+  <block id="53dc7b789c7b75a76697ea8a09d331d2" category="list-text">Antes de StorageClasses e volumes serem criados</block>
+  <block id="2c996e25afaf90de22ec79e9a6a73a7e" category="list-text">Após StorageClasses existirem</block>
+  <block id="97149dda6cb4283edb4c0312d8ecb2e5" category="list-text">Após o provisionamento dos volumes</block>
+  <block id="58a13eadd2875559839b7ed48d9a4e94" category="paragraph">Essa flexibilidade permite que você introduza a expansão automática sem recriar os recursos existentes.</block>
+  <block id="1ff439f927877a33304c69e5133b335c" category="section-title">Especificações da política de volume com crescimento automático</block>
+  <block id="cf2bdfea25d77139fbab5e9d28db31e8" category="paragraph">As políticas de crescimento automático são recursos personalizados do Kubernetes definidos da seguinte forma:</block>
+  <block id="d094dbc6674438379e9a7b76b8d100f3" category="cell">Identificador de política exclusivo</block>
+  <block id="ec743639640633cc0c6f72f43470b40e" category="cell">política-db-produção</block>
+  <block id="b89d4d9ef2127a19b1fd6bdb32024b88" category="cell">usedThreshold</block>
+  <block id="0eb94597b9397ffdebc5e81f04ffd452" category="cell">Percentual de capacidade que desencadeia a expansão</block>
+  <block id="41c8ca734636280a8cb0d496b1ce394f" category="cell">String de porcentagem</block>
+  <block id="e68c720bbfedb9afa99a3606f2e79068" category="cell">"80%"</block>
+  <block id="b8975976fc99a32ebfa6029b743acee3" category="cell">growthAmount</block>
+  <block id="2fc23688d922d66425148266a45963c7" category="cell">Quantidade a crescer quando o limite for atingido</block>
+  <block id="d9a618b2fa63013a5d1984fea1216d8b" category="cell">Porcentagem ou tamanho</block>
+  <block id="3520e1fdae83b091604d3ad0333da0cc" category="cell">"10%" ou "5Gi"</block>
+  <block id="70ead32841956db772f45f40e3c3774c" category="cell">"10%"</block>
+  <block id="b78e1120b12abd7215d67324fe9476ff" category="cell">maxSize</block>
+  <block id="8916ea751fd05957dc1daa2a2dd4b691" category="cell">Limite máximo de tamanho do volume</block>
+  <block id="05b680f87ed701663de0c9116be966e2" category="cell">Quantidade de Kubernetes</block>
+  <block id="81c60c972ba6f1e12a679e84b31a30f4" category="cell">"500Gi"</block>
+  <block id="545f6c2f382c04810103b3e5e6f7d841" category="cell">Ilimitado</block>
+  <block id="b6d2c5d36b2cb4f99fea0124c574832d" category="list-text">Crie um arquivo YAML que defina sua Autogrow Policy:</block>
+  <block id="d8cf78d9ebdf9b4ba811868e061105ed" category="list-text">Aplique a política ao seu cluster:</block>
+  <block id="f326973ba9a93c4364d0b9c615d3cc61" category="list-text">Verifique se a política foi criada:</block>
+  <block id="dc5e77e8271a90719f56728ca8904a65" category="listing-title">Resultado esperado</block>
+  <block id="65a6f87610269d13ef276dbbd579d362" category="paragraph">Depois que você cria uma política, Trident valida a especificação e atribui um dos seguintes estados:</block>
+  <block id="3d6623b8d5249788a0d797d4bbc5e5a1" category="cell">Ação necessária</block>
+  <block id="1abc19259b570c44f290695eb93f562f" category="cell">A política é validada e está pronta para uso.</block>
+  <block id="983e45d9f14c8e4b92b207877e7cabb0" category="cell">Nenhum.</block>
+  <block id="7f8b84e6a6a1cdd6cef7cad1f59ef866" category="cell">Foram detectados erros de validação.</block>
+  <block id="7ae2cc145400de1cec220648eef4acb8" category="cell">Revise e corrija a especificação.</block>
+  <block id="640fd9f95cff5e796c7bea791e570605" category="cell">A exclusão está em andamento.</block>
+  <block id="704aaf038b441fe6fd4bc62c839b1baf" category="cell">Aguarde a conclusão.</block>
+  <block id="cdadb767e93e6813c21f18ee07542d19" category="section-title">Associe uma política a um StorageClass</block>
+  <block id="5e52d0bbf90c859836c5d7ebaf77f5de" category="paragraph">Você pode associar uma Autogrow Policy a um StorageClass usando a <block ref="d3ebc760d856a789e9b6f2f04b100023" prefix=" " category="inline-code"></block> anotação. Todos os volumes provisionados a partir desse StorageClass herdam a política.</block>
+  <block id="01fc55ed3c3f01d36754f8850a737e79" category="admonition">O StorageClass deve ter<block ref="41bff9aad0d85451896a93a22edd478a" prefix=" " category="inline-code"></block>.</block>
+  <block id="5bfcafc90fdf417bf84954ada08bace1" category="list-text">Crie ou modifique uma StorageClass com a anotação de Autogrow Policy:</block>
+  <block id="bb54bd5f7d75e4c4674ce392c3199f0f" category="list-text">Aplique o StorageClass:</block>
+  <block id="26b7937a749c7d4e28c65b0d7315ea6f" category="list-text">Verifique a anotação:</block>
+  <block id="eb5fb681dc78779652a8e1e3de8529cc" category="section-title">Precedência de política</block>
+  <block id="0e7eeb7282ec962d76e07d93f9ab907a" category="paragraph">Quando as anotações da Política de Crescimento Automático são definidas tanto em um StorageClass quanto em um PVC, Trident aplica as seguintes regras de precedência:</block>
+  <block id="1d6321bfd7ef586834ed2693134b4ea0" category="list-text">*A anotação PVC tem prioridade.* Se um PVC definir <block ref="d3ebc760d856a789e9b6f2f04b100023" prefix=" " category="inline-code"></block>, esse valor será sempre usado.</block>
+  <block id="f220836f6d12c2792c68c8277a5dbd7f" category="list-text">*StorageClass a anotação só se aplica quando o PVC não possui nenhuma anotação.*</block>
+  <block id="00360e79b8b108c277e01d49429b621e" category="list-text">*Se nenhum dos dois tiver a anotação,* nenhuma Autogrow Policy será aplicada.</block>
+  <block id="efa0d16bb620ca8efbad9daa730478fa" category="cell">StorageClass anotação</block>
+  <block id="b717381de1b403ebb4dc8918e60c008a" category="cell">Anotação PVC</block>
+  <block id="62503b02361a4f61b748428c82cae0eb" category="cell">Comportamento eficaz</block>
+  <block id="0b29fc513e3d27ad9e0551e8a3277318" category="cell"><block ref="942559eba629f2b6bcd637f5070904d2" prefix="" category="inline-code"></block></block>
+  <block id="9ba66a9f92056682b7d86a38b4bc18c0" category="cell">Não definido</block>
+  <block id="6de6aae944bab5b5cf18167dd26aed06" category="cell">Usos<block ref="b6d44ca8f1212b3baf6def1d5fe5ea90" prefix=" " category="inline-code"></block>.</block>
+  <block id="8240faf0eb9b53daef99cca38281e22f" category="cell"><block ref="1d1620154df3b632ce96b9f1c6cab7da" prefix="" category="inline-code"></block></block>
+  <block id="1449080289b858ed814a9827e4ff45c3" category="cell">Usa <block ref="1b6f2331613486099b517057aef06fe0" prefix=" " category="inline-code"></block> (PVC substitui StorageClass).</block>
+  <block id="84cde0885217ace18c015108e721c9bf" category="cell"><block ref="d690e9b5e1d3865b7b182b16e2282642" prefix="" category="inline-code"></block></block>
+  <block id="1a6dd5add18ca77348cff8e06bebf376" category="cell">Sem política de crescimento automático (PVC desativa o autogrow).</block>
+  <block id="71108fcc50203282543094293fc528b1" category="cell"><block ref="66c8497228dd4680d2641f1aedb18573" prefix="" category="inline-code"></block></block>
+  <block id="881940a4483e95bf2ca30cc719599c86" category="cell">Usos<block ref="217be650e3cea5547e1647dd5e157efd" prefix=" " category="inline-code"></block>.</block>
+  <block id="af8b4ee6b6168c5fcd1cf89c7e1fb839" category="cell">Sem política de autogrow.</block>
+  <block id="d224f00749592afc25c394e8a46960ab" category="paragraph">Os exemplos a seguir mostram configurações comuns de Autogrow Policy para diferentes casos de uso.</block>
+  <block id="e7d6787e89244341f8baf25879cda7f7" category="section-title">Armazenamento de logs com incrementos de crescimento fixos</block>
+  <block id="5f0f046c472d5f8a205910ddd6cdcd34" category="section-title">Política mínima com valores padrão</block>
+  <block id="8f61fa179b18006703c8a040e19e9034" category="paragraph">Quando você omite <block ref="b8975976fc99a32ebfa6029b743acee3" prefix=" " category="inline-code"></block> e <block ref="b78e1120b12abd7215d67324fe9476ff" prefix=" " category="inline-code"></block>, Trident usa os padrões <block ref="bb1a5a2b7eec4f940f8e78abe48d68bf" prefix="(" category="inline-code"></block> de crescimento, tamanho ilimitado):</block>
+  <block id="c6f6dcb67d87d278072c14ce763fa6d8" category="section-title">Política com um maxSize personalizado e growthAmount padrão</block>
+  <block id="33aaea2199fbcd3960c192dd98f427ea" category="section-title">Crescimento agressivo com maxSize ilimitado</block>
+  <block id="59260f3f4f157c585d9b506790e24c1d" category="section-title">Política com percentuais fracionários</block>
+  <block id="536b961207e61e995c8842cd7f880dfe" category="admonition">São aceitas porcentagens fracionárias. Se você especificar mais de três casas decimais, Trident arredonda o valor para três casas decimais.</block>
+  <block id="a3c6536155079c56e217b714dd32156d" category="section-title">NAS StorageClass com Autogrow</block>
+  <block id="ead791c7fcb36c8bf4517df6422ca401" category="section-title">SAN StorageClass com Autogrow</block>
+  <block id="d93e8bbe8932c056f644485d998abed0" category="summary">Gerencie a expansão automática de volume usando as Políticas de Crescimento Automático do Trident.</block>
+  <block id="3c7244feeba190cf384cf7680deae8c5" category="paragraph">Após criar as Autogrow Policies, você pode visualizá-las, atualizá-las e excluí-las conforme necessário. Você também pode monitorar quais volumes estão usando uma determinada policy.</block>
+  <block id="f127daf0f31d2cf17567640922396d40" category="section-title">Ver políticas de Autogrow</block>
+  <block id="a856e3bd9be8a17273ffb7916a0e8cd9" category="section-title">Listar todas as políticas</block>
+  <block id="34914968db6f29a3c3a86d7f2b36d075" category="paragraph">Use <block ref="0f12ee5c9f1dd90158580f1c292b0d37" prefix=" " category="inline-code"></block> para listar todas as Autogrow Policies no seu cluster:</block>
+  <block id="3819595924cdc1be14e0472af2f70423" category="paragraph">Alternativamente, use <block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block>:</block>
+  <block id="2e118838acd96d5aeab6ec1af633b8b3" category="paragraph">Para visualizar a especificação completa e o status de uma policy:</block>
+  <block id="24b24af452d89c9ef544590f783ec6f5" category="paragraph">Para visualizar uma apólice com seus respectivos volumes em formato YAML:</block>
+  <block id="5098c9d6d57a257a25506581a06953f9" category="paragraph">Você pode modificar uma política existente para alterar seu limite, quantidade de crescimento ou tamanho máximo. As alterações entram em vigor imediatamente para todos os volumes que utilizam a política.</block>
+  <block id="e99e45bf54875e2d6e25e1ff5d6e0b22" category="admonition">As alterações afetam todos os volumes que atualmente utilizam a política. Teste as alterações primeiro em um ambiente que não seja de produção, sempre que possível.</block>
+  <block id="1119e3ac17411888a8e0183d7fb43943" category="list-text">Edite a política:</block>
+  <block id="6f67767c052db224b03ce0cb88b05033" category="list-text">Modifique os <block ref="b979c2934ac0b4ba3f08dabfdd1b2299" prefix=" " category="inline-code"></block> fields conforme necessário:</block>
+  <block id="4a51327030b3f667597882c4f597d0ec" category="list-text">Salve e saia. As alterações entram em vigor imediatamente.</block>
+  <block id="4afb9d53aace8c157d896c1239f6583a" category="section-title">Considerações sobre atualização</block>
+  <block id="5df24eb0c553c6dad7c311df77b34f62" category="list-text">*Efeito imediato:* Todos os volumes que utilizam a política adotam os novos parâmetros na próxima avaliação de crescimento.</block>
+  <block id="90592e84d0f06d49d9efd29d8d61328c" category="list-text">*Não é necessário reiniciar o volume:* As alterações serão aplicadas na próxima operação de crescimento.</block>
+  <block id="82d1a9fb9f7df7b8fee5d5a771853207" category="list-text">*Teste primeiro:* Valide as alterações em um ambiente que não seja de produção quando possível.</block>
+  <block id="bd4a523a3f9036ff2cd2640727efd1bf" category="list-text">*Comunique alterações:* Notifique as equipes quando você modificar as políticas compartilhadas.</block>
+  <block id="feadcc7b1e7283ce60d027ce4ec3ee73" category="paragraph">As políticas de crescimento automático usam proteção de finalizador para evitar exclusão acidental enquanto os volumes estão usando-as ativamente.</block>
+  <block id="0c0bbfd974826d70b2d33d8511be99f8" category="list-text">Excluir a política:</block>
+  <block id="2006f92af655d0522b1f24915066515f" category="list-text">Se os volumes ainda estiverem usando a política, a exclusão entra em um <block ref="ffbb410a55bb31f801dea6387e2745ac" prefix=" " category="inline-code"></block> estado. Verifique quais volumes são afetados:</block>
+  <block id="9903b03bd671f30651ab08727947f972" category="list-text">Remova a política de cada volume afetado. Escolha uma das seguintes opções:</block>
+  <block id="f5feae89f3bb59b58caac881c35e8982" category="list-text">*Opção A: desative explicitamente o crescimento automático* definindo a anotação como <block ref="f6d62a8e69201d3806ac1ef24ec64c4d" prefix=" " category="inline-code"></block>:</block>
+  <block id="15ce4350958acc3f6689457802af07bd" category="list-text">*Opção B: remover a anotação completamente*</block>
+  <block id="7b98c26f2f995f0578f9a8215030ee01" category="section-title">Comportamento de exclusão</block>
+  <block id="54861efdd06fc309e1c9a420feff98eb" category="cell">Cenário</block>
+  <block id="b39a035a995fc6597c8eb942210d1527" category="cell">Comportamento</block>
+  <block id="1128826ad82482094abe89bfc07d1caf" category="cell">Nenhum volume utiliza a política</block>
+  <block id="99f2474e11c087549bed64cc4d63f42a" category="cell">A política é excluída imediatamente.</block>
+  <block id="10f3a53367ceffb82330d7e82de2e934" category="cell">Os volumes estão utilizando a política</block>
+  <block id="44ba5a1b58b9415c92702b0cf78b16a7" category="cell">A política entra em <block ref="ffbb410a55bb31f801dea6387e2745ac" prefix=" " category="inline-code"></block> estado. Um finalizador bloqueia a conclusão até que todos os volumes sejam removidos.</block>
+  <block id="2b21405ba45856a6567451eee6fb9676" category="cell">Todos os volumes são removidos da política</block>
+  <block id="bc8864a43499a95fb188832699bf06ea" category="cell">Os finalizadores são removidos e a policy é excluída.</block>
+  <block id="b9882e74567cad146011c32269a8fd30" category="section-title">Monitorar o uso da política Autogrow</block>
+  <block id="2e931a5b60f757d9883400b02201e532" category="section-title">Verificar volumes usando uma política</block>
+  <block id="2a5e99f75b0425bc2473b15b7b939fd8" category="section-title">Descubra qual política um volume utiliza</block>
+  <block id="f462dca1e7e1024964087daf5ccaf8b5" category="section-title">Monitorar eventos de políticas</block>
+  <block id="c84d4278eb32c7a089aea86ebf95ad39" category="section-title">Protocolos suportados</block>
+  <block id="8f7e4fc0f49fe34f79780ce5d9aac3d3" category="paragraph">Autogrow suporta os seguintes protocolos de armazenamento:</block>
+  <block id="2fc47d723564d3e4812205baf9d844e6" category="admonition">Para volumes SAN, se o <block ref="b8975976fc99a32ebfa6029b743acee3" prefix=" " category="inline-code"></block> configurado for de 50 MiB ou menos, Trident aumenta automaticamente o valor de crescimento para 51 MB na operação de redimensionamento, desde que o tamanho resultante não exceda <block ref="b78e1120b12abd7215d67324fe9476ff" prefix=" " category="inline-code"></block>.</block>
+  <block id="482723983a4f2af954e36ff41e567451" category="section-title">Limitações conhecidas</block>
+  <block id="648bda045c71ffd4389f5a86a0e50b5d" category="list-text">*ONTAP Volumes de bloco bruto NVMe:* Volumes criados com versões do ONTAP anteriores à 9.16.1 não suportam autogrow.</block>
+  <block id="09ba5335c89d16756f0502e125c49ac7" category="list-text">*Volumes existentes (implantações brownfield):* O Autogrow pode não funcionar para volumes existentes, mesmo que uma Política de Autogrow válida seja aplicada. Isso ocorre devido a uma migração em andamento das publicações de volume. Para confirmar se a migração foi concluída, verifique os logs do controlador Trident para mensagens <block ref="af46de9ba965e0758fb411512ab65939" prefix=" " category="inline-code"></block>.</block>
+  <block id="642189a23200e831a4b6bb21067b24ec" category="section-title">Quando o Trident avalia o limiar?</block>
+  <block id="c1011a60b8f46b36a2cc1cdd037f746e" category="paragraph">Trident monitora continuamente o uso do volume. Quando a capacidade utilizada ultrapassa o<block ref="b89d4d9ef2127a19b1fd6bdb32024b88" prefix=" " category="inline-code"></block>, Trident cria uma solicitação interna de redimensionamento e expande o volume pela configuração de<block ref="b8975976fc99a32ebfa6029b743acee3" prefix=" " category="inline-code"></block>.</block>
+  <block id="55dbd6e0fe5d9b75f41d817c39c13c2d" category="paragraph">Por exemplo, esta política aciona a expansão em 80% da capacidade e aumenta o volume em 10% cada vez, até um máximo de 500 GiB:</block>
+  <block id="193f3cb2bb5b332fea39a9ea34e69087" category="section-title">Posso aplicar uma política depois que os volumes já foram provisionados?</block>
+  <block id="6c8d02ace433a2908e515061db638960" category="paragraph">Sim. Você pode criar uma Política de Crescimento Automático a qualquer momento e aplicá-la a PVCs existentes adicionando ou atualizando a <block ref="d3ebc760d856a789e9b6f2f04b100023" prefix=" " category="inline-code"></block> anotação. Você não precisa recriar o PVC ou o StorageClass.</block>
+  <block id="b99082a3eb962e1fa5d1fc28604f1a68" category="paragraph">Para aplicar uma política a um PVC existente:</block>
+  <block id="7e6415021d7c4fadc0a16960769cd4af" category="paragraph">Para aplicar uma política a um StorageClass existente:</block>
+  <block id="6852d46a7f12e4ac5bd8135d2811f6f6" category="section-title">O que acontece se eu definir uma Autogrow Policy tanto no StorageClass quanto no PVC?</block>
+  <block id="bd17699641cf7343854a3198cdf7da2f" category="paragraph">A anotação do PVC sempre tem precedência. Se um PVC tiver a <block ref="d3ebc760d856a789e9b6f2f04b100023" prefix=" " category="inline-code"></block> anotação, Trident usa esse valor independentemente do que o StorageClass especifica. Consulte <block ref="d2839e2bf68ffd7fca8df7984b7e917b" category="inline-link-macro-rx"></block> para obter detalhes.</block>
+  <block id="1e2410d687cee7f9d4903b106dcffc9c" category="paragraph">Por exemplo, dado este StorageClass:</block>
+  <block id="3b719965029f11402bd8b5380f755e50" category="paragraph">E este PVC que se sobrepõe à política de StorageClass:</block>
+  <block id="d6d85ac14273714d990863d333174c4a" category="paragraph">Trident usa <block ref="1b6f2331613486099b517057aef06fe0" prefix=" " category="inline-code"></block> para <block ref="9f405b89d6f90cccb2683dca5a203fb5" prefix=" " category="inline-code"></block>, não <block ref="b6d44ca8f1212b3baf6def1d5fe5ea90" prefix=" " category="inline-code"></block>.</block>
+  <block id="d556d5646fe3f1fd28ba7a1fcbd79929" category="section-title">Como faço para desativar o autogrow para um volume específico?</block>
+  <block id="e2e6a334679127c4f81b77f4a081d706" category="paragraph">Defina a anotação PVC como <block ref="f6d62a8e69201d3806ac1ef24ec64c4d" prefix=" " category="inline-code"></block>. Isso substitui qualquer política de nível de StorageClass para esse volume:</block>
+  <block id="8bbfcbd93d8cc88f6b487d8ec1d08aaf" category="paragraph">Você pode verificar se o autogrow está desativado:</block>
+  <block id="c91eea4d92096393948ae31b7eb9296b" category="section-title">O que acontece quando um volume atinge maxSize?</block>
+  <block id="8c1e915437865d1d3710f0a5b20c8738" category="paragraph">Trident interrompe a expansão do volume. Nenhuma outra solicitação de redimensionamento é criada para esse volume, mesmo que o uso continue a aumentar além do<block ref="b89d4d9ef2127a19b1fd6bdb32024b88" prefix=" " category="inline-code"></block>.</block>
+  <block id="6ee65f4bca45a04d76863e490aec7932" category="paragraph">Por exemplo, com essa política, Trident para de crescer o volume assim que ele atinge 100 GiB:</block>
+  <block id="969dfc37aea8dafda4ae3c7232d96587" category="paragraph">Para permitir crescimento ilimitado, omita <block ref="b78e1120b12abd7215d67324fe9476ff" prefix=" " category="inline-code"></block> ou defina como <block ref="cfcd208495d565ef66e7dff9f98764da" prefix=" " category="inline-code"></block>:</block>
+  <block id="666cd9150209e0b0d49b2bceac54a77d" category="section-title">Posso alterar uma política sem reiniciar os volumes?</block>
+  <block id="c3b00d913de35ad7090a063302874aad" category="paragraph">Sim. Quando você atualiza uma política, todos os volumes que usam essa política adotam os novos parâmetros na próxima avaliação de crescimento. Não é necessário reiniciar nenhum volume.</block>
+  <block id="0cb8faa3ad2519a71d06643b2a102cd7" category="paragraph">Para atualizar uma política existente:</block>
+  <block id="57bb704884957a2317add5ca4edc87ee" category="paragraph">Modifique os campos conforme necessário:</block>
+  <block id="656dc5d8699e6355dd74883d8b4144df" category="paragraph">Salve e saia. Verifique a política atualizada:</block>
+  <block id="fa05d67a89c9c8f88e5d01e608b6c00c" category="section-title">Por que minha policy está em estado de falha?</block>
+  <block id="e3f44d27f7876add17299d99e7b83e7a" category="paragraph">Um <block ref="d7c8c85bf79bbe1b7188497c32c3b0ca" prefix=" " category="inline-code"></block> estado indica que a especificação da política contém erros de validação. Execute o seguinte comando para visualizar os detalhes do erro:</block>
+  <block id="17ab4c6aad4148a27a468cb217919d57" category="paragraph">As causas comuns incluem um <block ref="b89d4d9ef2127a19b1fd6bdb32024b88" prefix=" " category="inline-code"></block> inválido (deve estar entre 1–99%), um <block ref="b8975976fc99a32ebfa6029b743acee3" prefix=" " category="inline-code"></block> que excede <block ref="b78e1120b12abd7215d67324fe9476ff" prefix=" " category="inline-code"></block>, ou um formato de quantidade do Kubernetes inválido. Corrija a especificação e reaplique:</block>
+  <block id="0a974295aa0a1ee94a2efba7ca4786d7" category="section-title">Por que não consigo excluir uma política?</block>
+  <block id="f0645da1b066e5e7a93f209350305cff" category="paragraph">As políticas utilizam proteção de finalização. Se os volumes ainda estiverem utilizando a política, a exclusão entra em um estado <block ref="ffbb410a55bb31f801dea6387e2745ac" prefix=" " category="inline-code"></block> e aguarda até que todos os volumes sejam removidos da política.</block>
+  <block id="6a792cdc0f46a4cf6a16eef5d3f5bc97" category="paragraph">Identifique os volumes afetados:</block>
+  <block id="9c663f1e1d46516e0d24fed61c98bd74" category="paragraph">Em seguida, remova a anotação de cada PVC:</block>
+  <block id="c1da314b8762df45f4533806e0b5655e" category="paragraph">Depois que todos os volumes são removidos, o finalizador é liberado e a política é excluída.</block>
+  <block id="f4b4085ee46b81c59ddaa607775b32e0" category="section-title">O recurso de crescimento automático funciona com todos os backends do ONTAP?</block>
+  <block id="6799f039a8ee0cbdaabb6c7369a938b9" category="paragraph">Autogrow é compatível com os protocolos NFS, iSCSI, FCP e NVMe. No entanto, volumes de bloco bruto NVMe exigem ONTAP 9.16.1 ou posterior.</block>
+  <block id="8504c1220f82dfbe91d0b8a16d01bbbb" category="paragraph">Os volumes existentes em implantações brownfield podem exigir que a migração da publicação de volume seja concluída antes que o autogrow entre em vigor. Verifique o status da migração consultando os logs do controlador Trident:</block>
+  <block id="9d45f6d0f534baba86021732a263b768" category="paragraph">Os seguintes exemplos de StorageClass mostram o autogrow configurado para backends NAS e SAN:</block>
+  <block id="1d08484a29cbed8f24ca4834cbced072" category="listing-title">Backend NAS</block>
+  <block id="fae4a0b973a551230e955c1a78ea6fd0" category="listing-title">Backend SAN</block>
+  <block id="4d3ddc69fe26b731a08866cbf1ea85f7" category="section-title">Qual é o valor mínimo de crescimento para volumes SAN?</block>
+  <block id="53143ff377f54decc74a178e79655b95" category="paragraph">Para volumes SAN, o crescimento mínimo efetivo é de 51 MB. Se você configurar um <block ref="b8975976fc99a32ebfa6029b743acee3" prefix=" " category="inline-code"></block> de 50 MiB ou menos, Trident aumenta automaticamente o crescimento para 51 MB na operação de redimensionamento.</block>
+  <block id="945c53097aed6aee6897384c32c13596" category="paragraph">Por exemplo, esta política define um <block ref="b8975976fc99a32ebfa6029b743acee3" prefix=" " category="inline-code"></block> de <block ref="b3b9f60c2eb049d3bcbddd22d73210ce" prefix=" " category="inline-code"></block>, mas Trident aplica um crescimento de 51 MB para qualquer volume SAN que a utilize:</block>
+  <block id="a55370dbc1a259397316ceebdfed21b8" category="paragraph">Para evitar esse ajuste automático, defina <block ref="b8975976fc99a32ebfa6029b743acee3" prefix=" " category="inline-code"></block> para um valor superior a 50 MiB:</block>
+  <block id="b58eceaaba71c126318ed8daedaef74b" category="sidebar">Configurar o armazenamento em camadas automático</block>
+  <block id="29032e0a813e69e465f384eaf892dbb3" category="sidebar">Gerenciar uma política de Autogrow</block>
 </blocks>

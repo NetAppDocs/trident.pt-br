@@ -31,14 +31,18 @@ Saiba o que há de novo no NetApp Trident e Trident Protect, incluindo melhorias
 
 ==== Melhorias
 
-* O suporte à simultaneidade para os drivers ONTAP-NAS (somente NFS), ONTAP-SAN (iSCSI, FCP, NVMe) e Google Cloud NetApp Volumes agora está disponível para o público em geral (GA).
-* Adicionado suporte para configuração automática de backend para Amazon FSx for NetApp ONTAP. Quando você cria um StorageClass que inclui os parâmetros necessários, NetApp Trident cria automaticamente o backend correspondente e VolumeSnapshotClass (se necessário).
-* Adicionado suporte para diferentes nuvens do Microsoft Azure, como Azure Government e Azure China, e configuração personalizada de nuvem para backends do Azure NetApp Files.
-* Escalabilidade aprimorada do controlador para volumes NVMe.
-* Adicionado suporte para a funcionalidade de volume com crescimento automático. Você pode controlar o comportamento do crescimento automático definindo políticas personalizadas de volume com crescimento automático do NetApp Trident.
-* Adicionado suporte para armazenamento em blocos do Google Cloud NetApp Volumes (SAN/iSCSI).
-* Adicionado suporte para armazenamento em camadas automático para Google Cloud NetApp Volumes. Agora você pode otimizar os custos de armazenamento ao adicionar controles nativos do Kubernetes para configurar o ONTAP FabricPool armazenamento em camadas automático para Google Cloud NetApp Volumes por meio do NetApp Trident.
-* Adicionado suporte para Kubernetes 1.35.
+* *Kubernetes*:
++
+** Adicionada disponibilidade geral (GA) para suporte à simultaneidade para ONTAP-NAS (somente NFS), ONTAP-SAN (iSCSI, FCP, NVMe) e Google Cloud NetApp Volumes (GCNV) drivers, graduando essa funcionalidade da versão de pré-visualização técnica. Consulte a link:https://docs.netapp.com/us-en/trident/trident-use/controller-scalability.html["Documentação sobre escalabilidade do controlador"] para mais informações.
+** Adicionado suporte para volume com crescimento automático no Trident com base em políticas AutoGrow do Trident personalizadas e definidas pelo usuário. Consulte a link:https://docs.netapp.com/us-en/trident/trident-use/automatic-volume-expansion.html["Documentação de expansão automática de volume"] para mais informações.
+** Concorrência de nós Trident aprimorada para melhorar a escalabilidade das operações de nós para volumes NVMe. Veja a link:https://docs.netapp.com/us-en/trident/trident-use/trident-nvme-rwx-subsystem-limits.html["Documentação de volumes NVMe"] para mais informações.
+** Adicionado suporte para o armazenamento automático em camadas de volumes NAS do GCNV por meio de anotações de PVC (`tieringPolicy`, `tieringMinimumCoolingDays`), incluindo seleção de pool e herança de clones. Veja a link:https://docs.netapp.com/us-en/trident/trident-use/gcnv-auto-tiering.html["Configure o armazenamento em camadas automático para a documentação do Google Cloud NetApp Volumes"] para mais informações.
+** Adicionado suporte para volumes de bloco SAN GCNV (iSCSI) usando o `google-cloud-netapp-volumes-san` driver, incluindo provisionamento, mapeamento de grupo de hosts por nó para acesso a LUN e operações de clonagem a partir de volume. Consulte alink:https://docs.netapp.com/us-en/trident/trident-use/gcnv-block.html["Documentação de configuração de blocos do Google Cloud NetApp Volumes"] para mais informações.
+** Adicionado suporte para configuração automática de backend para Amazon FSx for NetApp ONTAP. Quando você cria um StorageClass que inclui os parâmetros necessários, Trident cria automaticamente o backend correspondente e o VolumeSnapshotClass, se necessário. Veja o link:https://docs.netapp.com/us-en/trident/trident-use/trident-fsx-auto-backend-configuration.html#add-additional-fsxn-file-systems["Documentação de configuração do backend do Amazon FSx for NetApp ONTAP"] para mais informações.
+** Adicionado suporte para diferentes nuvens do Microsoft Azure, como Azure Government e Azure China, e configuração personalizada de nuvem para backends do Azure NetApp Files. Veja a link:https://docs.netapp.com/us-en/trident/trident-use/anf.html["Documentação de configuração do backend do Azure NetApp Files"] para mais informações.
+** Adicionado suporte para Kubernetes 1.35. Veja a link:https://docs.netapp.com/us-en/trident/trident-get-started/requirements.html["Documentação de requisitos"] para mais informações.
+
+
 
 
 
@@ -49,6 +53,21 @@ Saiba o que há de novo no NetApp Trident e Trident Protect, incluindo melhorias
 NOTE: Não deve ser usado em ambientes de produção.
 
 * *[Prévia Técnica]*: adicionado suporte para simultaneidade para os drivers ONTAP-NAS-Economy e ONTAP-SAN-Economy.
+
+
+
+
+==== Problemas conhecidos
+
+[WARNING]
+====
+Existe um problema conhecido com o `csi-snapshotter` sidecar. Em todas as versões do Kubernetes, VolumeGroupSnapshots `v1beta1` impede que VolumeSnapshots alcancem o `ReadyToUse` estado.
+
+====
+Duas soluções alternativas estão disponíveis:
+
+. Exclua os CRDs VolumeGroupSnapshots para desativar VolumeGroupSnapshots e, em seguida, reinstale Trident.
+. Instale VolumeGroupSnapshots `v1beta2` e  `snapshot-controller` versão 8.4.0 ou posterior e, em seguida, reinstale Trident. VolumeGroupSnapshots não funciona em versões do Kubernetes anteriores à v1.34.
 
 
 
@@ -218,7 +237,7 @@ Verlink:https://docs.netapp.com/us-en/trident/trident-protect/trident-protect-pr
 === Trident
 
 
-IMPORTANT: Para clientes que usam o SolidFire, não atualizem para a versão 25.06.1 devido a um problema conhecido ao cancelar a publicação de volumes.  A versão 25.06.2 será lançada em breve para resolver esse problema.
+IMPORTANT: Para clientes que utilizam SolidFire, não atualizem para a versão 25.06.1 devido a um problema conhecido ao cancelar a publicação de volumes. A versão 25.06.2 será lançada em breve para corrigir esse problema.
 
 
 
