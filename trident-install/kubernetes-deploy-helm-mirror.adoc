@@ -16,7 +16,7 @@ Você pode implantar o operador Trident e instalar o Trident usando o Helm. Este
 
 
 
-== Informações críticas sobre o Trident 25.10
+== Informações críticas sobre Trident 26.02
 
 *Você deve ler as seguintes informações críticas sobre o Trident.*
 
@@ -70,7 +70,7 @@ helm install <name> netapp-trident/trident-operator --version 100.2506.0 --set i
 --
 [source, console]
 ----
-helm install <name> netapp-trident/trident-operator --version 100.2506.0 --set imageRegistry=<your-registry> --set operatorImage=<your-registry>/trident-operator:25.10.0 --set tridentAutosupportImage=<your-registry>/trident-autosupport:25.10 --set tridentImage=<your-registry>/trident:25.10.0 --create-namespace --namespace <trident-namespace> --set nodePrep={iscsi}
+helm install <name> netapp-trident/trident-operator --version 100.2506.0 --set imageRegistry=<your-registry> --set operatorImage=<your-registry>/trident-operator:26.02.0 --set tridentAutosupportImage=<your-registry>/trident-autosupport:26.02 --set tridentImage=<your-registry>/trident:26.02.0 --create-namespace --namespace <trident-namespace> --set nodePrep={iscsi}
 ----
 --
 ====
