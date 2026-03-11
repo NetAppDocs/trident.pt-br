@@ -5387,12 +5387,8 @@
   <block id="493d70b01045b3860d249e304254b4c7" category="paragraph">Com o Trident, você pode usar VolumeSnapshots para criar novos PVs a partir deles. A criação de PVs a partir desses snapshots é realizada utilizando a tecnologia FlexClone para backends ONTAP compatíveis. Ao criar um PV a partir de um snapshot, o volume de suporte é um FlexClone do volume pai do snapshot. O<block ref="c0d2a793e71b152662b3e8cd2da00620" prefix=" " category="inline-code"></block> O driver utiliza clones de volume do software Element para criar PVs a partir de snapshots. Aqui, ele cria um clone a partir do instantâneo do elemento.</block>
   <block id="25f96c73018ecdf4416a2540508d0a38" category="paragraph">Ao usar o<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> ,<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> , e<block ref="c0d2a793e71b152662b3e8cd2da00620" prefix=" " category="inline-code"></block> Os drivers de armazenamento, como o Trident, podem clonar volumes. Ao usar o<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> ou<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block> Drivers, clonagem não é suportada. Criar um novo volume a partir de um volume existente resultará na criação de um novo snapshot.</block>
   <block id="6ee9f47ba3ae173d8bb74106620d9108" category="paragraph">O NetApp Trident permite o consumo e o gerenciamento de recursos de armazenamento em todas as plataformas de armazenamento populares da NetApp , na nuvem pública ou em infraestruturas locais, incluindo clusters ONTAP locais (AFF, FAS e ASA), ONTAP Select, Cloud Volumes ONTAP, software Element (NetApp HCI, SolidFire), Azure NetApp Files e Amazon FSx for NetApp ONTAP.</block>
-  <block id="a83aae835c84331f16ea2f7ab7c6b32b" category="list-text">docker.io/netapp/trident-autosupport:25.10</block>
-  <block id="85cacb03f2d374d44118baf0147c92d6" category="list-text">registry.k8s.io/sig-storage/csi-provisioner:v5.3.0</block>
   <block id="04405dc8db6e17d7853c7b251f054223" category="list-text">registry.k8s.io/sig-storage/csi-attacher:v4.10.0</block>
-  <block id="8ca2a31d7227b3df1183df9f930d889e" category="list-text">registry.k8s.io/sig-storage/csi-resizer:v1.14.0</block>
   <block id="d49d35d0964102edd30044f046d62050" category="list-text">registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.15.0</block>
-  <block id="6abe296459a351f6d3067ba3a8b8041b" category="list-text">docker.io/netapp/trident-operator:25.10.0 (opcional)</block>
   <block id="a3bfe8b87df4b85184ac2c726bd7b15e" category="list-text"><block ref="1a368feb8bb72ef66bb194b43d0a15b3" prefix="" category="inline-code"></block>*</block>
   <block id="e344165681ff8191ed4faed24ded7cc3" category="paragraph">O Trident é executado como um único pod de controlador e um pod de nó em cada nó de trabalho do cluster. O pod do nó deve estar em execução em qualquer host onde você queira potencialmente montar um volume Trident .</block>
   <block id="2cfd796902655e533881e53b6b9743ed" category="inline-link-macro">Automatizando o failover de aplicações com estado usando o Trident.</block>
@@ -5640,7 +5636,6 @@
   <block id="14f42721f8b15817f87c891438fb0a22" category="admonition">*Aviso*: Os valores de solicitação e limite fornecidos neste exemplo são apenas para fins de demonstração. Ajuste esses valores com base no seu ambiente e nas necessidades da sua carga de trabalho.</block>
   <block id="75bf9030851f3cf5454c338258e98f47" category="example-title">Configuração de solicitações e limites de recursos do Kubernetes para o controlador Trident e pods de nós Trident Windows e Linux.</block>
   <block id="c6f0dfdaf60b2fd022cd1b94ce713c90" category="paragraph">Este exemplo configura solicitações e limites de recursos do Kubernetes para o controlador Trident e para os pods dos nós Trident Windows e Linux.</block>
-  <block id="b320bddb4a4bb9ebc05f4941f7f248a0" category="list-text">registry.k8s.io/sig-storage/csi-snapshotter:v8.3.0</block>
   <block id="80aabc2f42a52376f3d884d3b02360f4" category="admonition">Se você usa o Red Hat OpenShift, é importante observar o papel crítico das anotações de namespace em ambientes OpenShift. As anotações de namespace garantem que os pods restaurados cumpram as permissões e configurações de segurança apropriadas definidas pelas restrições de contexto de segurança (SCCs) do OpenShift e possam acessar volumes sem problemas de permissão. Para mais informações, consulte o<block ref="842acfa178c0bbf09e368bf9db0716b8" category="inline-link-macro-rx"></block> .</block>
   <block id="5137aa193de4e4cc652a198db463acd3" category="admonition">Por padrão, as métricas do Trident são expostas na porta de destino.<block ref="bc3c4a6331a8a9950945a1aa8c95ab8a" prefix=" " category="inline-code"></block> no<block ref="ae3b848d2daecffc635ae20b0b882d8f" prefix=" " category="inline-code"></block> ponto final. Essas métricas são *ativadas por padrão* quando o Trident é instalado. Você pode configurar o consumo de métricas do Trident via HTTPS na porta.<block ref="c24f4c5eef7ec01c46e003a9296c8645" prefix=" " category="inline-code"></block> também.</block>
   <block id="e4850469bb389cec2e3ac44d4276ffb0" category="inline-link-macro">Documentação do operador Prometheus</block>
@@ -6497,7 +6492,6 @@
   <block id="ec92eeadf77128110614c3ae4b04e5c6" category="list-text">OpenShift 4.12, 4.14 - 4.21 (se você planeja usar a preparação de nó iSCSI com OpenShift 4.19, a versão mínima do Trident suportada é 25.06.1.)</block>
   <block id="991b6998365b18269e10fd6932757c88" category="list-text">Rancher Kubernetes Engine 2 (RKE2) v1.28.x - 1.35.x</block>
   <block id="8d64b27a6d71fd535c11f889aa7bab23" category="cell">v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.35.0</block>
-  <block id="c707950f03771f414f81ae094c2a267c" category="list-text">docker.io/netapp/trident:25.10.0</block>
   <block id="fa39b55af1ef0692bcd52101a2886102" category="inline-link-macro">Documentação sobre escalabilidade do controlador</block>
   <block id="132f0447aa079a2a979713029f6c5c0f" category="list-text">Adicionada disponibilidade geral (GA) para suporte à simultaneidade para ONTAP-NAS (somente NFS), ONTAP-SAN (iSCSI, FCP, NVMe) e Google Cloud NetApp Volumes (GCNV) drivers, graduando essa funcionalidade da versão de pré-visualização técnica. Consulte a <block ref="2cdc5fbb0ceee513eb25d6f3a67c7e5a" category="inline-link-macro-rx"></block> para mais informações.</block>
   <block id="79c677a07b8e51f9201ddd1c415adbfc" category="inline-link-macro">Documentação de expansão automática de volume</block>
@@ -6696,4 +6690,10 @@
   <block id="a55370dbc1a259397316ceebdfed21b8" category="paragraph">Para evitar esse ajuste automático, defina <block ref="b8975976fc99a32ebfa6029b743acee3" prefix=" " category="inline-code"></block> para um valor superior a 50 MiB:</block>
   <block id="b58eceaaba71c126318ed8daedaef74b" category="sidebar">Configurar o armazenamento em camadas automático</block>
   <block id="29032e0a813e69e465f384eaf892dbb3" category="sidebar">Gerenciar uma política de Autogrow</block>
+  <block id="4711816ecf930de7bedb0fff0ed5f46a" category="list-text">docker.io/netapp/trident:26.02.0</block>
+  <block id="d9d8d43f99f88fa1757ca456d25bffdc" category="list-text">docker.io/netapp/trident-autosupport:26.02</block>
+  <block id="93284b31b63cc86c59eeb4dcd6ba1751" category="list-text">registry.k8s.io/sig-storage/csi-provisioner:v6.1.0</block>
+  <block id="f5345a3e1ca4c50ed544fae4c14150b1" category="list-text">registry.k8s.io/sig-storage/csi-resizer:v2.0.0</block>
+  <block id="ed2e3a3511b1047c788e7fd621778ee2" category="list-text">registry.k8s.io/sig-storage/csi-snapshotter:v8.5.0</block>
+  <block id="62b6189a1ca283e5a1f0152c40a1d139" category="list-text">docker.io/netapp/trident-operator:26.02.0 (opcional)</block>
 </blocks>
