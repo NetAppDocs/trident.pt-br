@@ -6680,55 +6680,32 @@
   <block id="038293ff84b09b1a0092a33fdf412425" category="list-text">Exclua a implantação do operador usando o bundle manifest:</block>
   <block id="f5c23abe35c557b95db4b3fce1038b0e" category="sidebar">Mude para o operador Trident certificado pelo OpenShift</block>
   <block id="14f3910a0b98b041ef49c99202ac9220" category="admonition">Para obter o Helm chart, primeiro baixe o Helm chart em uma máquina com acesso à internet usando <block ref="75b190fb779b22a7754d4a5d68128df4" prefix=" " category="inline-code"></block>, depois copie o arquivo resultante <block ref="c13cb34a78859274a12ec8a8c0ff2044" prefix=" " category="inline-code"></block> para seu ambiente offline e instale usando <block ref="df98262a1bb421160e8fe1c48161c970" prefix=" " category="inline-code"></block> em vez da referência ao repositório na etapa final.</block>
-  <block id="8507ba02df0d48deded5730897bf6e97" category="paragraph">Trident oferece suporte à configuração automática de backend para AWS FSx for NetApp ONTAP (FSxN).</block>
-  <block id="ad7922ff1c481d0995f1437bea7a8c84" category="paragraph">Ao criar um StorageClass que inclua os parâmetros FSxN necessários, Trident cria automaticamente o backend correspondente e um VolumeSnapshotClass. Trident cria o VolumeSnapshotClass apenas uma vez para uma determinada configuração de driver e o reutiliza para StorageClasses subsequentes.</block>
-  <block id="639387f7f88bde513f926ea1ff4c90e6" category="paragraph">Trident deriva a configuração do backend da definição de StorageClass.</block>
-  <block id="4d61a55113f960775e1ae2a50b382699" category="paragraph">Aplique o StorageClass para acionar a configuração automática do backend. Trident executa as seguintes ações:</block>
-  <block id="f379938a5185874724527005bf3aeabb" category="list-text">Valida os parâmetros necessários</block>
-  <block id="dc69727d180499e284348dc296eb2b50" category="list-text">Cria o backend automaticamente</block>
-  <block id="7ed584db38a9bee1167dc955425223ab" category="list-text">Cria um VolumeSnapshotClass (apenas uma vez)</block>
-  <block id="d64b5a6e1547ddfca09a13e5aebe8168" category="list-text">Anota o StorageClass com o status da configuração</block>
-  <block id="d98a4165abe92912837ea03bad13759c" category="paragraph">Após a configuração ser concluída com sucesso, você pode criar PersistentVolumeClaims que referenciam este StorageClass.</block>
-  <block id="572fc95faf8275e347b442bf3862873e" category="paragraph">Defina os parâmetros necessários na seção <block ref="166e64f6c3677d0c513901242a3e702d" prefix=" " category="inline-code"></block> do StorageClass para acionar a criação automática do backend.</block>
-  <block id="4a66f688b5f27b391011d4d5f210cf07" category="cell">ID do sistema de arquivos FSx for NetApp ONTAP.</block>
-  <block id="1646b27d6ff4817458c1e837765e5048" category="cell">Driver de storage Trident. Por exemplo:<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> ou<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>.</block>
-  <block id="01461391f59e5a91649f8828a5274a6e" category="cell">Nome ou ARN do segredo do AWS Secrets Manager que contém credenciais.</block>
-  <block id="34fe8bf3198a28916988621e485274d7" category="paragraph">Você pode passar parâmetros opcionais para o backend através do StorageClass.</block>
-  <block id="32ec076320f5cf515e93b96f2d762f7c" category="paragraph">Todos os parâmetros de backend suportados para FSx para NetApp ONTAP backends também podem ser passados diretamente através da seção <block ref="166e64f6c3677d0c513901242a3e702d" prefix=" " category="inline-code"></block> do StorageClass.</block>
-  <block id="b4d40b4e27b99937451381cd46cb5716" category="cell">Parâmetros de backend</block>
-  <block id="ebb061953c0454b2c8ee7b0ac615ebcd" category="cell">Opcional</block>
-  <block id="35f9df52b863fe74078a89ed50659cd4" category="cell">Todos os parâmetros de backend suportados pelo FSx para NetApp ONTAP podem ser passados diretamente pela seção StorageClass<block ref="166e64f6c3677d0c513901242a3e702d" prefix=" " category="inline-code"></block>. Cada parâmetro deve ser definido como uma string.</block>
-  <block id="9013b630235e2a5c48b7357e23e1bd2f" category="paragraph">Importante:</block>
-  <block id="093b64ad2bc19e69e8ac30868397065b" category="list-text">Todos os parâmetros devem ser definidos como strings.</block>
-  <block id="5c7a8e5d73a7d753e99fbea649139ddf" category="list-text">Todos os parâmetros devem aparecer na seção <block ref="166e64f6c3677d0c513901242a3e702d" prefix=" " category="inline-code"></block> do StorageClass.</block>
-  <block id="6df7b7e87aa9ee0a36cc34ecb50760de" category="paragraph">Para obter uma lista completa dos parâmetros de backend suportados, consulte:</block>
-  <block id="3061a43007bdd725d91e07b257a95c18" category="paragraph"><block ref="405b5c63eb2716d2b54f049a27c529fa" category="inline-xref-macro-rx"></block>.</block>
-  <block id="560b5d77cb99a3f440a43be46abddd5a" category="paragraph">Crie um StorageClass que inclua os parâmetros FSxN necessários.</block>
-  <block id="435d9294f40415e32213e33dc71f0990" category="paragraph">Aplique o StorageClass para acionar a criação automática do backend.</block>
-  <block id="1996b3e22e3c049f173c9258a0318dad" category="paragraph">Trident cria automaticamente os recursos de backend necessários internamente.</block>
-  <block id="1d8672de58014181098298a6721a3fe3" category="paragraph">Verifique o status da configuração do backend usando as anotações do StorageClass.</block>
-  <block id="8637d6c1f3e0436f7f2ec935b829bd22" category="paragraph">Exemplo de saída:</block>
-  <block id="7d44151d1c04f56778fdcda39c28489b" category="paragraph">Principais anotações:</block>
-  <block id="00fba83be7dd1c62083c4dbdc936160d" category="cell">Resultado da configuração <block ref="505a83f220c02df2f85c3810cd9ceb38" prefix="(" category="inline-code"></block> ou<block ref="e139a585510a502bbf1841cf589f5086" prefix=" " category="inline-code"></block>).</block>
-  <block id="b3f4653ea561becfb420ba89942039e2" category="cell">Status detalhado da configuração ou mensagem de erro.</block>
-  <block id="a8bee80258fd236126c46b4006875a3d" category="cell">Nome do recurso do configurador interno.</block>
-  <block id="674a9490cf7dbd931790a3722bfaf24d" category="cell">Indica que o StorageClass é gerenciado pela Trident.</block>
-  <block id="87cb7130886a6009701858ca4f62e4e6" category="cell">Pools de storage criados para este backend.</block>
-  <block id="50889c77737a508d96fb6c795d274147" category="paragraph">Se a configuração for bem-sucedida <block ref="f31947ad13c330ab8360969e3083e133" prefix="(" category="inline-code"></block>, o StorageClass está totalmente operacional.</block>
-  <block id="728493218793a9604a3195856ce6861a" category="paragraph">Agora você pode:</block>
-  <block id="1746ddc5758a692a0a5f1902e441d3b9" category="list-text">Crie PersistentVolumeClaims usando esta StorageClass</block>
-  <block id="27efeebaa06cc87dcd84d9187e02d636" category="list-text">Monte os volumes resultantes nas cargas de trabalho do aplicativo</block>
-  <block id="c2aa447cb205ef48df2b7259c8d85c6e" category="paragraph">Se for necessária capacidade de storage adicional enquanto continua usando o mesmo StorageClass, anexe sistemas de arquivos FSx adicionais para NetApp ONTAP.</block>
-  <block id="44061aff26d10e3d18e361f3ba5cf2ca" category="paragraph">Edite o StorageClass:</block>
-  <block id="3ad8d6e662d9bac0193dd1e7ded5b38a" category="paragraph">Adicione ou atualize a anotação com IDs de filesystem adicionais:</block>
-  <block id="f5bcc5b755c86f8b844d1fb00c67e121" category="paragraph">Exemplo StorageClass com um sistema de arquivos adicional:</block>
-  <block id="c212966e67174317a9aa5f609e6cf3d5" category="paragraph">Esta operação adiciona capacidade de storage adicional enquanto continua a usar a StorageClass existente.</block>
-  <block id="4a984d77b47539ccaabab173a2f9df45" category="paragraph">A exclusão de um StorageClass normalmente exclui o backend Trident associado.</block>
-  <block id="9e30ef913cabaa12906b6d57768d8d26" category="paragraph">Isso pode interromper a conectividade de storage e quebrar cargas de trabalho em execução.</block>
-  <block id="ffa574ac86862864324d67c3d6ad69c0" category="paragraph">Verifique o impacto potencial antes de excluir qualquer StorageClass gerenciado.</block>
   <block id="0a016d1270ba974707ac8af9f53a2e63" category="sidebar">Configurar configuração automática de backend</block>
   <block id="fd271eb2e0c07a35a036e5d3d38f7295" category="list-text">Use <block ref="0562418e6d9a76d0dd22b2f186a2203d" prefix=" " category="inline-code"></block> e especifique um nome para sua implantação e o local do registro de imagens. Seu <block ref="57de9a35aeedde82408b1e047030d221" category="inline-link-macro-rx"></block> pode estar localizado em um registro ou em registros diferentes, mas todas as imagens CSI devem estar no mesmo registro. Nos exemplos, <block ref="64bf780034fbb05b851c4a4fedbc6d2a" prefix=" " category="inline-code"></block> é a versão do Trident que você está instalando.</block>
   <block id="b1a6996825cda91a559712aa47487d56" category="paragraph">Por exemplo, para alterar o valor padrão de <block ref="ad42f6697b035b7580e4fef93be20b4d" prefix=" " category="inline-code"></block>, execute o seguinte comando onde <block ref="64bf780034fbb05b851c4a4fedbc6d2a" prefix=" " category="inline-code"></block> é a versão do Trident que você está instalando:</block>
   <block id="4b4a2f07a31fb7ce67a051d38cdb07a1" category="list-text">Utilize <block ref="0562418e6d9a76d0dd22b2f186a2203d" prefix=" " category="inline-code"></block> e especifique um nome para sua implantação, como no exemplo a seguir, onde <block ref="5b8b118bf0117b802a69cacdb76c3dc5" prefix=" " category="inline-code"></block> é a versão do Trident que você está instalando.</block>
   <block id="965e298527e6fa46e6de9289de270ccf" category="list-text">Se você <block ref="538f4beb16c8502421a8389e199d34ce" category="inline-link-macro-rx"></block>, pode usar <block ref="ecdd1f9daa1459f8b8c837369bdc27a9" prefix=" " category="inline-code"></block> para atualizar em uma única etapa. Se você não adicionou o repositório Helm ou não consegue usá-lo para atualizar:</block>
+  <block id="112932a144144754ee49bfabdb99d739" category="paragraph">Trident oferece suporte à configuração automática de backend para AWS FSx for NetApp ONTAP (FSxN). Ao criar um StorageClass que inclua os parâmetros FSxN necessários, Trident cria automaticamente o backend correspondente e um VolumeSnapshotClass.</block>
+  <block id="16b97664881a67a27dea071f7290ff06" category="paragraph">Trident deriva a configuração do backend da definição de StorageClass. Quando você aplica o StorageClass, Trident valida os parâmetros necessários, cria o backend e anota o StorageClass com o status.</block>
+  <block id="3d4d8632d9ddb90edb43db4b7c53a227" category="paragraph">Trident cria o VolumeSnapshotClass apenas uma vez. Trident reutiliza o mesmo VolumeSnapshotClass para StorageClasses subsequentes.</block>
+  <block id="6c60936b230f8221d8dfdd63e27e1ff4" category="paragraph">Para acionar a criação automática do backend, defina os parâmetros necessários na StorageClass<block ref="166e64f6c3677d0c513901242a3e702d" prefix=" " category="inline-code"></block> seção.</block>
+  <block id="2a5a5f55665caf158babf5108995ea0a" category="cell">FSx para NetApp ONTAP ID do sistema de arquivos</block>
+  <block id="b2407737db469410c1a18f4bf2f29654" category="cell">Driver de storage Trident (por exemplo, <block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> ou <block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>)</block>
+  <block id="fa8a3a4ea9867d7d878570a2d5212f13" category="cell">Nome do segredo do Kubernetes que contém as credenciais da AWS</block>
+  <block id="e82817ea5e60bb30717e6dd9f767651e" category="paragraph">Você pode passar parâmetros opcionais para o backend através do StorageClass. Defina todos os valores opcionais como strings na StorageClass<block ref="166e64f6c3677d0c513901242a3e702d" prefix=" " category="inline-code"></block> section.</block>
+  <block id="9ad6fe0223f2a4064237d3b668da48e8" category="paragraph">Para obter uma lista completa dos parâmetros de backend, consulte: <block ref="405b5c63eb2716d2b54f049a27c529fa" category="inline-xref-macro-rx"></block>.</block>
+  <block id="fba69ccc557df84216c2ed0216c7c140" category="paragraph">O exemplo a seguir mostra um StorageClass que aciona a configuração automática do backend.</block>
+  <block id="ca5814ce9b88e8690a5d98623410e81d" category="paragraph">Após aplicar o StorageClass, Trident cria o backend automaticamente. Você pode criar PersistentVolumeClaims que referenciam este StorageClass.</block>
+  <block id="50ebdcd69d5fa27fa38c3f3a1dddc765" category="paragraph">Trident registra o resultado da criação do backend em anotações de StorageClass.</block>
+  <block id="2dba7d785c7b788725212b29c9a22452" category="cell">Resultado da configuração <block ref="505a83f220c02df2f85c3810cd9ceb38" prefix="(" category="inline-code"></block> ou<block ref="e139a585510a502bbf1841cf589f5086" prefix=" " category="inline-code"></block>)</block>
+  <block id="d98dde1e904004fd88a13fbfb031c500" category="cell">Mensagem detalhada de status ou erro</block>
+  <block id="bcc2c8da789654b87c7d99c009f5aa92" category="cell">Nome do recurso interno do configurador</block>
+  <block id="c9b6e4714e46730bf84b476f066f7443" category="cell">Indica que o StorageClass é gerenciado pela Trident</block>
+  <block id="fbcbbf502e3c16ab54359894752796a2" category="cell">Pools de storage criados para este backend</block>
+  <block id="f48f60fc8705cbffeaccecb6871e3318" category="paragraph">Para verificar o status, execute:</block>
+  <block id="ce1010d74ec7ecc3439482137d207b9a" category="paragraph">Confirme que<block ref="bfa17afa82ab15b8ee3af4af55582f7c" prefix=" " category="inline-code"></block> está definido como<block ref="505a83f220c02df2f85c3810cd9ceb38" prefix=" " category="inline-code"></block>. Se o valor for<block ref="e139a585510a502bbf1841cf589f5086" prefix=" " category="inline-code"></block>, revise<block ref="d4983a0c46f31dbf43955d08123b5f4d" prefix=" " category="inline-code"></block> para o erro.</block>
+  <block id="4c4f29a446a9127f4387c76407e2fdeb" category="paragraph">Se você precisar de capacidade de storage adicional enquanto continua usando o mesmo StorageClass, adicione IDs de sistema de arquivos FSxN adicionais.</block>
+  <block id="91cc0b93c8dc86369bc288988a041c18" category="paragraph">Edite o StorageClass e adicione a seguinte anotação:</block>
+  <block id="c9f5e695969fa31f7d624a795cc39fc0" category="paragraph">Após aplicar a alteração, Trident atualiza a configuração do backend e atualiza as anotações de StorageClass.</block>
+  <block id="adf4ed394ce07a1587cbc4320c7a6f81" category="paragraph">Excluir um StorageClass geralmente exclui o backend Trident associado. Isso pode interromper a conectividade de storage e quebrar cargas de trabalho em execução. Valide o impacto antes de excluir um StorageClass gerenciado.</block>
 </blocks>
