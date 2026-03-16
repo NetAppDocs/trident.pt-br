@@ -52,11 +52,11 @@ Além do link:../trident-get-started/kubernetes-deploy.html#before-you-deploy["p
 ----
 helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
 ----
-. Use `helm install` e especifique um nome para sua implantação, como no exemplo a seguir, onde `100.2506.0` está a versão do Trident que você está instalando.
+. Utilize  `helm install` e especifique um nome para sua implantação, como no exemplo a seguir, onde  `100..0` é a versão do Trident que você está instalando.
 +
 [listing]
 ----
-helm install <name> netapp-trident/trident-operator --version 100.2506.0 --create-namespace --namespace <trident-namespace>
+helm install <name> netapp-trident/trident-operator --version 100.2602.0 --create-namespace --namespace <trident-namespace>
 ----
 +
 
@@ -86,11 +86,11 @@ Especifique um arquivo YAML com substituições. Isso pode ser especificado vár
 Especifique substituições na linha de comando.
 
 |===
-Por exemplo, para alterar o valor padrão `debug` do , execute o seguinte comando onde `100.2506.0` está a versão do Trident que está a instalar:
+Por exemplo, para alterar o valor padrão de  `debug`, execute o seguinte comando onde  `100.2602.0` é a versão do Trident que você está instalando:
 
 [listing]
 ----
-helm install <name> netapp-trident/trident-operator --version 100.2506.0  --create-namespace --namespace trident --set tridentDebug=true
+helm install <name> netapp-trident/trident-operator --version 100.2602.0  --create-namespace --namespace trident --set tridentDebug=true
 ----
 
 
