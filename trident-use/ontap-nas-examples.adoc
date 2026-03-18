@@ -180,7 +180,7 @@ Você pode controlar o provisionamento padrão usando essas opções na `default
 | `unixPermissions` | Modo para novos volumes | "777" para volumes NFS; vazio (não aplicável) para volumes SMB 
 
 
-| `snapshotDir` | Controla o acesso ao `.snapshot` diretório | "Verdadeiro" para NFSv4 "falso" para NFSv3 
+| `snapshotDir` | Controla o acesso ao `.snapshot` diretório | `true`, `false` (Definido explicitamente). 
 
 
 | `exportPolicy` | Política de exportação a utilizar | "predefinição" 
@@ -653,7 +653,7 @@ parameters:
   selector: "app=mysqldb"
   fsType: "ext4"
 ----
-* O `protection-silver-creditpoints-20k` StorageClass será mapeado para o terceiro pool virtual no `ontap-nas-flexgroup` back-end. Esta é a única piscina que oferece proteção de nível de prata e 20000 pontos de crédito.
+* O `protection-silver-creditpoints-20k` StorageClass será mapeado para o terceiro pool virtual no `ontap-nas-flexgroup` backend. Este é o único pool que oferece proteção de nível prata e 20000 pontos de crédito.
 +
 [source, yaml]
 ----

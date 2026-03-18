@@ -86,7 +86,7 @@ Você pode controlar o provisionamento de volume padrão `defaults` na seção d
 | `exportRule` | As regras de exportação para novos volumes. Deve ser uma lista separada por vírgulas de qualquer combinação de endereços IPv4. | "0,0.0,0/0" 
 
 
-| `snapshotDir` | Acesso ao `.snapshot` diretório | "Verdadeiro" para NFSv4 "falso" para NFSv3 
+| `snapshotDir` | Acesso ao `.snapshot` diretório | `true`, `false` (o comportamento padrão pode variar. Defina explicitamente) "false" para NFSv3 
 
 
 | `snapshotReserve` | Porcentagem de volume reservado para snapshots | "" (aceitar predefinição de 0) 

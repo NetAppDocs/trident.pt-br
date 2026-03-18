@@ -232,7 +232,16 @@ Opção nas para volumes NFS provisionados, o padrão é `777`
 | `snapshotDir`  a| 
 Opção nas para acesso ao `.snapshot` diretório.
  a| 
-"Verdadeiro" para NFSv4 "falso" para NFSv3
+Habilita ou desabilita o acesso ao `.snapshot` diretório.
+
+
+
+| `snapshotDir`  a| 
+Opção nas para acesso ao `.snapshot` diretório.
+ a| 
+Habilita ou desabilita o acesso ao `.snapshot` diretório.
+
+Valores válidos: `true`, `false`. O comportamento padrão pode variar de acordo com a versão do ONTAP e do Trident. Defina explicitamente para garantir um comportamento consistente.
 
 
 

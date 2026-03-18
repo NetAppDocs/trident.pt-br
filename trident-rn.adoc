@@ -310,7 +310,7 @@ NOTE: Este recurso é experimental e atualmente suporta fluxos de trabalho paral
 +
 ** Corrigido um problema com CSI NodeExpandVolume em que dispositivos multipath podiam ficar com tamanhos incongruentes quando discos SCSI subjacentes não estavam disponíveis.
 ** Falha corrigida na limpeza de políticas de exportação duplicadas para drivers ONTAP-NAS e ONTAP-NAS-Economy.
-** Volumes GCNV corrigidos com padrão NFSv3 quando  `nfsMountOptions` não está definido; agora os protocolos NFSv3 e NFSv4 são suportados. Se  `nfsMountOptions` não for fornecido, a versão NFS padrão do host (NFSv3 ou NFSv4) será usada.
+** Corrigido o problema em que os volumes GCNV usavam NFSv3 por padrão quando  `nfsMountOptions` não estava definido; agora, ambos os protocolos NFSv3 e NFSv4 são suportados. Se  `nfsMountOptions` não for fornecido, a versão de NFS padrão do host (NFSv3 ou NFSv4) será usada.
 ** Problema de implantação corrigido ao instalar o Trident usando o Kustomize ( link:https://github.com/NetApp/trident/issues/831["Problema nº 831"] ).
 ** Políticas de exportação ausentes corrigidas para PVCs criados a partir de instantâneos ( link:https://github.com/NetApp/trident/issues/1016["Problema nº 1016"] ).
 ** Problema corrigido em que os tamanhos de volume ANF não eram alinhados automaticamente em incrementos de 1 GiB.

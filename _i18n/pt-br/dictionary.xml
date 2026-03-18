@@ -2011,7 +2011,6 @@
   <block id="9c64942fe493cb70c474ff447429d8a4" category="cell"><block ref="c72971f17465d2a32345bc872af62a34" prefix="" category="inline-code"></block></block>
   <block id="ea221277b2f168f5e17d112765f4a1c0" category="cell">Regras de exportação para novos volumes. <block ref="c72971f17465d2a32345bc872af62a34" prefix=" " category="inline-code"></block> Deve ser uma lista separada por vírgulas de qualquer combinação de endereços IPv4 ou sub-redes IPv4 na notação CIDR. Ignorado para volumes SMB.</block>
   <block id="1274e36c193ec0ce8b5c49d5e78ffd7b" category="cell">"0,0.0,0/0"</block>
-  <block id="08ee53e1d5cefb7967a295e98036598e" category="cell">Controla a visibilidade do diretório .snapshot</block>
   <block id="c07fbc0b2a1a865fe9e3a55c05b4f690" category="cell">"falso"</block>
   <block id="e5ac299cc3b14e1fac29518569ca9bb1" category="cell">O tamanho padrão dos novos volumes</block>
   <block id="ef81b740be2293b7e3c41047afe98764" category="cell">"100G"</block>
@@ -2336,8 +2335,6 @@
   <block id="1fa71ec0db169cb1ef6cfabf7648910e" category="paragraph">Para verificar se o PVC está vinculado, execute o seguinte comando:</block>
   <block id="42d7c2849e22a4d78da8b275f64f75aa" category="summary">Antes de configurar o back-end do Google Cloud NetApp volumes, você precisa garantir que os requisitos a seguir sejam atendidos.</block>
   <block id="b50d4e4fb1b847d1270df87e42364fe0" category="doc">Prepare-se para configurar um back-end do Google Cloud NetApp volumes</block>
-  <block id="0935df2153a18d9a4776751ebfb7cb82" category="section-title">Pré-requisitos para volumes NFS</block>
-  <block id="a03c3224ff98ca5b518f8a11ed9d6f72" category="paragraph">Se você estiver usando o Google Cloud NetApp volumes pela primeira vez ou em um novo local, precisará de alguma configuração inicial para configurar o Google Cloud NetApp volumes e criar um volume NFS. <block ref="d2edeebd0b5ddcd8a293f6eb7960f37c" category="inline-link-macro-rx"></block>Consulte a .</block>
   <block id="ec8b4b1603705e8f5deb17b1f83c5b04" category="paragraph">Antes de configurar o back-end do Google Cloud NetApp volumes:</block>
   <block id="1215f8190533dfdf63d2224a6d88266f" category="inline-link-macro">Google Cloud NetApp volumes</block>
   <block id="cbd1a08f0c7e9ece495b85acebbda95f" category="list-text">Uma conta do Google Cloud configurada com o serviço Google Cloud NetApp volumes. <block ref="633097af004065de10009ea2f33900c4" category="inline-link-macro-rx"></block>Consulte a .</block>
@@ -2470,7 +2467,6 @@
   <block id="01eacb47d802acac83a7e60311768055" category="list-text">O<block ref="63f9100803e1f67a5e33cbd5da9dbb33" prefix=" " category="inline-code"></block> StorageClass será mapeado para o primeiro e segundo pool virtual<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> no back-end. Estas são as únicas piscinas que oferecem proteção de nível de ouro.</block>
   <block id="6b35cdd98b7f7e55e698a6d0628e18e0" category="list-text">O<block ref="afbfe298fa275e5fff1aca9b2f213d9a" prefix=" " category="inline-code"></block> StorageClass será mapeado para o terceiro e quarto pool virtual no<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> back-end. Estas são as únicas piscinas que oferecem um nível de proteção diferente do ouro.</block>
   <block id="535efa214445261dfda5d5edc613e56b" category="list-text">O<block ref="65846755494383158592c748f74421ec" prefix=" " category="inline-code"></block> StorageClass será mapeado para o quarto pool virtual<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> no back-end. Este é o único pool que oferece configuração de pool de armazenamento para o aplicativo tipo mysqldb.</block>
-  <block id="d0c5a28c77fc4e37f7271d37f7372724" category="list-text">O<block ref="2e63b2ff91d4aeb88b54db5c90b71443" prefix=" " category="inline-code"></block> StorageClass será mapeado para o terceiro pool virtual no<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> back-end. Esta é a única piscina que oferece proteção de nível de prata e 20000 pontos de crédito.</block>
   <block id="0191eea3640b05213a7522d6581a2fd5" category="list-text">O<block ref="a96bee9dd30f3ea0af93b4c64ca1e4a4" prefix=" " category="inline-code"></block> StorageClass será mapeado para o terceiro pool virtual<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> no back-end e o segundo pool virtual<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block> no back-end. Estas são as únicas ofertas de pool com 5000 pontos de crédito.</block>
   <block id="0bd54df5242a2a2e9eca045fc695b41f" category="section-title">Atualização<block ref="ea76b2438eb5996eb2c347e7341ed59a" prefix=" " category="inline-code"></block> após a configuração inicial</block>
   <block id="ef0e40b987d8b9ad523bdde2bba5157a" category="summary">Entenda os requisitos, as opções de autenticação e as políticas de exportação para configurar um back-end do ONTAP com drivers nas do ONTAP.</block>
@@ -3134,7 +3130,6 @@
   <block id="98c76e4bb2a33d9fd5985c31833d545b" category="paragraph">Se NAE estiver ativado no back-end, qualquer volume provisionado no Trident será NAE habilitado.</block>
   <block id="dd7e96ca2da30b4de0cef5d5d0d67883" category="paragraph">Para obter mais informações, consulte: <block ref="5113a2fb1642ecd23870711ba25c4ad7" category="inline-link-macro-rx"></block>.</block>
   <block id="775acc7033e41c0ec1b40c64643c6339" category="paragraph">Opção nas para acesso ao<block ref="a15da8cecb1f1192c4d913b8ba676121" prefix=" " category="inline-code"></block> diretório.</block>
-  <block id="9baf39c0a00f0d9f174a9671e5cefbab" category="paragraph">"Verdadeiro" para NFSv4 "falso" para NFSv3</block>
   <block id="e1232df03027aec38979e9ee0c9b350c" category="paragraph">Escolha o<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> driver para aumentar o paralelismo para um único volume que pode crescer para o intervalo de petabytes com bilhões de arquivos. Alguns casos de uso ideais para FlexGroups incluem IA/ML/DL, big data e análise, compilações de software, streaming, repositórios de arquivos e assim por diante. O Trident usa todos os agregados atribuídos a uma SVM ao provisionar um volume FlexGroup. O suporte do FlexGroup no Trident também tem as seguintes considerações:</block>
   <block id="90bce6b2a4ca618777f172f6d51e69f1" category="list-text">A clonagem não é compatível com volumes FlexGroup.</block>
   <block id="971d29a2392e004ddd4263282b307e0c" category="inline-link">Guia de práticas recomendadas e implementação do volume NetApp FlexGroup</block>
@@ -4266,7 +4261,6 @@
   <block id="c994f1e00d22f7d8d4e7b3e7f50f8002" category="doc">Criptografia em trânsito Kerberos</block>
   <block id="c8ea4672c0efc6fee26c8648f609a829" category="paragraph">Usando a criptografia em trânsito Kerberos, você pode melhorar a segurança de acesso aos dados habilitando a criptografia para o tráfego entre o cluster gerenciado e o back-end de armazenamento.</block>
   <block id="420bac2406e93da0c7c791aca209017d" category="paragraph">O Trident oferece suporte à criptografia Kerberos para ONTAP como um back-end de armazenamento:</block>
-  <block id="796f801ad41f96aeb2e1a1950ed629e4" category="list-text">*On-Premise ONTAP* - o Trident oferece suporte à criptografia Kerberos em conexões NFSv3 e NFSv4 do Red Hat OpenShift e clusters do Kubernetes upstream para volumes ONTAP on-premise.</block>
   <block id="0a710c309a5f6dc65b056833a5208521" category="paragraph">Você pode criar, excluir, redimensionar, snapshot, clone, clone somente leitura e importar volumes que usam criptografia NFS.</block>
   <block id="2aff02c8ceb99a9445937af9d4d8f286" category="section-title">Configurar a criptografia Kerberos em trânsito com volumes ONTAP no local</block>
   <block id="330282591e8caa9814eb88ec524b89cf" category="paragraph">Você pode ativar a criptografia Kerberos no tráfego de armazenamento entre o cluster gerenciado e um back-end de armazenamento ONTAP no local.</block>
@@ -4274,12 +4268,9 @@
   <block id="0ff02d27ae5cac1a12c6c403fd55443c" category="list-text">Certifique-se de que tem acesso ao<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block> utilitário.</block>
   <block id="bef890ed7cc869346d4b483cd3e3ab00" category="list-text">Verifique se você tem acesso de administrador ao back-end de storage do ONTAP.</block>
   <block id="160b05c1b85ce34d702a3568614baec1" category="list-text">Certifique-se de saber o nome do volume ou volumes que você compartilhará no back-end de storage do ONTAP.</block>
-  <block id="9fe985de654739fa6f48edb0d49059b4" category="inline-link">Guia de práticas recomendadas e aprimoramentos do NetApp NFSv4</block>
-  <block id="9c6a0d551d50340cca48e6cfa4355566" category="list-text">Certifique-se de que todos os volumes NFSv4 usados com criptografia Kerberos estejam configurados corretamente. Consulte a seção Configuração de domínio do NetApp NFSv4 (página 13) do<block ref="fcbfe3012009d21ef9ba8407142f85b6" category="inline-link-rx"></block>.</block>
   <block id="7c67bfc9153da2055f6d09209f9853c7" category="section-title">Adicionar ou modificar políticas de exportação do ONTAP</block>
   <block id="3afa4a2a4546fcf1b9a361d1bff9763b" category="paragraph">Você precisa adicionar regras às políticas de exportação existentes do ONTAP ou criar novas políticas de exportação que suportem a criptografia Kerberos para o volume raiz da VM de armazenamento do ONTAP, bem como quaisquer volumes do ONTAP compartilhados com o cluster do Kubernetes upstream. As regras de política de exportação que você adicionar ou as novas políticas de exportação que você criar precisam oferecer suporte aos seguintes protocolos de acesso e permissões de acesso:</block>
   <block id="e21233a7f0d7fedb5883aea1dfed27cf" category="paragraph-title">Protocolos de acesso</block>
-  <block id="e10f51f4d0eb1b58929237c03db4b832" category="paragraph">Configurar a política de exportação com protocolos de acesso NFS, NFSv3 e NFSv4.</block>
   <block id="baedff73fdfff23f65e8b80727cd3088" category="paragraph-title">Aceder aos detalhes</block>
   <block id="892969be437eb53b05f372cc0ae74d6c" category="paragraph">Você pode configurar uma das três versões diferentes da criptografia Kerberos, dependendo de suas necessidades para o volume:</block>
   <block id="fda32d078836aa6e69a3497be5f9cdca" category="list-text">*Kerberos 5* - (autenticação e criptografia)</block>
@@ -5001,7 +4992,6 @@
   <block id="969ab4db9d9d63b4573cc75a0b550b21" category="list-text">[Visualização técnica] Adicionado suporte manual de QOS com o driver ANF.</block>
   <block id="fa420d9ecbb50720fc93ab14f7943b42" category="list-text">Corrigido um problema com CSI NodeExpandVolume em que dispositivos multipath podiam ficar com tamanhos incongruentes quando discos SCSI subjacentes não estavam disponíveis.</block>
   <block id="69e0fec3be54a3b91103c8c7b788339f" category="list-text">Falha corrigida na limpeza de políticas de exportação duplicadas para drivers ONTAP-NAS e ONTAP-NAS-Economy.</block>
-  <block id="6e02211c85412fa0d990bce8af9e671f" category="list-text">Volumes GCNV corrigidos com padrão NFSv3 quando <block ref="e477739f39dbd2f1e1c5268912135e92" prefix=" " category="inline-code"></block> não está definido; agora os protocolos NFSv3 e NFSv4 são suportados. Se <block ref="e477739f39dbd2f1e1c5268912135e92" prefix=" " category="inline-code"></block> não for fornecido, a versão NFS padrão do host (NFSv3 ou NFSv4) será usada.</block>
   <block id="aaa014969ef27003313b67f83fe7091d" category="inline-link-macro">Problema nº 831</block>
   <block id="cd620e798a4bbf9171d504843ebb70d0" category="list-text">Problema de implantação corrigido ao instalar o Trident usando o Kustomize ( <block ref="ae3bb668f87d2aa74a2bfe43dedc0001" category="inline-link-macro-rx"></block> ).</block>
   <block id="81a9708305846c55b26ba31f647ab071" category="inline-link-macro">Problema nº 1016</block>
@@ -5221,7 +5211,6 @@
   <block id="8b29df4adf6fbbaec0828beed4564d1b" category="list-text">Clique em *Exibir Operador* para visualizar os detalhes do Operador.</block>
   <block id="7c7ed74fe0c2134a4029358fd7840eaa" category="list-text">Em * Trident Orchestrator*, clique em *Criar instância*.</block>
   <block id="7b61a3bcc8bbd41470bf0de7fcfd839e" category="list-text">Clique em *Visualização YAML* e cole o seguinte no formulário:</block>
-  <block id="9152cfa618e086866a5af7caaed0d2bd" category="list-text">O Red Hat Enterprise Linux CoreOS (RHCOS) não tem o iSCSI habilitado e configurado.</block>
   <block id="5df2f935f2bc3df2c6378f665b3d6659" category="list-text">Você pode adicionar o<block ref="e9a7558decb5e432d8b7c4d536cc9876" prefix=" " category="inline-code"></block> parâmetro para configurar e habilitar os serviços iSCSI e Multipath em todos os nós de trabalho do OpenShift.</block>
   <block id="f61306bfa8c6de676059739358d4479f" category="list-text">Clique em *Criar*; o Trident Orchestrator será totalmente instalado.</block>
   <block id="7f95b6a9d45bd5ee11107a5abb5dd69c" category="section-title">Desinstalar operador Trident</block>
@@ -5969,7 +5958,6 @@
   <block id="7dc6151116748c06820707b3267ee0b6" category="cell">TCP/UDP 111</block>
   <block id="3ee12b938a2552d8e7e829deac4f0d88" category="cell">RPCBIND/portmapper</block>
   <block id="ee36adb297d92e86dd9cb9a6294bafe2" category="cell">ONTAP-NAS (NFSv3/v4), ANF (NFS)</block>
-  <block id="22514c1437249e60404f00fd34a14237" category="cell">Obrigatório para v3; opcional para v4 (descarregamento do firewall); restringir se estiver usando somente NFSv4.</block>
   <block id="a44b673cbbbd63bfa33d42c853f57439" category="cell">TCP/UDP 2049</block>
   <block id="5cf46b19bdb5ea243def7352324db5af" category="cell">Daemon NFS</block>
   <block id="a3d5e36471b118748b9809c728b8706e" category="cell">Dados essenciais; bem conhecidos; use TCP para confiabilidade.</block>
@@ -6708,4 +6696,18 @@
   <block id="91cc0b93c8dc86369bc288988a041c18" category="paragraph">Edite o StorageClass e adicione a seguinte anotação:</block>
   <block id="c9f5e695969fa31f7d624a795cc39fc0" category="paragraph">Após aplicar a alteração, Trident atualiza a configuração do backend e atualiza as anotações de StorageClass.</block>
   <block id="adf4ed394ce07a1587cbc4320c7a6f81" category="paragraph">Excluir um StorageClass geralmente exclui o backend Trident associado. Isso pode interromper a conectividade de storage e quebrar cargas de trabalho em execução. Valide o impacto antes de excluir um StorageClass gerenciado.</block>
+  <block id="dac5012fe50d282b4ce61c95054ca149" category="paragraph">Habilita ou desabilita o acesso ao<block ref="a15da8cecb1f1192c4d913b8ba676121" prefix=" " category="inline-code"></block> diretório.</block>
+  <block id="51f9d701191e420ed39266d6c65191b8" category="paragraph">Valores válidos:<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>,<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>. O comportamento padrão pode variar de acordo com a versão do ONTAP e do Trident. Defina explicitamente para garantir um comportamento consistente.</block>
+  <block id="b6e5467d6e3184e82d2324528e166e84" category="list-text">Red Hat Enterprise Linux CoreOS (RHCOS) não possui iSCSI habilitado e configurado.</block>
+  <block id="ebf79a17d0a10b060b88da85a533dc26" category="list-text">*On-premise ONTAP* - Trident oferece suporte à criptografia Kerberos sobre NFSv3 e a conexões de clusters Red Hat OpenShift e Kubernetes upstream para volumes ONTAP locais.</block>
+  <block id="65675a41b0f49633987e598dd7ffcb23" category="inline-link">NetApp Enhancements e Guia de Práticas Recomendadas</block>
+  <block id="052ef7045b8c09ce818e2fad09ebe073" category="list-text">Certifique-se de que todos os volumes que você usa com criptografia Kerberos estejam configurados corretamente. Consulte a seção Configuração de Domínio da NetApp (página 13) do <block ref="f8470a53f564de1533285eba87ab95cd" category="inline-link-rx"></block>.</block>
+  <block id="336dea50c2c2418edd367cce565e1879" category="paragraph">Configure a política de exportação com NFS, NFSv3 e protocolos de acesso.</block>
+  <block id="f18904f016d0dd2cbc3caf83ed1734d3" category="cell">Obrigatório para v3; opcional para v4 (descarregamento do firewall); restringir se estiver usando -only.</block>
+  <block id="460db1bfc0066fbf55e3e388b2ba8592" category="list-text">Corrigido o problema em que os volumes GCNV usavam NFSv3 por padrão quando <block ref="e477739f39dbd2f1e1c5268912135e92" prefix=" " category="inline-code"></block> não estava definido; agora, ambos os protocolos NFSv3 e NFSv4 são suportados. Se <block ref="e477739f39dbd2f1e1c5268912135e92" prefix=" " category="inline-code"></block> não for fornecido, a versão de NFS padrão do host (NFSv3 ou NFSv4) será usada.</block>
+  <block id="4bd5d0aa96daf67a3e8c2494ca905de2" category="cell"><block ref="b326b5062b2f0e69046810717534cb09" prefix="" category="inline-code"></block>,<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block> (Definido explicitamente).</block>
+  <block id="11c1dbb3fa55c48a97462a616085ddfc" category="cell"><block ref="b326b5062b2f0e69046810717534cb09" prefix="" category="inline-code"></block>,<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block> (o comportamento padrão pode variar. Defina explicitamente) "false" para NFSv3</block>
+  <block id="826434aa2de870d45f65375eed4dd985" category="section-title">Pré-requisitos para volumes NFS ou SMB</block>
+  <block id="796744214a34447ec504843fb0c28924" category="paragraph">Se você estiver usando o Google Cloud NetApp Volumes pela primeira vez ou em um novo local, será necessária alguma configuração inicial para configurar o Google Cloud NetApp Volumes e criar um volume NFS ou SMB. Consulte <block ref="d2edeebd0b5ddcd8a293f6eb7960f37c" category="inline-link-macro-rx"></block>.</block>
+  <block id="f58d26da0e092aac8227607603acb293" category="list-text">O<block ref="2e63b2ff91d4aeb88b54db5c90b71443" prefix=" " category="inline-code"></block> StorageClass será mapeado para o terceiro pool virtual no<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> backend. Este é o único pool que oferece proteção de nível prata e 20000 pontos de crédito.</block>
 </blocks>
