@@ -80,7 +80,6 @@ Para usar o Trident, você precisa de um ou mais dos seguintes backends suportad
 O Trident suporta os seguintes drivers ONTAP para virtualização KubeVirt e OpenShift:
 
 * ONTAP-nas
-* ONTAP-nas-economia
 * ONTAP-san (iSCSI, FCP, NVMe em TCP)
 * ONTAP-San-Economy (apenas iSCSI)
 
@@ -224,7 +223,7 @@ Para instalações com ar-gapped, a lista a seguir é uma referência das imagen
 | Versões do Kubernetes | Imagem do recipiente 
 
 
-| v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.35.0  a| 
+| v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.35.0  a| 
 * docker.io/netapp/trident:26.02.0
 * docker.io/netapp/trident-autosupport:26.02
 * registry.k8s.io/sig-storage/csi-provisioner:v6.1.0

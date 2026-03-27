@@ -148,7 +148,7 @@ Saiba mais sobre as novidades do Trident e do Trident Protect, incluindo melhori
 
 
 * Adicionada uma opção para o controlador Trident usar a rede do host via helm, operator e tridentctl (link:https://github.com/NetApp/trident/issues/858["Edição nº 858"] ).
-* Adicionado suporte manual de QoS ao driver ANF, tornando-o pronto para produção no Trident 26.02; esse aprimoramento experimental foi introduzido no Trident 25.06.
+* Adicionado suporte manual de QoS ao driver ANF, tornando-o pronto para produção no Trident 25.10; esse aprimoramento experimental foi introduzido no Trident 25.06.
 
 
 
