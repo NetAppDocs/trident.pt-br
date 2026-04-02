@@ -13,7 +13,7 @@ summary: Configurar o auto-tiering do Google Cloud NetApp Volumes usando mecanis
 
 
 [role="lead"]
-Esta página descreve como configurar o auto-tiering para Google Cloud NetApp Volumes usando Trident. O auto-tiering é configurado por meio dos parâmetros de backend do Trident e das anotações PersistentVolumeClaim durante o provisionamento do volume.
+O auto-tiering é configurado por meio dos parâmetros do backend do Trident e das anotações PersistentVolumeClaim durante o provisionamento de volumes. Você pode configurar o auto-tiering para Google Cloud NetApp Volumes usando Trident.
 
 
 

@@ -12,20 +12,18 @@ summary: Saiba como criar e usar drivers ONTAP nas com a instalação do Trident
 
 
 [role="lead"]
-Aprenda a criar e usar drivers ONTAP nas com sua instalação do Trident. Esta seção fornece exemplos de configuração de back-end e detalhes para mapear backends para StorageClasses.
-
-A partir da versão 25.10, o NetApp Trident oferece suporte alink:https://docs.netapp.com/us-en/ontap-afx/index.html["Sistemas de armazenamento NetApp AFX"^] . Os sistemas de armazenamento NetApp AFX diferem de outros sistemas baseados em ONTAP(ASA, AFF e FAS) na implementação de sua camada de armazenamento.
+Aprenda a criar e usar drivers ONTAP NAS com sua instalação do Trident. Esta seção fornece exemplos de configuração de backend e detalhes para mapear backends para StorageClasses. A partir da versão 25.10, NetApp Trident oferece suporte link:https://docs.netapp.com/us-en/ontap-afx/index.html["Sistemas de armazenamento NetApp AFX"^]. NetApp AFX sistemas de storage diferem de outros sistemas baseados em ONTAP (ASA, AFF e FAS) na implementação de sua camada de storage.
 
 
 NOTE: Apenas o `ontap-nas` O driver (com protocolo NFS) é compatível com sistemas NetApp AFX; o protocolo SMB não é compatível.
-
-Na configuração do backend Trident , não é necessário especificar que seu sistema é um sistema de armazenamento NetApp AFX. Ao selecionar `ontap-nas` como o `storageDriverName` O Trident detecta automaticamente o sistema de armazenamento AFX. Alguns parâmetros de configuração do backend não se aplicam aos sistemas de armazenamento AFX, conforme indicado na tabela abaixo.
 
 
 
 == Opções de configuração de back-end
 
-Consulte a tabela a seguir para obter as opções de configuração de back-end:
+Na configuração do backend do Trident, não é necessário especificar que seu sistema é um NetApp AFX sistema de storage. Ao selecionar  `ontap-nas` como o  `storageDriverName`, o Trident detecta automaticamente o sistema de storage AFX. Alguns parâmetros de configuração do backend não se aplicam a sistemas de storage AFX.
+
+A tabela a seguir exibe as opções de configuração do backend:
 
 [cols="1,3,2"]
 |===

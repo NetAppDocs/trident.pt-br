@@ -12,9 +12,7 @@ summary: 'Usando o Trident com o Amazon FSX for NetApp ONTAP, você pode garanti
 
 
 [role="lead"]
-O Trident simplifica o gerenciamento de armazenamento do Amazon FSX for NetApp ONTAP no Kubernetes para permitir que seus desenvolvedores e administradores se concentrem na implantação de aplicativos.
-
-Você pode instalar o Trident usando um dos seguintes métodos:
+Trident simplifica o gerenciamento de storage do Amazon FSx for NetApp ONTAP no Kubernetes para permitir que seus desenvolvedores e administradores se concentrem na implantação de aplicativos. Você pode instalar Trident usando um dos seguintes métodos:
 
 * Leme
 * Complemento EKS
