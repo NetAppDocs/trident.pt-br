@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: trident-use/ontap-san-prep.html 
-keywords: trident backend, ontap san, ontap-san, ontap-san-economy, fcp, asa r2, iscsi, nvme/tcp, fc 
+keywords: trident backend, ontap san, ontap-san, ontap-san-economy, fcp, asa r2, iscsi, nvme tcp, fc 
 summary: Saiba mais sobre como se preparar para configurar um back-end ONTAP com drivers SAN ONTAP. 
 ---
 = Prepare-se para configurar o back-end com drivers SAN ONTAP

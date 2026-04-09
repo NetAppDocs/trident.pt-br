@@ -18,7 +18,7 @@ Antes de usar o operador Trident para atualizar o Trident, você deve entender o
 
 == Manuseio de atualização do operador Trident
 
-Um dos muitos link:../trident-get-started/kubernetes-deploy.html["Benefícios de usar o operador Trident"] que instalar e atualizar o Trident é o manuseio automático de objetos do Trident e Kubernetes sem interromper os volumes montados existentes. Dessa forma, o Trident pode oferecer suporte a atualizações sem inatividade ou link:https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/["_atualizações contínuas_"^]. Em particular, o operador do Trident se comunica com o cluster do Kubernetes para:
+Uma das muitas link:../trident-install/kubernetes-deploy.html["Benefícios de usar o operador Trident"] maneiras de instalar e atualizar Trident é o gerenciamento automático de objetos do Trident e do Kubernetes sem interromper os volumes montados existentes. Dessa forma, Trident pode suportar atualizações sem inatividade, ou link:https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/["_atualizações contínuas_"^]. Em particular, o operador do Trident se comunica com o cluster Kubernetes para:
 
 * Exclua e recrie a implantação do controlador Trident e o nó DaemonSet.
 * Substitua o pod de nó Trident e o pod de nó Trident por novas versões.

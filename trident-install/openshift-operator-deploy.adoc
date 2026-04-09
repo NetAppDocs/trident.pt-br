@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar 
-permalink: trident-get-started/openshift-operator-deploy.html 
+permalink: trident-install/openshift-operator-deploy.html 
 keywords: deploy, trident, methods, operator, openshift, operatorhub 
 summary: Se você usar o Red Hat OpenShift, você pode instalar o Trident usando um operador. 
 ---

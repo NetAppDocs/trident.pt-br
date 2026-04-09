@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar 
-permalink: trident-get-started/kubernetes-deploy-operator-mirror.html 
+permalink: trident-install/kubernetes-deploy-operator-mirror.html 
 keywords: deploy, Trident, methods, operator, tridentctl, mirrored, registry, registries 
 summary: Você pode implantar manualmente o operador Trident para instalar o Trident. Este processo aplica-se a instalações onde as imagens de contentor exigidas pelo Trident são armazenadas em um Registro privado. 
 ---
@@ -38,7 +38,7 @@ O uso de configuração não multipathing ou o uso `find_multipaths: yes` de ou 
 
 == Implante manualmente o operador Trident e instale o Trident
 
-Revise link:../trident-get-started/kubernetes-deploy.html["a visão geral da instalação"] para garantir que você atendeu aos pré-requisitos de instalação e selecionou a opção de instalação correta para o seu ambiente.
+Revise link:kubernetes-deploy.html["a visão geral da instalação"] para garantir que você atendeu aos pré-requisitos de instalação e selecionou a opção de instalação correta para o seu ambiente.
 
 .Antes de começar
 Faça login no host Linux e verifique se ele está gerenciando um trabalho e link:requirements.html["Cluster compatível com Kubernetes"^]que você tem o Privileges necessário.

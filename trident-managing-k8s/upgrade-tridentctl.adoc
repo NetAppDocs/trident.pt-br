@@ -27,7 +27,7 @@ Revise link:upgrade-trident.html#select-an-upgrade-method["Selecione um método 
 ----
 ./tridentctl uninstall -n <namespace>
 ----
-. Reinstale o Trident. link:../trident-get-started/kubernetes-deploy-tridentctl.html["Instale o Trident usando o tridentctl"]Consulte a .
+. Reinstale Trident. Consulte link:../trident-install/kubernetes-deploy-tridentctl.html["Instale o Trident usando o tridentctl"].
 
 
 

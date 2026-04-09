@@ -141,7 +141,7 @@ Você pode excluir um volume compartilhado entre vários namespaces. O Trident r
 
 ==  `tridentctl get`Use para consultar volumes subordinados
 
-Usando o[`tridentctl` utilitário, você pode executar o `get` comando para obter volumes subordinados. Para obter mais informações, consulte o link:./Trident-reference/tridentctl.html[`tridentctl` comandos e opções].
+Usando o[`tridentctl` utilitário, você pode executar o `get` comando para obter volumes subordinados. Para mais informações, consulte link:../trident-reference/trident-cl.html[`tridentctl` comandos e opções].
 
 [listing]
 ----

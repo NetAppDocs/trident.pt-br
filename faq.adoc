@@ -62,7 +62,7 @@ Não há alterações no que diz respeito à experiência do usuário e às func
 
 === O Trident suporta uma instalação offline a partir de um registo privado?
 
-Sim, o Trident pode ser instalado offline. link:../trident-get-started/kubernetes-deploy.html["Saiba mais sobre a instalação do Trident"^]Consulte a .
+Sim, Trident pode ser instalado offline. Consulte link:../trident-install/kubernetes-deploy.html["Saiba mais sobre a instalação do Trident"^].
 
 
 
@@ -86,13 +86,13 @@ O Trident lê o servidor de API do Kubernetes para determinar quando os aplicati
 
 === Quais são as funções e Privileges usadas pelo Trident?
 
-O instalador do Trident cria um Kubernetes ClusterRole, que tem acesso específico aos recursos PersistentVolume, PersistentVolumeClaim, StorageClass e Secret do cluster Kubernetes. Consulte link:trident-get-started/kubernetes-customize-deploy-tridentctl.html["Personalize a instalação do tridentctl"^] .
+O instalador do Trident cria um Kubernetes ClusterRole, que tem acesso específico aos PersistentVolume, PersistentVolumeClaim, StorageClass e recursos Secret do cluster Kubernetes. Consulte link:trident-install/kubernetes-customize-deploy-tridentctl.html["Personalize a instalação do tridentctl"^].
 
 
 
 === Posso gerar localmente os arquivos de manifesto exatos que o Trident usa para instalação?
 
-Você pode gerar e modificar localmente os arquivos de manifesto exatos que o Trident usa para instalação, se necessário. link:trident-get-started/kubernetes-customize-deploy-tridentctl.html["Personalize a instalação do tridentctl"^]Consulte a .
+Você pode gerar e modificar localmente os arquivos de manifesto exatos que o Trident usa para instalação, se necessário. Consulte link:trident-install/kubernetes-customize-deploy-tridentctl.html["Personalize a instalação do tridentctl"^].
 
 
 

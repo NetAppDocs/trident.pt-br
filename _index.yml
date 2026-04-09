@@ -29,9 +29,9 @@ indexpage:
   - title: Implante o Trident
     links:
     - title: Implante com o operador Trident
-      url: "/trident-get-started/kubernetes-deploy-operator.html"
+      url: "/trident-install/kubernetes-deploy-operator.html"
     - title: Implante com o tridentctl
-      url: "/trident-get-started/kubernetes-deploy-tridentctl.html"
+      url: "/trident-install/kubernetes-deploy-tridentctl.html"
     - title: Implante o Trident para Docker
       url: "/trident-docker/deploy-docker.html"
   - title: Atualize o Trident

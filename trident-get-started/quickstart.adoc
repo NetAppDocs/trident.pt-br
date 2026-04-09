@@ -29,7 +29,7 @@ link:../trident-use/worker-node-prep.html["Prepare o nó de trabalho"]
 O Trident oferece vários métodos e modos de instalação otimizados para uma variedade de ambientes e organizações.
 
 [role="quick-margin-para"]
-link:../trident-get-started/kubernetes-deploy.html["Instale o Trident"]
+link:../trident-install/kubernetes-deploy.html["Instale o Trident"]
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png["Três"] Crie um backend
 [role="quick-margin-para"]
