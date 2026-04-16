@@ -6665,8 +6665,6 @@
   <block id="cb114173f156e2eda40775089a3067ff" category="list-text">Adicionado suporte manual de QoS ao driver ANF, tornando-o pronto para produção no Trident 25.10; esse aprimoramento experimental foi introduzido no Trident 25.06.</block>
   <block id="6d228b9c6fb2e4c9e3a85dbae436035c" category="list-text">Network File System (NFS)</block>
   <block id="611e52be5c0e9d0f23d78a96a901a63b" category="list-text">Internet Small Computer Systems Interface (iSCSI)</block>
-  <block id="ce1ff0a6a194c07d183ef0de076f81ae" category="list-text">Protocolo Fibre Channel (NVMe)</block>
-  <block id="062d8e05f949590d9b752838eb96ff40" category="list-text">Non-Volatile Memory Express over Fabrics (FCP)</block>
   <block id="8b346ec343205378291cfb292f7afa32" category="paragraph">Trident introduz escalabilidade do controlador por meio de maior simultaneidade entre vários drivers de armazenamento. Os clientes podem identificar quais drivers do Trident oferecem suporte à escalabilidade do controlador na disponibilidade geral e quais drivers estão disponíveis como prévia técnica no Trident 26.02. Isso permite decisões de implantação informadas e o gerenciamento adequado de riscos para ambientes Kubernetes escaláveis.</block>
   <block id="d6295b678067b0517d1f1e80acbf65c1" category="paragraph">Quando a escalabilidade do controlador está habilitada, as operações em diferentes volumes e backends são executadas simultaneamente. Isso aumenta a taxa de transferência e reduz completamente o tempo de operação em ambientes com um grande número de operações simultâneas de PersistentVolumeClaim e VolumeSnapshot.</block>
   <block id="6255f747f2d40f968f7a0826747a0636" category="paragraph">Os <block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block> e <block ref="0ffa63dea74ac96b64836a273ee062bb" prefix=" " category="inline-code"></block> drivers são diferentes. Apenas <block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block> é suportado. Não use <block ref="0ffa63dea74ac96b64836a273ee062bb" prefix=" " category="inline-code"></block> em configurações de backend ou exemplos.</block>
@@ -6724,4 +6722,6 @@
   <block id="395717e339150790e9789265ce54670c" category="image-alt">Configurações do complemento Trident</block>
   <block id="7d46dc6377e8ce5df89a34c4ad4e2991" category="image-alt">Status ativo do complemento Trident</block>
   <block id="2c0204a63fd46aab7636df3eb5f83972" category="paragraph">Usando o<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block> utilitário, você pode executar o<block ref="b5eda0a74558a342cf659187f06f746f" prefix=" " category="inline-code"></block> comando para obter volumes subordinados. Para mais informações, consulte link:../trident-reference/trident-cl.html<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix="[" category="inline-code"></block> comandos e opções].</block>
+  <block id="69ce754add983294c9646b227af63485" category="list-text">Protocolo Fibre Channel (FCP)</block>
+  <block id="95879db8219c8aca8e161d3712e8b423" category="list-text">Non-Volatile Memory Express over Fabrics (NVMe)</block>
 </blocks>
