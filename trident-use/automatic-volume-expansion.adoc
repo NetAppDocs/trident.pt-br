@@ -9,16 +9,15 @@ summary: Configure e gerencie a expansão automática de volume usando as Polít
 
 
 [role="lead"]
-A expansão de volume permite que os Volumes Persistentes provisionados pelo Trident cresçam automaticamente quando a capacidade utilizada atinge um limite definido. Essa funcionalidade reduz a sobrecarga operacional e ajuda a evitar interrupções nos aplicativos causadas pelo esgotamento da capacidade.
-
-A expansão de volume automática é implementada usando Autogrow Policies. Uma Autogrow Policy define:
+A expansão de volume permite que os Volumes Persistentes provisionados pelo Trident cresçam automaticamente quando a capacidade utilizada atinge um limite definido. Essa funcionalidade reduz a sobrecarga operacional e ajuda a evitar interrupções nos aplicativos causadas pelo esgotamento da capacidade. A expansão de volume automática é implementada usando Autogrow Policies. Uma Autogrow Policy define:
 
 * O limite de utilização que desencadeia a expansão
 * A quantidade pela qual o volume cresce
 * O tamanho máximo que o volume pode atingir
 
 
-Os volumes aumentam de tamanho automaticamente quando o limite de utilização definido é excedido. Os volumes nunca são reduzidos automaticamente.
+
+NOTE: Os volumes aumentam de tamanho automaticamente quando o limite de utilização definido é excedido. Os volumes nunca são reduzidos automaticamente.
 
 
 
@@ -33,8 +32,8 @@ Antes de configurar a expansão automática de volume, certifique-se de que os s
 +
 ** Network File System (NFS)
 ** Internet Small Computer Systems Interface (iSCSI)
-** Protocolo Fibre Channel (NVMe)
-** Non-Volatile Memory Express over Fabrics (FCP)
+** Memória Não Volátil Express (NVMe)
+** Protocolo Fibre Channel (FCP)
 
 
 
@@ -51,8 +50,8 @@ Antes de configurar a expansão automática de volume, certifique-se de que os s
 +
 ** Network File System (NFS)
 ** Internet Small Computer Systems Interface (iSCSI)
-** Protocolo Fibre Channel (NVMe)
-** Non-Volatile Memory Express over Fabrics (FCP)
+** Memória Não Volátil Express (NVMe)
+** Protocolo Fibre Channel (FCP)
 
 
 

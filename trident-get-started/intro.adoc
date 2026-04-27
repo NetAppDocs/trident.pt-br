@@ -18,7 +18,7 @@ O Trident é um projeto de código aberto totalmente suportado mantido pela NetA
 
 == O que é o Trident?
 
-O NetApp Trident permite o consumo e o gerenciamento de recursos de armazenamento em todas as plataformas de armazenamento populares da NetApp , na nuvem pública ou em infraestruturas locais, incluindo clusters ONTAP locais (AFF, FAS e ASA), ONTAP Select, Cloud Volumes ONTAP, software Element (NetApp HCI, SolidFire), Azure NetApp Files e Amazon FSx for NetApp ONTAP.
+O NetApp Trident permite o consumo e o gerenciamento de recursos de storage em todas as plataformas de storage NetApp populares, na nuvem pública ou em ambientes locais, incluindo clusters ONTAP locais (AFF, FAS e ASA), ONTAP Select, Cloud Volumes ONTAP, Element software (NetApp HCI, SolidFire), Azure NetApp Files, Amazon FSx for NetApp ONTAP e Google Cloud NetApp Volumes.
 
 O Trident é um orquestrador de storage dinâmico e em conformidade com a Container Storage Interface (CSI) que se integra nativamente ao link:https://kubernetes.io/["Kubernetes"^]. O Trident é executado como um único Pod de controlador e um Pod de nó em cada nó de trabalho no cluster. link:../trident-get-started/architecture.html["Arquitetura da Trident"]Consulte para obter detalhes.
 
@@ -33,12 +33,7 @@ NOTE: Se esta for a primeira vez que usa o Kubernetes, você deve se familiariza
 
 Trident é compatível com uma variedade de distribuições e plataformas Kubernetes.
 
-As plataformas suportadas incluem:
-
-* Kubernetes upstream
-* Red Hat OpenShift
-* SUSE Harvester 1.7.0 (ONTAP iSCSI)
-
+As plataformas suportadas incluem: * Kubernetes upstream * Red Hat OpenShift * SUSE Harvester 1.7.0 (ONTAP iSCSI)
 
 
 
