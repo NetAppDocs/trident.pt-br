@@ -13,7 +13,17 @@ summary: 'Usando o Trident com o Amazon FSX for NetApp ONTAP, você pode garanti
 
 
 
-== Integração de driver SAN e nas ONTAP
+== Visão geral
+
+Antes de provisionar volumes usando Trident, você precisa integrar seu backend de armazenamento ao Trident criando uma Trident Backend Configuration (TBC). A TBC define como Trident se conecta ao backend de armazenamento e fornece as informações necessárias para que Trident gerencie os recursos de storage.
+
+
+
+== Criar uma configuração de backend Trident (TBC) para FSx for ONTAP
+
+Existem duas maneiras de configurar o backend do Trident para usar um sistema de arquivos FSx for ONTAP: * Criar um StorageClass que utilize o recurso de Backend Automático. * Criar o backend e o StorageClass separadamente.
+
+Os passos desta seção explicam como criar o backend separadamente. Para obter informações sobre como usar o recurso de Backend Automático, consulte a seção xref:trident-fsx-storageclass-pvc.html#configure-a-kubernetes-storageclass-object-with-automatic-backend-configuration-support-for-fsx-for-ontap[Configurar StorageClass e PVC] para mais informações.
 
 Para criar um back-end de armazenamento, você precisa criar um arquivo de configuração no formato JSON ou YAML. O arquivo precisa especificar o tipo de storage desejado (nas ou SAN), o sistema de arquivos e SVM para obtê-lo e como se autenticar com ele. O exemplo a seguir mostra como definir o storage baseado em nas e usar um segredo da AWS para armazenar as credenciais no SVM que você deseja usar:
 
@@ -272,4 +282,4 @@ Você pode controlar o provisionamento padrão usando essas opções na `default
 
 == Provisionar volumes SMB
 
-Você pode provisionar volumes SMB usando o `ontap-nas` motorista. Antes de concluir <<Integração de driver SAN e nas ONTAP>> Conclua estas etapas: link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#prepare-to-provision-smb-volumes["Prepare-se para provisionar volumes SMB"].
+Você pode provisionar volumes SMB usando o `ontap-nas` motorista. Antes de concluir <<ONTAP SAN and NAS driver integration>> Conclua estas etapas: link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#prepare-to-provision-smb-volumes["Prepare-se para provisionar volumes SMB"].

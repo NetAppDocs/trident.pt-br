@@ -28,7 +28,7 @@ Trident cria o VolumeSnapshotClass apenas uma vez. Trident reutiliza o mesmo Vol
 
 Para acionar a criação automática do backend, defina os parâmetros necessários na StorageClass `parameters` seção.
 
-[cols="2,1,2,2"]
+[cols="2,1,1,3"]
 |===
 | Parâmetro | Obrigatório | Tipo | Descrição 
 
@@ -39,7 +39,7 @@ Para acionar a criação automática do backend, defina os parâmetros necessár
 | `storageDriverName` | Sim | cadeia de carateres | Driver de storage Trident (por exemplo,  `ontap-nas` ou  `ontap-san`) 
 
 
-| `credentialsName` | Sim | cadeia de carateres | Nome do segredo do Kubernetes que contém as credenciais da AWS 
+| `credentialsName` | Sim | cadeia de carateres | Nome do segredo do Kubernetes que contém as credenciais do FSx for ONTAP 
 |===
 
 
@@ -47,7 +47,7 @@ Para acionar a criação automática do backend, defina os parâmetros necessár
 
 Você pode passar parâmetros opcionais para o backend através do StorageClass. Defina todos os valores opcionais como strings na StorageClass `parameters` section.
 
-Para obter uma lista completa dos parâmetros de backend, consulte: xref:trident-use/trident-fsx-storage-backend.adoc#backend-advanced-configuration-and-examples[Configuração do backend FSx para NetApp ONTAP].
+Para obter uma lista completa dos parâmetros de backend, consulte: xref:trident-fsx-storage-backend.html#backend-advanced-configuration-and-examples[Configuração do backend FSx para NetApp ONTAP].
 
 
 

@@ -2662,7 +2662,6 @@
   <block id="ecca191ac54751ba8120816fbe45777e" category="list-text">Digite *NetApp_Trident-operator*.</block>
   <block id="bb7c6bde1fc26965ada02923bac65350" category="paragraph">Substitua<block ref="e2eb89f0ffaf521a0d2eeaffca04d117" prefix=" " category="inline-code"></block> pelo nome do cluster e execute o seguinte comando.</block>
   <block id="23e0e5bfdd7b1fef2ab4d932aae742e5" category="doc">Configure o back-end de armazenamento</block>
-  <block id="9303b8f40cf82f5e37702c7a6387e725" category="section-title">Integração de driver SAN e nas ONTAP</block>
   <block id="42f3b65b98b18c792b7b5534e40d2646" category="section-title">Detalhes do driver FSX for ONTAP</block>
   <block id="c3e86b30fe8148143701324ae1595af8" category="list-text"><block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix="" category="inline-code"></block>: Cada PV provisionado é um LUN dentro de seu próprio volume do Amazon FSX for NetApp ONTAP. Recomendado para armazenamento de blocos.</block>
   <block id="3878a0c92e55dbd3cdd9458330c2f1c3" category="list-text"><block ref="8321592ce24c8a122ecf26a63cfca407" prefix="" category="inline-code"></block>: Cada PV provisionado é um volume completo do Amazon FSX for NetApp ONTAP. Recomendado para NFS e SMB.</block>
@@ -2675,7 +2674,6 @@
   <block id="eadd7f9188e84053efc871a14d0d3bd6" category="section-title">Configuração avançada de backend e exemplos</block>
   <block id="ab2e083df601e1b7c7346487158ab13f" category="cell">"100"</block>
   <block id="7a5bbb3c815084605b780e0cd6e810fd" category="cell"><block ref="89ffa293e05655bd6be9d422345be38a" prefix="" category="inline-code"></block></block>
-  <block id="9817ca035dba7bc4123be2c0bf280d66" category="doc">Configurar uma classe de armazenamento e PVC</block>
   <block id="2d63b64b84c821bc810927f7ca7fa993" category="inline-link">_PersistentVolumeClaim_</block>
   <block id="d948cda211eadd3a86a406b43ee0d5fa" category="paragraph">O PVC pode ser configurado para solicitar o armazenamento de um determinado tamanho ou modo de acesso. Usando o StorageClass associado, o administrador do cluster pode controlar mais do que o Persistentvolume e o modo de acesso, como desempenho ou nível de serviço.</block>
   <block id="35e98ba80f6254a33de7a37ab113316e" category="section-title">Manifestos de amostra</block>
@@ -2965,8 +2963,6 @@
   <block id="19ce3b2e7823907e5153f00fe04f64f7" category="sidebar">Opções de configuração e exemplos</block>
   <block id="6fc0b7515ecca271c88eae4a685da613" category="sidebar">NetApp HCI ou SolidFire</block>
   <block id="53f64465dc89ebfc8f426b3cdf4d1614" category="sidebar">Crie uma função do IAM e um segredo da AWS</block>
-  <block id="0a3c6c3b1b9418c792ec73b934ca8fdd" category="sidebar">Configurar o back-end de storage</block>
-  <block id="50399b7d6597b32502708277dd2be03c" category="sidebar">Configure a classe de armazenamento e o PVC</block>
   <block id="af5d3eba040f5bcf3d3f037b574766c8" category="sidebar">Gerenciar backends</block>
   <block id="bcca457a84376733a80b2dfad749e939" category="sidebar">Gerencie backends com kubectl</block>
   <block id="e9e5f94eb04c1889f891ad75fd929b4b" category="sidebar">Gerencie backends com tridentctl</block>
@@ -3672,7 +3668,6 @@
   <block id="e5bbe1a57bb9d1fa8056d28e0a96a518" category="summary">Usando o Trident com o Amazon FSX for NetApp ONTAP, você pode garantir que os clusters do Kubernetes executados no Amazon Elastic Kubernetes Service (EKS) provisionem volumes persistentes de bloco e arquivo com o respaldo do do ONTAP.</block>
   <block id="a2e4c75efdd834198ec30de5256aa938" category="paragraph">Você pode integrar o Trident com o Amazon FSX for NetApp ONTAP usando os seguintes drivers:</block>
   <block id="b67b129bb636d36f948ca02b68bfa9bc" category="cell">Endereço IP de um cluster ou LIF de gerenciamento de SVM Um nome de domínio totalmente qualificado (FQDN) pode ser especificado. Pode ser definido para usar endereços IPv6 se o Trident tiver sido instalado usando o sinalizador IPv6. Os endereços IPv6 devem ser definidos entre colchetes, como [28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]. Se você fornecer o<block ref="d731d2fecb66f9c4a30253bd316a220f" prefix=" " category="inline-code"></block> sob o<block ref="ac68bbf921d953d1cfab916cb6120864" prefix=" " category="inline-code"></block> campo, não precisará fornecer o<block ref="a6ea6092cb7b9c5f31909eb4be8fa5ea" prefix=" " category="inline-code"></block> porque o Trident recupera as informações do SVM<block ref="a6ea6092cb7b9c5f31909eb4be8fa5ea" prefix=" " category="inline-code"></block> da AWS. Portanto, você deve fornecer credenciais para um usuário sob o SVM (por exemplo: Vsadmin) e o usuário deve ter a<block ref="6173aa5206484b5224450952747c7148" prefix=" " category="inline-code"></block> função.</block>
-  <block id="456166bed74a8ee84892a1778e8485a7" category="section-title">Atributos do Trident</block>
   <block id="0ad999be0dea6cdee2afca2bcb6da8b1" category="paragraph">Além <block ref="6004af307fc2eed554c42ebaa4be8446" category="inline-link-macro-rx"></block>do , para integrar o FSX for ONTAP com o Trident, você precisa:</block>
   <block id="6bb2a5c441a4e421f26e835928b68f1f" category="list-text">Os volumes SMB não são compatíveis com o complemento Trident EKS.</block>
   <block id="910bc8aad96dce304454db69330c4c1c" category="list-text">O Trident dá suporte a volumes SMB montados em pods executados apenas em nós do Windows. <block ref="5d9770278862f1ca4af19e761a5fa655" category="inline-link-macro-rx"></block>Consulte para obter detalhes.</block>
@@ -4740,8 +4735,6 @@
   <block id="f79367bddbaecd3962f7c740a1b2178f" category="paragraph">Um<block ref="b1b93f46fc69df9fe663c091f4d6c2b4" category="inline-link-rx"></block> (PVC) é um pedido de acesso ao Persistentvolume no cluster.</block>
   <block id="79a251ee7369fdcdb0847d35254afcf8" category="paragraph">Depois de criar o PVC, você pode montar o volume em um pod.</block>
   <block id="a305c8fb2137d8a4a767905590079e89" category="section-title">Crie o PVC</block>
-  <block id="06034bca671a3028021f1a722aac7b41" category="paragraph">Configure um objeto Kubernetes StorageClass e crie a classe de storage para instruir o Trident a provisionar volumes. Crie um PersistentVolumeClaim (PVC) que use o Kubernetes StorageClass configurado para solicitar acesso ao PV. Em seguida, pode montar o PV num pod.</block>
-  <block id="5de805965faeb85a54098223ea3a3334" category="paragraph">Depois de criar o PVC, você pode montar o volume em um pod.</block>
   <block id="89fb75fa5ae260c326092b78970469ed" category="list-text">No painel de navegação esquerdo, selecione *clusters*.</block>
   <block id="abdaa0762abc2037a71287c94bceae14" category="list-text">Selecione o nome do cluster para o qual deseja configurar o complemento NetApp Trident CSI.</block>
   <block id="691da62871e09bf9c944f36b9de07889" category="list-text">Selecione *Add-ons* e, em seguida, selecione *Get more add-ons*.</block>
@@ -5243,8 +5236,6 @@
   <block id="65f1acff2714c57d7d22160c1e0604ae" category="list-text">Configure as configurações necessárias do complemento.</block>
   <block id="a77e64d999da7477c22c11d171944968" category="list-text">Se você estiver usando IRSA (funções do IAM para conta de serviço), consulte as etapas de configuração adicionais<block ref="75a5fb22d89ca2450e7a1cb8fb11e3d1" category="inline-link-macro-rx"></block> .</block>
   <block id="b2a83c40e86c786c07c31acad2909e42" category="admonition">*Ignore estas etapas se estiver usando a associação de identidade do Pod.*</block>
-  <block id="346a92db06c8942d8b2bd2e2de5c2796" category="paragraph">O<block ref="da3f7f170e13df7f56e057fc4226aa85" category="inline-link-rx"></block> objeto identifica o Trident como o provisionador usado para essa classe e instrui o Trident sobre como provisionar um volume.  Use este exemplo para configurar o Storageclass para volumes usando NFS (consulte a seção Atributo Trident abaixo para obter a lista completa de atributos):</block>
-  <block id="7cb76a35f0ca09eacd7393285baf81df" category="paragraph">Use este exemplo para configurar o Storageclass para volumes usando iSCSI:</block>
   <block id="4789829a93714df585353f631620ef1d" category="paragraph-title">Exemplo de PVC usando iSCSI</block>
   <block id="325b282cbc15cc9dcde1a69271472526" category="paragraph">Este exemplo mostra um PVC básico para iSCSI com acesso RWO que está associado a uma StorageClass denominada<block ref="63f9100803e1f67a5e33cbd5da9dbb33" prefix=" " category="inline-code"></block> .</block>
   <block id="4aac510e801e497da3b150682838f5f7" category="section-title">Criar PVC</block>
@@ -6207,28 +6198,9 @@
   <block id="ac93ad43c097943006fe719e9fd99b27" category="summary">Configure o Trident para provisionar volumes em bloco (iSCSI) do Google Cloud NetApp Volumes Flex Unified pools.</block>
   <block id="9219256f157bdafe1c5a214d5484f9c8" category="doc">Configurar o Google Cloud NetApp Volumes para cargas de trabalho SAN</block>
   <block id="030ed2edf468b53664e975b876d46f03" category="paragraph">Este driver é dedicado a cargas de trabalho em bloco e não oferece suporte a protocolos NAS.</block>
-  <block id="f5112c14f372dd7b94423fd6a40d95d7" category="admonition">O <block ref="0ffa63dea74ac96b64836a273ee062bb" prefix=" " category="inline-code"></block>backend é necessário para provisionar volumes de bloco iSCSI. O <block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block>backend suporta apenas protocolos NAS e não pode ser usado para cargas de trabalho SAN.</block>
-  <block id="5319fb19b2dd90537aeb7ba40a987af6" category="section-title">Volumes NAS e volumes de bloco iSCSI</block>
-  <block id="1b9516b1df4a531800d0469511251af0" category="paragraph">Google Cloud NetApp Volumes oferece suporte tanto a armazenamento NAS quanto a armazenamento em blocos, que diferem na forma como os aplicativos acessam e gerenciam os dados.</block>
-  <block id="deba7c0a7280353d81db885dfc3a2c2e" category="paragraph">Os volumes NAS fornecem armazenamento baseado em arquivos e são montados como sistemas de arquivos compartilhados usando NFS ou SMB. Esses volumes são comumente usados quando vários pods ou nós precisam acessar os mesmos dados simultaneamente.</block>
-  <block id="5c13d573cd0c3bff82cc20bb1a8ea338" category="paragraph">Os volumes de bloco iSCSI fornecem armazenamento de bloco bruto e são anexados aos nós do Kubernetes como dispositivos de bloco. Cada volume é provisionado como um Logical Unit Number (LUN) e acessado usando o protocolo iSCSI. O armazenamento de bloco é normalmente usado quando as cargas de trabalho exigem acesso em nível de bloco ou comportamento de E/S gerenciado pelo aplicativo.</block>
-  <block id="95de174fe36d889a2507980416ff7832" category="paragraph">Você pode implantar cargas de trabalho orientadas a blocos no Google Kubernetes Engine usando storage iSCSI gerenciado pelo Trident, com suporte de pools *Flex Unified* do Google Cloud NetApp Volumes.</block>
   <block id="a7a26fa611d34df752010baa514d8644" category="paragraph">Isso se aplica aos seguintes ambientes:</block>
   <block id="33b357e9b1248a8155cd7a9b219c13f5" category="list-text">Trident 26.02 e posteriores</block>
-  <block id="eabd6f0afbc2b75e4a550c368b9724b6" category="list-text">Google Cloud NetApp Volumes *Flex Unified* pools de storage</block>
-  <block id="21f7ffb8541454449c2085beed22898c" category="list-text">workloads em bloco baseadas em iSCSI</block>
-  <block id="03c58ac276fe9f7ce7c3bab8317c8089" category="admonition">Apenas o nível de serviço Flex é compatível com cargas de trabalho SAN no Trident 26.02.</block>
-  <block id="0464e7e460924a133ff67fcc6e134919" category="section-title">Visão geral da arquitetura de armazenamento</block>
-  <block id="44d1313f5c73f54fb47908e3f0a4f496" category="paragraph">Para cargas de trabalho SAN, Trident provisiona armazenamento em bloco criando iSCSI Logical Unit Numbers (LUNs) em pools de storage Flex Unified.</block>
-  <block id="74f227e976bae1cc39e675842eb7cb2d" category="paragraph">Cada Kubernetes PersistentVolume corresponde a um único LUN. Trident gerencia todo o ciclo de vida do LUN, incluindo criação, mapeamento de host, anexação e limpeza.</block>
   <block id="ab04e271b6d54cf224666cefacdb8573" category="section-title">Pools de storage unificado Flex</block>
-  <block id="be36d9c0b275a81477dfe23120faa5e1" category="paragraph">Os pools de armazenamento Flex Unified fornecem armazenamento em bloco usando o protocolo iSCSI e são necessários para o provisionamento de SAN.</block>
-  <block id="26ae5410729e02a744a769aa5ef4bd08" category="paragraph">Para Trident 26.02:</block>
-  <block id="968785c57920529bfd59a3a78ac67308" category="list-text">Somente pools *Flex Unified REGIONAL* são suportados</block>
-  <block id="7552cdb53a868ba95c6ef5f85cb815fa" category="list-text">Os pools *ZONAL* do Flex Unified são suportados a partir do Trident 26.02.1</block>
-  <block id="45bc4080cc9c63e529abb0ba900abe6c" category="list-text">Somente o nível de serviço *Flex* é compatível com cargas de trabalho SAN</block>
-  <block id="f6723cd51a1b4a27647848cbb94a0594" category="section-title">Volumes de bloco</block>
-  <block id="36e50c65eb91278f4457106465068096" category="paragraph">Os volumes de bloco são provisionados como LUNs iSCSI e apresentados aos nós do Kubernetes como dispositivos de bloco.</block>
   <block id="eb1f6a8e5166a6617405e5407b12f256" category="paragraph">Volumes de bloco:</block>
   <block id="c10bdd8a37a44393c4f7469d2dd3d11e" category="list-text">Use o protocolo iSCSI</block>
   <block id="5e8378bcefb7ac8ef9444636b463ad2c" category="list-text">Suporte ao sistema de arquivos e apresentação de blocos brutos</block>
@@ -6245,14 +6217,10 @@
   <block id="a6ca416a27d99452ad94c04875a50237" category="list-text"><block ref="ac52cf637478f3656a1fdee5c02324fd" prefix="" category="inline-code"></block> Trident formata e monta o volume.</block>
   <block id="09947c3f46272c9a91bd1a87c7639eb6" category="list-text"><block ref="e1e4c8c9ccd9fc39c391da4bcd093fb2" prefix="" category="inline-code"></block> Trident conecta o dispositivo e o expõe como um dispositivo de bloco raw.</block>
   <block id="6e34b7a6a274d66212c5c041f078b280" category="section-title">Configurar um backend Trident SAN</block>
-  <block id="05c44b425e40404e45dd12793fbea3cf" category="section-title">Crie um StorageClass para cargas de trabalho SAN</block>
-  <block id="e6b8c8354e1cc832c61c70fcab543134" category="paragraph">Após configurar o backend SAN, crie um StorageClass que faça referência ao <block ref="0ffa63dea74ac96b64836a273ee062bb" prefix=" " category="inline-code"></block> driver.</block>
   <block id="ad232087d13574b319db8043e271b9a0" category="paragraph">O tipo de sistema de arquivos é definido no StorageClass, não no backend.</block>
   <block id="2aafc491ceeae4f91c6e908f486dd14a" category="paragraph">Tipos de sistemas de arquivos suportados:</block>
   <block id="b0c37696d180d9fb3aca04f7d5fa78d6" category="list-text"><block ref="40d1d2ce03569076bd0dc1e0ff90aa4c" prefix="" category="inline-code"></block> (padrão)</block>
   <block id="449ed6c5f87d319b6229515e91e66c19" category="list-text"><block ref="66f137c5dc684da2a6a65917c86edd67" prefix="" category="inline-code"></block></block>
-  <block id="c530853b363e6c3a83dcb768b081eeec" category="admonition">O driver SAN suporta apenas o nível de serviço Flex e não utiliza parâmetros de backend específicos do NAS, como <block ref="c72971f17465d2a32345bc872af62a34" prefix=" " category="inline-code"></block>,<block ref="c005e78d4bd808038335c32dd84cf7da" prefix=" " category="inline-code"></block>,<block ref="296026821ada2ab8aebcf13547a63df5" prefix=" " category="inline-code"></block>,<block ref="7ad68fdac2eac069eb8ed0fc45b0fb74" prefix=" " category="inline-code"></block>,<block ref="e477739f39dbd2f1e1c5268912135e92" prefix=" " category="inline-code"></block> ou configurações relacionadas ao tiering.</block>
-  <block id="e4243a03df5129eb72a50afc5da705f8" category="paragraph">Volumes de bloco provisionados usando o driver <block ref="0ffa63dea74ac96b64836a273ee062bb" prefix=" " category="inline-code"></block> oferecem suporte a:</block>
   <block id="686e697538050e4664636337cc3b834f" category="list-text">Criar</block>
   <block id="f2a6c498fb90ee345d997f888fce3b18" category="list-text">Excluir</block>
   <block id="ff24590464659ee8cdec688128c35f89" category="list-text">Clonar</block>
@@ -6261,22 +6229,18 @@
   <block id="59352489fc45602ce460963915561b6d" category="section-title">ReadWriteOnce (RWO)</block>
   <block id="f236c282e7e2f2a70de0c315bfee1e19" category="section-title">ReadWriteOncePod (RWOP)</block>
   <block id="85e9fb9823eab389cebecdfcc19aad63" category="section-title">ReadOnlyMany (ROX)</block>
-  <block id="4c4fd115a4d03a3462d0acdafe1066c7" category="paragraph">Um padrão comum para o ROX é clonar um volume ReadWriteOnce existente e montar o clone como somente leitura.</block>
   <block id="b011a35a4d416c19c8c048d929228dc5" category="section-title">ReadWriteMany (RWX) — somente bloco bruto</block>
   <block id="9463b06bf6f153df7882357e86619d84" category="paragraph">ReadWriteMany é suportado somente quando <block ref="f772287729bdf01bff1301d6925477bb" prefix=" " category="inline-code"></block>.</block>
   <block id="06a350c1ebbf0da9385125189c404c2b" category="section-title">Comportamento de sobreprovisionamento de GiB extra</block>
-  <block id="0fce6647f787c513d3d2927de617e8f8" category="paragraph">Os volumes em bloco do Google Cloud NetApp Volumes incluem sobrecarga de metadados internos. Essa sobrecarga reduz o tamanho do dispositivo visível para o kernel em comparação com a capacidade provisionada.</block>
   <block id="948153b2b31a19210ac73650d3c823fe" category="paragraph">Os testes mostram:</block>
   <block id="2f870fac29b7523a77089bf74c5dfc21" category="list-text">Aproximadamente 300 KiB de sobrecarga na criação inicial</block>
   <block id="9d830f008859ea75b8aaf391ee16d644" category="list-text">Até aproximadamente 107 MiB de overhead após um redimensionamento</block>
-  <block id="9692eac1277ba32dcecb935ad1c81d8c" category="paragraph">Como o Google Cloud NetApp Volumes aceita apenas alocações de GiB inteiros, Trident garante que o tamanho utilizável do dispositivo sempre atenda ou exceda a solicitação do PVC por:</block>
   <block id="64ba87d073e71e8d1f6a44b6ea86db47" category="list-text">Arredondando o tamanho solicitado para o próximo GiB inteiro</block>
   <block id="4097f01bd21bec8a560664060d458343" category="list-text">Adicionando um buffer adicional de 1 GiB</block>
   <block id="81eeab9506186e2dca8faefa78d54067" category="paragraph">Exemplo:</block>
   <block id="c709b7f10c1aca97c50608a41e9b96df" category="list-text">Pedido de PVC: 100 GiB</block>
   <block id="2da1d943e951f587fa397a455d51bf70" category="list-text">Tamanho provisionado no Google Cloud NetApp Volumes: 101 GiB</block>
   <block id="efe2c7aa67157cfe98ea24377b82c081" category="list-text">Espaço utilizável visível para a aplicação: pelo menos 100 GiB</block>
-  <block id="47686519d8c8a8d8952bf4cc3d9ee8be" category="paragraph">Isso garante que os aplicativos sempre recebam a capacidade solicitada, mesmo após contabilizar a sobrecarga de metadados internos.</block>
   <block id="2c2c590790e20acc0b94f9a094dc2c58" category="section-title">Exemplos de pods</block>
   <block id="f2a5d0ab21feb99ea60835fa7879e1e8" category="section-title">Volume de bloco montado no sistema de arquivos (RWO)</block>
   <block id="06acb5285fad9ad8d6f83d549b813e81" category="section-title">Dispositivo de bloco bruto (RWX)</block>
@@ -6288,9 +6252,6 @@
   <block id="81a262137df202bed2b6ba4d91b700b5" category="list-text">Faz login no destino iSCSI</block>
   <block id="3190dbedc03149a09e5a3dc1dfbc636c" category="list-text">Descobre o LUN</block>
   <block id="fe023a2ba87effc85465618ba573cc2a" category="list-text">Configura multipath</block>
-  <block id="c4e1812ca4554d39c9cac903c53a89f0" category="list-text">Se<block ref="2cf0f101be3f96ddc2574af750739255" prefix=" " category="inline-code"></block>, o Trident formata o dispositivo, se necessário, e o monta.</block>
-  <block id="171a09f6114249f41e579916571ceb0d" category="list-text">Se <block ref="f772287729bdf01bff1301d6925477bb" prefix=" " category="inline-code"></block>Trident anexar o dispositivo e expô-lo diretamente ao pod sem formatar ou montar.</block>
-  <block id="d1360e89470f42abf8a1bd73bd223f8e" category="admonition">Os volumes de bloco SAN não oferecem bloqueio distribuído nem coordenação de gravação. Quando um volume de bloco é acessado por vários nós (ReadWriteMany com <block ref="f772287729bdf01bff1301d6925477bb" prefix=" " category="inline-code"></block>), o aplicativo ou o sistema de arquivos deve gerenciar a concorrência.</block>
   <block id="f2ab524dedd31413fe8e2755467bb64f" category="inline-xref-macro">Configurar armazenamento em bloco (iSCSI)</block>
   <block id="386dcfb8da95be29d7285301520e80bf" category="paragraph">O driver suporta os seguintes modos de acesso:</block>
   <block id="bc017e37ded408a3a23af691ab128221" category="list-text">ReadWriteMany (RWX)</block>
@@ -6554,7 +6515,6 @@
   <block id="945c53097aed6aee6897384c32c13596" category="paragraph">Por exemplo, esta política define um <block ref="b8975976fc99a32ebfa6029b743acee3" prefix=" " category="inline-code"></block> de <block ref="b3b9f60c2eb049d3bcbddd22d73210ce" prefix=" " category="inline-code"></block>, mas Trident aplica um crescimento de 51 MB para qualquer volume SAN que a utilize:</block>
   <block id="a55370dbc1a259397316ceebdfed21b8" category="paragraph">Para evitar esse ajuste automático, defina <block ref="b8975976fc99a32ebfa6029b743acee3" prefix=" " category="inline-code"></block> para um valor superior a 50 MiB:</block>
   <block id="b58eceaaba71c126318ed8daedaef74b" category="sidebar">Configurar o armazenamento em camadas automático</block>
-  <block id="29032e0a813e69e465f384eaf892dbb3" category="sidebar">Gerenciar uma política de Autogrow</block>
   <block id="4711816ecf930de7bedb0fff0ed5f46a" category="list-text">docker.io/netapp/trident:26.02.0</block>
   <block id="d9d8d43f99f88fa1757ca456d25bffdc" category="list-text">docker.io/netapp/trident-autosupport:26.02</block>
   <block id="93284b31b63cc86c59eeb4dcd6ba1751" category="list-text">registry.k8s.io/sig-storage/csi-provisioner:v6.1.0</block>
@@ -6584,7 +6544,6 @@
   <block id="038293ff84b09b1a0092a33fdf412425" category="list-text">Exclua a implantação do operador usando o bundle manifest:</block>
   <block id="f5c23abe35c557b95db4b3fce1038b0e" category="sidebar">Mude para o operador Trident certificado pelo OpenShift</block>
   <block id="14f3910a0b98b041ef49c99202ac9220" category="admonition">Para obter o Helm chart, primeiro baixe o Helm chart em uma máquina com acesso à internet usando <block ref="75b190fb779b22a7754d4a5d68128df4" prefix=" " category="inline-code"></block>, depois copie o arquivo resultante <block ref="c13cb34a78859274a12ec8a8c0ff2044" prefix=" " category="inline-code"></block> para seu ambiente offline e instale usando <block ref="df98262a1bb421160e8fe1c48161c970" prefix=" " category="inline-code"></block> em vez da referência ao repositório na etapa final.</block>
-  <block id="0a016d1270ba974707ac8af9f53a2e63" category="sidebar">Configurar configuração automática de backend</block>
   <block id="fd271eb2e0c07a35a036e5d3d38f7295" category="list-text">Use <block ref="0562418e6d9a76d0dd22b2f186a2203d" prefix=" " category="inline-code"></block> e especifique um nome para sua implantação e o local do registro de imagens. Seu <block ref="57de9a35aeedde82408b1e047030d221" category="inline-link-macro-rx"></block> pode estar localizado em um registro ou em registros diferentes, mas todas as imagens CSI devem estar no mesmo registro. Nos exemplos, <block ref="64bf780034fbb05b851c4a4fedbc6d2a" prefix=" " category="inline-code"></block> é a versão do Trident que você está instalando.</block>
   <block id="b1a6996825cda91a559712aa47487d56" category="paragraph">Por exemplo, para alterar o valor padrão de <block ref="ad42f6697b035b7580e4fef93be20b4d" prefix=" " category="inline-code"></block>, execute o seguinte comando onde <block ref="64bf780034fbb05b851c4a4fedbc6d2a" prefix=" " category="inline-code"></block> é a versão do Trident que você está instalando:</block>
   <block id="4b4a2f07a31fb7ce67a051d38cdb07a1" category="list-text">Utilize <block ref="0562418e6d9a76d0dd22b2f186a2203d" prefix=" " category="inline-code"></block> e especifique um nome para sua implantação, como no exemplo a seguir, onde <block ref="5b8b118bf0117b802a69cacdb76c3dc5" prefix=" " category="inline-code"></block> é a versão do Trident que você está instalando.</block>
@@ -6593,9 +6552,7 @@
   <block id="6c60936b230f8221d8dfdd63e27e1ff4" category="paragraph">Para acionar a criação automática do backend, defina os parâmetros necessários na StorageClass<block ref="166e64f6c3677d0c513901242a3e702d" prefix=" " category="inline-code"></block> seção.</block>
   <block id="2a5a5f55665caf158babf5108995ea0a" category="cell">FSx para NetApp ONTAP ID do sistema de arquivos</block>
   <block id="b2407737db469410c1a18f4bf2f29654" category="cell">Driver de storage Trident (por exemplo, <block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> ou <block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>)</block>
-  <block id="fa8a3a4ea9867d7d878570a2d5212f13" category="cell">Nome do segredo do Kubernetes que contém as credenciais da AWS</block>
   <block id="e82817ea5e60bb30717e6dd9f767651e" category="paragraph">Você pode passar parâmetros opcionais para o backend através do StorageClass. Defina todos os valores opcionais como strings na StorageClass<block ref="166e64f6c3677d0c513901242a3e702d" prefix=" " category="inline-code"></block> section.</block>
-  <block id="9ad6fe0223f2a4064237d3b668da48e8" category="paragraph">Para obter uma lista completa dos parâmetros de backend, consulte: <block ref="405b5c63eb2716d2b54f049a27c529fa" category="inline-xref-macro-rx"></block>.</block>
   <block id="fba69ccc557df84216c2ed0216c7c140" category="paragraph">O exemplo a seguir mostra um StorageClass que aciona a configuração automática do backend.</block>
   <block id="ca5814ce9b88e8690a5d98623410e81d" category="paragraph">Após aplicar o StorageClass, Trident cria o backend automaticamente. Você pode criar PersistentVolumeClaims que referenciam este StorageClass.</block>
   <block id="50ebdcd69d5fa27fa38c3f3a1dddc765" category="paragraph">Trident registra o resultado da criação do backend em anotações de StorageClass.</block>
@@ -6722,4 +6679,98 @@
   <block id="574fe6dc4c1256174b51cb080d9c29d7" category="paragraph">Trident fornece o <block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block> driver para provisionar armazenamento NAS a partir do Google Cloud NetApp Volumes.</block>
   <block id="9cc2fc7699d7a45046ad2a26aecf813c" category="paragraph">Os volumes NAS são provisionados usando o <block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block> backend e suportam os protocolos NFS e SMB.</block>
   <block id="e31618e7026dbf60de16d83baf88e924" category="paragraph">Para provisionar volumes SMB, defina <block ref="296026821ada2ab8aebcf13547a63df5" prefix=" " category="inline-code"></block> para <block ref="79e0f325804dafbdaef73b3b17c0fd8d" prefix=" " category="inline-code"></block> e forneça as credenciais.</block>
+  <block id="0921e61089710d047d2a0f043e6939a7" category="list-text">Trident 25.10 e versões posteriores suportam FC, além de iSCSI e NVMe/TCP.</block>
+  <block id="d7878fe66e43144b89a634017c6d9c0e" category="section-title">O que há de novo na versão 26.02.1</block>
+  <block id="b63977ebeb8cca980a4ae51bb1ba061c" category="list-text">Corrigido o comportamento do SAN do Google Cloud NetApp Volumes (GCNV) para oferecer suporte a pools ZONAL do Flex Unified para cargas de trabalho em bloco (iSCSI). Agora, as configurações zonais e regionais são suportadas.</block>
+  <block id="48d9ac9cecc6a53197cd7cf3326dbb82" category="list-text">Corrigido o tratamento do pool NAS UNIFIED do Google Cloud NetApp Volumes (GCNV) através da melhoria das operações de criação, validação, nomenclatura e pesquisa de volumes alternativos quando <block ref="205a5b64f152caac16befd73ce654fa0" prefix=" " category="inline-code"></block> está ausente.</block>
+  <block id="2856310c5ecaef80431578f20f07f4e9" category="list-text">Corrigido um problema em que as operações de redimensionamento de dispositivos iSCSI podiam falhar quando os caminhos e portais disponíveis não correspondiam.</block>
+  <block id="f1f7aea0717cc16a257321e20d792ddb" category="list-text">Corrigido um problema intermitente que <block ref="834341c7d2e0b68a207927a199a70917" prefix=" " category="inline-code"></block> identificava incorretamente o tipo de sistema de arquivos para dispositivos LUKS, impedindo a criação de novos volumes.</block>
+  <block id="0441b48d2733f63cb09586ef7514fc61" category="list-text">Corrigido um problema em que operações de publicação e preparação LUKS em grande escala podiam bloquear o controlador Trident. Agora, os usuários devem manter o controle das senhas LUKS associadas aos volumes.</block>
+  <block id="314edd6beb90e77099d539ab9b164117" category="list-text">Corrigido um problema em que partições multipath iSCSI podiam aparecer como dispositivos fantasmas, impedindo que operações CSI<block ref="0dc16474f3e9131d097aeb1faa318204" prefix=" " category="inline-code"></block> fossem bem-sucedidas.</block>
+  <block id="5b56152c3ed450c0815295ea36211c24" category="list-text">Corrigida uma condição de corrida no namespace NVMe/TCP durante a criação simultânea de volumes (Issue #1089).</block>
+  <block id="efda1edd2e23e1d2cf8f8a9619907556" category="list-text">Corrigidas as operações simultâneas de clonagem de snapshots quando snapshots eram executados no mesmo segundo.</block>
+  <block id="257c53decebe3772111a15d42d3ea6f6" category="list-text">Corrigido um problema que impedia as VMs KubeVirt usando <block ref="c2430f5c6ca2c7fc1d96f3b9df14185f" prefix=" " category="inline-code"></block> de realizarem failover com Trident Automated Workload Failover.</block>
+  <block id="c4d85772a9395852304b81d59e3ba46e" category="list-text">Corrigido um erro que ocorria ao excluir um recurso personalizado inválido<block ref="aecd0fe929ecc8d67b064573f3b18b42" prefix=" " category="inline-code"></block> ao usar o núcleo concorrente do Trident.</block>
+  <block id="bc9232ac4c755ee84426e24e9a0405c3" category="list-text">Correção da indentação na <block ref="438b4d4d7c9abf7aad5e80313b276af4" prefix=" " category="inline-code"></block>definição YAML do CRD do Kubernetes (Issue #1120).</block>
+  <block id="77c126cbf9806500f42e2555a5c6472e" category="list-text">Corrigida a chamada da API REST de exclusão assíncrona do qtree (Problema nº 1121).</block>
+  <block id="665f8b6d8bf5d53c096e556d1b8d8d21" category="list-text">Corrigido <block ref="52372c5dc2b12eade9d88cfb99e96f6a" prefix=" " category="inline-code"></block> para usar o tipo de sistema de arquivos de configuração de volume em vez de um tipo de sistema de arquivos padrão incorreto.</block>
+  <block id="4d0012a281e9d7a72c25eeddcd3a4442" category="list-text">Corrigido o registro de inicialização do controlador para relatar corretamente o status do driver simultâneo.</block>
+  <block id="21eac6d41ac447841701e39ab931d335" category="list-text">Correção no tratamento de backends suspensos no Trident concorrente.</block>
+  <block id="ca7f07b973cebd6b0e4c9512a8f7bbf5" category="list-text">Melhoria no tratamento de ARNs da AWS para oferecer suporte a regiões especiais.</block>
+  <block id="34cd5d664f4ee492037497dd2d2ee1e6" category="admonition">O <block ref="0ffa63dea74ac96b64836a273ee062bb" prefix=" " category="inline-code"></block>backend é necessário para provisionar volumes de bloco iSCSI. O <block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block>backend suporta apenas protocolos NAS e não pode ser usado para cargas de trabalho SAN.</block>
+  <block id="1c7b34a9caa8749e2d24e5d603c118be" category="paragraph">Trident oferece suporte ao Google Cloud NetApp Volumes SAN (iSCSI) para cargas de trabalho usando o driver <block ref="0ffa63dea74ac96b64836a273ee062bb" prefix=" " category="inline-code"></block>.</block>
+  <block id="390dcee3e1a835e181b48851e539ee2e" category="paragraph">Os volumes SAN são provisionados a partir de pools de armazenamento Flex Unified e apresentados aos nós do Kubernetes como dispositivos de bloco iSCSI.</block>
+  <block id="a4df6bbc6e9373f94ef2331d24529059" category="list-text">Pools de storage unificado do Google Cloud NetApp Volumes Flex</block>
+  <block id="601d52adc8114431bc416099ce8be313" category="list-text">Cargas de trabalho baseadas em iSCSI</block>
+  <block id="78f03f85c5394fd7a80cc7e7e665e932" category="paragraph">Os pools de armazenamento Flex Unified fornecem armazenamento em bloco usando o protocolo iSCSI e são necessários para o provisionamento de SAN:</block>
+  <block id="b8343de0d3baa796d367deff1c097f4e" category="list-text">Os pools regionais Flex Unified são suportados.</block>
+  <block id="34e60a7c669e6264d983e5da5db3e289" category="list-text">Os pools Zonais unificados Flex são suportados a partir do Trident 26.02.1.</block>
+  <block id="5e9e385e7259d689cd483deada86f697" category="list-text">Apenas o nível de serviço *Flex* é compatível com cargas de trabalho SAN.</block>
+  <block id="6d0bdf89c852025bf524b10f0edf8f0c" category="paragraph">Após configurar o backend SAN, crie um StorageClass que faça referência ao <block ref="0ffa63dea74ac96b64836a273ee062bb" prefix=" " category="inline-code"></block> driver.</block>
+  <block id="31baf70cf008a67a50e9c49559080529" category="admonition">O driver SAN suporta apenas o nível de serviço Flex e não utiliza parâmetros de backend específicos do NAS, como <block ref="c72971f17465d2a32345bc872af62a34" prefix=" " category="inline-code"></block>,<block ref="c005e78d4bd808038335c32dd84cf7da" prefix=" " category="inline-code"></block>,<block ref="296026821ada2ab8aebcf13547a63df5" prefix=" " category="inline-code"></block>,<block ref="7ad68fdac2eac069eb8ed0fc45b0fb74" prefix=" " category="inline-code"></block>,<block ref="e477739f39dbd2f1e1c5268912135e92" prefix=" " category="inline-code"></block> ou configurações relacionadas ao tiering.</block>
+  <block id="5bb59cc146f321cf8944a8809d74e973" category="paragraph">Um padrão comum para o ROX é clonar um volume ReadWriteOnce existente e montar o clone como somente leitura.</block>
+  <block id="e8273045646b5e2bce6a3302f1a9c795" category="section-title">Comportamento do volume do bloco</block>
+  <block id="9ddfd85239f2d15ec2962a88e4e01270" category="paragraph">Os volumes de bloco são provisionados como LUNs iSCSI e apresentados aos nós do Kubernetes como dispositivos de bloco.</block>
+  <block id="d91f523dd03ef686932c834e2b87ff6e" category="paragraph">Volumes de bloco provisionados usando o driver <block ref="0ffa63dea74ac96b64836a273ee062bb" prefix=" " category="inline-code"></block> oferecem suporte a:</block>
+  <block id="a554317dfe38d81e719d53f5b1914659" category="paragraph">Os volumes em bloco do Google Cloud NetApp Volumes incluem sobrecarga de metadados internos. Essa sobrecarga reduz o tamanho do dispositivo visível para o kernel em comparação com a capacidade provisionada.</block>
+  <block id="9cc85ca134183bf6731e19e54f5cd4b5" category="paragraph">Como o Google Cloud NetApp Volumes aceita apenas alocações de GiB inteiros, Trident garante que o tamanho utilizável do dispositivo sempre atenda ou exceda a solicitação do PVC por:</block>
+  <block id="ab269249c9a3da70a264affeeca79815" category="list-text">Se<block ref="2cf0f101be3f96ddc2574af750739255" prefix=" " category="inline-code"></block>, o Trident formata o dispositivo, se necessário, e o monta.</block>
+  <block id="1a4c7c5069a55df075a08ed3c670d732" category="list-text">Se <block ref="f772287729bdf01bff1301d6925477bb" prefix=" " category="inline-code"></block>Trident anexar o dispositivo e expô-lo diretamente ao pod sem formatar ou montar.</block>
+  <block id="17a0461c603d62f121b81e8eb4ab4253" category="admonition">Os volumes de bloco SAN não oferecem bloqueio distribuído nem coordenação de gravação. Quando um volume de bloco é acessado por vários nós (ReadWriteMany com <block ref="f772287729bdf01bff1301d6925477bb" prefix=" " category="inline-code"></block>), o aplicativo ou o sistema de arquivos deve gerenciar a concorrência.</block>
+  <block id="cb182a02f5aa1ac8a7a2a4f14397a3b4" category="admonition">Para pools de armazenamento UNIFIED do Google Cloud NetApp Volumes, Trident aplica regras de nomenclatura e validação específicas do UNIFIED durante as operações de volume.</block>
+  <block id="45a3d3e8acfc9167865516499647195a" category="paragraph">Ao localizar um volume, Trident pode avaliar várias variantes de nomes de volume compatíveis (por exemplo, formatos com hífen e sublinhado) para melhorar a confiabilidade da importação e da descoberta.</block>
+  <block id="3e9c774c40ebaa8bc6c065e6715290b8" category="cell">Nome do segredo do Kubernetes que contém as credenciais do FSx for ONTAP</block>
+  <block id="24cea288ed5f6fc9b7c08e95b6463461" category="paragraph">Para obter uma lista completa dos parâmetros de backend, consulte: <block ref="f189fd85f853ba52a4458041a5711c17" category="inline-xref-macro-rx"></block>.</block>
+  <block id="850f34ee07c1f7c733689432aa913d97" category="doc">Configurar um PVC</block>
+  <block id="cb0040729f6ab230a60b480b317fab03" category="paragraph">Esta seção inclui instruções sobre como criar um PersistentVolumeClaim (PVC) que usa o StorageClass do Kubernetes configurado para solicitar um PV. Se a solicitação for bem-sucedida, você poderá montar o PV em um pod.</block>
+  <block id="8600b568bf793d635d66dbc65c77edc6" category="paragraph">Um <block ref="b1b93f46fc69df9fe663c091f4d6c2b4" category="inline-link-rx"></block> (PVC) é uma solicitação de acesso ao PersistentVolume no cluster. O PVC pode ser configurado para solicitar armazenamento de um determinado tamanho ou modo de acesso. Usando o StorageClass associado, o administrador do cluster pode controlar mais do que apenas o tamanho e o modo de acesso do PersistentVolume—como desempenho ou nível de serviço.</block>
+  <block id="1bddf0f5261cd0525bb15cf1ba37854b" category="paragraph">Após criar o backend Trident e o StorageClass, você pode criar um PVC. Depois que o PVC for criado, você pode montar o volume em um pod.</block>
+  <block id="8ffb3b03b4720d3a85bb61ca3588ec2b" category="paragraph">Os exemplos a seguir mostram opções básicas de configuração de PVC.</block>
+  <block id="defe22fa10dbce4957e04ddd9dccb782" category="paragraph">Antes de provisionar volumes usando Trident, você precisa integrar seu backend de armazenamento ao Trident criando uma Trident Backend Configuration (TBC). A TBC define como Trident se conecta ao backend de armazenamento e fornece as informações necessárias para que Trident gerencie os recursos de storage.</block>
+  <block id="962ef8b6f8710e2a8691044683805591" category="section-title">Criar uma configuração de backend Trident (TBC) para FSx for ONTAP</block>
+  <block id="2a673b8d42dbadfd3526e120fc0bc016" category="paragraph">Existem duas maneiras de configurar o backend do Trident para usar um sistema de arquivos FSx for ONTAP: * Criar um StorageClass que utilize o recurso de Backend Automático. * Criar o backend e o StorageClass separadamente.</block>
+  <block id="f0177cdf4d35f6a71b4a28e75a4ac404" category="inline-xref-macro">Configurar StorageClass e PVC</block>
+  <block id="a2e20c8e1b65e56ee81610e9d95b78ce" category="paragraph">Os passos desta seção explicam como criar o backend separadamente. Para obter informações sobre como usar o recurso de Backend Automático, consulte a seção <block ref="b825ec6c5ef762e84c50ce9a86b6b5be" category="inline-xref-macro-rx"></block> para mais informações.</block>
+  <block id="45785995a830d1fc258f9f492e7419f3" category="doc">Configure uma classe de armazenamento</block>
+  <block id="1a9cbcbc6ddc2988ba989623616f551f" category="paragraph">O<block ref="da3f7f170e13df7f56e057fc4226aa85" category="inline-link-rx"></block> identifica um provisionador e instrui o provisionador sobre como provisionar volumes. Esta seção mostra como configurar um objeto StorageClass do Kubernetes que especifica Trident como provisionador.</block>
+  <block id="181d66d2970ca0a79166620ff77f2365" category="section-title">Criar um StorageClass Objeto</block>
+  <block id="210b23a19c97ecce400f85135dfa4f55" category="paragraph">Ao criar um StorageClass para FSx for ONTAP, o Trident criará automaticamente a configuração de backend.</block>
+  <block id="509f5efbbc1d003a3134ba763ce9a153" category="admonition">Se você deseja configurar manualmente o backend de armazenamento, consulte a <block ref="f92675ea6cdcb434e9668b63d509b6c2" category="inline-xref-macro-rx"></block> seção sobre como criar o backend Trident e a classe de armazenamento separadamente.</block>
+  <block id="9fdbc2bf1d74e1af2c19ff15c59205a5" category="paragraph">Os três parâmetros a seguir precisam ser definidos ao criar um StorageClass:</block>
+  <block id="4bac3033b4cd0f657a9175dd92932fd7" category="paragraph">Você pode passar parâmetros opcionais para o backend através do StorageClass. Defina todos os valores opcionais como strings na StorageClass<block ref="166e64f6c3677d0c513901242a3e702d" prefix=" " category="inline-code"></block> section. Para obter uma lista completa dos parâmetros de backend, consulte: <block ref="f189fd85f853ba52a4458041a5711c17" category="inline-xref-macro-rx"></block>.</block>
+  <block id="1ebccd08373f6e20b1548e7b97f25d9f" category="section-title">Exemplo de arquivos de configuração StorageClass.</block>
+  <block id="e838148d72a21ebe7c26751f37c63e59" category="section-title">Crie o StorageClass</block>
+  <block id="3a0ab04525f748974131d078f6efe9a5" category="paragraph">Após criar o arquivo de configuração, execute o seguinte comando para criar a storage class.</block>
+  <block id="319d270355da0ef5c1a645fb84ecd6a2" category="paragraph">Após aplicar o StorageClass, Trident cria o backend automaticamente. Você pode então criar PersistentVolumeClaims que referenciam esse StorageClass.</block>
+  <block id="431abe22d3c3f3a5cfccfc33a37591a3" category="paragraph">Confirme que<block ref="bfa17afa82ab15b8ee3af4af55582f7c" prefix=" " category="inline-code"></block> está definido como<block ref="505a83f220c02df2f85c3810cd9ceb38" prefix=" " category="inline-code"></block>. Se o valor for<block ref="e139a585510a502bbf1841cf589f5086" prefix=" " category="inline-code"></block>, revise<block ref="d4983a0c46f31dbf43955d08123b5f4d" prefix=" " category="inline-code"></block> para o erro.</block>
+  <block id="3b4e54160ff21b9126b1939a2830cc79" category="list-text">Excluir um StorageClass que possui a configuração automática de backend geralmente exclui o Trident backend associado. Isso pode interromper a conectividade de storage e interromper cargas de trabalho em execução. Valide o impacto antes de excluir um StorageClass gerenciado.</block>
+  <block id="92c48c00f55de3455bac37a2a403df94" category="section-title">Crie um Kubernetes StorageClass sem configuração automática de backend</block>
+  <block id="8645f9668f3f64e63c43014bbdff0882" category="paragraph">Se você deseja criar o backend do Trident e o StorageClass separadamente, siga estas etapas.</block>
+  <block id="f6975d5b072f523c5dab01685cde7f4f" category="paragraph">Trident deriva a configuração do backend da definição de StorageClass. Quando você aplica o StorageClass, Trident valida os parâmetros necessários, cria o backend e anota o StorageClass com o status.</block>
+  <block id="05b05d7ac0a05235c947a9fa4351a814" category="paragraph">Trident cria o VolumeSnapshotClass apenas uma vez. Trident reutiliza o mesmo VolumeSnapshotClass para StorageClasses subsequentes.</block>
+  <block id="5e2e038fc4bffa632617893c02f7a119" category="section-title">Crie o backend do Trident</block>
+  <block id="5091534ae5bed88a4a03c171f04fce23" category="paragraph">Para criar um backend Trident, você precisa criar um arquivo de configuração em formato JSON ou YAML. O arquivo deve especificar o tipo de storage desejado (NAS ou SAN), o sistema de arquivos, a SVM de onde obtê-lo e como autenticar com ela. O exemplo a seguir mostra como definir um storage baseado em NAS e usar um segredo da AWS para armazenar as credenciais da SVM que você deseja usar:</block>
+  <block id="e34c114fdc6579aafd382920a42a88ca" category="cell">Nome do driver</block>
+  <block id="945ba4a855d40234c3d7eaa71538b817" category="cell">Cada PV provisionado é um LUN dentro de seu próprio volume Amazon FSx for NetApp ONTAP. Recomendado para armazenamento em bloco.</block>
+  <block id="2994e958dfa6c0f3734dd5b8035ca02c" category="cell">Cada PV provisionado é um volume completo do Amazon FSx for NetApp ONTAP. Recomendado para NFS e SMB.</block>
+  <block id="de3d99d86e2c4f81071b35780c774e1f" category="cell">Cada PV provisionado é um LUN com um número configurável de LUNs por Amazon FSx for NetApp ONTAP volume.</block>
+  <block id="ec5fde32b22ac2335b49b73f395ffa3e" category="cell">Cada PV provisionado é uma qtree, com um número configurável de qtrees por volume do Amazon FSx for NetApp ONTAP.</block>
+  <block id="c2a07acac71825901cef17dc1565ca40" category="cell">Cada PV provisionado é um volume completo do Amazon FSx for NetApp ONTAP FlexGroup.</block>
+  <block id="a815866827f14ff7dc89e579b05df139" category="paragraph">Após criar o arquivo de configuração, execute os seguintes comandos para criar e validar a Trident Backend Configuration (TBC):</block>
+  <block id="d5918f11259043026811eb13735fc8a8" category="paragraph">Para obter mais informações sobre outras opções de configuração, consulte a <block ref="f3823c63584019f8993046bd2573c9b0" category="inline-xref-macro-rx"></block> seção abaixo.</block>
+  <block id="53a21bcdb24e291e71cf0f2572c48299" category="section-title">Configurar uma Storage Class *sem* configuração automática de backend</block>
+  <block id="7d6abad6d9b0cb2c17d374eb60cfd549" category="paragraph">A seguir, apresentamos exemplos de configurações de Storage Class para uso com Trident e FSx for ONTAP.</block>
+  <block id="79aed0c0cab8f60748d97cff824e71d8" category="section-title">Classe de armazenamento para NFS</block>
+  <block id="1aeaba8f713cb76c3933e520e71db58b" category="paragraph">Você pode usar este exemplo para configurar StorageClass para volumes usando NFS (consulte a seção de Atributos do Trident abaixo para obter a lista completa de atributos):</block>
+  <block id="3c2af55b3b722b8e55112e627dcfa582" category="section-title">Classe de armazenamento para iSCSI</block>
+  <block id="157051d3c2492a3589f7ef937c9a3380" category="paragraph">Use este exemplo para configurar StorageClass para volumes usando iSCSI:</block>
+  <block id="5182a799b5d9bfc055f426543bab1173" category="section-title">Classe de armazenamento usando NFSv3 e AWS Bottlerocket</block>
+  <block id="d95d0aae1fadec77938feae823d4861b" category="section-title">Atributos do Trident StorageClass</block>
+  <block id="a6a81819cd47e7b0e923e797ae4112ba" category="paragraph">^1^: Não suportado pelo ONTAP Select ou FSx for ONTAP systems</block>
+  <block id="ef316cded652e105fec19365cf7e97ba" category="section-title">Crie a classe de armazenamento</block>
+  <block id="229c01017effc9064e0cda054a83ffb6" category="paragraph">Depois de configurar o StorageClass, você pode criá-lo no Kubernetes.</block>
+  <block id="f187a9b6db1e4664e89d1b0a6ae8e5aa" category="paragraph">Você pode provisionar volumes SMB usando o <block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> driver. No entanto, para isso, você deve concluir estas etapas: <block ref="2c87a2692f74b765fc7d12f8607c123c" category="inline-link-macro-rx"></block>.</block>
+  <block id="b808c0f6c02a2bfc490cec673c19e395" category="cell">Endereço IP do protocolo LIF. *ONTAP NAS drivers*: NetApp recomenda especificar dataLIF. Caso não seja fornecido, Trident busca os dataLIFs no SVM. Você pode especificar um nome de domínio totalmente qualificado (FQDN) para ser usado nas operações de montagem NFS, permitindo criar um DNS round-robin para balancear a carga entre vários dataLIFs. Pode ser alterado após a configuração inicial. *ONTAP SAN drivers*: Não especifique para iSCSI. Trident usa ONTAP Selective LUN Map para descobrir os LIFs iSCSI necessários para estabelecer uma sessão multipath. Um aviso é gerado se dataLIF for definido explicitamente. Pode ser configurado para usar endereços IPv6 se Trident foi instalado usando o parâmetro IPv6. Os endereços IPv6 devem ser definidos entre colchetes, como [28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555].</block>
+  <block id="c0f12f4cfb79ab18be46d9a2f0eccd58" category="sidebar">Configurar classe de armazenamento</block>
+  <block id="6c8701a99958ffdb3999e3f1f6e5fdbf" category="sidebar">Gerenciar expansão automática de volume</block>
 </blocks>
