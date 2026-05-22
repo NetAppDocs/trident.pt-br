@@ -6773,4 +6773,14 @@
   <block id="b808c0f6c02a2bfc490cec673c19e395" category="cell">Endereço IP do protocolo LIF. *ONTAP NAS drivers*: NetApp recomenda especificar dataLIF. Caso não seja fornecido, Trident busca os dataLIFs no SVM. Você pode especificar um nome de domínio totalmente qualificado (FQDN) para ser usado nas operações de montagem NFS, permitindo criar um DNS round-robin para balancear a carga entre vários dataLIFs. Pode ser alterado após a configuração inicial. *ONTAP SAN drivers*: Não especifique para iSCSI. Trident usa ONTAP Selective LUN Map para descobrir os LIFs iSCSI necessários para estabelecer uma sessão multipath. Um aviso é gerado se dataLIF for definido explicitamente. Pode ser configurado para usar endereços IPv6 se Trident foi instalado usando o parâmetro IPv6. Os endereços IPv6 devem ser definidos entre colchetes, como [28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555].</block>
   <block id="c0f12f4cfb79ab18be46d9a2f0eccd58" category="sidebar">Configurar classe de armazenamento</block>
   <block id="6c8701a99958ffdb3999e3f1f6e5fdbf" category="sidebar">Gerenciar expansão automática de volume</block>
+  <block id="ca98c81b13d8207d786f43bf91fb1214" category="paragraph">Dependências do Trident Protect atualizadas para corrigir vulnerabilidades de segurança:</block>
+  <block id="1e814d791d35fa19b57c4145b3286329" category="inline-link-macro">CVE-2026-33186</block>
+  <block id="afa5c2c58b0ea0edf4224d65e5937d55" category="list-text">gRPC-Go: <block ref="1c9c3ccc32b9c44006ccf474ce58b736" category="inline-link-macro-rx"></block></block>
+  <block id="d4d19dcac0c9bbf8965fcda3320fccfb" category="inline-link-macro">CVE-2024-45337</block>
+  <block id="b5dd9eebb8922267c5bd4f5556d26701" category="list-text">Go x/crypto SSH: <block ref="f482c36ed3999907815ac53d6074ec2f" category="inline-link-macro-rx"></block></block>
+  <block id="3ae92ebfe83269512ddaa15612a81256" category="list-text">OpenTelemetry-Go: <block ref="4699607a06f93475b0f8f4a13bd690dc" category="inline-link-macro-rx"></block></block>
+  <block id="b78ae2b3b9e5d50bcd9c234029141082" category="inline-link-macro">CVE-2025-22871</block>
+  <block id="8e31ed98521d2fbd01629de60bdbfd6a" category="list-text">Tempo de execução Go: <block ref="472bd143483bc49bc89effbd314435c0" category="inline-link-macro-rx"></block></block>
+  <block id="278b5284fc6585f71203297ebab6500e" category="inline-link-macro">CVE-2025-23109</block>
+  <block id="fd2c12a453dd202f7117b96858090a49" category="list-text">Dependências adicionais: <block ref="7beaa9a23a5ebb4abc880f48947240a7" category="inline-link-macro-rx"></block></block>
 </blocks>
