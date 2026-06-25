@@ -25,7 +25,7 @@ Antes de instalar o Trident, você deve rever estes requisitos gerais do sistema
 ====
 []
 =====
-* Kubernetes 1.35 agora é compatível com Trident. Atualize Trident antes de atualizar Kubernetes.
+* Kubernetes 1.36 agora é compatível com Trident. Atualize Trident antes de atualizar Kubernetes.
 * O Trident reforça estritamente o uso de configuração multipathing em ambientes SAN, com um valor recomendado de `find_multipaths: no` no arquivo multipath.conf.
 +
 O uso de configuração não multipathing ou o uso `find_multipaths: yes` de ou `find_multipaths: smart` valor no arquivo multipath.conf resultará em falhas de montagem. A Trident recomenda o uso de `find_multipaths: no` desde a versão 21,07.
@@ -41,13 +41,13 @@ O uso de configuração não multipathing ou o uso `find_multipaths: yes` de ou 
 O Trident é compatível com vários mecanismos de contêiner e orquestradores, incluindo os seguintes:
 
 * Anthos On-Prem (VMware) e Anthos em bare metal 1,16
-* Kubernetes 1.27 - 1.35
+* Kubernetes 1.27 - 1.36
 * OpenShift 4.12, 4.14 - 4.21 (se você planeja usar a preparação de nó iSCSI com OpenShift 4.19, a versão mínima do Trident suportada é 25.06.1.)
 +
 
 NOTE: A Trident continua a oferecer suporte a versões mais antigas do OpenShift em alinhamento com olink:https://access.redhat.com/support/policy/updates/openshift["Ciclo de vida da versão do Red Hat Extended Update Support (EUS)"] , mesmo que dependam de versões do Kubernetes que não são mais oficialmente suportadas pelo upstream.  Ao instalar o Trident nesses casos, você pode ignorar com segurança quaisquer mensagens de aviso sobre a versão do Kubernetes.
 
-* Rancher Kubernetes Engine 2 (RKE2) v1.28.x - 1.35.x
+* Rancher Kubernetes Engine 2 (RKE2) v1.28.x - 1.36.x
 
 
 O Trident também trabalha com uma série de outras ofertas do Kubernetes totalmente gerenciadas e autogeridas, incluindo o Google Kubernetes Engine (GKE), o Amazon Elastic Kubernetes Services (EKS), o
@@ -109,56 +109,56 @@ A tabela abaixo resume os recursos disponíveis com esta versão do Trident e as
 
 
 | Trident  a| 
-1.27 - 1.35
+1.27 - 1.36
  a| 
 Não
 
 
 
 | Instantâneos de volume  a| 
-1.27 - 1.35
+1.27 - 1.36
  a| 
 Não
 
 
 
 | PVC a partir de instantâneos de volume  a| 
-1.27 - 1.35
+1.27 - 1.36
  a| 
 Não
 
 
 
 | Redimensionamento iSCSI PV  a| 
-1.27 - 1.35
+1.27 - 1.36
  a| 
 Não
 
 
 
 | ONTAP bidirectional CHAP  a| 
-1.27 - 1.35
+1.27 - 1.36
  a| 
 Não
 
 
 
 | Políticas de exportação dinâmica  a| 
-1.27 - 1.35
+1.27 - 1.36
  a| 
 Não
 
 
 
 | Operador Trident  a| 
-1.27 - 1.35
+1.27 - 1.36
  a| 
 Não
 
 
 
 | Topologia de CSI  a| 
-1.27 - 1.35
+1.27 - 1.36
  a| 
 Não
 
@@ -223,7 +223,7 @@ Para instalações com ar-gapped, a lista a seguir é uma referência das imagen
 | Versões do Kubernetes | Imagem do recipiente 
 
 
-| v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.35.0  a| 
+| v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.36.0  a| 
 * docker.io/netapp/trident:26.02.0
 * docker.io/netapp/trident-autosupport:26.02
 * registry.k8s.io/sig-storage/csi-provisioner:v6.1.0

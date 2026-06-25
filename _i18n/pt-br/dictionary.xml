@@ -5943,8 +5943,6 @@
   <block id="69a4986cbe93f4162ce953d8e917b215" category="list-text"><block ref="69a4986cbe93f4162ce953d8e917b215" category="inline-link-rx"></block></block>
   <block id="4c2c3e7d0f5cd32449fc11925a3ad7bc" category="doc">Documentação do Trident 26.02</block>
   <block id="28b62bff68083dad22bdf1acf812f48a" category="list-text">Kubernetes 1.35 agora é compatível com Trident. Atualize Trident antes de atualizar Kubernetes.</block>
-  <block id="3efcec6a387ab5737e772a3baeea51b2" category="list-text">Kubernetes 1.27 - 1.35</block>
-  <block id="43e43f38c3caf4af908ea20149dccef1" category="paragraph">1.27 - 1.35</block>
   <block id="ac6cc7900e3d9478b2fcf3a73c070b29" category="section-title">Imagens de contêiner necessárias para Trident 26.02</block>
   <block id="627219ce2083b03812e10846d1307811" category="list-text">*spec.runImmediately*: (_Opcional_) Defina como <block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block> para acionar uma execução única e imediata da linha de base (backup e/ou snapshot de acordo com as configurações de retenção) quando o agendamento for criado. O padrão é <block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>. Isso não modifica a recorrência subsequente.</block>
   <block id="b267d2c4b44dd537f81ddd4d1ca1cdd8" category="paragraph">Exemplo de YAML para agendamento com execução imediata:</block>
@@ -6323,7 +6321,6 @@
   <block id="0e2ef50b7c69ffbf62cb09918ee19243" category="paragraph">Trident é compatível com uma variedade de distribuições e plataformas Kubernetes.</block>
   <block id="9dc48bb809ddb16298a6203467073aba" category="list-text">SUSE Harvester 1.7.0 (ONTAP iSCSI)</block>
   <block id="ec92eeadf77128110614c3ae4b04e5c6" category="list-text">OpenShift 4.12, 4.14 - 4.21 (se você planeja usar a preparação de nó iSCSI com OpenShift 4.19, a versão mínima do Trident suportada é 25.06.1.)</block>
-  <block id="991b6998365b18269e10fd6932757c88" category="list-text">Rancher Kubernetes Engine 2 (RKE2) v1.28.x - 1.35.x</block>
   <block id="fa39b55af1ef0692bcd52101a2886102" category="inline-link-macro">Documentação sobre escalabilidade do controlador</block>
   <block id="132f0447aa079a2a979713029f6c5c0f" category="list-text">Adicionada disponibilidade geral (GA) para suporte à simultaneidade para ONTAP-NAS (somente NFS), ONTAP-SAN (iSCSI, FCP, NVMe) e Google Cloud NetApp Volumes (GCNV) drivers, graduando essa funcionalidade da versão de pré-visualização técnica. Consulte a <block ref="2cdc5fbb0ceee513eb25d6f3a67c7e5a" category="inline-link-macro-rx"></block> para mais informações.</block>
   <block id="79c677a07b8e51f9201ddd1c415adbfc" category="inline-link-macro">Documentação de expansão automática de volume</block>
@@ -6584,7 +6581,6 @@
   <block id="9d5a9690e203a91236d7cd904141669f" category="section-title">O que há de novo em 25.10</block>
   <block id="f74472a1f5a071b8eb49ce2cf4c7f852" category="paragraph">Essa configuração é ideal para quem está começando a usar o Google Cloud NetApp Volumes e testando seus recursos, mas na prática pode ser necessário definir um escopo adicional para os volumes provisionados.</block>
   <block id="8eff9b9f03bae3f241ea78649c5afe12" category="admonition">Substitua <block ref="49e22ed291a6cbd4445ed587b8bd46c4" prefix=" " category="inline-code"></block> e <block ref="7d02a93664a6fdb768f99da64ea2b2e7" prefix=" " category="inline-code"></block> pelas credenciais da sua conta de serviço.</block>
-  <block id="5efca7076d66285d044c3d550f412284" category="cell">v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.35.0</block>
   <block id="bc8f2e08eff77df26551ba5e4180236f" category="list-text">(_Opcional_) Se necessário, você pode adicionar filtragem de recursos à mesma CR para incluir ou excluir recursos específicos:</block>
   <block id="b5576cce77be319ad80f479a5e774cba" category="list-text">*Exemplo de filtro genérico:*</block>
   <block id="4878b93d7331aa7f789a8e06af931f1a" category="list-text">*Exemplo de filtro somente de PVC:*</block>
@@ -6783,4 +6779,9 @@
   <block id="8e31ed98521d2fbd01629de60bdbfd6a" category="list-text">Tempo de execução Go: <block ref="472bd143483bc49bc89effbd314435c0" category="inline-link-macro-rx"></block></block>
   <block id="278b5284fc6585f71203297ebab6500e" category="inline-link-macro">CVE-2025-23109</block>
   <block id="fd2c12a453dd202f7117b96858090a49" category="list-text">Dependências adicionais: <block ref="7beaa9a23a5ebb4abc880f48947240a7" category="inline-link-macro-rx"></block></block>
+  <block id="1f07946fee6ac5cb85e38a3da3d8db2e" category="list-text">Kubernetes 1.36 agora é compatível com Trident. Atualize Trident antes de atualizar Kubernetes.</block>
+  <block id="4713d9468516722d04cb8a63424d6222" category="list-text">Kubernetes 1.27 - 1.36</block>
+  <block id="203760c50a5659765fa822dc460e7e7b" category="list-text">Rancher Kubernetes Engine 2 (RKE2) v1.28.x - 1.36.x</block>
+  <block id="f3157f5bea9295ba633b817f5c01eba4" category="paragraph">1.27 - 1.36</block>
+  <block id="8f56aaf2c6729a76e30900b2be574507" category="cell">v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.36.0</block>
 </blocks>
