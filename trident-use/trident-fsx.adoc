@@ -37,7 +37,7 @@ NOTE: Certifique-se de seguir as etapas de preparação de nós necessárias par
 +
 ** Os volumes SMB são suportados usando `ontap-nas` apenas o driver.
 ** Os volumes SMB não são compatíveis com o complemento Trident EKS.
-** O Trident dá suporte a volumes SMB montados em pods executados apenas em nós do Windows. link:../trident-use/trident-fsx-storage-backend.html#prepare-to-provision-smb-volumes["Prepare-se para provisionar volumes SMB"]Consulte para obter detalhes.
+** Trident suporta volumes SMB montados em pods executados apenas em nós Windows. Consulte link:worker-node-prep.html#prepare-to-provision-smb-volumes["Prepare-se para provisionar volumes SMB"] para obter detalhes.
 
 
 * Antes do Trident 24,02, os volumes criados nos sistemas de arquivos do Amazon FSX que têm backups automáticos ativados, não puderam ser excluídos pelo Trident. Para evitar esse problema no Trident 24,02 ou posterior, especifique o `fsxFilesystemID`, `apiRegion` AWS , AWS `apikey` e AWS `secretKey` no arquivo de configuração de back-end do AWS FSX for ONTAP.

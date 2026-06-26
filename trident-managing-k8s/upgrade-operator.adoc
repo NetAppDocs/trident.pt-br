@@ -12,7 +12,7 @@ summary: Você pode facilmente atualizar uma instalação existente do Trident u
 
 
 [role="lead"]
-Você pode atualizar o Trident usando o operador Trident manualmente ou usando o Helm. Você pode atualizar de uma instalação de operador Trident para outra instalação de operador Trident ou atualizar de uma `tridentctl` instalação para uma versão de operador Trident. Reveja link:upgrade-trident.html#select-an-upgrade-method["Selecione um método de atualização"] antes de atualizar a instalação de um operador Trident.
+Você pode atualizar o Trident usando o operador Trident, seja manualmente ou usando o Helm. Você pode atualizar de uma instalação do operador Trident para outra instalação do operador Trident ou atualizar de uma  `tridentctl` instalação para uma versão do operador Trident. Revise link:upgrade-trident.html#step-3-select-an-upgrade-method["Selecione um método de atualização"] antes de atualizar uma instalação do operador Trident.
 
 
 
@@ -26,7 +26,6 @@ NOTE: Para atualizar do Trident que foi instalado usando o operador com escopo d
 .Sobre esta tarefa
 O Trident fornece um arquivo de pacote que você pode usar para instalar o operador e criar objetos associados para sua versão do Kubernetes.
 
-* Para clusters que executam o Kubernetes 1,24, link:https://github.com/NetApp/trident/tree/stable/v25.02/deploy/bundle_pre_1_25.yaml["bundle_pre_1_25.yaml"^]use o .
 * Para clusters que executam o Kubernetes 1,25 ou posterior, link:https://github.com/NetApp/trident/tree/stable/v25.02/deploy/bundle_post_1_25.yaml["bundle_post_1_25.yaml"^]use o .
 
 

@@ -12,7 +12,7 @@ summary: Você pode usar o endpoint REST diretamente se preferir interagir com a
 
 
 [role="lead"]
-link:tridentctl.html["comandos e opções tridentctl"]Embora seja a maneira mais fácil de interagir com a API REST do Trident, você pode usar o endpoint REST diretamente, se preferir.
+Embora link:../trident-managing-k8s/tridentctl.html["comandos e opções tridentctl"] sejam a maneira mais fácil de interagir com a Trident API REST, você pode usar o endpoint REST diretamente se preferir.
 
 
 

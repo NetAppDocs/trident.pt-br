@@ -151,7 +151,7 @@ trident-controller-679648bd45-cv2mx   6/6     Running   0          5m29s
 trident-node-linux-vgc8n              2/2     Running   0          5m29s
 ----
 
-NOTE: Se o instalador não for concluído com êxito ou `trident-controller-<generated id>` (`trident-csi-<generated id>` em versões anteriores a 23,01) não tiver um status *Running*, a plataforma não foi instalada. Use `-d` para link:../troubleshooting.html#troubleshooting-an-unsuccessful-trident-deployment-using-tridentctl["ative o modo de depuração"] e solucione o problema.
+NOTE: Se o instalador não for concluído com êxito ou  `trident-controller-<generated id>` (`trident-csi-<generated id>` em versões anteriores à 23.01) não apresentar o status *Running*, a plataforma não foi instalada. Use  `-d` para link:../troubleshooting.html#unsuccessful-trident-deployment-using-tridentctl["ative o modo de depuração"] e solucionar o problema.
 
 
 
