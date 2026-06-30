@@ -19,6 +19,20 @@ WARNING: O `tridentctl` binário para Linux que é fornecido no arquivo zip do i
 
 
 
+== O que há de novo em 26.06
+
+Saiba o que há de novo no NetApp Trident e Trident Protect, incluindo melhorias, correções e descontinuações.
+
+
+
+=== Trident
+
+
+
+==== Correções
+
+
+
 == O que há de novo na versão 26.02.1
 
 Saiba o que há de novo no NetApp Trident e Trident Protect, incluindo melhorias, correções e descontinuações.
