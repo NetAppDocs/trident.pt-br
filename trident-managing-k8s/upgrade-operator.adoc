@@ -87,11 +87,11 @@ helm mapkubeapis trident  --namespace trident
 . Se você link:../trident-install/kubernetes-deploy-helm.html#deploy-the-trident-operator-and-install-trident-using-helm["Trident instalado usando Helm"], pode usar  `helm upgrade trident netapp-trident/trident-operator --version 100.2602.0` para atualizar em uma única etapa. Se você não adicionou o repositório Helm ou não consegue usá-lo para atualizar:
 +
 .. Transfira a versão mais recente do Trident a partir de link:https://github.com/NetApp/trident/releases/latest["A seção _assets_ no GitHub"^].
-.. Utilize o  `helm upgrade` comando onde  `trident-operator-26.02.0.tgz` reflete a versão para a qual você deseja atualizar.
+.. Utilize o  `helm upgrade` comando onde  `trident-operator-26.06.0.tgz` reflete a versão para a qual você deseja atualizar.
 +
 [listing]
 ----
-helm upgrade <name> trident-operator-26.02.0.tgz
+helm upgrade <name> trident-operator-26.06.0.tgz
 ----
 +
 
@@ -116,11 +116,11 @@ NOTE: Antes de alternar entre os métodos de instalação, revise link:../triden
 +
 [listing]
 ----
-# Download the release required [26.02.0]
-mkdir 26.02.0
-cd 26.02.0
-wget https://github.com/NetApp/trident/releases/download/v26.02.0/trident-installer-26.02.0.tar.gz
-tar -xf trident-installer-26.02.0.tar.gz
+# Download the release required [26.06.0]
+mkdir 26.06.0
+cd 26.06.0
+wget https://github.com/NetApp/trident/releases/download/v26.06.0/trident-installer-26.06.0.tar.gz
+tar -xf trident-installer-26.06.0.tar.gz
 cd trident-installer
 ----
 . Crie o `tridentorchestrator` CRD a partir do manifesto.
@@ -177,6 +177,6 @@ kubectl describe torc trident | grep Message -A 3
 Message:                Trident installed
 Namespace:              trident
 Status:                 Installed
-Version:                v26.02.0
+Version:                v26.06.0
 ----
 
