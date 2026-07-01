@@ -93,6 +93,9 @@ NOTE: Se você adicionar um filtro de namespace a um gancho de execução que é
 Visite o https://github.com/NetApp/Verda["Projeto NetApp Verda GitHub"] para baixar ganchos de execução reais para aplicativos populares, como Apache Cassandra e Elasticsearch. Você também pode ver exemplos e obter ideias para estruturar seus próprios ganchos de execução personalizados.
 
 
+NOTE: Os scripts no repositório Verda são fornecidos "como estão" e não são oficialmente suportados pela NetApp. O suporte da NetApp abrange apenas a estrutura de execução de hooks dentro do Trident Protect.
+
+
 
 == Crie um gancho de execução
 

@@ -62,7 +62,7 @@ Não há alterações no que diz respeito à experiência do usuário e às func
 
 === O Trident suporta uma instalação offline a partir de um registo privado?
 
-Sim, Trident pode ser instalado offline. Consulte link:../trident-install/kubernetes-deploy.html["Saiba mais sobre a instalação do Trident"^].
+Sim, Trident pode ser instalado offline. Consulte link:./trident-install/kubernetes-deploy.html["Saiba mais sobre a instalação do Trident"].
 
 
 

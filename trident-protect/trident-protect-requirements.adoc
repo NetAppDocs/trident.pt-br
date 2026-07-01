@@ -129,6 +129,8 @@ Você pode configurar o Trident Protect 24.10 para gerenciar o congelamento e o 
 kubectl set env deployment/trident-protect-controller-manager NEPTUNE_VM_FREEZE=true -n trident-protect
 ----
 ====
+Para aprender como definir aplicativos e restaurar VMs com Trident Protect, consulte link:trident-protect-kubevirt-vms.html["Proteja máquinas virtuais KubeVirt com Trident Protect"].
+
 
 
 == Requisitos para replicação do SnapMirror

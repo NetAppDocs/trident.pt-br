@@ -42,7 +42,7 @@ O Trident é compatível com vários mecanismos de contêiner e orquestradores, 
 
 * Anthos On-Prem (VMware) e Anthos em bare metal 1,16
 * Kubernetes 1.27 - 1.36
-* OpenShift 4.12, 4.14 - 4.21 (se você planeja usar a preparação de nó iSCSI com OpenShift 4.19, a versão mínima do Trident suportada é 25.06.1.)
+* OpenShift 4.12, 4.14 - 4.22 (se você planeja usar a preparação de nó iSCSI com OpenShift 4.19, a versão mínima do Trident suportada é 25.06.1.)
 +
 
 NOTE: A Trident continua a oferecer suporte a versões mais antigas do OpenShift em alinhamento com olink:https://access.redhat.com/support/policy/updates/openshift["Ciclo de vida da versão do Red Hat Extended Update Support (EUS)"] , mesmo que dependam de versões do Kubernetes que não são mais oficialmente suportadas pelo upstream.  Ao instalar o Trident nesses casos, você pode ignorar com segurança quaisquer mensagens de aviso sobre a versão do Kubernetes.
@@ -96,6 +96,49 @@ O Trident suporta os seguintes drivers ONTAP para virtualização KubeVirt e Ope
 
 
 
+
+
+
+== Suporte do Trident para Kubernetes em Kubernetes e OpenShift planos de controle hospedados
+
+A partir da versão 26.06, Trident qualifica totalmente a topologia Kubernetes em Kubernetes. Clusters Kubernetes cujos nós são executados como máquinas virtuais KubeVirt em um cluster de infraestrutura (host). Essa topologia sustenta ofertas de plano de controle hospedado, como planos de controle hospedados (OpenShift HCP) em OpenShift Virtualization.
+
+
+NOTE: Essa configuração funcionava em versões anteriores, mas a qualificação completa começa com 26.06.
+
+O cluster convidado (inquilino) utiliza o driver CSI KubeVirt (`kubevirt-csi` como seu provedor de armazenamento. Quando uma carga de trabalho no cluster convidado solicita um  `PersistentVolumeClaim`, o driver CSI KubeVirt cria um volume correspondente no cluster de infraestrutura. O Trident provisiona o volume a partir do ONTAP, e o volume é conectado dinamicamente à máquina virtual do nó convidado. O Trident é executado somente no cluster de infraestrutura. O cluster convidado consome o armazenamento do ONTAP indiretamente por meio do driver CSI KubeVirt.
+
+.Requisitos:
+* Trident está instalado no cluster de infraestrutura com um backend ONTAP compatível.
+* Existe uma classe de armazenamento Trident no cluster de infraestrutura para que o driver CSI KubeVirt mapeie os volumes do cluster convidado.
+* KubeVirt ou OpenShift Virtualization é implementado no cluster de infraestrutura, e o driver CSI do KubeVirt é instalado em cada cluster convidado.
+
+
+[cols="2,1"]
+|===
+| Componente | Versão 
+
+
+| Trident | 26,06 
+
+
+| Kubernetes (infraestrutura e cluster convidado) | 1,36 
+
+
+| KubeVirt | 1.9.0-beta.0 
+
+
+| Importador de dados em contêineres (CDI) | 1,65 
+|===
+.Pontos a considerar:
+* No cluster convidado, os volumes aparecem como dispositivos de bloco hot-plugged nas máquinas virtuais dos nós convidados.
+* O fluxo de trabalho do driver CSI KubeVirt não requer Trident no cluster convidado. Você configura o backend ONTAP e a classe de armazenamento no cluster de infraestrutura.
+
+
+.Instale Trident diretamente no cluster convidado:
+Você também pode instalar Trident diretamente no cluster convidado (tenant). Instale Trident no cluster convidado quando precisar do conjunto completo de recursos do Trident, como snapshots, clones, redimensionamento de volumes e importação, que  `kubevirt-csi` não são fornecidos por si só.
+
+No cluster convidado, utilize protocolos baseados em IP: NFS, iSCSI e NVMe/TCP. O cluster convidado não suporta Fibre Channel (FC) porque os nós convidados são máquinas virtuais sem conectividade FC direta.
 
 
 
@@ -223,7 +266,7 @@ Para instalações com ar-gapped, a lista a seguir é uma referência das imagen
 | Versões do Kubernetes | Imagem do recipiente 
 
 
-| v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.36.0  a| 
+| v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.35.0, v1.36.0  a| 
 * docker.io/netapp/trident:26.02.0
 * docker.io/netapp/trident-autosupport:26.02
 * registry.k8s.io/sig-storage/csi-provisioner:v6.1.0

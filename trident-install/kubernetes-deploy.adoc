@@ -25,7 +25,7 @@ Para garantir que o Trident possa ser instalado em uma ampla variedade de ambien
 ====
 []
 =====
-* Kubernetes 1.35 agora é compatível com Trident. Atualize Trident antes de atualizar Kubernetes.
+* O Kubernetes agora é compatível com Trident. Atualize Trident antes de atualizar o Kubernetes.
 * O Trident reforça estritamente o uso de configuração multipathing em ambientes SAN, com um valor recomendado de `find_multipaths: no` no arquivo multipath.conf.
 +
 O uso de configuração não multipathing ou o uso `find_multipaths: yes` de ou `find_multipaths: smart` valor no arquivo multipath.conf resultará em falhas de montagem. A Trident recomenda o uso de `find_multipaths: no` desde a versão 21,07.
@@ -40,7 +40,7 @@ O uso de configuração não multipathing ou o uso `find_multipaths: yes` de ou 
 
 Independentemente do seu caminho de instalação, você deve ter:
 
-* Privileges completo para um cluster Kubernetes compatível com execução de uma versão compatível do Kubernetes e requisitos de recursos habilitados. Reveja a link:requirements.html["requisitos"] para obter detalhes.
+* Privilégios completos em um cluster Kubernetes compatível, executando uma versão compatível do Kubernetes e com os requisitos de recursos ativados. Revise a link:../trident-get-started/requirements.html["requisitos"] para obter detalhes.
 * Acesso a um sistema de storage NetApp compatível.
 * Funcionalidade de montar volumes de todos os nós de trabalho do Kubernetes.
 * Um host Linux com `kubectl` (ou `oc`, se você estiver usando o OpenShift) instalado e configurado para gerenciar o cluster do Kubernetes que deseja usar.

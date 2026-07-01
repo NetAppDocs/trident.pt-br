@@ -136,7 +136,7 @@ Isso substituirá os valores padrão pelos especificados no `sccconfig.yaml` arq
 
 == Configure as definições adicionais do gráfico de navegação do Trident Protect.
 
-Você pode personalizar as configurações do AutoSupport e a filtragem de namespace para atender aos seus requisitos específicos.  A tabela a seguir descreve os parâmetros de configuração disponíveis:
+Você pode personalizar as configurações do AutoSupport, o filtro de namespace e o gerenciamento de certificados de webhook do OpenShift para atender às suas necessidades específicas. A tabela a seguir descreve os parâmetros de configuração disponíveis:
 
 |===
 | Parâmetro | Tipo | Descrição 
@@ -155,6 +155,9 @@ Você pode personalizar as configurações do AutoSupport e a filtragem de names
 
 
 | restaurarIgnorarEtiquetasDeEspaçoDeNomes | cadeia de carateres | Lista separada por vírgulas de rótulos de namespace a serem excluídos das operações de backup e restauração.  Permite filtrar namespaces com base em rótulos. 
+
+
+| useOpenshiftServiceCA | booleano | Habilita a integração com o operador de CA de serviço nativo do OpenShift para criação e injeção automática de certificados TLS para o webhook de admissão do Trident Protect. Quando definido como  `true`, o operador de CA de serviço gerencia automaticamente os certificados TLS do webhook. Use somente em clusters OpenShift. (padrão: `false`) 
 |===
 Você pode configurar essas opções usando um arquivo de configuração YAML ou sinalizadores de linha de comando:
 
@@ -174,6 +177,7 @@ autoSupport:
   insecure: true
 restoreSkipNamespaceAnnotations: "annotation1,annotation2"
 restoreSkipNamespaceLabels: "label1,label2"
+useOpenshiftServiceCA: true
 ----
 . Depois de preencher o `values.yaml` arquivo com os valores corretos, aplique o arquivo de configuração:
 +
@@ -196,6 +200,7 @@ helm upgrade trident-protect -n trident-protect netapp-trident-protect/trident-p
   --set autoSupport.proxy=http://my.proxy.url \
   --set-string restoreSkipNamespaceAnnotations="{annotation1,annotation2}" \
   --set-string restoreSkipNamespaceLabels="{label1,label2}" \
+  --set useOpenshiftServiceCA=true \
   --reuse-values
 ----
 

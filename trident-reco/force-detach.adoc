@@ -150,7 +150,7 @@ Os programas TNR (Captura, Esterilização e Devolução) podem ocorrer em um do
 
 
 
-NOTE: Você também pode usar métodos alternativos para detectar falhas em nós, conforme especificado em<<Integrating Custom Node Health Check Solutions>> seção abaixo.
+NOTE: Você também pode usar métodos alternativos para detectar falha de nó, conforme especificado na <<Integrando soluções personalizadas de verificação de integridade de nós>> seção abaixo.
 
 Verlink:https://www.redhat.com/en/blog/node-health-check-operator["Operador de verificação de integridade do nó"^] para mais informações.
 

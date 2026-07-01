@@ -1,0 +1,568 @@
+---
+sidebar: sidebar 
+permalink: trident-protect/trident-protect-kubevirt-vms.html 
+keywords: kubevirt, openshift virtualization, virtual machine, vm, backup, restore, includedvirtualmachines 
+summary: Proteja máquinas virtuais KubeVirt em OpenShift Virtualization com Trident Protect. Faça backup de todas as VMs em um namespace ou direcione VMs específicas pelo nome. Restaure seletivamente VMs individuais de um backup ou de um arquivo de snapshot. 
+---
+= Proteja máquinas virtuais KubeVirt com Trident Protect
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Trident Protect permite que você faça backup e restaure máquinas virtuais (VMs) KubeVirt em execução na Virtualização OpenShift. Você pode proteger todas as VMs em um ou mais namespaces de uma vez, ou usar o campo  `includedVirtualMachines` para selecionar VMs específicas pelo nome. Trident Protect coleta automaticamente todos os recursos dependentes da VM durante o backup e, durante a restauração, você pode recuperar todo o arquivo ou restaurar VMs individualmente.
+
+
+
+== KubeVirt modos de proteção
+
+Trident Protect oferece duas maneiras de definir quais KubeVirt VMs proteger. Escolha um modo ao definir um aplicativo:
+
+[cols="1,1,2"]
+|===
+| Modo | Campo | Descrição 
+
+
+| Baseado em namespace | `includedNamespaces` | Proteja todos os recursos correspondentes em um ou mais namespaces. Use um `labelSelector` na entrada do namespace para controlar quais VMs serão incluídas dinamicamente. 
+
+
+| Com escopo de VM | `includedVirtualMachines` | Proteja máquinas virtuais KubeVirt específicas por namespace e nome. Use este modo quando as máquinas virtuais estiverem distribuídas por namespaces ou quando você não quiser proteger todos os recursos de um namespace. 
+|===
+Você deve especificar exatamente um campo (`includedNamespaces` ou  `includedVirtualMachines`) no  `ApplicationSpec`. Você não pode usar ambos na mesma aplicação.
+
+Ambos os modos suportam filtragem adicional:
+
+* Use  `resourceFilter` para incluir ou excluir recursos específicos.
+* Use  `includedClusterScopedResources` para incluir recursos compatíveis com escopo de cluster, como  `StorageClass` objetos.
+
+
+
+NOTE: Trident Protect pode congelar e descongelar os sistemas de arquivos de máquinas virtuais KubeVirt durante operações de proteção de dados para garantir a consistência. Para detalhes de configuração, consulte link:trident-protect-requirements.html#protecting-data-with-kubevirt-vms["Proteção de dados com máquinas virtuais do KubeVirt"].
+
+
+
+== Recursos coletados durante backup e snapshot
+
+Ao criar um backup ou snapshot para um aplicativo que inclui KubeVirt VMs, Trident Protect coleta os recursos de VM selecionados e descobre automaticamente seus recursos dependentes.
+
+O comportamento de coleta se aplica em dois casos:
+
+* Aplicações com escopo de VM que usam  `includedVirtualMachines`.
+* Aplicações baseadas em namespaces que contêm KubeVirt `VirtualMachine` recursos.
+
+
+
+
+=== Coleção com escopo de VM
+
+Para aplicações com escopo de máquina virtual (VM), Trident Protect inicia com cada  `VirtualMachine` listada em  `includedVirtualMachines` e descobre os recursos dependentes necessários para restaurar essa VM.
+
+[cols="1,1,3"]
+|===
+| Tipo de recurso | Escopo | Como é descoberto 
+
+
+| `VirtualMachine` | Com namespace | Correspondência direta da lista  `includedVirtualMachines`. 
+
+
+| `VirtualMachineInstance` | Com namespace | Mesmo namespace e nome da VM, se a VM estiver em execução. 
+
+
+| `VirtualMachineInstancetype` | Com namespace | Referenciado por `spec.instancetype` quando `kind: VirtualMachineInstancetype`. 
+
+
+| `VirtualMachineClusterInstancetype` | Cluster | Referenciado por  `spec.instancetype` quando  `kind` não está definido ou  `kind: VirtualMachineClusterInstancetype`. 
+
+
+| `VirtualMachinePreference` | Com namespace | Referenciado por  `spec.preference` quando  `kind: VirtualMachinePreference`. 
+
+
+| `VirtualMachineClusterPreference` | Cluster | Referenciado por  `spec.preference` quando  `kind` não está definido ou  `kind: VirtualMachineClusterPreference`. 
+
+
+| `DataVolume` | Com namespace | Referenciado por  `spec.template.spec.volumes[].dataVolume.name`. 
+
+
+| `PersistentVolumeClaim` | Com namespace | Descoberto a partir de PVCs de suporte de DataVolume, que usam o mesmo nome que o DataVolume; referências diretas de PVC em  `persistentVolumeClaim.claimName`; PVCs de despejo de memória em  `memoryDump.claimName`; e PVCs efêmeros em  `ephemeral.persistentVolumeClaim.claimName`. 
+
+
+| `PersistentVolume` | Cluster | Descoberto a partir do PV de suporte para cada PVC coletado usando  `spec.volumeName`. 
+
+
+| `Secret` | Com namespace | Descoberto a partir de segredos de volume em  `secret.secretName`; segredos de extração de imagem containerDisk; referências a segredos de dados do usuário e de rede CloudInitNoCloud e CloudInitConfigDrive; segredos Sysprep; segredos de extração de imagem de contêiner KernelBoot; e segredos de SSH ou senha AccessCredentials. 
+
+
+| `ConfigMap` | Com namespace | Descoberto a partir do volume ConfigMaps em  `configMap.name` e Sysprep ConfigMaps. 
+
+
+| `ServiceAccount` | Com namespace | Descoberto a partir de  `serviceAccount.serviceAccountName`referências de volume. 
+
+
+| `NetworkAttachmentDefinition` | Com namespace | Descoberto em redes Multus  `spec.template.spec.networks[].multus.networkName` quando o nome da rede não contém  `/`. Somente referências NetworkAttachmentDefinition do mesmo namespace são coletadas. Referências entre namespaces diferentes são ignoradas. 
+
+
+| `Pod` | Com namespace | Descoberto para  `virt-launcher`Pods usando o seletor de rótulos `kubevirt.io=virt-launcher,vm.kubevirt.io/name=<vmName>`. 
+
+
+| Classe de armazenamento, volumes Trident e backends Trident | Cluster | Coletados da mesma forma que os aplicativos baseados em namespace, com base nos PVCs descobertos para a VM. 
+|===
+
+NOTE: Após a coleta de todos os recursos com escopo de máquina virtual e namespace, Trident Protect aplica o padrão `resourceFilter`, caso esteja configurado. A coleta de recursos com escopo de cluster prossegue normalmente.
+
+
+
+=== Coleção baseada em namespace
+
+Para aplicações baseadas em namespaces, Trident Protect examina os namespaces selecionados e coleta todos os recursos correspondentes. Se algum KubeVirt `VirtualMachine` objeto for encontrado, Trident Protect coleta automaticamente seus recursos dependentes, incluindo tipos de instância, preferências e `virt-launcher` Pods, da mesma forma que faz para aplicações com escopo de máquina virtual.
+
+Isso significa que os recursos específicos da VM são incluídos no seu backup ou snapshot mesmo quando o aplicativo é definido com  `includedNamespaces`.
+
+
+
+== Proteja máquinas virtuais usando definições de aplicativos baseadas em namespace
+
+Ao criar um aplicativo baseado em namespaces, Trident Protect examina os namespaces selecionados e coleta todos os recursos, incluindo quaisquer KubeVirt VMs. Para cada máquina virtual encontrada, Trident Protect também coleta os recursos dependentes necessários para fazer backup e restaurar essa máquina virtual.
+
+Exemplo de CR de aplicação baseada em namespace:
+
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: Application
+metadata:
+  name: <application_name>
+  namespace: <application_namespace>
+spec:
+  includedNamespaces:
+    - namespace: <vm_namespace>
+----
+Após criar o aplicativo, use os fluxos de trabalho padrão do Trident Protect para backups e snapshots:
+
+* Para exemplos de snapshots em YAML, veja link:trident-protect-protect-apps.html#create-an-on-demand-snapshot["Crie um snapshot sob demanda"].
+* Para exemplos de YAML de backup, consulte link:trident-protect-protect-apps.html#create-an-on-demand-backup["Crie um backup sob demanda"].
+
+
+
+
+=== Comportamento de restauração para aplicativos de máquina virtual baseados em namespace
+
+Como os aplicativos baseados em namespaces coletam recursos dos namespaces selecionados, o backup ou snapshot pode incluir objetos de tempo de execução do KubeVirt e metadados gerenciados pelo KubeVirt. Alguns desses objetos não devem ser restaurados diretamente porque representam o estado de tempo de execução do cluster de origem.
+
+Durante a restauração, Trident Protect aplica transformações compatíveis com KubeVirt para remover os metadados do cluster de origem e ignorar recursos transitórios do KubeVirt. Isso ajuda o KubeVirt a recriar a máquina virtual corretamente no ambiente restaurado.
+
+[cols="1,2"]
+|===
+| Recurso | Transformar 
+
+
+| VirtualMachine | Remove rótulos e anotações que começam com  `kubevirt.io/`. 
+
+
+| VirtualMachineInstance | Remove rótulos e anotações que começam com  `kubevirt.io/`. 
+
+
+| VirtualMachineInstanceMigration | Ignorado e não restaurado. 
+
+
+| VirtualMachineSnapshot | Ignorado e não restaurado. 
+
+
+| VirtualMachineSnapshotContent | Ignorado e não restaurado. 
+
+
+| Pod (`virt-launcher`) | Ignorado quando o pod possui o  `kubevirt.io=virt-launcher` rótulo. 
+|===
+
+NOTE: Trident Protect restaura os recursos do KubeVirt em uma ordem definida para evitar problemas de dependência. CDI DataVolumes (`cdi.kubevirt.io` são restaurados primeiro para que os dados de disco da máquina virtual estejam disponíveis antes da criação dos objetos da máquina virtual. Depois disso, VirtualMachines (`kubevirt.io` são restauradas antes de VirtualMachineInstances.
+
+
+
+== Proteção dinâmica de VM com seletores de rótulos
+
+Se você deseja proteger máquinas virtuais dinamicamente sem listar o nome de cada máquina virtual, use definições de aplicativos baseadas em namespace com seletores de rótulo.
+
+Apenas o VirtualMachine CR precisa de rótulos. Recursos dependentes, como DataVolumes, PVCs, Segredos e ConfigMaps, são coletados automaticamente.
+
+.Passos
+. Rotule as CRs da máquina virtual com um rótulo compartilhado:
++
+[source, console]
+----
+kubectl label virtualmachine <vm_name 1> app=<label_value> -n <vm_namespace>
+kubectl label virtualmachine <vm_name_2> app=<label_value> -n <vm_namespace>
+----
+. Crie um CR de aplicativo com  `includedNamespaces` e um  `labelSelector`:
++
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: Application
+metadata:
+  name: <application_name>
+  namespace: <application_namespace>
+spec:
+  includedNamespaces:
+    - namespace: <vm_namespace>
+      labelSelector:
+        matchLabels:
+          app: <label_value>
+----
+. Crie backups e restaurações usando o fluxo de trabalho padrão do Trident Protect.
+
+
+*Detalhes adicionais*:
+
+* Você pode adicionar ou remover VMs da proteção a qualquer momento alterando os rótulos:
+
+
+[source, console]
+----
+kubectl label virtualmachine <vm_name_to_add> app=<label_value> -n <vm_namespace>
+kubectl label virtualmachine <vm_name_to_remove> app=<different_label_value> -n <vm_namespace>
+----
+* Você também pode usar seletores de rótulo em vários namespaces:
+
+
+[source, yaml]
+----
+spec:
+  includedNamespaces:
+    - namespace: <vm_namespace_1>
+      labelSelector:
+        matchLabels:
+          <label_key>: <label_value>
+    - namespace: <vm_namespace_2>
+      labelSelector:
+        matchLabels:
+          <label_key>: <label_value>
+----
+
+
+== Proteja VMs específicas com includedVirtualMachines
+
+Use  `includedVirtualMachines` quando você quiser proteger um conjunto nomeado de VirtualMachines em um ou mais namespaces e restaurar seletivamente VMs específicas de um arquivamento.
+
+Tanto a solicitação de alteração (CR) quanto a restauração utilizam o mesmo formato de seletor  `includedVirtualMachines`.
+
+Utilize este seletor em diferentes contextos:
+
+* Em um CR de aplicação, ele define quais VMs estão protegidas.
+* Em uma solicitação de restauração (CR), define quais máquinas virtuais (VMs) são restauradas a partir do backup ou do arquivamento de Snapshot.
+
+
+
+NOTE: Na restauração de CRs, `includedVirtualMachines` é opcional. Se você não incluir este campo, todo o arquivamento será restaurado. Quando especificado, somente as VMs listadas e seus recursos dependentes serão restaurados.
+
+O YAML abaixo mostra a estrutura do seletor compartilhado:
+
+[source, yaml]
+----
+includedVirtualMachines:
+  - namespace: <vm_namespace_1>
+    names:
+      - <vm_name_1>
+      - <vm_name_2>
+  - namespace: <vm_namespace_2>
+    names:
+      - <vm_name_3>
+----
+
+NOTE: Várias entradas em `includedVirtualMachines` podem referenciar namespaces diferentes, o que possibilita definições e restaurações de aplicativos com reconhecimento de máquina virtual em múltiplos namespaces.
+
+[cols="1,1,2"]
+|===
+| Campo | Tipo | Descrição 
+
+
+| namespace | cadeia de carateres | Namespace do Kubernetes que contém os objetos da máquina virtual de destino. 
+
+
+| nomes | lista de strings | Um ou mais nomes de máquinas virtuais nesse namespace. 
+|===
+.Exemplo de aplicação baseada em máquina virtual:
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: Application
+metadata:
+  name: <application_name>
+  namespace: <application_namespace>
+spec:
+  includedVirtualMachines:
+    - namespace: <vm_namespace_1>
+      names:
+        - <vm_name_1>
+        - <vm_name_2>
+    - namespace: <vm_namespace_2>
+      names:
+        - <vm_name_3>
+  includedClusterScopedResources:
+    - group: storage.k8s.io
+      kind: StorageClass
+----
+
+
+== Restaurar VMs específicas do KubeVirt
+
+Você pode usar  `includedVirtualMachines` em CRs de restauração para restaurar apenas as KubeVirt VMs selecionadas de um backup, Snapshot ou arquivamento de Snapshot replicado.
+
+Quando  `includedVirtualMachines` é especificado em um CR de restauração, Trident Protect restaura apenas as VirtualMachines listadas e seus recursos dependentes, como  `VirtualMachineInstance`, `DataVolume`, `PersistentVolumeClaim`, `PersistentVolume`, `Secret`, `ConfigMap`, `ServiceAccount` e outros objetos relacionados à máquina virtual.
+
+Se você não especificar  `includedVirtualMachines`na CR de restauração, o Trident Protect restaura o arquivamento completo de acordo com a configuração da CR de restauração.
+
+
+
+=== CRs de restauração e comandos CLI compatíveis
+
+A tabela a seguir lista os CRs de restauração compatíveis  `includedVirtualMachines` e seus respectivos comandos da CLI.
+
+[cols="1,1,3"]
+|===
+| Restaurar CR | Comando CLI | Descrição 
+
+
+| `BackupRestore` | `tridentctl-protect create backuprestore` | Restaura a partir de um backup para mapeamentos de namespace novos ou diferentes. Suporta  `namespaceMapping`e  `storageClassMapping`. 
+
+
+| `BackupInplaceRestore` | `tridentctl-protect create backupinplacerestore` | Restaura a partir de um backup no namespace ou namespaces originais. 
+
+
+| `SnapshotRestore` | `tridentctl-protect create snapshotrestore` | Restaura a partir de um snapshot para mapeamentos de namespace novos ou diferentes. Suporta  `namespaceMapping` e  `storageClassMapping`. 
+
+
+| `SnapshotInplaceRestore` | `tridentctl-protect create snapshotinplacerestore` | Restaura a partir de um Snapshot no namespace ou namespaces originais. 
+
+
+| `ReplicateSnapshotRestore` | Somente YAML ou use o comando CLI compatível se disponível em seu ambiente | Restaura a partir de um snapshot replicado. Suporta  `namespaceMapping`,  `storageClassMapping` e restauração no local usando a flag  `inPlaceRestore`. 
+|===
+
+NOTE: A  `tridentctl-protect`CLI não possui uma flag para  `includedVirtualMachines`em comandos de restauração. Para restaurar VMs específicas, você deve aplicar um arquivo YAML de restauração CR diretamente usando  `kubectl apply`. Você pode escrever o YAML do zero ou usar a CLI com  `--dry-run --output yaml`para gerar um arquivo inicial, adicionar o campo  `includedVirtualMachines` em  `spec`, e então aplicá-lo.
+
+
+
+=== Comportamento de restauração com escopo de VM
+
+O campo  `includedVirtualMachines` em um CR de restauração usa o mesmo formato de seletor que o CR do aplicativo:
+
+[source, yaml]
+----
+includedVirtualMachines:
+  - namespace: <source_vm_namespace>
+    names:
+      - <vm_name_1>
+      - <vm_name_2>
+----
+Para CRs de restauração, os valores de namespace  `includedVirtualMachines` referem-se aos namespaces de origem conforme existem no backup, Snapshot ou arquivamento de Snapshot replicado.
+
+Se você usar  `namespaceMapping`, o Trident Protect primeiro seleciona as máquinas virtuais solicitadas do arquivamento de origem e, em seguida, aplica os mapeamentos de namespace durante a restauração. Se você usar  `storageClassMapping`, o Trident Protect aplica os mapeamentos de classe de armazenamento durante a fase de transformação da restauração.
+
+
+
+=== Gerar YAML de restauração com a CLI
+
+Você pode usar  `tridentctl-protect` para gerar um CR de restauração base e, em seguida, editar o YAML para adicionar  `includedVirtualMachines`.
+
+[source, console]
+----
+tridentctl-protect create <restore_command> <restore_name> \
+  <restore_options> \
+  --dry-run --output yaml > <restore_name>.yaml
+----
+Edite o arquivo YAML gerado e adicione o campo  `includedVirtualMachines` em  `spec`, depois aplique o arquivo:
+
+[source, console]
+----
+kubectl apply -f <restore_name>.yaml
+----
+
+
+=== Exemplo: defina um aplicativo baseado em máquina virtual
+
+O seguinte aplicativo protege três máquinas virtuais específicas em dois namespaces.
+
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: Application
+metadata:
+  name: production-vms
+  namespace: prod
+spec:
+  includedVirtualMachines:
+    - namespace: prod
+      names:
+        - app-server
+        - database-server
+    - namespace: monitoring
+      names:
+        - prometheus-vm
+  includedClusterScopedResources:
+    - group: storage.k8s.io
+      kind: StorageClass
+----
+
+
+=== Exemplo: criar um backup
+
+A criação de um backup para um aplicativo baseado em máquina virtual utiliza o backup CR padrão. Não são necessários campos específicos de máquina virtual no backup CR.
+
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: Backup
+metadata:
+  name: daily-backup
+  namespace: prod
+spec:
+  applicationRef: production-vms
+  appVaultRef: s3-vault
+----
+
+
+=== Exemplo: restaurar uma única máquina virtual a partir de um backup
+
+O exemplo a seguir restaura apenas  `database-server` do arquivamento de backup. As outras VMs no arquivamento, como  `app-server` e  `prometheus-vm`, são ignoradas.
+
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: BackupRestore
+metadata:
+  name: restore-db-only
+  namespace: prod-vms-restore
+spec:
+  appVaultRef: s3-vault
+  appArchivePath: backups/production-vms/2026-03-10T00-00-00Z
+  namespaceMapping:
+    - source: prod
+      destination: prod-dr
+  includedVirtualMachines:
+    - namespace: prod
+      names:
+        - database-server
+----
+[source, console]
+----
+kubectl apply -f restore-db-only.yaml
+----
+Somente  `database-server` e seus recursos dependentes, como DataVolumes, PVCs, PVs, Secrets, ConfigMaps e recursos relacionados do KubeVirt, são restaurados.
+
+
+
+=== Exemplo: restaurar uma única máquina virtual no local a partir de um backup
+
+O exemplo a seguir restaura apenas  `database-server`no namespace original a partir do arquivamento de backup.
+
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: BackupInplaceRestore
+metadata:
+  name: ipr-db-only
+  namespace: prod
+spec:
+  appVaultRef: s3-vault
+  appArchivePath: backups/production-vms/2026-03-10T00-00-00Z
+  includedVirtualMachines:
+    - namespace: prod
+      names:
+        - database-server
+----
+[source, console]
+----
+kubectl apply -f ipr-db-only.yaml
+----
+
+
+=== Exemplo: restaurar uma única máquina virtual a partir de um Snapshot
+
+O exemplo a seguir restaura apenas  `ubuntu-vm-blue-a627be38` de um arquivamento de Snapshot.
+
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: SnapshotRestore
+metadata:
+  name: blue-vm-snap-restore
+  namespace: blue
+spec:
+  appVaultRef: my-appvault
+  appArchivePath: snapshots/protectctl-blue-vm/snap-1
+  includedVirtualMachines:
+    - namespace: blue
+      names:
+        - ubuntu-vm-blue-a627be38
+----
+[source, console]
+----
+kubectl apply -f blue-vm-snap-restore.yaml
+----
+
+
+=== Combine a restauração da máquina virtual com outros filtros
+
+Você pode usar  `includedVirtualMachines` junto com  `resourceFilter`,  `namespaceMapping` e  `storageClassMapping` no mesmo CR de restauração para ajustar com precisão o que será restaurado.
+
+Ao adicionar um  `resourceFilter`, Trident Protect primeiro seleciona as VMs listadas em  `includedVirtualMachines` e seus recursos dependentes. Em seguida, aplica o filtro de recursos para restringir ainda mais o que está incluído ou excluído desses resultados.
+
+[source, yaml]
+----
+spec:
+  includedVirtualMachines:
+    - namespace: <vm_namespace>
+      names:
+        - <vm_name>
+  resourceFilter:
+    resourceSelectionCriteria: Include
+    resourceMatchers:
+      - kinds: ["PersistentVolumeClaim"]
+        names: ["<pvc_name>"]
+----
+Para  `BackupRestore`,  `SnapshotRestore` e  `ReplicateSnapshotRestore`,  `namespaceMapping` e  `storageClassMapping` funcionam junto com  `includedVirtualMachines`. As referências de namespace em  `includedVirtualMachines` correspondem aos namespaces de origem conforme aparecem no arquivamento. Os mapeamentos de namespace e classe de armazenamento são aplicados durante a fase de transformação de restauração após a conclusão da filtragem.
+
+Para obter detalhes sobre o comportamento de restauração, consulte link:trident-protect-restore-apps.html["Restaure aplicativos usando o Trident Protect."].
+
+
+
+== Crie um aplicativo com escopo de máquina virtual usando a CLI
+
+Use a  `--virtual-machines` flag para restringir o escopo de um aplicativo a KubeVirt VMs específicas em vez de namespaces inteiros. A  `--virtual-machines` flag é mutuamente exclusiva com  `--namespaces`.
+
+.Passos
+. Crie a aplicação executando um dos seguintes comandos, substituindo os valores entre colchetes pelas informações do seu ambiente. O formato para o  `--virtual-machines` parâmetro é  `<namespace>(<vm_name>)`. Para várias VMs, use nomes separados por vírgulas dentro dos parênteses:
++
+** Uma única máquina virtual em um namespace:
++
+[source, console]
+----
+tridentctl-protect create application <application_name> \
+  -n <application_namespace> \
+  --virtual-machines "<vm_namespace>(<vm_name>)"
+----
+** Múltiplas máquinas virtuais em diferentes namespaces:
++
+[source, console]
+----
+tridentctl-protect create application <application_name> \
+  -n <application_namespace> \
+  --virtual-machines "<vm_namespace_1>(<vm_name_1>,<vm_name_2>),<vm_namespace_2>(<vm_name_3>)"
+----
+
+
+
+
+
+
+== Informações relacionadas
+
+* link:trident-protect-manage-applications.html["Definir uma aplicação para gestão"]
+* link:trident-protect-protect-apps.html["Proteger aplicações"]
+* link:trident-protect-restore-apps.html["Restaure aplicativos usando o Trident Protect."]
+* link:trident-protect-restore-settings.html["Use as configurações avançadas de restauração"]
+* link:trident-protect-cli.html["Instale o plugin Trident Protect CLI"]
+* link:trident-protect-appvault-custom-resources.html["Use objetos AppVault para gerenciar buckets"]
+
