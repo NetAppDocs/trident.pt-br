@@ -15,6 +15,7 @@ A partir do Trident 26.06, um administrador de storage pode mover de forma não 
 
 
 
+[[requirements]]
 == Requisitos
 
 A movimentação de volume aplica-se ao driver  `ontap-san` para volumes iSCSI apenas. Os protocolos NVMe e NAS não são suportados.
@@ -33,6 +34,7 @@ Antes de mover um volume, certifique-se de que os seguintes requisitos sejam ate
 
 
 
+[[how-it-works]]
 == Como funciona
 
 Trident move o volume (LUN) entre dois locais dentro do mesmo cluster ONTAP. Antes da movimentação dos dados, Trident adiciona novos caminhos iSCSI ao destino, juntamente com os caminhos existentes, para que o dispositivo multipath do host nunca perca o acesso. Após a conclusão da movimentação pelo ONTAP, Trident remove os caminhos de origem obsoletos.
@@ -41,10 +43,12 @@ Trident executa a movimentação por meio de um conjunto ordenado de estados que
 
 
 
+[[move-a-volume]]
 == Mover um volume
 
 
 
+[[identify-the-volume-and-locations]]
 === Identifique o volume e os locais
 
 . Encontre o nome do PV que deseja mover. O nome do PV também é o nome do recurso de movimentação.
@@ -53,6 +57,7 @@ Trident executa a movimentação por meio de um conjunto ordenado de estados que
 
 
 
+[[start-the-move]]
 === Inicie a movimentação
 
 Use qualquer um dos métodos. Ambos criam o mesmo  `TridentVolumeMove`recurso, cujo nome é o nome da PV.
@@ -106,6 +111,7 @@ kubectl apply -f tridentvolumemove.yaml
 
 
 
+[[monitor-the-move]]
 === Monitore a movimentação
 
 Acompanhe o progresso usando o  `tvm`nome abreviado ou  `tridentvolumemove`:
@@ -176,6 +182,7 @@ A  `.status.attachments`lista indica o progresso de cada nó conectado em seu ca
 |===
 
 
+[[clean-up-the-move-resource]]
 === Limpe o recurso de movimentação
 
 Se você definir `deleteAfterSuccess`, Trident remove o recurso automaticamente. Caso contrário, você pode excluí-lo manualmente. Antes de solicitar outra movimentação no mesmo volume, certifique-se de que não exista nenhum recurso  `TridentVolumeMove` para esse volume em um estado  `Succeeded` ou  `Failed`.

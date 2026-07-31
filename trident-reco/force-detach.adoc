@@ -16,6 +16,7 @@ O recurso de desanexação forçada do Trident permite desanexar automaticamente
 
 
 
+[[details-about-force-detach]]
 == Detalhes sobre Force Detach
 
 A força de desprendimento está disponível para `ontap-san` , `ontap-san-economy` , `ontap-nas` , e `ontap-nas-economy` apenas. Antes de habilitar a desconexão forçada, o desligamento não normal do nó (NGNS) deve ser habilitado no cluster do Kubernetes. O NGNS é habilitado por padrão para o Kubernetes 1.28 e superior. Para mais informações, consulte link:https://kubernetes.io/docs/concepts/cluster-administration/node-shutdown/#non-graceful-node-shutdown["Kubernetes: Desligamento do nó não gracioso"^] .
@@ -44,12 +45,14 @@ Quando a integridade do nó é restaurada e a taint é removida, o Trident irá:
 
 
 
+[[details-about-automated-failover]]
 == Detalhes sobre o failover automático
 
 Você pode automatizar o processo de desacoplamento forçado por meio da integração comlink:https://github.com/medik8s/node-healthcheck-operator["operador de verificação de integridade do nó (NHC)"^] . Quando ocorre uma falha em um nó, o NHC aciona a remediação de nó Trident (TNR) e a desconexão forçada automaticamente, criando um CR TridentNodeRemediation no namespace do Trident que define o nó com falha. O TNR é criado somente em caso de falha de um nó e removido pelo NHC assim que o nó volta a ficar online ou é excluído.
 
 
 
+[[failed-node-pod-removal-process]]
 === Falha no processo de remoção do pod do nó
 
 O failover automático seleciona as cargas de trabalho a serem removidas do nó com falha. Quando um TNR é criado, o controlador TNR marca o nó como sujo, impedindo novas publicações de volume e inicia a remoção de pods compatíveis com o recurso de desanexação forçada e seus respectivos volumes anexados.
@@ -88,6 +91,7 @@ Essas anotações podem ser aplicadas a qualquer pod.
 ====
 
 
+[[tridentnoderemediation-cr]]
 === Remediação de nó Trident CR
 
 O CR TridentNodeRemediation (TNR) define um nó com falha. O nome do TNR é o nome do nó com falha.
@@ -135,6 +139,7 @@ Os programas TNR (Captura, Esterilização e Devolução) podem ocorrer em um do
 
 
 
+[[enabling-automated-failover]]
 === Habilitando o failover automático
 
 *Pré-requisitos*:
@@ -198,6 +203,7 @@ Para opções de configuração adicionais, consultelink:https://github.com/medi
 
 
 
+[[additional-setup-information]]
 === Informações adicionais de configuração
 
 Quando o Trident é instalado com o recurso de desanexação forçada ativado, dois recursos adicionais são criados automaticamente no namespace do Trident para facilitar a integração com o NHC: TridentNodeRemediationTemplate (TNRT) e ClusterRole.
@@ -246,6 +252,7 @@ rules:
 ----
 
 
+[[k8s-cluster-upgrades-and-maintenance]]
 === Atualizações e manutenção de clusters K8s
 
 Para evitar falhas, pause o failover automático durante a manutenção ou atualizações do Kubernetes, períodos em que se espera que os nós sejam desligados ou reinicializados. Você pode pausar o CR do NHC (descrito acima) aplicando um patch em seu CR:
@@ -256,6 +263,7 @@ Isso interrompe o failover automático. Para reativar o failover automático, re
 
 
 
+[[limitations]]
 === Limitações
 
 * As operações de E/S são impedidas apenas nos nós com falha para volumes suportados por desanexação forçada. Somente os pods que utilizam volumes/PVCs compatíveis com a função de desanexação forçada são removidos automaticamente.
@@ -264,6 +272,7 @@ Isso interrompe o failover automático. Para reativar o failover automático, re
 
 
 
+[[integrating-custom-node-health-check-solutions]]
 === Integrando soluções personalizadas de verificação de integridade de nós
 
 Você pode substituir o operador de verificação de integridade do nó por ferramentas alternativas de detecção de falhas de nó para acionar o failover automático. Para garantir a compatibilidade com o mecanismo de failover automático, sua solução personalizada deve:

@@ -16,6 +16,7 @@ Usando o Trident, você pode criar um volume em um namespace principal e compart
 
 
 
+[[features]]
 == Caraterísticas
 
 O TridentVolumeReference CR permite que você compartilhe com segurança volumes NFS ReadWriteMany (RWX) em um ou mais namespaces do Kubernetes. Essa solução nativa do Kubernetes tem os seguintes benefícios:
@@ -31,6 +32,7 @@ image::cross-namespace-sharing.png[Um diagrama conceitual de compartilhamento en
 
 
 
+[[quick-start]]
 == Início rápido
 
 Você pode configurar o compartilhamento de volume NFS em apenas algumas etapas.
@@ -53,6 +55,7 @@ O proprietário do namespace de destino cria o PVC subordinado para usar a fonte
 
 
 
+[[configure-the-source-and-destination-namespaces]]
 == Configure os namespaces de origem e destino
 
 Para garantir a segurança, o compartilhamento entre namespace requer colaboração e ação do proprietário do namespace de origem, do administrador do cluster e do proprietário do namespace de destino. A função de usuário é designada em cada etapa.
@@ -133,12 +136,14 @@ O Trident lê a `shareFromPVC` anotação no PVC de destino e cria o PV de desti
 
 
 
+[[delete-a-shared-volume]]
 == Eliminar um volume partilhado
 
 Você pode excluir um volume compartilhado entre vários namespaces. O Trident removerá o acesso ao volume no namespace de origem e manterá o acesso para outros namespaces que compartilham o volume. Quando todos os namespaces que fazem referência ao volume são removidos, o Trident exclui o volume.
 
 
 
+[[use-tridentctl-get-to-query-subordinate-volumes]]
 ==  `tridentctl get`Use para consultar volumes subordinados
 
 Usando o[`tridentctl` utilitário, você pode executar o `get` comando para obter volumes subordinados. Para mais informações, consulte link:../trident-reference/trident-cl.html[`tridentctl` comandos e opções].
@@ -157,6 +162,7 @@ Bandeiras -
 
 
 
+[[limitations]]
 == Limitações
 
 * O Trident não pode impedir que namespaces de destino gravem no volume compartilhado. Você deve usar o bloqueio de arquivos ou outros processos para evitar a substituição de dados de volume compartilhado.
@@ -166,6 +172,7 @@ Bandeiras -
 
 
 
+[[for-more-information]]
 == Para mais informações
 
 Para saber mais sobre o acesso ao volume entre namespace:

@@ -4,6 +4,7 @@
 
 
 
+[[data-mover-timeout-annotation]]
 == Anotação de tempo limite do movimentador de dados
 
 Durante as operações de backup e restauração, você pode usar a anotação  `protect.trident.netapp.io/data-mover-timeout-sec` para configurar o tempo limite para operações de movimentação de dados. Esta anotação especifica o tempo máximo, em segundos, que um movimentador de dados deve aguardar a conclusão de uma operação específica antes de atingir o tempo limite. É particularmente útil em situações em que problemas de rede ou outros fatores podem causar a paralisação das operações de movimentação de dados. Ela ajuda a detectar e lidar com operações paralisadas, em vez de definir um tempo limite geral para todo o processo. Por exemplo, se não houver progresso na restauração dos dados do volume devido a problemas de rede, a operação atingirá o tempo limite com base na duração especificada.

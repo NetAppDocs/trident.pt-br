@@ -16,6 +16,7 @@ O https://kubernetes.io/docs/concepts/storage/storage-classes/["Objeto Kubernete
 
 
 
+[[create-a-storageclass-object]]
 == Criar um StorageClass Objeto
 
 Ao criar um StorageClass para FSx for ONTAP, o Trident criará automaticamente a configuração de backend.
@@ -25,6 +26,7 @@ NOTE: Se você deseja configurar manualmente o backend de armazenamento, consult
 
 
 
+[[specify-required-storageclass-parameters]]
 === Especifique os parâmetros necessários de StorageClass
 
 Os três parâmetros a seguir precisam ser definidos ao criar um StorageClass:
@@ -184,6 +186,7 @@ Após aplicar a alteração, Trident atualiza a configuração do backend e atua
 
 
 
+[[create-a-kubernetes-storageclass-without-automatic-backend-configuration]]
 === Crie um Kubernetes StorageClass sem configuração automática de backend
 
 Se você deseja criar o backend do Trident e o StorageClass separadamente, siga estas etapas.
@@ -198,6 +201,7 @@ Trident cria o VolumeSnapshotClass apenas uma vez. Trident reutiliza o mesmo Vol
 
 
 
+[[create-the-trident-backend]]
 === Crie o backend do Trident
 
 Para criar um backend Trident, você precisa criar um arquivo de configuração em formato JSON ou YAML. O arquivo deve especificar o tipo de storage desejado (NAS ou SAN), o sistema de arquivos, a SVM de onde obtê-lo e como autenticar com ela. O exemplo a seguir mostra como definir um storage baseado em NAS e usar um segredo da AWS para armazenar as credenciais da SVM que você deseja usar:
@@ -319,6 +323,7 @@ Para obter mais informações sobre outras opções de configuração, consulte 
 
 
 
+[[configure-a-storage-class-without-automatic-backend-configuration]]
 === Configurar uma Storage Class *sem* configuração automática de backend
 
 A seguir, apresentamos exemplos de configurações de Storage Class para uso com Trident e FSx for ONTAP.
@@ -447,12 +452,14 @@ basic-csi    csi.trident.netapp.io   15h
 ----
 
 
+[[provision-smb-volumes]]
 == Provisionar volumes SMB
 
 Você pode provisionar volumes SMB usando o  `ontap-nas` driver. No entanto, para isso, você deve concluir estas etapas: link:worker-node-prep.html#prepare-to-provision-smb-volumes["Prepare-se para provisionar volumes SMB"].
 
 
 
+[[backend-advanced-configuration-and-examples]]
 == Configuração avançada de backend e exemplos
 
 Consulte a tabela a seguir para obter as opções de configuração de back-end:
@@ -545,6 +552,7 @@ Consulte a tabela a seguir para obter as opções de configuração de back-end:
 |===
 
 
+[[backend-configuration-options-for-provisioning-volumes]]
 == Opções de configuração de back-end para volumes de provisionamento
 
 Você pode controlar o provisionamento padrão usando essas opções na `defaults` seção da configuração. Para obter um exemplo, consulte os exemplos de configuração abaixo.

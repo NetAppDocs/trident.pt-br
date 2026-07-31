@@ -24,6 +24,7 @@ Se você estiver desativando clusters do Kubernetes, exclua todas as aplicaçõe
 
 
 
+[[determine-the-original-installation-method]]
 == Determine o método de instalação original
 
 Você deve usar o mesmo método para desinstalar o Trident que você usou para instalá-lo. Antes de desinstalar, verifique qual versão você usou para instalar o Trident originalmente.
@@ -44,12 +45,14 @@ Você deve usar o mesmo método para desinstalar o Trident que você usou para i
 
 
 
+[[uninstall-a-trident-operator-installation]]
 == Desinstale a instalação de um operador Trident
 
 Você pode desinstalar manualmente uma instalação do operador do Trident ou usando o Helm.
 
 
 
+[[uninstall-manual-installation]]
 === Desinstalar a instalação manual
 
 Se você instalou o Trident usando o operador, você pode desinstalá-lo fazendo um dos seguintes procedimentos:
@@ -73,6 +76,7 @@ kubectl delete -f deploy/<bundle.yaml> -n <namespace>
 
 
 
+[[uninstall-helm-installation]]
 === Desinstale a instalação do Helm
 
 Se você instalou o Trident usando o Helm, você pode desinstalá-lo usando `helm uninstall`o .
@@ -90,6 +94,7 @@ release "trident" uninstalled
 ----
 
 
+[[uninstall-a-tridentctl-installation]]
 == Desinstale uma `tridentctl` instalação
 
 Use o `uninstall` comando in `tridentctl` para remover todos os recursos associados ao Trident, exceto para CRDs e objetos relacionados:

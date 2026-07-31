@@ -83,6 +83,7 @@ tridentctl-protect create autosupportbundle <my-bundle-name> --trigger-type <tri
 ====
 
 
+[[monitor-and-retrieve-the-support-bundle]]
 == Monitore e recupere o pacote de suporte
 
 Depois de criar um pacote de suporte usando qualquer um dos métodos, você pode monitorar seu progresso de geração e recuperá-lo para seu sistema local.

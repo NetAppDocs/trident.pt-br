@@ -16,6 +16,7 @@ O operador Trident permite personalizar a instalação do Trident usando os atri
 
 
 
+[[understanding-controller-pods-and-node-pods]]
 == Compreensão dos pods dos nós e dos pods do controlador
 
 O Trident é executado como um único pod de controlador e um pod de nó em cada nó de trabalho do cluster. O pod do nó deve estar em execução em qualquer host onde você queira potencialmente montar um volume Trident .
@@ -28,6 +29,7 @@ Kubernetes link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-p
 
 
 
+[[configuration-options]]
 == Opções de configuração
 
 
@@ -88,7 +90,7 @@ NOTE: O `k8sTimeout` O parâmetro é aplicável somente para instalação do Tri
 | `logFormat` | Formato de Registro Trident a ser usado [text,json] | `"text"` 
 
 
-| `tridentImage` | Imagem Trident a instalar | `"netapp/trident:26.02"` 
+| `tridentImage` | Imagem Trident a instalar | `"netapp/trident:26.06"` 
 
 
 | `imageRegistry` | Caminho para o Registro interno, do formato
@@ -263,6 +265,7 @@ NOTE: Para obter mais informações sobre a formatação dos parâmetros do pod,
 
 
 
+[[sample-configurations]]
 == Exemplos de configurações
 
 Você pode usar os atributos em<<Opções de configuração>> ao definir `TridentOrchestrator` Para personalizar sua instalação.

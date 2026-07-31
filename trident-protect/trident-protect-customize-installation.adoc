@@ -16,6 +16,7 @@ Você pode personalizar a configuração padrão do Trident Protect para atender
 
 
 
+[[specify-trident-protect-container-resource-limits]]
 == Especifique os limites de recursos do contêiner Trident Protect.
 
 Você pode usar um arquivo de configuração para especificar limites de recursos para os contêineres do Trident Protect após a instalação do Trident Protect.  A definição de limites de recursos permite controlar a quantidade de recursos do cluster que são consumidos pelas operações do Trident Protect.
@@ -87,6 +88,7 @@ helm upgrade trident-protect -n trident-protect netapp-trident-protect/trident-p
 
 
 
+[[customize-security-context-constraints]]
 == Personalizar restrições de contexto de segurança
 
 Você pode usar um arquivo de configuração para modificar as restrições de contexto de segurança (SCCs) do OpenShift para contêineres Trident Protect após instalar o Trident Protect. Essas restrições definem as limitações de segurança para os pods em um cluster Red Hat OpenShift.
@@ -134,6 +136,7 @@ Isso substituirá os valores padrão pelos especificados no `sccconfig.yaml` arq
 
 
 
+[[configure-additional-trident-protect-helm-chart-settings]]
 == Configure as definições adicionais do gráfico de navegação do Trident Protect.
 
 Você pode personalizar as configurações do AutoSupport, o filtro de namespace e o gerenciamento de certificados de webhook do OpenShift para atender às suas necessidades específicas. A tabela a seguir descreve os parâmetros de configuração disponíveis:
@@ -209,6 +212,7 @@ helm upgrade trident-protect -n trident-protect netapp-trident-protect/trident-p
 ====
 
 
+[[restrict-trident-protect-pods-to-specific-nodes]]
 == Restrinja os pods do Trident Protect a nós específicos.
 
 Você pode usar a restrição de seleção de nós `nodeSelector` do Kubernetes para controlar quais de seus nós são elegíveis para executar pods do Trident Protect, com base nos rótulos dos nós.  Por padrão, o Trident Protect é restrito a nós que executam Linux. Você pode personalizar ainda mais essas restrições de acordo com suas necessidades.

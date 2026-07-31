@@ -18,6 +18,7 @@ Você pode personalizar operações de restauração usando configurações avan
 
 
 
+[[namespace-annotations-and-labels-during-restore-and-failover-operations]]
 == Anotações e rótulos de namespace durante operações de restauração e failover
 
 Durante as operações de restauração e failover, rótulos e anotações no namespace de destino são feitos para corresponder aos rótulos e anotações no namespace de origem. Rótulos ou anotações do namespace de origem que não existem no namespace de destino são adicionados, e quaisquer rótulos ou anotações que já existem são sobrescritos para corresponder ao valor do namespace de origem. Rótulos ou anotações que existem apenas no namespace de destino permanecem inalterados.
@@ -40,6 +41,7 @@ Se você instalou o aplicativo de origem usando o Helm com o `--create-namespace
 
 
 
+[[example]]
 === Exemplo
 
 O exemplo a seguir apresenta um namespace de origem e destino, cada um com anotações e rótulos diferentes. Você pode ver o estado do namespace de destino antes e depois da operação e como as anotações e rótulos são combinados ou substituídos no namespace de destino.
@@ -102,12 +104,14 @@ A tabela a seguir ilustra o estado do namespace de destino de exemplo após a op
 |===
 
 
+[[supported-fields]]
 == Campos suportados
 
 Esta seção descreve campos adicionais disponíveis para operações de restauração.
 
 
 
+[[storage-class-mapping]]
 === Mapeamento de classes de armazenamento
 
 O `spec.storageClassMapping` atributo define um mapeamento de uma classe de armazenamento presente no aplicativo de origem para uma nova classe de armazenamento no cluster de destino.  Você pode usar isso ao migrar aplicativos entre clusters com diferentes classes de armazenamento ou ao alterar o backend de armazenamento para operações de BackupRestore.
@@ -124,6 +128,7 @@ storageClassMapping:
 ----
 
 
+[[supported-annotations]]
 == Anotações suportadas
 
 Esta seção lista as anotações suportadas para configurar diversos comportamentos no sistema. Se uma anotação não for definida explicitamente pelo usuário, o sistema usará o valor padrão.

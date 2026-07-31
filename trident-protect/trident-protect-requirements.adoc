@@ -18,6 +18,7 @@ Comece verificando se seu ambiente operacional, clusters de aplicativos, aplicat
 
 
 
+[[trident-protect-kubernetes-cluster-compatibility]]
 == Compatibilidade do cluster Kubernetes com o Trident Protect
 
 O Trident Protect é compatível com uma ampla gama de ofertas de Kubernetes totalmente gerenciadas e autogerenciadas, incluindo:
@@ -43,6 +44,7 @@ O Trident Protect é compatível com uma ampla gama de ofertas de Kubernetes tot
 ====
 
 
+[[trident-protect-storage-backend-compatibility]]
 == Compatibilidade com o backend de armazenamento Trident Protect
 
 O Trident Protect é compatível com os seguintes sistemas de armazenamento:
@@ -66,6 +68,7 @@ Certifique-se de que o back-end de storage atenda aos seguintes requisitos:
 
 
 
+[[requirements-for-nas-economy-volumes]]
 == Requisitos para volumes nas-economia
 
 O Trident Protect oferece suporte a operações de backup e restauração para volumes NAS Economy. Atualmente, não há suporte para snapshots, clones e replicação do SnapMirror para volumes nas-economy.  Você precisa habilitar um diretório de snapshots para cada volume nas-economy que planeja usar com o Trident Protect.
@@ -90,6 +93,7 @@ NOTE: Você pode habilitar diretórios de snapshot por padrão para novos volume
 
 
 
+[[protecting-data-with-kubevirt-vms]]
 == Proteção de dados com máquinas virtuais do KubeVirt
 
 O Trident Protect oferece recursos de congelamento e descongelamento do sistema de arquivos para máquinas virtuais KubeVirt durante operações de proteção de dados, garantindo a consistência dos dados.  O método de configuração e o comportamento padrão para operações de congelamento de máquinas virtuais variam entre as versões do Trident Protect, sendo que as versões mais recentes oferecem configuração simplificada por meio de parâmetros do gráfico Helm.
@@ -133,6 +137,7 @@ Para aprender como definir aplicativos e restaurar VMs com Trident Protect, cons
 
 
 
+[[requirements-for-snapmirror-replication]]
 == Requisitos para replicação do SnapMirror
 
 A replicação NetApp SnapMirror está disponível para uso com o Trident Protect para as seguintes soluções ONTAP :
@@ -145,6 +150,7 @@ A replicação NetApp SnapMirror está disponível para uso com o Trident Protec
 
 
 
+[[ontap-cluster-requirements-for-snapmirror-replication]]
 === Requisitos de cluster do ONTAP para replicação do SnapMirror
 
 Se você planeja usar a replicação do SnapMirror, verifique se o cluster do ONTAP atende aos seguintes requisitos:
@@ -169,6 +175,7 @@ NOTE: Somente a proteção assíncrona SnapMirror é suportada.
 
 
 
+[[peering-considerations-for-snapmirror-replication]]
 === Considerações de peering para replicação do SnapMirror
 
 Certifique-se de que seu ambiente atenda aos seguintes requisitos se você planeja usar peering de back-end de storage:
@@ -184,12 +191,14 @@ NOTE: Certifique-se de que os nomes do SVM usados na relação de replicação e
 
 
 
+[[trident-ontap-configuration-for-snapmirror-replication]]
 === Configuração Trident / ONTAP para replicação SnapMirror
 
 O Trident Protect exige que você configure pelo menos um backend de armazenamento que suporte replicação para os clusters de origem e destino. Se os clusters de origem e destino forem os mesmos, o aplicativo de destino deverá usar um backend de armazenamento diferente do aplicativo de origem para obter a melhor resiliência.
 
 
 
+[[kubernetes-cluster-requirements-for-snapmirror-replication]]
 === Requisitos de cluster do Kubernetes para replicação do SnapMirror
 
 Certifique-se de que seus clusters do Kubernetes atendam aos seguintes requisitos:

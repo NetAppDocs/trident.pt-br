@@ -16,6 +16,7 @@ Todos os nós de trabalho no cluster do Kubernetes precisam ser capazes de monta
 
 
 
+[[selecting-the-right-tools]]
 == Selecionar as ferramentas certas
 
 Se você estiver usando uma combinação de drivers, você deve instalar todas as ferramentas necessárias para seus drivers. Versões recentes do Red Hat Enterprise Linux CoreOS (RHCOS) têm as ferramentas instaladas por padrão.
@@ -44,6 +45,7 @@ link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#pre
 
 
 
+[[node-service-discovery]]
 == Detecção de serviço de nós
 
 O Trident tenta detetar automaticamente se o nó pode executar serviços iSCSI ou NFS.
@@ -67,6 +69,7 @@ tridentctl get node -o wide -n <Trident namespace>
 ----
 
 
+[[nfs-volumes]]
 == Volumes NFS
 
 Instale as ferramentas NFS usando os comandos do seu sistema operacional. Certifique-se de que o serviço NFS seja iniciado durante o tempo de inicialização.
@@ -93,12 +96,14 @@ WARNING: Reinicie seus nós de trabalho após instalar as ferramentas NFS para e
 
 
 
+[[iscsi-volumes]]
 == Volumes iSCSI
 
 O Trident pode estabelecer automaticamente uma sessão iSCSI, digitalizar LUNs e descobrir dispositivos multipath, formatá-los e montá-los em um pod.
 
 
 
+[[iscsi-self-healing-capabilities]]
 === Recursos de autorrecuperação iSCSI
 
 Para sistemas ONTAP, o Trident executa a autorrecuperação iSCSI a cada cinco minutos para:
@@ -131,6 +136,7 @@ NOTE: Por exemplo, se os segredos CHAP foram girados no controlador de armazenam
 
 
 
+[[install-the-iscsi-tools]]
 === Instale as ferramentas iSCSI
 
 Instale as ferramentas iSCSI utilizando os comandos do seu sistema operativo.
@@ -249,6 +255,7 @@ NOTE: Para o Ubuntu 18,04, você deve descobrir portas de destino com `iscsiadm`
 ====
 
 
+[[configure-or-disable-iscsi-self-healing]]
 === Configurar ou desativar a auto-recuperação iSCSI
 
 Você pode configurar as seguintes configurações de auto-recuperação iSCSI Trident para corrigir sessões obsoletas:
@@ -291,6 +298,7 @@ tridentctl install --iscsi-self-healing-interval=3m0s --iscsi-self-healing-wait-
 ====
 
 
+[[nvmetcp-volumes]]
 == Volumes NVMe/TCP
 
 Instale as ferramentas NVMe usando os comandos do seu sistema operacional.
@@ -325,6 +333,7 @@ sudo modprobe nvme-tcp
 ====
 
 
+[[verify-installation]]
 === Verifique a instalação
 
 Após a instalação, verifique se cada nó no cluster do Kubernetes tem um NQN exclusivo usando o comando:
@@ -338,12 +347,14 @@ WARNING: O Trident modifica o `ctrl_device_tmo` valor para garantir que o NVMe n
 
 
 
+[[scsi-over-fc-volumes]]
 == SCSI em volumes FC
 
 Agora você pode usar o protocolo Fibre Channel (FC) com o Trident para provisionar e gerenciar recursos de storage no sistema ONTAP.
 
 
 
+[[prerequisites]]
 === Pré-requisitos
 
 Configure as configurações de rede e nó necessárias para FC.
@@ -373,6 +384,7 @@ Consulte a seguinte documentação do ONTAP para obter detalhes:
 
 
 
+[[install-the-fc-tools]]
 === Instalar as ferramentas FC
 
 Instale as ferramentas FC usando os comandos do seu sistema operacional.
@@ -446,6 +458,7 @@ sudo systemctl status multipath-tools
 ====
 
 
+[[prepare-to-provision-smb-volumes]]
 == Prepare-se para provisionar volumes SMB
 
 Você pode provisionar volumes SMB usando `ontap-nas` motoristas.

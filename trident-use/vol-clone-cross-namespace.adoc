@@ -16,6 +16,7 @@ Com o Trident, você pode criar novos volumes usando volumes existentes ou volum
 
 
 
+[[prerequisites]]
 == Pré-requisitos
 
 Antes de clonar volumes, certifique-se de que os backends de origem e destino são do mesmo tipo e têm a mesma classe de armazenamento.
@@ -25,6 +26,7 @@ NOTE: A clonagem entre namespaces é suportada apenas para `ontap-san` e `ontap-
 
 
 
+[[quick-start]]
 == Início rápido
 
 Você pode configurar a clonagem de volume em apenas algumas etapas.
@@ -47,6 +49,7 @@ O proprietário do namespace de destino cria PVC para clonar o PVC a partir do n
 
 
 
+[[configure-the-source-and-destination-namespaces]]
 == Configure os namespaces de origem e destino
 
 Para garantir a segurança, a clonagem de volumes entre namespaces requer colaboração e ação do proprietário do namespace de origem, do administrador do cluster e do proprietário do namespace de destino. A função de usuário é designada em cada etapa.
@@ -121,6 +124,7 @@ spec:
 
 
 
+[[limitations]]
 == Limitações
 
 * Para PVCs provisionados com drivers de economia ONTAP-nas, os clones somente leitura não são compatíveis.

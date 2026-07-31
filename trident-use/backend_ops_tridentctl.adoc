@@ -16,6 +16,7 @@ Saiba mais sobre como executar operações de gerenciamento de back-end usando `
 
 
 
+[[create-a-backend]]
 == Crie um backend
 
 Depois de criar um link:backends.html["arquivo de configuração de back-end"^], execute o seguinte comando:
@@ -34,6 +35,7 @@ Depois de identificar e corrigir o problema com o arquivo de configuração, voc
 
 
 
+[[delete-a-backend]]
 == Excluir um back-end
 
 Para excluir um back-end do Trident, faça o seguinte:
@@ -57,6 +59,7 @@ NOTE: Se o Trident provisionou volumes e snapshots desse back-end que ainda exis
 
 
 
+[[view-the-existing-backends]]
 == Veja os backends existentes
 
 Para visualizar os backends que o Trident conhece, faça o seguinte:
@@ -77,6 +80,7 @@ tridentctl get backend -o json -n trident
 
 
 
+[[update-a-backend]]
 == Atualize um back-end
 
 Depois de criar um novo arquivo de configuração de back-end, execute o seguinte comando:
@@ -95,6 +99,7 @@ Depois de identificar e corrigir o problema com o arquivo de configuração, voc
 
 
 
+[[identify-the-storage-classes-that-use-a-backend]]
 == Identificar as classes de armazenamento que usam um back-end
 
 Este é um exemplo do tipo de perguntas que você pode responder com o JSON que `tridentctl` produz para objetos de back-end. Isso usa o `jq` utilitário, que você precisa instalar.

@@ -16,6 +16,7 @@ Os pools virtuais fornecem uma camada de abstração entre os backends de storag
 
 
 
+[[learn-about-virtual-pools]]
 == Saiba mais sobre pools virtuais
 
 O administrador de armazenamento pode definir pools virtuais em qualquer um dos backends do Trident em um arquivo de definição JSON ou YAML.

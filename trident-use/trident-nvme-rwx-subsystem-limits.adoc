@@ -16,6 +16,7 @@ ReadWriteMany (RWX) volumes que utilizam o protocolo NVMe têm um limite de esca
 
 
 
+[[understand-the-64-node-limit]]
 == Entenda o limite de 64 nós
 
 Se você planeja usar ReadWriteMany (RWX) volumes com o protocolo NVMe, um único volume RWX NVMe não pode ser montado por mais de 64 nós em um cluster Kubernetes.
@@ -26,10 +27,12 @@ Essa limitação se aplica somente a volumes RWX que utilizam o protocolo NVMe.
 
 
 
+[[understand-nvme-subsystem-models]]
 == Entenda os modelos de subsistema NVMe
 
 
 
+[[per-volume-subsystem-model-trident-releases-earlier-than-26-02]]
 === Modelo de subsistema por volume (Trident releases anteriores a 26.02)
 
 Nas versões do Trident anteriores à 26.02, os volumes RWX NVMe são provisionados usando um modelo de subsistema por volume. Cada volume RWX NVMe é mapeado para seu próprio subsistema NVMe dedicado no ONTAP.
@@ -38,6 +41,7 @@ Este modelo é simples, mas possui um limite de escalabilidade inferior. Em clus
 
 
 
+[[super-subsystem-model-introduced-in-trident-26-02]]
 === Modelo de super-subsistema (introduzido no Trident 26.02)
 
 A partir do Trident 26.02, os volumes RWX NVMe utilizam um modelo de super-subsistema compartilhado. Vários volumes RWX NVMe compartilham o mesmo subsistema NVMe.
@@ -48,6 +52,7 @@ Cada volume RWX NVMe suporta até 64 nós.
 
 
 
+[[identify-error-symptoms]]
 == Identifique sintomas de erro
 
 Se você criar ou anexar volumes RWX NVMe em grande escala, poderá observar erros semelhantes aos seguintes:
@@ -60,12 +65,14 @@ Este erro indica que o limite do controlador do subsistema NVMe do ONTAP foi ati
 
 
 
+[[resolve-subsystem-limit-errors]]
 == Resolver erros de limite do subsistema
 
 Para superar as limitações de subsistemas por volume e aproveitar as vantagens do modelo de super-subsistema, atualize para Trident 26.02 ou posterior.
 
 
 
+[[upgrade-trident-to-apply-the-super-subsystem-model]]
 == Atualize Trident para aplicar o modelo de super-subsistema
 
 Para aplicar o modelo de super-subsistema para volumes RWX NVMe:

@@ -21,6 +21,7 @@ NOTE: Os volumes aumentam de tamanho automaticamente quando o limite de utiliza�
 
 
 
+[[requirements]]
 == Requisitos
 
 Antes de configurar a expansão automática de volume, certifique-se de que os seguintes requisitos sejam atendidos:
@@ -40,6 +41,7 @@ Antes de configurar a expansão automática de volume, certifique-se de que os s
 
 
 
+[[limitations]]
 == Limitações
 
 * Os volumes de bloco bruto do ONTAP Non-Volatile Memory Express anteriores ao ONTAP 9.16.1 não suportam expansão automática.
@@ -58,6 +60,7 @@ Antes de configurar a expansão automática de volume, certifique-se de que os s
 
 
 
+[[provision-volumes-with-autogrow-policy]]
 == Provisionar volumes com política de crescimento automático
 
 A política de volume com crescimento automático pode ser configurada em dois níveis:
@@ -68,6 +71,7 @@ A política de volume com crescimento automático pode ser configurada em dois n
 
 
 
+[[create-an-autogrow-policy]]
 == Criar uma política de crescimento automático
 
 As políticas de crescimento automático permitem a expansão automática do volume quando os volumes atingem um limite de capacidade definido.
@@ -92,6 +96,7 @@ Essa flexibilidade permite que você introduza a expansão automática sem recri
 
 
 
+[[autogrow-policy-specifications]]
 === Especificações da política de volume com crescimento automático
 
 As políticas de crescimento automático são recursos personalizados do Kubernetes definidos da seguinte forma:
@@ -114,6 +119,7 @@ As políticas de crescimento automático são recursos personalizados do Kuberne
 |===
 
 
+[[create-an-autogrow-policy]]
 == Criar uma política de crescimento automático
 
 .Passos
@@ -153,6 +159,7 @@ standard-autogrow   80%              10%             Success
 
 
 
+[[policy-states]]
 == Estados de política
 
 Depois que você cria uma política, Trident valida a especificação e atribui um dos seguintes estados:
@@ -172,6 +179,7 @@ Depois que você cria uma política, Trident valida a especificação e atribui 
 |===
 
 
+[[associate-a-policy-with-a-storageclass]]
 == Associe uma política a um StorageClass
 
 Você pode associar uma Autogrow Policy a um StorageClass usando a  `trident.netapp.io/autogrowPolicy` anotação. Todos os volumes provisionados a partir desse StorageClass herdam a política.
@@ -218,6 +226,7 @@ production-db-policy
 
 
 
+[[policy-precedence]]
 == Precedência de política
 
 Quando as anotações da Política de Crescimento Automático são definidas tanto em um StorageClass quanto em um PVC, Trident aplica as seguintes regras de precedência:
@@ -248,12 +257,14 @@ Quando as anotações da Política de Crescimento Automático são definidas tan
 |===
 
 
+[[configuration-examples]]
 == Exemplos de configuração
 
 Os exemplos a seguir mostram configurações comuns de Autogrow Policy para diferentes casos de uso.
 
 
 
+[[conservative-policy-for-production-databases]]
 === Política conservadora para bancos de dados de produção
 
 [source, yaml]
@@ -269,6 +280,7 @@ spec:
 ----
 
 
+[[log-storage-with-fixed-growth-increments]]
 === Armazenamento de logs com incrementos de crescimento fixos
 
 [source, yaml]
@@ -284,6 +296,7 @@ spec:
 ----
 
 
+[[minimal-policy-with-defaults]]
 === Política mínima com valores padrão
 
 Quando você omite  `growthAmount` e  `maxSize`, Trident usa os padrões (`10%` de crescimento, tamanho ilimitado):
@@ -299,6 +312,7 @@ spec:
 ----
 
 
+[[policy-with-a-custom-maxsize-and-default-growthamount]]
 === Política com um maxSize personalizado e growthAmount padrão
 
 [source, yaml]
@@ -313,6 +327,7 @@ spec:
 ----
 
 
+[[aggressive-growth-with-unlimited-maxsize]]
 === Crescimento agressivo com maxSize ilimitado
 
 [source, yaml]
@@ -327,6 +342,7 @@ spec:
 ----
 
 
+[[policy-with-fractional-percentages]]
 === Política com percentuais fracionários
 
 [source, yaml]
@@ -345,6 +361,7 @@ NOTE: São aceitas porcentagens fracionárias. Se você especificar mais de trê
 
 
 
+[[nas-storageclass-with-autogrow]]
 === NAS StorageClass com Autogrow
 
 [source, yaml]
@@ -363,6 +380,7 @@ allowVolumeExpansion: true
 ----
 
 
+[[san-storageclass-with-autogrow]]
 === SAN StorageClass com Autogrow
 
 [source, yaml]
