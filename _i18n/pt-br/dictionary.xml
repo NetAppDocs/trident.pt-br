@@ -7290,4 +7290,11 @@
   <block id="d25a42bf8872d5c2742f43937586ad40" category="inline-xref">Configuração avançada do backend e exemplos</block>
   <block id="f3bbb160e5770652e96a6a7ce5e4aaa9" category="paragraph">Para obter mais informações sobre outras opções de configuração, consulte a <block ref="24ff2177ac2d3277f1e79fe1615781ee" category="inline-xref-macro-rx"></block> seção abaixo.</block>
   <block id="3929c8e22750fae0b1b6ca0e82f82fd3" category="section-title">[[first-link]]Configuração avançada do backend e exemplos</block>
+  <block id="c3bd78da5a8e8ae22bd50629327c0c26" category="section-title">O que há de novo na versão 26.06.1</block>
+  <block id="0063db86c3042093f4b48db59ca75d87" category="list-text">Corrigida uma condição de corrida entre a publicação CSI e a movimentação de volume que podia anexar um volume usando informações de acesso desatualizadas.</block>
+  <block id="99bc89ae140f34c4ef13f436b3578358" category="list-text">Corrigida uma condição de corrida em que NodeGetInfo poderia retornar rótulos de topologia vazios antes da conclusão do registro do nó, causando falhas no provisionamento com reconhecimento de topologia.</block>
+  <block id="8141a9378a82f2d156fbd38ada6c3466" category="list-text">Corrigida uma rara condição de corrida de desconexão NVMe que podia derrubar um subsistema compartilhado enquanto outro pod ainda estava sendo conectado.</block>
+  <block id="13d49e861126c9f4e8187c3ed601942a" category="list-text">Corrigidas as falhas na publicação de clones de PVC NVMe (e o mapeamento incorreto do namespace pai) ao criar clones de um volume montado sob concorrência.</block>
+  <block id="92908f9dc019fbc39650b0f44ecbe68d" category="list-text">Corrigido o problema de falhas na criação de snapshots para PVCs em backends ONTAP-SAN-Economy usando um nameTemplate.</block>
+  <block id="241bcdc29e2aecc9374092674e96e3b7" category="list-text">Adicionada a opção <block ref="c187d606271268ec08cafc7fe2d89aba" prefix=" " category="inline-code"></block> (segundos) na configuração do backend ONTAP para definir os tempos limite dos clientes de API REST e ZAPI por backend.</block>
 </blocks>
