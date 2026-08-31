@@ -4297,8 +4297,6 @@
   <block id="ffe4cfc202d643b50342b93a4a11a82f" category="section-title">Promover PVC secundário durante um failover planejado</block>
   <block id="1d60b89a076d7f30b8efdef50e842f68" category="paragraph">Durante um failover planejado (migração), execute as seguintes etapas para promover o PVC secundário:</block>
   <block id="3310d9a60c164accb7c262ab6e9fbc65" category="list-text">No cluster primário do Kubernetes, crie um snapshot do PVC e aguarde até que o snapshot seja criado.</block>
-  <block id="8b17b79902950942165541a8ab704363" category="list-text">No cluster principal do Kubernetes, crie o SnapshotInfo CR para obter detalhes internos.</block>
-  <block id="678346d79faaa65b2da52e6d7ddce845" category="list-text">No cluster secundário do Kubernetes, atualize o campo _spec.State_ do _tridentMirrorRelationship_ CR para _promoted_ e _spec.promotedSnapshotHandle_ para ser o internalName do snapshot.</block>
   <block id="7b007b14980acd66e9301e02a5670f47" category="list-text">No cluster secundário do Kubernetes, confirme o status (campo status.State) do TrigentMirrorRelationship para promovido.</block>
   <block id="f69101c0107c4bbf8f0ccc9141beb68b" category="section-title">Restaurar uma relação de espelhamento após um failover</block>
   <block id="9a023cbe1d3be933d8edb6228f9901ce" category="paragraph">Antes de restaurar uma relação de espelho, escolha o lado que você deseja fazer como o novo primário.</block>
@@ -6590,7 +6588,6 @@
   <block id="7d6abad6d9b0cb2c17d374eb60cfd549" category="paragraph">A seguir, apresentamos exemplos de configurações de Storage Class para uso com Trident e FSx for ONTAP.</block>
   <block id="79aed0c0cab8f60748d97cff824e71d8" category="section-title">Classe de armazenamento para NFS</block>
   <block id="1aeaba8f713cb76c3933e520e71db58b" category="paragraph">Você pode usar este exemplo para configurar StorageClass para volumes usando NFS (consulte a seção de Atributos do Trident abaixo para obter a lista completa de atributos):</block>
-  <block id="3c2af55b3b722b8e55112e627dcfa582" category="section-title">Classe de armazenamento para iSCSI</block>
   <block id="157051d3c2492a3589f7ef937c9a3380" category="paragraph">Use este exemplo para configurar StorageClass para volumes usando iSCSI:</block>
   <block id="5182a799b5d9bfc055f426543bab1173" category="section-title">Classe de armazenamento usando NFSv3 e AWS Bottlerocket</block>
   <block id="d95d0aae1fadec77938feae823d4861b" category="section-title">Atributos do Trident StorageClass</block>
@@ -7297,4 +7294,7 @@
   <block id="13d49e861126c9f4e8187c3ed601942a" category="list-text">Corrigidas as falhas na publicação de clones de PVC NVMe (e o mapeamento incorreto do namespace pai) ao criar clones de um volume montado sob concorrência.</block>
   <block id="92908f9dc019fbc39650b0f44ecbe68d" category="list-text">Corrigido o problema de falhas na criação de snapshots para PVCs em backends ONTAP-SAN-Economy usando um nameTemplate.</block>
   <block id="241bcdc29e2aecc9374092674e96e3b7" category="list-text">Adicionada a opção <block ref="c187d606271268ec08cafc7fe2d89aba" prefix=" " category="inline-code"></block> (segundos) na configuração do backend ONTAP para definir os tempos limite dos clientes de API REST e ZAPI por backend.</block>
+  <block id="69eb48c01ded3a79590a6ae42b855f34" category="section-title">Classe de armazenamento para iSCSI</block>
+  <block id="791aed607ce65a32c8115590f604749d" category="list-text">No cluster Kubernetes primário, crie o TridentTridentSnapshotInfoCR para obter detalhes internos.</block>
+  <block id="e239ae5dff4b309ee9e4b5a6800472ca" category="list-text">No cluster Kubernetes secundário, atualize o campo _spec.state_ do CR _TridentMirrorRelationship_ para _promoted_ e _spec.volumeMappings[].promotedSnapshotHandle_ para ser o internalName do snapshot.</block>
 </blocks>
