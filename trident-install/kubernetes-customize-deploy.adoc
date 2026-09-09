@@ -138,14 +138,11 @@ O limite de consultas por segundo (QPS) usado pelo controlador durante a comunic
 
 
 | `enableConcurrency`  a| 
-Permite operações simultâneas do controlador Trident para melhor rendimento.
+Permite operações simultâneas do controlador do Trident para melhorar o desempenho. Para obter mais informações sobre os drivers compatíveis, consulte o link: https://docs.netapp.com/us-en/trident/trident-use/controller-scalability.html#controller-scalability[Controller Scalability documentation].
+| `resources` 
 
 
-NOTE: *Prévia Técnica*: Este recurso é experimental e atualmente suporta fluxos de trabalho paralelos limitados com os drivers ONTAP-NAS (somente NFS) e ONTAP-SAN (NVMe para ONTAP 9 unificado), além da prévia técnica existente para o driver ONTAP-SAN (protocolos iSCSI e FCP no ONTAP 9 unificado).
-| falso 
-
-
-| `resources`  a| 
+ a| 
 Define os limites de recursos e as solicitações do Kubernetes para o controlador Trident e os pods dos nós. Você pode configurar CPU e memória para cada contêiner e sidecar para gerenciar a alocação de recursos no Kubernetes.
 
 Para obter mais informações sobre como configurar solicitações e limites de recursos, consultelink:https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/["Gerenciamento de recursos para pods e contêineres"^] .
@@ -250,15 +247,10 @@ resources:
         limits:
           cpu:
           memory:
-----
+----| `httpsMetrics` 
 
 
-| `httpsMetrics` | Habilite o HTTPS para o endpoint de métricas do Prometheus. | falso 
-
-
-| `hostNetwork`  a| 
-Habilita a conexão de rede do host para o controlador Trident . Isso é útil quando você deseja separar o tráfego de front-end do tráfego de back-end em uma rede com várias residências.
-| falso 
+| Habilite o HTTPS para o endpoint de métricas do Prometheus. | falso | `hostNetwork` 
 |===
 
 NOTE: Para obter mais informações sobre a formatação dos parâmetros do pod, link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/["Atribuindo pods a nós"^]consulte .
