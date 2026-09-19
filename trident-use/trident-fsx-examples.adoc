@@ -29,7 +29,7 @@ Consulte a tabela a seguir para obter as opções de configuração de back-end:
 | `version` |  | Sempre 1 
 
 
-| `storageDriverName` | Nome do controlador de armazenamento | `ontap-nas` `ontap-nas-economy`, , `ontap-nas-flexgroup` `ontap-san` , , , `ontap-san-economy` 
+| `storageDriverName` | Nome do driver de armazenamento. Não pode ser modificado após a criação. Para atualizar este parâmetro, você deve criar um novo backend. | `ontap-nas` `ontap-nas-economy`, , `ontap-nas-flexgroup` `ontap-san` , , , `ontap-san-economy` 
 
 
 | `backendName` | Nome personalizado ou back-end de storage | Nome do driver e dataLIF 

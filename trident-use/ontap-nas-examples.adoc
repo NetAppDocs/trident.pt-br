@@ -37,7 +37,9 @@ A tabela a seguir exibe as opções de configuração do backend:
 
 
 | `storageDriverName`  a| 
-Nome do controlador de armazenamento
+Nome do driver de armazenamento.
+
+Não pode ser modificado após a criação. Para atualizar este parâmetro, você deve criar um novo backend.
 
 
 NOTE: Somente para sistemas NetApp AFX `ontap-nas` é suportado.

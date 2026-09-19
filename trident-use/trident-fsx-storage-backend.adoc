@@ -158,7 +158,7 @@ Consulte a tabela a seguir para obter as opções de configuração de back-end:
 | `version` |  | Sempre 1 
 
 
-| `storageDriverName` | Nome do controlador de armazenamento | `ontap-nas` `ontap-nas-economy`, , `ontap-nas-flexgroup` `ontap-san` , , , `ontap-san-economy` 
+| `storageDriverName` | Nome do driver de armazenamento. Não pode ser modificado após a criação. Para atualizar este parâmetro, você deve criar um novo backend. | `ontap-nas` `ontap-nas-economy`, , `ontap-nas-flexgroup` `ontap-san` , , , `ontap-san-economy` 
 
 
 | `backendName` | Nome personalizado ou back-end de storage | Nome do driver e dataLIF 
@@ -197,7 +197,7 @@ Consulte a tabela a seguir para obter as opções de configuração de back-end:
 | `svm` | Máquina virtual de armazenamento para usar | Derivado se um SVM managementLIF for especificado. 
 
 
-| `storagePrefix` | Prefixo usado ao provisionar novos volumes na SVM. Não pode ser modificado após a criação. Para atualizar esse parâmetro, você precisará criar um novo backend. | `trident` 
+| `storagePrefix` | Prefixo usado ao provisionar novos volumes na SVM. Não pode ser modificado após a criação. Para atualizar esse parâmetro, você precisará criar um novo backend. | `trident`NOTA: Os parâmetros de configuração do backend que afetam a identidade do backend e a nomenclatura do volume, como  `storageDriverName` e  `storagePrefix`, não podem ser alterados após a criação. Para atualizá-los, você deve criar um novo backend. 
 
 
 | `limitAggregateUsage` | *Não especifique para o Amazon FSX for NetApp ONTAP.* O fornecido `fsxadmin` e `vsadmin` não contém as permissões necessárias para recuperar o uso agregado e limitá-lo usando o Trident. | Não utilizar. 
