@@ -4,7 +4,7 @@ permalink: trident-use/create-stor-class.html
 keywords: storage class, manage storage class, storage classes, kubernetes storage classes 
 summary: Você pode projetar um arquivo Kubernetes StorageClass e criar o StorageClass para instruir o Trident a provisionar volumes. 
 ---
-= Crie uma classe de armazenamento
+= Crie uma classe de armazenamento do Trident
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

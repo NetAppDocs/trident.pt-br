@@ -4,7 +4,7 @@ permalink: trident-use/vol-clone-cross-namespace.html
 keywords: volref, volume reference, clone, pvc, pv, namespace, cvna, cross-namespace, sharing, volumesnapshots 
 summary: Usando o Trident, você pode criar novos volumes usando volumes existentes ou volumes de volumesnapshots de um namespace diferente dentro do mesmo cluster K8s. 
 ---
-= Clonar volumes entre namespaces
+= Clone volumes do Trident em namespaces diferentes
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

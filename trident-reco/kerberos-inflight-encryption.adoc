@@ -4,7 +4,7 @@ permalink: trident-reco/kerberos-inflight-encryption.html
 keywords: Trident, backend, storage, encryption, kerberos 
 summary: Você pode configurar a criptografia para proteger o tráfego entre o Trident e o back-end de storage. 
 ---
-= Criptografia em trânsito Kerberos
+= A criptografia Kerberos em trânsito do Trident
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

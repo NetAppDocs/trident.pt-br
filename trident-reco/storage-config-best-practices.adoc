@@ -4,7 +4,7 @@ permalink: trident-reco/storage-config-best-practices.html
 keywords: kubernetes, clusters, nodes, components, master, compute 
 summary: Em geral, um cluster do Kubernetes consiste em dois tipos de nós, cada um responsável por diferentes aspectos da funcionalidade. 
 ---
-= Configuração de armazenamento
+= Melhores práticas para a configuração de storage do Trident
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

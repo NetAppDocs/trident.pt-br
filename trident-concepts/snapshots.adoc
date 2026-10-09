@@ -4,7 +4,7 @@ permalink: trident-concepts/snapshots.html
 keywords: provisioning, Trident 
 summary: Saiba mais sobre como o Trident lida com a criação de snapshots de volume para seus drivers. 
 ---
-= Instantâneos de volume
+= Criação de instantâneo de volume do Trident
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

@@ -4,7 +4,7 @@ permalink: trident-use/manage-stor-class.html
 keywords: storage class, manage storage class, storage classes, kubernetes storage classes 
 summary: Você pode exibir classes de armazenamento existentes, definir uma classe de armazenamento padrão, identificar o back-end da classe de armazenamento e excluir classes de armazenamento. 
 ---
-= Gerenciar classes de armazenamento
+= Gerencie as classes de armazenamento do Trident
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

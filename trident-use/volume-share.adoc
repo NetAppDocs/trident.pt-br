@@ -4,7 +4,7 @@ permalink: trident-use/volume-share.html
 keywords: volref, volume reference, share, pvc, pv, nfs, namespace, cvna, cross-namespace, sharing 
 summary: Usando o Trident, você pode criar um volume em um namespace principal e compartilhá-lo em um ou mais namespaces secundários. 
 ---
-= Compartilhar um volume NFS entre namespaces
+= Compartilhe um volume NFS do Trident entre namespaces
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

@@ -4,7 +4,7 @@ permalink: trident-use/vol-expansion.html
 keywords: volumes, on-demand volume snapshots, expand volumes, iscsci volumes, nfs volumes, expand, expansion 
 summary: O Trident oferece aos usuários do Kubernetes a capacidade de expandir seus volumes depois que eles são criados. Encontre informações sobre as configurações necessárias para expandir volumes iSCSI, FC e NFS. 
 ---
-= Expanda volumes
+= Expandir volumes do Trident
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

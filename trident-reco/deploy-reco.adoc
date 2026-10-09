@@ -4,7 +4,7 @@ permalink: trident-reco/deploy-reco.html
 keywords: deployment, deploy, trident, namespace 
 summary: Use as recomendações listadas aqui quando implantar o Trident. 
 ---
-= Implantação
+= Recomendações de implantação do Trident
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

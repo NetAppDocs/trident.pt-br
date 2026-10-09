@@ -4,7 +4,7 @@ permalink: trident-use/worker-node-prep.html
 keywords: storage class, manage storage class, storage classes, kubernetes storage classes, worker node, nfs, iscsi, kubernetes clusters, self-healing, healing, nvme, tcp 
 summary: Todos os nós de trabalho no cluster do Kubernetes precisam ser capazes de montar os volumes provisionados para os pods. Se você estiver usando o driver ONTAP-nas, ONTAP-nas-Economy, ONTAP-nas-FlexGroup para um de seus back-ends, seus nós de trabalho precisarão das ferramentas NFS. Caso contrário, eles exigem as ferramentas iSCSI. 
 ---
-= Prepare o nó de trabalho
+= Prepare o nó de trabalho do Trident
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
