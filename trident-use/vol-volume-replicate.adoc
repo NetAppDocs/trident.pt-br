@@ -164,14 +164,24 @@ metadata:
   name: csi-nas
 spec:
   state: established
+  replicationPolicy: MirrorAllSnapshots
+  replicationSchedule: 5min
   volumeMappings:
   - localPVCName: csi-nas
     remoteVolumeHandle: "datavserver:trident_pvc_3bedd23c_46a8_4384_b12b_3c38b313c1e1"
 ----
 +
-O Trident criará um relacionamento SnapMirror com o nome da política de relacionamento configurado (ou padrão para o ONTAP) e inicializá-lo.
+O TMR `spec` possui quatro campos de nível superior: `state`, que define o estado de relacionamento desejado (consulte <<Estados de replicação de volume>>); `volumeMappings`, que associa PVCs locais aos seus identificadores de volume remotos; e os campos opcionais `replicationPolicy` e `replicationSchedule` descritos abaixo.
 
-.. Crie um PVC com StorageClass criado anteriormente para atuar como secundário (destino SnapMirror).
+
+
+
+
+Os campos  `replicationPolicy` e  `replicationSchedule` são opcionais. Defina  `replicationPolicy` como o nome de uma política assíncrona do SnapMirror no ONTAP e  `replicationSchedule` como o nome de um agendamento do ONTAP. Se um dos campos for omitido, o Trident usará a política ou o agendamento de replicação correspondente configurado no backend. Defina esses campos ao criar a relação; você não poderá alterar a política ou o agendamento depois que a relação for estabelecida. Para usar configurações diferentes, exclua e recrie o TMR.
+
+O Trident cria e inicializa uma relação do SnapMirror usando a política e o agendamento de replicação configurados.
+
+. Crie um PVC com StorageClass criado anteriormente para atuar como secundário (destino SnapMirror).
 +
 .Exemplo
 [source, yaml]
@@ -192,8 +202,6 @@ storageClassName: csi-nas
 ----
 +
 O Trident verificará se há CRD de relacionamento de espelhamento e não criará o volume se a relação não existir. Se o relacionamento existir, o Trident garantirá que o novo FlexVol volume seja colocado em um SVM que seja emparelhado com o SVM remoto definido no espelhamento.
-
-
 
 
 
@@ -261,7 +269,7 @@ Antes de restaurar uma relação de espelho, escolha o lado que você deseja faz
 
 .Passos
 . No cluster secundário do Kubernetes, certifique-se de que os valores do campo _spec.remoteVolumeHandle_ no TrigentMirrorRelationship sejam atualizados.
-. No cluster secundário do Kubernetes, atualize o campo _spec.mirror_ do TrigentMirrorRelationship para `reestablished`.
+. No cluster Kubernetes secundário, atualize o campo _spec.state_ de TridentMirrorRelationship para `reestablished`.
 
 
 

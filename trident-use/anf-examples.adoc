@@ -55,6 +55,9 @@ Os backends Azure NetApp Files fornecem essas opções de configuração.
 | `location` | Nome do local do Azure onde os novos volumes serão criados Opcional quando identidades gerenciadas estiverem ativadas em um cluster AKS. |  
 
 
+| `cloudConfiguration.cloudName` | Identifica o ambiente de nuvem do Azure para o backend. Defina como `AzureGovernment` ao usar o Azure Government. |  
+
+
 | `resourceGroups` | Lista de grupos de recursos para filtragem de recursos descobertos | "[]" (sem filtro) 
 
 
@@ -107,10 +110,18 @@ As nuvens do Microsoft Azure compatíveis incluem:
 
 * Azure Commercial
 * Azure Government (Azure Government / MAG)
+* O Azure China
 
 
 Ao implantar Trident ou criar um backend do Azure NetApp Files, certifique-se de que os endpoints do Azure Resource Manager e de autenticação correspondam ao seu ambiente de nuvem do Azure. Se os endpoints não corresponderem,  `tridentctl` não será possível autenticar e a criação do backend falhará.
 
+Para um backend do Azure Government, defina `cloudConfiguration.cloudName` na configuração do backend:
+
+[source, yaml]
+----
+cloudConfiguration:
+  cloudName: AzureGovernment
+----
 
 
 [[required-permissions-and-resources]]

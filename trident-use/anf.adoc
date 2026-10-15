@@ -25,6 +25,7 @@ As nuvens do Microsoft Azure compatíveis incluem:
 
 * Azure Commercial
 * Azure Government (Azure Government / MAG)
+* O Azure China
 
 
 Ao implantar Trident ou configurar um backend do Azure NetApp Files, certifique-se de que o Azure Resource Manager e os endpoints de autenticação correspondam ao seu ambiente de nuvem do Azure.
@@ -104,7 +105,7 @@ O exemplo a seguir instala Trident e define  `cloudProvider` usando a variável 
 
 [listing]
 ----
-helm install trident trident-operator-100.2602.0.tgz --create-namespace --namespace <trident-namespace> --set cloudProvider=$CP
+helm install trident trident-operator-100.2606.0.tgz --create-namespace --namespace <trident-namespace> --set cloudProvider=$CP
 ----
 --
 .<code>dtridentctl</code>
