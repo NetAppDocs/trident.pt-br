@@ -16,9 +16,13 @@ summary: Proteja todos os aplicativos tirando snapshots e backups usando uma pol
 [role="lead"]
 Você pode proteger todos os aplicativos gerenciados pelo Trident Protect criando snapshots e backups usando uma política de proteção automatizada ou de forma pontual.
 
+[NOTE]
+====
+* Você pode configurar o Trident Protect para congelar e descongelar sistemas de arquivos durante operações de proteção de dados. link:trident-protect-requirements.html#protecting-data-with-kubevirt-vms["Saiba mais sobre como configurar o congelamento do sistema de arquivos com o Trident Protect."].
+* Para capturar instantâneos dos volumes relacionados de um aplicativo no mesmo ponto no tempo, defina grupos de volume no aplicativo. Consulte link:trident-protect-volume-group-snapshots.html["Use snapshots de grupo de volume com Trident Protect"].
 
-NOTE: Você pode configurar o Trident Protect para congelar e descongelar sistemas de arquivos durante operações de proteção de dados. link:trident-protect-requirements.html#protecting-data-with-kubevirt-vms["Saiba mais sobre como configurar o congelamento do sistema de arquivos com o Trident Protect."].
 
+====
 
 
 [[create-an-on-demand-snapshot]]

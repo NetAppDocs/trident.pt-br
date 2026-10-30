@@ -16,8 +16,8 @@ Você pode implantar o operador Trident e instalar o Trident usando o Helm. Este
 
 
 
-[[critical-information-about-trident-26-06]]
-== Informações críticas sobre Trident 26.06
+[[critical-information-about-trident-26-10]]
+== Informações críticas sobre Trident 26.10
 
 *Você deve ler as seguintes informações críticas sobre o Trident.*
 
@@ -26,7 +26,7 @@ Você pode implantar o operador Trident e instalar o Trident usando o Helm. Este
 ====
 []
 =====
-* Kubernetes 1.37 agora é compatível com Trident. Atualize Trident antes de atualizar o Kubernetes.
+* O Trident 26.10 oferece suporte ao Kubernetes 1.27 a 1.37. Consulte a lista de imagens específicas da versão em link:../trident-get-started/requirements.html#container-images-and-corresponding-kubernetes-versions["Requisitos da Trident"] antes de atualizar o Kubernetes.
 * O Trident reforça estritamente o uso de configuração multipathing em ambientes SAN, com um valor recomendado de `find_multipaths: no` no arquivo multipath.conf.
 +
 O uso de configuração não multipathing ou o uso `find_multipaths: yes` de ou `find_multipaths: smart` valor no arquivo multipath.conf resultará em falhas de montagem. A Trident recomenda o uso de `find_multipaths: no` desde a versão 21,07.
@@ -54,11 +54,11 @@ Além do link:kubernetes-deploy.html#before-you-begin["pré-requisitos de implan
 ----
 helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
 ----
-. Utilize  `helm install` e especifique um nome para sua implantação, como no exemplo a seguir, onde  `100.2606.0` é a versão do Trident que você está instalando.
+. Utilize  `helm install` e especifique um nome para sua implantação, como no exemplo a seguir, onde  `100.2610.0` é a versão do Trident que você está instalando.
 +
 [listing]
 ----
-helm install <name> netapp-trident/trident-operator --version 100.2606.0 --create-namespace --namespace <trident-namespace>
+helm install <name> netapp-trident/trident-operator --version 100.2610.0 --create-namespace --namespace <trident-namespace>
 ----
 +
 
@@ -89,11 +89,11 @@ Especifique um arquivo YAML com substituições. Isso pode ser especificado vár
 Especifique substituições na linha de comando.
 
 |===
-Por exemplo, para alterar o valor padrão de  `debug`, execute o seguinte comando onde  `100.2606.0` é a versão do Trident que você está instalando:
+Por exemplo, para alterar o valor padrão de  `debug`, execute o seguinte comando onde  `100.2610.0` é a versão do Trident que você está instalando:
 
 [listing]
 ----
-helm install <name> netapp-trident/trident-operator --version 100.2606.0  --create-namespace --namespace trident --set tridentDebug=true
+helm install <name> netapp-trident/trident-operator --version 100.2610.0  --create-namespace --namespace trident --set tridentDebug=true
 ----
 
 
@@ -190,6 +190,9 @@ WARNING: Não remova a afinidade padrão do arquivo values.yaml. Quando você qu
 | `tridentSilenceAutosupport` | Permite desativar relatórios periódicos AutoSupport do Trident. | `false` 
 
 
+| `tridentExcludeAutosupport` | Quando configurado para  `true`, o Trident não configura o contêiner AutoSupport durante a instalação. | `false` 
+
+
 | `tridentAutosupportImageTag` | Permite substituir a etiqueta da imagem para o contentor Trident AutoSupport. | `<version>` 
 
 
@@ -229,13 +232,19 @@ WARNING: Não remova a afinidade padrão do arquivo values.yaml. Quando você qu
 | `enableForceDetach` | Permite ativar a função forçar desanexar. | `false` 
 
 
+| `enableDataLIFRefresh` | Atualiza os LIFs de dados NVMe para volumes publicados quando LIFs são adicionados, removidos ou recebem um novo endereço. Aplica-se a `ontap-san` com `sanType: nvme` no ONTAP unificado e a NVMe/TCP no ASA r2. Para obter mais informações, consulte link:../trident-use/refresh-nvme-data-lifs.html["Atualizar LIFs de dados NVMe"]. | `false` 
+
+
 | `excludePodSecurityPolicy` | Exclui a criação da diretiva de segurança do pod do operador. | `false` 
 
 
-| `cloudProvider` | Defina como `"Azure"` quando utilizar identidades geridas ou uma identidade de nuvem num cluster AKS. Defina como "AWS" ao usar uma identidade de nuvem em um cluster EKS. | `""` 
+| `cloudProvider` | Defina como `"Azure"` ao usar identidades gerenciadas ou uma identidade na nuvem em um cluster AKS, `"AWS"` ao usar uma identidade na nuvem em um cluster EKS ou `"GCP"` ao usar identidade na nuvem no GKE ou a Federação de Identidade de Carga de Trabalho no OpenShift. | `""` 
 
 
-| `cloudIdentity` | Defina como identidade da carga de trabalho ("azure.Workload.identity/client-id: xxxxxxxx-xxxx-xxxx-xxxxxxxxx") ao usar identidade da nuvem em um cluster AKS. Definido como função do AWS IAM ("'eks.amazonaws.com/role-arn: arn:aws:iam::123456:role/Trident-role'") ao usar a identidade da nuvem em um cluster do EKS. | `""` 
+| `cloudIdentity` | Defina como identidade da carga de trabalho ("azure.workload.identity/client-id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx") ao usar a identidade na nuvem em um cluster do AKS. Defina como função do AWS IAM ("'eks.amazonaws.com/role-arn: arn:aws:iam::123456:role/trident-role'") ao usar a identidade na nuvem em um cluster do EKS. Defina como a anotação de identidade na nuvem do GKE ao usar a identidade na nuvem no GKE. Não defina para a Federação de Identidade de Carga de Trabalho do OpenShift. | `""` 
+
+
+| `gcpWIFAudience` | Público-alvo para o token de conta de serviço projetado usado com o Google Cloud Workload Identity Federation em OpenShift. Use o nome de recurso canônico do provedor. Para obter mais informações, consulte link:../trident-use/gcnv.html#openshift-wif["Configure o Google Cloud NetApp Volumes com a federação de identidade da carga de trabalho"]. | `""` 
 
 
 | `iscsiSelfHealingInterval` | O intervalo no qual a auto-recuperação iSCSI é invocada. | `5m0s` 

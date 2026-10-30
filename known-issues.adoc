@@ -18,6 +18,17 @@ Os seguintes problemas conhecidos afetam a versão atual:
 
 
 
+[[volumes-remain-attached-after-upgrading-from-trident-22-10-or-earlier]]
+== Os volumes permanecem anexados após a atualização do Trident 22.10 ou anterior
+
+Este problema afeta clientes que atualizam diretamente do Trident 22.10 ou anterior para o Trident 26.10 com volumes anexados. Atualizações do Trident 23.01 ou posterior não são afetadas.
+
+Após a atualização, os volumes afetados podem não se desanexar. Os pods que usam volumes ReadWriteOnce (RWO) não podem ser movidos para outro nó e podem relatar um erro de anexação múltipla. A exclusão do PersistentVolume (PV) também pode travar.
+
+Para contornar esse problema, no nó que possui o anexo de volume obsoleto, exclua o  `volumePublishInfo.json`arquivo remanescente do  `globalmount`diretório desse volume.
+
+
+
 [[volumesnapshots-not-reaching-readytouse-state]]
 == VolumeSnapshots não atingindo o estado ReadyToUse
 

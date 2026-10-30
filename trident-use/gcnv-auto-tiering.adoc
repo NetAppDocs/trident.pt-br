@@ -22,7 +22,7 @@ O auto-tiering é configurado por meio dos parâmetros do backend do Trident e d
 
 O recurso de tiering automático permite que o Trident provisione volumes que movem automaticamente dados inativos de uma camada de desempenho para uma camada de capacidade. Isso reduz o custo de armazenamento enquanto preserva o desempenho para dados acessados com frequência.
 
-Trident aplica as configurações de armazenamento em camadas automático somente no momento da criação do volume. Alterações posteriores ao provisionamento não são suportadas em Trident 26.06.
+Trident aplica as configurações de armazenamento em camadas automático somente no momento da criação do volume. Alterações posteriores ao provisionamento não são suportadas em Trident 26.10.
 
 
 
@@ -86,10 +86,10 @@ As configurações definidas em uma precedência mais alta substituem os valores
 
 
 
-[[supported-functionality-in-trident-26-06]]
-== Funcionalidade suportada no Trident 26.06
+[[supported-functionality-in-trident-26-10]]
+== Funcionalidade suportada no Trident 26.10
 
-Trident 26.06 oferece suporte aos seguintes recursos de auto-tiering para Google Cloud NetApp Volumes:
+Trident 26.10 oferece suporte aos seguintes recursos de auto-tiering para Google Cloud NetApp Volumes:
 
 * Habilitar ou desabilitar o auto-tiering durante o provisionamento de volumes
 * Definindo uma política de hierarquização na configuração do backend do Trident
@@ -99,8 +99,8 @@ Trident 26.06 oferece suporte aos seguintes recursos de auto-tiering para Google
 
 
 
-[[unsupported-functionality-in-trident-26-06]]
-== Funcionalidade não suportada no Trident 26.06
+[[unsupported-functionality-in-trident-26-10]]
+== Funcionalidade não suportada no Trident 26.10
 
 As seguintes operações não são suportadas:
 

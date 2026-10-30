@@ -47,7 +47,7 @@ Você deve atribuir pelo menos um agregado à máquina virtual de storage (SVM) 
 [[unsupported-operations]]
 == Operações não suportadas
 
-* Criptografia LUKS
+* Criptografia do Linux Unified Key Setup (LUKS)
 * SnapMirror volume replicação
 * Limitação do uso agregado
 * Modo de reserva de espaço

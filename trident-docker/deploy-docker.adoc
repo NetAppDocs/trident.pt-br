@@ -153,8 +153,8 @@ Ou, https://docs.docker.com/engine/install/["siga as instruções para sua distr
 +
 [source, console]
 ----
-wget https://github.com/NetApp/trident/releases/download/10.0/trident-installer-26.06.0.tar.gz
-tar zxf trident-installer-26.06.0.tar.gz
+wget https://github.com/NetApp/trident/releases/download/10.0/trident-installer-26.10.0.tar.gz
+tar zxf trident-installer-26.10.0.tar.gz
 ----
 .. Mover para um local no caminho do compartimento:
 +

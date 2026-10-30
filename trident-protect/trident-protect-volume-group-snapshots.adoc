@@ -1,0 +1,203 @@
+---
+sidebar: sidebar 
+permalink: trident-protect/trident-protect-volume-group-snapshots.html 
+keywords: trident protect, volume group snapshot, consistency group, volumeGroups, multi-volume, kubevirt, ontap-san 
+summary: Use snapshots de grupo de volume para capturar várias declarações de volume persistente de um aplicativo no mesmo ponto no tempo com Trident Protect. 
+---
+= Use snapshots de grupo de volume com Trident Protect
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Use snapshots de grupo de volume para capturar as declarações de volume persistente (PVCs) relacionadas no mesmo ponto no tempo. Isso é útil para aplicativos que gravam em mais de um volume, incluindo máquinas virtuais (VMs) com vários discos.
+
+.Sobre esta tarefa
+Você define grupos de volume no `spec.volumeGroups` campo do `Application` recurso personalizado (CR). Quando você cria um snapshot da aplicação, o Trident Protect usa um grupo de consistência do ONTAP para criar snapshots de todos os PVCs em um grupo de volume no mesmo momento. Ele cria um grupo de consistência para cada namespace no grupo de volume. Cada volume no grupo também recebe seu próprio snapshot, para que você possa restaurar volumes individualmente.
+
+O Trident Protect cria instantâneos individuais dos PVCs que não estão em um grupo de volume. Esses instantâneos são criados um após o outro, portanto, não há garantia de que reflitam o mesmo ponto no tempo.
+
+Os snapshots de grupo de volume se aplicam a snapshots sob demanda, snapshots agendados e ao snapshot que o Trident Protect cria como parte de um backup. Se você fizer backup de um snapshot existente, o Trident Protect usará esse snapshot e não criará um novo snapshot de grupo. A replicação também não cria outro snapshot de grupo. Ela usa os snapshots por volume que o snapshot de grupo já criou.
+
+O Trident Protect captura volumes no mesmo ponto no tempo somente se eles atenderem a todas as seguintes condições:
+
+* Eles pertencem ao mesmo grupo de volume.
+* Eles estão no mesmo namespace.
+* Eles estão na mesma máquina virtual de armazenamento (SVM).
+* O grupo de volume não possui mais de 80 volumes nesse namespace.
+
+
+Se o Trident Protect não conseguir criar um snapshot de grupo, por exemplo, porque um requisito não foi atendido, ele adiciona um aviso a `status.warnings` e cria snapshots individuais dos PVCs desse grupo. Esses snapshots são criados um após o outro, portanto podem não refletir o mesmo ponto no tempo. O snapshot da aplicação ainda é concluído.
+
+A tabela a seguir descreve o que acontece em situações comuns.
+
+[cols="1,2"]
+|===
+| Situação | Resultado 
+
+
+| O grupo de volume seleciona PVCs em mais de um espaço de nomes | Um snapshot de grupo pertence a um namespace, portanto o Trident Protect cria um snapshot de grupo separado em cada namespace. Esses snapshots de grupo não são obtidos no mesmo momento. Um pode ser bem-sucedido enquanto outro ainda está em execução, falha ou recorre a snapshots individuais. Por exemplo, PVCs rotulados `app: payments-db` em `payments-a` e `payments-b` tornam-se dois snapshots de grupo separados. Não trate snapshots de grupo de namespaces diferentes como um único ponto de restauração. 
+
+
+| Os PVCs em um namespace estão em mais de uma SVM | O Trident Protect não divide volumes por SVM ou por backend do Trident. Um grupo de consistência do ONTAP não pode incluir volumes de mais de uma SVM, portanto, o snapshot do grupo falha para todo o namespace, incluindo os volumes que compartilham uma SVM. O Trident Protect adiciona um aviso, remove o snapshot do grupo e cria um snapshot individual de cada volume. Para capturar volumes juntos, coloque-os na mesma SVM. 
+
+
+| Um namespace possui mais de 80 PVCs correspondentes | O Trident Protect ignora apenas esse namespace e cria snapshots individuais de seus PVCs. Outros namespaces no mesmo grupo de volume ainda recebem um snapshot de grupo. 
+
+
+| Um PVC corresponde a mais de uma `volumeGroups` entrada | O Trident Protect adiciona o PVC a ambos os grupos de volume, e um dos snapshots do grupo pode falhar. O snapshot do grupo que falha reverte para snapshots individuais. Certifique-se de que cada PVC corresponda a apenas uma entrada. 
+
+
+| Um grupo de volume inclui PVCs que usam um driver ou protocolo que não oferece suporte a snapshots de grupo de volume | A captura instantânea do grupo falha, e o Trident Protect cria capturas instantâneas individuais desses PVCs. 
+|===
+.Antes de começar
+* Seus PVCs devem usar um driver e um protocolo de armazenamento que sejam compatíveis com snapshots de grupo de volume. Para os drivers e protocolos compatíveis, consulte link:../trident-use/vol-group-snapshots.html["Trabalhe com snapshots de grupo de volume do Trident"].
+* Seu cluster deve executar o Kubernetes 1.36 ou posterior.
+* O controlador de snapshots do Kubernetes deve ser da versão 8.5.0 ou posterior, com o `CSIVolumeGroupSnapshot` feature gate ativado.
+* Os `v1` CRDs para `VolumeGroupSnapshot`, `VolumeGroupSnapshotClass` e `VolumeGroupSnapshotContent` devem ser instalados.
+* Você deve usar o Trident 26.10 ou posterior com um backend online. O `CSIVolumeGroupSnapshot` feature gate também deve estar habilitado no contêiner do Trident `csi-snapshotter`.
+* Uma `VolumeGroupSnapshotClass`que usa o driver `csi.trident.netapp.io`deve ser definida. Se apenas uma classe for definida, o Trident Protect a usará. Se várias classes forem definidas, anote a classe que o Trident Protect deve usar com `snapshot.storage.kubernetes.io/is-default-class: "true"`. Caso contrário, o Trident Protect usará a primeira classe em ordem alfabética. Você não pode escolher a classe no `Application`ou no `Snapshot`CR. Para obter mais informações, consultelink:../trident-reference/objects.html#kubernetes-volumegroupsnapshotclass-objects["Classe de instantâneo de grupo de volume"].
+* A conta do ONTAP no backend do Trident deve ter permissão para criar, obter e excluir grupos de consistência, bem como para criar snapshots deles. Consulte link:https://docs.netapp.com/us-en/ontap-restapi/application_consistency-groups_endpoint_overview.html["Gerenciar grupos de consistência de aplicativos"^] e link:https://docs.netapp.com/us-en/ontap-restapi/application_consistency-groups_consistency_group.uuid_snapshots_endpoint_overview.html["Gerenciar snapshots de grupo de consistência de aplicativos"^]. A função padrão de administrador da SVM (`vsadmin`) não inclui essas permissões.
+
+
+
+
+[[define-a-volume-group]]
+== Defina um grupo de volume
+
+O Trident Protect cria snapshots de grupo apenas para volumes que pertencem a um grupo de volume. Adicione `spec.volumeGroups` ao `Application` CR para definir os grupos. Cada entrada é um grupo separado. Selecione os volumes por rótulo, por VM ou por ambos.
+
+.Sobre esta tarefa
+* Você só pode definir grupos de volume no  `Application`CR. A  `tridentctl-protect`CLI não tem uma opção de grupo de volume.
+* O Trident Protect inclui apenas os PVCs vinculados em um grupo de volume e cria snapshots individuais dos PVCs que não estão vinculados. Se uma entrada não selecionar nenhum PVC vinculado, o Trident Protect não cria um snapshot de grupo para essa entrada.
+* Certifique-se de que cada PVC corresponda a apenas uma entrada.
+
+
+.Antes de começar
+Defina a aplicação que deseja proteger. Consulte link:trident-protect-manage-applications.html["Defina uma aplicação para gestão com o Trident Protect."].
+
+.Passos
+. Se você selecionar volumes por rótulo, rotule os PVCs que deseja agrupar. Você pode usar qualquer chave e valor de rótulo. Os exemplos nesta página usam `volume-group=my-volume-group`.
++
+[source, console]
+----
+kubectl label pvc <pvc_name_1> <pvc_name_2> volume-group=my-volume-group -n <application_namespace>
+----
+. Adicione `spec.volumeGroups` ao seu arquivo CR existente `Application`. Cada entrada deve incluir `labelSelector``<volume_group>`, `vmSelector``<volume_group>` ou ambos. Se uma entrada incluir ambos os campos, o grupo de volume incluirá todos os volumes que qualquer um dos campos selecionar.
++
+** *spec.volumeGroups[].labelSelector*: um seletor de rótulo do Kubernetes (`matchLabels` ou `matchExpressions`) que seleciona PVCs na aplicação. Um seletor vazio não é válido.
+** *spec.volumeGroups[].vmSelector*: uma lista de KubeVirt VMs, cada uma com um `namespace` e `name`. O Trident Protect inclui os PVCs que cada VM monta.
++
+O exemplo a seguir define dois grupos de volume. O primeiro grupo inclui os PVCs rotulados como  `volume-group: my-volume-group`. O segundo grupo inclui os PVCs que  `my-vm-1` e  `my-vm-2` montam.
+
++
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: Application
+metadata:
+  name: my-app-name
+  namespace: my-namespace
+spec:
+  includedNamespaces:
+    - namespace: my-namespace
+  volumeGroups:
+    - labelSelector:
+        matchLabels:
+          volume-group: my-volume-group
+    - vmSelector:
+        - namespace: my-namespace
+          name: my-vm-1
+        - namespace: my-namespace
+          name: my-vm-2
+----
++
+
+NOTE: Mantenha os outros campos que seu `Application` CR já contém, como `spec.resourceFilter`. Se você omitir um campo do arquivo que aplica, `kubectl apply` o exclui do CR.
+
+
+
+. Aplique a CR atualizada:
++
+[source, console]
+----
+kubectl apply -f <application_cr_file>.yaml
+----
+
+
+.Resultado
+O `Application` CR inclui os grupos de volume. O próximo snapshot da aplicação os utiliza.
+
+
+
+[[create-a-snapshot]]
+== Criar um instantâneo
+
+Crie um snapshot sob demanda, um backup sob demanda ou um agendamento de proteção de dados para o aplicativo. Você não precisa adicionar nenhum campo. O Trident Protect usa os grupos de volume que você definiu no `Application` CR. Para obter instruções, consulte link:trident-protect-protect-apps.html["Proteja aplicativos usando o Trident Protect."].
+
+
+NOTE: Por padrão, o Trident Protect cria o snapshot do grupo antes de congelar os sistemas de arquivos da VM. Os volumes em um grupo de volume são capturados sem congelamento, portanto os dados que uma VM ainda não gravou em disco não são incluídos. Os discos que não estão no grupo de volume são capturados depois, quando o Trident Protect cria snapshots individuais após congelar a VM. Para capturar todos os discos de uma VM no mesmo momento, inclua todos os discos no grupo de volume. Para obter mais informações sobre o congelamento de sistemas de arquivos da VM, consulte link:trident-protect-requirements.html#protecting-data-with-kubevirt-vms["Proteção de dados com máquinas virtuais do KubeVirt"].
+
+
+
+[[review-the-result]]
+== Analise o resultado
+
+Após a conclusão do snapshot, verifique o status para confirmar se o Trident Protect criou os snapshots de grupo.
+
+
+NOTE: Um snapshot de aplicação concluído não significa que seus snapshots de grupo foram bem-sucedidos. A `VolumeGroupSnapshotsCreated` condição persiste `true` mesmo se todos os snapshots de grupo forem ignorados ou falharem, e o Trident Protect não criar um evento ou métrica no Kubernetes. Para detectar isso, monitore `status.warnings` e os campos `skipped` e `failed`.
+
+.Passos
+. Obtenha o nome do snapshot. Para listar os snapshots da aplicação, execute o seguinte comando:
++
+[source, console]
+----
+kubectl get snapshots -n <application_namespace>
+----
+. Verifique o status do instantâneo:
++
+[source, console]
+----
+kubectl get snapshots <snapshot_name> -n <application_namespace> -o yaml
+----
+
+
+.Resultado
+O `status.volumeGroupSnapshots` campo possui uma entrada para cada snapshot de grupo. O Trident Protect cria um snapshot de grupo separado para cada namespace em um grupo de volume. O exemplo a seguir está abreviado:
+
+[source, yaml]
+----
+status:
+  volumeGroupSnapshots:
+    - name: vgs-<snapshot_uid_prefix>-<group_index>-<namespace>
+      namespace: <namespace>
+      ready: true
+      memberPVCs:
+        - pvcName: <pvc_name_1>
+          pvcNamespace: <namespace>
+        - pvcName: <pvc_name_2>
+          pvcNamespace: <namespace>
+----
+O nome do snapshot do grupo inclui os primeiros oito caracteres do `Snapshot` UID, o índice da `spec.volumeGroups` entrada (começando em `0`) e o namespace, truncado para 12 caracteres.
+
+* `ready: true` significa que o snapshot do grupo foi bem-sucedido. Os snapshots que compõem o grupo também estão listados em `status.volumeSnapshots`. Estes são os snapshots dos membros do grupo, não snapshots adicionais dos mesmos volumes.
+* `skipped: true`significa que o Trident Protect não tentou criar o snapshot do grupo, porque o grupo de volume tem mais de 80 PVCs nesse namespace. O Trident Protect cria snapshots individuais dos volumes do grupo em vez disso e adiciona o  `skipReason`texto a  `status.warnings`.
+* `failed: true` significa que o Trident Protect tentou criar o snapshot do grupo, mas falhou. O Trident Protect cria snapshots individuais dos volumes do grupo em vez disso e adiciona o  `error`texto a  `status.warnings`.
+
+
+.Etiquetas temporárias de PVC e limpeza
+O Trident Protect adiciona um rótulo a cada PVC em um snapshot de grupo, por exemplo `protect.trident.netapp.io/vgs-group-673c0189-0=true`. Seus próprios rótulos não são alterados. O rótulo permanece no PVC até que você exclua o snapshot da aplicação. Quando você exclui o snapshot da aplicação, o Trident Protect também exclui seus snapshots de grupo de volume e snapshots de membro, além de remover os rótulos dos PVCs. Isso acontece independentemente de o `reclaimPolicy` do snapshot ser `Delete` ou `Retain`.
+
+.O que se segue?
+Restaure o aplicativo a partir do snapshot da mesma forma que para qualquer outro snapshot. Os snapshots de grupos de volume não têm restauração separada. O Trident Protect restaura a partir dos snapshots dos membros, para que você possa restaurar PVCs ou VMs individuais sem restaurar todos os PVCs do grupo. Consulte link:trident-protect-restore-apps.html#restore-from-a-snapshot-to-a-different-namespace["Restauração de um snapshot para um namespace diferente"] ou link:trident-protect-restore-apps.html#restore-from-a-snapshot-to-the-original-namespace["Restauração de um snapshot para o namespace original"].
+
+.Informações relacionadas
+* link:trident-protect-manage-applications.html["Defina uma aplicação para gestão com o Trident Protect."]
+* link:trident-protect-protect-apps.html["Proteja aplicativos usando o Trident Protect."]
+* link:trident-protect-kubevirt-vms.html["Proteja máquinas virtuais KubeVirt com Trident Protect"]
+

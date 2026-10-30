@@ -105,7 +105,7 @@ O exemplo a seguir instala Trident e define  `cloudProvider` usando a variável 
 
 [listing]
 ----
-helm install trident trident-operator-100.2606.0.tgz --create-namespace --namespace <trident-namespace> --set cloudProvider=$CP
+helm install trident trident-operator-100.2610.0.tgz --create-namespace --namespace <trident-namespace> --set cloudProvider=$CP
 ----
 --
 .<code>dtridentctl</code>

@@ -1,0 +1,136 @@
+---
+sidebar: sidebar 
+permalink: trident-protect/trident-protect-failover-older-snapshot.html 
+keywords: trident protect, netapp, snapmirror, failover, older snapshot, recovery point, ransomware, AppMirrorRelationship, promotedSnapshot 
+summary: Realizar o failover de uma aplicação replicada para um snapshot anterior, permitindo a recuperação a partir de um ponto no tempo anterior a quando os dados foram danificados ou comprometidos. 
+---
+= Faça failover para um snapshot anterior usando o Trident Protect
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Use o Trident Protect para realizar o failover de uma aplicação replicada para um snapshot anterior, permitindo a recuperação a partir de um ponto no tempo anterior à ocorrência de danos ou comprometimento dos dados. Por padrão, o failover utiliza o snapshot transferido mais recentemente.
+
+
+CAUTION: Recorrer a um snapshot mais antigo faz com que o ONTAP SnapMirror exclua os snapshots no cluster de destino que são mais recentes do que o snapshot selecionado, porque eles não são mais válidos. Adicione a anotação neste procedimento somente se essa perda de dados for aceitável.
+
+.Antes de começar
+* Um AppMirrorRelationship existe e está no `Established` estado. Para criar um, consulte link:trident-protect-use-snapmirror-replication.html#set-up-a-replication-relationship["Configure uma relação de replicação"]. Para verificar o estado, execute  `kubectl get amr -n <namespace> <relationship_name> -o=jsonpath='{.status}'`.
+* Os clusters de origem e de destino usam backends de armazenamento ONTAP com replicação SnapMirror. O Azure NetApp Files e outros backends não ONTAP não são compatíveis. Consulte link:trident-protect-requirements.html#requirements-for-snapmirror-replication["Requisitos para replicação do SnapMirror"].
+* Existe um agendamento de snapshots (com `snapshotRetention` maior que 1) no aplicativo de origem.
+
+
+
+
+[[identify-the-snapshot]]
+== Identifique o snapshot
+
+Cada instantâneo tem um horário de conclusão, para que você possa escolher o ponto no tempo desejado.
+
+.Passos
+. No cluster de origem, liste os snapshots:
++
+[source, console]
+----
+kubectl get snapshots -n my-app-namespace
+----
+. Encontre o snapshot para o qual deseja fazer o failover. Use o  `completionTimestamp`valor para selecionar o ponto no tempo.
+. Obtenha o caminho do arquivo desse snapshot:
++
+[source, console]
+----
+kubectl get snapshots <snapshot_name> -n my-app-namespace -o jsonpath='{.status.appArchivePath}'
+----
+. Anote a última parte do caminho, ou seja, tudo o que vem depois da última barra. Essa parte é o _basename_. Por exemplo:
++
+[listing]
+----
+20231114173500_schedule-20231114173500_f8df8bd3-a727-4a14-b954-9666aa618b55
+----
++
+
+NOTE: Use o basename, não o nome do recurso personalizado do snapshot.
+
+
+
+.Resultado
+O nome base do snapshot selecionado é registrado.
+
+
+
+[[fail-over-to-the-selected-snapshot]]
+== Fazer failover para o snapshot selecionado
+
+Especifique o snapshot a ser promovido e reconheça a perda de dados adicionando uma anotação.
+
+.Passos
+. No cluster de destino, adicione a anotação ao AppMirrorRelationship. Sem a anotação, um failover só poderá usar o snapshot transferido mais recentemente.
++
+[source, console]
+----
+kubectl annotate appmirrorrelationship <relationship_name> -n my-app-namespace protect.trident.netapp.io/allow-promotion-with-older-snapshots="true"
+----
+. Edite o arquivo CR AppMirrorRelationship (por exemplo, `trident-protect-relationship.yaml`):
++
+** Defina *spec.desiredState* para `Promoted`.
+** Defina *spec.promotedSnapshot* para o nome base que você registrou em <<Identifique o snapshot>>.
++
+Por exemplo:
+
++
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: AppMirrorRelationship
+metadata:
+  name: <relationship_name>
+  namespace: <namespace>
+  annotations:
+    protect.trident.netapp.io/allow-promotion-with-older-snapshots: "true"
+spec:
+  desiredState: Promoted
+  promotedSnapshot: <basename>
+----
+
+
+. Aplicar o CR:
++
+[source, console]
+----
+kubectl apply -f trident-protect-relationship.yaml -n my-app-namespace
+----
+. Verifique o status do relacionamento:
++
+[source, console]
+----
+kubectl get amr -n my-app-namespace <relationship_name> -o=jsonpath='{.status}' | jq
+----
+
+
+.Resultado
+O relacionamento passa para o `Promoted` estado, e o aplicativo é executado no cluster de destino com os dados do snapshot selecionado.
+
+Se o relacionamento permanecer no  `Promoting`estado e  `status.error` mostrar  `The snapshot provided is invalid or older than the most recently transferred snapshot`, a anotação está faltando ou não está definida como  `true`. Adicione a anotação e tente novamente.
+
+.O que se segue?
+Para retornar ao cluster original, execute um link:trident-protect-use-snapmirror-replication.html#reverse-resync-a-failed-over-replication-relationship["ressincronização reversa"] e, em seguida, link:trident-protect-use-snapmirror-replication.html#reverse-application-replication-direction["inverter a direção da replicação"].
+
+
+CAUTION: Para retornar ao cluster original, não execute uma resincronização normal. Uma resincronização normal descarta a aplicação em failover e retorna o relacionamento ao snapshot de origem mais recente.
+
+
+
+[[related-information]]
+== Informações relacionadas
+
+* link:trident-protect-use-snapmirror-replication.html["Configure e gerencie a replicação de aplicativos usando o Trident Protect"]
+* link:trident-protect-use-snapmirror-replication.html#fail-over-to-destination-cluster["Failover para o cluster de destino"]
+* link:trident-protect-use-snapmirror-replication.html#resync-a-failed-over-replication-relationship["Ressincronizar uma relação de replicação com falha"]
+* link:trident-protect-use-snapmirror-replication.html#fail-back-applications-to-the-original-source-cluster["Falha de aplicativos para o cluster de origem original"]
+* link:trident-protect-protect-apps.html#create-a-data-protection-schedule["Criar um cronograma de proteção de dados"]
+

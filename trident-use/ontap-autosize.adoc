@@ -1,0 +1,229 @@
+---
+sidebar: sidebar 
+permalink: trident-use/ontap-autosize.html 
+keywords: ONTAP, autosize, FlexVol, ontap-san, ontap-san-economy, Trident 
+summary: Configure o dimensionamento automático de volume do ONTAP para volumes FlexVol gerenciados pelo Trident. 
+---
+= Configurar o dimensionamento automático de volume do ONTAP
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Configure o Trident para habilitar o dimensionamento automático de volume do ONTAP nos volumes FlexVol que dão suporte a volumes persistentes. Quando o espaço usado atinge um limite configurado, o ONTAP aumenta automaticamente o FlexVol até um tamanho máximo. Isso fornece capacidade adicional para snapshots e sobrecarga de storage sem redimensionar manualmente o FlexVol.
+
+O dimensionamento automático de volume do ONTAP aumenta apenas o FlexVol de suporte; ele não altera o tamanho do PersistentVolumeClaim (PVC). Isso difere de link:automatic-volume-expansion.html["Políticas de crescimento automático do Trident"], que expandem o PVC.
+
+O Trident aplica as configurações de dimensionamento automático de backend quando cria, clona ou redimensiona um volume e quando importa um volume que gerencia.
+
+
+
+[[requirements]]
+== Requisitos
+
+* Trident 26.10 ou posterior.
+* Um dos seguintes drivers:
++
+** `ontap-san` com iSCSI, NVMe ou Fibre Channel Protocol (FCP).
+** `ontap-san-economy` com iSCSI.
+
+
+* ONTAP no local:
++
+** Para backends que utilizam as APIs REST do ONTAP, ONTAP 9.12.1 ou posterior. Os backends NVMe devem utilizar as APIs REST do ONTAP.
+** Para backends que utilizam ONTAPI (ZAPI), qualquer versão do ONTAP suportada pelo Trident. Consulte link:../trident-get-started/requirements.html["Requisitos da Trident"].
+
+
+
+
+
+
+[[limitations]]
+== Limitações
+
+* O dimensionamento automático de volume do ONTAP não reduz FlexVols.
+* O dimensionamento automático é configurado por backend. Crie backends separados para usar configurações diferentes para cargas de trabalho diferentes.
+* O dimensionamento automático de volume do ONTAP não é compatível com os drivers NAS do ONTAP, os sistemas ASA r2, o NetApp AFX ou outros sistemas ONTAP desagregados, nem com o Google Cloud NetApp Volumes. A criação do backend falha nessas configurações.
+* A replicação do TridentMirrorRelationship e as configurações do MetroCluster não são compatíveis com o dimensionamento automático de volume do ONTAP. O Trident não impede essas configurações.
+* Para `ontap-san-economy`, `maximumSize` deve ser uma porcentagem.
+* Para `ontap-san`, um valor absoluto `maximumSize` atua como um limite de tamanho. A criação ou expansão de um PVC falha se o FlexVol subjacente precisar exceder esse limite.
+* Um `ontap-san-economy` FlexVol pode conter LUNs para vários PVCs. Cada operação de volume aplica as configurações de dimensionamento automático do backend atual a todo o FlexVol. Se vários backends compartilharem FlexVols, a operação mais recente determinará as configurações deles. Para `ontap-san-economy`, configure apenas `mode: grow` e omita `growThresholdPercent` e `maximumSize` para que todos os backends usem os mesmos padrões.
+
+
+
+
+[[ontap-volume-autosize-options]]
+== Opções de dimensionamento automático de volume do ONTAP
+
+Defina essas opções no bloco `ontapAutosize` de nível superior da configuração do backend.
+
+[cols="1,3,1,1,1,1"]
+|===
+| Opção | Descrição | Formato | Obrigatório | Padrão quando  `ontapAutosize` está presente | Exemplo 
+
+
+| `mode` | Ativa ou desativa o dimensionamento automático. `grow` ativa o dimensionamento automático; `off` desativa-o. | Cadeia de carateres | Não | `off` | `grow` ou `off` 
+
+
+| `growThresholdPercent` | Porcentagem de espaço utilizado a partir da qual o ONTAP aumenta o FlexVol. Os valores válidos são de 2 a 99. | Número inteiro | Não | `85` | `90` 
+
+
+| `maximumSize` | Tamanho máximo do FlexVol, expresso como uma porcentagem do seu tamanho ou como um tamanho absoluto. Tamanhos absolutos são suportados apenas para `ontap-san`. | Porcentagem ou quantidade do Kubernetes | Não | `"20%"` | `"20%"` ou `"2Ti"` 
+|===
+As configurações padrão se aplicam quando o `ontapAutosize` bloco está presente. Se você omitir o bloco, o Trident não alterará as configurações de dimensionamento automático nos FlexVols.
+
+O Trident converte uma porcentagem `maximumSize` em um tamanho absoluto e a recalcula sempre que o volume é redimensionado. Por exemplo, com `maximumSize: "20%"`, um FlexVol de 100 GiB pode crescer até 120 GiB.
+
+
+
+[[configure-ontap-volume-autosize]]
+== Configurar o dimensionamento automático de volume do ONTAP
+
+. Adicione o `ontapAutosize` bloco à sua configuração de backend:
++
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentBackendConfig
+metadata:
+  name: backend-tbc-ontap-san
+  namespace: trident
+spec:
+  version: 1
+  storageDriverName: ontap-san
+  backendName: ontap-san-autosize
+  managementLIF: 10.0.0.1
+  svm: svm_san
+  sanType: iscsi
+  ontapAutosize:
+    mode: grow
+    growThresholdPercent: 85
+    maximumSize: "20%"
+  credentials:
+    name: backend-tbc-ontap-san-secret
+----
+. Crie o backend:
++
+[source, console]
+----
+kubectl -n trident create -f backend-tbc-ontap-san.yaml
+----
+. Após provisionar um volume a partir deste backend, verifique as configurações de dimensionamento automático aplicadas ao volume do Trident:
++
+[source, console]
+----
+kubectl get tridentvolume <pv-name> -n trident \
+  -o jsonpath='{.config.ontapAutosizeMode} {.config.ontapAutosizeGrowThresholdPercent} {.config.ontapAutosizeMaximumSize}'
+----
++
+Para a configuração acima, o resultado esperado é:
+
++
+[source, console]
+----
+grow 85 20%
+----
+
+
+
+
+[[update-autosize-settings-on-a-backend]]
+== Atualizar as configurações de dimensionamento automático em um backend
+
+Você pode adicionar, alterar ou remover o `ontapAutosize` bloco atualizando o backend. A alteração não atualiza imediatamente os FlexVols existentes:
+
+* Para `ontap-san`, novos volumes, clones e importações gerenciadas usam as novas configurações. Os volumes existentes mantêm suas configurações atuais, inclusive quando são redimensionados.
+* Para `ontap-san-economy`, o FlexVol compartilhado recebe as novas configurações na próxima vez em que o Trident cria, redimensiona, clona ou importa um volume nele.
+
+
+
+
+[[configuration-examples]]
+== Exemplos de configuração
+
+
+
+[[ontap-san-with-fcp-and-an-absolute-maximum-size]]
+=== `ontap-san` com FCP e um tamanho máximo absoluto
+
+[source, json]
+----
+{
+  "version": 1,
+  "storageDriverName": "ontap-san",
+  "managementLIF": "10.0.0.1",
+  "svm": "svm_san",
+  "username": "vsadmin",
+  "password": "<password>",
+  "sanType": "fcp",
+  "ontapAutosize": {
+    "mode": "grow",
+    "growThresholdPercent": 90,
+    "maximumSize": "2Ti"
+  }
+}
+----
+
+
+[[ontap-san-economy]]
+=== `ontap-san-economy`
+
+Este exemplo define apenas `mode`, portanto o Trident usa os valores padrão para `growThresholdPercent` e `maximumSize`:
+
+[source, json]
+----
+{
+  "version": 1,
+  "storageDriverName": "ontap-san-economy",
+  "managementLIF": "10.0.0.1",
+  "svm": "svm_san",
+  "username": "vsadmin",
+  "password": "<password>",
+  "ontapAutosize": {
+    "mode": "grow"
+  }
+}
+----
+
+
+[[frequently-asked-questions]]
+== Perguntas frequentes
+
+
+
+[[can-i-use-ontap-volume-autosize-with-trident-autogrow-policies]]
+=== Posso usar o dimensionamento automático de volume do ONTAP com as Trident Autogrow Policies?
+
+Sim. Uma política de crescimento automático do Trident expande o PVC, e o Trident recalcula o máximo do dimensionamento automático do ONTAP durante cada redimensionamento. Se você usar um valor absoluto `maximumSize` com `ontap-san`, defina o `maxSize` da política baixo o suficiente para manter o FlexVol subjacente dentro desse limite. O FlexVol é maior que o PVC porque o Trident adiciona espaço para reserva de snapshot e metadados.
+
+
+
+[[what-is-the-difference-between-omitting-ontapautosize-and-setting-mode-off]]
+=== Qual é a diferença entre omitir `ontapAutosize` e definir `mode: off`?
+
+Se você omitir  `ontapAutosize`, o Trident não altera as configurações de dimensionamento automático nos FlexVols do ONTAP. Se você definir  `mode: off`, o Trident desativa o dimensionamento automático nos FlexVols que ele cria ou atualiza, incluindo clones que herdaram as configurações de dimensionamento automático da origem.
+
+
+
+[[why-did-my-pvc-expansion-fail-with-an-ontapautosize-maximum-is-below-required-flexvol-size-error]]
+=== Por que minha expansão de PVC falhou com um `ontapAutosize maximum ... is below required FlexVol size` erro?
+
+O volume usa um valor absoluto `maximumSize`, e o PVC expandido requer um FlexVol maior. Um `ontap-san` volume mantém o tamanho máximo com o qual foi criado, portanto atualizar o backend não altera a configuração nos volumes existentes. Para novos volumes, aumente `maximumSize` ou use uma porcentagem.
+
+
+
+[[why-did-volume-creation-fail-with-an-autosize-error]]
+=== Por que a criação do volume falhou com um erro de dimensionamento automático?
+
+O ONTAP rejeitou as configurações de dimensionamento automático, e os eventos de PVC incluem o motivo fornecido pelo ONTAP. Por exemplo, o tamanho máximo pode exceder o maior tamanho de FlexVol compatível com o sistema ONTAP. Reduza `maximumSize` no backend; o Trident usa o valor atualizado na próxima vez que tenta criar um volume.
+
+
+
+[[related-information]]
+== Informações relacionadas
+
+* link:automatic-volume-expansion.html["Expansão de volume automática usando o Trident Autogrow Policies"]
+* link:https://docs.netapp.com/us-en/ontap-cli/volume-autosize.html["Referência de comandos do ONTAP: dimensionamento automático de volume"^]
+

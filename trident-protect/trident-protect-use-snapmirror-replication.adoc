@@ -4,7 +4,7 @@ permalink: trident-protect/trident-protect-use-snapmirror-replication.html
 keywords: trident, protect, netapp, snapmirror, data, asynchronous, replication, clusters 
 summary: Com o Trident Protect, você pode usar os recursos de replicação assíncrona da tecnologia NetApp SnapMirror para replicar dados e alterações de aplicativos de um backend de armazenamento para outro, no mesmo cluster ou entre clusters diferentes. 
 ---
-= Replique aplicações usando NetApp SnapMirror e Trident Protect.
+= Configure e gerencie a replicação de aplicativos usando o Trident Protect
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -382,6 +382,7 @@ NOTE: Ao usar uma solicitação de alteração (CR), crie manualmente o namespac
 .. Configure os seguintes atributos:
 +
 *** *metadata.name:* (obrigatório) o nome do recurso personalizado AppMirrorRelationship.
+*** *metadata.annotations.protect.trident.netapp.io/retain-mac-address*: (_Opcional_) Defina como  `"true"` para reter o endereço MAC das VMs do KubeVirt no cluster de destino. Consulte link:trident-protect-restore-settings.html#supported-annotations["Utilize as configurações avançadas de restauração do Trident Protect."].
 *** *spec.destinationAppVaultRef*: (_required_) esse valor deve corresponder ao nome do AppVault para o aplicativo de destino no cluster de destino.
 *** *spec.namespaceMapping*: (_required_) os namespaces de destino e origem devem corresponder ao namespace de aplicativo definido no respetivo CR de aplicação.
 *** *Spec.sourceAppVaultRef*: (_required_) este valor deve corresponder ao nome do AppVault para o aplicativo de origem.
@@ -476,7 +477,15 @@ kubectl get amr -n my-app-namespace <relationship name> -o=jsonpath='{.status}' 
 
 Com o Trident Protect, você pode realizar o failover de aplicativos replicados para um cluster de destino. Este procedimento interrompe a relação de replicação e coloca o aplicativo online no cluster de destino.  O Trident Protect não interrompe o aplicativo no cluster de origem se ele estiver operacional.
 
+Este procedimento faz failover para o snapshot mais recente. Para fazer failover para um snapshot anterior, consulte link:trident-protect-failover-older-snapshot.html["Faça failover para um snapshot anterior usando o Trident Protect"].
+
 .Passos
+. (_Opcional_) Para preservar o endereço MAC das VMs do KubeVirt, anote o AppMirrorRelationship antes de promovê-lo. Consulte link:trident-protect-restore-settings.html#supported-annotations["Utilize as configurações avançadas de restauração do Trident Protect."].
++
+[source, console]
+----
+kubectl annotate appmirrorrelationship <relationship_name> -n <application_namespace> protect.trident.netapp.io/retain-mac-address="true"
+----
 . No cluster de destino, edite o arquivo CR AppMirrorRelationship (por exemplo, `trident-protect-relationship.yaml` ) e altere o valor de *spec.desiredState* para `Promoted`.
 . Salve o arquivo CR.
 . Aplicar o CR:

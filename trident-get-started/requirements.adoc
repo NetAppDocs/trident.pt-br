@@ -26,7 +26,7 @@ Antes de instalar o Trident, você deve rever estes requisitos gerais do sistema
 ====
 []
 =====
-* Kubernetes 1.37 agora é compatível com Trident. Atualize Trident antes de atualizar o Kubernetes.
+* O Trident 26.10 é compatível com o Kubernetes das versões 1.27 a 1.37. Consulte a lista de imagens específicas para cada versão abaixo antes de atualizar o Kubernetes.
 * O Trident reforça estritamente o uso de configuração multipathing em ambientes SAN, com um valor recomendado de `find_multipaths: no` no arquivo multipath.conf.
 +
 O uso de configuração não multipathing ou o uso `find_multipaths: yes` de ou `find_multipaths: smart` valor no arquivo multipath.conf resultará em falhas de montagem. A Trident recomenda o uso de `find_multipaths: no` desde a versão 21,07.
@@ -50,6 +50,13 @@ O Trident é compatível com vários mecanismos de contêiner e orquestradores, 
 NOTE: A Trident continua a oferecer suporte a versões mais antigas do OpenShift em alinhamento com olink:https://access.redhat.com/support/policy/updates/openshift["Ciclo de vida da versão do Red Hat Extended Update Support (EUS)"] , mesmo que dependam de versões do Kubernetes que não são mais oficialmente suportadas pelo upstream.  Ao instalar o Trident nesses casos, você pode ignorar com segurança quaisquer mensagens de aviso sobre a versão do Kubernetes.
 
 * Rancher Kubernetes Engine 2 (RKE2) v1.28.x - 1.37.x
+* Talos OS para NFSv4, iSCSI e NVMe/TCP. As seguintes extensões do sistema Talos são necessárias para cada protocolo; confirme esses requisitos com a Sidero Labs.
++
+** NFSv4: `siderolabs/nfs-utils`
+** iSCSI: `siderolabs/iscsi-tools`, `siderolabs/multipath-tools`, e `siderolabs/trident-iscsi-tools`
+** NVMe/TCP: `siderolabs/nvme-cli`, `siderolabs/util-linux-tools`, e `siderolabs/trident-iscsi-tools`
+
+
 
 
 O Trident também trabalha com uma série de outras ofertas do Kubernetes totalmente gerenciadas e autogeridas, incluindo o Google Kubernetes Engine (GKE), o Amazon Elastic Kubernetes Services (EKS), o
@@ -106,10 +113,10 @@ O Trident suporta os seguintes drivers ONTAP para virtualização KubeVirt e Ope
 [[trident-support-for-kubernetes-on-kubernetes-and-openshift-hosted-control-planes]]
 == Suporte do Trident para Kubernetes em Kubernetes e OpenShift planos de controle hospedados
 
-A partir da versão 26.06, Trident qualifica totalmente a topologia Kubernetes em Kubernetes. Clusters Kubernetes cujos nós são executados como máquinas virtuais KubeVirt em um cluster de infraestrutura (host). Essa topologia sustenta ofertas de plano de controle hospedado, como planos de controle hospedados (OpenShift HCP) em OpenShift Virtualization.
+O Trident qualifica totalmente a topologia Kubernetes on Kubernetes. Clusters Kubernetes cujos nós são executados como máquinas virtuais KubeVirt em um cluster de infraestrutura (host). Essa topologia sustenta ofertas de plano de controle hospedado, como planos de controle hospedados (HCP) do OpenShift na virtualização do OpenShift.
 
 
-NOTE: Essa configuração funcionava em versões anteriores, mas a qualificação completa começa com 26.06.
+NOTE: Essa configuração funcionava em versões anteriores, mas a qualificação completa começou com a versão 26.06.
 
 O cluster convidado (inquilino) utiliza o driver CSI KubeVirt (`kubevirt-csi` como seu provedor de armazenamento. Quando uma carga de trabalho no cluster convidado solicita um  `PersistentVolumeClaim`, o driver CSI KubeVirt cria um volume correspondente no cluster de infraestrutura. O Trident provisiona o volume a partir do ONTAP, e o volume é conectado dinamicamente à máquina virtual do nó convidado. O Trident é executado somente no cluster de infraestrutura. O cluster convidado consome o armazenamento do ONTAP indiretamente por meio do driver CSI KubeVirt.
 
@@ -124,13 +131,13 @@ O cluster convidado (inquilino) utiliza o driver CSI KubeVirt (`kubevirt-csi` co
 | Componente | Versão 
 
 
-| Trident | 26,06 
+| Trident | 26,10 
 
 
-| Kubernetes (infraestrutura e cluster convidado) | 1,36 
+| Kubernetes (infraestrutura e cluster convidado) | 1,37 
 
 
-| KubeVirt | 1.9.0-beta.0 
+| KubeVirt | 1.9.0 
 
 
 | Importador de dados em contêineres (CDI) | 1,65 
@@ -268,22 +275,22 @@ link:../trident-reference/ports.html["Portas Trident"]
 
 Para instalações com ar-gapped, a lista a seguir é uma referência das imagens de contentor necessárias para instalar o Trident. Use o `tridentctl images` comando para verificar a lista de imagens de contentor necessárias.
 
-O suporte ao Kubernetes 1.37 está disponível a partir do Trident 26.06. A lista de imagens 26.06.2 abaixo inclui as imagens para o Kubernetes 1.37.
+A lista de imagens do Trident 26.10 abaixo inclui as imagens para o Kubernetes 1.37.
 
 
 
-[[container-images-required-for-trident-26-06-0]]
-=== Imagens de contêiner necessárias para o Trident 26.06.0
+[[container-images-required-for-trident-26-10-0]]
+=== Imagens de contêiner necessárias para o Trident 26.10.0
 
 [cols="2"]
 |===
 | Versões do Kubernetes | Imagem do recipiente 
 
 
-| v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.35.0, v1.36.0  a| 
-* docker.io/netapp/trident:26.06.0
-* docker.io/netapp/trident-autosupport:26.06
-* docker.io/netapp/trident-operator:26.06.0 (opcional)
+| v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.35.0, v1.36.0, v1.37.0  a| 
+* docker.io/netapp/trident:26.10.0
+* docker.io/netapp/trident-autosupport:26.10
+* docker.io/netapp/trident-operator:26.10.0 (opcional)
 * registry.k8s.io/sig-storage/csi-attacher:v4.11.0
 * registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.17.0
 * registry.k8s.io/sig-storage/csi-provisioner:v6.3.0
@@ -302,7 +309,7 @@ O suporte ao Kubernetes 1.37 está disponível a partir do Trident 26.06. A list
 | Versões do Kubernetes | Imagem do recipiente 
 
 
-| v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.35.0, v1.36.0, v1.37.0  a| 
+| v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.35.0, v1.36.0  a| 
 * docker.io/netapp/trident:26.06.2
 * docker.io/netapp/trident-autosupport:26.06
 * docker.io/netapp/trident-operator:26.06.2 (opcional)

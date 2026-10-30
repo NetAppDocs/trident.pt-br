@@ -168,7 +168,7 @@ O Trident suporta a importação de volume usando os `ontap-nas` drivers e `onta
 
 [NOTE]
 ====
-* O  `ontap-nas-economy`driver gerencia o armazenamento no nível de qtree, portanto, não oferece suporte à importação de um volume FlexVol por si só. Para importar qtrees com o  `ontap-nas-economy`driver, consulte <<import-qtrees,Importar qtrees>> (Prévia Técnica). Quando Trident importa uma qtree, ele também importa o volume pai FlexVol como um bucket que contém a qtree.
+* Para importar qtrees com o `ontap-nas-economy` driver, consulte <<import-qtrees,Importar qtrees NFS>>. Quando o Trident importa uma qtree, ele também importa o FlexVol pai como um bucket que contém a qtree. As qtrees devem ser importadas individualmente.
 * Os `ontap-nas` drivers e `ontap-nas-flexgroup` não permitem nomes de volume duplicados.
 
 
@@ -274,10 +274,10 @@ spec:
 
 [NOTE]
 ====
-A importação de qtree é um recurso em Tech Preview no Trident 26.06. Recursos em Tech Preview não são suportados para uso em produção.
+A importação de qtree é um recurso em Tech Preview no Trident 26.10. Recursos em Tech Preview não são suportados para uso em produção.
 
 ====
-A partir do Trident 26.06, você pode importar qtrees ONTAP existentes para o Trident usando o driver  `ontap-nas-economy`. Identifique a qtree pelo nome do volume FlexVol e pelo nome da qtree no formato  `flexvol/qtree`, juntamente com o UUID do backend que a contém. As considerações gerais de importação em <<Visão geral e considerações>> também se aplicam à importação de qtrees.
+Você pode importar qtrees existentes do ONTAP para o Trident usando o `ontap-nas-economy` driver. Identifique a qtree pelos nomes do volume FlexVol e da qtree no `flexvol/qtree` formato, juntamente com o UUID do backend que a contém. As considerações gerais sobre importação em <<Visão geral e considerações>> também se aplicam à importação de qtree.
 
 .Importe um qtree usando o tridentctl
 Especifique a qtree no formato  `flexvol/qtree` como o nome do volume. O exemplo a seguir importa a qtree `qtree1` do volume FlexVol `flexvol1` no backend `ontap_nas_economy`:

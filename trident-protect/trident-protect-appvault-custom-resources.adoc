@@ -40,6 +40,9 @@ Ao criar objetos AppVault usando CRs ou o plugin Trident Protect CLI, você pode
 
 
 
+NOTE: Para criptografar os metadados de snapshot e backup ou para alterar a senha do cofre, use o `spec.vaultPasswordSecretRef` campo. Consulte link:trident-protect-encrypt-appvault-metadata.html["Criptografe os metadados do AppVault para snapshots e backups do Trident Protect"].
+
+
 
 ==== Crie um segredo de senha do repositório do mover de dados
 

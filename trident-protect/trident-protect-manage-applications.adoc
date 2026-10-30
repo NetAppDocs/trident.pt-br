@@ -51,6 +51,7 @@ NOTE: Para definir um aplicativo com escopo de VM que protege máquinas virtuais
 **** *LabelSeletor*: (_Opcional_) filtra os recursos com escopo de cluster com base em seus rótulos.
 
 
+*** *spec.volumeGroups*: (_Opcional_) use este atributo para criar snapshots de grupo de volume consistentes com falhas de volumes relacionados em conjunto. Para obter detalhes, consulte link:trident-protect-volume-group-snapshots.html["Use snapshots de grupo de volume com Trident Protect"].
 *** *metadata.annotations.protect.trident.netapp.io/skip-vm-freeze*: (_Opcional_) Esta anotação só se aplica a aplicações definidas a partir de máquinas virtuais, como em ambientes KubeVirt, onde o congelamento do sistema de arquivos ocorre antes dos snapshots. Especifique se este aplicativo pode gravar no sistema de arquivos durante um snapshot. Se definido como verdadeiro, o aplicativo ignora a configuração global e pode gravar no sistema de arquivos durante um snapshot. Se definido como falso, o aplicativo ignora a configuração global e o sistema de arquivos é congelado durante a captura de um instantâneo. Se especificada, mas a aplicação não tiver máquinas virtuais na definição da aplicação, a anotação será ignorada. Caso não seja especificado, o aplicativo segue olink:trident-protect-requirements.html#protecting-data-with-kubevirt-vms["configuração de congelamento global do Trident Protect"] .
 +
 [NOTE]
