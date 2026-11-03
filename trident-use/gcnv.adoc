@@ -110,6 +110,11 @@ A partir do Trident 26.10, você pode usar o Google Cloud Workload Identity Fede
 
 O WIF troca um token projetado de conta de serviço do Kubernetes por credenciais de curta duração do Google Cloud. O Trident usa essas credenciais para representar uma conta de serviço do Google Cloud; as funções do IAM dessa conta de serviço autorizam suas chamadas de API do Google Cloud NetApp Volumes. Isso evita armazenar uma chave de conta de serviço de longa duração na configuração de backend.
 
+[IMPORTANT]
+====
+No OpenShift Dedicated, o provedor OIDC pode ser compartilhado com outros componentes do OpenShift. Se a lista `allowedAudiences` do provedor estiver vazia, o Google aceita o nome canônico do recurso do provedor, com ou sem o  `https://`prefixo, portanto nenhuma alteração no provedor é necessária para o público do Trident. Não defina uma lista explícita de público apenas para o Trident. Se o provedor já tiver públicos explícitos, acrescente o público do Trident, preservando todos os valores existentes. Substituir a lista pode impedir que outros componentes do OpenShift troquem tokens.
+
+====
 
 
 ==== Prepare o cluster do OpenShift
@@ -197,11 +202,6 @@ oc -n trident get deploy trident-controller -o yaml
 
 Configure um Google Cloud Workload Identity Pool e um provedor OIDC para o cluster. O emissor do provedor deve corresponder ao claim `iss` do token, e o mapeamento de atributos deve mapear `assertion.sub` para `google.subject`. O público permitido do provedor deve corresponder ao claim `aud` do token projetado.
 
-[CAUTION]
-====
-Para o OSD, não substitua nem restrinja a lista de público-alvo em um provedor compartilhado. Quando `allowedAudiences` estiver vazio, o Google aceita o nome de recurso canônico do provedor, com ou sem o `https://` prefixo. A configuração `--allowed-audiences` substitui essa lista padrão e pode impedir que outros componentes do OSD troquem tokens. Adicione um público-alvo somente quando o provedor já tiver uma lista explícita e preserve todos os valores existentes. Não adicione uma condição de atributo ao provedor compartilhado do OSD. Consulte o Google Cloud link:https://docs.cloud.google.com/iam/docs/reference/rest/v1/projects.locations.workloadIdentityPools.providers#Oidc["Referência do provedor OIDC"^].
-
-====
 Os endpoints públicos `.well-known/openid-configuration` e JWKS são necessários apenas ao usar a descoberta OIDC. O Google também oferece suporte ao upload direto do JWKS usando `jwksJson` ou `--jwk-json-path`.
 
 Atribua à entidade principal WIF a  `roles/iam.workloadIdentityUser`função na conta de serviço do Google Cloud que o Trident vai representar. Para um sujeito de token de  `system:serviceaccount:trident:trident-controller`, a entidade principal tem este formato:

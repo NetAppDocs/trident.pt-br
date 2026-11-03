@@ -21,6 +21,11 @@ Começando com o lançamento de 24,02, o Trident segue uma cadência de lançame
 
 Ao atualizar para a versão mais recente do Trident, considere o seguinte:
 
+[WARNING]
+====
+Não atualize para o Trident 26.10.0 a partir do Trident 25.10 ou de qualquer versão anterior. Durante a inicialização, os pods de nó do Trident podem desanexar volumes que ainda estão em uso. Os pods afetados podem falhar com o erro `volume ... is not staged`. Esse problema se aplica mesmo quando a atualização está dentro da janela suportada de quatro versões. Aguarde uma versão que inclua a correção antes de atualizar. Para obter mais informações, consulte link:../known-issues.html["problemas conhecidos"].
+
+====
 * Deve haver apenas uma instância do Trident instalada em todos os namespaces em um determinado cluster do Kubernetes.
 * O Trident 23,07 e posterior requer instantâneos de volume v1 e não suporta mais instantâneos alfa ou beta.
 * Ao atualizar, é importante que você forneça `parameter.fsType` em `StorageClasses` usado pelo Trident. Você pode excluir e recriar `StorageClasses` sem interromper volumes pré-existentes.
