@@ -18,13 +18,6 @@ Os seguintes problemas conhecidos afetam a versão atual:
 
 
 
-[[trident-node-pods-might-detach-in-use-volumes-during-upgrade-to-26-10-0]]
-== Os pods de nó do Trident podem desanexar volumes em uso durante a atualização para 26.10.0
-
-Não atualize para o Trident 26.10.0 a partir do Trident 25.10 ou de qualquer versão anterior. Durante a inicialização, os pods de nó do Trident podem desanexar volumes que ainda estão em uso. Os pods afetados podem falhar com o erro `volume ... is not staged`. Uma correção está em desenvolvimento. Aguarde uma versão que inclua a correção antes de atualizar.
-
-
-
 [[volumes-remain-attached-after-upgrading-from-trident-22-10-or-earlier]]
 == Os volumes permanecem anexados após a atualização do Trident 22.10 ou anterior
 

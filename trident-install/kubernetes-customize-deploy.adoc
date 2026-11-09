@@ -98,7 +98,7 @@ NOTE: O `k8sTimeout` O parâmetro é aplicável somente para instalação do Tri
 | `logFormat` | Formato de Registro Trident a ser usado [text,json] | `"text"` 
 
 
-| `tridentImage` | Imagem Trident a instalar | `"netapp/trident:26.10.0"` 
+| `tridentImage` | Imagem Trident a instalar | `"netapp/trident:26.10.1"` 
 
 
 | `imageRegistry` | Caminho para o Registro interno, do formato
