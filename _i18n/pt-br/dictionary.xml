@@ -186,22 +186,6 @@
   <block id="588d2fe1c60271cde75dbeba32e0b25b" category="list-text">Certifique-se de que NFS e/ou iSCSI estão configurados para o seu sistema.</block>
   <block id="03fe5b0d58270efa87041677cac72ad7" category="list-text">Instale e configure o plug-in de volume do Docker do NetApp:</block>
   <block id="f45f5a64dae951d3e37c9bd382201b06" category="list-text">Baixe e descompacte o aplicativo:</block>
-  <block id="b255d9e06a4ca8e9f5bc31c9198426ad" category="list-text">Mover para um local no caminho do compartimento:</block>
-  <block id="b2edeceecc054572188ee3b08cd58c64" category="list-text">Depois de colocar o binário e criar o arquivo de configuração, inicie o daemon Trident usando o arquivo de configuração desejado.</block>
-  <block id="4846d107d8ddb5051591d14dcbddba8c" category="admonition">A menos que especificado, o nome padrão para o driver de volume é "NetApp".</block>
-  <block id="e3dec3f86b9a3b1be209ab63855ce432" category="list-text">Criar um volume:</block>
-  <block id="5ff2e3e853922fdb84ef21b85ffdac2e" category="list-text">Provisione um volume Docker ao iniciar um contentor:</block>
-  <block id="8f6a91f5f21d0478e3fd89095fc28ab9" category="list-text">Remover um volume Docker:</block>
-  <block id="0350980c728940d67af063bb5d711f0f" category="paragraph">Um arquivo de unidade de exemplo para sistemas baseados em systemd pode ser encontrado<block ref="50a97f9b0dec64cc53ca48406c60fe4d" prefix=" " category="inline-code"></block> no repositório Git. Para usar o arquivo com RHEL, faça o seguinte:</block>
-  <block id="5b51496da86e5a2073e0c618390c3d2a" category="list-text">Copie o arquivo para o local correto.</block>
-  <block id="44103de0a164f687d305ad91e919d8ee" category="paragraph">Você deve usar nomes exclusivos para os arquivos de unidade se tiver mais de uma instância em execução.</block>
-  <block id="3223aadc84a3ccb4a3473ba01c895184" category="list-text">Edite o arquivo, altere a descrição (linha 2) para corresponder ao nome do driver e ao caminho do arquivo de configuração (linha 9) para refletir seu ambiente.</block>
-  <block id="1edae3931401a32d7dd7dd6e0a2ad563" category="list-text">Recarregue systemd para que ele ingere alterações:</block>
-  <block id="db38a93e27eba57d507611d002ad612f" category="list-text">Ative o serviço.</block>
-  <block id="c7e0a4deeebe264aa7d5f7f3ca3ef77f" category="paragraph">Esse nome varia dependendo do que você nomeou o arquivo no<block ref="dce2a9642217836d54f614dfd625b753" prefix=" " category="inline-code"></block> diretório.</block>
-  <block id="baa04490a79e9e8de7fa4cd44e2c6fbb" category="list-text">Inicie o serviço.</block>
-  <block id="93c7574cf83c1f01b04891cf2d826cea" category="list-text">Ver o estado.</block>
-  <block id="f4f15418284ae7a01b27fccc1af0463a" category="admonition">Sempre que você modificar o arquivo unit, execute o<block ref="269b117015efb12595eebf74692e5cbc" prefix=" " category="inline-code"></block> comando para que ele esteja ciente das alterações.</block>
   <block id="3a3b7ac2e39541ea05707ccd6eb054d4" category="doc">Problemas e limitações conhecidos</block>
   <block id="8bb35988eac5a841d2af092365f1aa42" category="section-title">A atualização do plug-in de volume do Docker do Trident para 20,10 e posterior a partir de versões mais antigas resulta em falha de atualização com o erro de nenhum arquivo ou diretório.</block>
   <block id="7aebfa1e2291377e040de92d7f7f335f" category="list-title">Solução alternativa</block>
@@ -3048,7 +3032,6 @@
   <block id="58391bc76e8c1c5635a11134b3e4083d" category="admonition">Se você usou o Trident pré Docker 1,13/17,03 no método daemon tradicional, certifique-se de parar o processo Trident e reiniciar o seu daemon Docker antes de usar o método do plugin gerenciado.</block>
   <block id="8554af307cedea04e0e39362f35175f4" category="list-text">Inicie o Trident usando o sistema de plug-in gerenciado. Substitua<block ref="3d689bd3819ead35ed794427bd12f459" prefix=" " category="inline-code"></block> pela versão do plugin (xxx.xx.x) que você está usando.</block>
   <block id="8020e7c6d37db1ac7100b3b117f46cfd" category="list-text">Comece a usar o Trident para consumir storage do sistema configurado.</block>
-  <block id="b48e6203239c93859800f96924a39ed7" category="section-title">Inicie o Trident na inicialização do sistema</block>
   <block id="a5a6bc232526faaa8ab11bd5f46a069c" category="summary">Encontre informações sobre problemas conhecidos ao usar o Trident com o Docker.</block>
   <block id="44110fddc560d626db733ac60924ea7c" category="paragraph">Encontre informações sobre problemas e limitações conhecidos ao usar o Trident com Docker.</block>
   <block id="442b5623691118072cf6342e3614f21a" category="section-title">O Docker Swarm tem certos comportamentos que impedem o Trident de suportá-lo com cada combinação de armazenamento e driver.</block>
@@ -4689,7 +4672,6 @@
   <block id="8ef3114bf1395e8f04d7b3404982499e" category="list-text">Você pode definir o sinalizador de criptografia NVE como<block ref="9d4568c009d203ab10e33ea9953a0264" prefix=" " category="inline-code"></block> para criar volumes habilitados para NAE.</block>
   <block id="351e2b20bd9ea864b69cd832f3a4a5df" category="list-text">Se o NAE não estiver habilitado no back-end, qualquer volume provisionado no Trident será habilitado para NVE, a menos que o sinalizador de criptografia NVE esteja definido como<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block> (o valor padrão) na configuração do back-end.</block>
   <block id="a346cffc17b34fc56f3020d8b33d30c3" category="paragraph">Quando a classe de armazenamento e PVC são criados, você pode montar o PV em um pod. Esta seção lista o comando de exemplo e a configuração para anexar o PV a um pod.</block>
-  <block id="f253a45a33bc62e467efd426699d9025" category="paragraph">Depois que o daemon é iniciado, você pode criar e gerenciar volumes usando a interface CLI do Docker.</block>
   <block id="a0ba0b0d751124c646a352594c7e9d7b" category="paragraph">O resto dos pilotos estão sujeitos a problemas como condições de corrida que podem resultar na criação de um grande número de volumes para uma única solicitação sem um claro "vencedor"; por exemplo, o elemento tem um recurso que permite que os volumes tenham o mesmo nome, mas IDs diferentes.</block>
   <block id="8904f6454065d44212063d39eeae5f07" category="paragraph">Controle refinado das opções de montagem NFS; o padrão é "-o nfsvers 3". *Disponível apenas para os<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> condutores e<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>*.<block ref="71f7a3f48cfd3876cffba401813b7db0" category="inline-link-rx"></block>.</block>
   <block id="6a3f2fe5a221ff5e914123b7d1d207ac" category="paragraph">Percentagem de reserva de instantâneo, o padrão é "" para aceitar o padrão ONTAP</block>
@@ -7930,6 +7912,20 @@
   <block id="32e050df1ec85a2f1e5df0a5f58268ec" category="list-text">Utilize o <block ref="cd01e1bae83933b9c59c914bc71332ac" prefix=" " category="inline-code"></block> comando onde <block ref="a4b3c2e901b9e596a96af375fe1d5a7c" prefix=" " category="inline-code"></block> reflete a versão para a qual você deseja atualizar.</block>
   <block id="65eb82fddd05e92e211e0d77aeb0e4e1" category="section-title">O que há de novo na versão 26.10.1</block>
   <block id="24ab713b78d3325367406612bac11467" category="list-text">Corrigidos os pods de nó do Trident que forçavam a desanexação de volumes em uso na inicialização após a atualização do Trident 25.10 ou anterior, o que fazia os pods falharem com<block ref="8307b5796c66c457d6a138b37abe40c5" prefix=" " category="inline-code"></block>.</block>
-  <block id="08a653a879b277b1ab0d81324b64565e" category="paragraph">Não atualize para o Trident 26.10.1. Durante a inicialização, os pods de nó do Trident podem desanexar volumes que ainda estão em uso. Os pods afetados podem falhar com o erro<block ref="8307b5796c66c457d6a138b37abe40c5" prefix=" " category="inline-code"></block>. Esse problema foi corrigido no Trident 26.10.1. Em vez disso, atualize para o Trident 26.10.1 ou posterior.</block>
   <block id="90e0d67f77c8a5ec012e93f3be5c8331" category="list-text">O Azure<block ref="d5189de027922f81005951e6efe0efd5" prefix=" " category="inline-code"></block> que contém pelo menos um<block ref="c5f14b2142014dc234282a513132bad4" category="inline-link-rx"></block>. O<block ref="d5189de027922f81005951e6efe0efd5" prefix=" " category="inline-code"></block> parâmetro é obrigatório no nível superior do arquivo de configuração de backend. Os valores de localização especificados em pools virtuais são ignorados.</block>
+  <block id="784329f85fd663964c68f0a0708c6a94" category="paragraph">sudo mv trident-installer/extras/bin/trident /usr/local/bin/ sudo chown root:root /usr/local/bin/trident sudo chmod 755 /usr/local/bin/trident</block>
+  <block id="5dd8f815786ef70394bd3584d3a83edb" category="paragraph">sudo mkdir -p /etc/netappdvp</block>
+  <block id="e3390f4eb37ee288a1506cb1c597aa95" category="paragraph">cat &lt;&lt; EOF &gt; /etc/netappdvp/ontap-nas.json</block>
+  <block id="adc4dd00e378338b858aca4e95957991" category="paragraph">{ "version": 1, "storageDriverName": "ontap-nas", "managementLIF": "10.0.0.1", "dataLIF": "10.0.0.2", "svm": "svm_nfs", "username": "vsadmin", "password": "password", "aggregate": "aggr1" } EOF</block>
+  <block id="59eded362480a8bf2a93749d766232f5" category="paragraph">sudo trident --config=/etc/netappdvp/ontap-nas.json</block>
+  <block id="d61aa82a9c4cc0306260158ad8814a0f" category="paragraph">docker volume create -d netapp --name trident_1</block>
+  <block id="23eec71379bdec8968a87c5d8d0ce0a0" category="paragraph">docker run --rm -it --volume-driver netapp --volume trident_2:/my_vol alpine ash</block>
+  <block id="1a3c38b86779ead156135d6d6117f9e0" category="paragraph">docker volume rm trident_1</block>
+  <block id="8e77e19e4710951abc111ddaa1a9700a" category="paragraph">docker volume rm trident_2</block>
+  <block id="6e764ace6033355001647dc536a222e2" category="paragraph">cp contrib/trident.service.example /usr/lib/systemd/system/trident.service</block>
+  <block id="269b117015efb12595eebf74692e5cbc" category="paragraph">systemctl daemon-reload</block>
+  <block id="906e1aecd65b40017e38c9165527f849" category="paragraph">systemctl enable trident</block>
+  <block id="0bb25bc3cf1d0c26ca853353a2dd7109" category="paragraph">systemctl start trident</block>
+  <block id="f2f8542f9f112ea6545bf028e893aadc" category="paragraph">systemctl status trident</block>
+  <block id="4e7dcfae0cbac5529245e0641c2da2e4" category="paragraph">Não atualize para o Trident 26.10.0. Durante a inicialização, os pods de nó do Trident podem desanexar volumes que ainda estão em uso. Os pods afetados podem falhar com o erro<block ref="8307b5796c66c457d6a138b37abe40c5" prefix=" " category="inline-code"></block>. Esse problema foi corrigido no Trident 26.10.1. Em vez disso, atualize para o Trident 26.10.1 ou posterior.</block>
 </blocks>
