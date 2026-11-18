@@ -30,33 +30,56 @@ CAUTION: Recorrer a um snapshot mais antigo faz com que o ONTAP SnapMirror exclu
 [[identify-the-snapshot]]
 == Identifique o snapshot
 
-Cada instantâneo tem um horário de conclusão, para que você possa escolher o ponto no tempo desejado.
+Cada snapshot tem um horário de conclusão. Obtenha seu caminho de arquivamento com `kubectl` no cluster de origem ou com a CLI.
 
-.Passos
-. No cluster de origem, liste os snapshots:
+
+NOTE: Use a CLI quando o cluster de origem estiver inativo ou o recurso personalizado de snapshot não estiver disponível. Execute o comando no cluster de destino ou em qualquer cluster que tenha o AppVault de origem.
+
+[role="tabbed-block"]
+====
+.Use o kubectl
+--
+Use `kubectl` no cluster de origem para obter o caminho do arquivo.
+
+. No cluster de origem, liste os snapshots e anote o  `completionTimestamp`nome do snapshot desejado:
 +
 [source, console]
 ----
 kubectl get snapshots -n my-app-namespace
 ----
-. Encontre o snapshot para o qual deseja fazer o failover. Use o  `completionTimestamp`valor para selecionar o ponto no tempo.
-. Obtenha o caminho do arquivo desse snapshot:
+. Obtenha o caminho do arquivo:
 +
 [source, console]
 ----
 kubectl get snapshots <snapshot_name> -n my-app-namespace -o jsonpath='{.status.appArchivePath}'
 ----
-. Anote a última parte do caminho, ou seja, tudo o que vem depois da última barra. Essa parte é o _basename_. Por exemplo:
-+
+
+
+--
+.Use a CLI
+--
+Use a CLI do Trident Protect para obter o caminho do arquivo. No cluster de destino, ou em qualquer cluster que tenha o AppVault de origem, liste os snapshots. `TIMESTAMP`é o horário de conclusão e  `PATH`é o caminho do arquivo.
+
+[source, console]
+----
+tridentctl-protect get appvaultcontent <source_appvault_name> \
+--app <app_name> \
+--show-resources snapshot \
+--show-paths
+----
+
+NOTE: O CR do AppVault do aplicativo de origem deve existir no cluster onde você executa o comando, e seu ambiente deve ser capaz de se conectar ao bucket de storage de objetos definido no CR do AppVault. Se restrições de rede impedirem o acesso, execute a CLI de dentro de um pod no cluster.
+
+--
+====
+O nome base é tudo o que vem depois da última barra no caminho. Por exemplo:
+
 [listing]
 ----
 20231114173500_schedule-20231114173500_f8df8bd3-a727-4a14-b954-9666aa618b55
 ----
-+
 
 NOTE: Use o basename, não o nome do recurso personalizado do snapshot.
-
-
 
 .Resultado
 O nome base do snapshot selecionado é registrado.

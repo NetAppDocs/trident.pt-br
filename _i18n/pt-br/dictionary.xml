@@ -7412,11 +7412,6 @@
   <block id="661e48e3ddcb4ee665d58f7e5e1c6681" category="list-text">Os clusters de origem e de destino usam backends de armazenamento ONTAP com replicação SnapMirror. O Azure NetApp Files e outros backends não ONTAP não são compatíveis. Consulte <block ref="670bdb44a12521f652832ff70a2b48a9" category="inline-link-macro-rx"></block>.</block>
   <block id="ef284a298a0c724678206bb6ba103de7" category="list-text">Existe um agendamento de snapshots (com<block ref="460d2880d85882a9c98985b9b97c15f8" prefix=" " category="inline-code"></block> maior que 1) no aplicativo de origem.</block>
   <block id="5de50c48c56db2fa0806da49412703bd" category="section-title">Identifique o snapshot</block>
-  <block id="1a157faa616e61a92bf557ba68abe72c" category="paragraph">Cada instantâneo tem um horário de conclusão, para que você possa escolher o ponto no tempo desejado.</block>
-  <block id="0ac971abb32150cb232a1abb0082f500" category="list-text">No cluster de origem, liste os snapshots:</block>
-  <block id="2394dfdac35ebd284555d0101e404df3" category="list-text">Encontre o snapshot para o qual deseja fazer o failover. Use o <block ref="369e101dc6bf4c62661cf5aa4b24d2c8" prefix=" " category="inline-code"></block>valor para selecionar o ponto no tempo.</block>
-  <block id="8480a49548657339b304ce0f98735b0b" category="list-text">Obtenha o caminho do arquivo desse snapshot:</block>
-  <block id="5ca06174a57c94edb13ef971d48bd2af" category="list-text">Anote a última parte do caminho, ou seja, tudo o que vem depois da última barra. Essa parte é o _basename_. Por exemplo:</block>
   <block id="d4e5a5e14e40c7d660cb667ba2083dda" category="admonition">Use o basename, não o nome do recurso personalizado do snapshot.</block>
   <block id="e8b0579b405ef1127f2cff3c747506d8" category="paragraph">O nome base do snapshot selecionado é registrado.</block>
   <block id="295f97215fb39c0acd113fe01d547678" category="section-title">Fazer failover para o snapshot selecionado</block>
@@ -7928,4 +7923,13 @@
   <block id="0bb25bc3cf1d0c26ca853353a2dd7109" category="paragraph">systemctl start trident</block>
   <block id="f2f8542f9f112ea6545bf028e893aadc" category="paragraph">systemctl status trident</block>
   <block id="4e7dcfae0cbac5529245e0641c2da2e4" category="paragraph">Não atualize para o Trident 26.10.0. Durante a inicialização, os pods de nó do Trident podem desanexar volumes que ainda estão em uso. Os pods afetados podem falhar com o erro<block ref="8307b5796c66c457d6a138b37abe40c5" prefix=" " category="inline-code"></block>. Esse problema foi corrigido no Trident 26.10.1. Em vez disso, atualize para o Trident 26.10.1 ou posterior.</block>
+  <block id="79c2ec5d9abadd1928864428c124fbf6" category="paragraph">Cada snapshot tem um horário de conclusão. Obtenha seu caminho de arquivamento com<block ref="0f12ee5c9f1dd90158580f1c292b0d37" prefix=" " category="inline-code"></block> no cluster de origem ou com a CLI.</block>
+  <block id="9cf75acdd1d73c0ba1f192ebd7c1af71" category="admonition">Use a CLI quando o cluster de origem estiver inativo ou o recurso personalizado de snapshot não estiver disponível. Execute o comando no cluster de destino ou em qualquer cluster que tenha o AppVault de origem.</block>
+  <block id="5d4b81a0f1df6afa40e2dcbfe2ecdd96" category="open-title">Use o kubectl</block>
+  <block id="4f058c5bfefb1ec708b6b944c62f9a4d" category="paragraph">Use<block ref="0f12ee5c9f1dd90158580f1c292b0d37" prefix=" " category="inline-code"></block> no cluster de origem para obter o caminho do arquivo.</block>
+  <block id="ad5d0860ae49b0980945c7619f60967c" category="list-text">No cluster de origem, liste os snapshots e anote o <block ref="369e101dc6bf4c62661cf5aa4b24d2c8" prefix=" " category="inline-code"></block>nome do snapshot desejado:</block>
+  <block id="3cc16137e98111ef3413864a0173b086" category="list-text">Obtenha o caminho do arquivo:</block>
+  <block id="875a912cbb29f994f1b2176315627605" category="paragraph">Use a CLI do Trident Protect para obter o caminho do arquivo. No cluster de destino, ou em qualquer cluster que tenha o AppVault de origem, liste os snapshots.<block ref="87fb568bfdc633ffd5dee0f22cb4606c" prefix=" " category="inline-code"></block>é o horário de conclusão e <block ref="5ffb5f0d0de78321df46fc7c93ca64a3" prefix=" " category="inline-code"></block>é o caminho do arquivo.</block>
+  <block id="a912c0a1c642f7dc58bec8536841ad2b" category="admonition">O CR do AppVault do aplicativo de origem deve existir no cluster onde você executa o comando, e seu ambiente deve ser capaz de se conectar ao bucket de storage de objetos definido no CR do AppVault. Se restrições de rede impedirem o acesso, execute a CLI de dentro de um pod no cluster.</block>
+  <block id="d9f64db02c827452abb5970dc13d7416" category="paragraph">O nome base é tudo o que vem depois da última barra no caminho. Por exemplo:</block>
 </blocks>
