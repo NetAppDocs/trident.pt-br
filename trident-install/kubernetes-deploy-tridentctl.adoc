@@ -78,7 +78,7 @@ O pacote de instalação do Trident cria um pod Trident, configura os objetos CR
 
 [listing]
 ----
-wget https://github.com/NetApp/trident/releases/download/v26.10.0/trident-installer-26.10.1.tar.gz
+wget https://github.com/NetApp/trident/releases/download/v26.10.1/trident-installer-26.10.1.tar.gz
 tar -xf trident-installer-26.10.1.tar.gz
 cd trident-installer
 ----

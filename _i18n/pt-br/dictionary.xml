@@ -2580,9 +2580,6 @@
   <block id="88b0b88c998957f004af42563d5e5b40" category="paragraph">Usando<block ref="296026821ada2ab8aebcf13547a63df5" prefix=" " category="inline-code"></block>,<block ref="e12fdd044232e643620eed06bf33c7af" prefix=" " category="inline-code"></block> e<block ref="1ad68a6a046942b7c1666aed825df70a" prefix=" " category="inline-code"></block>, você pode especificar um volume SMB e fornecer as credenciais necessárias do ative Directory. Os volumes SMB são suportados usando<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> apenas o driver.</block>
   <block id="f477db05998ad8420119de646e2ff290" category="doc">Crie uma função do IAM e o AWS Secret</block>
   <block id="98c3c9acd444d11890d48438db3c165e" category="paragraph">Você pode configurar pods do Kubernetes para acessar recursos da AWS autenticando como uma função do AWS IAM em vez de fornecer credenciais explícitas da AWS.</block>
-  <block id="3f566b5ded6e7ac8c26dd3c07a2ea056" category="admonition">Para autenticar usando uma função do AWS IAM, você deve ter um cluster do Kubernetes implantado usando o EKS.</block>
-  <block id="3926fdac6344d565c95f560468946335" category="section-title">Criar política do IAM</block>
-  <block id="78edc229f8df1c5e0840f6469bc28454" category="paragraph">Os exemplos a seguir criam uma política do IAM usando a AWS CLI:</block>
   <block id="77f6e3db9b70538186091595d9c8c9e8" category="list-text">Complemento EKS</block>
   <block id="e477faed39be08642267684bb501d931" category="open-title">Console de gerenciamento</block>
   <block id="e8d532dbf6904e2793dbda6fd0d03818" category="list-text">Abra o console do Amazon EKS em<block ref="c4765fcd1a0f97cf67c0365ddc45d563" category="inline-link-rx"></block>.</block>
@@ -2628,7 +2625,6 @@
   <block id="ed463de3671571836f800949d75f3af8" category="paragraph">Este exemplo mostra um PVC básico para NVMe/TCP com acesso RWO associado a um StorageClass<block ref="63f9100803e1f67a5e33cbd5da9dbb33" prefix=" " category="inline-code"></block> chamado .</block>
   <block id="e1f83bd8f580cc9a48311142d551b3cf" category="list-text">Crie o PVC.</block>
   <block id="150f6f248f009f461b84862124e2b499" category="list-text">Verifique o estado do PVC.</block>
-  <block id="80d13d3dbe137e8fb646193f275eceeb" category="list-text">Um cluster do Amazon EKS existente ou um cluster do Kubernetes autogerenciado com<block ref="0f12ee5c9f1dd90158580f1c292b0d37" prefix=" " category="inline-code"></block> o instalado.</block>
   <block id="9b800ce65251b771d0eb86610e11f6b0" category="list-text">Um sistema de arquivos e máquina virtual de armazenamento (SVM) do Amazon FSX for NetApp ONTAP que pode ser acessado a partir dos nós de trabalho do seu cluster.</block>
   <block id="288b1cbb87d08c32abf3084c28636e5c" category="inline-link-macro">NFS ou iSCSI</block>
   <block id="d7481875afa061fb651628b2597d52ec" category="list-text">Nós de trabalho preparados para <block ref="966ed3bab2d39ae1014ad2eb34527e0f" category="inline-link-macro-rx"></block>.</block>
@@ -4434,12 +4430,7 @@
   <block id="e992eb9afeef39efec8f68b68ffade1d" category="paragraph">* Exemplo JSON de política*:</block>
   <block id="54fe765490f6a1e88df34666a34bd7de" category="paragraph">* arquivo trust-relation.json:*</block>
   <block id="383e53c41c71ed73661ac56b250f6ba3" category="paragraph">Atualize os seguintes valores no<block ref="d19984a25b3e536a13a6bc3036325ffd" prefix=" " category="inline-code"></block> arquivo:</block>
-  <block id="e6fd9d7b1a119dcc259f2b06b2a2168c" category="list-text">*&lt;account_id&gt;* - seu ID de conta da AWS</block>
-  <block id="799fd029d6ab8a846f662458a1f8df55" category="list-text">*&lt;oidc_provider&gt;* - o OIDC do seu cluster EKS. Você pode obter o oidc_provider executando:</block>
-  <block id="053db598e2fbb7aa26ff7edbf6139941" category="paragraph">*Anexar a função do IAM com a política do IAM*:</block>
   <block id="069097b4881e6034a743e694f616726d" category="paragraph">Depois que a função tiver sido criada, anexe a política (que foi criada na etapa acima) à função usando este comando:</block>
-  <block id="02b550dde0cf971ab3461242774691c7" category="paragraph">*Verifique se o provedor OICD está associado*:</block>
-  <block id="25c5ea267b4be122e562399076209238" category="paragraph">Verifique se seu provedor de OIDC está associado ao cluster. Você pode verificá-lo usando este comando:</block>
   <block id="7c3f89bd6bb66984ef17d4765bf1f65a" category="open-title">eksctl</block>
   <block id="a01b2c45a64c7d0c2a2aa3ce418eaa04" category="inline-link-macro">Ativar a funcionalidade de instantâneos para volumes CSI</block>
   <block id="9adc02aa546c3838bddb73a67ebaa4e2" category="paragraph">Se quiser utilizar a funcionalidade de instantâneos, instale o suplemento do controlador de instantâneos CSI. <block ref="d2fce68a585fb4c517040885fb7393e9" category="inline-link-macro-rx"></block>Consulte para obter mais informações.</block>
@@ -4657,8 +4648,6 @@
   <block id="f8c91efdaebc08b292c83903943a18c8" category="admonition">Se você selecionar Substituir para o método de resolução de conflitos, uma ou mais configurações para o suplemento existente podem ser sobrescritas com as configurações de complemento do Amazon EKS. Se você não ativar essa opção e houver um conflito com suas configurações existentes, a operação falhará. Você pode usar a mensagem de erro resultante para solucionar o conflito. Antes de selecionar essa opção, certifique-se de que o complemento do Amazon EKS não gerencie as configurações que você precisa para gerenciar automaticamente.</block>
   <block id="3b19f031abb1ee1e70a3d19640060ff8" category="cell">Especifique as credenciais do FSX SVM para armazenar no AWS Secrets Manager. <block ref="b068931cc450442b63f5b3d276ea4297" prefix=" " category="inline-code"></block>- : Nome do recurso Amazon (ARN) do segredo, que contém as credenciais do SVM. <block ref="599dcce2998a6b40b1e38e8c6006cb0a" prefix=" " category="inline-code"></block>- : Defina para<block ref="eb301fdabb7b8996ba898845d5546121" prefix=" " category="inline-code"></block>. <block ref="e10af1024bf046058eef4c68dff3462a" category="inline-link-macro-rx"></block>Consulte para obter mais informações.</block>
   <block id="f62b661d066f6d5a24622ec3438e051b" category="example-title">Configuração para o AWS FSX for ONTAP com o Gerenciador de Segredos</block>
-  <block id="88f9965484e8785ad82e1b99cdae3ab3" category="section-title">Crie o segredo do AWS Secrets Manager</block>
-  <block id="646ed389b399156cbfb4923c9d8fbf95" category="paragraph">Como o Trident estará emitindo APIs em um vserver do FSX para gerenciar o armazenamento para você, ele precisará de credenciais para fazer isso. A maneira segura de passar essas credenciais é através de um segredo do AWS Secrets Manager. Portanto, se você ainda não tiver um, precisará criar um segredo do AWS Secrets Manager que contenha as credenciais da conta vsadmin.</block>
   <block id="360f6e9d45a33dadfdb2b47fa3a32110" category="paragraph">Este exemplo cria um segredo do AWS Secrets Manager para armazenar credenciais do Trident CSI:</block>
   <block id="1cb68d4d58173447ddb7517b51d352a9" category="paragraph">O Trident também precisa de permissões da AWS para ser executado corretamente. Portanto, você precisa criar uma política que dê ao Trident as permissões de que ele precisa.</block>
   <block id="49512d524988e02360eaf4f4bb2ad8f3" category="paragraph">Se a saída estiver vazia, use o seguinte comando para associar o IAM OIDC ao cluster:</block>
@@ -4745,8 +4734,6 @@
   <block id="eeda04a5133a10ebd4956c7d83dfd389" category="list-text">Logouts removidos para portais não CHAP não-CHAP intermitentemente insalubres durante a auto-recuperação iSCSI (<block ref="0939f851f18acedadb7fdffdec6d140b" category="inline-link-macro-rx"></block>).</block>
   <block id="78937357687a7b0292ed689d4e420485" category="inline-link">Documentação da Red Hat</block>
   <block id="89e30b0f2c0e48835ff872a994fc749c" category="list-text">Ao usar nós de trabalho que executam RHEL/Red Hat Enterprise Linux CoreOS (RHCOS) com FC PVs, especifique a<block ref="70f68bb2f748b85de6526bfe236ea1e9" prefix=" " category="inline-code"></block> mountOption no StorageClass para executar a recuperação de espaço em linha. Consulte a<block ref="65c95aeda8cb0b26307f9839dd3fefbf" category="inline-link-rx"></block>.</block>
-  <block id="e80b6a304e29d5dfcb9150f47d69db94" category="section-title">Suporte ao Trident para virtualização KubeVirt e OpenShift</block>
-  <block id="cffd29fb8e17cb30625130ee24cd667d" category="paragraph">O Trident suporta os seguintes drivers ONTAP para virtualização KubeVirt e OpenShift:</block>
   <block id="0ae326ef84f2a6bc4be48951f88c0162" category="list-text">Atualize a classe de armazenamento para ter o<block ref="7cfbb6f07899c8071ff38e69dca190e2" prefix=" " category="inline-code"></block> parâmetro (por exemplo:<block ref="6db865adcb81b7cf881ff9839476f850" prefix=" " category="inline-code"></block>) No ambiente de virtualização OpenShift. Se necessário, defina o modo de volume para bloquear explicitamente usando o<block ref="1467a571dd94848f616edc4a0c33b927" prefix=" " category="inline-code"></block> parâmetro no<block ref="c6dda2fd1e6d70d582099348cfe6c847" prefix=" " category="inline-code"></block> para notificar CDI para criar volumes de dados de bloco.</block>
   <block id="2bf380408feee0a9443f217c907f0681" category="inline-link-macro">Documentação de Registro do Red Hat OpenShift</block>
   <block id="3a298688c4d78e1b7532d3859cd16a57" category="inline-link-macro">Documentação do Red Hat OpenShift Container Platform 3,11</block>
@@ -4945,26 +4932,18 @@
   <block id="d075b47d76ffc95cce31e3ff1a3bf887" category="paragraph">O Trident oferece suporte a relacionamentos espelhados entre um volume de origem em um cluster e o volume de destino no cluster com peering para replicação de dados para recuperação de desastres.  Você pode usar uma Definição de Recurso Personalizada (CRD) com namespace, chamada Trident Mirror Relationship (TMR), para executar as seguintes operações:</block>
   <block id="2d78d4f2531b53f3a4980133900540f7" category="paragraph">O NetApp Trident oferece suporte à replicação de volume com a tecnologia NetApp SnapMirror usando classes de armazenamento apoiadas pelos seguintes drivers: ** <block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> : NFS ** <block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> : iSCSI ** <block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> :FC ** <block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> : NVMe/TCP (requer no mínimo a versão ONTAP 9.15.1)</block>
   <block id="a6d2a1b8501003e74309a1ac77e249d4" category="admonition">A replicação de volume usando SnapMirror não é compatível com sistemas ASA r2. Para obter informações sobre sistemas ASA r2, consulte <block ref="40f055dd42976ff294174231df35e37e" category="inline-link-macro-rx"></block> .</block>
-  <block id="b2b0186a010875b0d453752a8aa06a4c" category="section-title">Criar identidade de pod ou função IAM para associação de conta de serviço (IRSA)</block>
-  <block id="152bceec6d4e34c053208d61763334bc" category="paragraph">Você pode configurar uma conta de serviço do Kubernetes para assumir uma função de Gerenciamento de Identidade e Acesso (IAM) da AWS com a função de Identidade do Pod do EKS ou a função de IAM para Associação de Conta de Serviço (IRSA). Quaisquer Pods configurados para usar a conta de serviço podem acessar qualquer serviço da AWS para o qual a função tenha permissão de acesso.</block>
-  <block id="0522426ad683048758e710700760f5a9" category="open-title">Identidade do Pod</block>
   <block id="acbe8cfddfd64fba35512f543affb372" category="paragraph">As associações de identidade do Amazon EKS Pod fornecem a capacidade de gerenciar credenciais para seus aplicativos, de forma semelhante à maneira como os perfis de instância do Amazon EC2 fornecem credenciais para instâncias do Amazon EC2.</block>
   <block id="870d5f69e46397da39e4d5bc6a55edc4" category="paragraph">*Instale o Pod Identity no seu cluster EKS*:</block>
   <block id="3a735289083f3ebf5b12bf1252f47e70" category="paragraph">Você pode criar uma identidade de Pod por meio do console da AWS ou usando o seguinte comando da AWS CLI:</block>
   <block id="6b12dab36e102678866ee1a9295bf251" category="inline-link-macro">Configurar o agente de identidade do pod do Amazon EKS</block>
-  <block id="f0e49b3188e2241a1fd992e7697df37f" category="paragraph">Para mais informações consulte <block ref="223f02a97a1894440d2727b156e834b6" category="inline-link-macro-rx"></block> .</block>
   <block id="4fcddd38c3384849e906ff198dca9a35" category="paragraph">*Crie trust-relationship.json*:</block>
   <block id="9eaa0d9301ed8e0e6ec8d359da513e09" category="paragraph">Crie trust-relationship.json para permitir que o EKS Service Principal assuma essa função para a Identidade do Pod. Em seguida, crie uma função com esta política de confiança:</block>
   <block id="c256d9b106d5b83ccc940e1c11d40213" category="paragraph">*arquivo trust-relationship.json*:</block>
   <block id="d5bcbf5d17aa3658058051153a3abb49" category="paragraph">*Anexe a política de função à função do IAM*:</block>
   <block id="5855de3e8f302cffda094dad3434d14d" category="paragraph">Anexe a política de função da etapa anterior à função do IAM que foi criada:</block>
   <block id="ae33daeae7be898405819838f197197f" category="paragraph">*Crie uma associação de identidade de pod*:</block>
-  <block id="bfb2fc1510ac240a94b2b84a57023dfd" category="paragraph">Crie uma associação de identidade de pod entre a função do IAM e a conta de serviço do Trident (trident-controller)</block>
-  <block id="37d9be75a57d7c290f4624befaf41cba" category="open-title">Função do IAM para associação de conta de serviço (IRSA)</block>
   <block id="58b24f910cf7a97cc3ea8486155b2ee3" category="paragraph">*Usando a AWS CLI*:</block>
-  <block id="4411692a55eac3faa65c355f682424c8" category="paragraph">*Se você estiver usando eksctl*, use o exemplo a seguir para criar uma função do IAM para uma conta de serviço no EKS:</block>
   <block id="de756da101866f0bf66d3cfdb32b337b" category="list-text">Instale o Trident usando o seguinte exemplo:</block>
-  <block id="3840ce271260ab4b489b1664491a7ae0" category="open-title">Associação de contas de serviço (IRSA)</block>
   <block id="682fae06c762bb51c348b65f07930993" category="list-text">Defina os valores para *provedor de nuvem* e *identidade da nuvem*:</block>
   <block id="eff2bb231132a96a28f9d538ef100a34" category="paragraph">Se você planeja usar iSCSI, certifique-se de que o iSCSI esteja habilitado na sua máquina cliente. Se estiver usando o sistema operacional AL2023 Worker node, você pode automatizar a instalação do cliente iSCSI adicionando o parâmetro node prep na instalação do helm:</block>
   <block id="586ac0fdd530431245eb98eb3aa882f4" category="list-text">Siga estas etapas para selecionar o complemento:</block>
@@ -6383,7 +6362,6 @@
   <block id="a24b1fc957d4a3542de5e601eac1d28f" category="doc">Implantar um aplicativo</block>
   <block id="1c21e9c64b7661ab6b46e1a5d6c8bc6d" category="section-title">Implante um aplicativo de exemplo</block>
   <block id="7fdc028dffbf771dba84d86122529ce5" category="paragraph">Trident simplifica o gerenciamento de storage do Amazon FSx for NetApp ONTAP no Kubernetes para permitir que seus desenvolvedores e administradores se concentrem na implantação de aplicativos. Você pode instalar Trident usando um dos seguintes métodos:</block>
-  <block id="6529ed4499fd7aea7863a4cbdb1e267a" category="paragraph"><block ref="6a2736fcbb5755dd03d114a5153506eb" category="inline-link-rx"></block> é um serviço totalmente gerenciado da AWS que executa sistemas de arquivos alimentados pelo sistema operacional de storage NetApp ONTAP. Ele fornece recursos, desempenho e administração do ONTAP com a escalabilidade e simplicidade operacional da AWS. Um sistema de arquivos é o recurso principal no Amazon FSx e é análogo a um cluster ONTAP local. Cada sistema de arquivos contém uma ou mais máquinas virtuais de armazenamento (SVMs), e cada SVM contém um ou mais volumes que armazenam arquivos e diretórios. Essa integração permite que clusters Kubernetes em execução no Amazon Elastic Kubernetes Service (EKS) provisionem volumes persistentes com suporte a ONTAP para cargas de trabalho de bloco e arquivo.</block>
   <block id="e135dbea693333923195aacbaa21dfde" category="paragraph">ReadWriteMany (RWX) volumes que utilizam o protocolo NVMe têm um limite de escalabilidade de 64 nós por volume. A seguir, são apresentadas as limitações, explicada a arquitetura do subsistema NVMe envolvido e descritas as etapas necessárias para a resolução do problema.</block>
   <block id="4daca3334f00c4ec7830e587d1e0269d" category="list-text">É necessário o Helm 4.x ou posterior para instalar Trident Protect.</block>
   <block id="43da129a49cd39591bce7ddda6f0dc82" category="list-text">Verifique se o AppVault CR existe no cluster de destino usando o plugin Trident Protect CLI:</block>
@@ -6408,7 +6386,6 @@
   <block id="7d46dc6377e8ce5df89a34c4ad4e2991" category="image-alt">Status ativo do complemento Trident</block>
   <block id="2c0204a63fd46aab7636df3eb5f83972" category="paragraph">Usando o<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block> utilitário, você pode executar o<block ref="b5eda0a74558a342cf659187f06f746f" prefix=" " category="inline-code"></block> comando para obter volumes subordinados. Para mais informações, consulte link:../trident-reference/trident-cl.html<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix="[" category="inline-code"></block> comandos e opções].</block>
   <block id="955581130750cc1758fa61171c2e0575" category="paragraph">O NetApp Trident permite o consumo e o gerenciamento de recursos de storage em todas as plataformas de storage NetApp populares, na nuvem pública ou em ambientes locais, incluindo clusters ONTAP locais (AFF, FAS e ASA), ONTAP Select, Cloud Volumes ONTAP, Element software (NetApp HCI, SolidFire), Azure NetApp Files, Amazon FSx for NetApp ONTAP e Google Cloud NetApp Volumes.</block>
-  <block id="e08706b9934e8c02c4412d7cbbb8de70" category="paragraph">As plataformas suportadas incluem: * Kubernetes upstream * Red Hat OpenShift * SUSE Harvester 1.7.0 (ONTAP iSCSI)</block>
   <block id="1868784d55625cd96ac74dd1393e90f9" category="paragraph">A interface do usuário fornece um exemplo padrão. Você pode editá-lo diretamente em vez de copiar uma configuração completa.</block>
   <block id="ca375865284ae4e0a7735a38800e6c18" category="paragraph">Opcional: ativar concorrência</block>
   <block id="a7dfe0e5a21691eba1519b710d8d3a75" category="paragraph">Para habilitar a concorrência, adicione o seguinte campo à especificação:</block>
@@ -6484,8 +6461,6 @@
   <block id="45785995a830d1fc258f9f492e7419f3" category="doc">Configure uma classe de armazenamento</block>
   <block id="1a9cbcbc6ddc2988ba989623616f551f" category="paragraph">O<block ref="da3f7f170e13df7f56e057fc4226aa85" category="inline-link-rx"></block> identifica um provisionador e instrui o provisionador sobre como provisionar volumes. Esta seção mostra como configurar um objeto StorageClass do Kubernetes que especifica Trident como provisionador.</block>
   <block id="181d66d2970ca0a79166620ff77f2365" category="section-title">Criar um StorageClass Objeto</block>
-  <block id="210b23a19c97ecce400f85135dfa4f55" category="paragraph">Ao criar um StorageClass para FSx for ONTAP, o Trident criará automaticamente a configuração de backend.</block>
-  <block id="509f5efbbc1d003a3134ba763ce9a153" category="admonition">Se você deseja configurar manualmente o backend de armazenamento, consulte a <block ref="f92675ea6cdcb434e9668b63d509b6c2" category="inline-xref-macro-rx"></block> seção sobre como criar o backend Trident e a classe de armazenamento separadamente.</block>
   <block id="9fdbc2bf1d74e1af2c19ff15c59205a5" category="paragraph">Os três parâmetros a seguir precisam ser definidos ao criar um StorageClass:</block>
   <block id="1ebccd08373f6e20b1548e7b97f25d9f" category="section-title">Exemplo de arquivos de configuração StorageClass.</block>
   <block id="e838148d72a21ebe7c26751f37c63e59" category="section-title">Crie o StorageClass</block>
@@ -7195,10 +7170,8 @@
   <block id="59d40127a6af11747a793d61df5338e5" category="doc">Integração do Trident e do Kubernetes com produtos NetApp</block>
   <block id="0aa4c54ee2846cd1ee10e094f05cfa48" category="list-text">Kubernetes 1.37 agora é compatível com Trident. Atualize Trident antes de atualizar o Kubernetes.</block>
   <block id="fb969327dd7c5284cf39ef2077642427" category="list-text">Kubernetes 1.27 - 1.37</block>
-  <block id="1f8bad982c95fa13c1c3b93510b02a5e" category="list-text">Rancher Kubernetes Engine 2 (RKE2) v1.28.x - 1.37.x</block>
   <block id="d03983e9fca4277cf0919e8bea0c196c" category="paragraph">1.27 - 1.37</block>
   <block id="ba8ebafc2389dabfa3286dbc34aec82b" category="section-title">Imagens de contêiner necessárias para o Trident 26.06.2</block>
-  <block id="df499232b0659c7b92a4bb7def65662d" category="cell">v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.35.0, v1.36.0, v1.37.0</block>
   <block id="add431fb6c7231214d4cc5b3f76a2a96" category="list-text">docker.io/netapp/trident:26.06.2</block>
   <block id="2c3f6f002722bde0c2e5610ddd0a46b8" category="list-text">docker.io/netapp/trident-operator:26.06.2 (opcional)</block>
   <block id="39b839ecfa8ad2cd1a2a661969868248" category="list-text">registry.k8s.io/sig-storage/csi-attacher:v4.11.0</block>
@@ -7908,20 +7881,6 @@
   <block id="65eb82fddd05e92e211e0d77aeb0e4e1" category="section-title">O que há de novo na versão 26.10.1</block>
   <block id="24ab713b78d3325367406612bac11467" category="list-text">Corrigidos os pods de nó do Trident que forçavam a desanexação de volumes em uso na inicialização após a atualização do Trident 25.10 ou anterior, o que fazia os pods falharem com<block ref="8307b5796c66c457d6a138b37abe40c5" prefix=" " category="inline-code"></block>.</block>
   <block id="90e0d67f77c8a5ec012e93f3be5c8331" category="list-text">O Azure<block ref="d5189de027922f81005951e6efe0efd5" prefix=" " category="inline-code"></block> que contém pelo menos um<block ref="c5f14b2142014dc234282a513132bad4" category="inline-link-rx"></block>. O<block ref="d5189de027922f81005951e6efe0efd5" prefix=" " category="inline-code"></block> parâmetro é obrigatório no nível superior do arquivo de configuração de backend. Os valores de localização especificados em pools virtuais são ignorados.</block>
-  <block id="784329f85fd663964c68f0a0708c6a94" category="paragraph">sudo mv trident-installer/extras/bin/trident /usr/local/bin/ sudo chown root:root /usr/local/bin/trident sudo chmod 755 /usr/local/bin/trident</block>
-  <block id="5dd8f815786ef70394bd3584d3a83edb" category="paragraph">sudo mkdir -p /etc/netappdvp</block>
-  <block id="e3390f4eb37ee288a1506cb1c597aa95" category="paragraph">cat &lt;&lt; EOF &gt; /etc/netappdvp/ontap-nas.json</block>
-  <block id="adc4dd00e378338b858aca4e95957991" category="paragraph">{ "version": 1, "storageDriverName": "ontap-nas", "managementLIF": "10.0.0.1", "dataLIF": "10.0.0.2", "svm": "svm_nfs", "username": "vsadmin", "password": "password", "aggregate": "aggr1" } EOF</block>
-  <block id="59eded362480a8bf2a93749d766232f5" category="paragraph">sudo trident --config=/etc/netappdvp/ontap-nas.json</block>
-  <block id="d61aa82a9c4cc0306260158ad8814a0f" category="paragraph">docker volume create -d netapp --name trident_1</block>
-  <block id="23eec71379bdec8968a87c5d8d0ce0a0" category="paragraph">docker run --rm -it --volume-driver netapp --volume trident_2:/my_vol alpine ash</block>
-  <block id="1a3c38b86779ead156135d6d6117f9e0" category="paragraph">docker volume rm trident_1</block>
-  <block id="8e77e19e4710951abc111ddaa1a9700a" category="paragraph">docker volume rm trident_2</block>
-  <block id="6e764ace6033355001647dc536a222e2" category="paragraph">cp contrib/trident.service.example /usr/lib/systemd/system/trident.service</block>
-  <block id="269b117015efb12595eebf74692e5cbc" category="paragraph">systemctl daemon-reload</block>
-  <block id="906e1aecd65b40017e38c9165527f849" category="paragraph">systemctl enable trident</block>
-  <block id="0bb25bc3cf1d0c26ca853353a2dd7109" category="paragraph">systemctl start trident</block>
-  <block id="f2f8542f9f112ea6545bf028e893aadc" category="paragraph">systemctl status trident</block>
   <block id="4e7dcfae0cbac5529245e0641c2da2e4" category="paragraph">Não atualize para o Trident 26.10.0. Durante a inicialização, os pods de nó do Trident podem desanexar volumes que ainda estão em uso. Os pods afetados podem falhar com o erro<block ref="8307b5796c66c457d6a138b37abe40c5" prefix=" " category="inline-code"></block>. Esse problema foi corrigido no Trident 26.10.1. Em vez disso, atualize para o Trident 26.10.1 ou posterior.</block>
   <block id="79c2ec5d9abadd1928864428c124fbf6" category="paragraph">Cada snapshot tem um horário de conclusão. Obtenha seu caminho de arquivamento com<block ref="0f12ee5c9f1dd90158580f1c292b0d37" prefix=" " category="inline-code"></block> no cluster de origem ou com a CLI.</block>
   <block id="9cf75acdd1d73c0ba1f192ebd7c1af71" category="admonition">Use a CLI quando o cluster de origem estiver inativo ou o recurso personalizado de snapshot não estiver disponível. Execute o comando no cluster de destino ou em qualquer cluster que tenha o AppVault de origem.</block>
@@ -7932,4 +7891,69 @@
   <block id="875a912cbb29f994f1b2176315627605" category="paragraph">Use a CLI do Trident Protect para obter o caminho do arquivo. No cluster de destino, ou em qualquer cluster que tenha o AppVault de origem, liste os snapshots.<block ref="87fb568bfdc633ffd5dee0f22cb4606c" prefix=" " category="inline-code"></block>é o horário de conclusão e <block ref="5ffb5f0d0de78321df46fc7c93ca64a3" prefix=" " category="inline-code"></block>é o caminho do arquivo.</block>
   <block id="a912c0a1c642f7dc58bec8536841ad2b" category="admonition">O CR do AppVault do aplicativo de origem deve existir no cluster onde você executa o comando, e seu ambiente deve ser capaz de se conectar ao bucket de storage de objetos definido no CR do AppVault. Se restrições de rede impedirem o acesso, execute a CLI de dentro de um pod no cluster.</block>
   <block id="d9f64db02c827452abb5970dc13d7416" category="paragraph">O nome base é tudo o que vem depois da última barra no caminho. Por exemplo:</block>
+  <block id="b255d9e06a4ca8e9f5bc31c9198426ad" category="list-text">Mova para um local no caminho do bin:</block>
+  <block id="b2edeceecc054572188ee3b08cd58c64" category="list-text">Após colocar o arquivo binário e criar o arquivo de configuração, inicie o daemon Trident usando o arquivo de configuração desejado.</block>
+  <block id="4846d107d8ddb5051591d14dcbddba8c" category="admonition">A menos que especificado, o nome padrão para o driver de volume é "netapp".</block>
+  <block id="f253a45a33bc62e467efd426699d9025" category="paragraph">Após o daemon ser iniciado, você pode criar e gerenciar volumes usando a interface Docker CLI.</block>
+  <block id="e3dec3f86b9a3b1be209ab63855ce432" category="list-text">Crie um volume:</block>
+  <block id="5ff2e3e853922fdb84ef21b85ffdac2e" category="list-text">Provisione um volume Docker ao iniciar um contêiner:</block>
+  <block id="8f6a91f5f21d0478e3fd89095fc28ab9" category="list-text">Remova um volume do Docker:</block>
+  <block id="b48e6203239c93859800f96924a39ed7" category="section-title">Iniciar Trident na inicialização do sistema</block>
+  <block id="0350980c728940d67af063bb5d711f0f" category="paragraph">Um arquivo de unidade de exemplo para sistemas baseados em systemd pode ser encontrado em<block ref="50a97f9b0dec64cc53ca48406c60fe4d" prefix=" " category="inline-code"></block> no repositório Git. Para usar o arquivo com RHEL, faça o seguinte:</block>
+  <block id="5b51496da86e5a2073e0c618390c3d2a" category="list-text">Copie o arquivo para o local correto.</block>
+  <block id="44103de0a164f687d305ad91e919d8ee" category="paragraph">Você deve usar nomes exclusivos para os arquivos de unidade se tiver mais de uma instância em execução.</block>
+  <block id="3223aadc84a3ccb4a3473ba01c895184" category="list-text">Edite o arquivo, altere a descrição (linha 2) para corresponder ao nome do driver e o caminho do arquivo de configuração (linha 9) para refletir seu ambiente.</block>
+  <block id="1edae3931401a32d7dd7dd6e0a2ad563" category="list-text">Recarregue o systemd para que ele incorpore as alterações:</block>
+  <block id="db38a93e27eba57d507611d002ad612f" category="list-text">Ative o serviço.</block>
+  <block id="c7e0a4deeebe264aa7d5f7f3ca3ef77f" category="paragraph">Esse nome varia dependendo do nome que você deu ao arquivo no <block ref="dce2a9642217836d54f614dfd625b753" prefix=" " category="inline-code"></block> diretório.</block>
+  <block id="baa04490a79e9e8de7fa4cd44e2c6fbb" category="list-text">Inicie o serviço.</block>
+  <block id="93c7574cf83c1f01b04891cf2d826cea" category="list-text">Veja o status.</block>
+  <block id="f4f15418284ae7a01b27fccc1af0463a" category="admonition">Sempre que você modificar o arquivo de unidade, execute o comando <block ref="269b117015efb12595eebf74692e5cbc" prefix=" " category="inline-code"></block> para que ele reconheça as alterações.</block>
+  <block id="2a0ab69690643375ed9dc83c59b8aa9c" category="paragraph">As plataformas compatíveis incluem: * Kubernetes upstream * Red Hat OpenShift * SUSE Virtualization (Harvester) 1.8.x - 1.9.x (ONTAP NFS, iSCSI, NVMe/TCP e FC)</block>
+  <block id="36b055be954f090c5fb6f25e33c699fe" category="list-text">O OpenShift 5.0</block>
+  <block id="d3391c138d54f9b74f52b306efa08f7a" category="list-text">O SUSE Rancher Kubernetes Engine 2 (RKE2) v1.28.x a 1.37.x</block>
+  <block id="835cc74797e1c8ee07bd8c38ac1bd60b" category="list-text">SUSE Virtualization (Harvester) 1.8.x - 1.9.x (NFS, iSCSI, NVMe/TCP e FC)</block>
+  <block id="f42f40f6d5d49b5e3806b87d986b741b" category="section-title">Suporte do Trident para KubeVirt, OpenShift Virtualization e SUSE Virtualization</block>
+  <block id="7d29727835a92964fb9fb5ffc0b8397d" category="paragraph">O Trident oferece suporte aos seguintes drivers do ONTAP para KubeVirt, OpenShift Virtualization e SUSE Virtualization:</block>
+  <block id="25a956744b1b23c58b6a78b27f1a06b8" category="paragraph-title">Relatórios de certificação de SUSE Virtualization</block>
+  <block id="201ff38abd6cf7b8f6e5570e2f83b156" category="paragraph">As seguintes configurações do Trident 26.10 foram validadas com o SUSE Virtualization. Os testes foram realizados por Suresh Thoppay:</block>
+  <block id="8c68c72d4745d450a969a4897b811dfe" category="inline-link-macro">O Trident 26.10 com o SUSE Virtualization 1.8.2</block>
+  <block id="01961ac303c9c071ee8df33c4dff8af0" category="list-text"><block ref="01961ac303c9c071ee8df33c4dff8af0" category="inline-link-macro-rx"></block></block>
+  <block id="ef41f172d2c7b8aeb6740d4ef084563c" category="inline-link-macro">O Trident 26.10 com o SUSE Virtualization 1.9.1</block>
+  <block id="76d108e7a62e81a3d79b10c7a23e46f3" category="list-text"><block ref="76d108e7a62e81a3d79b10c7a23e46f3" category="inline-link-macro-rx"></block></block>
+  <block id="b4991f9cac039ba1e0291cc3946ed350" category="cell">v1.37.0</block>
+  <block id="0c50ade86b7b5a19e1df41171bd3cabe" category="summary">Ao usar o Trident com o Amazon FSx for NetApp ONTAP, você pode habilitar clusters Kubernetes em execução no Amazon EKS ou no Red Hat OpenShift para provisionar volumes persistentes em bloco e de arquivos com suporte do ONTAP.</block>
+  <block id="9219283c7dd0470bcc67f4cc7618af9c" category="doc">Crie uma função do IAM e um segredo do AWS Secrets Manager</block>
+  <block id="0fe6ece7a799b5f7f58e60f8d5d8ab5b" category="admonition">Para autenticar usando uma função do IAM da AWS, você precisa ter um cluster Kubernetes implantado usando o Amazon EKS ou o Red Hat OpenShift.</block>
+  <block id="4f996e7b73b796b1b798a651d5157001" category="paragraph">O Trident precisa de credenciais para gerenciar o armazenamento na SVM do FSx for ONTAP. Armazene as<block ref="6173aa5206484b5224450952747c7148" prefix=" " category="inline-code"></block> credenciais em um segredo do AWS Secrets Manager.</block>
+  <block id="0fdc81bb400ca1e69ba8ff758bfa0311" category="section-title">Crie uma política IAM</block>
+  <block id="7c933eceab71ddc0f6e5b189ef4d7134" category="paragraph">O exemplo a seguir cria uma política do IAM usando a AWS CLI:</block>
+  <block id="2fa5938e4796a92472535650065b5ddf" category="paragraph">O comando retorna o ARN da política. Use-o nos comandos a seguir.</block>
+  <block id="92fd1a17a422b110107ac9ad0dba5772" category="section-title">Crie uma função IAM para Pod Identity ou uma função IAM para uma conta de serviço (IRSA)</block>
+  <block id="7a153cae27958d18c049b81e891ed581" category="paragraph">Você pode configurar uma conta de serviço do Kubernetes para assumir uma função do AWS Identity and Access Management (IAM) com o EKS Pod Identity ou funções do IAM para contas de serviço (IRSA). Os pods configurados para usar a conta de serviço podem então acessar os serviços da AWS aos quais a função tem permissão de acesso.</block>
+  <block id="e7942d102dca4335d425fb7b94464c62" category="open-title">Identidade do Pod (EKS)</block>
+  <block id="ddebea2d16294ee89475a78b213929b0" category="paragraph">Para obter mais informações, consulte <block ref="223f02a97a1894440d2727b156e834b6" category="inline-link-macro-rx"></block>.</block>
+  <block id="3727e3118bfd7d7d319f06bc69577054" category="paragraph">Crie uma associação de identidade de pod entre a função IAM e a conta de serviço do Trident <block ref="1043da3d0f6135a3085a7e59f7e2c6cd" prefix="(" category="inline-code"></block>).</block>
+  <block id="35fa532ede4914a065f5f50df94ff4e1" category="open-title">Função do IAM para contas de serviço (IRSA) (somente no EKS)</block>
+  <block id="8c54c9c042ce8a35604da46cdbddb12a" category="list-text">*&lt;account_id&gt;* - Seu ID de conta da AWS</block>
+  <block id="7899a1460d2924e9dde80941a83c321a" category="list-text">*&lt;oidc_provider&gt;* - A URL do provedor OIDC para o seu cluster EKS. Você pode obtê-la executando:</block>
+  <block id="710b9a6a7b8c499878daf733c504748d" category="paragraph">*Anexe a política do IAM à função do IAM*:</block>
+  <block id="137735a6c4a78c39a8aa31d7664d1b7a" category="paragraph">*Verifique a associação do provedor OIDC*:</block>
+  <block id="58546741f53933689e6874e222688825" category="paragraph">Verifique se o seu provedor OIDC está associado ao seu cluster ao executar este comando:</block>
+  <block id="6cf59ffc46829d02e154b6d0d917ee08" category="paragraph">Se você estiver usando<block ref="7c3f89bd6bb66984ef17d4765bf1f65a" prefix=" " category="inline-code"></block>, use o exemplo a seguir para criar uma função do IAM para uma conta de serviço no EKS:</block>
+  <block id="be2ca5d2675fd02a025aeda2d76cd21b" category="open-title">Função do IAM para o OpenShift autogerenciado</block>
+  <block id="d4ba96cc1aa73a6a05af0f3285a5511f" category="paragraph">A implantação autogerenciada do OpenShift cria funções do IAM e as associa aos nós do cluster. Anexe a política do IAM do Trident à função atribuída a cada nó.</block>
+  <block id="d54319c0f22cb86336f3c083972bd91f" category="paragraph">Para encontrar os IDs das instâncias dos nós em seu cluster, execute o seguinte comando:</block>
+  <block id="2bb28164a1980e68bf9d92a5204db32d" category="paragraph">Para encontrar a função do IAM associada a cada instância, execute o seguinte comando para cada instância:</block>
+  <block id="b7eff210151c8a7f7893d4898db62c3e" category="paragraph">Anexe a política do IAM a cada função executando o seguinte comando:</block>
+  <block id="ddb180d2e11702d995d386d8cd83b6f6" category="open-title">Função IAM para conta de serviço (IRSA) (EKS)</block>
+  <block id="b84ef15482e99cba8fcf9c23c06b1208" category="admonition">O instalador autogerenciado do OpenShift não cria a regra do grupo de segurança de que o Trident precisa para a porta TCP 8443 quando<block ref="e3b493bcbdc62af28f127a151a9fb487" prefix=" " category="inline-code"></block> está habilitado. Adicione uma regra de entrada para a porta TCP 8443 do CIDR da VPC aos grupos de segurança<block ref="12f48cfdba1a62c28c0c99833d7dc1c3" prefix=" " category="inline-code"></block> e<block ref="e1d582509d68c34e13d09a18c734d384" prefix=" " category="inline-code"></block> criados pelo instalador do OpenShift.</block>
+  <block id="3e7bd056cfe8bdd6495ab53326546232" category="paragraph">Ao criar um StorageClass para o FSx for ONTAP, o Trident pode criar automaticamente a configuração de backend.</block>
+  <block id="43ad98a623d4fa4d5cb6c73b72cf2e6f" category="paragraph">Para configurar o backend de armazenamento manualmente, consulte <block ref="f92675ea6cdcb434e9668b63d509b6c2" category="inline-xref-macro-rx"></block> para obter instruções sobre como criar o backend do Trident e o StorageClass separadamente.</block>
+  <block id="eaa39a8597929826698488fffbfaf2d8" category="admonition">Em OpenShift, você deve criar o backend do Trident e a StorageClass separadamente.</block>
+  <block id="5757a5ba9568bee1eb6a600c754b34ee" category="cell">Nome do Kubernetes Secret ou do ARN do segredo do AWS Secrets Manager que contém as credenciais do FSx for ONTAP</block>
+  <block id="f9ac6b8213d2b2cf0e1212175cff0d5f" category="paragraph"><block ref="6a2736fcbb5755dd03d114a5153506eb" category="inline-link-rx"></block> é um serviço totalmente gerenciado da AWS que executa sistemas de arquivos com tecnologia do sistema operacional de storage ONTAP da NetApp. Ele fornece recursos, desempenho e administração do ONTAP com a escalabilidade e a simplicidade operacional da AWS. Um sistema de arquivos é o recurso principal no Amazon FSx e é análogo a um cluster ONTAP local. Cada sistema de arquivos contém uma ou mais máquinas virtuais de storage (SVMs), e cada SVM contém um ou mais volumes que armazenam arquivos e diretórios. Essa integração permite que clusters Kubernetes autogerenciados, clusters do Amazon Elastic Kubernetes Service (EKS) e clusters OpenShift autogerenciados provisionem volumes persistentes com suporte do ONTAP para cargas de trabalho de bloco e arquivo.</block>
+  <block id="0eb421f2772e4f12180ab8ff4bc33bcd" category="list-text">Um cluster Kubernetes autogerenciado existente ou um cluster Amazon EKS com<block ref="0f12ee5c9f1dd90158580f1c292b0d37" prefix=" " category="inline-code"></block> instalado, ou um cluster OpenShift autogerenciado com<block ref="fb024832e51eb5f6da9113a745f1eb59" prefix=" " category="inline-code"></block> instalado.</block>
+  <block id="52cf57e7f48f933bb1fb7c46911d7307" category="list-text">Cluster OpenShift autogerenciado:</block>
+  <block id="874b92447a68adcb603ab8bcb1fd4801" category="list-text">Para a integração recomendada do Trident, que usa um segredo do AWS Secrets Manager para as credenciais do FSx for ONTAP, os pods do controlador Trident no OpenShift devem ser executados com<block ref="e3b493bcbdc62af28f127a151a9fb487" prefix=" " category="inline-code"></block> definido como<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>.</block>
 </blocks>
